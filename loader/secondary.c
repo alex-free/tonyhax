@@ -143,10 +143,15 @@ void wait_lid_status(bool open) {
 
 void try_boot_cd() {
 	int32_t read;
-
+/*
 	debug_write("Swap CD now");
 	wait_lid_status(true);
 	wait_lid_status(false);
+*/
+
+	// Send Read-TOC command
+   debug_write("TOC read command sent...");
+	cd_command(0x1E, NULL, 0);
 
 	debug_write("Initializing CD");
 	if (!CdInit()) {
@@ -195,9 +200,9 @@ void try_boot_cd() {
 	const char * bootfile = "cdrom:PSX.EXE;1";
 
 	char bootfilebuf[32];
-	debug_write("Loading SYSTEM.CNF");
+	debug_write("Loading SYSTEM2.CNF");
 
-	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
+	int32_t cnf_fd = FileOpen("cdrom:SYSTEM2.CNF;1", FILE_READ);
 	if (cnf_fd > 0) {
 		read = FileRead(cnf_fd, data_buffer, 2048);
 		FileClose(cnf_fd);

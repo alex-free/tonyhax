@@ -13,7 +13,7 @@
 #include "crc.h"
 #include "integrity.h"
 
-int sscmd;
+int sscmd, temp;
 
 unsigned char gid;
 unsigned char ti_tn;
@@ -223,10 +223,7 @@ bool is_toc_complete()
 
 void SetSessionSuperUltraCommandSmash()				
 {
-	int temp;
 	sscmd = 0x80; cd_command(CD_CMD_SETMODE,(unsigned char *)&sscmd,1);cd_wait_int(); // Set motor to 2x speed
-	
-	temp = 64; // 64 SetSessions ensures that the TOC is updated from the original authentic PSX disc to the backup or import disc
 
 		while(1)
 		{
@@ -260,7 +257,9 @@ void try_boot_cd() {
             if(is_lid_open() || !licensed_drive()) // If lid is open drive is not licensed, and if lid is closed we check if it is licenesed (if it is not licensed but not open then the drive is closed and the user can open it and license it)
             { // We need to license the drive with a real NTSC-J PSX game disc first, this is the code path used by FreePSXBoot
               // Note lack of if !defined STEALTH, because only the TOCPerfect code path can have STEALTH defined in it
-                debug_write("Remove the FreePSXBoot memory card from your console now");
+                #if defined MEMORY_CARD
+                   debug_write("Remove the FreePSXBoot memory card from your console now");
+                #endif               
 				debug_write("Put in a real NTSC-J PSX game disc, then block the lid sensor");
 				wait_lid_status(true);
 				wait_lid_status(false); // Blocking lid sensor = 'closing lid'
@@ -273,6 +272,7 @@ void try_boot_cd() {
 					return;
 				}
 			} // Drive is already licensed for all other methods to run the loader (boot CD via 'swap trick' or DemoSwap), and the lid is 'closed' at this point
+            debug_write("Drive is licensed");
             debug_write("Stopping motor");
 			cd_command(CD_CMD_STOP,0,0); cd_wait_int(); cd_wait_int();
 			
@@ -586,6 +586,7 @@ void main() {
         #endif        
         bugged_setsession = 1;
         enable_unlock = 0;
+	    temp = 128; // 128 SetSessions ensures that the TOC is updated from the original authentic PSX disc to the backup or import disc
     } 
     else if(cdcontrollerver[1]==0x11 && cdcontrollerver[2]==0x18 && cdcontrollerver[0]==0x94 && cdcontrollerver[3]==0xC0)
     {
@@ -594,6 +595,7 @@ void main() {
         #endif        
         bugged_setsession = 1;
         enable_unlock = 0;
+	    temp = 64; // 64 SetSessions ensures that the TOC is updated from the original authentic PSX disc to the backup or import disc
     }
     else if(cdcontrollerver[1]==0x05 && cdcontrollerver[2]==0x16 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xC1)
     {
@@ -601,6 +603,7 @@ void main() {
             debug_write("CDROM Controller BIOS Version: May 16th 1995 VC1 A");
         #endif        
         bugged_setsession = 1;
+	    temp = 64; // 64 SetSessions ensures that the TOC is updated from the original authentic PSX disc to the backup or import disc
     }
     #if !defined STEALTH                   
         else if(cdcontrollerver[1]==0x07 && cdcontrollerver[2]==0x24 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xC1)

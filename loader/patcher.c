@@ -72,5 +72,8 @@ void patcher_apply(void) {
 
 	// Install patches
 	install_modchip_patch(start_addr);
-	install_fpx_patch(start_addr);
+    #if defined MEMORY_CARD
+        if(enable_unlock)
+	        install_fpx_patch(start_addr);
+    #endif
 }

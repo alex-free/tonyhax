@@ -7,3 +7,9 @@
 [submodule "mkpsxiso"]
 	path = mkpsxiso
 	url = https://github.com/lameguy64/mkpsxiso
+[submodule "nxflash"]
+	path = nxflash
+	url = https://github.com/danhans42/nxflash/
+[submodule "psexe2rom"]
+	path = psexe2rom
+	url = https://github.com/alex-free/psexe2rom/

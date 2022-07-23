@@ -77,6 +77,12 @@ crash2-us.mcs: crash2-us-tpl.mcs entry.bin
 	dd conv=notrunc if=entry.bin of=crash2-us.mcs bs=1 seek=688
 	bash fix-crash-checksum.sh crash2-us.mcs us2
 
+# Crash Bandicoot 2 NTSC-J target
+crash2-jp.mcs: crash2-jp-tpl.mcs entry.bin
+	cp crash2-jp-tpl.mcs crash2-jp.mcs
+	dd conv=notrunc if=entry.bin of=crash2-jp.mcs bs=1 seek=688
+	bash fix-crash-checksum.sh crash2-jp.mcs us2
+
 # Crash Bandicoot 2 PAL-EU target
 # redump.org lists two versions of this game: with and without EDC
 # This was tested with the non-EDC version (hash b077862d2c6e1b8060c2eae2fe82e708b228de7c)

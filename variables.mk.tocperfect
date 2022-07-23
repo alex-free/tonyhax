@@ -22,6 +22,7 @@ OBJCOPYFLAGS=-O binary
 
 ENTRY_MCS := $(patsubst $(SELF_DIR)/entrypoints/%-tpl.mcs, %.mcs, $(wildcard $(SELF_DIR)/entrypoints/*-tpl.mcs))
 ENTRY_RAW := \
+    BISCPS-1004700000000 \
 	BASCUS-9415400047975 \
 	BASCUS-9424400000000 \
 	BASCUS-9455916 \
@@ -123,4 +124,4 @@ FREEPSXBOOT_IMAGES := \
 
 # Boot CD files
 
-BOOT_CD_FILES := tonyhax-boot-cd.bin tonyhax-boot-cd.cue
+BOOT_CD_FILES := tonyhax-boot-cd-europe.bin tonyhax-boot-cd-europe.cue tonyhax-boot-cd-japan.bin tonyhax-boot-cd-japan.cue

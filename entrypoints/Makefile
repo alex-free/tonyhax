@@ -1,6 +1,8 @@
 
 # Thanks to whoever made https://devhints.io/makefile!
 
+# Seek value = offset to start of entry loader, which will be updated on code changes to entry.S
+
 include ../variables.mk
 
 all: $(ENTRY_MCS) $(ENTRY_RAW)
@@ -8,8 +10,10 @@ all: $(ENTRY_MCS) $(ENTRY_RAW)
 $(ENTRY_RAW): $(ENTRY_MCS)
 	bash ../util/mcs2raw.sh $(ENTRY_MCS)
 
+# BES = PAL BAS = USA BIS = JAP
+
 clean:
-	$(RM) BES* BAS* $(ENTRY_MCS) *.elf *.bin
+	$(RM) BES* BAS* BIS* $(ENTRY_MCS) *.elf *.bin
 
 # Entry target
 
@@ -77,7 +81,7 @@ crash2-us.mcs: crash2-us-tpl.mcs entry.bin
 	dd conv=notrunc if=entry.bin of=crash2-us.mcs bs=1 seek=688
 	bash fix-crash-checksum.sh crash2-us.mcs us2
 
-# Crash Bandicoot 2 NTSC-J target
+# Crash Bandicoot 2 NTSC-J target (Thanks MottZilla - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867)
 crash2-jp.mcs: crash2-jp-tpl.mcs entry.bin
 	cp crash2-jp-tpl.mcs crash2-jp.mcs
 	dd conv=notrunc if=entry.bin of=crash2-jp.mcs bs=1 seek=688
@@ -92,6 +96,12 @@ crash2-eu.mcs: crash2-eu-tpl.mcs entry.bin
 	dd conv=notrunc if=entry.bin of=crash2-eu.mcs bs=1 seek=432
 	bash fix-crash-checksum.sh crash2-eu.mcs eu2
 
+# Crash Bandicoot 3 NTSC-J target (Thanks Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
+crash3-jp.mcs: crash3-jp-tpl.mcs entry.bin
+	cp crash3-jp-tpl.mcs crash3-jp.mcs
+	dd conv=notrunc if=entry.bin of=crash3-jp.mcs bs=1 seek=688
+	bash fix-crash-checksum.sh crash3-jp.mcs us3
+
 # Crash Bandicoot 3 NTSC-US target
 crash3-us.mcs: crash3-us-tpl.mcs entry.bin
 	cp crash3-us-tpl.mcs crash3-us.mcs
@@ -103,6 +113,16 @@ crash3-eu.mcs: crash3-eu-tpl.mcs entry.bin
 	cp crash3-eu-tpl.mcs crash3-eu.mcs
 	dd conv=notrunc if=entry.bin of=crash3-eu.mcs bs=1 seek=432
 	bash fix-crash-checksum.sh crash3-eu.mcs eu3
+
+# Doki Oki NTSC-J target (Thanks Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
+doki-oki-jp.mcs: doki-oki-jp-tpl.mcs entry.bin
+	cp doki-oki-jp-tpl.mcs doki-oki-jp.mcs
+	dd conv=notrunc if=entry.bin of=doki-oki-jp.mcs bs=1 seek=896
+
+# The Legend Of Heroes I&II NTSC-J target (Thanks Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
+the-legend-of-heroes-1-and-2-jp.mcs: the-legend-of-heroes-1-and-2-jp-tpl.mcs entry.bin
+	cp the-legend-of-heroes-1-and-2-jp-tpl.mcs the-legend-of-heroes-1-and-2-jp.mcs
+	dd conv=notrunc if=entry.bin of=the-legend-of-heroes-1-and-2-jp.mcs bs=1 seek=216
 
 # Sports Superbike PAL-EU target
 superbike1-eu.mcs: superbike1-eu-tpl.mcs entry.bin

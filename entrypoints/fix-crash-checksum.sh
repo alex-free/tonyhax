@@ -32,6 +32,7 @@ case "$region" in
 		exit 1
 esac
 
+# Crash 2 and 3 Japanese and American versions are interchangable with the checksum 
 # algorithm is on PAL Crash Bandicoot 2 at 80036D24
 # algorithm is on PAL Crash Bandicoot 3 at 80071E08, static memory card buffer at 80072AD8, length 0x590 words
 

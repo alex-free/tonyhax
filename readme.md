@@ -6,7 +6,7 @@ tonyhax international
 Tonyhax International: Backup Loader/Region Bypass/Exploit For All PS1 Consoles (Japanese, American, European) And Early PS2 Consoles (Japanese, American, European, SCPH-10000-SCPH-39000)
 ===========================================================================================================================================================================================
 
-Brought to you by [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867) and [Alex Free](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6018), built on the work of many [others](#credits).
+Brought to you by [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867), [Alex Free](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6018), and [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714). Built on the work of many [others](#credits).
 
 Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Software backup loader exploit thing for the Sony PlayStation 1" originally created by [Socram8888](https://github.com/socram8888). Tonyhax International is developed by Alex Free and MottZilla with many new features and upgrades compared to the original Tonyhax, as described below:
 
@@ -56,9 +56,18 @@ Links
 Downloads
 ---------
 
+### Version 1.0.5 (7/27/2022)
+
+*   [tonyhax-v1.0.5-international](https://github.com/alex-free/tonyhax/releases/download/v1.0.5i/tonyhax-v1.0.5-international.zip)
+*   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.5i.zip)
+
+Changes:
+
+*   Added [save game exploit](#savegame) support for Doki Oki (NTSC-J), Crash Bandicoot 3 (NTSC-J), and The Legend Of Heroes I&II (NTSC-J). All these save game exploits were found by [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714).
+
 ### Version 1.0.4 (7/23/2022)
 
-*   [tonyhax-v1.0.4-international](https://github.com/alex-free/tonyhax/releases/download/v1.0.4i/tonyhax-v1.0.4-international.zip)
+*   [tonyhax-v1.0.5-international](https://github.com/alex-free/tonyhax/releases/download/v1.0.4i/tonyhax-v1.0.4-international.zip)
 *   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.4i.zip)
 
 Usage
@@ -81,7 +90,7 @@ Once the Tonyhax International loader boots, you will see the text `Put in a rea
 
 *   Using the [Boot CD](#bootcd).
 *   Using the ROM with a real NTSC-J PSX game already in the drive and the lid sensor blocked before powering it on (a pen spring, tin foil, etc. works to press down the lid sensor).
-*   Using the [save game exploit](#savegame).
+*   Using the [save game exploit](#savegame) with the lid sensor already blocked before powering on the console and booting the exploitable game.
 
 The lid sensor is highlighted by the red circle and arrow in the pictures below. On the original grey fat PS1 consoles (SCPH-900X and earlier) it is located in the top right corner, it is is shaped like a circle. Ideally you press it down with a bent pen spring as shown. On the slim PSone consoles (SCPH-10X) it is in the lower right corner to the side of the edge of the CD drive. For these consoles it is best to use a piece of tape or paper to slide in and press it down as shown.
 
@@ -137,7 +146,7 @@ A brief `Starting` message will appear. The screen will go black, and then your 
 Available Boot Methods:
 
 *   [Boot CD](#bootcd) (I don't know of anyway to boot this on an unmodified Japanese PS2 but it is available)
-*   [Save game exploit](#savegame) (_Crash Bandicoot 2 is currently the only Japanese game supported by the save game exploit, more games will be supported in the future_)
+*   [Save game exploit](#savegame)
 
 ### Removing The DVD Drive Tray Front Panel
 
@@ -215,16 +224,16 @@ Inside the Tonyhax International releases ([download](#downloads) above) in the 
 *   tonyhax-flasher-cd-europe.cue
 *   tonyhax-flasher-cd-japan.bin
 *   tonyhax-flasher-cd-japan.cue
-*   tonyhax-v1.0.4-international.rom
+*   tonyhax-v1.0.5-international.rom
 
-The BIN+CUE files can be burned to a CD-R. The BIN+CUE files contain the [NXFlash](https://github.com/danhans42/nxflash) PS1 executable with the `tonyhax-v1.0.4-international.rom` file. This means when you boot the burned flasher CD-R on your PS1 console, you can connect your GameShark/cheat device, press R2 (re-detect cheat cart), press start (flash eeprom from CD), and then press X to flash your GameShark/Cheat device. Now you can simply reset or power off then power on your PS1 console and it will boot Tonyhax International from the GameShark/cheat cart immeditely.
+The BIN+CUE files can be burned to a CD-R. The BIN+CUE files contain the [NXFlash](https://github.com/danhans42/nxflash) PS1 executable with the `tonyhax-v1.0.5-international.rom` file. This means when you boot the burned flasher CD-R on your PS1 console, you can connect your GameShark/cheat device, press R2 (re-detect cheat cart), press start (flash eeprom from CD), and then press X to flash your GameShark/Cheat device. Now you can simply reset or power off then power on your PS1 console and it will boot Tonyhax International from the GameShark/cheat cart immeditely.
 
 If you are using Tonyhax International to boot the burned flasher CD-R, it does not matter if you burn the flasher CD with the BIN+CUE japan files or the BIN+CUE Europe files. If you are instead using a swap trick or mod chip to boot the burned flasher CD-R, you may need to burn either the BIN+CUE japan files or the BIN+CUE Europe files specifically as described below:
 
 *   If you have a SCPH-1000 Japanese console, any American console, or any European console older then the SCPH-102 you can use either the Europe or japan BIN+CUE files as it does not matter.
 *   If you have a SCPH-3000 or newer Japanese console you need to use the japan BIN+CUE files. If you have a SCPH-102 European console then you need to use the europe BIN+CUE files.
 
-There are many other ways (besides using the flasher CD) to flash the `tonyhax-v1.0.4-international.rom` file you make with PSEXE2ROM to your PS1 cheat cart. One way is to use a serial cable to transfer the ROM file from your computer to your PS1 console using a program like [UNIROM](https://unirom.github.io/) or [NXFlash](https://github.com/danhans42/nxflash).
+There are many other ways (besides using the flasher CD) to flash the `tonyhax-v1.0.5-international.rom` file you make with PSEXE2ROM to your PS1 cheat cart. One way is to use a serial cable to transfer the ROM file from your computer to your PS1 console using a program like [UNIROM](https://unirom.github.io/) or [NXFlash](https://github.com/danhans42/nxflash).
 
 The SCPH-900X and SCPH-10X consoles do not have an expansion port, and hence a GameShark can not be connected to those consoles.
 
@@ -480,6 +489,16 @@ BESCES-0096700765150
 
 Crash Bandicoot 3: Warped
 
+NTSC-J
+
+SCPS-10073
+
+crash3-jp.mcs
+
+BISCPS-1007300000000
+
+Crash Bandicoot 3: Warped
+
 NTSC-U
 
 SCUS-94244
@@ -497,6 +516,16 @@ SCES-01420
 crash3-eu.mcs
 
 BESCES-0142000000000
+
+Doki Oki
+
+NTSC-J
+
+SLPS-00130
+
+doki-oki-jp.mcs
+
+BISLPS-00130DOKIOH
 
 Sports Superbike
 
@@ -517,6 +546,16 @@ SLES-03827
 superbike2-eu.mcs
 
 BESLES-03827SSII
+
+The Legend Of Heroes I&II
+
+NTSC-J
+
+SLPS-01323
+
+the-legend-of-heros-1-and-2-jp.mcs
+
+BISLPS-01323010001
 
 Tony Hawk's Pro Skater 2
 
@@ -662,7 +701,7 @@ After the correct memory card save game exploit **Raw** file and the `BESLEM-999
 
 ### Using The Save Game Exploit
 
-Now that you have the save game exploit files on the PS1 memory card, start the real PS1 game on your console with the PS1 memory card inserted in it. Follow the instructions for the real PS1 game you are using, described below:
+Now that you have the save game exploit files on the PS1 memory card, start the real PS1 game on your console with the PS1 memory card containing the save game files inserted in it. If you are using a Japanese PS1, it is recommended that you power off the console, put in the Japanese version of the game that has a save game exploit file available, block the lid sensor, and then turn on the console and have it boot the game. In either case, follow the instructions for the real PS1 game you are using described below:
 
 Game
 
@@ -691,6 +730,14 @@ If you are using the European version, on the language selection screen select t
 Tonyhawk's games
 
 Boot the game as you'd normally do. On the main menu, wait until the save file is automatically loaded (it should say `Loading TONYHAX EU/US/DE/FR`, depending on the game's region). After it's done, choose the `CREATE SKATER` menu and press X.
+
+The Legend Of Heroes I&II
+
+Boot the game as you'd normally do. On the main menu, select the Legend Of Heroes I (the I button on the left), **not The Legend Of Heroes II (the II button on the right)**. Once in The Legend Of Heroes I load the save file.
+
+Doki Oki
+
+Boot the game as you'd normally do. Press start, circle, circle, then circle one last time to navigate through the main menu and load the save file.
 
 TOCPerfect Patching
 -------------------
@@ -771,9 +818,9 @@ Another thing you can do is boot [TOCPerfect](#tocperfect) patched games with th
 Important Info About Burning PSX Backups
 ----------------------------------------
 
-Your **burner** and **CD-R media** matter! **The PS1/PS2 will read 74min/650MB CD-Rs better then 80min/700MB CD-Rs**. It is also **ideal to use CD-Rs with a dark bottom layer as it is more reflective and easier to read for the console**. The slower you can burn, the better. With a sufficiently high enough write speed (over 10x is highly not recommended), the console will not be able to read you CD-R!
+Your **burner** and **CD-R media** matter! **The PS1/PS2 will read 74min/650MB CD-Rs better then 80min/700MB CD-Rs**. It is also **ideal to use CD-Rs with a dark bottom layer as it is more reflective and easier to read for the console**. The slower you can burn, the better. With a sufficiently high enough write speed (over 16x is highly not recommended), the console will not be able to read you CD-R! Newer optical drives don't support writing at the slow speeds older drives support writing at. If you get a newer optical drive, it may for example have a minimum burning speed of 16x (which is fine in my expierence if it is the lowest you can go). A really old IDE CD burner however could easily burn at 4x which may be more desirable.
 
-New old stock VerbatimDataLifePlus 74 min/650MB CD-Rs from the turn of the century are the best I have used so far. I also highly recommend using a desktop-class CD writer (3.5 inch SATA or IDE CD burner) and not any "portable"/"laptop" USB DVD drives that are 1) cheap and 2) not getting external power. 3.5 inch SATA and IDE CD burners can be found for cheap, and you can use an IDE/SATA to USB adapter to use them on laptops and other systems.
+New old stock VerbatimDataLifePlus 74 min/650MB CD-Rs from the turn of the century are the best I have used so far. I also highly recommend using a desktop-class CD writer (3.5 inch SATA or IDE CD burner). 3.5 inch SATA and IDE CD burners can be found for cheap, and you can use an IDE/SATA to USB adapter to use them on laptops and other systems. They work better then "laptop" drives and cheap external all in one usb DVD/CD burners in my expierence.
 
 Recommended burning programs:
 
@@ -821,6 +868,10 @@ MottZilla
 *   Developed the PS-EXE loader used on GameShark/cheat cartridges to run Tonyhax International.
 *   Came up with reset+unlock without opening/closing the lid method for TOCPerfect booting on USA/PAL consoles.
 *   Came up with the CDROM BIOS Firmware detection and VC3 console laser re-calibration to fix disc reading after using SetSession to get the TOC data on VC3 consoles after discovering that it _may_ cause reading issues that can be fixed by re-calibrating the laser after executing the SetSession command.
+
+Patchouli(karehaani):
+
+Created save game exploits for Doki Oki (NTSC-J), Crash Bandicoot 3 (NTSC-J), and The Lengend Of Heroes I&II. Patchouli also made a different Crash Bandicoot 2 (NTSC-J) save game exploit then the one that MottZilla originally came up with, but the original MottZilla save game exploit remains the one in the source as there is no need for 2 different save game exploits for one game that do the same thing.
 
 ### Tonyhax Acknowledgements
 

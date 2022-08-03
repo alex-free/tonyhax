@@ -7,7 +7,7 @@ SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Common variables
 
-TONYHAX_VERSION=v1.0.5-international
+TONYHAX_VERSION=v1.0.6-international
 
 CC=mips-linux-gnu-gcc
 CFLAGS=-O1 -Wall -Wextra -Wno-main -EL -march=r3000 -mabi=32 -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION) -DMEMORY_CARD
@@ -22,6 +22,10 @@ OBJCOPYFLAGS=-O binary
 
 ENTRY_MCS := $(patsubst $(SELF_DIR)/entrypoints/%-tpl.mcs, %.mcs, $(wildcard $(SELF_DIR)/entrypoints/*-tpl.mcs))
 ENTRY_RAW := \
+	BISLPM-86922CHSVTRv1 \
+	BISLPM-86489CHSv1 \
+	BISLPM-86751CEEAG01 \
+	BISLPM-86754DRACULA	\
 	BISLPS-01323010001 \
     BISCPS-1004700000000 \
     BISCPS-1007300000000 \

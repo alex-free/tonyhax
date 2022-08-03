@@ -60,6 +60,16 @@
 
 <a name=downloads><h2>Downloads</h2></a>
 
+<h3>Version 1.0.6 (8/3/2022)</h3>
+
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.6i/tonyhax-v1.0.6-international.zip">tonyhax-v1.0.6-international</a></li>
+<li><a href="https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.6i.zip">source code</a></li></ul>
+
+<p>Changes:</p>
+<ul><li>Added <a href=#savegame>save game exploit</a> support for Castlevania Chronicle NTSC-J (only the first release, rev 1 is not working right now) (Alex Free) and 1500 Lite Series Castrol Honda Super Bike Racing NTSC-J (Alex Free).</li>
+<li>Added <a href=#savegame>save game exploit</a> support for Tony Hawk Pro Skater 2 NTSC-J (MottZilla) and 1500 Lite Series Castrol Honda VTR (MottZilla).</li></ul>
+
 <h3>Version 1.0.5 (7/27/2022)</h3>
 
 <ul>
@@ -72,12 +82,14 @@
 <h3>Version 1.0.4 (7/23/2022)</h3>
 
 <ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.4i/tonyhax-v1.0.4-international.zip">tonyhax-v1.0.5-international</a></li>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.4i/tonyhax-v1.0.4-international.zip">tonyhax-v1.0.4-international</a></li>
 <li><a href="https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.4i.zip">source code</a></li></ul>
 
 <a name=usage><h2>Usage</h2></a>
 
-<p>The Tonyhax International loader is the program that is booted on any PS1 or an early PS2 that enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted on your PS1 with a <a href=#rom>GameShark/cheat cart</a>, <a href=#freepsxboot>flashed memory card</a>, <a href=#savegame>save game exploit</a>, or <a href=#bootcd>CD-R</a>. It provides the ability to properly play backup and import discs on all PS1 consoles, and early PS2 consoles (Japanese, USA, and PAL up to SCPH-39000). <b>If you are using <b>any Japanese console</b>, at least one real NTSC-J PSX game disc is required. No real PSX game disc is required for USA/PAL consoles.</b></p>
+<p>The Tonyhax International loader is the program that is booted on any PS1 or an early PS2 that enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted on your PS1 with a <a href=#rom>GameShark/cheat cart</a>, <a href=#freepsxboot>flashed memory card</a>, <a href=#savegame>save game exploit</a>, or <a href=#bootcd>CD-R</a>. It provides the ability to properly play backup and import discs on all PS1 consoles, and early PS2 consoles (Japanese, USA, and PAL up to SCPH-39000).</p>
+
+<p>If you are using <b>any Japanese console</b>, at least one real NTSC-J PSX game disc is required. If you are using a <b>Japanese PS2 console (SCPH-10000 to SCPH-39000)</b> a Swap Magic Tool is also required. Neither of these are needed if you are using a USA or PAL PS1/PS2 console.</p>
 
 <h3>Japanese PSX/PS1 Console Instructions</h3>
 
@@ -223,16 +235,16 @@ Please wait, this may take a few minutes
     <li>tonyhax-flasher-cd-europe.cue</li>
     <li>tonyhax-flasher-cd-japan.bin</li>
     <li>tonyhax-flasher-cd-japan.cue</li>
-    <li>tonyhax-v1.0.5-international.rom</li>
+    <li>tonyhax-v1.0.6-international.rom</li>
 </ul>
 
-<p>The BIN+CUE files can be burned to a CD-R. The BIN+CUE files contain the <a href=https://github.com/danhans42/nxflash>NXFlash</a> PS1 executable with the <code>tonyhax-v1.0.5-international.rom</code> file. This means when you boot the burned flasher CD-R on your PS1 console, you can connect your GameShark/cheat device, press R2 (re-detect cheat cart), press start (flash eeprom from CD), and then press X to flash your GameShark/Cheat device. Now you can simply reset or power off then power on your PS1 console and it will boot Tonyhax International from the GameShark/cheat cart immeditely.</p>
+<p>The BIN+CUE files can be burned to a CD-R. The BIN+CUE files contain the <a href=https://github.com/danhans42/nxflash>NXFlash</a> PS1 executable with the <code>tonyhax-v1.0.6-international.rom</code> file. This means when you boot the burned flasher CD-R on your PS1 console, you can connect your GameShark/cheat device, press R2 (re-detect cheat cart), press start (flash eeprom from CD), and then press X to flash your GameShark/Cheat device. Now you can simply reset or power off then power on your PS1 console and it will boot Tonyhax International from the GameShark/cheat cart immeditely.</p>
 
 <p>If you are using Tonyhax International to boot the burned flasher CD-R, it does not matter if you burn the flasher CD with the BIN+CUE japan files or the BIN+CUE Europe files. If you are instead using a swap trick or mod chip to boot the burned flasher CD-R, you may need to burn either the BIN+CUE japan files or the BIN+CUE Europe files specifically as described below:</p>
 
 <ul><li>If you have a SCPH-1000 Japanese console, any American console, or any European console older then the SCPH-102 you can use either the Europe or japan BIN+CUE files as it does not matter.</li>
 <li>If you have a SCPH-3000 or newer Japanese console you need to use the japan BIN+CUE files. If you have a SCPH-102 European console then you need to use the europe BIN+CUE files.</li></ul>
-<p>There are many other ways (besides using the flasher CD) to flash the <code>tonyhax-v1.0.5-international.rom</code> file you make with PSEXE2ROM to your PS1 cheat cart. One way is to use a serial cable to transfer the ROM file from your computer to your PS1 console using a program like <a href=https://unirom.github.io/>UNIROM</a> or <a href=https://github.com/danhans42/nxflash>NXFlash</a>.
+<p>There are many other ways (besides using the flasher CD) to flash the <code>tonyhax-v1.0.6-international.rom</code> file you make with PSEXE2ROM to your PS1 cheat cart. One way is to use a serial cable to transfer the ROM file from your computer to your PS1 console using a program like <a href=https://unirom.github.io/>UNIROM</a> or <a href=https://github.com/danhans42/nxflash>NXFlash</a>.
 
 <p>The SCPH-900X and SCPH-10X consoles do not have an expansion port, and hence a GameShark can not be connected to those consoles.</p>
 
@@ -340,8 +352,8 @@ Please wait, this may take a few minutes
 
 <p>Instead of using a PS2 to copy the save game exploit files, you can use a Dex Drive or similar with a visual memory card editor (such as <a href=http://onorisoft.free.fr/retro.htm?psx/psx.htm>OrionSoft's PS1 Memory Card Manager</a> or <a href=https://archive.org/details/inter-act-dex-plorer-ver.-1.10.950>Dex-plorer</a>), to modify a PS1 memory card's contents directly with a computer. If you go this route, consider using the MCS files (listed below). This way of adding the required save game exploit files would only require:</p>
 
-<ul><li>A real PS1 game disc that matches your console's region and has save game exploit files available.</li>
-  <li>Any PS1 console, or early PS2 console (SCPH-39000 or lower model number).</li>
+<ul><li>A real PS1 game disc that matches your console's region and that has save game exploit files available.</li>
+  <li>Any PS1 console, or early PS2 console (SCPH-10000 to SCPH-39000 models).</li>
   <li>An authentic PS1 memory card that has enough space to hold the hacked game save file and the tonyhax file.</li>
   <li>A DexDrive, PS3 Memory Card USB adapter, or other hardware that allows you to write and modify a PS1 memory card with a computer.</li>
   <li>Software such as <a href=http://onorisoft.free.fr/retro.htm?psx/psx.htm>OrionSoft's PS1 Memory Card Manager</a> (for the PS3 Memory Card USB adapter) or <a href=https://archive.org/details/inter-act-dex-plorer-ver.-1.10.950>Dex-plorer</a> (for the DexDrive).</li></ul>
@@ -387,11 +399,24 @@ Please wait, this may take a few minutes
 <td>BESLES-02618</td>
 </tr>
 <tr>
+<td>Castlevania Chronicle - Akumajou Dracula (only first release of the game, rev 1 does not work right now)</td>
+<td>NTSC-J</td>
+<td>SLPM-86754</td>
+<td>cc-jp.mcs</td>
+<td>BISLPM-86754DRACULA</td>
+</tr>
 <td>Castlevania Chronicles</td>
 <td>NTSC-U</td>
 <td>SLUS-01384</td>
 <td>cc-us.mcs</td>
 <td>BASLUS-01384DRACULA</td>
+</tr>
+<tr>
+<td>Castrol Honda Superbike [SuperLite 1500 Series]</td>
+<td>NTSC-J</td>
+<td>SLPM-86489</td>
+<td>castrolsb-jp.mcs</td>
+<td>BISLPM-86489CHSv1</td>
 </tr>
 <tr>
 <td>Castrol Honda Superbike Racing</td>
@@ -406,6 +431,13 @@ Please wait, this may take a few minutes
 <td>SLES-01182</td>
 <td>castrolsb-eu.mcs</td>
 <td>BESLES_01182CHSv1</td>
+</tr>
+<tr>
+<td>Castrol Honda VTR [SuperLite 1500 Series]</td>
+<td>NTSC-J</td>
+<td>SLPM-86922</td>
+<td>castrolvtr-jp.mcs</td>
+<td>BISLPM-86922CHSVTRv1</td>
 </tr>
 <tr>
 <td>Castrol Honda VTR</td>
@@ -497,6 +529,13 @@ Please wait, this may take a few minutes
 <td>SLPS-01323</td>
 <td>the-legend-of-heros-1-and-2-jp.mcs</td>
 <td>BISLPS-01323010001</td>
+</tr>
+<tr>
+<td>Tony Hawk's Pro Skater 2</td>
+<td>NTSC-J</td>
+<td>SLPM-86751</td>
+<td>thps2-jp.mcs</td>
+<td>BISLPM-86751CEEAG01</td>
 </tr>
 <tr>
 <td>Tony Hawk's Pro Skater 2</td>

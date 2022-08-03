@@ -43,10 +43,20 @@ brunswick2-eu.mcs: brunswick2-eu-tpl.mcs entry.bin
 	cp brunswick2-eu-tpl.mcs brunswick2-eu.mcs
 	dd conv=notrunc if=entry.bin of=brunswick2-eu.mcs bs=1 seek=2272
 
+# Castlevania Chronicles NTSC-J target (Alex Free)
+cc-jp.mcs: cc-jp-tpl.mcs entry.bin
+	cp cc-jp-tpl.mcs cc-jp.mcs
+	dd conv=notrunc if=entry.bin of=cc-jp.mcs bs=1 seek=820
+
 # Castlevania Chronicles NTSC-US target
 cc-us.mcs: cc-us-tpl.mcs entry.bin
 	cp cc-us-tpl.mcs cc-us.mcs
 	dd conv=notrunc if=entry.bin of=cc-us.mcs bs=1 seek=820
+
+# Castrol Honda Superbike Racing NTSC-J target (Alex Free)
+castrolsb-jp.mcs: castrolsb-jp-tpl.mcs entry.bin
+	cp castrolsb-jp-tpl.mcs castrolsb-jp.mcs
+	dd conv=notrunc if=entry.bin of=castrolsb-jp.mcs bs=1 seek=1364
 
 # Castrol Honda Superbike Racing NTSC-US target
 castrolsb-us.mcs: castrolsb-us-tpl.mcs entry.bin
@@ -57,6 +67,11 @@ castrolsb-us.mcs: castrolsb-us-tpl.mcs entry.bin
 castrolsb-eu.mcs: castrolsb-eu-tpl.mcs entry.bin
 	cp castrolsb-eu-tpl.mcs castrolsb-eu.mcs
 	dd conv=notrunc if=entry.bin of=castrolsb-eu.mcs bs=1 seek=1760
+
+# Castrol Honda VTR NTSC-J target (MottZilla - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867)
+	cp castrolvtr-jp-tpl.mcs castrolvtr-jp.mcs
+	dd conv=notrunc if=entry.bin of=castrolvtr-jp.mcs bs=1 seek=824	
+	successcu/successcu -c castrolvtr-jp.mcs
 
 # Castrol Honda VTR PAL-EU target
 castrolvtr-eu.mcs: castrolvtr-eu-tpl.mcs entry.bin
@@ -81,7 +96,7 @@ crash2-us.mcs: crash2-us-tpl.mcs entry.bin
 	dd conv=notrunc if=entry.bin of=crash2-us.mcs bs=1 seek=688
 	bash fix-crash-checksum.sh crash2-us.mcs us2
 
-# Crash Bandicoot 2 NTSC-J target (Thanks MottZilla - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867)
+# Crash Bandicoot 2 NTSC-J target (MottZilla - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867)
 crash2-jp.mcs: crash2-jp-tpl.mcs entry.bin
 	cp crash2-jp-tpl.mcs crash2-jp.mcs
 	dd conv=notrunc if=entry.bin of=crash2-jp.mcs bs=1 seek=688
@@ -96,7 +111,7 @@ crash2-eu.mcs: crash2-eu-tpl.mcs entry.bin
 	dd conv=notrunc if=entry.bin of=crash2-eu.mcs bs=1 seek=432
 	bash fix-crash-checksum.sh crash2-eu.mcs eu2
 
-# Crash Bandicoot 3 NTSC-J target (Thanks Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
+# Crash Bandicoot 3 NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
 crash3-jp.mcs: crash3-jp-tpl.mcs entry.bin
 	cp crash3-jp-tpl.mcs crash3-jp.mcs
 	dd conv=notrunc if=entry.bin of=crash3-jp.mcs bs=1 seek=688
@@ -114,12 +129,12 @@ crash3-eu.mcs: crash3-eu-tpl.mcs entry.bin
 	dd conv=notrunc if=entry.bin of=crash3-eu.mcs bs=1 seek=432
 	bash fix-crash-checksum.sh crash3-eu.mcs eu3
 
-# Doki Oki NTSC-J target (Thanks Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
+# Doki Oki NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
 doki-oki-jp.mcs: doki-oki-jp-tpl.mcs entry.bin
 	cp doki-oki-jp-tpl.mcs doki-oki-jp.mcs
 	dd conv=notrunc if=entry.bin of=doki-oki-jp.mcs bs=1 seek=896
 
-# The Legend Of Heroes I&II NTSC-J target (Thanks Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
+# The Legend Of Heroes I&II NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
 the-legend-of-heroes-1-and-2-jp.mcs: the-legend-of-heroes-1-and-2-jp-tpl.mcs entry.bin
 	cp the-legend-of-heroes-1-and-2-jp-tpl.mcs the-legend-of-heroes-1-and-2-jp.mcs
 	dd conv=notrunc if=entry.bin of=the-legend-of-heroes-1-and-2-jp.mcs bs=1 seek=216
@@ -133,6 +148,12 @@ superbike1-eu.mcs: superbike1-eu-tpl.mcs entry.bin
 superbike2-eu.mcs: superbike2-eu-tpl.mcs entry.bin
 	cp superbike2-eu-tpl.mcs superbike2-eu.mcs
 	dd conv=notrunc if=entry.bin of=superbike2-eu.mcs bs=1 seek=824
+
+# THPS2 NTSC-J target (MottZilla - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867)
+thps2-jp.mcs: thps2-jp-tpl.mcs entry.bin
+	cp thps2-jp-tpl.mcs thps2-jp.mcs
+	dd conv=notrunc if=entry.bin of=thps2-jp.mcs bs=1 seek=5336
+	successcu/successcu -t thps2-jp.mcs
 
 # THPS2 NTSC-US target
 thps2-us.mcs: thps2-us-tpl.mcs entry.bin

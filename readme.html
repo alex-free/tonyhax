@@ -34,8 +34,9 @@
   <tr>
     <th>Can be compiled on <a href=#building>any operating system</a> that supports <a href=https://crosstool-ng.github.io/>Crosstool-NG</a> using a script that builds a local tool chain within the source directory that does not install anything into your system.</th>
     <th>Only supports being compiled on Debian 10/Windows Subsystem for Linux.</th>
-  </tr>
 </table>
+
+<p>Tonyhax International also provides more <a href=#savegame>save game exploits</a> then the original Tonyhax.</p>
 
 <h2>Table of Contents</h2>
 
@@ -59,6 +60,22 @@
 <li><a href=https://alex-free.github.io/psexe2rom>PSEXE2ROM Homepage</a></li></ul>
 
 <a name=downloads><h2>Downloads</h2></a>
+
+<h3>Version 1.0.7 (8/7/2022)</h3>
+
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.7i/tonyhax-v1.0.7-international.zip">tonyhax-v1.0.7-international</a></li>
+<li><a href="https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.7i.zip">source code</a></li></ul>
+
+<p>Changes:</p>
+
+<ul><li>The Tonyhax International loader memory card save file <b>is now named <code>HAX</code> instead of <code>BESLEM-99999TONYHAX</code> to allow for more exploitable games</b>. You will need to update both the save game exploit file for your game as well as the Tonyhax International loader file to use v1.0.7 if you are using a previou version of the save game exploit file for your game that is already on a memory card.</li>
+<li>Removed the SetSessionSuperUltraCommandSmash and replaced it with <a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=867">MottZilla</a>'s new method of re-reading TOC data for VC0 A, VC0 B, and VC1 A CDROM Controller BIOS firmwares. <b>This change reduces the time it takes to re-read the TOC data on the backup CD-R or import PS1 disc from 2-10 minutes on the SCPH-1000, SCPH-3000, and some SCPH-3500 japanese consoles to around 30 seconds with 100% reliability!</b></li>
+<li>Added <a href=#savegame>save game exploit</a> support for Tekken 3 Japan/USA/PAL thanks to Patchouli (<a href=http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=671>karehaani</a>) and <a href=https://github.com/socram8888/tonyhax/pull/20>krystalgamer</a>.</li>
+<li>Added <a href=#savegame>save game exploit</a> support for Tekken 2 Japan (rev 1 only), USA (rev 0 only), and PAL thanks to Patchouli (<a href=http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=671>karehaani</a>) and <a href=https://github.com/socram8888/tonyhax/pull/20>krystalgamer</a>.</li>
+<li>Added <a href=#savegame>save game exploit</a> support for Downhill Snow Japan thanks to Patchouli (<a href=http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=671>karehaani</a>).</li>
+</ul>
+
 
 <h3>Version 1.0.6 (8/3/2022)</h3>
 
@@ -116,14 +133,7 @@
 <p><img src="images/psone-lid-sensor.png" alt="psone lid sensor" height="400"></p>
 <p><img src="images/psone-lid-sensor-blocked.png" alt="psone lid sensor blocked" height="400"></p></center>
 
-<p>After blocking the lid sensor, your real Japanese PS1 game will spin up and then stop. Once you see the text <code>Put in a backup/import disc, then press X</code> remove either the real NTSC-J PSX game disc or Boot CD from your PS1 console's CD drive. Put in the backup CD-R or import PSX game disc you want to play <b>without unblocking the lid sensor</b>. Once you press X, on most Japanese consoles (SCPH-3500 and newer) you will eventually see the text <code> Sending SetSession</code>, followed by the game booting quickly. If you instead see the text:</p>
-
-<pre><code>Sending SetSessionSuperUltraCommandSmash
-Please wait, this may take a few minutes
-</code></pre>
-<p>You have a very early Japanese PSX console (SCPH-1000 or SCPH-3000). <b>These early Japanese PSX consoles take MUCH longer to boot backups with CD Audio in comparison to all other PSX consoles. This is due to a bug in the CDROM BIOS controller firmware versions found in these consoles that Tonyhax International has to work around. The more audio tracks in a backup CD-R, the longer it will take for the game to boot. You can expect this step to take possibly multiple minutes to complete. The console or program is not stuck, please be patient while booting completes as this waiting is unavoidable at this time.</b></p>
-
-<p>At the end of the loader, the screen will go black, and then your backup CD-R will boot with perfect CD audio playback. Note that you can not unblock the lid sensor while playing the game on <b>Japanese consoles</b>, if you do so the game will stop working. There are some games which span multiple discs. And some of these games (such as Parasite Eve and Crono Cross) that span multiple discs require you to open the CD drive, remove disc 1, insert disc 2, and close the CD drive at some point in the game. If you have to do this on your <b>Japanese console</b>, please instead do the following to work around the limitation:</p>
+<p>After blocking the lid sensor, your real Japanese PS1 game will spin up and then stop. Once you see the text <code>Put in a backup/import disc, then press X</code> remove either the real NTSC-J PSX game disc or Boot CD from your PS1 console's CD drive. Put in the backup CD-R or import PSX game disc you want to play <b>without unblocking the lid sensor</b>. Once you press X, the console will run some commands automatically, followed by the game booting with perfect CD audio playback. Note that you can not unblock the lid sensor while playing the game on <b>Japanese consoles</b>, if you do so the game will stop working. There are some games which span multiple discs. And some of these games (such as Parasite Eve and Crono Cross) that span multiple discs require you to open the CD drive, remove disc 1, insert disc 2, and close the CD drive at some point in the game. If you have to do this on your <b>Japanese console</b>, please instead do the following to work around the limitation:</p>
 
 <ul><li>When the game asks you to insert disc 2, unblock the lid sensor and remove the CD.</li>
   <li>Put <b>any real authentic Japanese PSX disc</b> into the PS1 drive.</li>
@@ -210,10 +220,10 @@ Please wait, this may take a few minutes
 
 <p>Available Boot Methods:</p>
 
-<ul><li><a href=#bootcd>Boot CD</a></li>
+<ul><li><a href=#bootcd>Boot CD</a> (you can use something like the code breaker pro PS1 disc to boot it first)</li>
   <li><a href=#savegame>Save game exploit</a></li></ul>
 
-<p>Once you see the text <code>Put in a backup/import disc, then press X</code> appear, eject the DVD drive. Then you can remove the real PSX game disc from your PS2 console's DVD drive. Put in the backup CD-R or import PSX game disc you want to play, and close the DVD drive. Now on your controller press X. You will eventually see the text <code> Sending SetSession</code>, followed by the game booting quickly.</p>
+<p>Once you see the text <code>Put in a backup/import disc, then press X</code> appear, eject the DVD drive. Then you can remove the real PSX game disc from your PS2 console's DVD drive. Put in the backup CD-R or import PSX game disc you want to play, and close the DVD drive. Now on your controller press X. The console will then send some commands automatically, followed by the game booting.</p>
 
 <a name=rom><h2>ROM/ROM Flasher CD</h2></a>
 
@@ -235,16 +245,16 @@ Please wait, this may take a few minutes
     <li>tonyhax-flasher-cd-europe.cue</li>
     <li>tonyhax-flasher-cd-japan.bin</li>
     <li>tonyhax-flasher-cd-japan.cue</li>
-    <li>tonyhax-v1.0.6-international.rom</li>
+    <li>tonyhax-v1.0.7-international.rom</li>
 </ul>
 
-<p>The BIN+CUE files can be burned to a CD-R. The BIN+CUE files contain the <a href=https://github.com/danhans42/nxflash>NXFlash</a> PS1 executable with the <code>tonyhax-v1.0.6-international.rom</code> file. This means when you boot the burned flasher CD-R on your PS1 console, you can connect your GameShark/cheat device, press R2 (re-detect cheat cart), press start (flash eeprom from CD), and then press X to flash your GameShark/Cheat device. Now you can simply reset or power off then power on your PS1 console and it will boot Tonyhax International from the GameShark/cheat cart immeditely.</p>
+<p>The BIN+CUE files can be burned to a CD-R. The BIN+CUE files contain the <a href=https://github.com/danhans42/nxflash>NXFlash</a> PS1 executable with the <code>tonyhax-v1.0.7-international.rom</code> file. This means when you boot the burned flasher CD-R on your PS1 console, you can connect your GameShark/cheat device, press R2 (re-detect cheat cart), press start (flash eeprom from CD), and then press X to flash your GameShark/Cheat device. Now you can simply reset or power off then power on your PS1 console and it will boot Tonyhax International from the GameShark/cheat cart immeditely.</p>
 
 <p>If you are using Tonyhax International to boot the burned flasher CD-R, it does not matter if you burn the flasher CD with the BIN+CUE japan files or the BIN+CUE Europe files. If you are instead using a swap trick or mod chip to boot the burned flasher CD-R, you may need to burn either the BIN+CUE japan files or the BIN+CUE Europe files specifically as described below:</p>
 
 <ul><li>If you have a SCPH-1000 Japanese console, any American console, or any European console older then the SCPH-102 you can use either the Europe or japan BIN+CUE files as it does not matter.</li>
 <li>If you have a SCPH-3000 or newer Japanese console you need to use the japan BIN+CUE files. If you have a SCPH-102 European console then you need to use the europe BIN+CUE files.</li></ul>
-<p>There are many other ways (besides using the flasher CD) to flash the <code>tonyhax-v1.0.6-international.rom</code> file you make with PSEXE2ROM to your PS1 cheat cart. One way is to use a serial cable to transfer the ROM file from your computer to your PS1 console using a program like <a href=https://unirom.github.io/>UNIROM</a> or <a href=https://github.com/danhans42/nxflash>NXFlash</a>.
+<p>There are many other ways (besides using the flasher CD) to flash the <code>tonyhax-v1.0.7-international.rom</code> file you make with PSEXE2ROM to your PS1 cheat cart. One way is to use a serial cable to transfer the ROM file from your computer to your PS1 console using a program like <a href=https://unirom.github.io/>UNIROM</a> or <a href=https://github.com/danhans42/nxflash>NXFlash</a>.
 
 <p>The SCPH-900X and SCPH-10X consoles do not have an expansion port, and hence a GameShark can not be connected to those consoles.</p>
 
@@ -336,7 +346,7 @@ Please wait, this may take a few minutes
 
 <a name=savegame><h2>Save Game Exploit</h2></a>
 
-<p>The original way to boot the Tonyhax International loader is through a special game save on a PS1 memory card that you load while in a specific, supported real PS1 game that you can play normally on your PS1 or PS2 console (SCPH-39000 models and lower). You need to copy the <code>BESLEM-99999TONYHAX</code> file and the game exploit file specific to the original real PS1 game you own to the PS1 memory card, then load the save in a specific way in the exploitable game. Described below are 2 different methods to copy these files to a PS1 memory card. One involves using a PS2, the other involves using special hardware that allows you to write to the PS1 memory card directly from your computer.</p>
+<p>The original way to boot the Tonyhax International loader is through a special game save on a PS1 memory card that you load while in a specific, supported real PS1 game that you can play normally on your PS1 or PS2 console (SCPH-39000 models and lower). You need to copy the <code>HAX</code> file and the game exploit file specific to the original real PS1 game you own to the PS1 memory card, then load the save in a specific way in the exploitable game. Described below are 2 different methods to copy these files to a PS1 memory card. One involves using a PS2, the other involves using special hardware that allows you to write to the PS1 memory card directly from your computer.</p>
 
 <h3>PS2 Installation Method Requirements</h3>
 
@@ -348,19 +358,19 @@ Please wait, this may take a few minutes
   <li>A FAT32 formatted USB flash drive that your PS2 console can read (<b>not all USB flash drives seem to work, you may need to do a bit of trial and error testing to find one that you can use</b>).</li>
   <li>A PS2 console that can run uLaunchELF (Models newer then SCPH-39000 can therefore be used for this step, but they can not be used to boot into Tonyhax International using the game save). You could do this with <a href=https://www.ps2-home.com/forum/viewtopic.php?t=5208>FreeHDBoot</a> or <a href=https://www.ps2-home.com/forum/viewtopic.php?t=1248>FreeMCBoot</a>.</li></ul>
 
+<p>You want to <b>use the Raw save game exploit file for your exploitable game (in the <code>entrypoints</code> directory) and the Raw loader file <code>HAX</code> (in the <code>loader</code> directory)</b> when using the uLaunchELF/PS2 installation method. The Raw filenames for each save game exploit is available in the table below.</p>
+
 <h3>PS3 Memory Card USB Adapter/DexDrive/Computer Installation Method</h3>
 
-<p>Instead of using a PS2 to copy the save game exploit files, you can use a Dex Drive or similar with a visual memory card editor (such as <a href=http://onorisoft.free.fr/retro.htm?psx/psx.htm>OrionSoft's PS1 Memory Card Manager</a> or <a href=https://archive.org/details/inter-act-dex-plorer-ver.-1.10.950>Dex-plorer</a>), to modify a PS1 memory card's contents directly with a computer. If you go this route, consider using the MCS files (listed below). This way of adding the required save game exploit files would only require:</p>
+<p>Instead of using a PS2 to copy the save game exploit files, you can use a Dex Drive or similar with a visual memory card editor (such as <a href=http://onorisoft.free.fr/retro.htm?psx/psx.htm>OrionSoft's PS1 Memory Card Manager</a> or <a href=https://archive.org/details/inter-act-dex-plorer-ver.-1.10.950>Dex-plorer</a>), to modify a PS1 memory card's contents directly with a computer. This way of adding the required save game exploit files would only require:</p>
 
 <ul><li>A real PS1 game disc that matches your console's region and that has save game exploit files available.</li>
   <li>Any PS1 console, or early PS2 console (SCPH-10000 to SCPH-39000 models).</li>
   <li>An authentic PS1 memory card that has enough space to hold the hacked game save file and the tonyhax file.</li>
   <li>A DexDrive, PS3 Memory Card USB adapter, or other hardware that allows you to write and modify a PS1 memory card with a computer.</li>
-  <li>Software such as <a href=http://onorisoft.free.fr/retro.htm?psx/psx.htm>OrionSoft's PS1 Memory Card Manager</a> (for the PS3 Memory Card USB adapter) or <a href=https://archive.org/details/inter-act-dex-plorer-ver.-1.10.950>Dex-plorer</a> (for the DexDrive).</li></ul>
+  <li>Software such as <a href=http://onorisoft.free.fr/retro.htm?psx/psx.htm>OrionSoft's PS1 Memory Card Manager</a> (for the PS3 Memory Card USB adapter) or <a href=https://archive.org/details/inter-act-dex-plorer-ver.-1.10.950>Dex-plorer</a> (for the DexDrive), or <a href=https://github.com/ShendoXT/memcardrex>MemcardRex</a> (for general memory card file managment and manipulation).</li></ul>
  
-<h3>Copying The Files On Your PS1 Memory Card</h3>
-
-<p>When using the PS2 to copy the files over, first copy <code>BESLEM-99999TONYHAX</code> (found in the <code>loader</code> directory in each Tonyhax International release) and the <b>Raw</b> file for your compatible game (found in the <code>entrypoints</code> directory, filenames for each supported game are listed below) to the FAT32 USB flash drive that your PS2 can read using a computer.</p>
+ <p>You want to <b>use the MCS save game exploit file for your exploitable game (in the <code>entrypoints</code> directory) and the MCS loader file <code>tonyhax.mcs</code> (in the <code>loader</code> directory)</b> when using the uLaunchELF/PS2 installation method. The MCS filenames for each save game exploit is available in the table below.</p>
 
 <table BORDER=10 BORDERCOLOR=BLUE>
 <tr>
@@ -399,7 +409,7 @@ Please wait, this may take a few minutes
 <td>BESLES-02618</td>
 </tr>
 <tr>
-<td>Castlevania Chronicle - Akumajou Dracula (only first release of the game, rev 1 does not work right now)</td>
+<td>Castlevania Chronicle - Akumajou Dracula (only first release of the game (rev 0), rev 1 does not work right now)</td>
 <td>NTSC-J</td>
 <td>SLPM-86754</td>
 <td>cc-jp.mcs</td>
@@ -510,6 +520,13 @@ Please wait, this may take a few minutes
 <td>BISLPS-00130DOKIOH</td>
 </tr>
 <tr>
+<td>Downhill Snow</td>
+<td>NTSC-J</td>
+<td>SLPS-01391</td>
+<td>downhill-snow-jp.mcs</td>
+<td>BISLPS-01391SKI00S</td>
+</tr>
+<tr>
 <td>Sports Superbike</td>
 <td>PAL-E</td>
 <td>SLES-03057</td>
@@ -522,6 +539,48 @@ Please wait, this may take a few minutes
 <td>SLES-03827</td>
 <td>superbike2-eu.mcs</td>
 <td>BESLES-03827SSII</td>
+</tr>
+<tr>
+<td>Tekken 2 (only second release of the game (rev 1), rev 0 does not work right now)</td>
+<td>NTSC-J</td>
+<td>SLPS-00300</td>
+<td>tekken2-jp.mcs</td>
+<td>BISLPS-00300TEKKEN-2</td>
+</tr>
+<tr>
+<td>Tekken 2 (only first release of the game (rev 0), rev 1 does not work right now)</td>
+<td>NTSC-U</td>
+<td>SLUS-00213</td>
+<td>tekken2-us.mcs</td>
+<td>BASLUS-00213TEKKEN-2</td>
+</tr>
+<tr>
+<td>Tekken 2</td>
+<td>PAL-E</td>
+<td>SCES-00255</td>
+<td>tekken2-eu.mcs</td>
+<td>BESCES-00255TEKKEN-2</td>
+</tr>
+<tr>
+<td>Tekken 3</td>
+<td>NTSC-J</td>
+<td>SLPS-01300</td>
+<td>tekken3-jp.mcs</td>
+<td>BISLPS-01300TEKKEN-3</td>
+</tr>
+<tr>
+<td>Tekken 3</td>
+<td>NTSC-U</td>
+<td>SLUS-00402</td>
+<td>tekken3-us.mcs</td>
+<td>BASLUS-00402TEKKEN-3</td>
+</tr>
+<tr>
+<td>Tekken 3</td>
+<td>PAL-E</td>
+<td>SCES-01237</td>
+<td>tekken3-eu.mcs</td>
+<td>BESCES-01237TEKKEN-3</td>
 </tr>
 <tr>
 <td>The Legend Of Heroes I&II</td>
@@ -637,7 +696,10 @@ Please wait, this may take a few minutes
 </tr>
 </table>
 
-<p>After the correct memory card save game exploit <b>Raw</b> file and the <code>BESLEM-99999TONYHAX</code> file is copied to the FAT32 formatted USB flash drive that your PS2 can read, eject the USB flash drive from your computer and insert it and a PS1 memory card into the PS2. Start the uLaunchElf program and navigate to the <code>mass</code> device (this is your USB flash drive) with the <code>DPAD</code> on the controller, then select it with the <code>circle</code> button. Using the <code>DPAD</code> to navigate, press the <code>cross</code> button on the controller to highlight both the <code>BESLEM-99999TONYHAX</code> and the <b>Raw</b> save game exploit file that you previously copied to the USB flash drive. Now Press the <code>R2</code> button on the controller to make the file operations menu appear in uLaunchELF. Use the <code>DPAD</code> to move to the copy function and then press the <code>circle</code> button to select it. Now press the <code>triangle</code> button to navigate out of the <code>mass</code> device and then use the <code>DPAD</code> and then the circle button to navigate into either the <code>MC0</code> (if the PS1 memory card is in slot 1 of the PS2) or <code>MC1</code> (if the PS1 memory card is in slot 2 of the PS2) device. Press the <code>R2</code> button to again make the file operations menu appear in uLaunchElF. Use the <code>DPAD</code> to navigate to the paste option and press the <code>circle</code> button to finally paste both the <code>BESLEM-99999TONYHAX</code> and the raw save game exploit file. Now you can press the <code>triangle</code> button to navigate out of the PS1 memory card device, and remove the memory card from the PS2 console.</p>
+<h3>Copying The Files On Your PS1 Memory Card With A PS2</h3>
+
+<p>When using the PS2 to copy the files over, first copy the Raw loader file named <code>HAX</code> (found in the <code>loader</code> directory in each Tonyhax International release) and the Raw file for your compatible exploitable game (named in the table above, found in the <code>entrypoints</code> directory) to the FAT32 USB flash drive that your PS2 can read using a computer.</p>
+<p>After the correct memory card save game exploit <b>Raw</b> file and the <code>HAX</code> file is copied to the FAT32 formatted USB flash drive that your PS2 can read, eject the USB flash drive from your computer and insert it and a PS1 memory card into the PS2. Start the uLaunchElf program and navigate to the <code>mass</code> device (this is your USB flash drive) with the <code>DPAD</code> on the controller, then select it with the <code>circle</code> button. Using the <code>DPAD</code> to navigate, press the <code>cross</code> button on the controller to highlight both the <code>HAX</code> and the <b>Raw</b> save game exploit file that you previously copied to the USB flash drive. Now Press the <code>R2</code> button on the controller to make the file operations menu appear in uLaunchELF. Use the <code>DPAD</code> to move to the copy function and then press the <code>circle</code> button to select it. Now press the <code>triangle</code> button to navigate out of the <code>mass</code> device and then use the <code>DPAD</code> and then the circle button to navigate into either the <code>MC0</code> (if the PS1 memory card is in slot 1 of the PS2) or <code>MC1</code> (if the PS1 memory card is in slot 2 of the PS2) device. Press the <code>R2</code> button to again make the file operations menu appear in uLaunchElF. Use the <code>DPAD</code> to navigate to the paste option and press the <code>circle</code> button to finally paste both the <code>HAX</code> and the raw save game exploit file. Now you can press the <code>triangle</code> button to navigate out of the PS1 memory card device, and remove the memory card from the PS2 console.</p>
 
 <h3>Using The Save Game Exploit</h2>
 
@@ -668,18 +730,26 @@ Please wait, this may take a few minutes
   <td>Castrol Honda VTR, Sports Superbike 2 and XS Moto</td>
   <td>If you are using the European version, on the language selection screen select the English language. On the main menu, choose <code>Options</code>. Select <code>Load game</code> and choose the memory card where the save is stored. Back on the main menu, click on either <code>Single Race</code> or <code>Championship</code>.</td>
 </tr>
+<td>Doki Oki</td>
+<td>Boot the game as you'd normally do. Press start, circle, circle, then circle one last time to navigate through the main menu and load the save file.</td>
+</tr>
 <tr>
-<td>Tonyhawk's games</td>
-<td>Boot the game as you'd normally do. On the main menu, wait until the save file is automatically loaded (it should say <code>Loading TONYHAX EU/US/DE/FR</code>, depending on the game's region). After it's done, choose the <code>CREATE SKATER</code> menu and press X.</td>
+<td>Downhill Snow</td>
+<td>Boot the game as you'd normally do. Use the X button to select <code>SCENARIO</code>, then <code>CONTINUE</code>, now select the save file in slot 1 or slot2. On the next screen after loading the save file select <code>CONFIG</code>, then <code>RANKING</code>, then <code>Moguls</code>. Immeditely after select <code>Moguls</code> press the right directional key until the blue screen appears, then let go of all buttons on the controller.</td>
 </tr>
 <tr>
 <td>The Legend Of Heroes I&II</td>
 <td>Boot the game as you'd normally do. On the main menu, select the Legend Of Heroes I (the I button on the left), <b>not The Legend Of Heroes II (the II button on the right)</b>. Once in The Legend Of Heroes I load the save file.</td>
 </tr>
 <tr>
-<td>Doki Oki</td>
-<td>Boot the game as you'd normally do. Press start, circle, circle, then circle one last time to navigate through the main menu and load the save file.</td>
+<tr>
+<td>Tonyhawk's games</td>
+<td>Boot the game as you'd normally do. On the main menu, wait until the save file is automatically loaded (it should say <code>Loading TONYHAX EU/US/DE/FR</code>, depending on the game's region). After it's done, choose the <code>CREATE SKATER</code> menu and press X.</td>
 </tr>
+<td>Tekken games</td>
+<td>Boot the game as you'd normally do. On the main menu, select <code>Survival Mode</code>, and pick a character. Die at any point to end the survival round, press start on the stats screen, and wait. <b>The screen will fade to black, and in a few seconds the Tonyhax International loader will start. There are no colors displayed while the Tonyhax International loader is started with a Tekken save game exploit, unlike all other games.</b>
+</tr>
+
 </table>
 
 <a name=tocperfect><h2>TOCPerfect Patching</h2></a>
@@ -754,9 +824,9 @@ Please wait, this may take a few minutes
 
 <a name=burning><h2>Important Info About Burning PSX Backups</h2></a>
 
-<p>Your <b>burner</b> and <b>CD-R media</b> matter! <b>The PS1/PS2 will read 74min/650MB CD-Rs better then 80min/700MB CD-Rs</b>. It is also <b>ideal to use CD-Rs with a dark bottom layer as it is more reflective and easier to read for the console</b>. The slower you can burn, the better. With a sufficiently high enough write speed (over 16x is highly not recommended), the console will not be able to read you CD-R! Newer optical drives don't support writing at the slow speeds older drives support writing at. If you get a newer optical drive, it may for example have a minimum burning speed of 16x (which is fine in my expierence if it is the lowest you can go). A really old IDE CD burner however could easily burn at 4x which may be more desirable.</p>
+<p>Your <b>burner</b> and <b>CD-R media</b> matter! <b>The PS1/PS2 will read 74min/650MB CD-Rs better then 80min/700MB CD-Rs. New old stock VerbatimDataLifePlus 74 min/650MB CD-Rs from the turn of the century are the best I have used so far, these have a dark bottom layer as it is more reflective and easier to read for the console</b>. The slower you can burn, the better. With a sufficiently high enough write speed (over 10x is not recommended), the console will not be able to read you CD-R or will read it poorly (longer load times or freezing)</b>. Newer optical drives don't support writing at the slow speeds older drives support writing at, so keep that in mind.</p>
 
-<p>New old stock VerbatimDataLifePlus 74 min/650MB CD-Rs from the turn of the century are the best I have used so far. I also highly recommend using a desktop-class CD writer (3.5 inch SATA or IDE CD burner). 3.5 inch SATA and IDE CD burners can be found for cheap, and you can use an IDE/SATA to USB adapter to use them on laptops and other systems. They work better then "laptop" drives and cheap external all in one usb DVD/CD burners in my expierence.</p>
+<p></p>
 
 <p>Recommended burning programs:</p>
 
@@ -768,6 +838,8 @@ Please wait, this may take a few minutes
 <pre><code>cdrdao write --speed 1 --swap --eject yourgame.cue</code></pre>
 
 <p>If you are having issues booting discs in Tonyhax International, consider wiping with a clean microfiber cloth from the inner ring to the outer edge of the CD-R in all directions and then trying to boot the disc again. If this does not work, try a different CD-R media and or CD burner.</p>
+
+<p>If all the above does not improve anything, try changing the orientation of the PS1 console to stand vertically (try right and left sides) to see if it reads discs better. If this is not satisfactory, it is possible that your laser is dying if it is old and has seen a lot of use, if this is the case you can easily replace your laser assembly with a reproduction drive from china of <i>doubious</i> quality. You may need to <a href=http://dogbreath.de/PS1/LaserAlignment/Laser.html>tweak the BIAS and GAIN values</a> with one of these reproduction drives (if you have any PS1 model before the SCPH-500X series).</p>
 
 <a name=building><h2>Building From Source</h2></a>
 

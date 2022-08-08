@@ -13,12 +13,7 @@
 #include "crc.h"
 #include "integrity.h"
 
-int sscmd, temp;
-
-unsigned char gid;
-unsigned char ti_tn;
-unsigned char ti_mm[100];
-unsigned char ti_ss[100];
+int sscmd;
 
 const char * p5_localized;
 const char * region_name;
@@ -141,6 +136,7 @@ bool is_lid_open() {
 
 bool licensed_drive() {
     uint8_t getid_response[9];
+	unsigned char gid;
 
     while(1)
 	{
@@ -161,88 +157,6 @@ bool licensed_drive() {
     }   
 }
 #endif
-
-void get_toc_data()		// TODO: Clean up? GetTN is a BCD value. This code currently is working though.
-{
-	unsigned char scmd[4];
-	unsigned char buf[4];
-	int n;
-	int a,b;
-	int ti;
-	
-	cd_command(CD_CMD_GETTN,0,0);
-	cd_wait_int();
-	cd_read_reply(buf);
-	
-	a = buf[2]>>4;
-	b = buf[2]&0xF;
-	
-	ti_tn = b + (a*10);
-	ti_tn = buf[2];		// It's Not BCD?
-	
-	for(n=0;n<100;n++)
-	{
-		ti_mm[n] = 0;ti_ss[n] = 0;
-	}
-	n = 1;
-	ti= 1;
-
-	while(1)
-	{
-		scmd[0] = n;cd_command(CD_CMD_GETTD,(unsigned char *)&scmd,1);cd_wait_int(); // GetTD for Track
-		cd_read_reply(buf);ti_mm[ti] = buf[1];ti_ss[ti] = buf[2];
-		n++;ti++;
-		
-		if( (n&0xF)==0xA )
-		{
-			n = n - 0xA;
-			n = n + 0x10;
-		}
-
-		if(n>ti_tn)
-			break;
-	}			
-}
-
-bool is_toc_complete()
-{
-	int i;
-	
-	int track_count = (ti_tn&0xF) | ((ti_tn>>4)*10);	// Convert ti_tn from BCD to Decimal.
-	
-	track_count++;
-	for(i=1;i<track_count;i++)	// Check Tracks 1 to ti_tn to see if any are 00:00.
-	{
-		if( (ti_mm[i] + ti_ss[i]) == 0) 
-			return false;
-	}
-		
-	return true;
-}
-
-
-void SetSessionSuperUltraCommandSmash()				
-{
-	sscmd = 0x80; cd_command(CD_CMD_SETMODE,(unsigned char *)&sscmd,1);cd_wait_int(); // Set motor to 2x speed
-
-		while(1)
-		{
-				while(1)
-				{
-					sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
-					temp--;
-					
-					if(temp==0)
-						break;
-				}
-						
-			get_toc_data();
-
-			if (is_toc_complete())
-				break;
-			temp = 16; // Now we can check more often, 16 is enough to trigger changes to the TOC now
-		}
-}
 
 void try_boot_cd() {
 	int32_t read;
@@ -307,13 +221,16 @@ void try_boot_cd() {
 	{
 		if(bugged_setsession) {
 			#if !defined STEALTH
-				debug_write("Sending SetSessionSuperUltraCommandSmash");
-				debug_write("Please wait, this may take a few minutes");
+				debug_write("Sending SetSession 2, please wait");
 			#endif
-				SetSessionSuperUltraCommandSmash();
+				sscmd = 2; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
+			#if !defined STEALTH
+				debug_write("Sending SetSession 1");
+			#endif
+				sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
 		} else {
 			#if !defined STEALTH
-				debug_write("Sending SetSession");
+				debug_write("Sending SetSession 1");
 			#endif
 			sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
 		}
@@ -586,7 +503,6 @@ void main() {
         #endif        
         bugged_setsession = 1;
         enable_unlock = 0;
-	    temp = 128; // 128 SetSessions ensures that the TOC is updated from the original authentic PSX disc to the backup or import disc
     } 
     else if(cdcontrollerver[1]==0x11 && cdcontrollerver[2]==0x18 && cdcontrollerver[0]==0x94 && cdcontrollerver[3]==0xC0)
     {
@@ -595,7 +511,6 @@ void main() {
         #endif        
         bugged_setsession = 1;
         enable_unlock = 0;
-	    temp = 64; // 64 SetSessions ensures that the TOC is updated from the original authentic PSX disc to the backup or import disc
     }
     else if(cdcontrollerver[1]==0x05 && cdcontrollerver[2]==0x16 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xC1)
     {
@@ -603,7 +518,6 @@ void main() {
             debug_write("CDROM Controller BIOS Version: May 16th 1995 VC1 A");
         #endif        
         bugged_setsession = 1;
-	    temp = 64; // 64 SetSessions ensures that the TOC is updated from the original authentic PSX disc to the backup or import disc
     }
     #if !defined STEALTH                   
         else if(cdcontrollerver[1]==0x07 && cdcontrollerver[2]==0x24 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xC1)

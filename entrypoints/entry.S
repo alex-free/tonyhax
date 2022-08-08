@@ -21,9 +21,11 @@ realstart:
 	# Save real start address in s0
 	move s0, ra
 
+#ifndef BAREBONES
 	# Paint blue
 	li a0, 0xFF0000
 	bal paintscr
+#endif
 
 	# Keep only VBlank interrupts enabled
 	li t1, 0x1
@@ -68,13 +70,16 @@ realstart:
 	# Save handle
 	move s1, v0
 
+	#ifndef BAREBONES
 	# If less than zero, it failed
 	blt v0, zero, fatalerror
+	#endif
 
 	# The kernel will fail to read if we don't wait a bit (here, ~1/10th of a second)
 	# This is a known issue as specified in LIBOVR46.PDF section 5-11:
 	# "If read() or write() is issued immediately after open(), an error occurs"
 	li t0, 1000000
+
 busywait:
 	addi t0, -1
 	bne t0, zero, busywait
@@ -89,8 +94,10 @@ busywait:
 	li a2, 0x100
 	jal 0xB0
 
+	#ifndef BAREBONES
 	# If we did not read the correct amount, lock
 	bne v0, 0x100, fatalerror
+	#endif
 
 	# Load executable load address and size
 	lw s3, 0x44(s2)
@@ -103,16 +110,19 @@ busywait:
 	move a2, s3
 	jal 0xB0
 
+#ifndef BAREBONES
 	# If we did not read the correct amount, lock
 	bne v0, s3, fatalerror
 
 	# Paint green
 	li a0, 0x00FF00
 	bal paintscr
+#endif
 
 	# Jump to it!
 	jr s2
 
+#ifndef BAREBONES
 fatalerror:
 	# Red
 	li a0, 0x0000FF
@@ -144,6 +154,7 @@ redscreen:
 	.word 0x00000000
 	# Width of 1024, height of 512
 	.word 0x01FF03FF
+#endif
 
 splname:
-	.asciiz "bu00:BESLEM-99999TONYHAX"
+	.asciiz "bu00:HAX"

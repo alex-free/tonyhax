@@ -18,9 +18,17 @@ clean:
 # Entry target
 
 entry.elf: entry.S
-	$(CC) $(CFLAGS) entry.S -o entry.elf
+	$(CC) $(CFLAGS) -DNOPAINT entry.S -o entry.elf
 
 entry.bin: entry.elf
+	$(OBJCOPY) $(OBJCOPYFLAGS) -j .text $< $@
+
+# Entry target for Tekken games (no color codes, no error handling, smallest size)
+
+entry-bb.elf: entry.S
+	$(CC) $(CFLAGS) -DBAREBONES entry.S -o entry-bb.elf
+
+entry-bb.bin: entry-bb.elf
 	$(OBJCOPY) $(OBJCOPYFLAGS) -j .text $< $@
 
 # Brunswick Circuit Pro Bowling NTSC-US target
@@ -43,7 +51,7 @@ brunswick2-eu.mcs: brunswick2-eu-tpl.mcs entry.bin
 	cp brunswick2-eu-tpl.mcs brunswick2-eu.mcs
 	dd conv=notrunc if=entry.bin of=brunswick2-eu.mcs bs=1 seek=2272
 
-# Castlevania Chronicles NTSC-J target (Alex Free)
+# Castlevania Chronicles NTSC-J target (rev 0 only)(Alex Free)
 cc-jp.mcs: cc-jp-tpl.mcs entry.bin
 	cp cc-jp-tpl.mcs cc-jp.mcs
 	dd conv=notrunc if=entry.bin of=cc-jp.mcs bs=1 seek=820
@@ -134,6 +142,11 @@ doki-oki-jp.mcs: doki-oki-jp-tpl.mcs entry.bin
 	cp doki-oki-jp-tpl.mcs doki-oki-jp.mcs
 	dd conv=notrunc if=entry.bin of=doki-oki-jp.mcs bs=1 seek=896
 
+# Downhill Snow NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
+downhill-snow-jp.mcs: downhill-snow-jp-tpl.mcs entry.bin
+	cp downhill-snow-jp-tpl.mcs downhill-snow-jp.mcs
+	dd conv=notrunc if=entry.bin of=downhill-snow-jp.mcs bs=1 seek=1780
+
 # The Legend Of Heroes I&II NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
 the-legend-of-heroes-1-and-2-jp.mcs: the-legend-of-heroes-1-and-2-jp-tpl.mcs entry.bin
 	cp the-legend-of-heroes-1-and-2-jp-tpl.mcs the-legend-of-heroes-1-and-2-jp.mcs
@@ -148,6 +161,54 @@ superbike1-eu.mcs: superbike1-eu-tpl.mcs entry.bin
 superbike2-eu.mcs: superbike2-eu-tpl.mcs entry.bin
 	cp superbike2-eu-tpl.mcs superbike2-eu.mcs
 	dd conv=notrunc if=entry.bin of=superbike2-eu.mcs bs=1 seek=824
+
+# Tekken 2 NTSC-J target (rev 1 only) (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714) ( krystalgamer - https://github.com/socram8888/tonyhax/pull/20)
+tekken2-jp.mcs: tekken2-jp-tpl.mcs entry-bb.bin
+	cp tekken2-jp-tpl.mcs tekken2-jp.mcs
+	python3 ./tekken_decoder.py tekken2-jp.mcs tekken2-jp-decoded.bin
+	dd conv=notrunc if=entry-bb.bin of=tekken2-jp-decoded.bin bs=1 seek=44
+	python3 ./tekken_encoder.py tekken2-jp.mcs tekken2-jp-decoded.bin tekken2-jp.mcs
+	rm tekken2-jp-decoded.bin
+
+# Tekken 2 NTSC-U target (rev 0 only) (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714) ( krystalgamer - https://github.com/socram8888/tonyhax/pull/20)
+tekken2-us.mcs: tekken2-us-tpl.mcs entry-bb.bin
+	cp tekken2-us-tpl.mcs tekken2-us.mcs
+	python3 ./tekken_decoder.py tekken2-us.mcs tekken2-us-decoded.bin
+	dd conv=notrunc if=entry-bb.bin of=tekken2-us-decoded.bin bs=1 seek=44
+	python3 ./tekken_encoder.py tekken2-us.mcs tekken2-us-decoded.bin tekken2-us.mcs
+	rm tekken2-us-decoded.bin
+
+# Tekken 2 PAL target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714) ( krystalgamer - https://github.com/socram8888/tonyhax/pull/20)
+tekken2-eu.mcs: tekken2-eu-tpl.mcs entry-bb.bin
+	cp tekken2-eu-tpl.mcs tekken2-eu.mcs
+	python3 ./tekken_decoder.py tekken2-eu.mcs tekken2-eu-decoded.bin
+	dd conv=notrunc if=entry-bb.bin of=tekken2-eu-decoded.bin bs=1 seek=44
+	python3 ./tekken_encoder.py tekken2-eu.mcs tekken2-eu-decoded.bin tekken2-eu.mcs
+	rm tekken2-eu-decoded.bin
+
+#Tekken 3 NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714) ( krystalgamer - https://github.com/socram8888/tonyhax/pull/20)
+tekken3-jp.mcs: tekken3-jp-tpl.mcs entry-bb.bin
+	cp tekken3-jp-tpl.mcs tekken3-jp.mcs
+	python3 ./tekken_decoder.py tekken3-jp.mcs tekken3-jp-decoded.bin
+	dd conv=notrunc if=entry-bb.bin of=tekken3-jp-decoded.bin bs=1 seek=72
+	python3 ./tekken_encoder.py tekken3-jp.mcs tekken3-jp-decoded.bin tekken3-jp.mcs
+	rm tekken3-jp-decoded.bin
+
+#Tekken 3 NTSC-U target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714) ( krystalgamer - https://github.com/socram8888/tonyhax/pull/20)
+tekken3-us.mcs: tekken3-us-tpl.mcs entry-bb.bin
+	cp tekken3-us-tpl.mcs tekken3-us.mcs
+	python3 ./tekken_decoder.py tekken3-us.mcs tekken3-us-decoded.bin
+	dd conv=notrunc if=entry-bb.bin of=tekken3-us-decoded.bin bs=1 seek=72
+	python3 ./tekken_encoder.py tekken3-us.mcs tekken3-us-decoded.bin tekken3-us.mcs
+	rm tekken3-us-decoded.bin
+
+#Tekken 3 PAL target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714) ( krystalgamer - https://github.com/socram8888/tonyhax/pull/20)
+tekken3-eu.mcs: tekken3-eu-tpl.mcs entry-bb.bin
+	cp tekken3-eu-tpl.mcs tekken3-eu.mcs
+	python3 ./tekken_decoder.py tekken3-eu.mcs tekken3-eu-decoded.bin
+	dd conv=notrunc if=entry-bb.bin of=tekken3-eu-decoded.bin bs=1 seek=72
+	python3 ./tekken_encoder.py tekken3-eu.mcs tekken3-eu-decoded.bin tekken3-eu.mcs
+	rm tekken3-eu-decoded.bin
 
 # THPS2 NTSC-J target (MottZilla - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867)
 thps2-jp.mcs: thps2-jp-tpl.mcs entry.bin

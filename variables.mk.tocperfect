@@ -7,7 +7,7 @@ SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Common variables
 
-TONYHAX_VERSION=v1.0.6-international
+TONYHAX_VERSION=v1.0.7-international
 
 CC=mips-linux-gnu-gcc
 CFLAGS=-O1 -Wall -Wextra -Wno-main -EL -march=r3000 -mabi=32 -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION) -DTOCPERFECT
@@ -22,6 +22,9 @@ OBJCOPYFLAGS=-O binary
 
 ENTRY_MCS := $(patsubst $(SELF_DIR)/entrypoints/%-tpl.mcs, %.mcs, $(wildcard $(SELF_DIR)/entrypoints/*-tpl.mcs))
 ENTRY_RAW := \
+	BISLPS-01391SKI00S \
+	BISLPS-00300TEKKEN-2 \
+	BISLPS-01300TEKKEN-3 \
 	BISLPM-86922CHSVTRv1 \
 	BISLPM-86489CHSv1 \
 	BISLPM-86751CEEAG01 \
@@ -33,6 +36,8 @@ ENTRY_RAW := \
 	BASCUS-9415400047975 \
 	BASCUS-9424400000000 \
 	BASCUS-9455916 \
+	BASLUS-00213TEKKEN-2 \
+	BASLUS-00402TEKKEN-3 \
 	BASLUS-00571 \
 	BASLUS-00856 \
 	BASLUS-00882CHSv1 \
@@ -41,6 +46,8 @@ ENTRY_RAW := \
 	BASLUS-01419TNHXG01 \
 	BASLUS-01485TNHXG01 \
 	BASLUS-01506XSMOTOv1 \
+	BESCES-00255TEKKEN-2 \
+	BESCES-01237TEKKEN-3 \
 	BESCES-0096700765150 \
 	BESCES-0142000000000 \
 	BESCES-0228316 \
@@ -65,7 +72,7 @@ ENTRY_FILES := $(ENTRY_MCS) $(ENTRY_RAW)
 
 # Program loader variables
 
-LOADER_FILES := tonyhax.mcs BESLEM-99999TONYHAX tonyhax.exe
+LOADER_FILES := tonyhax.mcs HAX tonyhax.exe
 
 # FreePSXBoot images
 

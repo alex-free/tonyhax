@@ -40,7 +40,7 @@ secondary.elf: secondary.ld $(LOADER_OBJECTS)
 tonyhax.mcs: tonyhax-tpl.mcs secondary.elf
 	bash generate-tonyhax-mcs.sh secondary.elf tonyhax-tpl.mcs tonyhax.mcs $(TONYHAX_VERSION)
 
-BESLEM-99999TONYHAX: tonyhax.mcs
+HAX: tonyhax.mcs
 	bash ../util/mcs2raw.sh tonyhax.mcs
 
 tonyhax.exe: secondary.elf

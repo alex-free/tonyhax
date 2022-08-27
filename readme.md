@@ -16,7 +16,7 @@ Tonyhax
 
 Supports all [Japanese](#usage)/American/European PS1 consoles, as well as Japanese/American/European PS2 consoles with model number SCPH-10000 to SCPH-39000.
 
-Supports American/European PS1 consoles, as well as American/European PS2 consoles with model number SCPH-39000 and lower only.
+Supports all American/European PS1 consoles, as well as American/European PS2 consoles with with model number SCPH-30001-SCPH-39000.
 
 Can be flashed to a GameShark or other cheat device (via a [flasher CD](#rom) or serial cable) that starts the Tonyhax International loader automatically when the PS1 console (SCPH-750X models and older) is powered on.
 
@@ -30,6 +30,10 @@ Can be compiled on [any operating system](#building) that supports [Crosstool-NG
 
 Only supports being compiled on Debian 10/Windows Subsystem for Linux.
 
+Loader displays the CDROM Controller BIOS firmware version on PS1 consoles.
+
+Loader does not display the CDROM Controller BIOS firmware version on any console.
+
 Tonyhax International also provides more [save game exploits](#savegame) then the original Tonyhax.
 
 Table of Contents
@@ -37,13 +41,51 @@ Table of Contents
 
 *   [Downloads](#downloads)
 *   [Usage](#usage)
+
+_Japanese PS1 Consoles_
+
+*   [Japanese PS1 Console Loader Instructions](#jps1)
+*   [Playing Games That Contain Anti-Piracy Features On Japanese PS1 Consoles](#apjps1)
+*   [Playing Games That Span Multiple Discs On Japanese PS1 Consoles](#mdjps1)
+
+_Japanese PS2 Consoles_
+
+*   [Japanese PS2 Console Loader Instructions](#jps2)
+*   [Using the Swap Magic Tool](#swapmagictool)
+*   [Playing Games That Contain Anti-Piracy Features On Japanese PS2 Consoles](#apjps2)
+*   [Playing Games That Span Multiple Discs On Japanese PS2 Consoles](#mdjps2)
+
+_American/European PS1/PS2 Consoles_
+
+*   [American/European PS1/PS2 Console Loader Instructions](#uu)
+*   [Playing Games That Contain Anti-Piracy Features On American/European PS1/PS2 Consoles](#apu)
+*   [Playing Games That Span Multiple Discs On American/European PS1/PS2 Consoles](#apu)
+
+_Boot Methods_
+
 *   [ROM/ROM Flasher CD](#rom)
 *   [FreePSXBoot Exploit Memory Card Images](#freepsxboot)
 *   [Boot CD](#bootcd)
 *   [Save Game Exploit](#savegame)
 *   [TOCPerfect Patching](#tocperfect)
 *   [Audio Menu Swap Trick](#audiomenuswaptrick)
-*   [Important Info About Burning PSX Backups](#burning)
+
+_Burning CD-R Backups_
+
+*   [CD-R Media For PS1 Backups](#cdr)
+*   [Burning Programs For PS1 Backups](#burning)
+*   [Cleaning Discs](#clean)
+*   [Vertical Console Boot Fix](#vertical)
+
+_Replacing CD Drives In PS1 Consoles_
+
+*   [PS1 CD Drive Compatibility](#cddrivecompat)
+*   [Laser Assembly Top Case Swap](#ltcswap)
+*   [Manual bias/gain Adjustments (Early Consoles Only)](#biasngain)
+*   [Manual Laser Resistance Adjustments](#laserresistance)
+
+_More Info_
+
 *   [Building From Source](#building)
 *   [Credits](#credits)
 
@@ -57,6 +99,18 @@ Links
 
 Downloads
 ---------
+
+### Version 1.0.8 (8/26/2022)
+
+*   [tonyhax-v1.0.8-international](https://github.com/alex-free/tonyhax/releases/download/v1.0.8i/tonyhax-v1.0.8-international.zip)
+*   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.8i.zip)
+
+Changes:
+
+*   Fixed the anti anti-piracy functionallity regression for American/European consoles. You can now play backup or import PS1 games that have anti-piracy features (i.e. Dino Crisis or Spyro: Year Of The Dragon) without issue on all American console and European consoles.
+*   Removed the PAL licensed ROM flasher CD image, as it is not actually not needed. Any console that supports cheat carts (SCPH-1000 up to SCPH-750X models) will boot a CD-R burned via the current `tonyhax-rom-flasher.bin+tonyhax-rom-flasher.cue` files just fine.
+*   Updated documentation on burning PS1 backups. Added info on games containing anti-piracy and or libcrypt protection. Also added info on replacing and modifying PS1 CD drives and changing bias/gain/laser resistance values.
+*   Cleaned up build proccess and source tree.
 
 ### Version 1.0.7 (8/7/2022)
 
@@ -98,13 +152,14 @@ Changes:
 Usage
 -----
 
-The Tonyhax International loader is the program that is booted on any PS1 or an early PS2 that enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted on your PS1 with a [GameShark/cheat cart](#rom), [flashed memory card](#freepsxboot), [save game exploit](#savegame), or [CD-R](#bootcd). It provides the ability to properly play backup and import discs on all PS1 consoles, and early PS2 consoles (Japanese, USA, and PAL up to SCPH-39000).
+The Tonyhax International loader is the program that is booted on any PS1 or an early PS2 that enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted on your PS1 with a [GameShark/cheat cart](#rom), [flashed memory card](#freepsxboot), [save game exploit](#savegame), or [CD-R](#bootcd). It provides the ability to properly play backup and import discs on all PS1 consoles, and early PS2 consoles (Japanese, USA, and PAL models SCPH-10000 to SCPH-39000).
 
-If you are using **any Japanese console**, at least one real NTSC-J PSX game disc is required. If you are using a **Japanese PS2 console (SCPH-10000 to SCPH-39000)** a Swap Magic Tool is also required. Neither of these are needed if you are using a USA or PAL PS1/PS2 console.
+If you are using **any Japanese console**, at least one real Japanese NTSC-J PS1 game disc is required (any officially licensed Japanese PS1 disc will do). If you are using a **Japanese PS2 console (SCPH-10000 to SCPH-39000)** a Swap Magic Tool is also required. Neither of these are needed if you are using an American or European PS1/PS2 console.
 
-### Japanese PSX/PS1 Console Instructions
+Japanese PS1 Console Loader Instructions
+----------------------------------------
 
-Available Boot Methods:
+Boot into the Tonyhax International loader using one of the boot methods below:
 
 *   [ROM/ROM Flasher CD](#rom)
 *   [FreePSXBoot Memory Card Images](#freepsxboot)
@@ -113,13 +168,11 @@ Available Boot Methods:
 *   [TOCPerfect Patching](#tocperfect)
 *   [Audio Menu Swap Trick](#audiomenuswaptrick)
 
-Once the Tonyhax International loader boots, you will see the text `Put in a real NTSC-J PSX game disc, then block the lid sensor` _unless you are using Tonyhax International in one of the following ways:_
+If you see the text `Put in a real NTSC-J PSX game disc, then block the lid sensor`:
 
-*   Using the [Boot CD](#bootcd).
-*   Using the ROM with a real NTSC-J PSX game already in the drive and the lid sensor blocked before powering it on (a pen spring, tin foil, etc. works to press down the lid sensor).
-*   Using the [save game exploit](#savegame) with the lid sensor already blocked before powering on the console and booting the exploitable game.
-
-The lid sensor is highlighted by the red circle and arrow in the pictures below. On the original grey fat PS1 consoles (SCPH-900X and earlier) it is located in the top right corner, it is is shaped like a circle. Ideally you press it down with a bent pen spring as shown. On the slim PSone consoles (SCPH-10X) it is in the lower right corner to the side of the edge of the CD drive. For these consoles it is best to use a piece of tape or paper to slide in and press it down as shown.
+*   Open the CD drive of your PS1 console.
+*   Put in a real NTSC-J Japanese PS1 game disc in the CD drive, but don't close the CD drive lid.
+*   The lid sensor is highlighted by the red circle and arrow in the pictures below. On the original grey fat PS1 consoles (SCPH-900X and earlier) it is located in the top right corner, it is is shaped like a circle. Ideally you press it down with a bent pen spring as shown. On the slim PSone consoles (SCPH-10X) it is in the lower right corner to the side of the edge of the CD drive. For these consoles it is best to use a piece of tape or paper to slide in and press it down as shown.
 
 ![ps1 lid sensor](images/ps1-lid-sensor.png)
 
@@ -131,7 +184,12 @@ The lid sensor is highlighted by the red circle and arrow in the pictures below.
 
 ![psone lid sensor blocked](images/psone-lid-sensor-blocked.png)
 
-After blocking the lid sensor, your real Japanese PS1 game will spin up and then stop. Once you see the text `Put in a backup/import disc, then press X` remove either the real NTSC-J PSX game disc or Boot CD from your PS1 console's CD drive. Put in the backup CD-R or import PSX game disc you want to play **without unblocking the lid sensor**. Once you press X, the console will run some commands automatically, followed by the game booting with perfect CD audio playback. Note that you can not unblock the lid sensor while playing the game on **Japanese consoles**, if you do so the game will stop working. There are some games which span multiple discs. And some of these games (such as Parasite Eve and Crono Cross) that span multiple discs require you to open the CD drive, remove disc 1, insert disc 2, and close the CD drive at some point in the game. If you have to do this on your **Japanese console**, please instead do the following to work around the limitation:
+After blocking the lid sensor, your real Japanese PS1 game will spin up and then stop. Once you see the text `Put in a backup/import disc, then press X` remove either the real NTSC-J PSX game disc or Boot CD from your PS1 console's CD drive. Put in the backup CD-R or import PSX game disc you want to play **without unblocking the lid sensor**. Once you press X, the console will run some commands automatically, followed by the game booting with perfect CD audio playback. Note that you can not unblock the lid sensor while playing the game on **Japanese consoles**, if you do so the game will stop working.
+
+Playing Games That Span Multiple Discs On Japanese PS1 Consoles
+---------------------------------------------------------------
+
+There are some games which span multiple discs. And some of these games (such as Parasite Eve, Fear Effect, and Crono Cross) that span multiple discs require you to open the CD drive, remove disc 1, insert disc 2, and close the CD drive at some point in the game without providing a save game option at the disc swap. If you encounter this type of game on a Japanese PS1 console you have to do the "mid-game hot-swap trick":
 
 *   When the game asks you to insert disc 2, unblock the lid sensor and remove the CD.
 *   Put **any real authentic Japanese PSX disc** into the PS1 drive.
@@ -139,37 +197,74 @@ After blocking the lid sensor, your real Japanese PS1 game will spin up and then
 
 It is important to note however that most games that span multiple discs allow you to load a game save created on disc 1 while playing disc 2. This means you just need to save at the last point possible on disc 1, and then you can just boot disc 2 like normal and load your game save created earlier on disc 1. **Some games however do not allow this** as previously mentioned, so for those games you must use the **mid-game hot-swap trick** described above.
 
-### American/European PS1 Console Instructions
+Playing Games That Contain Anti-Piracy Features On Japanese PS1 Consoles
+------------------------------------------------------------------------
 
-Available Boot Methods:
+Some of the later PS1 games included anti-piracy functionality designed to prevent playing backups or imported versions (i.e. NTSC-U/PAL region) of the game on a Japanese console. These anti-piracy measures have mod-chips and swap tricks in mind.
 
-*   [ROM/ROM Flasher CD](#rom)
-*   [FreePSXBoot Memory Card Images](#freepsxboot)
-*   [Boot CD](#bootcd)
-*   [Save Game Exploit](#savegame)
-*   [TOCPerfect Patching](#tocperfect)
-*   [Audio Menu Swap Trick](#audiomenuswaptrick)
+Japanese Console Model
 
-On these consoles, put in the backup CD-R or import you want to play and close the PSX console's lid when you see the text `Put in a backup or import disc, then close the drive lid`.
+Plays Real Import NTSC-U/PAL PS1 Discs Containing Anti-Piracy?
 
-Note: You can skip this part if you are using the [ROM](#rom) in this way (which allows yo to boot the backup CD-R or import completely automatically at power on!):
+Plays Backup CD-R NTSC-J/NTSC-U/PAL Discs Containing Anti-Piracy?
 
-*   Power off the American or European PSX console.
-*   Open the CD drive, put in any backup CD-R or import game then close the CD drive.
-*   Power on the PSX console with the flashed GameShark/cheat cart installed to the parallel port.
+Plays Backup CD-R NTSC-J/NTSC-U/PAL Discs With Anti-Piracy Patched Out?
 
-A brief `Starting` message will appear. The screen will go black, and then your backup CD-R will boot with perfect CD audio! You also have the ability to open and close the lid as normal, as well as swap to another burned backup CD-R (i.e. swap to the next (burned backup) disc in games that span multiple discs without having to do another swap trick for games like Parasite Eve).
+Plays Backup CD-R NTSC-J/NTSC-U/PAL Discs Containing Anti-Piracy+Libcrypt?
 
-### Japanese PS2 Console Instructions (SCPH-10000-SCPH-39000)
+Plays Backup CD-R NTSC-J/NTSC-U/PAL Discs With Anti-Piracy+Libcrypt Patched Out?
+
+SCPH-1000
+
+YES
+
+YES
+
+YES
+
+NO
+
+YES
+
+SCPH-3000
+
+YES
+
+YES
+
+YES
+
+NO
+
+YES
+
+SCPH-3500 (3rd gen Japanese model PS1) through SCPH-100 (Japanese PSone)
+
+NO
+
+NO
+
+YES
+
+NO
+
+YES
+
+You can find patches to remove anti-piracy and or libcrypt protection from games on websites such as [ConsoleCopyWorld](https://consolecopyworld.com/psx/psx_protected_games.shtml). For example here is a patch for [PoPoRogue](https://consolecopyworld.com/psx/psx_poporogue.shtml), found by browsing through the [Protected Games](https://consolecopyworld.com/psx/psx_protected_games.shtml) page on CopyConsoleWorld.
+
+Some **PAL region games contain an additional anti-piracy measure known as libcrypt**. It is only possible to play these games if you use a patched backup copy which has this libcrypt protection and the anti-piracy features removed.
+
+Japanese PS2 Console Loader Instructions (SCPH-10000-SCPH-39000)
+----------------------------------------------------------------
 
 Available Boot Methods:
 
 *   [Boot CD](#bootcd) (I don't know of anyway to boot this on an unmodified Japanese PS2 but it is available)
 *   [Save game exploit](#savegame)
 
-### Removing The DVD Drive Tray Front Panel
-
 Japanese PS2 consoles **must have the DVD drive tray front panel removed to use Tonyhax International**. For the SCPH-10000, you can follow the method below (some newer consoles may slightly differ in the way to remove the DVD drive's front panel).
+
+### Removing The DVD Drive Tray Front Panel
 
 Turn on the Japanese PS2 console. Eject the DVD drive tray, and **while it is open** power off the console by either pulling the plug from the wall or PSU in the back of the console, or by flicking the power switch for the PSU on the back of the console. You can not use the power button because then the DVD drive tray will close before the console turns off. Now, flip the Japanese PS2 console upside down like in the image below:
 
@@ -183,15 +278,12 @@ With the DVD drive face plate off, flip over the Japanese PS2 console right side
 
 ![ps2 drive cover removed](images/ps2-drive-cover-removed.png)
 
-### Using The Loader On Japanese PS2 Consoles SCPH-10000-SCPH-39000
+You can now use one of the supported boot methods to start the Tonyhax International loader on the Japanese PS2 console. You will most likely be using the [Save Game Exploit](#savegame), however you could be using some kind of intermediate boot disc to boot the [Boot CD](#bootcd) as well if you find one that supports Japanese PS1 consoles. Once you see the text `Put in a backup/import disc, then press X` appear, you need to use a Swap Magic Slide Tool to release the DVD drive to gain access to it without pressing the eject switch. A [video tutorial](https://www.youtube.com/watch?v=Ffv5m52zlEI) is available that shows how to use the Swap Magic Tool (in general), although the exact steps are also explained below. Once you use the Swap Magic Tool to swap in your import/backup CD-R while booted in the Tonyhax International loader, just press the cross button on your PS2 or PS1 controller to boot and play your game.
 
-Use one of the supported boot methods to start the Tonyhax International loader on the Japanese PS2 console. You will most likely be using the [Save Game Exploit](#savegame), however you could be using some kind of intermediate boot disc to boot the [Boot CD](#bootcd) as well if you find one that supports Japanese PS1 consoles. Once you see the text `Put in a backup/import disc, then press X` appear, you need to use a Swap Magic Slide Tool to release the DVD drive to gain access to it without pressing the eject switch. A [video tutorial](https://www.youtube.com/watch?v=Ffv5m52zlEI) is available that shows how to use the Swap Magic Tool (in general), although the exact steps are also explained below. Once you use the Swap Magic Tool to swap in your import/backup CD-R while booted in the Tonyhax International loader, just press the cross button on your PS2 or PS1 controller to boot and play your game.
+Important note: **do not eject the PS1 import or backup CD-R from the Japanese PS2 console until your done playing the game**. Unlike American and European consoles (which do not have this limitation), if you do so your game will stop working, and you will have to start Tonyhax International all over again to boot your import/backup CD-R and start playing again.
 
-Important note: **do not eject the PS1 import or backup CD-R from the Japanese PS2 console until your done playing the game**. If you do so your game will stop working, and you will have to start Tonyhax International all over again to boot your import/backup CD-R and start playing again.
-
-There are some games which span multiple discs. And **some of these games (such as Parasite Eve and Crono Cross) that span multiple discs require you to open the CD drive, remove disc 1, insert disc 2, and close the CD drive at some point in the game. Unfortunately only for Japanese PS2 consoles, you can not do this and there are currently no known workarounds** (unlike the hot-swap mid-game swap trick available on the Japanese PS1 consoles). If you get to a point in a game that requires ejecting the drive and putting in a new game, you have to play this part of the game on a different console. It is important to note however that most games that span multiple discs allow you to load a game save created on disc 1 while playing disc 2. This means you just need to save at the last point possible on disc 1, and then you can just boot disc 2 like normal and load your game save created earlier on disc 1. **Some games however do not allow this** as previously mentioned, so for those games you just have to play the part on another console until you can save on the next disc.
-
-### Using the Swap Magic Tool
+Using the Swap Magic Tool
+-------------------------
 
 Slide in the Swap Magic Tool like shown in the image below by the arrow. You need to feel around with the Swap Magic Tool to get the hook to latch on internally inside the DVD drive.
 
@@ -215,14 +307,61 @@ Now that the DVD drive tray is pushed all the way back in, the Swap Magic Tool c
 
 ![ps2 slide tool moved to lock drive](images/ps2-slide-tool-moved-to-lock-drive.png)
 
-### American/European PS2 Console Instructions (SCPH-3001-SCPH-39000)
+Playing Games That Contain Anti-Piracy Features On Japanese PS2 Consoles
+------------------------------------------------------------------------
 
-Available Boot Methods:
+Some of the later PS1 games included anti-piracy functionality designed to prevent playing backups or imported versions (i.e. NTSC-U/PAL region) of the game on a Japanese console. These anti-piracy measures have mod-chips and swap tricks in mind.
+
+There is currently no support yet for playing unmodified backup CD-Rs or imported NTSC-U/PAL region game disc that contain anti-piracy checks for Japanese PS2 consoles. You have to patch a backup copy CD image and burn that to a CD-R to play these games on Japanese PS2 consoles.
+
+You can find patches to remove anti-piracy and or libcrypt protection from games on websites such as [ConsoleCopyWorld](https://consolecopyworld.com/psx/psx_protected_games.shtml). For example here is a patch for [PoPoRogue](https://consolecopyworld.com/psx/psx_poporogue.shtml), found by browsing through the [Protected Games](https://consolecopyworld.com/psx/psx_protected_games.shtml) page on CopyConsoleWorld.
+
+Some **PAL region games contain an additional anti-piracy measure known as libcrypt**. It is only possible to play these games if you use a patched backup copy which has this libcrypt protection and the anti-piracy features removed.
+
+Playing Games That Span Multiple Discs on Japanese PS2 Consoles
+---------------------------------------------------------------
+
+There are some games which span multiple discs. And **some of these games** (such as Parasite Eve, Fear Effect, and Crono Cross) that span multiple discs require you to open the CD drive, remove disc 1, insert disc 2, and close the CD drive at some point in the game. Unfortunately only for Japanese PS2 consoles, you can not do this with Tonyhax International. If you get to a point in a game that requires ejecting the drive and putting in a new game, you have to play this part of the game on a different console (Any PS1 or American/European PS2 works). It is important to note however that most games that span multiple discs allow you to load a game save created on disc 1 while playing disc 2. This means you just need to save at the last point possible on disc 1, and then you can just boot disc 2 with Tonyhax International like normal and load your game save created earlier on disc 1, bypassing this limitation for certain games that allow saving right at disc swap mid-game.
+
+American/European PS1/PS2 Console Loader Instructions
+-----------------------------------------------------
+
+Available boot methods for American and European PS2 consoles:
 
 *   [Boot CD](#bootcd) (you can use something like the code breaker pro PS1 disc to boot it first)
 *   [Save game exploit](#savegame)
 
-Once you see the text `Put in a backup/import disc, then press X` appear, eject the DVD drive. Then you can remove the real PSX game disc from your PS2 console's DVD drive. Put in the backup CD-R or import PSX game disc you want to play, and close the DVD drive. Now on your controller press X. The console will then send some commands automatically, followed by the game booting.
+Available boot methods for American and European PS1 consoles:
+
+*   [ROM/ROM Flasher CD](#rom)
+*   [FreePSXBoot Memory Card Images](#freepsxboot)
+*   [Boot CD](#bootcd)
+*   [Save Game Exploit](#savegame)
+*   [TOCPerfect Patching](#tocperfect)
+*   [Audio Menu Swap Trick](#audiomenuswaptrick)
+
+Once you see the text `Put in a backup/import disc` appear, eject the DVD drive (PS2) or open the CD drive (PS1).
+
+*   If you are booting the Tonyhax International [Boot CD](#bootcd) via the [Audio Menu Swap Trick](#audiomenuswaptrick), you'll want to remove the spring or whatever you have blocking down the lid sensor to "open" the CD drive and stop the disc from spinning, allowing you to remove the Boot CD from the console's CD drive (PS1) or DVD drive (PS2).
+*   If you are booting Tonyhax International via a [Save Game Exploit](#savegame), after ejecting the DVD drive (PS2) or opening the CD drive (PS1) the real PS1 game disc you used with a save game exploit will stop spinning, allowing you to remove it from the console's CD drive (PS1) or DVD drive (PS2).
+
+All other boot methods don't have a disc usually in the drive already, so there is no disc to remove. With no disc currently in your console, you can now put in the backup CD-R or import PSX game disc you want to play. Close the CD drive (PS1) or DVD drive (PS2). The console will detect that the drive has been closed and will spin up your disc. The console will then send some commands and boot the disc.
+
+Playing Games That Contain Anti-Piracy Features On American/European PS1/PS2 Consoles
+-------------------------------------------------------------------------------------
+
+Since the original Tonyhax v1.4.3 release that Tonyhax International is based on there has been support for playing unmodified backup CD-R copies and or import discs of games that contain anti-piracy functionallity through the Tonyhax loader. Tonyhax International will boot these discs fine.
+
+Some **PAL region games contain an additional anti-piracy measure known as libcrypt**. It is only possible to play these games if:
+
+*   You burn a patched backup copy which has this libcrypt protection and the anti-piracy features removed to a CD-R that you boot with Tonyhax International.
+*   You use an original PS1 disc imported from another region (NTSC-J/NTSC-U/PAL).
+*   You burn a backup CD-R in a [special way](https://github.com/Kippykip/SBITools) to keep the libcrypt protection working. Tonyhax International defeats the anti-piracy measures and then the disc is good to boot!
+
+Playing Games That Span Multiple Discs On American/European PS1/PS2 Consoles
+----------------------------------------------------------------------------
+
+All American and European consoles do not have the same limitations as the Japanese consoles. You are free to eject/insert the DVD drive tray normally, which allows you to play through backup CD-Rs or import discs from any region (Japan, USA, or PAL) of games that span multiple discs exactly the same as real PS1 game discs that normally work on your American or European console. For instance, in the game Parasite Eve you must remove disc 1 and insert disc 2 at a specific point in the game when prompted to continue playing. This works exactly as the game prompts you on American and European consoles because Tonyhax International has the capability to unlock the CD drive to read unlicensed discs (which includes both real PS1 discs licensed for a region that does not match your console as well as backup CD-R discs) for American and European consoles. This can be a big deal for some games as they do not allow you to load a save created on Disc 1 while Disc 2 is in the console, you have to eject Disc 1 and insert Disc 2 in the middle of game play to proceed. The game Parasite Eve is like this, which actually prevents completing a full play through of the game on a Japanese SCPH-10000-SCPH-39000 console. There is a work-around available to Japanese PS1 consoles known as the mid-game hot-swap trick, but it involves swapping a moving disc in the console with the lid sensor blocked which is a definite downgrade to having this functionality simply work as designed like it does on all American and European PS1/PS2 consoles when using Tonyhax International.
 
 ROM/ROM Flasher CD
 ------------------
@@ -239,20 +378,11 @@ You can overwrite the contents of any PS1 cheat cartridge such as a GameShark wi
 
 Inside the Tonyhax International releases ([download](#downloads) above) in the `rom` directory are the following files:
 
-*   tonyhax-flasher-cd-europe.bin
-*   tonyhax-flasher-cd-europe.cue
-*   tonyhax-flasher-cd-japan.bin
-*   tonyhax-flasher-cd-japan.cue
-*   tonyhax-v1.0.7-international.rom
+*   tonyhax-rom-flasher.bin
+*   tonyhax-rom-flasher.cue
+*   tonyhax-v1.0.8-international.rom
 
-The BIN+CUE files can be burned to a CD-R. The BIN+CUE files contain the [NXFlash](https://github.com/danhans42/nxflash) PS1 executable with the `tonyhax-v1.0.7-international.rom` file. This means when you boot the burned flasher CD-R on your PS1 console, you can connect your GameShark/cheat device, press R2 (re-detect cheat cart), press start (flash eeprom from CD), and then press X to flash your GameShark/Cheat device. Now you can simply reset or power off then power on your PS1 console and it will boot Tonyhax International from the GameShark/cheat cart immeditely.
-
-If you are using Tonyhax International to boot the burned flasher CD-R, it does not matter if you burn the flasher CD with the BIN+CUE japan files or the BIN+CUE Europe files. If you are instead using a swap trick or mod chip to boot the burned flasher CD-R, you may need to burn either the BIN+CUE japan files or the BIN+CUE Europe files specifically as described below:
-
-*   If you have a SCPH-1000 Japanese console, any American console, or any European console older then the SCPH-102 you can use either the Europe or japan BIN+CUE files as it does not matter.
-*   If you have a SCPH-3000 or newer Japanese console you need to use the japan BIN+CUE files. If you have a SCPH-102 European console then you need to use the europe BIN+CUE files.
-
-There are many other ways (besides using the flasher CD) to flash the `tonyhax-v1.0.7-international.rom` file you make with PSEXE2ROM to your PS1 cheat cart. One way is to use a serial cable to transfer the ROM file from your computer to your PS1 console using a program like [UNIROM](https://unirom.github.io/) or [NXFlash](https://github.com/danhans42/nxflash).
+The BIN+CUE files can be burned to a CD-R. The BIN+CUE files contain the [NXFlash](https://github.com/danhans42/nxflash) PS1 executable with the `tonyhax-v1.0.8-international.rom` file. This means when you boot the burned flasher CD-R on your PS1 console, you can connect your GameShark/cheat device, press R2 (re-detect cheat cart), press start (flash EEPROM from CD), and then press X to flash your GameShark/Cheat device. Now you can simply reset or power off then power on your PS1 console and it will boot Tonyhax International from the GameShark/cheat cart immediately.
 
 The SCPH-900X and SCPH-10X consoles do not have an expansion port, and hence a GameShark can not be connected to those consoles.
 
@@ -317,7 +447,7 @@ After the correct memory card file is copied to the USB flash drive that your PS
 *   Select your PS1 memory card in the menu and then select restore. In the file picker navigate to the memory card file you copied to the USB flash drive previously.
 *   Wait for the restore to complete and press X. Remove your memory card and put it into either Slot 1 or Slot 2 of your PS1 console depending on what memory card image you use.
 
-Now you can turn on your PSX console without a disc in it, and then select the `Memory Card` option in the PS1's startup menu.This will start the Tonyhax international loader. **At this point, if you are using a FreePSXBoot memory card in slot 1 and or a Japanese console you must remove the FreePSXBoot memory card once the loader starts to ensure successful booting of your backup or import.**
+Now you can turn on your PSX console without a disc in it, and then select the `Memory Card` option in the PS1's startup menu. This will start the Tonyhax international loader. **At this point, if you are using a FreePSXBoot memory card in slot 1 and or a Japanese console you must remove the FreePSXBoot memory card once the loader starts to ensure successful booting of your backup or import.**
 
 Boot CD
 -------
@@ -335,7 +465,7 @@ If you are instead using a swap trick or mod chip to boot the burned flasher CD-
 
 If you have a SCPH-1000 Japanese console, any American console, or any European console older then the SCPH-102 you can use either the europe or japan BIN+CUE files as it does not matter.
 
-If you have a SCPH-3000 or newer Japanese console you need to use the japan BIN+CUE files. If you have a SCPH-102 European console then you need to use the europe BIN+CUE files.
+If you have a SCPH-3000 or newer Japanese console you need to use the japan BIN+CUE files. If you have a SCPH-102 European console then you need to use the Europe BIN+CUE files.
 
 Save Game Exploit
 -----------------
@@ -872,7 +1002,7 @@ The Legend Of Heroes I&II
 
 Boot the game as you'd normally do. On the main menu, select the Legend Of Heroes I (the I button on the left), **not The Legend Of Heroes II (the II button on the right)**. Once in The Legend Of Heroes I load the save file.
 
-Tonyhawk's games
+Tony Hawk Pro Skater games
 
 Boot the game as you'd normally do. On the main menu, wait until the save file is automatically loaded (it should say `Loading TONYHAX EU/US/DE/FR`, depending on the game's region). After it's done, choose the `CREATE SKATER` menu and press X.
 
@@ -899,7 +1029,7 @@ Currently PS1 DemoSwap Patcher is closed source and is not with in the Tonyhax I
 Audio Menu Swap Trick
 ---------------------
 
-The Audio Menu Swap Trick is an exploit only available on early Playstation consoles, it is **the only swap trick that does not involve swapping a moving disc** making it the best swap trick ever available. It was first described in the original [Swap Trick Guide](https://gamefaqs.gamespot.com/ps/916392-playstation/faqs/4708) from 1996. You can use the Audio Menu Swap Trick to boot Tonyhax International, which makes it a very convent method only requiring a compatible console and no other hardware (such as a memory card, GameShark, mod chip, etc.).
+The Audio Menu Swap Trick is an exploit only available on early PlayStation consoles, it is **the only swap trick that does not involve swapping a moving disc** making it the best swap trick ever available. It was first described in the original [Swap Trick Guide](https://gamefaqs.gamespot.com/ps/916392-playstation/faqs/4708) from 1996. You can use the Audio Menu Swap Trick to boot Tonyhax International, which makes it a very nice method only requiring a compatible console and no other hardware (such as a memory card, GameShark, mod chip, etc.).
 
 ### Requirements
 
@@ -956,23 +1086,153 @@ You can alternatively use the audio menu swap trick to boot the Tonyhax Internat
 
 Another thing you can do is boot [TOCPerfect](#tocperfect) patched games with the audio menu swap trick. These patched games automatically run Tonyhax International before booting into the real game, so you get all the benefits of the [Boot CD](#bootcd) and more since you don't have to swap the boot CD with the backup CD-R you actually want to play.
 
-Important Info About Burning PSX Backups
-----------------------------------------
+CD-R Media For PS1 Backups
+--------------------------
 
-Your **burner** and **CD-R media** matter! **The PS1/PS2 will read 74min/650MB CD-Rs better then 80min/700MB CD-Rs. New old stock VerbatimDataLifePlus 74 min/650MB CD-Rs from the turn of the century are the best I have used so far, these have a dark bottom layer as it is more reflective and easier to read for the console**. The slower you can burn, the better. With a sufficiently high enough write speed (over 10x is not recommended), the console will not be able to read you CD-R or will read it poorly (longer load times or freezing). Newer optical drives don't support writing at the slow speeds older drives support writing at, so keep that in mind.
+Only use high-quality CD-R media. If you want good results burning backups for your PS1 your CD-R media should contain:
 
-Recommended burning programs:
+*   High quality dye (SuperAZO, AZO, or Phthalocyanine).
+*   A highly reflective layer system.
+*   High quality polycarbonate and "sealing" process combining all parts of the CD-R.
+
+I have found Verbatim DataLifePlus CD-Rs to be really good with PS1 consoles. Here is the ATIP information displayed by `cdrecord -atip` for a Verbatim DataLifePlus CD-R:
+
+    ATIP info from disk:
+      Indicated writing power: 4
+    Disk Is not unrestricted
+    Disk Is not erasable
+      Disk sub type: Medium Type A, high Beta category (A+) (3)
+      ATIP start of lead in:  -11077 (97:34/23)
+      ATIP start of lead out: 359848 (79:59/73)
+    Disk type:    Long strategy type (Cyanine, AZO or similar)
+    Manuf. index: 11
+    Manufacturer: Mitsubishi Chemical Corporation
+
+Verbatim UltraLife Archival Grade Gold CD-Rs also are really good. They are more expensive then Verbatim DataLifePlus, and I think Verbatim DataLifePlus CD-Rs are slightly better with the PS1 but they are an option. Here is the ATIP information displayed by `cdrecord -atip` for a Verbatim DataLifePlus CD-R:
+
+    ATIP info from disk:
+      Indicated writing power: 5
+    Disk Is not unrestricted
+    Disk Is not erasable
+      Disk sub type: Medium Type B, low Beta category (B-) (4)
+      ATIP start of lead in:  -12520 (97:15/05)
+      ATIP start of lead out: 359849 (79:59/74)
+    Disk type:    Short strategy type (Phthalocyanine or similar)
+    Manuf. index: 26
+    Manufacturer: TDK Corporation
+
+Do not use cheap/poor quality CD-R media, which is almost always all that is available in retail stores and most likely any CD-R that is not "archival grade". Poor quality cheap CD-R media will result in:
+
+*   Slower loading times/in-game lag because of CD drive tracking errors (bad noises from the CD drive).
+*   Issues reading data off of the disc possibly resulting in a game to freeze and motor power off in the CD drive.
+*   Skipping/silent audio and or music.
+
+Later PS1 consoles (confirmed with a SCPH-7500, although most likely starting at the SCPH-5000 series and newer) and all PS2 consoles have a much greater tolerance to poor quality CD-R media, and _may_ work fine with it however in general it is still best to just always use Verbatim DataLifePlus/UltraLife CD-Rs or something of similar quality. Here is the ATIP information displayed by `cdrecord -atip` for a Maxell Music CD-R (which is a CD-R that **does not work well with the early SCPH-1000/SCPH-3000/SCPH-3500/SCPH-1001/SCPH-1002 but seems to be fine for the SCPH-7500 and PS2s)**:
+
+    ATIP info from disk:
+      Indicated writing power: 4
+    Disk Is unrestricted
+    Disk Is not erasable
+      Disk sub type: Medium Type A, low Beta category (A-) (2)
+      ATIP start of lead in:  -12508 (97:15/17)
+      ATIP start of lead out: 359845 (79:59/70)
+    Disk type:    Short strategy type (Phthalocyanine or similar)
+    Manuf. index: 22
+    Manufacturer: Ritek Co.
+
+Keep Your Discs Clean
+---------------------
+
+If you are having issues booting discs in Tonyhax International, consider wiping with a clean microfiber cloth from the inner ring to the outer edge of the disc in all directions and then trying to boot the disc again.
+
+Vertical Console Boot Fix
+-------------------------
+
+If cleaning your discs does not improve anything, try changing the orientation of the PS1 console to stand vertically (try both right and left sides) to see if it reads discs better. Contrary to popular belief, this can work on all PS1 consoles (it works on my SCPH-7500) and not just the early ones as constantly stated online. I believe that turning the console to the left (power supply unit on the bottom) usually has the best results, but try multiple orientations to see if this fix gets your console going.
+
+PS1 CD Drive Compatibility
+--------------------------
+
+You can easily replace your laser assembly. All PS1 laser assemblies are inter-changable and [compatible](http://www.psxdev.net/forum/viewtopic.php?t=3503) between all motherboard and console revision/models with the following limitations:
+
+*   Some console motherboard+CD drive combinations need a laser ribbon cable extender to make the laser ribbon cable reach and connect to the right socket on the motherboard.
+*   PU-7/PU-8 Motherboards (found in SCPH-1000/SCPH-3000/SCPH-3500/SCPH-1001/SCPH-1002) originally used either KSM-440AAM or KSM-440ACM type CD drives. They can support all the other drive types but you must swap the top case of the laser assembly with an **original KSM-440AAM or KSM-440ACM laser assembly top case**.
+
+To aquire a new CD drive for your PS1 you seem to now have two options:
+
+*   Get a refurbished CD drive from china, these are commonly found on eBay. Understand that all "new" made in china PS1 cd drives in reality [refurbished](http://www.psxdev.net/forum/viewtopic.php?t=1274)! Be aware that you are not actually buying a "new" laser assembly, you are probably going to get a used PS1 laser assembly with a laser resistance pot tweak to make the laser stronger. This can cause problems with SCPH-1000/SCPH-3000/SCPH-1001/SCPH-1002 consoles as they have a predisposed worse tolerance to bad/worn laser pickups already, when compared to newer PS1 models.
+*   Buy a cheap "console only" listing on eBay for a PSone (SCPH-100/SCPH-101/SCPH-102) and salvage it soley for the CD drive. You can actually still do this for a similar price as buying a stand-alone refurbished chinese PS1 CD drive if you look in the listings, and you might actually get a higher-quality better working CD drive in the end. The laser is probably stronger and the laser assembly itself is probably also still in good shape in a PSone console. You can look for other console models to salvage the CD drive out of, not just a PSone. The PSone however is probably the best bet to get a good CD drive from.
+
+All PS1 laser assemblies are inter-changable and [compatible](http://www.psxdev.net/forum/viewtopic.php?t=3503) between all motherboard and console revision/models. However depending on your console's motherboard revision (which is viable when you open your PS1 console) and the laser ribbon cable lenghth on your laser assembly (found labeled on the bottom of the assembly), you may need a laser diode ribbon cable extender to make the assembly connect to the motherboard or need replace the top case of the laser assembly. It is also important to note that PU-7/PU-8 Motherboards/SCPH-1000/SCPH-3000/SCPH-3500/SCPH-1001/SCPH-1002 have a worse tolerance to worn/bad laser assemblies in comparison to i.e. newer PU-20/PU-22/PSone consoles, so they may be even more finicky. Laser assemblies with wear and dimmer laser diodes may work fine in i.e. a SCPH-100 but not in a SCPH-1000.
+
+Laser Assembly Top Case Swap
+----------------------------
+
+PU-7/PU-8 Motherboards (found in SCPH-1000/SCPH-3000/SCPH-3500/SCPH-1001/SCPH-1002) originally used either KSM-440AAM or KSM-440ACM. They can support all the other drives but you must swap the top case of the laser assembly with an **original KSM-440AAM or KSM-440ACM laser assembly top case** or it won't fit when you go to screw the console together. **Even the "new" chinese KSM-440ACM laser assemblies (which are really refurbished and not new!) require this or they will not fit in these early PS1 consoles**, because they are not properly made to the original size specifications.
+
+To replace the top case of a newer laser assembly to make it fit in a SCPH-1000/SCPH-3000/SCPH-3500/SCPH-1001/SCPH-1002 console with a PU-7 or PU-8 motherboard:
+
+*   Unscrew the bottom screws in the PlayStation console using a Phillips #2 screwdriver and flip it over, taking off the top case of the console and exposing the CD drive.
+*   Power on the console and go to the CD player.
+*   Place an audio CD or possibly a game with CDDA audio on the exposed CD drive. Press down the lid sensor at the top right of the exposed lower case of the PlayStation console (its a black switch lever-type button when the top case of the console is removed) and play the **last audio track** on the CD.
+*   While the last audio track is playing, power off the PS1 console and remove the CD from the CD drive spindle. The laser diode is now "locked" in position towards the end of the laser assembly rails, allowing access to remove the top case of the laser assembly itself.
+*   Using a Phillips #00 screw driver, unscrew the 2 screws on each side of the spindle motor and completely remove them. On the opposite side of the laser assembly spindle motor is a clip that connects the top case of the laser assembly to the bottom half. Unclip this clip by gently pulling out and upwards. There is another clip on the right side of the spindle motor on the laser assembly that also needs to be un-clipped in the same way. After you do this, you should be able to gently push the top case forwards, slipping it out from under the spindle motor and removing it completely, exposing the laser diode ribbon cable, rails, and gears inside the laser assembly.
+*   Now you can disconnect you older laser assembly from your motherboard. Gently pull the power wires (NOT THE LASER RIBBON CABLE) from the laser assembly. The laser ribbon cable (the red/orange one) has a connector that needs to be unlocked, you can do this by using a tool to unlock it from it's socket. You need to gently pull up on both the left and right sides of the locking socket to release the ribbon cable, finally allowing to pull it all out.
+
+Now do the exact same for the newer laser assembly you are using as your replacement. First connect it to the motherboard, take off the laser assembly top case following the same instructions using the CD player/power off trick to lock the laser diode at the end of the laser assembly rails, unscrewing the laser assembly top case, and finally un-clipping both clips exactly as before. Now put on the original laser assembly top case from your original drive on to the newer laser assembly. It is quite a tight fit, make sure all your clips are properly connected and that you have gently slid the original top case under your new laser assembly spindle motor correctly, keeping the laser ribbon cable in the proper position for laser diode movement. When all of this is done you will see the 2 screw threads of the laser assembly directly under the laser assembly top case, and you can just screw in the Phillips #00 screws all the way in to secure it. After doing all of this, make sure your spindle motor is properly spinning freely and NOT rubbing against the laser assembly top case, and finally you can go place your new Frankenstein laser assembly in your old PU-7/PU-8 console and it will all fit when you go to screw the entire console back together.
+
+Manual bias/gain Resistance Adjustments (Early Consoles Only)
+-------------------------------------------------------------
+
+On the early SCPH-1000/SCPH-3000/SCPH-3500/SCPH-1001/SCPH-1002 consoles the bias and gain values are not automatically adjusted by the PS1 motherboard like on all newer PS1 console revisions. They are manually set by the bias screw and the gain screw. When you get a new CD drive connected the bias and gain values may change from what they should be, or you may find that the CD drive does not work as well as it can without slight adjustments to these values. If you measure the bias value to not be 1.634v in standby (no CD in drive/drive open), and if the gain value is not around 1.825v measured while playing CD audio, consider changing them to these values IF simply modifying the laser resistance screw does not do enough.
+
+![bias and gain screws on motherboard](images/biasngain.jpg)
+
+Image credit: [http://dogbreath.de/PS1/LaserAlignment/Laser.html](http://dogbreath.de/PS1/LaserAlignment/Laser.html)
+
+### Checking And Setting The bias
+
+Start with the console powered on with a CD drive connected, but with no disc in the drive and or the drive lid open. The console is in "IDLE" like this. Using a multi-meter set to measure voltage, connect the postive lead to point P (as displayed in the image above) and the negative lead to anywhere on the top metal sheilding of the PS1 console (to ground it). If you do not see the value 1.634v use a flathead #2 screwdriver (iFixit tool kit labels this) to very slightly change the bias screw's postition on the motherboard, rotating the screw until you get to that value.
+
+*   Rotate CLOCKWISE to increase bias voltage reading.
+*   Rotate COUNTER-CLOCKWISE to decrease the bias voltage reading.
+
+Alternative bias values may be tried, but 1.634v is the Sony default value (going off of my SCPH-1000 console which has a sticker on it saying it was sent in for repair in March 1998, and besides that it looks like it never has been touched). A bias value of 1.7v is commonly stated [online](http://dogbreath.de/PS1/LaserAlignment/Laser.html), but I have commonly found this to be too high and cause the CD drive to have contstant runoff and make scary noises on some consoles. Try 1.634v first.
+
+### Checking And Setting The gain
+
+Start with the console powered on with a CD drive connected, a CD containing audio in the CD drive, and have the lid sensor blocked so that the console thinks the CD drive is closed. Now go to the CD player and play an audio track on the CD. Using a multi-meter set to measure voltage, connect the postive lead to point P (as displayed in the image above) and the negative lead to anywhere on the top metal sheilding of the PS1 console (to ground it). If you do not see the value 1.825v use a flathead #3 screwdriver (iFixit tool kit lables this) to very slightly change the bias screw's postition on the motherboard, rotating the screw until you get to that value.
+
+*   Rotate CLOCKWISE to DECREASE gain voltage reading. This is because gain is a value to SUBTRACT from the bias.
+*   Rotate COUNTER-CLOCKWISE to INCREASE the bias voltage reading. This is because gain is a value to SUBTRACT from the bias.
+
+Checking And Setting The Laser Resistance
+-----------------------------------------
+
+If you are having issues reading discs, you may want to try slightly changing your laser resistance value. It is unlikely however that you will need to change the laser resistance on refurbished PS1 CD drives (sold as "new" on ebay). They have the laser resistance usually lowered as part of being refurbished. The laser resistance screw is displayed in the image below, along with the resistance positive and negative test points:
+
+![laser screw](images/laser-screw.png)
+
+Original image credit: [http://dogbreath.de/PS1/LaserAlignment/Laser.html](http://dogbreath.de/PS1/LaserAlignment/Laser.html)
+
+It is easiest to test the resistance when the CD drive is unplugged from the motherboard, so that you can position it better to access the points on the side of the laser assembly with a multimeter set to test resistance in ohms. **Write down** the current resistance on your CD drive to refer to later if needed. Use a flathead #2 screwdriver (iFixit tool kit labels this) to very slightly change the resistance screw. The value of .768 ohms is a good value to try first (going off of my SCPH-1000 console which has a sticker on it saying it was sent in for repair in March 1998, and besides that it looks like it never has been touched).
+
+*   Rotate the laser resistance screw CLOCKWISE to INCREASE the resistance value. The higher the resistance, the lower the power that the laser diode will use.
+*   Rotate the laser resistance screw COUNTER-CLOCKWISE to DECREASE the resistance value.The lower the resistance, the higher the power that the laser diode will use.
+
+After setting this laser resistance, test out reading/playing a disc with the CD drive. If you have an early SCPH-1000/SCPH-3000/SCPH-3500/SCPH-1001/SCPH-1002 console you may need to manually adjust the bias/gain to 1.634v/1.825v after you change the laser resistance value. If this does not work as well as you want, try changing the laser resistance value slightly down to .742 ohms, or slighly up to maybe .8 ohms. Try different values out. I would not go any lower the .700, or any higher then 1.200 ohms.
+
+The proper way to set the laser resistance screw would be by using an analog [oscilloscope](http://www.psxdev.net/forum/viewtopic.php?f=59&t=715) after simply setting the bias/gain (if you have an early PS1 console). Trial and error can however give good results if you are determinded!
+
+Burning Programs For PS1 Backups
+--------------------------------
 
 *   [IMGBurn](https://www.imgburn.com) (Windows).
 *   [CDRDAO](http://cdrdao.sourceforge.net) (Mac OS X/Linux/\*BSD/Windows).
 
-If you use cdrdao, you must use the `--swap` argument for discs with CDDA audio. Example:
+If you use cdrdao, you must use the `--swap` argument for discs with CDDA audio or the game will have no music! Example:
 
     cdrdao write --speed 1 --swap --eject yourgame.cue
-
-If you are having issues booting discs in Tonyhax International, consider wiping with a clean microfiber cloth from the inner ring to the outer edge of the CD-R in all directions and then trying to boot the disc again. If this does not work, try a different CD-R media and or CD burner.
-
-If all the above does not improve anything, try changing the orientation of the PS1 console to stand vertically (try right and left sides) to see if it reads discs better. If this is not satisfactory, it is possible that your laser is dying if it is old and has seen a lot of use, if this is the case you can easily replace your laser assembly with a reproduction drive from china of _doubious_ quality. You may need to [tweak the BIAS and GAIN values](http://dogbreath.de/PS1/LaserAlignment/Laser.html) with one of these reproduction drives (if you have any PS1 model before the SCPH-500X series).
 
 Building From Source
 --------------------

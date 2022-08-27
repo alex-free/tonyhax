@@ -22,7 +22,7 @@ uint8_t cdcontrollerver[4];
 
 bool calibrate_laser = 0; // Only Japanese VC3s need this so it is off by default
 bool bugged_setsession = 0; // VC0 A, VC0 B, and VC1 A CDROM Controller BIOS versions all have a buggy SetSession command that requires a special work around to use
-bool enable_unlock = 1; // Disabled on VC0 A, VC0 B, and VC2 A Japanese CDROM Controller BIOS versions automatically. On VC1+ the testregion command is run and if the region is Japan it is also disabled.
+bool enable_unlock = 1; // Disabled on VC0 A, VC0 B, and VC1 A Japanese CDROM Controller BIOS versions automatically. On VC1+ the testregion command is run and if the region is Japan it is also disabled.
 bool controller_input = 0; // When enabled, debug_write does not display the repeat messages counter. This is so we can draw a blank line and then wait for controller input using vsync in debug_write
 
 // Loading address of tonyhax, provided by the secondary.ld linker script
@@ -380,6 +380,8 @@ void try_boot_cd() {
     #endif	   
     SetConf(event, tcb, stacktop);
 
+	patcher_apply(); // Needs to happen here to work
+
     #if !defined STEALTH
 	    debug_write("Clearing RAM");
     #endif	
@@ -636,7 +638,6 @@ void main() {
 	}
 
 	while (1) {
-		patcher_apply();
 		try_boot_cd();
 		#if !defined STEALTH
 		    debug_write("Reinitializing kernel");

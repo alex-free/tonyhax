@@ -7,7 +7,7 @@ SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Common variables
 
-TONYHAX_VERSION=v1.0.8-international
+TONYHAX_VERSION=v1.1.0-international
 
 CC=mips-linux-gnu-gcc
 CFLAGS=-O1 -Wall -Wextra -Wno-main -EL -march=r3000 -mabi=32 -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION)
@@ -79,8 +79,10 @@ LOADER_FILES := tonyhax.mcs HAX tonyhax.exe
 FREEPSXBOOT_IMAGES := \
     tonyhax_scph-1000_slot1.mcr \
     tonyhax_scph-1000_slot2.mcr \
-    tonyhax_scph-3000_slot1.mcr \
-    tonyhax_scph-3000_slot2.mcr \
+    tonyhax_scph-3000_v1.1_slot1.mcr \
+    tonyhax_scph-3000_v1.1_slot2.mcr \
+    tonyhax_scph-3000_v2.1_slot1.mcr \
+    tonyhax_scph-3000_v2.1_slot2.mcr \
     tonyhax_scph-3500_slot1.mcr \
     tonyhax_scph-3500_slot2.mcr \
     tonyhax_scph-5000_slot1.mcr \

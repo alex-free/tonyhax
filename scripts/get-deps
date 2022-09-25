@@ -1,5 +1,9 @@
 #!/bin/bash
 
+cd "$(dirname "$0")"
+cd ../
+git submodule update --init --recursive
+
 if command -v dnf &> /dev/null; then
     sudo dnf install -y git autoconf automake texinfo help2man libtool ncurses-devel g++ make cmake cdrdao python
 elif command -v apt &> /dev/null; then

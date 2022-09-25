@@ -15,10 +15,9 @@ inline uint32_t encode_jal(const void * addr) {
 }
 
 void install_modchip_patch(uint8_t * patches_addr) {
-    #if !defined STEALTH
-		debug_write("Installing modchip patch");
+	#if !defined STEALTH
+		debug_write("Installing non-stealth modchip patch");
 	#endif
-
 	// Get the handler info structure
 	handler_info_t * syscall_handler = bios_get_syscall_handler();
 
@@ -32,9 +31,9 @@ void install_modchip_patch(uint8_t * patches_addr) {
 	 */
 	uint32_t lw_op = verifier[20];
 	if ((lw_op >> 16) != 0x8C39) {
-		#if !defined STEALTH
-			debug_write("Check failed!");
-		#endif
+	#if !defined STEALTH
+		debug_write("Check failed!");
+	#endif
 		return;
 	}
 	void ** cases_array = (void **) (lw_op & 0xFFFF);
@@ -57,28 +56,16 @@ void install_modchip_patch(uint8_t * patches_addr) {
 	cases_array[1] = patches_addr + BIOS_PATCHES_MODCHIPSTART;
 }
 
-void install_fpx_patch(uint8_t * patches_addr) {
-	if (!bios_is_ps1()) {
-		return;
-	}
-
-    #if !defined STEALTH
-		debug_write("Installing FreePSXBoot patch");
-	#endif
-	*((uint32_t *) 0x5B40) = encode_jal(patches_addr + BIOS_PATCHES_ANTIFPXPATCH);
-}
-
 void patcher_apply(void) {
 	// We have plenty of space at the end of table B
 	uint8_t * start_addr = (uint8_t *) (GetB0Table() + 0x5E);
 
 	// Copy patches
-    #if !defined STEALTH
-		debug_write("Copying patches to %x", (uint32_t) start_addr);
+	#if !defined STEALTH
+		debug_write("Copying patch to %x", (uint32_t) start_addr);
 	#endif
 	memcpy(start_addr, BIOS_PATCHES_BLOB, sizeof(BIOS_PATCHES_BLOB));
 
-	// Install patches
+	// Install patch
 	install_modchip_patch(start_addr);
-	install_fpx_patch(start_addr);
 }

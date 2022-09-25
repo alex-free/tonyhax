@@ -30,15 +30,6 @@ struct handler_info {
 #define BIOS_DEFAULT_TCB 0x4
 #define BIOS_DEFAULT_STACKTOP 0x801FFF00
 
-/*
- * EXTRAS.
- */
-
-/**
- * BIOS author string.
- */
-extern const char * const BIOS_DEVELOPER;
-
 /**
  * BIOS version string. Not available on SCPH-1000 consoles.
  *
@@ -50,6 +41,11 @@ extern const char * const BIOS_VERSION;
  * Executes a full reset of the console's BIOS, as if a WarmBoot was issued.
  */
 void bios_reinitialize(void);
+
+/**
+ * Executes a full reset of the console's BIOS (leaves A/B/C tables/external patches alone), as if a WarmBoot was issued.
+ */
+void bios_reinitialize_fpsxboot(void);
 
 /**
  * Returns true if the console is running an original PS1 BIOS.

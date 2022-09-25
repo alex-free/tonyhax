@@ -20,7 +20,7 @@ const char * region_name;
 
 uint8_t cdcontrollerver[4];
 
-bool calibrate_laser = 0; // Only Japanese VC3s need this so it is off by default
+bool calibrate_laser = 0; // Only Japanese VC2 and VC3 consoles need this so it is off by default
 bool bugged_setsession = 0; // VC0 A, VC0 B, and VC1 A CDROM Controller BIOS versions all have a buggy SetSession command that requires a special work around to use
 bool enable_unlock = 1; // Disabled on VC0 A, VC0 B, and VC1 A Japanese CDROM Controller BIOS versions automatically. On VC1+ the testregion command is run and if the region is Japan it is also disabled.
 bool controller_input = 0; // When enabled, debug_write does not display the repeat messages counter. This is so we can draw a blank line and then wait for controller input using vsync in debug_write
@@ -44,7 +44,7 @@ void log_bios_version() {
 		version = "1.0 or older";
 	}
 
-	debug_write("BIOS: v%s", version);
+	debug_write("System BIOS Version: %s", version);
 }
 
 
@@ -83,8 +83,7 @@ bool unlock_drive() {
 	    debug_write("Drive region: %s", region_name);
     #endif
 	// Note the kernel's implementation of strlen returns 0 for nulls.
-	if (!backdoor_cmd(0x50, NULL) || !backdoor_cmd(0x51, "Licensed by") || !backdoor_cmd(0x52, "Sony") || !backdoor_cmd(0x53, "Computer") || !backdoor_cmd(0x54, "Entertainment") || !backdoor_cmd(0x55, p5_localized) || !backdoor_cmd(0x56, NULL)) 
-	{
+	if (!backdoor_cmd(0x50, NULL) || !backdoor_cmd(0x51, "Licensed by") || !backdoor_cmd(0x52, "Sony") || !backdoor_cmd(0x53, "Computer") || !backdoor_cmd(0x54, "Entertainment") || !backdoor_cmd(0x55, p5_localized) || !backdoor_cmd(0x56, NULL)) {
         #if !defined STEALTH
 		    debug_write("Backdoor failed");
         #endif
@@ -126,8 +125,7 @@ bool is_lid_open() {
 	// Always returns one, no need to check either
 	cd_read_reply(cd_reply);
 
-    if(cd_reply[0]==0x10)
-    {
+    if(cd_reply[0]==0x10) {
         return true;
 	} else {
         return false;
@@ -138,8 +136,7 @@ bool licensed_drive() {
     uint8_t getid_response[9];
 	unsigned char gid;
 
-    while(1)
-	{
+    while(1) {
     	cd_command(CD_CMD_GETID,0,0);
 		gid = cd_wait_int();
 		if(gid!=5)
@@ -149,8 +146,7 @@ bool licensed_drive() {
     cd_wait_int();
 	cd_read_reply(getid_response);
 
-    if(getid_response[0]==0x02 && getid_response[1]==0x00 && getid_response[2]==0x20 && getid_response[3]==0x00)
-    {
+    if(getid_response[0]==0x02 && getid_response[1]==0x00 && getid_response[2]==0x20 && getid_response[3]==0x00) {
         return true;
 	} else {
         return false;
@@ -168,24 +164,18 @@ void try_boot_cd() {
 			wait_lid_status(true);
 			wait_lid_status(false);
 		} else {
-            if(is_lid_open() || !licensed_drive()) // If lid is open drive is not licensed, and if lid is closed we check if it is licenesed (if it is not licensed but not open then the drive is closed and the user can open it and license it)
-            { // We need to license the drive with a real NTSC-J PSX game disc first, this is the code path used by FreePSXBoot
-              // Note lack of if !defined STEALTH, because only the TOCPerfect code path can have STEALTH defined in it
-                #if defined MEMORY_CARD
-                   debug_write("Remove the FreePSXBoot memory card from your console now");
-                #endif               
+            if(is_lid_open() || !licensed_drive()) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licenesed (if it is not licensed but not open then the drive is closed and the user can open it and license it)    
 				debug_write("Put in a real NTSC-J PSX game disc, then block the lid sensor");
 				wait_lid_status(true);
 				wait_lid_status(false); // Blocking lid sensor = 'closing lid'
 
-	            debug_write("Initializing CD"); // Drive will be in licensed state after this is successful
-				if (!CdInit()) 
-				{
+	            debug_write("Initializing CD");	// Drive will be in licensed state after this is successful
+				if (!CdInit()) {
 					debug_write("Init failed");
                     debug_write("Try unblocking then blocking the lid sensor again");
 					return;
 				}
-			} // Drive is already licensed for all other methods to run the loader (boot CD via 'swap trick' or DemoSwap), and the lid is 'closed' at this point
+			} // Drive is licensed and the lid is 'closed' at this point
             debug_write("Drive is licensed");
             debug_write("Stopping motor");
 			cd_command(CD_CMD_STOP,0,0); cd_wait_int(); cd_wait_int();
@@ -200,30 +190,30 @@ void try_boot_cd() {
 			address = (void *) (GetB0Table()[0x13]);
 			((void (*)(void)) address)();	// BIOS StartPad
 
-			debug_write("Keep the lid sensor blocked until turing off the console");
+			debug_write("Keep the lid sensor blocked until turning off the console");
             debug_write("Remove the real NTSC-J PSX game disc");
-            debug_write("Put in a backup/import disc, then press X");
-            controller_input = 1; // disable the repeat counter used in debug_write
-				while(1) { j = padbuf[0][3] ^ 0xFF;
+            debug_write("Put in a backup/import disc, then press X on controller 1"); // Thanks MottZilla!
+            controller_input = 1; // disable the repeat counter used in debug_write until controller input is done
+				while(1) { 
+					j = padbuf[0][3] ^ 0xFF;
 					if( j == 0x40)
 						break;
 
 					debug_write(" "); // Vblank wait for controller input
 				}	
-		    controller_input = 0; // Set debug_write back to normal (enable repeat counter)
+		    controller_input = 0; // Set debug_write back to normal (enable repeat counter) as controller input is done
 			// StopPAD() as we are done using Joypad input
 			address = (void *) (GetB0Table()[0x14]);
-			((void (*)(void)) address)();	// BIOS StopPad	
+			((void (*)(void)) address)();	// BIOS StopPad
 		}
 	#endif
 
-	if(!enable_unlock) // Japanese consoles 
-	{
+	if(!enable_unlock) {
 		if(bugged_setsession) {
 			#if !defined STEALTH
 				debug_write("Sending SetSession 2, please wait");
 			#endif
-				sscmd = 2; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
+				sscmd = 2; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int(); // There is a 3rd response we are ignoring by sending SetSession 1 next
 			#if !defined STEALTH
 				debug_write("Sending SetSession 1");
 			#endif
@@ -235,20 +225,28 @@ void try_boot_cd() {
 			sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
 		}
 
-		if(calibrate_laser) { // VC3s need laser calibration after this, Sony improved their disc changed but lid sensor not tripped detection later on? On USA/PAL we can reset then unlock, but we can't on Japanese.
+		if(calibrate_laser) { // VC2 and VC3s do auto Bias/Gain calibration when reading the real NTSC-J PS1 disc. A swapped in CD-R or just a different disc in general needs this to be updated
         #if !defined STEALTH		
-        	debug_write("Calibrating laser for VC3 CDROM controller");
+        	debug_write("Calibrating laser");
         #endif		
         	cbuf[0] = 0x50; cbuf[1] = 0x38; cbuf[2] = 0x15; cbuf[3] = 0x0A;	// ModeCompensateTrackingAutoGain
-			cd_command(CD_CMD_TEST,&cbuf[0],4); cd_wait_int();
+			cd_command(CD_CMD_TEST,&cbuf[0],4); 
+			cd_wait_int();
 		}
 	}
 
     #if !defined STEALTH
         debug_write("Reinitializing kernel"); // We have to reinitilize, stop, and init in that order to prevent the process from freezing at this point
-    #endif	
-    bios_reinitialize();
+    #endif
+    #if defined FREEPSXBOOT	
+    	bios_reinitialize_fpsxboot();
+    #else
+    	bios_reinitialize();
+    #endif
 	bios_inject_disc_error();
+
+	if(enable_unlock)
+		patcher_apply();  // Apply anti-piracy patch. If you can't unlock this is currently pointless because almost every single game containing anti-piracy detection executes a read-toc command which unlicenses/unathenticates the drive, ruining our swap trick. VC0/VC0B (SCPH-1000/Early SCPH-3000) don't actually have the read-toc command however, and if there is not a non-stealth modchip in the console it will pass all anti-piracy detections already. There are no more BIOS reinitializations after this point that could wipe out our patches so it is safe to do this here
 
     #if !defined STEALTH
         debug_write("Stopping motor");
@@ -258,8 +256,7 @@ void try_boot_cd() {
     #if !defined STEALTH
 	    debug_write("Initializing CD");
     #endif
-	if (!CdInit()) 
-	{
+	if (!CdInit()) {
 		#if !defined STEALTH
 			debug_write("Init failed");
 		#endif
@@ -268,13 +265,21 @@ void try_boot_cd() {
 	
     #if !defined STEALTH
     	debug_write("Checking game region");
-    #endif	
-    if (CdReadSector(1, 4, data_buffer) != 1) {
-		#if !defined STEALTH
-			debug_write("Failed to read sector");
-		#endif
+    #endif
+
+    #if defined TOCPERFECT	
+    	if (CdReadSector(1, 12, data_buffer) != 1) { // Real license data sector is copied to sector 12 by PS1 DemoSwap Patcher before it writes Japanese license data to sector 4
+			#if !defined STEALTH
+				debug_write("Failed to read sector");
+			#endif
 		return;
-	}
+		}
+	#else
+    	if (CdReadSector(1, 4, data_buffer) != 1) {
+			debug_write("Failed to read sector");
+			return;
+		}
+	#endif
 
 	#if !defined STEALTH
 	    const char * game_region;
@@ -297,7 +302,6 @@ void try_boot_cd() {
 		case 'A':
 			game_region = "American";
 			break;
-
 		case 'I':
 			game_region = "Japanese";
 			break;
@@ -311,22 +315,29 @@ void try_boot_cd() {
 	}
     
     #if !defined STEALTH
-    	debug_write("Game's region is %s. Using %s video.", game_region, game_is_pal ? "PAL" : "NTSC");
+    	debug_write("Game's region is %s. Using %s video.", game_region, game_is_pal ? "PAL" : "NTSC"); // Does not work on PS2, only on original PS1s.
     #endif
 
-	// Defaults if no SYSTEM.CNF file exists
+	// Defaults if no SYSTEM.CNF file exists, matches shell program behavior
 	uint32_t tcb = BIOS_DEFAULT_TCB;
 	uint32_t event = BIOS_DEFAULT_EVCB;
 	uint32_t stacktop = BIOS_DEFAULT_STACKTOP;
 	const char * bootfile = "cdrom:PSX.EXE;1";
 
 	char bootfilebuf[32];
-    
-    #if !defined STEALTH
-    	debug_write("Loading SYSTEM.CNF");
-    #endif
 
-	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
+    #if defined TOCPERFECT
+    	#if !defined STEALTH
+    		debug_write("Loading SYSTEM.CN2");
+    	#endif
+		int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CN2;1", FILE_READ);
+    #else
+    	#if !defined STEALTH
+    		debug_write("Loading SYSTEM.CNF");
+    	#endif
+   		int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
+   	#endif
+    
 	if (cnf_fd > 0) {
 		read = FileRead(cnf_fd, data_buffer, 2048);
 		FileClose(cnf_fd);
@@ -344,14 +355,9 @@ void try_boot_cd() {
 		config_get_hex((char *) data_buffer, "TCB", &tcb);
 		config_get_hex((char *) data_buffer, "EVENT", &event);
 		config_get_hex((char *) data_buffer, "STACK", &stacktop);
-		#if defined TOCPERFECT // TOCPerfect reads the real executable labeled as BOOY in SYSTEM.CNF as BOOT is this executable
-			if (config_get_string((char *) data_buffer, "BOOY", bootfilebuf)) {
-		#else
-			if (config_get_string((char *) data_buffer, "BOOT", bootfilebuf)) {
-		#endif
+		if (config_get_string((char *) data_buffer, "BOOT", bootfilebuf)) {
 			bootfile = bootfilebuf;
-			}
-
+		}
 	} else {
 		uint32_t errorCode = GetLastError();
 		if (errorCode != FILEERR_NOT_FOUND) {
@@ -369,18 +375,12 @@ void try_boot_cd() {
 	debug_write(" * %s = %x", "TCB", tcb);
 	debug_write(" * %s = %x", "EVENT", event);
 	debug_write(" * %s = %x", "STACK", stacktop);
-	#if defined TOCPERFECT
-		debug_write(" * %s = %s", "BOOY", bootfile);
-	#else
-		debug_write(" * %s = %s", "BOOT", bootfile);
-	#endif
+	debug_write(" * %s = %s", "BOOT", bootfile);
     
     #if !defined STEALTH
     	debug_write("Configuring kernel");
     #endif	   
     SetConf(event, tcb, stacktop);
-
-	patcher_apply(); // Needs to happen here to work
 
     #if !defined STEALTH
 	    debug_write("Clearing RAM");
@@ -470,8 +470,11 @@ void try_boot_cd() {
 
 void main() {
 	// Undo all possible fuckeries during exploiting
-	bios_reinitialize();
-
+    #if defined FREEPSXBOOT	
+    	bios_reinitialize_fpsxboot();
+    #else
+    	bios_reinitialize();
+    #endif
 	// Mute the audio
 	audio_halt();
 
@@ -497,89 +500,76 @@ void main() {
 
 	sscmd = 0x20; cd_command(CD_CMD_TEST,(unsigned char *)&sscmd,1); cd_wait_int(); 
 	cd_read_reply(cdcontrollerver);	// Test Command $19,$20 gets the CDROM BIOS
-
-   	if(cdcontrollerver[1]==0x09 && cdcontrollerver[2]==0x19 && cdcontrollerver[0]==0x94 && cdcontrollerver[3]==0xC0) 
-    {
+   	if(cdcontrollerver[1]==0x09 && cdcontrollerver[2]==0x19 && cdcontrollerver[0]==0x94 && cdcontrollerver[3]==0xC0) {
         #if !defined STEALTH
             debug_write("CDROM Controller BIOS Version: September 19th 1994 VC0 A");
         #endif        
         bugged_setsession = 1;
         enable_unlock = 0;
     } 
-    else if(cdcontrollerver[1]==0x11 && cdcontrollerver[2]==0x18 && cdcontrollerver[0]==0x94 && cdcontrollerver[3]==0xC0)
-    {
+    else if(cdcontrollerver[1]==0x11 && cdcontrollerver[2]==0x18 && cdcontrollerver[0]==0x94 && cdcontrollerver[3]==0xC0) {
         #if !defined STEALTH
             debug_write("CDROM Controller BIOS Version: November 18th 1994 VC0 B");
         #endif        
         bugged_setsession = 1;
         enable_unlock = 0;
     }
-    else if(cdcontrollerver[1]==0x05 && cdcontrollerver[2]==0x16 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xC1)
-    {
+    else if(cdcontrollerver[1]==0x05 && cdcontrollerver[2]==0x16 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xC1) {
         #if !defined STEALTH
             debug_write("CDROM Controller BIOS Version: May 16th 1995 VC1 A");
         #endif        
-        bugged_setsession = 1;
+        bugged_setsession = 1; // NOTE I don't think this will ever be triggered but just in case. Earliest SCPH-3000s and late SCPH-1000s are VC0B and later SCPH-3000s are VC1B. Only unlockable systems have VC1A it seems.
     }
     #if !defined STEALTH                   
-        else if(cdcontrollerver[1]==0x07 && cdcontrollerver[2]==0x24 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xC1)
-        {
+        else if(cdcontrollerver[1]==0x07 && cdcontrollerver[2]==0x24 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xC1) {
             debug_write("CDROM Controller BIOS Version: July 24th 1995 VC1 B");    
         } 
-        else if(cdcontrollerver[1]==0x07 && cdcontrollerver[2]==0x24 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xD1)
-        {        
+        else if(cdcontrollerver[1]==0x07 && cdcontrollerver[2]==0x24 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xD1) {        
             debug_write("CDROM Controller BIOS Version: July 24th 1995 VD1 DEBUG");
         }
-        else if(cdcontrollerver[1]==0x08 && cdcontrollerver[2]==0x15 && cdcontrollerver[0]==0x96 && cdcontrollerver[3]==0xC2)
-        {
+        else if(cdcontrollerver[1]==0x08 && cdcontrollerver[2]==0x15 && cdcontrollerver[0]==0x96 && cdcontrollerver[3]==0xC2) {
             debug_write("CDROM Controller BIOS Version: August 15th 1996 VC2 VCD");
         } 
-        else if(cdcontrollerver[1]==0x08 && cdcontrollerver[2]==0x18 && cdcontrollerver[0]==0x96 && cdcontrollerver[3]==0xC1)
-        {        
+        else if(cdcontrollerver[1]==0x08 && cdcontrollerver[2]==0x18 && cdcontrollerver[0]==0x96 && cdcontrollerver[3]==0xC1) {        
             debug_write("CDROM Controller BIOS Version: August 18th 1996 VC1 YAROZE");
         } 
     #endif
-    else if(cdcontrollerver[1]==0x09 && cdcontrollerver[2]==0x12 && cdcontrollerver[0]==0x96 && cdcontrollerver[3]==0xC2)
-    {
+    else if(cdcontrollerver[1]==0x09 && cdcontrollerver[2]==0x12 && cdcontrollerver[0]==0x96 && cdcontrollerver[3]==0xC2) {
         #if !defined STEALTH                
             debug_write("CDROM Controller BIOS Version: September 12th 1996 VC2 A JAPANESE");
         #endif    
-        enable_unlock = 0;
+        calibrate_laser = 1;
     }
     #if !defined STEALTH                 
-        else if(cdcontrollerver[1]==0x01 && cdcontrollerver[2]==0x10 && cdcontrollerver[0]==0x97 && cdcontrollerver[3]==0xC2)
-        {
+        else if(cdcontrollerver[1]==0x01 && cdcontrollerver[2]==0x10 && cdcontrollerver[0]==0x97 && cdcontrollerver[3]==0xC2) {
             debug_write("CDROM Controller BIOS Version: January 10th 1997 VC2 A");
+            calibrate_laser = 1;
         } 
-        else if(cdcontrollerver[1]==0x08 && cdcontrollerver[2]==0x14 && cdcontrollerver[0]==0x97 && cdcontrollerver[3]==0xC2)
-        {
+        else if(cdcontrollerver[1]==0x08 && cdcontrollerver[2]==0x14 && cdcontrollerver[0]==0x97 && cdcontrollerver[3]==0xC2) {
             debug_write("CDROM Controller BIOS Version: August 14th 1997 VC2 B");
+	        calibrate_laser = 1;
         }
     #endif 
-    else if(cdcontrollerver[1]==0x06 && cdcontrollerver[2]==0x10 && cdcontrollerver[0]==0x98 && cdcontrollerver[3]==0xC3)
-    {
+    else if(cdcontrollerver[1]==0x06 && cdcontrollerver[2]==0x10 && cdcontrollerver[0]==0x98 && cdcontrollerver[3]==0xC3) {
         #if !defined STEALTH        
             debug_write("CDROM Controller BIOS Version: June 10th 1998 VC3 A");
         #endif        
         calibrate_laser = 1;        
     } 
-    else if(cdcontrollerver[1]==0x02 && cdcontrollerver[2]==0x01 && cdcontrollerver[0]==0x99 && cdcontrollerver[3]==0xC3)
-    {
+    else if(cdcontrollerver[1]==0x02 && cdcontrollerver[2]==0x01 && cdcontrollerver[0]==0x99 && cdcontrollerver[3]==0xC3) {
         #if !defined STEALTH
-            debug_write("CDROM Controller BIOS Version: Febuary 1st 1999 VC3 B");
+            debug_write("CDROM Controller BIOS Version: February 1st 1999 VC3 B");
         #endif        
         calibrate_laser = 1;        
     } 
-    else if(cdcontrollerver[1]==0x06 && cdcontrollerver[2]==0x06 && cdcontrollerver[0]==0xA1 && cdcontrollerver[3]==0xC3)
-    {             
+    else if(cdcontrollerver[1]==0x06 && cdcontrollerver[2]==0x06 && cdcontrollerver[0]==0xA1 && cdcontrollerver[3]==0xC3) {             
         #if !defined STEALTH     
             debug_write("CDROM Controller BIOS Version: June 6th 2001 VC3 C");
         #endif        
         calibrate_laser = 1;        
-    } 
+    }
 
-	if(enable_unlock)
-    {
+	if(enable_unlock) {
 		uint8_t cd_reply[16];
 		// Run "GetRegion" test
 		uint8_t test = CD_TEST_REGION;
@@ -620,15 +610,13 @@ void main() {
 			return;
 		}
 
-		if(enable_unlock) {
-			#if defined TOCPERFECT // Get TOC via reset + unlock instead of unlock + opening/closing the drive lid for auto loading in TOCPerfect
+		if(enable_unlock) { // Check again, this could be false now
+			#if defined TOCPERFECT // Get TOC via reset + unlock instead of unlock + opening/closing the drive lid for auto loading in TOCPerfect, thanks MottZilla!
 				#if !defined STEALTH
 					debug_write("Resetting drive");
 				#endif
-				
 				cd_drive_reset();
 			#endif
-
 				#if !defined STEALTH
 					debug_write("Unlocking drive");
 				#endif
@@ -639,11 +627,16 @@ void main() {
 
 	while (1) {
 		try_boot_cd();
+
 		#if !defined STEALTH
 		    debug_write("Reinitializing kernel");
-        #endif		
-        bios_reinitialize();
-		bios_inject_disc_error();
+        #endif
+    	#if defined FREEPSXBOOT
+    		bios_reinitialize_fpsxboot();
+    	#else
+    		bios_reinitialize();
+    	#endif		
+    	bios_inject_disc_error();
 	}
 }
 

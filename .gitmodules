@@ -1,6 +1,3 @@
-[submodule "freepsxboot/FreePSXBoot"]
-	path = freepsxboot/FreePSXBoot
-	url = https://github.com/brad-lin/FreePSXBoot
 [submodule "crosstool-ng"]
 	path = crosstool-ng
 	url = https://github.com/crosstool-ng/crosstool-ng
@@ -13,3 +10,6 @@
 [submodule "psexe2rom"]
 	path = psexe2rom
 	url = https://github.com/alex-free/psexe2rom/
+[submodule "freepsxboot/FreePSXBoot"]
+	path = freepsxboot/FreePSXBoot
+	url = https://github.com/alex-free/FreePSXBoot

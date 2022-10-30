@@ -79,7 +79,7 @@ castrolsb-eu.mcs: castrolsb-eu-tpl.mcs entry.bin
 # Castrol Honda VTR NTSC-J target (MottZilla - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867)
 	cp castrolvtr-jp-tpl.mcs castrolvtr-jp.mcs
 	dd conv=notrunc if=entry.bin of=castrolvtr-jp.mcs bs=1 seek=824	
-	successcu/successcu -c castrolvtr-jp.mcs
+	../util/successcu -c ./castrolvtr-jp.mcs
 
 # Castrol Honda VTR PAL-EU target
 castrolvtr-eu.mcs: castrolvtr-eu-tpl.mcs entry.bin
@@ -165,56 +165,56 @@ superbike2-eu.mcs: superbike2-eu-tpl.mcs entry.bin
 # Tekken 2 NTSC-J target (rev 1 only) (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714) ( krystalgamer - https://github.com/socram8888/tonyhax/pull/20)
 tekken2-jp.mcs: tekken2-jp-tpl.mcs entry-bb.bin
 	cp tekken2-jp-tpl.mcs tekken2-jp.mcs
-	python3 ./tekken_decoder.py tekken2-jp.mcs tekken2-jp-decoded.bin
+	python3 ../util/tekken_decoder.py tekken2-jp.mcs tekken2-jp-decoded.bin
 	dd conv=notrunc if=entry-bb.bin of=tekken2-jp-decoded.bin bs=1 seek=44
-	python3 ./tekken_encoder.py tekken2-jp.mcs tekken2-jp-decoded.bin tekken2-jp.mcs
+	python3 ../util/tekken_encoder.py tekken2-jp.mcs tekken2-jp-decoded.bin tekken2-jp.mcs
 	rm tekken2-jp-decoded.bin
 
 # Tekken 2 NTSC-U target (rev 0 only) (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714) ( krystalgamer - https://github.com/socram8888/tonyhax/pull/20)
 tekken2-us.mcs: tekken2-us-tpl.mcs entry-bb.bin
 	cp tekken2-us-tpl.mcs tekken2-us.mcs
-	python3 ./tekken_decoder.py tekken2-us.mcs tekken2-us-decoded.bin
+	python3 ../util/tekken_decoder.py tekken2-us.mcs tekken2-us-decoded.bin
 	dd conv=notrunc if=entry-bb.bin of=tekken2-us-decoded.bin bs=1 seek=44
-	python3 ./tekken_encoder.py tekken2-us.mcs tekken2-us-decoded.bin tekken2-us.mcs
+	python3 ../util/tekken_encoder.py tekken2-us.mcs tekken2-us-decoded.bin tekken2-us.mcs
 	rm tekken2-us-decoded.bin
 
 # Tekken 2 PAL target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714) ( krystalgamer - https://github.com/socram8888/tonyhax/pull/20)
 tekken2-eu.mcs: tekken2-eu-tpl.mcs entry-bb.bin
 	cp tekken2-eu-tpl.mcs tekken2-eu.mcs
-	python3 ./tekken_decoder.py tekken2-eu.mcs tekken2-eu-decoded.bin
+	python3 ../util/tekken_decoder.py tekken2-eu.mcs tekken2-eu-decoded.bin
 	dd conv=notrunc if=entry-bb.bin of=tekken2-eu-decoded.bin bs=1 seek=44
-	python3 ./tekken_encoder.py tekken2-eu.mcs tekken2-eu-decoded.bin tekken2-eu.mcs
+	python3 ../util/tekken_encoder.py tekken2-eu.mcs tekken2-eu-decoded.bin tekken2-eu.mcs
 	rm tekken2-eu-decoded.bin
 
 #Tekken 3 NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714) ( krystalgamer - https://github.com/socram8888/tonyhax/pull/20)
 tekken3-jp.mcs: tekken3-jp-tpl.mcs entry-bb.bin
 	cp tekken3-jp-tpl.mcs tekken3-jp.mcs
-	python3 ./tekken_decoder.py tekken3-jp.mcs tekken3-jp-decoded.bin
+	python3 ../util/tekken_decoder.py tekken3-jp.mcs tekken3-jp-decoded.bin
 	dd conv=notrunc if=entry-bb.bin of=tekken3-jp-decoded.bin bs=1 seek=72
-	python3 ./tekken_encoder.py tekken3-jp.mcs tekken3-jp-decoded.bin tekken3-jp.mcs
+	python3 ../util/tekken_encoder.py tekken3-jp.mcs tekken3-jp-decoded.bin tekken3-jp.mcs
 	rm tekken3-jp-decoded.bin
 
 #Tekken 3 NTSC-U target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714) ( krystalgamer - https://github.com/socram8888/tonyhax/pull/20)
 tekken3-us.mcs: tekken3-us-tpl.mcs entry-bb.bin
 	cp tekken3-us-tpl.mcs tekken3-us.mcs
-	python3 ./tekken_decoder.py tekken3-us.mcs tekken3-us-decoded.bin
+	python3 ../util/tekken_decoder.py tekken3-us.mcs tekken3-us-decoded.bin
 	dd conv=notrunc if=entry-bb.bin of=tekken3-us-decoded.bin bs=1 seek=72
-	python3 ./tekken_encoder.py tekken3-us.mcs tekken3-us-decoded.bin tekken3-us.mcs
+	python3 ../util/tekken_encoder.py tekken3-us.mcs tekken3-us-decoded.bin tekken3-us.mcs
 	rm tekken3-us-decoded.bin
 
 #Tekken 3 PAL target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714) ( krystalgamer - https://github.com/socram8888/tonyhax/pull/20)
 tekken3-eu.mcs: tekken3-eu-tpl.mcs entry-bb.bin
 	cp tekken3-eu-tpl.mcs tekken3-eu.mcs
-	python3 ./tekken_decoder.py tekken3-eu.mcs tekken3-eu-decoded.bin
+	python3 ../util/tekken_decoder.py tekken3-eu.mcs tekken3-eu-decoded.bin
 	dd conv=notrunc if=entry-bb.bin of=tekken3-eu-decoded.bin bs=1 seek=72
-	python3 ./tekken_encoder.py tekken3-eu.mcs tekken3-eu-decoded.bin tekken3-eu.mcs
+	python3 ../util/tekken_encoder.py tekken3-eu.mcs tekken3-eu-decoded.bin tekken3-eu.mcs
 	rm tekken3-eu-decoded.bin
 
 # THPS2 NTSC-J target (MottZilla - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867)
 thps2-jp.mcs: thps2-jp-tpl.mcs entry.bin
 	cp thps2-jp-tpl.mcs thps2-jp.mcs
 	dd conv=notrunc if=entry.bin of=thps2-jp.mcs bs=1 seek=5336
-	successcu/successcu -t thps2-jp.mcs
+	../util/successcu -t ./thps2-jp.mcs
 
 # THPS2 NTSC-US target
 thps2-us.mcs: thps2-us-tpl.mcs entry.bin

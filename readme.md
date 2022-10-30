@@ -1,74 +1,67 @@
-tonyhax international 
+# [alex-free.github.io](https://alex-free.github.io)
 
-[alex-free.github.io](https://alex-free.github.io)
-==================================================
-
-Tonyhax International: The Ultimate Backup/Import Disc Loader SoftMod Solution For The Original PlayStation & Early Models Of PlayStation 2
-===========================================================================================================================================
+# Tonyhax International: The Ultimate Backup/Import Disc Loader SoftMod Solution For The Original PlayStation & Early Models Of PlayStation 2
 
 Brought to you by [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867), [Alex Free](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6018), and [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714). Built on the work of many [others](#credits).
 
-Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Software backup loader exploit thing for the Sony PlayStation 1" originally created by [Socram8888](https://github.com/socram8888). Tonyhax International is developed by Alex Free and MottZilla with many new features and upgrades compared to the original Tonyhax:
+Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Software backup loader exploit thing for the Sony PlayStation 1" originally created by [Socram8888](https://github.com/socram8888). Tonyhax International is developed by Alex Free and MottZilla with many new features and upgrades compared to the original Tonyhax, some of which are listed below:
 
-*   Supports all PS1 Consoles (Japanese, American, European, SCPH-1000-SCPH-102) **and** Early PS2 Consoles (Japanese, American, European, SCPH-10000-SCPH-39004).
-*   More [save game exploits](#savegame) are available.
-*   You can [flash](#rom) the Tonyhax International backup/import loader to a GameShark/Action Reply/cheat cartridge. Whenever the flashed cartridge is plugged into the back of a SCPH-1000-SCPH-7502 PS1 console when you power it on the Tonyhax International will boot instead of the shell program/BIOS (Sony screens/CD Player/Memory Card Manager).
-*   Uses the newer[FreePSXBoot](https://github.com/bradl-in/FreePSXBoot) exploit/patching methods to disable FreePSXBoot memory cards that boot Tonyhax International after the FreePSXBoot exploit starts the loader from the memory card on all BIOS versions.
-*   Completely automated testing/building/development suite of scripts in the source that supports building Tonyhax International on virtually any \*nix like OS.
+* Supports all PS1 Consoles (Japanese, American, European, SCPH-1000-SCPH-102) **and** Early PS2 Consoles (Japanese, American, European, SCPH-10000-SCPH-39004).
 
-Table of Contents
------------------
+* Supports more [save game exploits](#save-game-exploit), enabling the use of even more PSX game discs to start the Tonyhax International loader.
 
-*   [Downloads](#downloads)
-*   [Usage](#usage)
+* Supports [flashing](#romrom-flasher-cd) the Tonyhax International backup/import loader to a GameShark/Action Reply/cheat cartridge. Whenever the flashed cartridge is plugged into the back of a SCPH-1000-SCPH-7502 PS1 console when you power it on the Tonyhax International will boot instead of the shell program/BIOS (Sony screens/CD Player/Memory Card Manager).
 
-_Japanese PS1 Consoles_
+* Uses the newer [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) exploit/patching methods to disable FreePSXBoot memory cards that boot Tonyhax International after the FreePSXBoot exploit starts the loader from the memory card on all BIOS versions.
 
-*   [Japanese PS1 Console Loader Instructions](#jps1)
-*   [Playing Games That Contain Anti-Piracy Features On Japanese PS1 Consoles](#apjps1)
-*   [Playing Games That Span Multiple Discs On Japanese PS1 Consoles](#mdjps1)
+* Supports more [games with additonal copy protection routines](#playing-games-with-additonal-copy-protection-routines) using a new anti-piracy bypass system.
 
-_Japanese PS2 Consoles_
+* Completely automated testing/building/development suite of scripts in the source that supports building Tonyhax International on virtually any \*nix like OS.
 
-*   [Japanese PS2 Console Loader Instructions](#jps2)
-*   [Using the Swap Magic Tool](#swapmagictool)
-*   [Playing Games That Contain Anti-Piracy Features On Japanese PS2 Consoles](#apjps2)
-*   [Playing Games That Span Multiple Discs On Japanese PS2 Consoles](#mdjps2)
-*   [Playing European/PAL Games On Japanese PS2 Consoles](#paljps2)
+### Usage
 
-_American/European PS1/PS2 Consoles_
+_Japanese PS1 Consoles (SCPH-1000-SCPH-100)_
 
-*   [American/European PS1/PS2 Console Loader Instructions](#uu)
-*   [Playing Games That Contain Anti-Piracy Features On American/European PS1/PS2 Consoles](#apu)
-*   [Playing Games That Span Multiple Discs On American/European PS1/PS2 Consoles](#apu)
-*   [Playing PAL Games On American PS2 Consoles](#palups2)
-*   [Playing Japanese/American Games On PAL PS2 Consoles](#ntscpalps2)
+*   [Japanese PS1 Console Loader Instructions](#japanese-ps1-console-loader-instructions)
+*   [Playing Games That Span Multiple Discs On Japanese PS1 Consoles](#playing-games-that-span-multiple-discs-on-japanese-ps1-consoles)
+
+_Japanese PS2 Consoles (SCPH-10000-SCPH-39000)_
+
+*   [Japanese PS2 Console Loader Instructions](#japanese-ps2-console-loader-instructions)
+*   [Using the Swap Magic Tool](#using-the-swap-magic-tool)
+*   [Playing Games That Span Multiple Discs On Japanese PS2 Consoles](#playing-games-that-span-multiple-discs-on-japanese-ps2-consoles)
+*   [Playing PAL Region Games On Japanese PS2 Consoles](#playing-pal-region-games-on-japanese-ps2-consoles)
+
+_American/European PS1/PS2 Consoles (SCPH-1001-SCPH-39004)_
+
+*   [American/European PS1/PS2 Console Loader Instructions](#americaneuropean-ps1ps2-console-loader-instructions)
+*   [Playing Games That Span Multiple Discs On American/European PS1/PS2 Consoles](#playing-games-that-span-multiple-discs-on-americaneuropean-ps1ps2-consoles)
+*   [Playing PAL Games On American PS2 Consoles](#playing-pal-games-on-american-ps2-consoles)
+*   [Playing Japanese/American Games On PAL PS2 Consoles](#playing-japaneseamerican-games-on-pal-ps2-consoles)
 
 _Boot Methods_
 
-*   [ROM/ROM Flasher CD](#rom)
-*   [FreePSXBoot Exploit Memory Card Images](#freepsxboot)
-*   [Boot CD](#bootcd)
-*   [Save Game Exploit](#savegame)
-
-_Burning CD-R Backups_
-
-*   [CD-R Media For PS1 Backups](#cdr)
-*   [Burning Programs For PS1 Backups](#burning)
+*   [ROM/ROM Flasher CD](#romrom-flasher-cd)
+*   [FreePSXBoot Exploit Memory Card Images](#freepsxboot-exploit-memory-card-images)
+*   [Boot CD](#boot-cd)
+*   [Save Game Exploit](#save-game-exploit)
 
 _More Info_
 
-*   [Building From Source](#building)
+*	[Playing Games With Additional Copy Protection Routines](#playing-games-with-additonal-copy-protection-routines)
+*   [CD-R Media For PS1 Backups](#cd-r-media-for-ps1-backups)
+*   [Burning Programs For PS1 Backups](#burning-programs-for-ps1-backups)
+*	[Disc Read Errors And PS1 CD Drive Repair](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/)
+*   [Building From Source](#building-from-source)
 *   [Credits](#credits)
 
-Links
------
+## External Links
 
 *   [Tonyhax International Homepage](https://alex-free.github.io/tonyhax-international)
 *   [Tonyhax International GitHub](https://github.com/alex-free/tonyhax)
 *   [PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/)
 *   [PSX-Place Tonyhax International Resource](https://www.psx-place.com/resources/tonyhax-international.1281/)
-[](https://www.psx-place.com/resources/tonyhax-international.1281/)*   [](https://www.psx-place.com/resources/tonyhax-international.1281/)[PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967)
+*   [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967)
 *   [GBATemp Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/#post-9922514)
 *   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap)
 *   [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom)
@@ -76,8 +69,18 @@ Links
 *   [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax)
 *   [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)
 
-Downloads
----------
+## Downloads
+
+### Version 1.1.1 (10/29/2022)
+
+*   [tonyhax-v1.1.1-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.1i/tonyhax-v1.1.1-international.zip)
+*   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.1.1i.zip)
+
+Changes:
+
+*	A completely new system to bypass [additional anti-piracy copy protection routines](#playing-games-with-additonal-copy-protection-routines) found in some later PSX games **which works on all consoles, including Japanese ones** has replaced the old Socram8888 bios patch. This improves Tonyhax International by giving it the ability to play many more games then ever before, and makes support just as good on the Japanese consoles. Huge thanks to MottZilla for the method to implement gameshark codes in Tonyhax International, which provides this functionallity.
+*	Optimized Tonyhax International's loader for size and speed. Cleaned up source tree.
+*	Rewrote documentation in markdown.
 
 ### Version 1.1.0 (9/25/2022)
 
@@ -87,7 +90,7 @@ Downloads
 Changes:
 
 *   Updated to FreePSXBoot v2.1 (my own [fork](https://github.com/alex-free/FreePSXBoot) for now so that it compiles on [Fedora](https://github.com/brad-lin/FreePSXBoot/pull/97)). This means among other things that those 'fake' 64KB chinese PS1 memory cards now work with the FreePSXBoot images.
-*   **Tonyhax International [FreePSXBoot](#freepsxboot) memory cards no longer need to be removed after booting the loader if they are in slot 2 of the console.** I have completely removed Socram8888's old FreePSXBoot patch. The new 'memory card timeout to disable' patch from the FreePSXBoot builder is now used instead of the 'pretend memory card is corrupted' patch from the original Tonyhax. The new patch works with all games, some games did not like the old patch method used. **The new patch also works correctly on every single PS1 BIOS version, including BIOS v1.0, v1.1, and v2.0.** The old patch never worked on BIOS v1.0, 1.1, or 2.0.
+*   **Tonyhax International [FreePSXBoot](#freepsxboot-exploit-memory-card-images) memory cards no longer need to be removed after booting the loader if they are in slot 2 of the console.** I have completely removed Socram8888's old FreePSXBoot patch. The new 'memory card timeout to disable' patch from the FreePSXBoot builder is now used instead of the 'pretend memory card is corrupted' patch from the original Tonyhax. The new patch works with all games, some games did not like the old patch method used. **The new patch also works correctly on every single PS1 BIOS version, including BIOS v1.0, v1.1, and v2.0.** The old patch never worked on BIOS v1.0, 1.1, or 2.0.
 *   Added tonyhax\_scph-3000\_v1.1\_slot2.mcr, tonyhax\_scph-3000\_v1.1\_slot1.mcr, tonyhax\_scph-3000\_v2.1\_slot2.mcr, and tonyhax\_scph-3000\_v2.1\_slot1.mcr FreePSXBoot memory card files (as there are actually 2 different BIOS versions found in SCPH-3000 consoles).
 *   All FreePSXBoot images are now created with the `-fastload` option on to improve how fast Tonyhax International starts with the FreePSXBoot exploit. The `-fastload` option also provides that cool loading screen you can see in [Unirom](https://unirom.github.io).
 *   Japanese PlayStations with **VC2 and VC3** CDROM drive controllers are now re-calibrated to improve CD tracking and read performance for these CDROM controllers. VC1 and VC0 do not have equivalent commands, hardware, or even a need for this really since Bias and Gain can only be set manually.
@@ -118,9 +121,9 @@ Changes:
 
 *   The Tonyhax International loader memory card save file **is now named `HAX` instead of `BESLEM-99999TONYHAX` to allow for more exploitable games**. You will need to update both the save game exploit file for your game as well as the Tonyhax International loader file to use v1.0.7 if you are using a previou version of the save game exploit file for your game that is already on a memory card.
 *   Removed the SetSessionSuperUltraCommandSmash and replaced it with [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867)'s new method of re-reading TOC data for VC0 A, VC0 B, and VC1 A CDROM Controller BIOS firmwares. **This change reduces the time it takes to re-read the TOC data on the backup CD-R or import PS1 disc from 2-10 minutes on the SCPH-1000, SCPH-3000, and some SCPH-3500 japanese consoles to around 30 seconds with 100% reliability!**
-*   Added [save game exploit](#savegame) support for Tekken 3 Japan/USA/PAL thanks to Patchouli ([karehaani](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=671)) and [krystalgamer](https://github.com/socram8888/tonyhax/pull/20).
-*   Added [save game exploit](#savegame) support for Tekken 2 Japan (rev 1 only), USA (rev 0 only), and PAL thanks to Patchouli ([karehaani](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=671)) and [krystalgamer](https://github.com/socram8888/tonyhax/pull/20).
-*   Added [save game exploit](#savegame) support for Downhill Snow Japan thanks to Patchouli ([karehaani](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=671)).
+*   Added [save game exploit](#save-game-exploit) support for Tekken 3 Japan/USA/PAL thanks to Patchouli ([karehaani](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=671)) and [krystalgamer](https://github.com/socram8888/tonyhax/pull/20).
+*   Added [save game exploit](#save-game-exploit) support for Tekken 2 Japan (rev 1 only), USA (rev 0 only), and PAL thanks to Patchouli ([karehaani](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=671)) and [krystalgamer](https://github.com/socram8888/tonyhax/pull/20).
+*   Added [save game exploit](#save-game-exploit) support for Downhill Snow Japan thanks to Patchouli ([karehaani](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=671)).
 
 ### Version 1.0.6 (8/3/2022)
 
@@ -129,8 +132,8 @@ Changes:
 
 Changes:
 
-*   Added [save game exploit](#savegame) support for Castlevania Chronicle NTSC-J (only the first release, rev 1 is not working right now) (Alex Free) and 1500 Lite Series Castrol Honda Super Bike Racing NTSC-J (Alex Free).
-*   Added [save game exploit](#savegame) support for Tony Hawk Pro Skater 2 NTSC-J (MottZilla) and 1500 Lite Series Castrol Honda VTR (MottZilla).
+*   Added [save game exploit](#save-game-exploit) support for Castlevania Chronicle NTSC-J (only the first release, rev 1 is not working right now) (Alex Free) and 1500 Lite Series Castrol Honda Super Bike Racing NTSC-J (Alex Free).
+*   Added [save game exploit](#save-game-exploit) support for Tony Hawk Pro Skater 2 NTSC-J (MottZilla) and 1500 Lite Series Castrol Honda VTR (MottZilla).
 
 ### Version 1.0.5 (7/27/2022)
 
@@ -139,29 +142,27 @@ Changes:
 
 Changes:
 
-*   Added [save game exploit](#savegame) support for Doki Oki (NTSC-J), Crash Bandicoot 3 (NTSC-J), and The Legend Of Heroes I&II (NTSC-J). All these save game exploits were found by [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714).
+*   Added [save game exploit](#save-game-exploit) support for Doki Oki (NTSC-J), Crash Bandicoot 3 (NTSC-J), and The Legend Of Heroes I&II (NTSC-J). All these save game exploits were found by [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714).
 
 ### Version 1.0.4 (7/23/2022)
 
 *   [tonyhax-v1.0.4-international](https://github.com/alex-free/tonyhax/releases/download/v1.0.4i/tonyhax-v1.0.4-international.zip)
 *   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.4i.zip)
 
-Usage
------
+## Usage
 
-The Tonyhax International loader is the program that is booted on any PS1 or an early PS2 that enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted on your PS1 with a [GameShark/cheat cart](#rom), [flashed memory card](#freepsxboot), [save game exploit](#savegame), or [CD-R](#bootcd). It provides the ability to properly play backup and import discs on all PS1 consoles, and early PS2 consoles (Japanese, USA, and PAL models SCPH-10000-SCPH-39004).
+The Tonyhax International loader is the program that is booted on any PS1 or an early PS2 that enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted on your PS1 with a [GameShark/cheat cart](#romrom-flasher-cd), [flashed memory card](#freepsxboot-exploit-memory-card-images), [save game exploit](#save-game-exploit), or [CD-R](#boot-cd). It provides the ability to properly play backup and import discs on all PS1 consoles, and early PS2 consoles (Japanese, USA, and PAL models SCPH-10000-SCPH-39004).
 
 If you are using **any Japanese console**, at least one real Japanese NTSC-J PS1 game disc is required (any officially licensed Japanese PS1 disc will do). If you are using a **Japanese PS2 console (SCPH-10000-SCPH-3900-)** a Swap Magic Tool is also required. Neither of these are needed if you are using an American or European PS1/PS2 console.
 
-Japanese PS1 Console Loader Instructions
-----------------------------------------
+### Japanese PS1 Console Loader Instructions
 
 Boot into the Tonyhax International loader using one of the boot methods below:
 
-*   [ROM/ROM Flasher CD](#rom)
-*   [FreePSXBoot Memory Card Images](#freepsxboot)
-*   [Boot CD](#bootcd)
-*   [Save Game Exploit](#savegame)
+*   [ROM/ROM Flasher CD](#romrom-flasher-cd)
+*   [FreePSXBoot Memory Card Images](#freepsxboot-exploit-memory-card-images)
+*   [Boot CD](#boot-cd)
+*   [Save Game Exploit](#save-game-exploit)
 
 If you see the text `Put in a real NTSC-J PSX game disc, then block the lid sensor`:
 
@@ -181,8 +182,7 @@ If you see the text `Put in a real NTSC-J PSX game disc, then block the lid sens
 
 After blocking the lid sensor, your real Japanese PS1 game will spin up and then stop. Once you see the text `Put in a backup/import disc, then press X` remove either the real NTSC-J PSX game disc or Boot CD from your PS1 console's CD drive. Put in the backup CD-R or import PSX game disc you want to play **without unblocking the lid sensor**. Once you press X, the console will run some commands automatically, followed by the game booting with perfect CD audio playback. Note that you can not unblock the lid sensor while playing the game on **Japanese consoles**, if you do so the game will stop working.
 
-Playing Games That Span Multiple Discs On Japanese PS1 Consoles
----------------------------------------------------------------
+### Playing Games That Span Multiple Discs On Japanese PS1 Consoles
 
 There are some games which span multiple discs. And some of these games (such as Parasite Eve, Fear Effect, and Crono Cross) that span multiple discs require you to open the CD drive, remove disc 1, insert disc 2, and close the CD drive at some point in the game without providing a save game option at the disc swap. If you encounter this type of game on a Japanese PS1 console you have to do the "mid-game hot-swap trick":
 
@@ -192,56 +192,12 @@ There are some games which span multiple discs. And some of these games (such as
 
 It is important to note however that most games that span multiple discs allow you to load a game save created on disc 1 while playing disc 2. This means you just need to save at the last point possible on disc 1, and then you can just boot disc 2 like normal and load your game save created earlier on disc 1. **Some games however do not allow this** as previously mentioned, so for those games you must use the **mid-game hot-swap trick** described above.
 
-Playing Games That Contain Anti-Piracy Features On Japanese PS1 Consoles
-------------------------------------------------------------------------
-
-Some of the later PS1 games included anti-piracy functionality designed to prevent playing backups or imported versions (i.e. NTSC-U/PAL region) of the game on a Japanese console. These anti-piracy measures have mod-chips and swap tricks in mind. **As long as you do not have a non-stealth modchip in an early SCPH-3000 or SCPH-1000 console** you can play any game containing anti-piracy detection with Tonyhax International if they do not also contain the libcrypt protection, found in some PAL region games. It is only possible to play these games if you use a patched backup copy which has this libcrypt protection removed.
-
-You can find patches to remove anti-piracy and or libcrypt protection from games on websites such as [ConsoleCopyWorld](https://consolecopyworld.com/psx/psx_protected_games.shtml). For example here is a patch for [PoPoRogue](https://consolecopyworld.com/psx/psx_poporogue.shtml), found by browsing through the [Protected Games](https://consolecopyworld.com/psx/psx_protected_games.shtml) page on CopyConsoleWorld.
-
-Japanese Console Model
-
-Plays Real Import NTSC-U/PAL PS1 Discs Containing Anti-Piracy?
-
-Plays Backup CD-R NTSC-J/NTSC-U/PAL Discs Containing Anti-Piracy?
-
-Plays Backup CD-R NTSC-J/NTSC-U/PAL Discs With Anti-Piracy Patched Out?
-
-Plays Backup CD-R NTSC-J/NTSC-U/PAL Discs Containing Anti-Piracy+Libcrypt?
-
-Plays Backup CD-R NTSC-J/NTSC-U/PAL Discs With Anti-Piracy+Libcrypt Patched Out?
-
-SCPH-1000 - Early SCPH-3000
-
-YES, (unless you have a non-stealth modchip)
-
-YES, (unless you have a non-stealth modchip)
-
-YES
-
-NO, hardware does not support it
-
-YES
-
-Late SCPH-3000 - SCPH-100
-
-NO, support has not been added yet
-
-NO, supported has not been added yet
-
-YES
-
-NO, support has not been added yet
-
-YES
-
-Japanese PS2 Console Loader Instructions (SCPH-10000-SCPH-39000)
-----------------------------------------------------------------
+### Japanese PS2 Console Loader Instructions
 
 Available Boot Methods:
 
-*   [Boot CD](#bootcd) (I don't know of anyway to boot this on an unmodified Japanese PS2 but it is available).
-*   [Save game exploit](#savegame)
+*   [Boot CD](#boot-cd) (I don't know of anyway to boot this on an unmodified Japanese PS2 but it is available).
+*   [Save game exploit](#save-game-exploit)
 
 Japanese PS2 consoles **must have the DVD drive tray front panel removed to use Tonyhax International**. For the SCPH-10000, you can follow the method below (some newer consoles may slightly differ in the way to remove the DVD drive's front panel).
 
@@ -259,12 +215,11 @@ With the DVD drive face plate off, flip over the Japanese PS2 console right side
 
 ![ps2 drive cover removed](images/ps2-drive-cover-removed.jpg)
 
-You can now use one of the supported boot methods to start the Tonyhax International loader on the Japanese PS2 console. You will most likely be using the [Save Game Exploit](#savegame), however you could be using some kind of intermediate boot disc to boot the [Boot CD](#bootcd) as well if you find one that supports Japanese PS1 consoles. Once you see the text `Put in a backup/import disc, then press X` appear, you need to use a Swap Magic Slide Tool to release the DVD drive to gain access to it without pressing the eject switch. A [video tutorial](https://www.youtube.com/watch?v=Ffv5m52zlEI) is available that shows how to use the Swap Magic Tool (in general), although the exact steps are also explained below. Once you use the Swap Magic Tool to swap in your import/backup CD-R while booted in the Tonyhax International loader, just press the cross button on your PS2 or PS1 controller to boot and play your game.
+You can now use one of the supported boot methods to start the Tonyhax International loader on the Japanese PS2 console. You will most likely be using the [Save Game Exploit](#save-game-exploit), however you could be using some kind of intermediate boot disc to boot the [Boot CD](#boot-cd) as well if you find one that supports Japanese PS1 consoles. Once you see the text `Put in a backup/import disc, then press X` appear, you need to use a Swap Magic Slide Tool to release the DVD drive to gain access to it without pressing the eject switch. A [video tutorial](https://www.youtube.com/watch?v=Ffv5m52zlEI) is available that shows how to use the Swap Magic Tool (in general), although the exact steps are also explained below. Once you use the Swap Magic Tool to swap in your import/backup CD-R while booted in the Tonyhax International loader, just press the cross button on your PS2 or PS1 controller to boot and play your game.
 
 Important note: **do not eject the PS1 import or backup CD-R from the Japanese PS2 console until your done playing the game**. Unlike American and European consoles (which do not have this limitation), if you do so your game will stop working, and you will have to start Tonyhax International all over again to boot your import/backup CD-R and start playing again.
 
-Using the Swap Magic Tool
--------------------------
+### Using the Swap Magic Tool
 
 Slide in the Swap Magic Tool like shown in the image below by the arrow. You need to feel around with the Swap Magic Tool to get the hook to latch on internally inside the DVD drive.
 
@@ -288,73 +243,46 @@ Now that the DVD drive tray is pushed all the way back in, the Swap Magic Tool c
 
 ![ps2 slide tool moved to lock drive](images/ps2-slide-tool-moved-to-lock-drive.jpg)
 
-Playing Games That Contain Anti-Piracy Features On Japanese PS2 Consoles
-------------------------------------------------------------------------
+### Playing Games That Span Multiple Discs on Japanese PS2 Consoles
 
-Some of the later PS1 games included anti-piracy functionality designed to prevent playing backups or imported versions (i.e. NTSC-U/PAL region) of the game on a Japanese console. These anti-piracy measures have mod-chips and swap tricks in mind.
+There are some games which span multiple discs. And **some of these games** (such as Parasite Eve, Fear Effect, and Crono Cross) that span multiple discs require you to open the CD drive, remove disc 1, insert disc 2, and close the CD drive at some point in the game. **Unfortunately only for Japanese PS2 consoles, you can not do this with Tonyhax International.** If you get to a point in a game that requires ejecting the drive and putting in a new game, you have to play this part of the game on a different console (Any PS1 or American/European PS2 works). It is important to note however that most games that span multiple discs allow you to load a game save created on disc 1 while playing disc 2. This means you just need to save at the last point possible on disc 1, and then you can just boot disc 2 with Tonyhax International like normal and load your game save created earlier on disc 1, bypassing this limitation for certain games that allow saving right at disc swap mid-game.
 
-There is currently no support yet for playing unmodified backup CD-Rs or imported NTSC-U/PAL region game disc that contain anti-piracy checks for Japanese PS2 consoles. You have to patch a backup copy CD image and burn that to a CD-R to play these games on Japanese PS2 consoles.
-
-You can find patches to remove anti-piracy and or libcrypt protection from games on websites such as [ConsoleCopyWorld](https://consolecopyworld.com/psx/psx_protected_games.shtml). For example here is a patch for [PoPoRogue](https://consolecopyworld.com/psx/psx_poporogue.shtml), found by browsing through the [Protected Games](https://consolecopyworld.com/psx/psx_protected_games.shtml) page on CopyConsoleWorld.
-
-Some **PAL region games contain an additional anti-piracy measure known as libcrypt**. It is only possible to play these games if you use a patched backup copy which has this libcrypt protection and the anti-piracy features removed.
-
-Playing Games That Span Multiple Discs on Japanese PS2 Consoles
----------------------------------------------------------------
-
-There are some games which span multiple discs. And **some of these games** (such as Parasite Eve, Fear Effect, and Crono Cross) that span multiple discs require you to open the CD drive, remove disc 1, insert disc 2, and close the CD drive at some point in the game. Unfortunately only for Japanese PS2 consoles, you can not do this with Tonyhax International. If you get to a point in a game that requires ejecting the drive and putting in a new game, you have to play this part of the game on a different console (Any PS1 or American/European PS2 works). It is important to note however that most games that span multiple discs allow you to load a game save created on disc 1 while playing disc 2. This means you just need to save at the last point possible on disc 1, and then you can just boot disc 2 with Tonyhax International like normal and load your game save created earlier on disc 1, bypassing this limitation for certain games that allow saving right at disc swap mid-game.
-
-Playing PAL/European Games On Japanese PS2 Consoles
----------------------------------------------------
+### Playing PAL Region Games On Japanese PS2 Consoles
 
 The early PS2 models that Tonyhax International supports have the PS1 mode which runs PS1 software hard-coded to NTSC video mode. This can cause a problem with Tonyhax International if you want to play a European/PAL PS1 backup CD-R or import disc on a Japanese PS2 in PAL video mode. Since PS1 software can not change the video mode correctly from PS1 mode running on a PS2, you have to resort to the PS1 homebrew software known as [PSVModeNeg](https://www.psx-place.com/threads/ps1vmodeneg-by-sp193.25050/). This software allows you to explicitly change the video mode to PAL. An older version of PSVModeNeg is required if you want to use it's effects with Tonyhax International, specifically [v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip). This version simply inverses the current video mode of the console, rather then reading the PS1 game disc to figure out what video mode the disc itself expects. Here are the steps below to change your Japanese PS2 console to PAL video mode for Tonyhax International:
 
 *   Download [PSVModeNeg v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip) and extract the file `PS1VModeNeg.elf`.
 *   Copy the file `PS1VModeNeg.elf` to a FAT32 formatted USB flash drive that works with your soft-modded PS2. You can soft-mod your PS2 with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208), [FreeDVDBoot](https://github.com/CTurt/FreeDVDBoot) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248) to be able to use PS1VModeNEG on your PS2 console.
 *   Using uLaunchELF or wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
-*   Put in the real Japanese PS1 game disc that you are using with a [save game exploit.](#savegame) when in PS1VModeNeg. The video mode will be forced to PAL now in the PS1 mode of your Japanese PS2.
+*   Put in the real Japanese PS1 game disc that you are using with a [save game exploit.](#save-game-exploit) when in PS1VModeNeg. The video mode will be forced to PAL now in the PS1 mode of your Japanese PS2.
 *   Playing through your Japanese PS1 game disc may look or act weird in PAL video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a PAL region import disc or PAL region backup CD-R and the PAL PS1 game will boot in PAL video mode.
 
-American/European PS1/PS2 Console Loader Instructions
------------------------------------------------------
+## American/European PS1/PS2 Console Loader Instructions
 
 Available boot methods for American and European PS2 consoles:
 
-*   [Boot CD](#bootcd) (you can use something like the code breaker pro PS1 disc to boot it first)
-*   [Save game exploit](#savegame)
+*   [Boot CD](#boot-cd) (you can use something like the code breaker pro PS1 disc to boot it first)
+*   [Save game exploit](#save-game-exploit)
 
 Available boot methods for American and European PS1 consoles:
 
-*   [ROM/ROM Flasher CD](#rom)
-*   [FreePSXBoot Memory Card Images](#freepsxboot)
-*   [Boot CD](#bootcd)
-*   [Save Game Exploit](#savegame)
+*   [ROM Flasher CD](#romrom-flasher-cd)
+*   [FreePSXBoot Memory Card Images](#freepsxboot-memory-card-images)
+*   [Boot CD](#boot-cd)
+*   [Save Game Exploit](#save-game-exploit)
 
 Once you see the text `Put in a backup/import disc` appear, eject the DVD drive (PS2) or open the CD drive (PS1).
 
-*   If you are booting the Tonyhax International [Boot CD](#bootcd), you'll want to remove the spring or whatever you have blocking down the lid sensor to "open" the CD drive and stop the disc from spinning, allowing you to remove the Boot CD from the console's CD drive (PS1) or DVD drive (PS2).
-*   If you are booting Tonyhax International via a [Save Game Exploit](#savegame), after ejecting the DVD drive (PS2) or opening the CD drive (PS1) the real PS1 game disc you used with a save game exploit will stop spinning, allowing you to remove it from the console's CD drive (PS1) or DVD drive (PS2).
+*   If you are booting the Tonyhax International [Boot CD](#boot-cd), you'll want to remove the spring or whatever you have blocking down the lid sensor to "open" the CD drive and stop the disc from spinning, allowing you to remove the Boot CD from the console's CD drive (PS1) or DVD drive (PS2).
+*   If you are booting Tonyhax International via a [Save Game Exploit](#save-game-exploit), after ejecting the DVD drive (PS2) or opening the CD drive (PS1) the real PS1 game disc you used with a save game exploit will stop spinning, allowing you to remove it from the console's CD drive (PS1) or DVD drive (PS2).
 
 All other boot methods don't have a disc usually in the drive already, so there is no disc to remove. With no disc currently in your console, you can now put in the backup CD-R or import PSX game disc you want to play. Close the CD drive (PS1) or DVD drive (PS2). The console will detect that the drive has been closed and will spin up your disc. The console will then send some commands and boot the disc.
 
-Playing Games That Contain Anti-Piracy Features On American/European PS1/PS2 Consoles
--------------------------------------------------------------------------------------
-
-Since the original Tonyhax v1.4.3 release that Tonyhax International is based on there has been support for playing unmodified backup CD-R copies and or import discs of games that contain anti-piracy functionallity through the Tonyhax loader. Tonyhax International will boot these discs fine.
-
-Some **PAL region games contain an additional anti-piracy measure known as libcrypt**. It is only possible to play these games with Tonyhax International if:
-
-*   You burn a patched backup copy which has this libcrypt protection removed to a CD-R.
-*   You use the original PAL region PS1 disc.
-*   You burn a backup CD-R in a [special way](https://github.com/Kippykip/SBITools) to keep the libcrypt protection working.
-
-Playing Games That Span Multiple Discs On American/European PS1/PS2 Consoles
-----------------------------------------------------------------------------
+## Playing Games That Span Multiple Discs On American/European PS1/PS2 Consoles
 
 All American and European consoles do not have the same limitations as the Japanese consoles and can play games that span multiple discs like normal.
 
-Playing PAL Games On American PS2 Consoles
-------------------------------------------
+## Playing PAL Games On American PS2 Consoles
 
 The early PS2 models that Tonyhax International supports have the PS1 mode which runs PS1 software hard-coded to NTSC video mode. This can cause a problem with Tonyhax International if you want to play a European/PAL PS1 backup CD-R or import disc on a American PS2 in PAL video mode. Since PS1 software can not change the video mode correctly from PS1 mode running on a PS2, you have to resort to the PS1 homebrew software known as [PSVModeNeg](https://www.psx-place.com/threads/ps1vmodeneg-by-sp193.25050/). This software allows you to explicitly change the video mode to PAL. An older version of PSVModeNeg is required if you want to use it's effects with Tonyhax International, specifically [v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip). This version simply inverses the current video mode of the console, rather then reading the PS1 game disc to figure out what video mode the disc itself expects. Here are the steps below to change your American PS2 console to PAL video mode for Tonyhax International:
 
@@ -362,22 +290,20 @@ The early PS2 models that Tonyhax International supports have the PS1 mode which
 *   Copy the file `PS1VModeNeg.elf` to a FAT32 formatted USB flash drive that works with your soft-modded PS2. You can soft-mod your PS2 with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208), [FreeDVDBoot](https://github.com/CTurt/FreeDVDBoot) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248) to be able to use PS1VModeNEG on your PS2 console.
 *   Using uLaunchELF or wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
 *   Using uLaunchELF or wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
-*   Put in the real American PS1 game disc that you are using with a [save game exploit.](#savegame) when in PS1VModeNeg. The video mode will be forced to PAL now in the PS1 mode of your American PS2.
+*   Put in the real American PS1 game disc that you are using with a [save game exploit.](#save-game-exploit) when in PS1VModeNeg. The video mode will be forced to PAL now in the PS1 mode of your American PS2.
 *   Playing through your American PS1 game disc may look or act weird in PAL video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a PAL region import disc or PAL region backup CD-R and the PAL PS1 game will boot in PAL video mode.
 
-Playing Japanese/American Games On PAL PS2 Consoles
----------------------------------------------------
+## Playing Japanese/American Games On PAL PS2 Consoles
 
 The early PS2 models that Tonyhax International supports have the PS1 mode which runs PS1 software hard-coded to NTSC video mode. This can cause a problem with Tonyhax International if you want to play a Japanese/American PS1 backup CD-R or import discs on a PAL PS2 in NTSC video mode. Since PS1 software can not change the video mode correctly from PS1 mode running on a PS2, you have to resort to the PS1 homebrew software known as [PSVModeNeg](https://www.psx-place.com/threads/ps1vmodeneg-by-sp193.25050/). This software allows you to explicitly change the video mode to PAL. An older version of PSVModeNeg is required if you want to use it's effects with Tonyhax International, specifically [v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip). This version simply inverses the current video mode of the console, rather then reading the PS1 game disc to figure out what video mode the disc itself expects. Here are the steps below to change your PAL PS2 console to NTSC video mode for Tonyhax International:
 
 *   Download [PSVModeNeg v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip) and extract the file `PS1VModeNeg.elf`.
 *   Copy the file `PS1VModeNeg.elf` to a FAT32 formatted USB flash drive that works with your soft-modded PS2. You can soft-mod your PS2 with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208), [FreeDVDBoot](https://github.com/CTurt/FreeDVDBoot) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248) to be able to use PS1VModeNEG on your PS2 console.
 *   Using uLaunchELF or wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
-*   Put in the real PAL PS1 game disc that you are using with a [save game exploit.](#savegame) when in PS1VModeNeg. The video mode will be forced to NTSC now in the PS1 mode of your PAL PS2.
+*   Put in the real PAL PS1 game disc that you are using with a [save game exploit.](#save-game-exploit) when in PS1VModeNeg. The video mode will be forced to NTSC now in the PS1 mode of your PAL PS2.
 *   Playing through your PAL PS1 game disc may look or act weird in NTSC video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a NTSC disc and the NTSC PS1 import or backup disc will boot in NTSC video mode.
 
-ROM/ROM Flasher CD
-------------------
+## Rom/ROM Flasher CD
 
 You can overwrite the contents of a GameShark, Action Reply, or other PS1 cheat cartridge with the Tonyhax International ROM using a simple flasher CD-R that you burn or a combination of a home-made serial to USB cable, PC, and special program booted on your target PS1 console that supports flashing cheat cartridges over serial.
 
@@ -482,10 +408,9 @@ After the correct memory card file is copied to the USB flash drive that your PS
 
 Now you can turn on your PSX console without a disc in it, and then select the `Memory Card` option in the PS1's startup menu. This will start the Tonyhax international loader. **At this point, if you are using a FreePSXBoot memory card in slot 1 you must remove the FreePSXBoot memory card from slot 1 once the loader starts to ensure successful booting of your backup or import. If you are using a FreePSXBoot memory card in slot 2 you can just leave it in your console at all times**, no need to remove it! It will be disabled from use after booting a game with Tonyhax International.
 
-Boot CD
--------
+## Boot CD
 
-CD BIN+CUE files containing the Tonyhax International loader are available. The Boot CD can be booted by a mod chip, swap trick, or unofficial boot disc (i.e. PSX Change v2). Inside the Tonyhax International releases (downloadable above) in the `boot-cd` directory are the following files:
+CD BIN+CUE files containing the Tonyhax International loader are available. The Boot CD can be booted by a swap trick, or an unofficial boot disc (i.e. PSX Change v2). Inside the Tonyhax International releases (downloadable above) in the `boot-cd` directory are the following files:
 
 *   tonyhax-boot-cd-europe.bin
 *   tonyhax-boot-cd-europe.cue
@@ -510,8 +435,7 @@ To boot the Tonyhax International Boot CD-R with the CD Player Swap Trick:
 *   Once the real PlayStation game stops spinning, put in your burned Tonyhax International Boot CD-R disc.
 *   Exit the CD Player menu, and wait for the Tonyhax International loader to start.
 
-Save Game Exploit
------------------
+## Save Game Exploit
 
 The original way to boot the Tonyhax International loader is through a special game save on a PS1 memory card that you load while in a specific, supported real PS1 game that you can play normally on your PS1 or early PS2 console (SCPH-10000-SCPH-39004 models). You need to copy the `HAX` file and the game exploit file **specific to the original real PS1 game you own** to the PS1 memory card, then load the save in a specific way in the exploitable game. Described below are 2 different methods to copy these files to a PS1 memory card. One involves using a PS2, the other involves using special hardware that allows you to write to the PS1 memory card directly from your computer.
 
@@ -539,465 +463,52 @@ Instead of using a PS2 to copy the save game exploit files, you can use a Dex Dr
 
 You want to **use the MCS save game exploit file for your exploitable game (in the `entrypoints` directory) and the MCS loader file `tonyhax.mcs` (in the `loader` directory)** when using the uLaunchELF/PS2 installation method. The MCS filenames for each save game exploit is available in the table below.
 
-Game
-
-Region
-
-Code
-
-MCS file
-
-Raw file
-
-Brunswick Circuit Pro Bowling
-
-NTSC-U
-
-SLUS-00571
-
-brunswick1-us.mcs
-
-BASLUS-00571
-
-Brunswick Circuit Pro Bowling
-
-PAL-E
-
-SLES-01376
-
-brunswick1-eu.mcs
-
-BESLES-01376
-
-Brunswick Circuit Pro Bowling 2
-
-NTSC-U
-
-SLUS-00856
-
-brunswick2-us.mcs
-
-BASLUS-00856
-
-Brunswick Circuit Pro Bowling 2
-
-PAL-E
-
-SLES-02618
-
-brunswick2-eu.mcs
-
-BESLES-02618
-
-Castlevania Chronicle - Akumajou Dracula (only first release of the game (rev 0), rev 1 does not work right now)
-
-NTSC-J
-
-SLPM-86754
-
-cc-jp.mcs
-
-BISLPM-86754DRACULA
-
-Castlevania Chronicles
-
-NTSC-U
-
-SLUS-01384
-
-cc-us.mcs
-
-BASLUS-01384DRACULA
-
-Castrol Honda Superbike \[SuperLite 1500 Series\]
-
-NTSC-J
-
-SLPM-86489
-
-castrolsb-jp.mcs
-
-BISLPM-86489CHSv1
-
-Castrol Honda Superbike Racing
-
-NTSC-U
-
-SLUS-00882
-
-castrolsb-us.mcs
-
-BASLUS-00882CHSv1
-
-Castrol Honda Superbike Racing
-
-PAL-E
-
-SLES-01182
-
-castrolsb-eu.mcs
-
-BESLES\_01182CHSv1
-
-Castrol Honda VTR \[SuperLite 1500 Series\]
-
-NTSC-J
-
-SLPM-86922
-
-castrolvtr-jp.mcs
-
-BISLPM-86922CHSVTRv1
-
-Castrol Honda VTR
-
-PAL-E
-
-SLES-02942
-
-castrolvtr-eu.mcs
-
-BESLES-02942CHSVTRv1
-
-Cool Boarders 4
-
-NTSC-U
-
-SCUS-94559
-
-coolbrd4-us.mcs
-
-BASCUS-9455916
-
-Cool Boarders 4
-
-PAL-E
-
-SCES-02283
-
-coolbrd4-eu.mcs
-
-BESCES-0228316
-
-Crash Bandicoot 2: Cortex Strikes Back
-
-NTSC-J
-
-SCPS-10047
-
-crash2-jp.mcs
-
-BISCPS-1004700000000
-
-Crash Bandicoot 2: Cortex Strikes Back
-
-NTSC-U
-
-SCUS-94154
-
-crash2-us.mcs
-
-BASCUS-9415400047975
-
-Crash Bandicoot 2: Cortex Strikes Back
-
-PAL-E
-
-SCES-00967
-
-crash2-eu.mcs
-
-BESCES-0096700765150
-
-Crash Bandicoot 3: Warped
-
-NTSC-J
-
-SCPS-10073
-
-crash3-jp.mcs
-
-BISCPS-1007300000000
-
-Crash Bandicoot 3: Warped
-
-NTSC-U
-
-SCUS-94244
-
-crash3-us.mcs
-
-BASCUS-9424400000000
-
-Crash Bandicoot 3: Warped
-
-PAL-E
-
-SCES-01420
-
-crash3-eu.mcs
-
-BESCES-0142000000000
-
-Doki Oki
-
-NTSC-J
-
-SLPS-00130
-
-doki-oki-jp.mcs
-
-BISLPS-00130DOKIOH
-
-Downhill Snow
-
-NTSC-J
-
-SLPS-01391
-
-downhill-snow-jp.mcs
-
-BISLPS-01391SKI00S
-
-Sports Superbike
-
-PAL-E
-
-SLES-03057
-
-superbike1-eu.mcs
-
-BESLES-03057SSBv1
-
-Sports Superbike 2
-
-PAL-E
-
-SLES-03827
-
-superbike2-eu.mcs
-
-BESLES-03827SSII
-
-Tekken 2 (only second release of the game (rev 1), rev 0 does not work right now)
-
-NTSC-J
-
-SLPS-00300
-
-tekken2-jp.mcs
-
-BISLPS-00300TEKKEN-2
-
-Tekken 2 (only first release of the game (rev 0), rev 1 does not work right now)
-
-NTSC-U
-
-SLUS-00213
-
-tekken2-us.mcs
-
-BASLUS-00213TEKKEN-2
-
-Tekken 2
-
-PAL-E
-
-SCES-00255
-
-tekken2-eu.mcs
-
-BESCES-00255TEKKEN-2
-
-Tekken 3
-
-NTSC-J
-
-SLPS-01300
-
-tekken3-jp.mcs
-
-BISLPS-01300TEKKEN-3
-
-Tekken 3
-
-NTSC-U
-
-SLUS-00402
-
-tekken3-us.mcs
-
-BASLUS-00402TEKKEN-3
-
-Tekken 3
-
-PAL-E
-
-SCES-01237
-
-tekken3-eu.mcs
-
-BESCES-01237TEKKEN-3
-
-The Legend Of Heroes I&II
-
-NTSC-J
-
-SLPS-01323
-
-the-legend-of-heros-1-and-2-jp.mcs
-
-BISLPS-01323010001
-
-Tony Hawk's Pro Skater 2
-
-NTSC-J
-
-SLPM-86751
-
-thps2-jp.mcs
-
-BISLPM-86751CEEAG01
-
-Tony Hawk's Pro Skater 2
-
-NTSC-U
-
-SLUS-01066
-
-thps2-us.mcs
-
-BASLUS-01066TNHXG01
-
-Tony Hawk's Pro Skater 2
-
-PAL-DE
-
-SLES-02910
-
-thps2-de.mcs
-
-BESLES-02910TNHXG01
-
-Tony Hawk's Pro Skater 2
-
-PAL-E
-
-SLES-02908
-
-thps2-eu.mcs
-
-BESLES-02908TNHXG01
-
-Tony Hawk's Pro Skater 2
-
-PAL-FR
-
-SLES-02909
-
-thps2-fr.mcs
-
-BESLES-02909TNHXG01
-
-Tony Hawk's Pro Skater 3
-
-NTSC-U
-
-SLUS-01419
-
-thps3-us.mcs
-
-BASLUS-01419TNHXG01
-
-Tony Hawk's Pro Skater 3
-
-PAL-DE
-
-SLES-03647
-
-thps3-de.mcs
-
-BESLES-03647TNHXG01
-
-Tony Hawk's Pro Skater 3
-
-PAL-E
-
-SLES-03645
-
-thps3-eu.mcs
-
-BESLES-03645TNHXG01
-
-Tony Hawk's Pro Skater 3
-
-PAL-FR
-
-SLES-03646
-
-thps3-fr.mcs
-
-BESLES-03646TNHXG01
-
-Tony Hawk's Pro Skater 4
-
-NTSC-U
-
-SLUS-01485
-
-thps4-us.mcs
-
-BASLUS-01485TNHXG01
-
-Tony Hawk's Pro Skater 4
-
-PAL-DE
-
-SLES-03955
-
-thps4-de.mcs
-
-BESLES-03955TNHXG01
-
-Tony Hawk's Pro Skater 4
-
-PAL-E
-
-SLES-03954
-
-thps4-eu.mcs
-
-BESLES-03954TNHXG01
-
-Tony Hawk's Pro Skater 4
-
-PAL-FR
-
-SLES-03956
-
-thps4-fr.mcs
-
-BESLES-03956TNHXG01
-
-XS Moto
-
-NTSC-U
-
-SLUS-01506
-
-xsmoto-us.mcs
-
-BASLUS-01506XSMOTOv1
-
-XS Moto
-
-PAL-E
-
-SLES-04095
-
-xsmoto-eu.mcs
-
-BESLES-04095XSMOTO
+| Game                                                                                                             | Region | Code       | MCS file                           | Raw file             |
+|------------------------------------------------------------------------------------------------------------------|--------|------------|------------------------------------|----------------------|
+| Brunswick Circuit Pro Bowling                                                                                    | NTSC-U | SLUS-00571 | brunswick1-us.mcs                  | BASLUS-00571         |
+| Brunswick Circuit Pro Bowling                                                                                    | PAL-E  | SLES-01376 | brunswick1-eu.mcs                  | BESLES-01376         |
+| Brunswick Circuit Pro Bowling 2                                                                                  | NTSC-U | SLUS-00856 | brunswick2-us.mcs                  | BASLUS-00856         |
+| Brunswick Circuit Pro Bowling 2                                                                                  | PAL-E  | SLES-02618 | brunswick2-eu.mcs                  | BESLES-02618         |
+| Castlevania Chronicle - Akumajou Dracula (only first release of the game (rev 0), rev 1 does not work right now) | NTSC-J | SLPM-86754 | cc-jp.mcs                          | BISLPM-86754DRACULA  |
+| Castrol Honda Superbike [SuperLite 1500 Series]                                                                  | NTSC-J | SLPM-86489 | castrolsb-jp.mcs                   | BISLPM-86489CHSv1    |
+| Castrol Honda Superbike Racing                                                                                   | NTSC-U | SLUS-00882 | castrolsb-us.mcs                   | BASLUS-00882CHSv1    |
+| Castrol Honda Superbike Racing                                                                                   | PAL-E  | SLES-01182 | castrolsb-eu.mcs                   | BESLES_01182CHSv1    |
+| Castrol Honda VTR [SuperLite 1500 Series]                                                                        | NTSC-J | SLPM-86922 | castrolvtr-jp.mcs                  | BISLPM-86922CHSVTRv1 |
+| Castrol Honda VTR                                                                                                | PAL-E  | SLES-02942 | castrolvtr-eu.mcs                  | BESLES-02942CHSVTRv1 |
+| Cool Boarders 4                                                                                                  | NTSC-U | SCUS-94559 | coolbrd4-us.mcs                    | BASCUS-9455916       |
+| Cool Boarders 4                                                                                                  | PAL-E  | SCES-02283 | coolbrd4-eu.mcs                    | BESCES-0228316       |
+| Crash Bandicoot 2: Cortex Strikes Back                                                                           | NTSC-J | SCPS-10047 | crash2-jp.mcs                      | BISCPS-1004700000000 |
+| Crash Bandicoot 2: Cortex Strikes Back                                                                           | NTSC-U | SCUS-94154 | crash2-us.mcs                      | BASCUS-9415400047975 |
+| Crash Bandicoot 2: Cortex Strikes Back                                                                           | PAL-E  | SCES-00967 | crash2-eu.mcs                      | BESCES-0096700765150 |
+| Crash Bandicoot 3: Warped                                                                                        | NTSC-J | SCPS-10073 | crash3-jp.mcs                      | BISCPS-1007300000000 |
+| Crash Bandicoot 3: Warped                                                                                        | NTSC-U | SCUS-94244 | crash3-us.mcs                      | BASCUS-9424400000000 |
+| Crash Bandicoot 3: Warped                                                                                        | PAL-E  | SCES-01420 | crash3-eu.mcs                      | BESCES-0142000000000 |
+| Doki Oki                                                                                                         | NTSC-J | SLPS-00130 | doki-oki-jp.mcs                    | BISLPS-00130DOKIOH   |
+| Downhill Snow                                                                                                    | NTSC-J | SLPS-01391 | downhill-snow-jp.mcs               | BISLPS-01391SKI00S   |
+| Sports Superbike                                                                                                 | PAL-E  | SLES-03057 | superbike1-eu.mcs                  | BESLES-03057SSBv1    |
+| Sports Superbike 2                                                                                               | PAL-E  | SLES-03827 | superbike2-eu.mcs                  | BESLES-03827SSII     |
+| Tekken 2 (only second release of the game (rev 1), rev 0 does not work right now)                                | NTSC-J | SLPS-00300 | tekken2-jp.mcs                     | BISLPS-00300TEKKEN-2 |
+| Tekken 2 (only first release of the game (rev 0), rev 1 does not work right now)                                 | NTSC-U | SLUS-00213 | tekken2-us.mcs                     | BASLUS-00213TEKKEN-2 |
+| Tekken 2                                                                                                         | PAL-E  | SCES-00255 | tekken2-eu.mcs                     | BESCES-00255TEKKEN-2 |
+| Tekken 3                                                                                                         | NTSC-J | SLPS-01300 | tekken3-jp.mcs                     | BISLPS-01300TEKKEN-3 |
+| Tekken 3                                                                                                         | NTSC-U | SLUS-00402 | tekken3-us.mcs                     | BASLUS-00402TEKKEN-3 |
+| Tekken 3                                                                                                         | PAL-E  | SCES-01237 | tekken3-eu.mcs                     | BESCES-01237TEKKEN-3 |
+| The Legend Of Heroes I&II                                                                                        | NTSC-J | SLPS-01323 | the-legend-of-heros-1-and-2-jp.mcs | BISLPS-01323010001   |
+| Tony Hawk's Pro Skater 2                                                                                         | NTSC-J | SLPM-86751 | thps2-jp.mcs                       | BISLPM-86751CEEAG01  |
+| Tony Hawk's Pro Skater 2                                                                                         | NTSC-U | SLUS-01066 | thps2-us.mcs                       | BASLUS-01066TNHXG01  |
+| Tony Hawk's Pro Skater 2                                                                                         | PAL-DE | SLES-02910 | thps2-de.mcs                       | BESLES-02910TNHXG01  |
+| Tony Hawk's Pro Skater 2                                                                                         | PAL-E  | SLES-02908 | thps2-eu.mcs                       | BESLES-02908TNHXG01  |
+| Tony Hawk's Pro Skater 2                                                                                         | PAL-FR | SLES-02909 | thps2-fr.mcs                       | BESLES-02909TNHXG01  |
+| Tony Hawk's Pro Skater 3                                                                                         | NTSC-U | SLUS-01419 | thps3-us.mcs                       | BASLUS-01419TNHXG01  |
+| Tony Hawk's Pro Skater 3                                                                                         | PAL-DE | SLES-03647 | thps3-de.mcs                       | BESLES-03647TNHXG01  |
+| Tony Hawk's Pro Skater 3                                                                                         | PAL-E  | SLES-03645 | thps3-eu.mcs                       | BESLES-03645TNHXG01  |
+| Tony Hawk's Pro Skater 3                                                                                         | PAL-FR | SLES-03646 | thps3-fr.mcs                       | BESLES-03646TNHXG01  |
+| Tony Hawk's Pro Skater 4                                                                                         | NTSC-U | SLUS-01485 | thps4-us.mcs                       | BASLUS-01485TNHXG01  |
+| Tony Hawk's Pro Skater 4                                                                                         | PAL-DE | SLES-03955 | thps4-de.mcs                       | BESLES-03955TNHXG01  |
+| Tony Hawk's Pro Skater 4                                                                                         | PAL-E  | SLES-03954 | thps4-eu.mcs                       | BESLES-03954TNHXG01  |
+| Tony Hawk's Pro Skater 4                                                                                         | PAL-FR | SLES-03956 | thps4-fr.mcs                       | BESLES-03956TNHXG01  |
+| XS Moto                                                                                                          | NTSC-U | SLUS-01506 | xsmoto-us.mcs                      | BASLUS-01506XSMOTOv1 |
+| XS Moto                                                                                                          | PAL-E  | SLES-04095 | xsmoto-eu.mcs                      | BESLES-04095XSMOTO   |
 
 ### Copying The Files On Your PS1 Memory Card With A PS2
 
@@ -1009,52 +520,18 @@ After the correct memory card save game exploit **Raw** file and the `HAX` file 
 
 Now that you have the save game exploit files on the PS1 memory card, start the real PS1 game on your console with the PS1 memory card containing the save game files inserted in it. If you are using a Japanese PS1, it is recommended that you power off the console, put in the Japanese version of the game that has a save game exploit file available, block the lid sensor, and then turn on the console and have it boot the game. In either case, follow the instructions for the real PS1 game you are using described below:
 
-Game
+| Game                                                  | Specific Instructions                                                                                                                                                                                                                                                                                                                                                     |
+|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Cool Boarders 4                                       | Boot the game. It should say the records and settings have been automatically loaded. Click on ONE PLAYER.                                                                                                                                                                                                                                                                |
+| Crash Bandicoot games                                 | Boot the game, on the title menu, choose LOAD GAME. On the save game list, select TONYHAX and press X.                                                                                                                                                                                                                                                                    |
+| Brunswick games                                       | Boot the game as you'd normally do. On the main menu, select LOAD GAME, then Select MEMORY CARD 1. After about three seconds tonyhax should be running.                                                                                                                                                                                                                   |
+| Castrol Honda Superbike Racing and Sports Superbike 1 | On the language selection screen, if prompted to, select the English language. Enter the Memory Card menu. Load game from the Memory Card. Click accept after it's done loading. On the main menu, select Race, then Single race.                                                                                                                                         |
+| Castrol Honda VTR, Sports Superbike 2 and XS Moto     | If you are using the European version, on the language selection screen select the English language. On the main menu, choose Options. Select Load game and choose the memory card where the save is stored. Back on the main menu, click on either Single Race or Championship.                                                                                          |
+| Downhill Snow                                         | Boot the game as you'd normally do. Use the X button to select SCENARIO, then CONTINUE, now select the save file in slot 1 or slot2. On the next screen after loading the save file select CONFIG, then RANKING, then Moguls. Immeditely after select Moguls press the right directional key until the blue screen appears, then let go of all buttons on the controller. |
+| The Legend Of Heroes I&II (single game compilation)   | Boot the game as you'd normally do. On the main menu, select the Legend Of Heroes I (the I button on the left), not The Legend Of Heroes II (the II button on the right). Once in The Legend Of Heroes I load the save file.                                                                                                                                              |
+| Tony Hawk Pro Skater games                            | Boot the game as you'd normally do. On the main menu, wait until the save file is automatically loaded (it should say Loading TONYHAX EU/US/DE/FR, depending on the game's region). After it's done, choose the CREATE SKATER menu and press X.                                                                                                                           |
 
-Specific Instructions
-
-Cool Boarders 4
-
-Boot the game. It should say the records and settings have been automatically loaded. Click on `ONE PLAYER`.
-
-Crash Bandicoot games
-
-Boot the game, on the title menu, choose `LOAD GAME`. On the save game list, select `TONYHAX` and press X.
-
-Brunswick games
-
-Boot the game as you'd normally do. On the main menu, select `LOAD GAME`, then Select `MEMORY CARD 1`. After about three seconds tonyhax should be running.
-
-Castrol Honda Superbike Racing and Sports Superbike 1
-
-On the language selection screen, if prompted to, select the English language. Enter the Memory Card menu. Load game from the Memory Card. Click accept after it's done loading. On the main menu, select `Race`, then `Single race`.
-
-Castrol Honda VTR, Sports Superbike 2 and XS Moto
-
-If you are using the European version, on the language selection screen select the English language. On the main menu, choose `Options`. Select `Load game` and choose the memory card where the save is stored. Back on the main menu, click on either `Single Race` or `Championship`.
-
-Doki Oki
-
-Boot the game as you'd normally do. Press start, circle, circle, then circle one last time to navigate through the main menu and load the save file.
-
-Downhill Snow
-
-Boot the game as you'd normally do. Use the X button to select `SCENARIO`, then `CONTINUE`, now select the save file in slot 1 or slot2. On the next screen after loading the save file select `CONFIG`, then `RANKING`, then `Moguls`. Immeditely after select `Moguls` press the right directional key until the blue screen appears, then let go of all buttons on the controller.
-
-The Legend Of Heroes I&II (single game compilation)
-
-Boot the game as you'd normally do. On the main menu, select the Legend Of Heroes I (the I button on the left), **not The Legend Of Heroes II (the II button on the right)**. Once in The Legend Of Heroes I load the save file.
-
-Tony Hawk Pro Skater games
-
-Boot the game as you'd normally do. On the main menu, wait until the save file is automatically loaded (it should say `Loading TONYHAX EU/US/DE/FR`, depending on the game's region). After it's done, choose the `CREATE SKATER` menu and press X.
-
-Tekken games
-
-Boot the game as you'd normally do. On the main menu, select `Survival Mode`, and pick a character. Die at any point to end the survival round, press start on the stats screen, and wait. **The screen will fade to black, and in a few seconds the Tonyhax International loader will start. There are no colors displayed while the Tonyhax International loader is started with a Tekken save game exploit, unlike all other games.**
-
-CD-R Media For PS1 Backups
---------------------------
+## CD-R Media For PS1 Backups
 
 Only use high-quality CD-R media. If you want good results burning backups for your PS1 your CD-R media should contain:
 
@@ -1109,8 +586,7 @@ Later PS1 consoles (starting at the SCPH-5000 series and newer) and all PS2 cons
 
 If you are having issues booting discs in Tonyhax International, consider wiping with a clean microfiber cloth from the inner ring to the outer edge of the disc in all directions and then trying to boot the disc again.
 
-Burning Programs For PS1 Backups
---------------------------------
+## Burning Programs For PS1 Backups
 
 *   [IMGBurn](https://www.imgburn.com) (Windows).
 *   [CDRDAO](http://cdrdao.sourceforge.net) (Mac OS X/Linux/\*BSD/Windows).
@@ -1119,8 +595,395 @@ If you use cdrdao, you must use the `--swap` argument for discs with CDDA audio 
 
     cdrdao write --speed 1 --swap --eject yourgame.cue
 
-Building From Source
---------------------
+## Playing Games With Additonal Copy Protection Routines
+
+Starting in late 1998, some PSX games began including additional copy protection code that is designed to prevent playing backup CD-R copies of a game. This additional copy protection originally could only detect the first type of mod-chips (known as 'non-stealth') and would only fail if it detected one. **Tonyhax International does not trigger this type of anti-piracy copy protection on stock consoles and these games don't require any patching by Tonyhax International.**
+
+Starting in early 1999, the additional copy protection code was upgraded to detect both and 'non-stealth' mod-chips and 'traditional' swap tricks (which don't update TOC data). **Tonyhax International also does not trigger this type of anti-piracy copy protection on stock consoles and these games don't require any patching by Tonyhax International.**
+
+However, starting in mid 1999, the additional copy protection code was upgraded again. This updated copy protection code can detect 'non-stealth' mod-chips, 'traditional' swap tricks (which don't update TOC data), and the authenticity of the disc currently running in the PSX console. **This last check causes the anti-piracy copy protection routine to trigger on games booted with Tonyhax International unless you are using a SCPH-1000 or early SCPH-3000 Japanese PSX console model. All is not lost however, Tonyhax International is now capable of game-specific on the fly patching to bypass this type of anti-piracy copy protection routine on ALL consoles. Below is a list of games which require explicit game-specific anti-piracy bypass support to work and their current status of support as of the latest version of Tonyhax International.**
+
+If you find a game which triggers the 'anti-piracy screen of death' that is not listed below, or you want support to be added for a game that is not yet currently supported but is listed below, please open an [Anti-Piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&template=antipiracy-issue.md&title=) on the [Tonyhax International Github](https://github.com/alex-free/tonyhax). I would eventually like every game that can trigger the anti-piracy copy protection routine when booted via Tonyhax International on a stock console to have a game specific bypass implemented for 100% compatibility.
+
+Some PAL games are using a different copy protection scheme known as LibCrypt protection. This protection can be bypassed by burning a backup CD-R in a [very specific way to keep the protection working](https://github.com/Kippykip/SBITools), or just by using an original authentic PAL PSX disc. **Some PAL games may include both anti-piracy detection and LibCrypt detection, please open an [Anti-Piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&template=antipiracy-issue.md&title=) on the [Tonyhax International Github](https://github.com/alex-free/tonyhax) in such a case so that I can add support.**
+
+
+### Animetic Story Game 1: Card Captor Sakura
+
+- Versions Tested: Japan ([Disc 1](http://redump.org/disc/12000/), [Disc 2](http://redump.org/disc/11999/)).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Alundra 2
+
+- Versions Tested: [Japan](http://redump.org/disc/15641/), [Japan Demo](http://redump.org/disc/6752/), [USA](http://redump.org/disc/2996/), [Europe](http://redump.org/disc/1089/), [German](http://redump.org/disc/11603/), [French](http://redump.org/disc/13396/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: When first booting the game during the 'now loading' screen.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 3 GetTN commands.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Arc The Lad III
+
+- Versions Tested: Japan Rev 0 ([Disc 1](http://redump.org/disc/5897/), [Disc 2](http://redump.org/disc/5898/)), Japan Rev 1 ([Disc 1](http://redump.org/disc/34793/), [Disc 2](http://redump.org/disc/34794/)), USA ([Disc 1](http://redump.org/disc/674/), [Disc 2](http://redump.org/disc/675/)).
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.
+
+### Beat Mania: The Sound of Tokyo
+
+- Versions Tested: [Japan](http://redump.org/disc/36163/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Beat Mania 6thMix + Core Remix
+
+- Versions Tested: [Japan](http://redump.org/disc/16285/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Biohazard 3: The Last Escape
+
+- Versions Tested: [Japan Rev 0](http://redump.org/disc/10/), [Japan Rev 1](http://redump.org/disc/8357/), [Japan Demo](http://redump.org/disc/11674/).
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo.
+- When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots, pause there.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 3 GetTN commands.
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1, Japan Demo.
+
+### Biohazard Gun Survivor
+
+- Versions Tested: [Japan](http://redump.org/disc/8102/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots, pause there.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Chase The Express
+
+- Versions Tested: Japan ([Disc 1](http://redump.org/disc/5637/), [Disc 2](http://redump.org/disc/5638/)), [Japan Demo 1](http://redump.org/disc/6551/), [Japan Demo 2](http://redump.org/disc/19589/), Europe ([Disc 1](http://redump.org/disc/27257/), [Disc 2](http://redump.org/disc/27258/)), France ([Disc 1](http://redump.org/disc/28137/), [Disc 2](http://redump.org/disc/28138/)), Germany ([Disc 1](http://redump.org/disc/7507/), [Disc 2](http://redump.org/disc/7508/)), Italy ([Disc 1](http://redump.org/disc/28358/), [Disc 2](http://redump.org/disc/28359/)).
+- Versions With Anti-Piracy Screen: Japan, Japan Demo 1, Japan Demo 2.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 2 GeTN commands.
+- Versions With Anti-Piracy Bypass Support: Japan, Japan Demo 1, Japan Demo 2.
+
+### Crash Bandicoot Racing
+
+- Versions Tested: [Japan](http://redump.org/disc/3694/), [Japan Demo](http://redump.org/disc/53590/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: When first booting the game when the Naughty Dog box is first viable.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 14 GetTN commands.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Dancing Stage Featuring True Kiss Destination
+
+- Versions Tested: [Japan](http://redump.org/disc/15853/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: On the first text screen after boot, until right before the first FMV.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Dino Crisis
+
+- Versions Tested: [Japan](http://redump.org/disc/1598/), [USA Rev 0](http://redump.org/disc/459/), [USA Rev 1](http://redump.org/disc/473/), [USA Demo](http://redump.org/disc/2942/), [Europe](http://redump.org/disc/710/), [Italy](http://redump.org/disc/28171/), [Germany](http://redump.org/disc/7586/), [France](http://redump.org/disc/24278/), [Spain](http://redump.org/disc/27940/).
+- Versions With Anti-Piracy Screen: Japan, USA Rev 0, USA Rev 1.
+- When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 3 GetTN commands.
+- Versions With Anti-Piracy Bypass Support: Japan, USA Rev 0, USA Rev 1.
+
+### Dino Crisis 2
+
+- Versions Tested: [Japan](http://redump.org/disc/1600/), [Japan Demo](http://redump.org/disc/4407/), [USA](http://redump.org/disc/460/), [USA Demo](http://redump.org/disc/49242/), [Europe](http://redump.org/disc/1071/), [Italy](http://redump.org/disc/45993/), [Germany](http://redump.org/disc/10641/), [France](http://redump.org/disc/29514/), [Spain](http://redump.org/disc/27941/).
+- Versions With Anti-Piracy Screen: Japan, Japan Demo.
+- When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 3 GetTN commands.
+- Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.
+
+### Exciting Bass 2
+
+- Versions Tested: [Japan](http://redump.org/disc/63487/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 2 GetTN commands.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Exciting Bass 3
+
+- Versions Tested: [Japan](http://redump.org/disc/59734/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 2 GetTN commands.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Gekitotsu Toma L'Arc - L'Arc en Ciel vs Tomarunner
+
+- Versions: [Japan](http://redump.org/disc/20715/)
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Glint Glitters
+
+- Versions Tested: [Japan](http://redump.org/disc/15969/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 18 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: **TODO: NOT SUPPORTED YET**
+
+### Goo! Goo! Soundry
+
+- Versions Tested: [Japan](http://redump.org/disc/16027/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: On the first 'now loading' screen at boot.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 4 GetTN commands, 5 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Grind Session
+
+- Versions Tested: [USA](http://redump.org/disc/854/), [USA Demo](http://redump.org/disc/42794/), [Europe](http://redump.org/disc/3688/), [Scandinavia](http://redump.org/disc/53879/).
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: After going through the main menu and starting training/single player/a level.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: USA.
+
+### Guitar Freaks
+
+- Versions Tested: [Japan](http://redump.org/disc/2277/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: At the loading screen with the spinning guitars.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Harlem Beat: You're The One
+
+- Versions Tested: [Japan](http://redump.org/disc/36294/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: At the first loading screen after boot.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Hyper Value 2800: Hanafuda
+
+- Versions Tested: [Japan](http://redump.org/disc/15791/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately after boot.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support:  **TODO: NOT SUPPORTED YET**
+
+### Hyper Value 2800: Mahjong
+
+- Versions Tested: [Japan](http://redump.org/disc/15793/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately after boot.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Jikkyou Powerful Pro Yakyuu '99: Ketteiban
+
+- Versions Tested: [Japan](http://redump.org/disc/11091/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Jikkyou Powerful Pro Yakyuu '99: Kaimakuban
+
+- Versions Tested: [Japan](http://redump.org/disc/1686/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### JoJo's Bizarre Adventure
+
+- Versions Tested: [Japan](http://redump.org/disc/2871/), [USA](http://redump.org/disc/386/), [Europe](http://redump.org/disc/9983/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: First loading screen after boot.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Legend Of Dragoon
+
+- Versions Tested: Japan ([Disc 1](http://redump.org/disc/22753/), [Disc 2](http://redump.org/disc/22754/), [Disc 3](http://redump.org/disc/22755/), [Disc 4](http://redump.org/disc/22756/)), USA ([Disc 1](http://redump.org/disc/153/), [Disc 2](http://redump.org/disc/154/), [Disc 3](http://redump.org/disc/155/), [Disc 4](http://redump.org/disc/156/)), Europe ([Disc 1](http://redump.org/disc/2379/), [Disc 2](http://redump.org/disc/2380/), [Disc 3](http://redump.org/disc/2381), [Disc 4](http://redump.org/disc/2382/)), France ([Disc 1](http://redump.org/disc/16750/), [Disc 2](http://redump.org/disc/16751/), [Disc 3](http://redump.org/disc/16752/), [Disc 4](http://redump.org/disc/16753/)), Germany ([Disc 1](http://redump.org/disc/15580/), [Disc 2](http://redump.org/disc/15581/), [Disc 3](http://redump.org/disc/15582/), [Disc 4](http://redump.org/disc/15583/)), Italy ([Disc 1](http://redump.org/disc/30643/), [Disc 2](http://redump.org/disc/30644/), [Disc 3](http://redump.org/disc/30645/), [Disc 4](http://redump.org/disc/30646/)).
+- Versions With Anti-Piracy Screen: Japan, USA, Europe, France, Germany, Italy.
+- When Is The Anti-Piracy Screen Check: First loading screen after boot.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan, USA, Europe, France, Germany, Italy.
+
+### Legend Of Mana
+
+- Versions Tested: [Japan](http://redump.org/disc/1940/), [USA](http://redump.org/disc/96/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan, USA.
+
+### Marvel vs. Capcom: Clash of Super Heroes
+
+- Versions Tested: [Japan](http://redump.org/disc/36384/), [Japan Demo](http://redump.org/disc/60646/), [USA](http://redump.org/disc/1235/), [Europe](http://redump.org/disc/3910/).
+- Versions With Anti-Piracy Screen: Japan, Japan Demo.
+- When Is The Anti-Piracy Screen Check: Immediately on boot.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.
+
+### My Garden
+
+- Versions Tested: [Japan](http://redump.org/disc/8300/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Ore no Ryouri
+
+- Versions Tested: [Japan](http://redump.org/disc/39643/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### PoPoLoCrois Monogatari II
+
+- Versions Tested: Japan ([Disc 1](http://redump.org/disc/1653/), [Disc 2](http://redump.org/disc/1654/), [Disc 3](http://redump.org/disc/1651/)), [Japan Demo](http://redump.org/disc/57327/)
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Pop'n Music 2
+
+- Versions Tested: [Japan](http://redump.org/disc/9774/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Pop'n Music 5
+
+- Versions Tested: [Japan](http://redump.org/disc/9778/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Pop'n Music 6
+
+- Versions Tested: [Japan](http://redump.org/disc/9777/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Robbit mon Dieu
+- Versions Tested: [Japan](http://redump.org/disc/7227/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately after boot.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Rockman
+
+- Versions Tested: [Japan](http://redump.org/disc/6091/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Rockman 2: Dr. Wily no Nazo
+
+- Versions Tested: [Japan](http://redump.org/disc/6092/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Rockman 3: Dr. Wily no Saigo!?
+
+- Versions Tested: [Japan](http://redump.org/disc/6092/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Rockman 4: Aratanaru Yabou!!
+
+- Versions Tested: [Japan](http://redump.org/disc/6094/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Rockman 6
+
+- Versions Tested: [Japan](http://redump.org/disc/6096/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Street Fighter EX2 Plus
+
+- Versions Tested: [Japan](http://redump.org/disc/12561/), [Japan Demo](http://redump.org/disc/68873/), [USA](http://redump.org/disc/1233/), [Europe](http://redump.org/disc/1006/).
+- Versions With Anti-Piracy Screen: Japan, Japan Demo.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan, Japan Demo, Europe, USA.
+
+### Tokimeki Memorial 2
+
+- Versions Tested: Japan Rev 0, Japan Rev 1, Japan Limited Box.
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Limited Box.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: **TODO: NOT SUPPORTED YET**
+
+### Tomba!
+
+- Versions Tested: [USA](http://redump.org/disc/8604/), [USA Demo](http://redump.org/disc/15174/).
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: ?? Have played this for a bit, have not triggered it yet. I am guessing 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command because AFAIK no American anti-piracy game doesn't send ReadTOC.
+- Type Of Check: ??
+- Versions With Anti-Piracy Bypass Support: USA.
+
+### Vandal Harts II
+
+- Versions Tested: [Japan](http://redump.org/disc/4854/), [USA](http://redump.org/disc/4854/), [Europe](http://redump.org/disc/4854/), [Italy](http://redump.org/disc/4854/), [Spain](http://redump.org/disc/4854/).
+- Versions With Anti-Piracy Screen: Japan, USA.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 1 ReadTOC command (USA only!), 6 Test commands (Japan) or 2 Test commands(USA), 2 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan (no patch required), USA.
+
+### Wild Arms II
+
+- Versions Tested: Japan Rev 0 ([Disc 1](http://redump.org/disc/3924/), [Disc 2](http://redump.org/disc/3925/)), Japan Rev 1 ([Disc 1](http://redump.org/disc/1902/), [Disc 2](http://redump.org/disc/1903/)), [Japan Demo](http://redump.org/disc/4799//), USA ([Disc 1](http://redump.org/disc/171/), [Disc 2](http://redump.org/disc/172/)), [USA Demo](http://redump.org/disc/42466/).
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo, USA, USA Demo.
+- When Is The Anti-Piracy Screen Check: Right after the media vision logo screen fades to black.
+- Type Of Check: 1 ReadTOC command (USA only!), 3 Test commands (Japan Rev 0, Japan Rev 1, Japan Demo) or 2 Test commands(USA), 1 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0 (no patch required), Japan Rev 1 (no patch required), Japan Demo (no patch required), USA, USA Demo.
+
+### World Soccer Jikkyou Winning Eleven 4
+
+- Versions Tested: [Japan Rev 0](http://redump.org/disc/4934/), [Japan Rev 1](http://redump.org/disc/4934/).
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.
+- When Is The Anti-Piracy Screen Check: As soon as the Japan Olympic Committee screen appears.
+- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.
+
+### XI[SAI] Jumbo
+
+- Versions Tested: [Japan](http://redump.org/disc/8372/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Type Of Check: 2 ReadTOC command, 4 Test commands, 6 GetTN commands, 6 GetTD commands.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+## Building From Source
 
 You can compile Tonyhax International from source using any operating system which supports [Crosstool-NG](https://crosstool-ng.github.io/) using a script that builds a local tool-chain within the source directory that does not install anything into your system.
 
@@ -1132,13 +995,13 @@ Now that all the dependencies are installed, you can build the tool chain which 
 
 The `build-local-tool-chain` script also ensures that all sub modules are downloaded by running `git submodule update --init --recursive`. Now we can finally use the local tool chain to build Tonyhax International by running the script `./build-with-local-tool-chain`, found in the `scripts` directory of each Tonyhax International release. After you build Tonyhax International a release `.zip` file will be generated in the root of the source directory.
 
-Credits
--------
+## Credits
 
 ### Tonyhax Internationl - The Tonyhax Team
 
 _Alex Free_
-
+* 	Discovered a way to trigger the VC0 behavior in the anti-piracy module type which triggers on Tonyhax International, that defeats most anti-piracy copy protection routines found in some PSX games when explicit support is added.
+*	Implemented all of the gameshark code integration, and wrote quite a few custom gameshark codes to bypass anti-piracy in games without codes previously being available.
 *   Created the original TOCPerfect concept, first released as [TOCPerfect v1.0](https://alex-free.github.io/tocperfect).
 *   First discovered that SetSession is bugged on the VC0 A, VC0 B, and VC1 A CDROM BIOS versions, and came up with the initial bypass idea by mashing SetSession in frustration on MottZilla's PSX CDROM Debugger program that was created to debug the SetSession command on a early SCPH-1001, SCPH-1000, and SCPH-3000 consoles specifically. Since then Martin Korth has confirmed that SetSession is bugged on VC0 A, VC0 B, and VC1 A CDROM BIOS versions.
 *   Later discovered that SetSession's bug on early hardware can be bypassed by sending SetSession for a non-existant Session 2, waiting for 2 out of 3 expected interrupts, and then immediately sending SetSession 1. The idea to involve SetSession 2 however was MottZilla's.
@@ -1150,7 +1013,8 @@ _Alex Free_
 *   Ported the 1500 Lite Series Castrol Honda Super Bike Racing stack overflow exploit from the USA version to the Japanese version.
 
 _MottZilla_
-
+*	Guidance on increasing the size of the Tonyhax International loader.
+*	Wrote the GameShark Code Engine now used by the anti-piracy bypass features and explained how to use it.
 *   The original sole creator of [PS1 DemoSwap Patcher v1.0](https://www.psx-place.com/threads/mctool-tonyhax-freepsxboot-installer.36569). MottZilla re-implemented the TOCPerfect concept into a much superior method, and included his implementation alongside of his DemoSwap idea in PS1 DemoSwap Patcher.
 *   Wrote the controller input support for Tonyhax International.
 *   Wrote the laser re-calibration function for VC2 and VC3 CDROM controllers.

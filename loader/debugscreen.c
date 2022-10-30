@@ -14,13 +14,6 @@
 #define CLUT_X 640
 #define CLUT_Y (6 * CHAR_HEIGHT)
 
-// Orca loaded right next to the font
-#define ORCA_WIDTH 40
-#define ORCA_HEIGHT 20
-
-// Divided by 4 because each pixel is 4bpp, or 1/4 of a 16-bit short
-#define ORCA_TEXCOORD_X (CHAR_VRAM_WIDTH * 16)
-
 #define TH_MARGIN 40
 #define LOG_LINES 22
 #define LOG_MARGIN 32
@@ -32,8 +25,6 @@
 
 // Grayscale
 static const uint16_t PALETTE[16] = { 0x0000, 0x0842, 0x1084, 0x18C6, 0x2108, 0x294A, 0x318C, 0x39CE, 0x4631, 0x4E73, 0x56B5, 0x5EF7, 0x6739, 0x6F7B, 0x77BD, 0x7FFF };
-
-#include "orca.inc"
 
 void decompressfont() {
 	// Font is 1bpp. We have to convert each character to 4bpp.
@@ -102,10 +93,6 @@ void debug_init() {
 	// Load font
 	decompressfont();
 
-	// Load orca image
-	// Again, /4 because each pixels is 1/4 of a 16-bit short
-	GPU_dw(FONT_X + ORCA_TEXCOORD_X / 4, 0, ORCA_WIDTH / 4, ORCA_HEIGHT, (const uint16_t *) ORCA_IMAGE);
-
 	// Load the palette to Vram
 	GPU_dw(CLUT_X, CLUT_Y, 16, 1, PALETTE);
 
@@ -130,29 +117,6 @@ void debug_init() {
 
 	// "orca.pet" website
 	debug_text_at(SCREEN_WIDTH - 8 * CHAR_DRAW_WIDTH - TH_MARGIN, 40, "orca.pet");
-
-	// Draw orca
-	gpu_tex_rect_t orca_rect = {
-		.texcoord = {
-			.x = ORCA_TEXCOORD_X,
-			.y = 0,
-		},
-		.pos = {
-			.x = SCREEN_WIDTH - 8 * CHAR_DRAW_WIDTH - TH_MARGIN - 10 - ORCA_WIDTH,
-			.y = 40,
-		},
-		.size = {
-			.width = ORCA_WIDTH,
-			.height = ORCA_HEIGHT,
-		},
-		.clut = {
-			.x = CLUT_X,
-			.y = CLUT_Y,
-		},
-		.semi_transp = 0,
-		.raw_tex = 1,
-	};
-	gpu_draw_tex_rect(&orca_rect);
 }
 
 void debug_text_at(uint_fast16_t x_pos, uint_fast16_t y_pos, const char * text) {

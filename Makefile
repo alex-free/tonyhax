@@ -17,7 +17,7 @@ $(PACKAGE_FILE): $(PACKAGE_CONTENTS)
 $(PACKAGE_CONTENTS): modules
 
 modules:
-	$(MAKE) -C entrypoints/successcu
+	$(MAKE) -C util
 	$(MAKE) -C entrypoints all
 	$(MAKE) -C loader -f Makefile.freepsxboot all
 	$(MAKE) -C freepsxboot all
@@ -27,7 +27,7 @@ modules:
 	$(MAKE) -C rom all
 
 clean:
-	$(MAKE) -C entrypoints/successcu clean
+	$(MAKE) -C util clean
 	$(MAKE) -C entrypoints clean
 	$(MAKE) -C loader clean
 	$(MAKE) -C freepsxboot clean

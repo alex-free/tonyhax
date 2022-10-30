@@ -23,6 +23,7 @@ void bios_reinitialize() {
 	// Clear kernel heap space. Not really needed but nice for debugging.
 	bzero((void *) 0xA000E000, 0x2000);
 
+#if !defined FREEPSXBOOT // We want to keep the patch to disable the memory card in slot 2 from the FPSXBOOTBUILDER!
 	// The following is adapted from the WarmBoot call
 
 	// Copy the relocatable kernel chunk
@@ -42,83 +43,7 @@ void bios_reinitialize() {
 
 	// Restore default exception return function
 	SetDefaultExitFromException();
-
-	// Clear interrupts and mask
-	I_STAT = 0;
-	I_MASK = 0;
-
-	// Setup devices
-	InstallDevices(tty_enabled);
-
-	/*
-	 * Configure with default values
-	 *
-	 * SetConf call does:
-	 *  - Configure the system memory (via SysInitMemory)
-	 *  - Initialize the exception handler arrays
-	 *  - Enqueues the syscall handler (via EnqueueSyscallHandler)
-	 *  - Initializes the default interrupt (via InitDefInt)
-	 *  - Allocates the event handler array
-	 *  - Allocates the thread structure
-	 *  - Enqueues the timer and VBlank handler (via EnqueueTimerAndVblankIrqs)
-	 *  - Calls a function that re-configures the CD subsystem as follows:
-	 *      - Enqueues the CD interrupt (via EnqueueCdIntr)
-	 *      - Opens shit-ton of CD-related events (via OpenEvent)
-	 *      - Enables the CD-related events (via EnableEvent)
-	 *      - Re-enables interrupts (via ExitCriticalSection)
-	 *
-	 * This call is to be used after the CdInit has happened, once we've read the SYSTEM.CNF
-	 * file and we want to reconfigure the kernel before launching the game's executable.
-	 *
-	 * However, for the purpose of reinitializing the BIOS, the CD reinitialization procedure is
-	 * problematic, as CdInit (which we'll call later once the disc is swapped) calls this very
-	 * same function, resulting in the CD interrupt being added twice to the array of handlers,
-	 * as wells as events being opened twice.
-	 *
-	 * We can't patch this code because it's stored in ROM. Instead, before calling this function
-	 * we'll replace the EnqueueCdIntr with a fake version that patches the system state to return
-	 * earlier and avoid the CD reinitialization entirely.
-	 */
-	void * realEnqueueCdIntr = A0_TBL[0xA2];
-	A0_TBL[0xA2] = FakeEnqueueCdIntr;
-	SetConf(BIOS_DEFAULT_EVCB, BIOS_DEFAULT_TCB, BIOS_DEFAULT_STACKTOP);
-	A0_TBL[0xA2] = realEnqueueCdIntr;
-
-	// End of code adapted
-
-	// Re-enable interrupts
-	ExitCriticalSection();
-
-	// Save for later
-	original_disc_error = A0_TBL[0xA1];
-}
-
-void bios_reinitialize_fpsxboot() {
-	// Disable interrupts
-	EnterCriticalSection();
-
-	// Clear kernel heap space. Not really needed but nice for debugging.
-	bzero((void *) 0xA000E000, 0x2000);
-
-	// The following is adapted from the WarmBoot call
-
-	// Copy the relocatable kernel chunk
-	//bios_copy_relocated_kernel();
-
-	// Reinitialize the A table
-	//bios_copy_a0_table();
-
-	// Restore A, B and C tables
-	//init_a0_b0_c0_vectors();
-
-	// Fix A table
-	//AdjustA0Table();
-
-	// Install default exception handlers
-	//InstallExceptionHandlers();
-
-	// Restore default exception return function
-	//SetDefaultExitFromException();
+#endif
 
 	// Clear interrupts and mask
 	I_STAT = 0;

@@ -13,7 +13,7 @@
 #include "crc.h"
 #include "integrity.h"
 
-int sscmd;
+uint8_t sscmd;
 
 const char * p5_localized;
 const char * region_name;
@@ -24,12 +24,13 @@ bool calibrate_laser = 0; // Only Japanese VC2 and VC3 consoles need this so it 
 bool bugged_setsession = 0; // VC0 A, VC0 B, and VC1 A CDROM Controller BIOS versions all have a buggy SetSession command that requires a special work around to use
 bool enable_unlock = 1; // Disabled on VC0 A, VC0 B, and VC1 A Japanese CDROM Controller BIOS versions automatically. On VC1+ the testregion command is run and if the region is Japan it is also disabled.
 bool controller_input = 0; // When enabled, debug_write does not display the repeat messages counter. This is so we can draw a blank line and then wait for controller input using vsync in debug_write
+bool first_rev = 0; // VC0 A and VC0 B do not need any anti-piracy patching as they are immune to addtional copy protection routines because of the lack of the ReadTOC command in the CDROM Controller BIOS Firmware
 
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
 
 // Buffer right before this executable
-uint8_t * const data_buffer = (uint8_t *) 0x801F9800;
+uint8_t * const data_buffer = (uint8_t *) 0x801F7880;
 
 void log_bios_version() {
 	/*
@@ -44,7 +45,7 @@ void log_bios_version() {
 		version = "1.0 or older";
 	}
 
-	debug_write("System BIOS Version: %s", version);
+	debug_write("Sys BIOS: %s", version);
 }
 
 
@@ -189,7 +190,6 @@ void try_boot_cd() {
 			// BIOS Function StartPAD()
 			address = (void *) (GetB0Table()[0x13]);
 			((void (*)(void)) address)();	// BIOS StartPad
-
 			debug_write("Keep the lid sensor blocked until turning off the console");
             debug_write("Remove the real NTSC-J PSX game disc");
             debug_write("Put in a backup/import disc, then press X on controller 1"); // Thanks MottZilla!
@@ -235,24 +235,6 @@ void try_boot_cd() {
 		}
 	}
 
-    #if !defined STEALTH
-        debug_write("Reinitializing kernel"); // We have to reinitilize, stop, and init in that order to prevent the process from freezing at this point
-    #endif
-    #if defined FREEPSXBOOT	
-    	bios_reinitialize_fpsxboot();
-    #else
-    	bios_reinitialize();
-    #endif
-	bios_inject_disc_error();
-
-	if(enable_unlock)
-		patcher_apply();  // Apply anti-piracy patch. If you can't unlock this is currently pointless because almost every single game containing anti-piracy detection executes a read-toc command which unlicenses/unathenticates the drive, ruining our swap trick. VC0/VC0B (SCPH-1000/Early SCPH-3000) don't actually have the read-toc command however, and if there is not a non-stealth modchip in the console it will pass all anti-piracy detections already. There are no more BIOS reinitializations after this point that could wipe out our patches so it is safe to do this here
-
-    #if !defined STEALTH
-        debug_write("Stopping motor");
-    #endif	
-    cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
-    
     #if !defined STEALTH
 	    debug_write("Initializing CD");
     #endif
@@ -376,7 +358,7 @@ void try_boot_cd() {
 	debug_write(" * %s = %x", "EVENT", event);
 	debug_write(" * %s = %x", "STACK", stacktop);
 	debug_write(" * %s = %s", "BOOT", bootfile);
-    
+
     #if !defined STEALTH
     	debug_write("Configuring kernel");
     #endif	   
@@ -391,7 +373,6 @@ void try_boot_cd() {
     #if !defined STEALTH
     	debug_write("Reading executable header");
     #endif
-
 	int32_t exe_fd = FileOpen(bootfile, FILE_READ);
 	if (exe_fd <= 0) {
 		#if !defined STEALTH
@@ -411,10 +392,8 @@ void try_boot_cd() {
 
 	exe_header_t * exe_header = (exe_header_t *) (data_buffer + 0x10);
 
-	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function
-	// since that's all we can do.
-	
-	if (exe_header->load_addr + exe_header->load_size >= data_buffer) {
+	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function since that's all we can do.
+	if (exe_header->load_addr + exe_header->load_size >= data_buffer) { // Comment out this line and the one mentioned below to force loadandexecute bios call
 		#if !defined STEALTH
 			debug_write("Executable won't fit. Using buggy BIOS call.");
 		#endif
@@ -425,12 +404,15 @@ void try_boot_cd() {
 			debug_switch_standard(game_is_pal);
 		}
 
+		if(!first_rev)
+			activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+
 		// Restore original error handler
 		bios_restore_disc_error();
 
 		LoadAndExecute(bootfile, exe_header->initial_sp_base, exe_header->initial_sp_offset);
 		return;
-	}
+	} // Comment out this line and the one above to force loadandexecute bios call
 
     #if !defined STEALTH
     	debug_write("Loading executable (%d bytes @ %x)", exe_header->load_size, exe_header->load_addr);
@@ -442,6 +424,9 @@ void try_boot_cd() {
 		#endif
 		return;
 	}
+	
+	if(!first_rev)
+		activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
 
 	FileClose(exe_fd);
 
@@ -470,11 +455,7 @@ void try_boot_cd() {
 
 void main() {
 	// Undo all possible fuckeries during exploiting
-    #if defined FREEPSXBOOT	
-    	bios_reinitialize_fpsxboot();
-    #else
-    	bios_reinitialize();
-    #endif
+	bios_reinitialize();
 	// Mute the audio
 	audio_halt();
 
@@ -500,73 +481,20 @@ void main() {
 
 	sscmd = 0x20; cd_command(CD_CMD_TEST,(unsigned char *)&sscmd,1); cd_wait_int(); 
 	cd_read_reply(cdcontrollerver);	// Test Command $19,$20 gets the CDROM BIOS
-   	if(cdcontrollerver[1]==0x09 && cdcontrollerver[2]==0x19 && cdcontrollerver[0]==0x94 && cdcontrollerver[3]==0xC0) {
-        #if !defined STEALTH
-            debug_write("CDROM Controller BIOS Version: September 19th 1994 VC0 A");
-        #endif        
+	#if !defined STEALTH
+		debug_write("CD BIOS: %x", *(uint32_t*) cdcontrollerver);
+	#endif
+   	if(cdcontrollerver[0]==0x94) {    
         bugged_setsession = 1;
-        enable_unlock = 0;
+        enable_unlock = 0; // VC0 A and VC0 B are both from 1994 and don't support the getregion command to figure out if it is unlockable or not.
+        first_rev = 1;
     } 
-    else if(cdcontrollerver[1]==0x11 && cdcontrollerver[2]==0x18 && cdcontrollerver[0]==0x94 && cdcontrollerver[3]==0xC0) {
-        #if !defined STEALTH
-            debug_write("CDROM Controller BIOS Version: November 18th 1994 VC0 B");
-        #endif        
-        bugged_setsession = 1;
-        enable_unlock = 0;
-    }
-    else if(cdcontrollerver[1]==0x05 && cdcontrollerver[2]==0x16 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xC1) {
-        #if !defined STEALTH
-            debug_write("CDROM Controller BIOS Version: May 16th 1995 VC1 A");
-        #endif        
+    else if(cdcontrollerver[1] == 0x05 && cdcontrollerver[2] == 0x16 && cdcontrollerver[0] == 0x95 && cdcontrollerver[3] == 0xC1) {     
         bugged_setsession = 1; // NOTE I don't think this will ever be triggered but just in case. Earliest SCPH-3000s and late SCPH-1000s are VC0B and later SCPH-3000s are VC1B. Only unlockable systems have VC1A it seems.
+        bugged_setsession = 1;
     }
-    #if !defined STEALTH                   
-        else if(cdcontrollerver[1]==0x07 && cdcontrollerver[2]==0x24 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xC1) {
-            debug_write("CDROM Controller BIOS Version: July 24th 1995 VC1 B");    
-        } 
-        else if(cdcontrollerver[1]==0x07 && cdcontrollerver[2]==0x24 && cdcontrollerver[0]==0x95 && cdcontrollerver[3]==0xD1) {        
-            debug_write("CDROM Controller BIOS Version: July 24th 1995 VD1 DEBUG");
-        }
-        else if(cdcontrollerver[1]==0x08 && cdcontrollerver[2]==0x15 && cdcontrollerver[0]==0x96 && cdcontrollerver[3]==0xC2) {
-            debug_write("CDROM Controller BIOS Version: August 15th 1996 VC2 VCD");
-        } 
-        else if(cdcontrollerver[1]==0x08 && cdcontrollerver[2]==0x18 && cdcontrollerver[0]==0x96 && cdcontrollerver[3]==0xC1) {        
-            debug_write("CDROM Controller BIOS Version: August 18th 1996 VC1 YAROZE");
-        } 
-    #endif
-    else if(cdcontrollerver[1]==0x09 && cdcontrollerver[2]==0x12 && cdcontrollerver[0]==0x96 && cdcontrollerver[3]==0xC2) {
-        #if !defined STEALTH                
-            debug_write("CDROM Controller BIOS Version: September 12th 1996 VC2 A JAPANESE");
-        #endif    
+    else if((cdcontrollerver[3] == 0xC2) || (cdcontrollerver[3] == 0xC3)) {   
         calibrate_laser = 1;
-    }
-    #if !defined STEALTH                 
-        else if(cdcontrollerver[1]==0x01 && cdcontrollerver[2]==0x10 && cdcontrollerver[0]==0x97 && cdcontrollerver[3]==0xC2) {
-            debug_write("CDROM Controller BIOS Version: January 10th 1997 VC2 A");
-            calibrate_laser = 1;
-        } 
-        else if(cdcontrollerver[1]==0x08 && cdcontrollerver[2]==0x14 && cdcontrollerver[0]==0x97 && cdcontrollerver[3]==0xC2) {
-            debug_write("CDROM Controller BIOS Version: August 14th 1997 VC2 B");
-	        calibrate_laser = 1;
-        }
-    #endif 
-    else if(cdcontrollerver[1]==0x06 && cdcontrollerver[2]==0x10 && cdcontrollerver[0]==0x98 && cdcontrollerver[3]==0xC3) {
-        #if !defined STEALTH        
-            debug_write("CDROM Controller BIOS Version: June 10th 1998 VC3 A");
-        #endif        
-        calibrate_laser = 1;        
-    } 
-    else if(cdcontrollerver[1]==0x02 && cdcontrollerver[2]==0x01 && cdcontrollerver[0]==0x99 && cdcontrollerver[3]==0xC3) {
-        #if !defined STEALTH
-            debug_write("CDROM Controller BIOS Version: February 1st 1999 VC3 B");
-        #endif        
-        calibrate_laser = 1;        
-    } 
-    else if(cdcontrollerver[1]==0x06 && cdcontrollerver[2]==0x06 && cdcontrollerver[0]==0xA1 && cdcontrollerver[3]==0xC3) {             
-        #if !defined STEALTH     
-            debug_write("CDROM Controller BIOS Version: June 6th 2001 VC3 C");
-        #endif        
-        calibrate_laser = 1;        
     }
 
 	if(enable_unlock) {
@@ -631,11 +559,7 @@ void main() {
 		#if !defined STEALTH
 		    debug_write("Reinitializing kernel");
         #endif
-    	#if defined FREEPSXBOOT
-    		bios_reinitialize_fpsxboot();
-    	#else
-    		bios_reinitialize();
-    	#endif		
+    	bios_reinitialize();
     	bios_inject_disc_error();
 	}
 }

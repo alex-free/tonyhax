@@ -85,7 +85,7 @@ busywait:
 	bne t0, zero, busywait
 
 	# Load temp buffer address
-	li s2, 0x801FA000
+	li s2, 0x801F8180
 
 	# Load header using FileRead
 	li t1, 0x34

@@ -1,7 +1,4 @@
 
 #pragma once
 
-/**
- * Install and apply suitable BIOS patches.
- */
-void patcher_apply(void);
+void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr);

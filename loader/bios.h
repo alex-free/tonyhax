@@ -43,11 +43,6 @@ extern const char * const BIOS_VERSION;
 void bios_reinitialize(void);
 
 /**
- * Executes a full reset of the console's BIOS (leaves A/B/C tables/external patches alone), as if a WarmBoot was issued.
- */
-void bios_reinitialize_fpsxboot(void);
-
-/**
  * Returns true if the console is running an original PS1 BIOS.
  *
  * @returns true if console is a PS1.

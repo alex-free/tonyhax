@@ -106,7 +106,7 @@ int cd_check_op(int op) {
 		*((uint32_t *) 0) = i;
 	}
 
-	// This is really bizarre, why a less than?
+	// This is really bizarre, why a less than? (Most likely because VC0 A/VC0 B consoles do not have readtoc in the firmware and would otherwise always fail!)
 	if (cd_ackd_ints < CD_OPERATIONS[op].expected_ints) {
 		return 0;
 	}

@@ -105,5 +105,5 @@ void cd_drive_reset() {
 	cd_wait_int();
 
 	// Need to wait for some cycles before it springs back to life
-	for (int i = 0; i < 0x400000; i++);
+	for (volatile int i = 0; i < 0x400000; i++); // unmodifiable compiler code
 }

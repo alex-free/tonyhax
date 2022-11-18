@@ -263,6 +263,46 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     }
 
+// Crash Bash
+  	if((strcmp("cdrom:\\SCUS_945.70;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Detected Crash Bash - USA");
+		#endif
+		/*
+		D002D51E 1040
+		8002D51E 1000
+		code by https://gbatemp.net/members/m4x1mumrez.610331/
+    	*/
+    	enable_code_1(0x8002D51E, 0x1000, 0x1040);
+    	install_cheat_engine();
+    }
+
+   	if((strcmp("cdrom:\\SCPS_101.40;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Detected Crash Bash - JPN");
+		#endif
+		/*
+		D002D7EE 1040
+		8002D7EE 1000
+		code from GameHacking: https://gamehacking.org/game/93827
+    	*/
+    	enable_code_1(0x8002D7EE, 0x1000, 0x1040);
+    	install_cheat_engine();
+    }
+
+   	if((strcmp("cdrom:\\PCPX_962.02;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Detected Crash Bash - JPN Demo");
+		#endif
+		/*
+		D002D3BE 1040
+		8002D3BE 1000
+		code by https://gbatemp.net/members/m4x1mumrez.610331/
+    	*/
+    	enable_code_1(0x8002D3BE, 0x1000, 0x1040);
+    	install_cheat_engine();
+    }
+
 // Cool Boarders 2001
    	if((strcmp("cdrom:\\SCUS_946.25;1", bootfile)) == 0) {
    		#if !defined STEALTH

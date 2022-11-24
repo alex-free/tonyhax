@@ -2,4 +2,4 @@
 
 cd "$(dirname "$0")"
 cd ../rom
-cdrdao write --speed 1 --swap --eject --device /dev/cdrom tonyhax-flasher-cd-japan.cue 
+cdrdao write --speed 1 --swap --eject tonyhax-rom-flasher.cue

@@ -272,10 +272,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D002D51E 1040
 		8002D51E 1000
 		code by https://gbatemp.net/members/m4x1mumrez.610331/
-    	*/
-    	enable_code_1(0x8002D51E, 0x1000, 0x1040);
-    	install_cheat_engine();
-    }
+		*/
+		enable_code_1(0x8002D51E, 0x1000, 0x1040);
+		install_cheat_engine();
+	}
 
    	if((strcmp("cdrom:\\SCPS_101.40;1", bootfile)) == 0) {
    		#if !defined STEALTH
@@ -285,10 +285,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D002D7EE 1040
 		8002D7EE 1000
 		code from GameHacking: https://gamehacking.org/game/93827
-    	*/
-    	enable_code_1(0x8002D7EE, 0x1000, 0x1040);
-    	install_cheat_engine();
-    }
+		*/
+		enable_code_1(0x8002D7EE, 0x1000, 0x1040);
+		install_cheat_engine();
+	}
 
    	if((strcmp("cdrom:\\PCPX_962.02;1", bootfile)) == 0) {
    		#if !defined STEALTH
@@ -298,10 +298,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D002D3BE 1040
 		8002D3BE 1000
 		code by https://gbatemp.net/members/m4x1mumrez.610331/
-    	*/
-    	enable_code_1(0x8002D3BE, 0x1000, 0x1040);
-    	install_cheat_engine();
-    }
+		*/
+		enable_code_1(0x8002D3BE, 0x1000, 0x1040);
+		install_cheat_engine();
+	}
 
 // Cool Boarders 2001
    	if((strcmp("cdrom:\\SCUS_946.25;1", bootfile)) == 0) {
@@ -312,10 +312,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D00B35B0 001E
 		800B35B0 0000
 		code generated via aprip
-    	*/
-    	enable_code_1(0x800B35B0, 0x0000, 0x001E);
-    	install_cheat_engine();
-    }
+		*/
+		enable_code_1(0x800B35B0, 0x0000, 0x001E);
+		install_cheat_engine();
+	}
 
    	if((strcmp("cdrom:\\SCUS_945.97;1", bootfile)) == 0) {
    		#if !defined STEALTH
@@ -325,10 +325,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D00B35B8 001E
 		800B35B8 0000
 		alex-free's code via aprip gameshark code conversion
-    	*/
-    	enable_code_1(0x800B35B8, 0x0000, 0x001E);
-    	install_cheat_engine();
-    }
+		*/
+		enable_code_1(0x800B35B8, 0x0000, 0x001E);
+		install_cheat_engine();
+	}
 
 // Dance Dance Revolution - Best Hits
 	if((strcmp("cdrom:\\SLPM_866.93;1", bootfile)) == 0) {
@@ -367,10 +367,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D019117A 1040
 		8019117A 1000
 		code is from copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml
-    	*/
-    	enable_code_1(0x8019117A, 0x1000, 0x1040);
-    	install_cheat_engine();
-    }
+		*/
+		enable_code_1(0x8019117A, 0x1000, 0x1040);
+		install_cheat_engine();
+	}
 
 // Dino Crisis
 	if((strcmp("cdrom:\\SLUS_009.22;1", bootfile) == 0)) { // NTSC-U has 2 versions, rev 0 and rev 1 (greatest hits) see https://tcrf.net/Dino_Crisis_(PlayStation)#Revisional_Differences
@@ -404,7 +404,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
  		   	enable_code_1(0x80148004, 0x8F20, 0x8658);
 			install_cheat_engine();
     	}
-	}
+}
 
    	if((strcmp("cdrom:\\SLPS_021.80;1", bootfile)) == 0) { // Same as USA Rev 0
    		#if !defined STEALTH
@@ -538,7 +538,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D0014274 52A9
 		80014274 50BE
 		code 1 of 2 by 'TheVoice' found on copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_g.shtml
-    	*/
+		*/
   		enable_code_1(0x80014274, 0x50BE, 0x52A9);
 		/*
 		D00146FE 1040
@@ -558,7 +558,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D001654E 1040
 		8001654E 1000
 		code found on copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_g.shtml
-    	*/
+		*/
   		enable_code_1(0x8001654E, 0x1000, 0x1040);
 		install_cheat_engine();
     }
@@ -572,7 +572,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D01A411E 1040
 		801A411E 1000
 		code found on copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_h.shtml
-    	*/
+		*/
   		enable_code_1(0x801A411E, 0x1000, 0x1040);
 		install_cheat_engine();
     }
@@ -586,7 +586,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D00A0186 1040
 		800A0186 1000
 		code found on copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_h.shtml
-    	*/
+		*/
   		enable_code_1(0x800A0186, 0x1000, 0x1040);
 		install_cheat_engine();
     }
@@ -628,13 +628,13 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D0035C48 D91E
 		80035C48 D733
 		code 1 of 2 found on copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_j.shtml
-    	*/
+		*/
   		enable_code_1(0x80035C48, 0xD733, 0xD91E);
   		/*
 		D00360D2 1040
 		800360D2 1000
 		code 2 of 2 found on copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_j.shtml
-    	*/
+		*/
   		enable_code_2(0x800360D2, 0x1000, 0x1040);
 		install_cheat_engine();
     }
@@ -676,7 +676,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D01BF172 1040
 		801BF172 1000
 		code found on copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_l.shtml
-    	*/
+		*/
   		enable_code_1(0x801BF172, 0x1000, 0x1040);
 		install_cheat_engine();
     }
@@ -757,7 +757,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		code 1 of 2 from copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_l.shtml
 		*/
   		enable_code_1(0x80050ECA, 0x1000, 0x1040);
-    	/*
+		/*
 		D00360D2 1040
 		800360D2 1000
 		code 2 of 2 from copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_l.shtml
@@ -775,7 +775,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		 D01011C0 001E
 		 801011C0 0000
 		code by https://gbatemp.net/members/m4x1mumrez.610331/ generated with APrip
-    	*/
+		*/
  		enable_code_1(0x801011C0, 0x0000, 0x001E);
  		install_cheat_engine();
     }
@@ -789,7 +789,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D00F0C3A 1040
 		800F0C3A 1000
 		code from copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_m.shtml
-    	*/
+		*/
  		enable_code_1(0x800F0C3A, 0x1000, 0x1040);
 		install_cheat_engine();
     }
@@ -803,7 +803,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D009E212 1040
 		8009E212 1000
 		code from copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_m.shtml
-    	*/
+		*/
  		enable_code_1(0x8009E212, 0x1000, 0x1040);
 		install_cheat_engine();
     }
@@ -817,7 +817,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D0031C1A 1040
 		80031C1A 1000
 		code from copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_m.shtml
-    	*/
+		*/
  		enable_code_1(0x80031C1A, 0x1000, 0x1040);
 		install_cheat_engine();
     }
@@ -859,7 +859,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D0015342 1040
 		80015342 1000
 		code from copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_p.shtml
-    	*/
+		*/
  		enable_code_1(0x80015342, 0x1000, 0x1040);
 		install_cheat_engine();
     }
@@ -902,8 +902,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80017962 1000
 		'skip mod check' code is from copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_b.shtml
 		*/
-    	enable_code_1(0x80017962, 0x1000, 0x1040);
-    	install_cheat_engine();
+		enable_code_1(0x80017962, 0x1000, 0x1040);
+		install_cheat_engine();
     }
 
    	if((strcmp("cdrom:\\SLUS_010.87;1", bootfile)) == 0) {
@@ -914,9 +914,9 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D001714E 1040
 		8001714E 1000
 		converted code via aprip
-    	*/
-    	enable_code_1(0x8001714E, 0x1000, 0x1040);
-    	install_cheat_engine();
+		*/
+		enable_code_1(0x8001714E, 0x1000, 0x1040);
+		install_cheat_engine();
     }
 
    	if(((strcmp("cdrom:\\SLES_027.32;1", bootfile)) == 0) || ((strcmp("cdrom:\\SLES_027.44;1", bootfile)) == 0)) { // Same code works on both Europe and France versions
@@ -928,8 +928,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8001713E 1000
 		converted code via aprip
 		*/
-    	enable_code_1(0x8001713E, 0x1000, 0x1040);
-    	install_cheat_engine();
+		enable_code_1(0x8001713E, 0x1000, 0x1040);
+		install_cheat_engine();
     }
 
 // Robbit mon Dieu
@@ -971,7 +971,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		code from copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
 		*/
  		enable_code_1(0x8006CA82, 0x1000, 0x1040);
-    	install_cheat_engine();
+		install_cheat_engine();
     }
 
 // Rockman 3: Dr. Wily no Saigo!?

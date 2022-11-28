@@ -29,9 +29,6 @@ bool first_rev = 0; // VC0 A and VC0 B do not need any anti-piracy patching as t
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
 
-// Buffer right before this executable
-uint8_t * const data_buffer = (uint8_t *) 0x801F7880;
-
 void log_bios_version() {
 	/*
 	 * "System ROM Version 4.5 05/25/00 A"
@@ -47,7 +44,6 @@ void log_bios_version() {
 
 	debug_write("Sys BIOS: %s", version);
 }
-
 
 bool backdoor_cmd(uint_fast8_t cmd, const char * string) {
 	uint8_t cd_reply[16];
@@ -252,7 +248,17 @@ void try_boot_cd() {
 		#endif
 		return;
 	}
-	
+
+	/*
+	 * Use the space the BIOS has allocated for reading CD sectors.
+	 *
+	 * The English translation of Mizzurna Falls (J) (SLPS-01783) depends on the header being
+	 * present here (see issue #95 in GitHub).
+	 *
+	 * This address varies between PS1 and PS2.
+	 */
+	uint8_t * data_buffer = (uint8_t *) (bios_is_ps1() ? 0xA000B070 : 0xA000A8D0);
+
     #if !defined STEALTH
     	debug_write("Checking game region");
     #endif
@@ -401,7 +407,7 @@ void try_boot_cd() {
 	exe_header_t * exe_header = (exe_header_t *) (data_buffer + 0x10);
 
 	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function since that's all we can do.
-	if (exe_header->load_addr + exe_header->load_size >= data_buffer) { // Comment out this line and the one mentioned below to force loadandexecute bios call
+	if (exe_header->load_addr + exe_header->load_size >= &__RO_START__) { // Comment out this line and the one mentioned below to force loadandexecute bios call
 		#if !defined STEALTH
 			debug_write("Executable won't fit. Using buggy BIOS call.");
 		#endif

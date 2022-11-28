@@ -143,7 +143,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     		install_cheat_engine();
     	} else {
 			debug_write("REV 1");
- 			// D0022206 1040 alex-free's code via aprip gameshark code conversion
+ 			// D0022206 1040 my code via aprip gameshark code conversion
 			// 80022206 1000
     		enable_code_1(0x80022206, 0x1000, 0x1040);
     		install_cheat_engine();		
@@ -158,7 +158,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	/*
 		D0134C48 001E
 		80134C48 0000
-		alex-free's code to patch out readtoc
+		my code to patch out readtoc
     	*/
     	enable_code_1(0x80134C48, 0x0000, 0x001E);
     	install_cheat_engine();
@@ -172,7 +172,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D0131B6C 001E
 		80131B6C 001A
-    	alex-free's code to patch out readtoc
+    	my code to patch out readtoc
     	*/
     	enable_code_1(0x80131B6C, 0x0000, 0x001E);
     	install_cheat_engine();
@@ -202,7 +202,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 			/*
 			D018418E 1040
 			8018418E 1000 
-			alex-free's code via aprip gameshark code conversion
+			my code via aprip gameshark code conversion
     		*/
     		enable_code_1(0x8018418E, 0x1000, 0x1040);
     		install_cheat_engine();
@@ -257,7 +257,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
     	D001255E 1040
     	8001255E 1040
-		alex-free's code via aprip gameshark code conversion
+		my code via aprip gameshark code conversion
     	*/
     	enable_code_1(0x8001255E, 0x1000, 0x1040);
     	install_cheat_engine();
@@ -271,7 +271,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D002D51E 1040
 		8002D51E 1000
-		code by https://gbatemp.net/members/m4x1mumrez.610331/
+		code converted via aprip by https://gbatemp.net/members/m4x1mumrez.610331/
     	*/
     	enable_code_1(0x8002D51E, 0x1000, 0x1040);
     	install_cheat_engine();
@@ -297,7 +297,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D002D3BE 1040
 		8002D3BE 1000
-		code by https://gbatemp.net/members/m4x1mumrez.610331/
+		code converted via aprip by https://gbatemp.net/members/m4x1mumrez.610331/
     	*/
     	enable_code_1(0x8002D3BE, 0x1000, 0x1040);
     	install_cheat_engine();
@@ -324,9 +324,23 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D00B35B8 001E
 		800B35B8 0000
-		alex-free's code via aprip gameshark code conversion
+		my code via aprip gameshark code conversion
     	*/
     	enable_code_1(0x800B35B8, 0x0000, 0x001E);
+    	install_cheat_engine();
+    }
+
+// Dance Dance Revolution Best Hits
+   	if((strcmp("cdrom:\\SLPM_866.93;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Detected Dance Dance Revolution Best Hits - JPN");
+		#endif
+		/*
+		D0102FA0 001E
+		80102FA0 0000
+		my code via aprip to patch out ReadTOC
+    	*/
+    	enable_code_1(0x80102FA0, 0x0000, 0x001E);
     	install_cheat_engine();
     }
 
@@ -371,7 +385,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 			/*
 			D0148004 8658
 			80148004 8F20
-			alex-free's code, the anti-piracy table just moved memory addresses between versions :)
+			my code, the anti-piracy table just moved memory addresses between versions :)
 			*/
  		   	enable_code_1(0x80148004, 0x8F20, 0x8658);
 			install_cheat_engine();
@@ -399,7 +413,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
   		/*
 		D00D7714 001E
 		800D7714 0000
-		alex-free's code via aprip to disable readtoc
+		my code via aprip to disable readtoc
 		*/
 		enable_code_1(0x800D7714, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -412,7 +426,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
   		/*
 		D00CB104 001E
 		800CB104 0000
-		alex-free's codevia aprip to disable readtoc
+		my codevia aprip to disable readtoc
 		*/
 		enable_code_1(0x800CB104, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -426,7 +440,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
   		/*
 		D0063004 001E
 		80063004 0000
-		alex-free's code via aprip to disable readtoc
+		my code via aprip to disable readtoc
 		*/
 		enable_code_1(0x80063004, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -439,7 +453,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
   		/*
 		D006351C 001E
 		8006351C 0000
-		alex-free's code via aprip to disable readtoc
+		my code via aprip to disable readtoc
 		*/
 		enable_code_1(0x8006351C, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -467,7 +481,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D00B9170 001E
 		800B9170 0000
-		alex-free's code to patch out readtoc via aprip
+		my code to patch out readtoc via aprip
   		*/
   		enable_code_1(0x800B9170, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -481,7 +495,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D0195D9C 001E
 		80195D9C 0000
-		alex-free's code to patch out readtoc via aprip
+		my code to patch out readtoc via aprip
   		*/
   		enable_code_1(0x80195D9C, 0x0000, 0x001E);
   		install_cheat_engine();
@@ -495,7 +509,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D0055278 001E
 		80055278 0000
-		alex-free's code to patch out readtoc via aprip
+		my code to patch out readtoc via aprip
   		*/
   		enable_code_1(0x80055278, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -571,7 +585,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
   		/*
 		D016B4D8 001E
 		8016B4D8 0000
-		alex-free's code to patch out readtoc via aprip
+		my code to patch out readtoc via aprip
 		*/
   		enable_code_1(0x8016B4D8, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -585,7 +599,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D016B268 001E
 		8016B268 0000
-		alex-free's code to patch out readtoc via aprip
+		my code to patch out readtoc via aprip
 		*/
   		enable_code_1(0x8016B268, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -646,7 +660,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		801BF6F6 1040
 		801BF6F6 1000 
-		alex-free's code via aprip's gameshark conversion
+		my code via aprip's gameshark conversion
    		*/
   		enable_code_1(0x801BF6F6, 0x1000, 0x1040);
 		install_cheat_engine();
@@ -659,7 +673,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D01C0892 1040
 		801C0892 1000
-		alex-free's code via aprip's gameshark conversion
+		my code via aprip's gameshark conversion
 		*/
   		enable_code_1(0x801C0892, 0x1000, 0x1040);
 		install_cheat_engine();
@@ -672,7 +686,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D01C0872 1040
 		801C0872 1040
-		alex-free's code via aprip's gameshark conversion
+		my code via aprip's gameshark conversion
 		*/
   		enable_code_1(0x801C0872, 0x1000, 0x1040);
 		install_cheat_engine();
@@ -685,7 +699,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D01C082E 1040
 		801C082E 1000
-		alex-free's code via aprip's gameshark conversion
+		my code via aprip's gameshark conversion
   		*/
   		enable_code_1(0x801C082E, 0x1000, 0x1040);
 		install_cheat_engine();
@@ -698,7 +712,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D01C0826 1040
 		801C0826 1000
-		alex-free's code via aprip's gameshark conversion
+		my code via aprip's gameshark conversion
 		*/
   		enable_code_1(0x801C0826, 0x1000, 0x1040);
 		install_cheat_engine();
@@ -830,7 +844,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
    		/*
 		D0048F34 001E
 		80048F34 0000
-		alex-free's code via aprip to patch out readtoc
+		my code via aprip to patch out readtoc
 		*/
  		enable_code_1(0x80048F34, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -844,7 +858,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
  		/*
 		D004A24D 001E
 		8004A24D 0000
-		alex-free's code via aprip to patch out readtoc
+		my code via aprip to patch out readtoc
 		*/
  		enable_code_1(0x8004A24D, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -954,7 +968,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
  		/*
  		D007009C 001E
 		8007009C 0000
- 		alex-free's code via aprip to patch out readtoc
+ 		my code via aprip to patch out readtoc
 		*/
  		enable_code_1(0x8007009C, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -995,7 +1009,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D01BD13E 1040
 		801BD13E 1000
-		alex-free's code via aprip gameshark code conversion
+		my code via aprip gameshark code conversion
 		*/
  		enable_code_1(0x801BD48A, 0x1000, 0x1040);
 		install_cheat_engine();
@@ -1009,7 +1023,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D002542C 001E
 		8002542C 0000
-		alex-free's code via aprip
+		my code via aprip
 		*/
  		enable_code_1(0x8002542C, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -1023,7 +1037,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
  		/*
 		D00865FC 001E
 		800865FC 0000
-		alex-free's code via aprip to patch out readtoc
+		my code via aprip to patch out readtoc
 		*/
  		enable_code_1(0x800865FC, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -1037,7 +1051,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
    		/*
    		D003A4E8 001E
    		8003A4E8 0000
- 		alex-free's code via aprip to patch out readtoc
+ 		my code via aprip to patch out readtoc
     	*/
  		enable_code_1(0x8003A4E8, 0x0000, 0x001E);
 		install_cheat_engine();
@@ -1050,7 +1064,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
    		D003A5D4 001E
    		8003A5D4 0000
-		alex-free's code via aprip gameshark code conversion on my own code (code-ception)
+		my code via aprip gameshark code conversion on my own code (code-ception)
     	*/
  		enable_code_1(0x8003A5D4, 0x0000, 0x001E);
 		install_cheat_engine();

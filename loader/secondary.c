@@ -42,6 +42,7 @@ void log_bios_version() {
 		version = "1.0 or older";
 	}
 
+	debug_write("Console: %s", bios_is_ps1() ? "PS1": "PS2");
 	debug_write("Sys BIOS: %s", version);
 }
 

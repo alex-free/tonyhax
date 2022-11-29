@@ -35,11 +35,6 @@ struct handler_info {
  */
 
 /**
- * BIOS author string.
- */
-static const char * const BIOS_DEVELOPER = (const char *) 0xBFC0012C; // BIOS v2.1 and above
-static const char * const BIOS_DEVELOPER_OLD = (const char *) 0xBFC00129; // BIOS v1.0-v2.0
-/**
  * BIOS version string. Not available on SCPH-1000 consoles.
  *
  * Example: "System ROM Version 4.1 12/16/97 E"
@@ -263,21 +258,6 @@ void init_a0_b0_c0_vectors(void);
  * Table A, call 0x46.
  */
 void GPU_dw(uint32_t x, uint32_t y, uint32_t width, uint32_t height, const uint16_t * src);
-
-/**
- * Copies the width*height 16-bit half words to Vram at x, y coords using DMA.
- *
- * width*height MUST be a multiple of 32, or else it'll lock up.
- *
- * @param x Vram coord X
- * @param y Vram coord Y
- * @param width texture width, in 16-bit pixels
- * @param height texture height, in lines
- * @param src texture data
- *
- * Table A, call 0x47.
- */
-void gpu_send_dma(uint32_t x, uint32_t y, uint32_t width, uint32_t height, const uint16_t * src);
 
 /**
  * Executes the given GPU GP1 command.

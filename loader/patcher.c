@@ -856,11 +856,11 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 			//debug_write("Detected Pop'n Music 6");
 		#endif
  		/*
-		D004A24D 001E
-		8004A24D 0000
+		D004A24C 001E
+		8004A24C 0000
 		my code via aprip to patch out readtoc
 		*/
- 		enable_code_1(0x8004A24D, 0x0000, 0x001E);
+ 		enable_code_1(0x8004A24C, 0x0000, 0x001E);
 		install_cheat_engine();
     }
 

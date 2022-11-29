@@ -37,8 +37,8 @@ struct handler_info {
 /**
  * BIOS author string.
  */
-static const char * const BIOS_DEVELOPER = (const char *) 0xBFC0012C;
-
+static const char * const BIOS_DEVELOPER = (const char *) 0xBFC0012C; // BIOS v2.1 and above
+static const char * const BIOS_DEVELOPER_OLD = (const char *) 0xBFC00129; // BIOS v1.0-v2.0
 /**
  * BIOS version string. Not available on SCPH-1000 consoles.
  *

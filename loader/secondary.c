@@ -426,7 +426,7 @@ void try_boot_cd() {
 
 		LoadAndExecute(bootfile, exe_header->initial_sp_base, exe_header->initial_sp_offset);
 		return;
-	} // Comment out this line and the one above to force loadandexecute bios call
+	}
 
     #if !defined STEALTH
     	debug_write("Loading executable (%d bytes @ %x)", exe_header->load_size, exe_header->load_addr);

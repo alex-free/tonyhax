@@ -100,7 +100,13 @@ bool bios_is_ps1(void) {
 	 *
 	 * PS2 have "PS compatible mode by M.T"
 	 */
-	return strncmp(BIOS_DEVELOPER, "CEX-", 4) == 0;
+	if(strncmp(BIOS_DEVELOPER, "CEX-", 4) == 0) {
+		return true;
+	} else if(strncmp(BIOS_DEVELOPER_OLD, "CEX-", 4) == 0) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 bool bios_is_european(void) {

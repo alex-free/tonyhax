@@ -19,6 +19,9 @@ clean:
 %.o: %.S $(LOADER_HEADERS)
 	$(CC) $(CFLAGS) -c $<
 
+orca.inc: orca.img
+	bash ../util/bin2h.sh ORCA_IMAGE orca.img orca.inc
+
 secondary.elf: secondary.ld $(LOADER_OBJECTS)
 	$(LD) $(LDFLAGS) -T secondary.ld $(LOADER_OBJECTS) -o $@
 	bash insert-tonyhax-crc.sh secondary.elf

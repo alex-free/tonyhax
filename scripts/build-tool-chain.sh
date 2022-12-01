@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
-cd "$(dirname "$0")"
-cd ../
-git submodule update --init --recursive
+cd "$(dirname "$0")"/../
 cd crosstool-ng
 ./bootstrap
 ./configure --enable-local
@@ -15,6 +13,3 @@ cd ../mkpsxiso
 rm -rf ./build
 cmake -S . -B ./build -DCMAKE_BUILD_TYPE=Release
 cmake --build ./build
-
-
-

@@ -2,7 +2,7 @@
 #include "bios.h"
 #include "debugscreen.h"
 #include "str.h"
-#include "patcher.h"
+#include "ap-bypass.h"
 
 /*
 MottZilla's original notes from his email to me:
@@ -236,6 +236,33 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     }
 
+// Crash Bash
+  	if((strcmp("cdrom:\\SCUS_945.70;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Detected Crash Bash - USA");
+		#endif
+		/*
+		D002D51E 1040
+		8002D51E 1000
+		code from GameHacking: https://gamehacking.org/game/88640, skips mod check
+    	*/
+    	enable_code_1(0x8002D51E, 0x1000, 0x1040);
+    	install_cheat_engine();
+    }
+
+   	if((strcmp("cdrom:\\SCPS_101.40;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Detected Crash Bash - JPN");
+		#endif
+		/*
+		D002D7EE 1040
+		8002D7EE 1000
+		code from GameHacking: https://gamehacking.org/game/93827, skips mod check
+    	*/
+    	enable_code_1(0x8002D7EE, 0x1000, 0x1040);
+    	install_cheat_engine();
+    }
+
 // Crash Bandicoot Racing
    	if((strcmp("cdrom:\\SCPS_101.18;1", bootfile)) == 0) {
    		#if !defined STEALTH
@@ -263,46 +290,6 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     }
 
-// Crash Bash
-  	if((strcmp("cdrom:\\SCUS_945.70;1", bootfile)) == 0) {
-   		#if !defined STEALTH
-			//debug_write("Detected Crash Bash - USA");
-		#endif
-		/*
-		D002D51E 1040
-		8002D51E 1000
-		code converted via aprip by https://gbatemp.net/members/m4x1mumrez.610331/
-    	*/
-    	enable_code_1(0x8002D51E, 0x1000, 0x1040);
-    	install_cheat_engine();
-    }
-
-   	if((strcmp("cdrom:\\SCPS_101.40;1", bootfile)) == 0) {
-   		#if !defined STEALTH
-			//debug_write("Detected Crash Bash - JPN");
-		#endif
-		/*
-		D002D7EE 1040
-		8002D7EE 1000
-		code from GameHacking: https://gamehacking.org/game/93827
-    	*/
-    	enable_code_1(0x8002D7EE, 0x1000, 0x1040);
-    	install_cheat_engine();
-    }
-
-   	if((strcmp("cdrom:\\PCPX_962.02;1", bootfile)) == 0) {
-   		#if !defined STEALTH
-			//debug_write("Detected Crash Bash - JPN Demo");
-		#endif
-		/*
-		D002D3BE 1040
-		8002D3BE 1000
-		code converted via aprip by https://gbatemp.net/members/m4x1mumrez.610331/
-    	*/
-    	enable_code_1(0x8002D3BE, 0x1000, 0x1040);
-    	install_cheat_engine();
-    }
-
 // Cool Boarders 2001
    	if((strcmp("cdrom:\\SCUS_946.25;1", bootfile)) == 0) {
    		#if !defined STEALTH
@@ -327,20 +314,6 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		my code via aprip gameshark code conversion
     	*/
     	enable_code_1(0x800B35B8, 0x0000, 0x001E);
-    	install_cheat_engine();
-    }
-
-// Dance Dance Revolution Best Hits
-   	if((strcmp("cdrom:\\SLPM_866.93;1", bootfile)) == 0) {
-   		#if !defined STEALTH
-			//debug_write("Detected Dance Dance Revolution Best Hits - JPN");
-		#endif
-		/*
-		D0102FA0 001E
-		80102FA0 0000
-		my code via aprip to patch out ReadTOC
-    	*/
-    	enable_code_1(0x80102FA0, 0x0000, 0x001E);
     	install_cheat_engine();
     }
 
@@ -625,7 +598,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     }
 
-// Kore Hore! Pukka
+// Koko Hore! Pukka
 	if((strcmp("cdrom:\\SCPS_101.33;1", bootfile)) == 0) {
 		#if !defined STEALTH
 			//debug_write("Detected Kore Hore! Pukka");
@@ -633,7 +606,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D00A341C 001E
 		800A341C 0000
-		code by https://gbatemp.net/members/m4x1mumrez.610331/ generated with APrip
+		code generated via aprip by https://gbatemp.net/members/m4x1mumrez.610331/
     	*/
   		enable_code_1(0x800A341C, 0x0000, 0x001E);
     	install_cheat_engine();
@@ -738,15 +711,15 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     }
 
-// Love Hina: Ai wa Kotoba no Naka ni & Love Hina 2: Kotoba wa Konayuki no You ni 
-   	if(((strcmp("cdrom:\\SLPM_866.52;1", bootfile)) == 0) || ((strcmp("cdrom:\\SLPM_866.77;1", bootfile)) == 0)) { // Both share the same code
+// Love Hina: Ai wa Kotoba no Naka ni / Love Hina 2: Kotoba wa Konayuki no You ni
+   	if(((strcmp("cdrom:SLPM_866.52;1", bootfile)) == 0) || ((strcmp("cdrom:SLPM_866.77;1", bootfile)) == 0)) { // Same code works for both games
    		#if !defined STEALTH
 			//debug_write("Detected Love Hina 1 or 2");
 		#endif
 		/*
 		 D01011C0 001E
 		 801011C0 0000
-		code by https://gbatemp.net/members/m4x1mumrez.610331/ generated with APrip
+		code generated via APrip by https://gbatemp.net/members/m4x1mumrez.610331/
     	*/
  		enable_code_1(0x801011C0, 0x0000, 0x001E);
  		install_cheat_engine();
@@ -819,6 +792,20 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		code from copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_p.shtml
 		*/
  		enable_code_1(0x800B2612, 0x1000, 0x1040);
+		install_cheat_engine();
+    }
+
+// Pop'n Music: Animation Melody
+   	if((strcmp("cdrom:\\SLPM_865.92;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Pop'n Music: Animation Melody");
+		#endif
+		/*
+		D009E7E8 001E
+		8009E7E8 0000
+		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+    	*/
+ 		enable_code_1(0x8009E7E8, 0x0000, 0x001E);
 		install_cheat_engine();
     }
 

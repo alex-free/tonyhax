@@ -48,12 +48,13 @@ _Boot Methods_
 
 _More Info_
 
-*	[Playing Games With Additional Copy Protection Routines](#playing-games-with-additonal-copy-protection-routines)
-*   [CD-R Media For PS1 Backups](#cd-r-media-for-ps1-backups)
-*   [Burning Programs For PS1 Backups](#burning-programs-for-ps1-backups)
-*	[Disc Read Errors And PS1 CD Drive Repair](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/)
-*   [Building From Source](#building-from-source)
-*   [Credits](#credits)
+* [Playing Games With Additional Copy Protection Routines](#playing-games-with-additonal-copy-protection-routines)
+* [CD-R Media For PS1 Backups](#cd-r-media-for-ps1-backups)
+* [Burning Programs For PS1 Backups](#burning-programs-for-ps1-backups)
+* [Disc Read Errors And PS1 CD Drive Repair](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/)
+* [Building From Source](#building-from-source)
+* [Known Incompatible Games](#known-incompatible-games)
+* [Credits](#credits)
 
 ## External Links
 
@@ -72,10 +73,30 @@ _More Info_
 
 ## Downloads
 
+### Version 1.1.3 (11/30/2022)
+
+*   [tonyhax-v1.1.3-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.3i/tonyhax-v1.1.3-international.zip)
+
+Changes:
+
+* Added support for bypassing the [additional anti-piracy copy protection routines](#playing-games-with-additonal-copy-protection-routines) in Crash Bash/Crash Bandicoot Carnival, Koko Hore! Pukka, Love Hina: Ai wa Kotoba no Naka ni, and Love Hina 2: Kotoba wa Konayuki no You ni (thanks [M4x1mumRez](https://github.com/M4x1mumReZ)).
+
+* Added a [Known Incompatible Games](#known-incompatible-games) section, which documents games that currently do not work with either the **original [Tonyhax](https://github.com/socram8888/tonyhax) OR Tonyhax International.**
+
+* Rewrote the [Building From Source](#building-from-source) instructions for clarity and simplicity.
+
+* Fixed Pop'n Music 6's anti-piracy bypass and 'boots to black screen' issue.
+
+* Added support for bypassing the [additional anti-piracy copy protection routines](#playing-games-with-additonal-copy-protection-routines) in Pop'N Music: Animation Melody (thanks [trappedinlimbo](https://www.psx-place.com/members/trappedinlimbo.156719/)).
+
+* Merged **all new applicable changes** from the latest [O.G. Tonyhax](https://github.com/socram8888/tonyhax) where applicable (as of 11/30/2022 this is up to date with the current source tree). See commits [8284633c435a9325dcfd7028d9788bacae94de69](https://github.com/alex-free/tonyhax/commit/8284633c435a9325dcfd7028d9788bacae94de69), [b72b08e5ba814196f07993491b483e5ec8e3fc93](https://github.com/alex-free/tonyhax/commit/b72b08e5ba814196f07993491b483e5ec8e3fc93), and [8934a2bb614973064e45a6638e03fd0c7426e5fc](https://github.com/alex-free/tonyhax/commit/8934a2bb614973064e45a6638e03fd0c7426e5fc) for full details.
+
+* Changed everything to be cleaner and closer to the latest source tree of the original Tonyhax. There will now be a diff comparing the `loader` directory of the current Tonyhax `loader` directory with the Tonyhax International `loader` directory, enabling easy comparison/documention/review of the current code differences between the fork and upstream. You can find this diff in the `docs/tonyhax-vs-tonyhax-international-diffs` directory in the source tree.
+
+
 ### Version 1.1.2 (11/9/2022)
 
 *   [tonyhax-v1.1.2-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.2i/tonyhax-v1.1.2-international.zip)
-*   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.1.2i.zip)
 
 Changes:
 
@@ -85,10 +106,10 @@ Changes:
 
 *	Fixes a regression in version 1.1.1 that could possibly cause Japanese consoles to freeze before booting the game completely.
 
+
 ### Version 1.1.1 (10/29/2022)
 
 *   [tonyhax-v1.1.1-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.1i/tonyhax-v1.1.1-international.zip)
-*   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.1.1i.zip)
 
 Changes:
 
@@ -99,7 +120,6 @@ Changes:
 ### Version 1.1.0 (9/25/2022)
 
 *   [tonyhax-v1.1.0-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.0i/tonyhax-v1.1.0-international.zip)
-*   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.1.0i.zip)
 
 Changes:
 
@@ -117,7 +137,6 @@ Changes:
 ### Version 1.0.8 (8/26/2022)
 
 *   [tonyhax-v1.0.8-international](https://github.com/alex-free/tonyhax/releases/download/v1.0.8i/tonyhax-v1.0.8-international.zip)
-*   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.8i.zip)
 
 Changes:
 
@@ -129,7 +148,6 @@ Changes:
 ### Version 1.0.7 (8/7/2022)
 
 *   [tonyhax-v1.0.7-international](https://github.com/alex-free/tonyhax/releases/download/v1.0.7i/tonyhax-v1.0.7-international.zip)
-*   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.7i.zip)
 
 Changes:
 
@@ -142,7 +160,6 @@ Changes:
 ### Version 1.0.6 (8/3/2022)
 
 *   [tonyhax-v1.0.6-international](https://github.com/alex-free/tonyhax/releases/download/v1.0.6i/tonyhax-v1.0.6-international.zip)
-*   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.6i.zip)
 
 Changes:
 
@@ -152,7 +169,6 @@ Changes:
 ### Version 1.0.5 (7/27/2022)
 
 *   [tonyhax-v1.0.5-international](https://github.com/alex-free/tonyhax/releases/download/v1.0.5i/tonyhax-v1.0.5-international.zip)
-*   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.5i.zip)
 
 Changes:
 
@@ -161,7 +177,6 @@ Changes:
 ### Version 1.0.4 (7/23/2022)
 
 *   [tonyhax-v1.0.4-international](https://github.com/alex-free/tonyhax/releases/download/v1.0.4i/tonyhax-v1.0.4-international.zip)
-*   [source code](https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.4i.zip)
 
 ## Usage
 
@@ -613,11 +628,15 @@ If you use cdrdao, you must use the `--swap` argument for discs with CDDA audio 
 
 Starting in late 1998, some PSX games began including additional copy protection code that is designed to prevent playing backup CD-R copies of a game. This additional copy protection originally could only detect the first type of mod-chips (known as 'non-stealth') and would only fail if it detected one. **Tonyhax International does not trigger this type of anti-piracy copy protection on stock consoles and these games don't require any patching by Tonyhax International.**
 
-Starting in mid 1999, the additional copy protection code was upgraded again. This updated copy protection code can detect 'non-stealth' mod-chips, 'traditional' swap tricks (which don't update TOC data), and the authenticity of the disc currently running in the PSX console. **This last check causes the anti-piracy copy protection routine to trigger on games booted with Tonyhax International unless you are using a SCPH-1000 or early SCPH-3000 Japanese PSX console model. All is not lost however, Tonyhax International is now capable of game-specific on the fly patching to bypass this type of anti-piracy copy protection routine on ALL consoles. Below is a list of games which require explicit game-specific anti-piracy bypass support to work and their current status of support as of the latest version of Tonyhax International.**
+Starting in mid 1999, the additional copy protection code was upgraded again. This updated copy protection code can detect 'non-stealth' mod-chips, 'traditional' swap tricks (which don't update TOC data), and the authenticity of the disc currently running in the PSX console. **This last check causes the anti-piracy copy protection routine to trigger on games booted with Tonyhax International unless you are using a SCPH-1000 or early SCPH-3000 Japanese PSX console model. 
+
+**Tonyhax International is now capable of game-specific on the fly patching to bypass this type of anti-piracy copy protection routine on ALL consoles.** Below is a list of games which require explicit game-specific anti-piracy bypass support to work and their current status of support as of the latest version of Tonyhax International.**
 
 If you find a game which triggers the 'anti-piracy screen of death' that is not listed below, or you want support to be added for a game that is not yet currently supported but is listed below, please open an [Anti-Piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&template=antipiracy-issue.md&title=) on the [Tonyhax International Github](https://github.com/alex-free/tonyhax). I would eventually like every game that can trigger the anti-piracy copy protection routine when booted via Tonyhax International on a stock console to have a game specific bypass implemented for 100% compatibility.
 
-Some PAL games are using a different copy protection scheme known as LibCrypt protection. This protection can be bypassed by burning a backup CD-R in a [very specific way to keep the protection working](https://github.com/Kippykip/SBITools), or just by using an original authentic PAL PSX disc. **Some PAL games may include both anti-piracy detection and LibCrypt detection, please open an [Anti-Piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&template=antipiracy-issue.md&title=) on the [Tonyhax International Github](https://github.com/alex-free/tonyhax) in such a case so that I can add support.**
+_IMPORTANT NOTE:_ Tonyhax International **does not bypass anti-piracy if your console has an actual non-stealth modchip installed.**
+
+Some PAL games are using a different copy protection scheme known as LibCrypt protection. This protection can be bypassed by burning a backup CD-R in a [very specific way to keep the protection working](https://github.com/Kippykip/SBITools), or just by using an original authentic PAL PSX disc ('imported' for a different region console will work via the Tonyhax International loader).
 
 
 ### Animetic Story Game 1: Card Captor Sakura
@@ -625,7 +644,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: Japan ([Disc 1](http://redump.org/disc/12000/), [Disc 2](http://redump.org/disc/11999/)).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immeditely.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Alundra 2
@@ -633,7 +651,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/15641/), [Japan Demo](http://redump.org/disc/6752/), [USA](http://redump.org/disc/2996/), [Europe](http://redump.org/disc/1089/), [German](http://redump.org/disc/11603/), [French](http://redump.org/disc/13396/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: When first booting the game during the 'now loading' screen.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 3 GetTN commands.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Arc The Lad III
@@ -641,7 +658,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: Japan Rev 0 ([Disc 1](http://redump.org/disc/5897/), [Disc 2](http://redump.org/disc/5898/)), Japan Rev 1 ([Disc 1](http://redump.org/disc/34793/), [Disc 2](http://redump.org/disc/34794/)), USA ([Disc 1](http://redump.org/disc/674/), [Disc 2](http://redump.org/disc/675/)).
 - Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.
 - Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.
 
 ### Beat Mania: The Sound of Tokyo
@@ -649,7 +665,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/36163/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Beat Mania 6thMix + Core Remix
@@ -657,7 +672,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/16285/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Chase The Express
@@ -665,15 +679,20 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: Japan ([Disc 1](http://redump.org/disc/5637/), [Disc 2](http://redump.org/disc/5638/)), [Japan Demo 1](http://redump.org/disc/6551/), [Japan Demo 2](http://redump.org/disc/19589/), Europe ([Disc 1](http://redump.org/disc/27257/), [Disc 2](http://redump.org/disc/27258/)), France ([Disc 1](http://redump.org/disc/28137/), [Disc 2](http://redump.org/disc/28138/)), Germany ([Disc 1](http://redump.org/disc/7507/), [Disc 2](http://redump.org/disc/7508/)), Italy ([Disc 1](http://redump.org/disc/28358/), [Disc 2](http://redump.org/disc/28359/)).
 - Versions With Anti-Piracy Screen: Japan, Japan Demo 1, Japan Demo 2.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 2 GeTN commands.
 - Versions With Anti-Piracy Bypass Support: Japan, Japan Demo 1, Japan Demo 2.
+
+### Crash Bash
+
+- Versions Tested: [Japan](http://redump.org/disc/3819/), [Japan] Demo](http://redump.org/disc/53589/), [USA](http://redump.org/disc/512/), [USA Demo](http://redump.org/disc/49446/), [Europe](http://redump.org/disc/5483/).
+- Versions With Anti-Piracy Screen: Japan, USA.
+- When Is The Anti-Piracy Screen Check: 'Sony Computer Entertainment Presents' screen.
+- Versions With Anti-Piracy Bypass Support: Japan, USA.
 
 ### Crash Bandicoot Racing
 
 - Versions Tested: [Japan](http://redump.org/disc/3694/), [Japan Demo](http://redump.org/disc/53590/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: When first booting the game when the Naughty Dog box is first visible.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 14 GetTN commands.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Cool Boarders 2001
@@ -681,7 +700,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [USA](http://redump.org/disc/513/), [USA Demo](http://redump.org/disc/42467/).
 - Versions With Anti-Piracy Screen: USA, USA Demo.
 - When Is The Anti-Piracy Screen Check: During the first loading screen.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN commands.
 - Versions With Anti-Piracy Bypass Support: USA, USA Demo.
 
 ### Dancing Stage Featuring True Kiss Destination
@@ -689,7 +707,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/15853/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: On the first text screen after boot, until right before the first FMV.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Dino Crisis
@@ -697,7 +714,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/1598/), [USA Rev 0](http://redump.org/disc/459/), [USA Rev 1](http://redump.org/disc/473/), [USA Demo](http://redump.org/disc/2942/), [Europe](http://redump.org/disc/710/), [Italy](http://redump.org/disc/28171/), [Germany](http://redump.org/disc/7586/), [France](http://redump.org/disc/24278/), [Spain](http://redump.org/disc/27940/).
 - Versions With Anti-Piracy Screen: Japan, USA Rev 0, USA Rev 1.
 - When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 3 GetTN commands.
 - Versions With Anti-Piracy Bypass Support: Japan, USA Rev 0, USA Rev 1.
 
 ### Dino Crisis 2
@@ -705,14 +721,12 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/1600/), [Japan Demo](http://redump.org/disc/4407/), [USA](http://redump.org/disc/460/), [USA Demo](http://redump.org/disc/49242/), [Europe](http://redump.org/disc/1071/), [Italy](http://redump.org/disc/45993/), [Germany](http://redump.org/disc/10641/), [France](http://redump.org/disc/29514/), [Spain](http://redump.org/disc/27941/).
 - Versions With Anti-Piracy Screen: Japan, Japan Demo.
 - When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 3 GetTN commands.
 - Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.
 
 ### Disney's The Emperor's New Grove
 
 - Versions With Anti-Piracy Screen: [USA](http://redump.org/disc/14583/), [Europe](http://redump.org/disc/7565/).
 - When Is The Anti-Piracy Screen Check: Start a new game, after the first FMV on the first loading screen is when the check completes.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN commands.
 - Versions With Anti-Piracy Bypass Support: USA, Europe.
 
 ### Exciting Bass 2
@@ -720,7 +734,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/63487/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 2 GetTN commands.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Exciting Bass 3
@@ -728,7 +741,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/59734/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 2 GetTN commands.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Gekitotsu Toma L'Arc - L'Arc en Ciel vs Tomarunner
@@ -736,7 +748,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions: [Japan](http://redump.org/disc/20715/)
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Glint Glitters
@@ -744,7 +755,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/15969/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 18 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: **TODO: NOT SUPPORTED YET**
 
 ### Goo! Goo! Soundry
@@ -752,7 +762,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/16027/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: On the first 'now loading' screen at boot.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 4 GetTN commands, 5 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Grind Session
@@ -760,7 +769,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [USA](http://redump.org/disc/854/), [USA Demo](http://redump.org/disc/42794/), [Europe](http://redump.org/disc/3688/), [Scandinavia](http://redump.org/disc/53879/).
 - Versions With Anti-Piracy Screen: USA.
 - When Is The Anti-Piracy Screen Check: After going through the main menu and starting training/single player/a level.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: USA.
 
 ### Guitar Freaks
@@ -768,7 +776,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/2277/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: At the loading screen with the spinning guitars.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Harlem Beat: You're The One
@@ -776,7 +783,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/36294/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: At the first loading screen after boot.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Hyper Value 2800: Hanafuda
@@ -784,7 +790,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/15791/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately after boot.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support:  **TODO: NOT SUPPORTED YET**
 
 ### Hyper Value 2800: Mahjong
@@ -792,7 +797,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/15793/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately after boot.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Jikkyou Powerful Pro Yakyuu '99: Ketteiban
@@ -800,7 +804,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/11091/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Jikkyou Powerful Pro Yakyuu '99: Kaimakuban
@@ -808,7 +811,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/1686/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### JoJo's Bizarre Adventure
@@ -816,7 +818,13 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/2871/), [USA](http://redump.org/disc/386/), [Europe](http://redump.org/disc/9983/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: First loading screen after boot.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Koko Hore! Pukka
+
+- Versions Tested: [Japan](http://redump.org/disc/4812/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Legend Of Dragoon
@@ -824,7 +832,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: Japan ([Disc 1](http://redump.org/disc/22753/), [Disc 2](http://redump.org/disc/22754/), [Disc 3](http://redump.org/disc/22755/), [Disc 4](http://redump.org/disc/22756/)), USA ([Disc 1](http://redump.org/disc/153/), [Disc 2](http://redump.org/disc/154/), [Disc 3](http://redump.org/disc/155/), [Disc 4](http://redump.org/disc/156/)), Europe ([Disc 1](http://redump.org/disc/2379/), [Disc 2](http://redump.org/disc/2380/), [Disc 3](http://redump.org/disc/2381), [Disc 4](http://redump.org/disc/2382/)), France ([Disc 1](http://redump.org/disc/16750/), [Disc 2](http://redump.org/disc/16751/), [Disc 3](http://redump.org/disc/16752/), [Disc 4](http://redump.org/disc/16753/)), Germany ([Disc 1](http://redump.org/disc/15580/), [Disc 2](http://redump.org/disc/15581/), [Disc 3](http://redump.org/disc/15582/), [Disc 4](http://redump.org/disc/15583/)), Italy ([Disc 1](http://redump.org/disc/30643/), [Disc 2](http://redump.org/disc/30644/), [Disc 3](http://redump.org/disc/30645/), [Disc 4](http://redump.org/disc/30646/)).
 - Versions With Anti-Piracy Screen: Japan, USA, Europe, France, Germany, Italy.
 - When Is The Anti-Piracy Screen Check: First loading screen after boot.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan, USA, Europe, France, Germany, Italy.
 
 ### Legend Of Mana
@@ -832,15 +839,27 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/1940/), [USA](http://redump.org/disc/96/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan, USA.
+
+### Love Hina: Ai wa Kotoba no Naka ni
+
+- Versions Tested: [Japan](http://redump.org/disc/7369/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Love Hina 2: Kotoba wa Konayuki no You ni
+
+- Versions Tested: [Japan](http://redump.org/disc/7370/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Marvel vs. Capcom: Clash of Super Heroes
 
 - Versions Tested: [Japan](http://redump.org/disc/36384/), [Japan Demo](http://redump.org/disc/60646/), [USA](http://redump.org/disc/1235/), [Europe](http://redump.org/disc/3910/).
 - Versions With Anti-Piracy Screen: Japan, Japan Demo.
 - When Is The Anti-Piracy Screen Check: Immediately on boot.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.
 
 ### My Garden
@@ -848,7 +867,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/8300/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Ore no Ryouri
@@ -856,7 +874,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/39643/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Pocket Jiman
@@ -864,7 +881,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/3189/)
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### PoPoLoCrois Monogatari II
@@ -872,7 +888,13 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: Japan ([Disc 1](http://redump.org/disc/1653/), [Disc 2](http://redump.org/disc/1654/), [Disc 3](http://redump.org/disc/1651/)), [Japan Demo](http://redump.org/disc/57327/)
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN commands, 1 GetTD command.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Pop'n Music: Animation Melody
+
+- Versions Tested: [Japan](http://redump.org/disc/33223/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Pop'n Music 2
@@ -880,7 +902,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/9774/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Pop'n Music 5
@@ -888,7 +909,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/9778/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Pop'n Music 6
@@ -896,7 +916,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/9777/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Resident Evil 3: The Last Escape
@@ -904,7 +923,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan Rev 0](http://redump.org/disc/10/), [Japan Rev 1](http://redump.org/disc/8357/), [Japan Demo](http://redump.org/disc/11674/), [USA](http://redump.org/disc/126/), [USA Demo](http://redump.org/disc/7312/),[Europe](http://redump.org/disc/496/), [Europe Demo](http://redump.org/disc/9463/), [France](http://redump.org/disc/9753/), [Germany](http://redump.org/disc/5526/), [Italy](http://redump.org/disc/16397/), [Ireland](http://redump.org/disc/28197/), [Spain](http://redump.org/disc/1387/),
 - Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo.
 - When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots, pause there.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 3 GetTN commands.
 - Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1, Japan Demo.
 
 ### Resident Evil: Survivor
@@ -912,14 +930,12 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/8102/), [USA](http://redump.org/disc/326/), [Europe](http://redump.org/disc/801/), [France](http://redump.org/disc/5826/).
 - Versions With Anti-Piracy Screen: Japan, USA.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.
 - Versions With Anti-Piracy Bypass Support: Japan, USA.
 
 ### Robbit mon Dieu
 - Versions Tested: [Japan](http://redump.org/disc/7227/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately after boot.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Rockman
@@ -927,7 +943,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/6091/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Rockman 2: Dr. Wily no Nazo
@@ -935,7 +950,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/6092/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Rockman 3: Dr. Wily no Saigo!?
@@ -943,7 +957,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/6092/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Rockman 4: Aratanaru Yabou!!
@@ -951,7 +964,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/6094/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Rockman 6
@@ -959,7 +971,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/6096/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Street Fighter EX2 Plus
@@ -967,7 +978,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/12561/), [Japan Demo](http://redump.org/disc/68873/), [USA](http://redump.org/disc/1233/), [Europe](http://redump.org/disc/1006/).
 - Versions With Anti-Piracy Screen: Japan, Japan Demo.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan, Japan Demo, Europe, USA.
 
 ### Tokimeki Memorial 2
@@ -975,7 +985,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: Japan Rev 0, Japan Rev 1, Japan Limited Box.
 - Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Limited Box.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: **TODO: NOT SUPPORTED YET**
 
 ### Tomba! 2: The Evil Swine Return
@@ -983,7 +992,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [USA](http://redump.org/disc/16475/), [USA Demo](http://redump.org/disc/32246/), [Europe](http://redump.org/disc/31192/), [France](http://redump.org/disc/31192/), [Germany](http://redump.org/disc/31192/), [Italy](http://redump.org/disc/41369/), [Spain](http://redump.org/disc/1582/).
 - Versions With Anti-Piracy Screen: USA.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: USA.
 
 ### Vandal Harts II
@@ -991,7 +999,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/4854/), [USA](http://redump.org/disc/4854/), [Europe](http://redump.org/disc/4854/), [Italy](http://redump.org/disc/4854/), [Spain](http://redump.org/disc/4854/).
 - Versions With Anti-Piracy Screen: Japan, USA.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command (USA only!), 6 Test commands (Japan) or 2 Test commands(USA), 2 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan (no patch required), USA.
 
 ### Wild Arms II
@@ -999,7 +1006,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: Japan Rev 0 ([Disc 1](http://redump.org/disc/3924/), [Disc 2](http://redump.org/disc/3925/)), Japan Rev 1 ([Disc 1](http://redump.org/disc/1902/), [Disc 2](http://redump.org/disc/1903/)), [Japan Demo](http://redump.org/disc/4799//), USA ([Disc 1](http://redump.org/disc/171/), [Disc 2](http://redump.org/disc/172/)), [USA Demo](http://redump.org/disc/42466/).
 - Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo, USA, USA Demo.
 - When Is The Anti-Piracy Screen Check: Right after the media vision logo screen fades to black.
-- Type Of Check: 1 ReadTOC command (USA only!), 3 Test commands (Japan Rev 0, Japan Rev 1, Japan Demo) or 2 Test commands(USA), 1 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan Rev 0 (no patch required), Japan Rev 1 (no patch required), Japan Demo (no patch required), USA, USA Demo.
 
 ### World Soccer Jikkyou Winning Eleven 4
@@ -1007,7 +1013,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan Rev 0](http://redump.org/disc/4934/), [Japan Rev 1](http://redump.org/disc/4934/).
 - Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.
 - When Is The Anti-Piracy Screen Check: As soon as the Japan Olympic Committee screen appears.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN commands, 1 GetTD command.
 - Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.
 
 ### XI[SAI] Jumbo
@@ -1015,7 +1020,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/8372/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 2 ReadTOC command, 4 Test commands, 6 GetTN commands, 6 GetTD commands.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Yu-Gi-Oh! Forbidden Memories
@@ -1023,70 +1027,98 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions Tested: [Japan](http://redump.org/disc/4173/), [Japan Genteiban Edition](http://redump.org/disc/51546/), [USA](http://redump.org/disc/820/), [Europe](http://redump.org/disc/1053/), [France](http://redump.org/disc/28263/), [Germany](http://redump.org/disc/1256/), [Spain](http://redump.org/disc/30673/), [Italy](http://redump.org/disc/35297/).
 - Versions With Anti-Piracy Screen: Japan, Japan Genteiban Edition, USA, Europe, France, Germany, Spain, Italy.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 0 GetTD commands.
 - Versions With Anti-Piracy Bypass Support: Japan, Japan Genteiban Edition, USA,
+
+## Known Incompatible Games
+
+This is a small list of games that have been _confirmed by myself_ to not currently work with **both Tonyhax International AND the original [Tonyhax](https://github.com/socram8888/tonyhax).** I am waiting for a fix from the original Tonyhax [developer](https://github.com/socram8888) for these games as these are not Tonyhax International specific issues.
+
+* [Dance Dance Revolution](http://redump.org/disc/1562/) - [Tonyhax Issue 121](https://github.com/socram8888/tonyhax/issues/121).
+* [Dance Dance Revolution 2nd Remix](http://redump.org/disc/9477/) - [Tonyhax Issue 121](https://github.com/socram8888/tonyhax/issues/121).
+* [Dance Dance Revolution Best Hits](http://redump.org/disc/30601/) - [Tonyhax International Issue 10](https://github.com/alex-free/tonyhax/issues/10) and [Tonyhax Issue 133](https://github.com/socram8888/tonyhax/issues/133).
+* [Dance Dance Revolution 3rd Mix](http://redump.org/disc/9536/) - [Tonyhax Issue 133](https://github.com/socram8888/tonyhax/issues/133).
+* [Dance Dance Revolution 4th Mix](http://redump.org/disc/34157/) - [Tonyhax Issue 133](https://github.com/socram8888/tonyhax/issues/133).
+
 
 ## Building From Source
 
-You can compile Tonyhax International from source using any operating system which supports [Crosstool-NG](https://crosstool-ng.github.io/) using a script that builds a local tool-chain within the source directory that does not install anything into your system.
 
-If you are running _Fedora or Debian_ (Windows Subsystem For Linux can run these operating systems on Windows to provide a sufficient build environment), you can download the build dependencies automatically with the `get-deps` script, which is in the `scripts` folder found in the Tonyhax International [source](https//alex-free.github.io/tonyhax).
+Obtain the **complete Tonyhax International current source tree from GitHub using git**, using the command below:
 
-If you are running some other Linux distribution, a \*BSD operating system, or something else that supports [Crosstool-NG](https://crosstool-ng.github.io/), but is not yet supported by the `get-deps` script, you need to install the equivalent packages or software. Then everything should work nicely in the next step.
+`git clone --recursive https://github.com/alex-free/tonyhax`
 
-Now that all the dependencies are installed, you can build the tool chain which compiles Tonyhax International. The way this works is actually highly unusual, but I think extremely elegant and clean. 
+Next, install all the required dependencies:
 
-First execute the `build-local-tool-chain` script, which is in the `scripts` folder found in the Tonyhax International [source](https//alex-free.github.io/tonyhax). **As long as you installed all the required dependencies** a tool chain will be built and configured to be locally installed within the `crosstool-ng` sub module folder found in the Tonyhax International source. This means that _nothing is changed on your system_ by installing the tool chain with the `build-local-tool-chain` script as it is completely portable accessible in the Tonyhax International source itself.
+* git 
+* autoconf 
+* automake
+* g++ 
+* make 
+* libtool 
+* texinfo 
+* help2man 
+* ncurses-devel 
+* libtinyxml2-devel 
+* cmake 
+* cdrdao 
+* python 
+* pandoc
 
-The `build-local-tool-chain` script also ensures that all sub modules are downloaded by running `git submodule update --init --recursive`. Now we can finally use the local tool chain to build Tonyhax International by running the script `./build-with-local-tool-chain`, found in the `scripts` directory of each Tonyhax International release. After you build Tonyhax International a release `.zip` file will be generated in the root of the source directory.
+If you are running _Fedora or Debian_ (Windows Subsystem For Linux can run these operating systems on Windows to provide a sufficient build environment), you can download the build dependencies automatically with the `get-deps.sh` script found in the `scripts` folder of the Tonyhax International [source tree](https//alex-free.github.io/tonyhax). **For any other OS, you'll need to find the above packages and install them manually yourself.**
+
+Next, you need to build the tool-chain. Execute the `build-tool-chain.sh` script, which is found in the `scripts` directory of Tonyhax International source tree. **This will take some time to build, depending on how fast your computer is.**
+
+With everything installed, you can now build Tonyhax International with the `build.sh` script found in the `scripts` directory of the TOnyhax International source tree. After you build Tonyhax International a release `.zip` file will be generated in the root of the source directory.
 
 ## Credits
 
-### Tonyhax Internationl - The Tonyhax Team
+### MottZilla
 
-_Alex Free_
-* 	Discovered a way to trigger the VC0 behavior in the anti-piracy module type which triggers on Tonyhax International, that defeats most anti-piracy copy protection routines found in some PSX games when explicit support is added.
-*	Implemented all of the gameshark code integration, and wrote quite a few custom gameshark codes to bypass anti-piracy in games without codes previously being available.
-*   Created the original TOCPerfect concept, first released as [TOCPerfect v1.0](https://alex-free.github.io/tocperfect).
-*   First discovered that SetSession is bugged on the VC0 A, VC0 B, and VC1 A CDROM BIOS versions, and came up with the initial bypass idea by mashing SetSession in frustration on MottZilla's PSX CDROM Debugger program that was created to debug the SetSession command on a early SCPH-1001, SCPH-1000, and SCPH-3000 consoles specifically. Since then Martin Korth has confirmed that SetSession is bugged on VC0 A, VC0 B, and VC1 A CDROM BIOS versions.
-*   Later discovered that SetSession's bug on early hardware can be bypassed by sending SetSession for a non-existant Session 2, waiting for 2 out of 3 expected interrupts, and then immediately sending SetSession 1. The idea to involve SetSession 2 however was MottZilla's.
-*   Wrote [PSEXE2ROM](https://alex-free.github.io/psexe2rom) to MottZilla's specifications so that it could be integrated into the source tree for ROM support.
-*   Integrated support for all Japanese PS1 and early PS2 consoles (SCPH-1000-SCPH-39000).
-*   Integrated support for all new save game exploits from MottZilla and Patchouli.
-*   Wrote TOCPerfect support in the loader.
-*   Ported the famous Castlevania Chronicles stack overflow exploit from the USA version to the Japanese Rev 0 version.
-*   Ported the 1500 Lite Series Castrol Honda Super Bike Racing stack overflow exploit from the USA version to the Japanese version.
-
-_MottZilla_
 *	Guidance on increasing the size of the Tonyhax International loader.
+
 *	Wrote the GameShark Code Engine now used by the anti-piracy bypass features and explained how to use it.
+
 *   The original sole creator of [PS1 DemoSwap Patcher v1.0](https://www.psx-place.com/threads/mctool-tonyhax-freepsxboot-installer.36569). MottZilla re-implemented the TOCPerfect concept into a much superior method, and included his implementation alongside of his DemoSwap idea in PS1 DemoSwap Patcher.
 *   Wrote the controller input support for Tonyhax International.
+
 *   Wrote the laser re-calibration function for VC2 and VC3 CDROM controllers.
+
 *   Developed the first Japanese save game exploit for Crash Bandicoot 2.
+
 *   Developed the PS-EXE loader used on GameShark/cheat cartridges to run Tonyhax International.
+
 *   Came up with reset+unlock technique for TOCPerfect booting on USA/PAL consoles.
+
 *   Helped debug the [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) builder's own patch to disable a FreePSXBoot memory card in slot 2.
+
 *   Originally came up with the idea to involve the SetSession 2 command in a fix for the older CDROM controllers.
+
 *   Explained the save game checksum routines in both Tonyhawk Pro Skater 2 (Japanese version) & Castrol Honda VTR (Japanese version) to help me create SuccessCheckSumUpdater (SuccessCU).
+
 *   Explained to myself how to find/port save game exploits to new games or to different versions of games available in different regions (i.e. Japanese version).
 
-_Patchouli(karehaani)_
+### Patchouli(karehaani)
 
 *   Doki Oki (Japan) save game exploit.
+
 *   Crash Bandicoot 3 (Japan) save game exploit.
+
 *   The Lengend Of Heroes I&II (Japan) save game exploit.
+
 *   Tekken 3 Japan/USA/PAL save game exploits (based off of previous work by [krystalgamer](https://github.com/socram8888/tonyhax/pull/20)).
+
 *   Tekken 2 Japan (rev 1 only)/USA (rev 0 only)/PAL save game exploits (based off of previous work by [krystalgamer](https://github.com/socram8888/tonyhax/pull/20)).
+
 *   Downhill Snow (Japan) save game exploit.
 
 ### Misc Acknowledgements
 
 *   [Berion](https://www.psx-place.com/members/berion.1431/) of [PSX-Place](https://psx-place.com) compressed the images of this document properly (this is the first time I've edited photos).
 *   Martin Korth for confirming the SetSession bug found in VC0A, VC0B, and VC1A CDROM controller BIOS versions, and for the priceless [PSX-SPX](http://problemkaputt.de/psx-spx.htm) document.
+
 *   [Peppe90](https://www.psx-place.com/members/peppe90.42412/) of [PSX-Place](https://psx-place.com) for testing NTSC gamems on a PAL PS2. His results have confirmed that the video mode can not be changed from PS1 software in PS1 mode on a PS1. It must be changed in PS1DRV from the PS2, as PS1 mode is set to always display the same video mode that the console shipped with (for the early PS2s that Tonyhax International supports). He mentioned that PS1VModeNeg v1.0.1 can be used to overcome this. The original Tonyhax [issue](https://github.com/socram8888/tonyhax/issues/25) explaining this also was helpful in figuring out how to bypass this PS2 level limitation.
 
-### Tonyhax Acknowledgements
+### O.G. Tonyhax Acknowledgements
 
 [Socram8888](https://github.com/socram8888) is the original developer of the Tonyhax loader. The original Tonyhax loader credits are below, in alphabetical order:
 

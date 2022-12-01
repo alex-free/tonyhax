@@ -3,6 +3,7 @@
 
 include ../variables.mk
 
+LOADER_AUTOGEN := orca.inc
 LOADER_HEADERS := $(wildcard *.h) $(LOADER_AUTOGEN)
 LOADER_OBJECTS := $(patsubst %.c, %.o, $(patsubst %.S, %.o, $(wildcard *.c *.S)))
 
@@ -18,6 +19,9 @@ clean:
 
 %.o: %.S $(LOADER_HEADERS)
 	$(CC) $(CFLAGS) -c $<
+
+orca.inc: orca.img
+	bash ../util/bin2h.sh ORCA_IMAGE orca.img orca.inc
 
 secondary.elf: secondary.ld $(LOADER_OBJECTS)
 	$(LD) $(LDFLAGS) -T secondary.ld $(LOADER_OBJECTS) -o $@

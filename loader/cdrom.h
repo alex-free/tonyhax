@@ -14,6 +14,7 @@
 #define CD_CMD_SETMODE 0x0E
 #define CD_CMD_GETTN 0x13
 #define CD_CMD_GETTD 0x14
+
 /**
  * Starts executing a CD command.
  *

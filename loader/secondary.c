@@ -1,3 +1,4 @@
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>
@@ -6,12 +7,12 @@
 #include "bios.h"
 #include "cdrom.h"
 #include "cfgparse.h"
+#include "crc.h"
 #include "debugscreen.h"
 #include "gpu.h"
-#include "patcher.h"
-#include "io.h"
-#include "crc.h"
+#include "ap-bypass.h"
 #include "integrity.h"
+#include "io.h"
 
 uint8_t sscmd;
 

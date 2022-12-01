@@ -199,6 +199,7 @@
 <li><a href="#burning-programs-for-ps1-backups">Burning Programs For PS1 Backups</a></li>
 <li><a href="https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/">Disc Read Errors And PS1 CD Drive Repair</a></li>
 <li><a href="#building-from-source">Building From Source</a></li>
+<li><a href="#known-incompatible-games">Known Incompatible Games</a></li>
 <li><a href="#credits">Credits</a></li>
 </ul>
 <h2 id="external-links">External Links</h2>
@@ -217,10 +218,23 @@
 <li><a href="https://orca.pet/tonyhax">Tonyhax (the original) Homepage</a></li>
 </ul>
 <h2 id="downloads">Downloads</h2>
+<h3 id="version-1.1.3-11302022">Version 1.1.3 (11/30/2022)</h3>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.3i/tonyhax-v1.1.3-international.zip">tonyhax-v1.1.3-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li><p>Added support for bypassing the <a href="#playing-games-with-additonal-copy-protection-routines">additional anti-piracy copy protection routines</a> in Crash Bash/Crash Bandicoot Carnival, Koko Hore! Pukka, Love Hina: Ai wa Kotoba no Naka ni, and Love Hina 2: Kotoba wa Konayuki no You ni (thanks <a href="https://github.com/M4x1mumReZ">M4x1mumRez</a>).</p></li>
+<li><p>Added a <a href="#known-incompatible-games">Known Incompatible Games</a> section, which documents games that currently do not work with either the <strong>original <a href="https://github.com/socram8888/tonyhax">Tonyhax</a> OR Tonyhax International.</strong></p></li>
+<li><p>Rewrote the <a href="#building-from-source">Building From Source</a> instructions for clarity and simplicity.</p></li>
+<li><p>Fixed Pop’n Music 6’s anti-piracy bypass and ‘boots to black screen’ issue.</p></li>
+<li><p>Added support for bypassing the <a href="#playing-games-with-additonal-copy-protection-routines">additional anti-piracy copy protection routines</a> in Pop’N Music: Animation Melody (thanks <a href="https://www.psx-place.com/members/trappedinlimbo.156719/">trappedinlimbo</a>).</p></li>
+<li><p>Merged <strong>all new applicable changes</strong> from the latest <a href="https://github.com/socram8888/tonyhax">O.G. Tonyhax</a> where applicable (as of 11/30/2022 this is up to date with the current source tree). See commits <a href="https://github.com/alex-free/tonyhax/commit/8284633c435a9325dcfd7028d9788bacae94de69">8284633c435a9325dcfd7028d9788bacae94de69</a>, <a href="https://github.com/alex-free/tonyhax/commit/b72b08e5ba814196f07993491b483e5ec8e3fc93">b72b08e5ba814196f07993491b483e5ec8e3fc93</a>, and <a href="https://github.com/alex-free/tonyhax/commit/8934a2bb614973064e45a6638e03fd0c7426e5fc">8934a2bb614973064e45a6638e03fd0c7426e5fc</a> for full details.</p></li>
+<li><p>Changed everything to be cleaner and closer to the latest source tree of the original Tonyhax. There will now be a diff comparing the <code>loader</code> directory of the current Tonyhax <code>loader</code> directory with the Tonyhax International <code>loader</code> directory, enabling easy comparison/documention/review of the current code differences between the fork and upstream. You can find this diff in the <code>docs/tonyhax-vs-tonyhax-international-diffs</code> directory in the source tree.</p></li>
+</ul>
 <h3 id="version-1.1.2-1192022">Version 1.1.2 (11/9/2022)</h3>
 <ul>
 <li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.2i/tonyhax-v1.1.2-international.zip">tonyhax-v1.1.2-international</a></li>
-<li><a href="https://github.com/alex-free/tonyhax/archive/refs/tags/v1.1.2i.zip">source code</a></li>
 </ul>
 <p>Changes:</p>
 <ul>
@@ -231,7 +245,6 @@
 <h3 id="version-1.1.1-10292022">Version 1.1.1 (10/29/2022)</h3>
 <ul>
 <li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.1i/tonyhax-v1.1.1-international.zip">tonyhax-v1.1.1-international</a></li>
-<li><a href="https://github.com/alex-free/tonyhax/archive/refs/tags/v1.1.1i.zip">source code</a></li>
 </ul>
 <p>Changes:</p>
 <ul>
@@ -242,7 +255,6 @@
 <h3 id="version-1.1.0-9252022">Version 1.1.0 (9/25/2022)</h3>
 <ul>
 <li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.0i/tonyhax-v1.1.0-international.zip">tonyhax-v1.1.0-international</a></li>
-<li><a href="https://github.com/alex-free/tonyhax/archive/refs/tags/v1.1.0i.zip">source code</a></li>
 </ul>
 <p>Changes:</p>
 <ul>
@@ -260,7 +272,6 @@
 <h3 id="version-1.0.8-8262022">Version 1.0.8 (8/26/2022)</h3>
 <ul>
 <li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.8i/tonyhax-v1.0.8-international.zip">tonyhax-v1.0.8-international</a></li>
-<li><a href="https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.8i.zip">source code</a></li>
 </ul>
 <p>Changes:</p>
 <ul>
@@ -272,7 +283,6 @@
 <h3 id="version-1.0.7-872022">Version 1.0.7 (8/7/2022)</h3>
 <ul>
 <li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.7i/tonyhax-v1.0.7-international.zip">tonyhax-v1.0.7-international</a></li>
-<li><a href="https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.7i.zip">source code</a></li>
 </ul>
 <p>Changes:</p>
 <ul>
@@ -285,7 +295,6 @@
 <h3 id="version-1.0.6-832022">Version 1.0.6 (8/3/2022)</h3>
 <ul>
 <li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.6i/tonyhax-v1.0.6-international.zip">tonyhax-v1.0.6-international</a></li>
-<li><a href="https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.6i.zip">source code</a></li>
 </ul>
 <p>Changes:</p>
 <ul>
@@ -295,7 +304,6 @@
 <h3 id="version-1.0.5-7272022">Version 1.0.5 (7/27/2022)</h3>
 <ul>
 <li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.5i/tonyhax-v1.0.5-international.zip">tonyhax-v1.0.5-international</a></li>
-<li><a href="https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.5i.zip">source code</a></li>
 </ul>
 <p>Changes:</p>
 <ul>
@@ -304,7 +312,6 @@
 <h3 id="version-1.0.4-7232022">Version 1.0.4 (7/23/2022)</h3>
 <ul>
 <li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.4i/tonyhax-v1.0.4-international.zip">tonyhax-v1.0.4-international</a></li>
-<li><a href="https://github.com/alex-free/tonyhax/archive/refs/tags/v1.0.4i.zip">source code</a></li>
 </ul>
 <h2 id="usage-1">Usage</h2>
 <p>The Tonyhax International loader is the program that is booted on any PS1 or an early PS2 that enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted on your PS1 with a <a href="#romrom-flasher-cd">GameShark/cheat cart</a>, <a href="#freepsxboot-exploit-memory-card-images">flashed memory card</a>, <a href="#save-game-exploit">save game exploit</a>, or <a href="#boot-cd">CD-R</a>. It provides the ability to properly play backup and import discs on all PS1 consoles, and early PS2 consoles (Japanese, USA, and PAL models SCPH-10000-SCPH-39004).</p>
@@ -1021,15 +1028,16 @@ Manufacturer: Ritek Co.</code></pre>
 <pre><code>cdrdao write --speed 1 --swap --eject yourgame.cue</code></pre>
 <h2 id="playing-games-with-additonal-copy-protection-routines">Playing Games With Additonal Copy Protection Routines</h2>
 <p>Starting in late 1998, some PSX games began including additional copy protection code that is designed to prevent playing backup CD-R copies of a game. This additional copy protection originally could only detect the first type of mod-chips (known as ‘non-stealth’) and would only fail if it detected one. <strong>Tonyhax International does not trigger this type of anti-piracy copy protection on stock consoles and these games don’t require any patching by Tonyhax International.</strong></p>
-<p>Starting in mid 1999, the additional copy protection code was upgraded again. This updated copy protection code can detect ‘non-stealth’ mod-chips, ‘traditional’ swap tricks (which don’t update TOC data), and the authenticity of the disc currently running in the PSX console. <strong>This last check causes the anti-piracy copy protection routine to trigger on games booted with Tonyhax International unless you are using a SCPH-1000 or early SCPH-3000 Japanese PSX console model. All is not lost however, Tonyhax International is now capable of game-specific on the fly patching to bypass this type of anti-piracy copy protection routine on ALL consoles. Below is a list of games which require explicit game-specific anti-piracy bypass support to work and their current status of support as of the latest version of Tonyhax International.</strong></p>
+<p>Starting in mid 1999, the additional copy protection code was upgraded again. This updated copy protection code can detect ‘non-stealth’ mod-chips, ‘traditional’ swap tricks (which don’t update TOC data), and the authenticity of the disc currently running in the PSX console. **This last check causes the anti-piracy copy protection routine to trigger on games booted with Tonyhax International unless you are using a SCPH-1000 or early SCPH-3000 Japanese PSX console model.</p>
+<p><strong>Tonyhax International is now capable of game-specific on the fly patching to bypass this type of anti-piracy copy protection routine on ALL consoles.</strong> Below is a list of games which require explicit game-specific anti-piracy bypass support to work and their current status of support as of the latest version of Tonyhax International.**</p>
 <p>If you find a game which triggers the ‘anti-piracy screen of death’ that is not listed below, or you want support to be added for a game that is not yet currently supported but is listed below, please open an <a href="https://github.com/alex-free/tonyhax/issues/new?assignees=&amp;labels=antipiracy&amp;template=antipiracy-issue.md&amp;title=">Anti-Piracy issue</a> on the <a href="https://github.com/alex-free/tonyhax">Tonyhax International Github</a>. I would eventually like every game that can trigger the anti-piracy copy protection routine when booted via Tonyhax International on a stock console to have a game specific bypass implemented for 100% compatibility.</p>
-<p>Some PAL games are using a different copy protection scheme known as LibCrypt protection. This protection can be bypassed by burning a backup CD-R in a <a href="https://github.com/Kippykip/SBITools">very specific way to keep the protection working</a>, or just by using an original authentic PAL PSX disc. <strong>Some PAL games may include both anti-piracy detection and LibCrypt detection, please open an <a href="https://github.com/alex-free/tonyhax/issues/new?assignees=&amp;labels=antipiracy&amp;template=antipiracy-issue.md&amp;title=">Anti-Piracy issue</a> on the <a href="https://github.com/alex-free/tonyhax">Tonyhax International Github</a> in such a case so that I can add support.</strong></p>
+<p><em>IMPORTANT NOTE:</em> Tonyhax International <strong>does not bypass anti-piracy if your console has an actual non-stealth modchip installed.</strong></p>
+<p>Some PAL games are using a different copy protection scheme known as LibCrypt protection. This protection can be bypassed by burning a backup CD-R in a <a href="https://github.com/Kippykip/SBITools">very specific way to keep the protection working</a>, or just by using an original authentic PAL PSX disc (‘imported’ for a different region console will work via the Tonyhax International loader).</p>
 <h3 id="animetic-story-game-1-card-captor-sakura">Animetic Story Game 1: Card Captor Sakura</h3>
 <ul>
 <li>Versions Tested: Japan (<a href="http://redump.org/disc/12000/">Disc 1</a>, <a href="http://redump.org/disc/11999/">Disc 2</a>).</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="alundra-2">Alundra 2</h3>
@@ -1037,7 +1045,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/15641/">Japan</a>, <a href="http://redump.org/disc/6752/">Japan Demo</a>, <a href="http://redump.org/disc/2996/">USA</a>, <a href="http://redump.org/disc/1089/">Europe</a>, <a href="http://redump.org/disc/11603/">German</a>, <a href="http://redump.org/disc/13396/">French</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: When first booting the game during the ‘now loading’ screen.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 3 GetTN commands.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="arc-the-lad-iii">Arc The Lad III</h3>
@@ -1045,7 +1052,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: Japan Rev 0 (<a href="http://redump.org/disc/5897/">Disc 1</a>, <a href="http://redump.org/disc/5898/">Disc 2</a>), Japan Rev 1 (<a href="http://redump.org/disc/34793/">Disc 1</a>, <a href="http://redump.org/disc/34794/">Disc 2</a>), USA (<a href="http://redump.org/disc/674/">Disc 1</a>, <a href="http://redump.org/disc/675/">Disc 2</a>).</li>
 <li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.</li>
 </ul>
 <h3 id="beat-mania-the-sound-of-tokyo">Beat Mania: The Sound of Tokyo</h3>
@@ -1053,7 +1059,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/36163/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="beat-mania-6thmix-core-remix">Beat Mania 6thMix + Core Remix</h3>
@@ -1061,7 +1066,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/16285/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="chase-the-express">Chase The Express</h3>
@@ -1069,15 +1073,20 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: Japan (<a href="http://redump.org/disc/5637/">Disc 1</a>, <a href="http://redump.org/disc/5638/">Disc 2</a>), <a href="http://redump.org/disc/6551/">Japan Demo 1</a>, <a href="http://redump.org/disc/19589/">Japan Demo 2</a>, Europe (<a href="http://redump.org/disc/27257/">Disc 1</a>, <a href="http://redump.org/disc/27258/">Disc 2</a>), France (<a href="http://redump.org/disc/28137/">Disc 1</a>, <a href="http://redump.org/disc/28138/">Disc 2</a>), Germany (<a href="http://redump.org/disc/7507/">Disc 1</a>, <a href="http://redump.org/disc/7508/">Disc 2</a>), Italy (<a href="http://redump.org/disc/28358/">Disc 1</a>, <a href="http://redump.org/disc/28359/">Disc 2</a>).</li>
 <li>Versions With Anti-Piracy Screen: Japan, Japan Demo 1, Japan Demo 2.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 2 GeTN commands.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan, Japan Demo 1, Japan Demo 2.</li>
+</ul>
+<h3 id="crash-bash">Crash Bash</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/3819/">Japan</a>, [Japan] Demo](http://redump.org/disc/53589/), <a href="http://redump.org/disc/512/">USA</a>, <a href="http://redump.org/disc/49446/">USA Demo</a>, <a href="http://redump.org/disc/5483/">Europe</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan, USA.</li>
+<li>When Is The Anti-Piracy Screen Check: ‘Sony Computer Entertainment Presents’ screen.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan, USA.</li>
 </ul>
 <h3 id="crash-bandicoot-racing">Crash Bandicoot Racing</h3>
 <ul>
 <li>Versions Tested: <a href="http://redump.org/disc/3694/">Japan</a>, <a href="http://redump.org/disc/53590/">Japan Demo</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: When first booting the game when the Naughty Dog box is first visible.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 14 GetTN commands.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="cool-boarders-2001">Cool Boarders 2001</h3>
@@ -1085,7 +1094,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/513/">USA</a>, <a href="http://redump.org/disc/42467/">USA Demo</a>.</li>
 <li>Versions With Anti-Piracy Screen: USA, USA Demo.</li>
 <li>When Is The Anti-Piracy Screen Check: During the first loading screen.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN commands.</li>
 <li>Versions With Anti-Piracy Bypass Support: USA, USA Demo.</li>
 </ul>
 <h3 id="dancing-stage-featuring-true-kiss-destination">Dancing Stage Featuring True Kiss Destination</h3>
@@ -1093,7 +1101,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/15853/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: On the first text screen after boot, until right before the first FMV.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="dino-crisis">Dino Crisis</h3>
@@ -1101,7 +1108,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/1598/">Japan</a>, <a href="http://redump.org/disc/459/">USA Rev 0</a>, <a href="http://redump.org/disc/473/">USA Rev 1</a>, <a href="http://redump.org/disc/2942/">USA Demo</a>, <a href="http://redump.org/disc/710/">Europe</a>, <a href="http://redump.org/disc/28171/">Italy</a>, <a href="http://redump.org/disc/7586/">Germany</a>, <a href="http://redump.org/disc/24278/">France</a>, <a href="http://redump.org/disc/27940/">Spain</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan, USA Rev 0, USA Rev 1.</li>
 <li>When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 3 GetTN commands.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan, USA Rev 0, USA Rev 1.</li>
 </ul>
 <h3 id="dino-crisis-2">Dino Crisis 2</h3>
@@ -1109,14 +1115,12 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/1600/">Japan</a>, <a href="http://redump.org/disc/4407/">Japan Demo</a>, <a href="http://redump.org/disc/460/">USA</a>, <a href="http://redump.org/disc/49242/">USA Demo</a>, <a href="http://redump.org/disc/1071/">Europe</a>, <a href="http://redump.org/disc/45993/">Italy</a>, <a href="http://redump.org/disc/10641/">Germany</a>, <a href="http://redump.org/disc/29514/">France</a>, <a href="http://redump.org/disc/27941/">Spain</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan, Japan Demo.</li>
 <li>When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 3 GetTN commands.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.</li>
 </ul>
 <h3 id="disneys-the-emperors-new-grove">Disney’s The Emperor’s New Grove</h3>
 <ul>
 <li>Versions With Anti-Piracy Screen: <a href="http://redump.org/disc/14583/">USA</a>, <a href="http://redump.org/disc/7565/">Europe</a>.</li>
 <li>When Is The Anti-Piracy Screen Check: Start a new game, after the first FMV on the first loading screen is when the check completes.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN commands.</li>
 <li>Versions With Anti-Piracy Bypass Support: USA, Europe.</li>
 </ul>
 <h3 id="exciting-bass-2">Exciting Bass 2</h3>
@@ -1124,7 +1128,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/63487/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 2 GetTN commands.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="exciting-bass-3">Exciting Bass 3</h3>
@@ -1132,7 +1135,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/59734/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 2 GetTN commands.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="gekitotsu-toma-larc---larc-en-ciel-vs-tomarunner">Gekitotsu Toma L’Arc - L’Arc en Ciel vs Tomarunner</h3>
@@ -1140,7 +1142,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions: <a href="http://redump.org/disc/20715/">Japan</a></li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="glint-glitters">Glint Glitters</h3>
@@ -1148,7 +1149,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/15969/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 18 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: <strong>TODO: NOT SUPPORTED YET</strong></li>
 </ul>
 <h3 id="goo-goo-soundry">Goo! Goo! Soundry</h3>
@@ -1156,7 +1156,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/16027/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: On the first ‘now loading’ screen at boot.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 4 GetTN commands, 5 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="grind-session">Grind Session</h3>
@@ -1164,7 +1163,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/854/">USA</a>, <a href="http://redump.org/disc/42794/">USA Demo</a>, <a href="http://redump.org/disc/3688/">Europe</a>, <a href="http://redump.org/disc/53879/">Scandinavia</a>.</li>
 <li>Versions With Anti-Piracy Screen: USA.</li>
 <li>When Is The Anti-Piracy Screen Check: After going through the main menu and starting training/single player/a level.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: USA.</li>
 </ul>
 <h3 id="guitar-freaks">Guitar Freaks</h3>
@@ -1172,7 +1170,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/2277/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: At the loading screen with the spinning guitars.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="harlem-beat-youre-the-one">Harlem Beat: You’re The One</h3>
@@ -1180,7 +1177,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/36294/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: At the first loading screen after boot.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="hyper-value-2800-hanafuda">Hyper Value 2800: Hanafuda</h3>
@@ -1188,7 +1184,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/15791/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately after boot.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: <strong>TODO: NOT SUPPORTED YET</strong></li>
 </ul>
 <h3 id="hyper-value-2800-mahjong">Hyper Value 2800: Mahjong</h3>
@@ -1196,7 +1191,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/15793/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately after boot.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="jikkyou-powerful-pro-yakyuu-99-ketteiban">Jikkyou Powerful Pro Yakyuu ’99: Ketteiban</h3>
@@ -1204,7 +1198,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/11091/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="jikkyou-powerful-pro-yakyuu-99-kaimakuban">Jikkyou Powerful Pro Yakyuu ’99: Kaimakuban</h3>
@@ -1212,7 +1205,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/1686/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="jojos-bizarre-adventure">JoJo’s Bizarre Adventure</h3>
@@ -1220,7 +1212,13 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/2871/">Japan</a>, <a href="http://redump.org/disc/386/">USA</a>, <a href="http://redump.org/disc/9983/">Europe</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: First loading screen after boot.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="koko-hore-pukka">Koko Hore! Pukka</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/4812/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="legend-of-dragoon">Legend Of Dragoon</h3>
@@ -1228,7 +1226,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: Japan (<a href="http://redump.org/disc/22753/">Disc 1</a>, <a href="http://redump.org/disc/22754/">Disc 2</a>, <a href="http://redump.org/disc/22755/">Disc 3</a>, <a href="http://redump.org/disc/22756/">Disc 4</a>), USA (<a href="http://redump.org/disc/153/">Disc 1</a>, <a href="http://redump.org/disc/154/">Disc 2</a>, <a href="http://redump.org/disc/155/">Disc 3</a>, <a href="http://redump.org/disc/156/">Disc 4</a>), Europe (<a href="http://redump.org/disc/2379/">Disc 1</a>, <a href="http://redump.org/disc/2380/">Disc 2</a>, <a href="http://redump.org/disc/2381">Disc 3</a>, <a href="http://redump.org/disc/2382/">Disc 4</a>), France (<a href="http://redump.org/disc/16750/">Disc 1</a>, <a href="http://redump.org/disc/16751/">Disc 2</a>, <a href="http://redump.org/disc/16752/">Disc 3</a>, <a href="http://redump.org/disc/16753/">Disc 4</a>), Germany (<a href="http://redump.org/disc/15580/">Disc 1</a>, <a href="http://redump.org/disc/15581/">Disc 2</a>, <a href="http://redump.org/disc/15582/">Disc 3</a>, <a href="http://redump.org/disc/15583/">Disc 4</a>), Italy (<a href="http://redump.org/disc/30643/">Disc 1</a>, <a href="http://redump.org/disc/30644/">Disc 2</a>, <a href="http://redump.org/disc/30645/">Disc 3</a>, <a href="http://redump.org/disc/30646/">Disc 4</a>).</li>
 <li>Versions With Anti-Piracy Screen: Japan, USA, Europe, France, Germany, Italy.</li>
 <li>When Is The Anti-Piracy Screen Check: First loading screen after boot.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan, USA, Europe, France, Germany, Italy.</li>
 </ul>
 <h3 id="legend-of-mana">Legend Of Mana</h3>
@@ -1236,15 +1233,27 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/1940/">Japan</a>, <a href="http://redump.org/disc/96/">USA</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan, USA.</li>
+</ul>
+<h3 id="love-hina-ai-wa-kotoba-no-naka-ni">Love Hina: Ai wa Kotoba no Naka ni</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/7369/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="love-hina-2-kotoba-wa-konayuki-no-you-ni">Love Hina 2: Kotoba wa Konayuki no You ni</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/7370/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="marvel-vs.-capcom-clash-of-super-heroes">Marvel vs. Capcom: Clash of Super Heroes</h3>
 <ul>
 <li>Versions Tested: <a href="http://redump.org/disc/36384/">Japan</a>, <a href="http://redump.org/disc/60646/">Japan Demo</a>, <a href="http://redump.org/disc/1235/">USA</a>, <a href="http://redump.org/disc/3910/">Europe</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan, Japan Demo.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately on boot.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.</li>
 </ul>
 <h3 id="my-garden">My Garden</h3>
@@ -1252,7 +1261,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/8300/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="ore-no-ryouri">Ore no Ryouri</h3>
@@ -1260,7 +1268,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/39643/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 3 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="pocket-jiman">Pocket Jiman</h3>
@@ -1268,7 +1275,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/3189/">Japan</a></li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="popolocrois-monogatari-ii">PoPoLoCrois Monogatari II</h3>
@@ -1276,7 +1282,13 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: Japan (<a href="http://redump.org/disc/1653/">Disc 1</a>, <a href="http://redump.org/disc/1654/">Disc 2</a>, <a href="http://redump.org/disc/1651/">Disc 3</a>), <a href="http://redump.org/disc/57327/">Japan Demo</a></li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN commands, 1 GetTD command.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="popn-music-animation-melody">Pop’n Music: Animation Melody</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/33223/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="popn-music-2">Pop’n Music 2</h3>
@@ -1284,7 +1296,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/9774/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="popn-music-5">Pop’n Music 5</h3>
@@ -1292,7 +1303,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/9778/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="popn-music-6">Pop’n Music 6</h3>
@@ -1300,7 +1310,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/9777/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="resident-evil-3-the-last-escape">Resident Evil 3: The Last Escape</h3>
@@ -1308,7 +1317,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/10/">Japan Rev 0</a>, <a href="http://redump.org/disc/8357/">Japan Rev 1</a>, <a href="http://redump.org/disc/11674/">Japan Demo</a>, <a href="http://redump.org/disc/126/">USA</a>, <a href="http://redump.org/disc/7312/">USA Demo</a>,<a href="http://redump.org/disc/496/">Europe</a>, <a href="http://redump.org/disc/9463/">Europe Demo</a>, <a href="http://redump.org/disc/9753/">France</a>, <a href="http://redump.org/disc/5526/">Germany</a>, <a href="http://redump.org/disc/16397/">Italy</a>, <a href="http://redump.org/disc/28197/">Ireland</a>, <a href="http://redump.org/disc/1387/">Spain</a>,</li>
 <li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo.</li>
 <li>When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots, pause there.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 3 GetTN commands.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1, Japan Demo.</li>
 </ul>
 <h3 id="resident-evil-survivor">Resident Evil: Survivor</h3>
@@ -1316,7 +1324,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/8102/">Japan</a>, <a href="http://redump.org/disc/326/">USA</a>, <a href="http://redump.org/disc/801/">Europe</a>, <a href="http://redump.org/disc/5826/">France</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan, USA.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTD command, 1 GetTN command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan, USA.</li>
 </ul>
 <h3 id="robbit-mon-dieu">Robbit mon Dieu</h3>
@@ -1324,7 +1331,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/7227/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately after boot.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="rockman">Rockman</h3>
@@ -1332,7 +1338,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/6091/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="rockman-2-dr.-wily-no-nazo">Rockman 2: Dr. Wily no Nazo</h3>
@@ -1340,7 +1345,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/6092/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="rockman-3-dr.-wily-no-saigo">Rockman 3: Dr. Wily no Saigo!?</h3>
@@ -1348,7 +1352,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/6092/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="rockman-4-aratanaru-yabou">Rockman 4: Aratanaru Yabou!!</h3>
@@ -1356,7 +1359,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/6094/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="rockman-6">Rockman 6</h3>
@@ -1364,7 +1366,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/6096/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="street-fighter-ex2-plus">Street Fighter EX2 Plus</h3>
@@ -1372,7 +1373,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/12561/">Japan</a>, <a href="http://redump.org/disc/68873/">Japan Demo</a>, <a href="http://redump.org/disc/1233/">USA</a>, <a href="http://redump.org/disc/1006/">Europe</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan, Japan Demo.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan, Japan Demo, Europe, USA.</li>
 </ul>
 <h3 id="tokimeki-memorial-2">Tokimeki Memorial 2</h3>
@@ -1380,7 +1380,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: Japan Rev 0, Japan Rev 1, Japan Limited Box.</li>
 <li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Limited Box.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: <strong>TODO: NOT SUPPORTED YET</strong></li>
 </ul>
 <h3 id="tomba-2-the-evil-swine-return">Tomba! 2: The Evil Swine Return</h3>
@@ -1388,7 +1387,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/16475/">USA</a>, <a href="http://redump.org/disc/32246/">USA Demo</a>, <a href="http://redump.org/disc/31192/">Europe</a>, <a href="http://redump.org/disc/31192/">France</a>, <a href="http://redump.org/disc/31192/">Germany</a>, <a href="http://redump.org/disc/41369/">Italy</a>, <a href="http://redump.org/disc/1582/">Spain</a>.</li>
 <li>Versions With Anti-Piracy Screen: USA.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN command, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: USA.</li>
 </ul>
 <h3 id="vandal-harts-ii">Vandal Harts II</h3>
@@ -1396,7 +1394,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/4854/">Japan</a>, <a href="http://redump.org/disc/4854/">USA</a>, <a href="http://redump.org/disc/4854/">Europe</a>, <a href="http://redump.org/disc/4854/">Italy</a>, <a href="http://redump.org/disc/4854/">Spain</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan, USA.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command (USA only!), 6 Test commands (Japan) or 2 Test commands(USA), 2 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan (no patch required), USA.</li>
 </ul>
 <h3 id="wild-arms-ii">Wild Arms II</h3>
@@ -1404,7 +1401,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: Japan Rev 0 (<a href="http://redump.org/disc/3924/">Disc 1</a>, <a href="http://redump.org/disc/3925/">Disc 2</a>), Japan Rev 1 (<a href="http://redump.org/disc/1902/">Disc 1</a>, <a href="http://redump.org/disc/1903/">Disc 2</a>), <a href="http://redump.org/disc/4799//">Japan Demo</a>, USA (<a href="http://redump.org/disc/171/">Disc 1</a>, <a href="http://redump.org/disc/172/">Disc 2</a>), <a href="http://redump.org/disc/42466/">USA Demo</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo, USA, USA Demo.</li>
 <li>When Is The Anti-Piracy Screen Check: Right after the media vision logo screen fades to black.</li>
-<li>Type Of Check: 1 ReadTOC command (USA only!), 3 Test commands (Japan Rev 0, Japan Rev 1, Japan Demo) or 2 Test commands(USA), 1 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan Rev 0 (no patch required), Japan Rev 1 (no patch required), Japan Demo (no patch required), USA, USA Demo.</li>
 </ul>
 <h3 id="world-soccer-jikkyou-winning-eleven-4">World Soccer Jikkyou Winning Eleven 4</h3>
@@ -1412,7 +1408,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/4934/">Japan Rev 0</a>, <a href="http://redump.org/disc/4934/">Japan Rev 1</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.</li>
 <li>When Is The Anti-Piracy Screen Check: As soon as the Japan Olympic Committee screen appears.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 1 GetTN commands, 1 GetTD command.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.</li>
 </ul>
 <h3 id="xisai-jumbo">XI[SAI] Jumbo</h3>
@@ -1420,7 +1415,6 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/8372/">Japan</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 2 ReadTOC command, 4 Test commands, 6 GetTN commands, 6 GetTD commands.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan.</li>
 </ul>
 <h3 id="yu-gi-oh-forbidden-memories">Yu-Gi-Oh! Forbidden Memories</h3>
@@ -1428,36 +1422,72 @@ Manufacturer: Ritek Co.</code></pre>
 <li>Versions Tested: <a href="http://redump.org/disc/4173/">Japan</a>, <a href="http://redump.org/disc/51546/">Japan Genteiban Edition</a>, <a href="http://redump.org/disc/820/">USA</a>, <a href="http://redump.org/disc/1053/">Europe</a>, <a href="http://redump.org/disc/28263/">France</a>, <a href="http://redump.org/disc/1256/">Germany</a>, <a href="http://redump.org/disc/30673/">Spain</a>, <a href="http://redump.org/disc/35297/">Italy</a>.</li>
 <li>Versions With Anti-Piracy Screen: Japan, Japan Genteiban Edition, USA, Europe, France, Germany, Spain, Italy.</li>
 <li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Type Of Check: 1 ReadTOC command, 2 Test commands, 2 GetTN commands, 0 GetTD commands.</li>
 <li>Versions With Anti-Piracy Bypass Support: Japan, Japan Genteiban Edition, USA,</li>
 </ul>
-<h2 id="building-from-source">Building From Source</h2>
-<p>You can compile Tonyhax International from source using any operating system which supports <a href="https://crosstool-ng.github.io/">Crosstool-NG</a> using a script that builds a local tool-chain within the source directory that does not install anything into your system.</p>
-<p>If you are running <em>Fedora or Debian</em> (Windows Subsystem For Linux can run these operating systems on Windows to provide a sufficient build environment), you can download the build dependencies automatically with the <code>get-deps</code> script, which is in the <code>scripts</code> folder found in the Tonyhax International <a href="https//alex-free.github.io/tonyhax">source</a>.</p>
-<p>If you are running some other Linux distribution, a *BSD operating system, or something else that supports <a href="https://crosstool-ng.github.io/">Crosstool-NG</a>, but is not yet supported by the <code>get-deps</code> script, you need to install the equivalent packages or software. Then everything should work nicely in the next step.</p>
-<p>Now that all the dependencies are installed, you can build the tool chain which compiles Tonyhax International. The way this works is actually highly unusual, but I think extremely elegant and clean.</p>
-<p>First execute the <code>build-local-tool-chain</code> script, which is in the <code>scripts</code> folder found in the Tonyhax International <a href="https//alex-free.github.io/tonyhax">source</a>. <strong>As long as you installed all the required dependencies</strong> a tool chain will be built and configured to be locally installed within the <code>crosstool-ng</code> sub module folder found in the Tonyhax International source. This means that <em>nothing is changed on your system</em> by installing the tool chain with the <code>build-local-tool-chain</code> script as it is completely portable accessible in the Tonyhax International source itself.</p>
-<p>The <code>build-local-tool-chain</code> script also ensures that all sub modules are downloaded by running <code>git submodule update --init --recursive</code>. Now we can finally use the local tool chain to build Tonyhax International by running the script <code>./build-with-local-tool-chain</code>, found in the <code>scripts</code> directory of each Tonyhax International release. After you build Tonyhax International a release <code>.zip</code> file will be generated in the root of the source directory.</p>
-<h2 id="credits">Credits</h2>
-<h3 id="tonyhax-internationl---the-tonyhax-team">Tonyhax Internationl - The Tonyhax Team</h3>
-<p><em>Alex Free</em> * Discovered a way to trigger the VC0 behavior in the anti-piracy module type which triggers on Tonyhax International, that defeats most anti-piracy copy protection routines found in some PSX games when explicit support is added. * Implemented all of the gameshark code integration, and wrote quite a few custom gameshark codes to bypass anti-piracy in games without codes previously being available. * Created the original TOCPerfect concept, first released as <a href="https://alex-free.github.io/tocperfect">TOCPerfect v1.0</a>. * First discovered that SetSession is bugged on the VC0 A, VC0 B, and VC1 A CDROM BIOS versions, and came up with the initial bypass idea by mashing SetSession in frustration on MottZilla’s PSX CDROM Debugger program that was created to debug the SetSession command on a early SCPH-1001, SCPH-1000, and SCPH-3000 consoles specifically. Since then Martin Korth has confirmed that SetSession is bugged on VC0 A, VC0 B, and VC1 A CDROM BIOS versions. * Later discovered that SetSession’s bug on early hardware can be bypassed by sending SetSession for a non-existant Session 2, waiting for 2 out of 3 expected interrupts, and then immediately sending SetSession 1. The idea to involve SetSession 2 however was MottZilla’s. * Wrote <a href="https://alex-free.github.io/psexe2rom">PSEXE2ROM</a> to MottZilla’s specifications so that it could be integrated into the source tree for ROM support. * Integrated support for all Japanese PS1 and early PS2 consoles (SCPH-1000-SCPH-39000). * Integrated support for all new save game exploits from MottZilla and Patchouli. * Wrote TOCPerfect support in the loader. * Ported the famous Castlevania Chronicles stack overflow exploit from the USA version to the Japanese Rev 0 version. * Ported the 1500 Lite Series Castrol Honda Super Bike Racing stack overflow exploit from the USA version to the Japanese version.</p>
-<p><em>MottZilla</em> * Guidance on increasing the size of the Tonyhax International loader. * Wrote the GameShark Code Engine now used by the anti-piracy bypass features and explained how to use it. * The original sole creator of <a href="https://www.psx-place.com/threads/mctool-tonyhax-freepsxboot-installer.36569">PS1 DemoSwap Patcher v1.0</a>. MottZilla re-implemented the TOCPerfect concept into a much superior method, and included his implementation alongside of his DemoSwap idea in PS1 DemoSwap Patcher. * Wrote the controller input support for Tonyhax International. * Wrote the laser re-calibration function for VC2 and VC3 CDROM controllers. * Developed the first Japanese save game exploit for Crash Bandicoot 2. * Developed the PS-EXE loader used on GameShark/cheat cartridges to run Tonyhax International. * Came up with reset+unlock technique for TOCPerfect booting on USA/PAL consoles. * Helped debug the <a href="https://github.com/brad-lin/FreePSXBoot">FreePSXBoot</a> builder’s own patch to disable a FreePSXBoot memory card in slot 2. * Originally came up with the idea to involve the SetSession 2 command in a fix for the older CDROM controllers. * Explained the save game checksum routines in both Tonyhawk Pro Skater 2 (Japanese version) &amp; Castrol Honda VTR (Japanese version) to help me create SuccessCheckSumUpdater (SuccessCU). * Explained to myself how to find/port save game exploits to new games or to different versions of games available in different regions (i.e. Japanese version).</p>
-<p><em>Patchouli(karehaani)</em></p>
+<h2 id="known-incompatible-games">Known Incompatible Games</h2>
+<p>This is a small list of games that have been <em>confirmed by myself</em> to not currently work with <strong>both Tonyhax International AND the original <a href="https://github.com/socram8888/tonyhax">Tonyhax</a>.</strong> I am waiting for a fix from the original Tonyhax <a href="https://github.com/socram8888">developer</a> for these games as these are not Tonyhax International specific issues.</p>
 <ul>
-<li>Doki Oki (Japan) save game exploit.</li>
-<li>Crash Bandicoot 3 (Japan) save game exploit.</li>
-<li>The Lengend Of Heroes I&amp;II (Japan) save game exploit.</li>
-<li>Tekken 3 Japan/USA/PAL save game exploits (based off of previous work by <a href="https://github.com/socram8888/tonyhax/pull/20">krystalgamer</a>).</li>
-<li>Tekken 2 Japan (rev 1 only)/USA (rev 0 only)/PAL save game exploits (based off of previous work by <a href="https://github.com/socram8888/tonyhax/pull/20">krystalgamer</a>).</li>
-<li>Downhill Snow (Japan) save game exploit.</li>
+<li><a href="http://redump.org/disc/1562/">Dance Dance Revolution</a> - <a href="https://github.com/socram8888/tonyhax/issues/121">Tonyhax Issue 121</a>.</li>
+<li><a href="http://redump.org/disc/9477/">Dance Dance Revolution 2nd Remix</a> - <a href="https://github.com/socram8888/tonyhax/issues/121">Tonyhax Issue 121</a>.</li>
+<li><a href="http://redump.org/disc/30601/">Dance Dance Revolution Best Hits</a> - <a href="https://github.com/alex-free/tonyhax/issues/10">Tonyhax International Issue 10</a> and <a href="https://github.com/socram8888/tonyhax/issues/133">Tonyhax Issue 133</a>.</li>
+<li><a href="http://redump.org/disc/9536/">Dance Dance Revolution 3rd Mix</a> - <a href="https://github.com/socram8888/tonyhax/issues/133">Tonyhax Issue 133</a>.</li>
+<li><a href="http://redump.org/disc/34157/">Dance Dance Revolution 4th Mix</a> - <a href="https://github.com/socram8888/tonyhax/issues/133">Tonyhax Issue 133</a>.</li>
+</ul>
+<h2 id="building-from-source">Building From Source</h2>
+<p>Obtain the <strong>complete Tonyhax International current source tree from GitHub using git</strong>, using the command below:</p>
+<p><code>git clone --recursive https://github.com/alex-free/tonyhax</code></p>
+<p>Next, install all the required dependencies:</p>
+<ul>
+<li>git</li>
+<li>autoconf</li>
+<li>automake</li>
+<li>g++</li>
+<li>make</li>
+<li>libtool</li>
+<li>texinfo</li>
+<li>help2man</li>
+<li>ncurses-devel</li>
+<li>libtinyxml2-devel</li>
+<li>cmake</li>
+<li>cdrdao</li>
+<li>python</li>
+<li>pandoc</li>
+</ul>
+<p>If you are running <em>Fedora or Debian</em> (Windows Subsystem For Linux can run these operating systems on Windows to provide a sufficient build environment), you can download the build dependencies automatically with the <code>get-deps.sh</code> script found in the <code>scripts</code> folder of the Tonyhax International <a href="https//alex-free.github.io/tonyhax">source tree</a>. <strong>For any other OS, you’ll need to find the above packages and install them manually yourself.</strong></p>
+<p>Next, you need to build the tool-chain. Execute the <code>build-tool-chain.sh</code> script, which is found in the <code>scripts</code> directory of Tonyhax International source tree. <strong>This will take some time to build, depending on how fast your computer is.</strong></p>
+<p>With everything installed, you can now build Tonyhax International with the <code>build.sh</code> script found in the <code>scripts</code> directory of the TOnyhax International source tree. After you build Tonyhax International a release <code>.zip</code> file will be generated in the root of the source directory.</p>
+<h2 id="credits">Credits</h2>
+<h3 id="mottzilla">MottZilla</h3>
+<ul>
+<li><p>Guidance on increasing the size of the Tonyhax International loader.</p></li>
+<li><p>Wrote the GameShark Code Engine now used by the anti-piracy bypass features and explained how to use it.</p></li>
+<li><p>The original sole creator of <a href="https://www.psx-place.com/threads/mctool-tonyhax-freepsxboot-installer.36569">PS1 DemoSwap Patcher v1.0</a>. MottZilla re-implemented the TOCPerfect concept into a much superior method, and included his implementation alongside of his DemoSwap idea in PS1 DemoSwap Patcher.</p></li>
+<li><p>Wrote the controller input support for Tonyhax International.</p></li>
+<li><p>Wrote the laser re-calibration function for VC2 and VC3 CDROM controllers.</p></li>
+<li><p>Developed the first Japanese save game exploit for Crash Bandicoot 2.</p></li>
+<li><p>Developed the PS-EXE loader used on GameShark/cheat cartridges to run Tonyhax International.</p></li>
+<li><p>Came up with reset+unlock technique for TOCPerfect booting on USA/PAL consoles.</p></li>
+<li><p>Helped debug the <a href="https://github.com/brad-lin/FreePSXBoot">FreePSXBoot</a> builder’s own patch to disable a FreePSXBoot memory card in slot 2.</p></li>
+<li><p>Originally came up with the idea to involve the SetSession 2 command in a fix for the older CDROM controllers.</p></li>
+<li><p>Explained the save game checksum routines in both Tonyhawk Pro Skater 2 (Japanese version) &amp; Castrol Honda VTR (Japanese version) to help me create SuccessCheckSumUpdater (SuccessCU).</p></li>
+<li><p>Explained to myself how to find/port save game exploits to new games or to different versions of games available in different regions (i.e. Japanese version).</p></li>
+</ul>
+<h3 id="patchoulikarehaani">Patchouli(karehaani)</h3>
+<ul>
+<li><p>Doki Oki (Japan) save game exploit.</p></li>
+<li><p>Crash Bandicoot 3 (Japan) save game exploit.</p></li>
+<li><p>The Lengend Of Heroes I&amp;II (Japan) save game exploit.</p></li>
+<li><p>Tekken 3 Japan/USA/PAL save game exploits (based off of previous work by <a href="https://github.com/socram8888/tonyhax/pull/20">krystalgamer</a>).</p></li>
+<li><p>Tekken 2 Japan (rev 1 only)/USA (rev 0 only)/PAL save game exploits (based off of previous work by <a href="https://github.com/socram8888/tonyhax/pull/20">krystalgamer</a>).</p></li>
+<li><p>Downhill Snow (Japan) save game exploit.</p></li>
 </ul>
 <h3 id="misc-acknowledgements">Misc Acknowledgements</h3>
 <ul>
-<li><a href="https://www.psx-place.com/members/berion.1431/">Berion</a> of <a href="https://psx-place.com">PSX-Place</a> compressed the images of this document properly (this is the first time I’ve edited photos).</li>
-<li>Martin Korth for confirming the SetSession bug found in VC0A, VC0B, and VC1A CDROM controller BIOS versions, and for the priceless <a href="http://problemkaputt.de/psx-spx.htm">PSX-SPX</a> document.</li>
-<li><a href="https://www.psx-place.com/members/peppe90.42412/">Peppe90</a> of <a href="https://psx-place.com">PSX-Place</a> for testing NTSC gamems on a PAL PS2. His results have confirmed that the video mode can not be changed from PS1 software in PS1 mode on a PS1. It must be changed in PS1DRV from the PS2, as PS1 mode is set to always display the same video mode that the console shipped with (for the early PS2s that Tonyhax International supports). He mentioned that PS1VModeNeg v1.0.1 can be used to overcome this. The original Tonyhax <a href="https://github.com/socram8888/tonyhax/issues/25">issue</a> explaining this also was helpful in figuring out how to bypass this PS2 level limitation.</li>
+<li><p><a href="https://www.psx-place.com/members/berion.1431/">Berion</a> of <a href="https://psx-place.com">PSX-Place</a> compressed the images of this document properly (this is the first time I’ve edited photos).</p></li>
+<li><p>Martin Korth for confirming the SetSession bug found in VC0A, VC0B, and VC1A CDROM controller BIOS versions, and for the priceless <a href="http://problemkaputt.de/psx-spx.htm">PSX-SPX</a> document.</p></li>
+<li><p><a href="https://www.psx-place.com/members/peppe90.42412/">Peppe90</a> of <a href="https://psx-place.com">PSX-Place</a> for testing NTSC gamems on a PAL PS2. His results have confirmed that the video mode can not be changed from PS1 software in PS1 mode on a PS1. It must be changed in PS1DRV from the PS2, as PS1 mode is set to always display the same video mode that the console shipped with (for the early PS2s that Tonyhax International supports). He mentioned that PS1VModeNeg v1.0.1 can be used to overcome this. The original Tonyhax <a href="https://github.com/socram8888/tonyhax/issues/25">issue</a> explaining this also was helpful in figuring out how to bypass this PS2 level limitation.</p></li>
 </ul>
-<h3 id="tonyhax-acknowledgements">Tonyhax Acknowledgements</h3>
+<h3 id="o.g.-tonyhax-acknowledgements">O.G. Tonyhax Acknowledgements</h3>
 <p><a href="https://github.com/socram8888">Socram8888</a> is the original developer of the Tonyhax loader. The original Tonyhax loader credits are below, in alphabetical order:</p>
 <ul>
 <li>Alex Free for adding the boot CD image.</li>

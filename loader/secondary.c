@@ -81,11 +81,20 @@ bool unlock_drive() {
     #if !defined STEALTH
 	    debug_write("Drive region: %s", region_name);
     #endif
+
 	// Note the kernel's implementation of strlen returns 0 for nulls.
-	if (!backdoor_cmd(0x50, NULL) || !backdoor_cmd(0x51, "Licensed by") || !backdoor_cmd(0x52, "Sony") || !backdoor_cmd(0x53, "Computer") || !backdoor_cmd(0x54, "Entertainment") || !backdoor_cmd(0x55, p5_localized) || !backdoor_cmd(0x56, NULL)) {
-        #if !defined STEALTH
-		    debug_write("Backdoor failed");
-        #endif
+	if (
+			!backdoor_cmd(0x50, NULL) ||
+			!backdoor_cmd(0x51, "Licensed by") ||
+			!backdoor_cmd(0x52, "Sony") ||
+			!backdoor_cmd(0x53, "Computer") ||
+			!backdoor_cmd(0x54, "Entertainment") ||
+			!backdoor_cmd(0x55, p5_localized) ||
+			!backdoor_cmd(0x56, NULL)
+	) {
+	    #if !defined STEALTH
+			debug_write("Backdoor failed");
+		#endif
 		return false;
 	}
 
@@ -95,8 +104,8 @@ bool unlock_drive() {
 #if !defined TOCPERFECT
 void wait_lid_status(bool open) {
 	uint8_t cd_reply[16];
-	uint8_t expected = open ? 0x10 : 0x00;
 
+	uint8_t expected = open ? 0x10 : 0x00;
 	do {
 		// Issue Getstat command
 		// We cannot issue the BIOS CD commands yet because we haven't called CdInit
@@ -191,14 +200,14 @@ void try_boot_cd() {
 			debug_write("Keep the lid sensor blocked until turning off the console");
             debug_write("Remove the real NTSC-J PSX game disc");
             debug_write("Put in a backup/import disc, then press X on controller 1"); // Thanks MottZilla!
-            controller_input = 1; // disable the repeat counter used in debug_write until controller input is done
-				while(1) { 
-					j = padbuf[0][3] ^ 0xFF;
-					if( j == 0x40)
-						break;
+            controller_input = 1; // disable the repeat counter used in debug_write until controller input is done, see debugscreen.c
+			while(1) { 
+				j = padbuf[0][3] ^ 0xFF;
+				if( j == 0x40)
+					break;
 
-					debug_write(" "); // Vblank wait for controller input
-				}	
+				debug_write(" "); // Vblank wait for controller input
+			}	
 		    controller_input = 0; // Set debug_write back to normal (enable repeat counter) as controller input is done
 			// StopPAD() as we are done using Joypad input
 			address = (void *) (GetB0Table()[0x14]);
@@ -300,13 +309,16 @@ void try_boot_cd() {
 		case 'A':
 			game_region = "American";
 			break;
+
 		case 'I':
 			game_region = "Japanese";
 			break;
+
 		default:
 			game_region = "unknown";
 			break;
     #else
+
 		default:
 			break;
     #endif        
@@ -409,7 +421,7 @@ void try_boot_cd() {
 	exe_header_t * exe_header = (exe_header_t *) (data_buffer + 0x10);
 
 	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function since that's all we can do.
-	if (exe_header->load_addr + exe_header->load_size >= &__RO_START__) { // Comment out this line and the one mentioned below to force loadandexecute bios call
+	if (exe_header->load_addr + exe_header->load_size >= &__RO_START__) {
 		#if !defined STEALTH
 			debug_write("Executable won't fit. Using buggy BIOS call.");
 		#endif
@@ -586,6 +598,7 @@ void __attribute__((section(".start"))) start() {
 
 	// Execute integrity test
 	integrity_test();
+
 	main();
 
 	while(1);

@@ -328,7 +328,7 @@ void try_boot_cd() {
     	debug_write("Game's region is %s. Using %s video.", game_region, game_is_pal ? "PAL" : "NTSC"); // Does not work on PS2, only on original PS1s.
     #endif
 
-	// Defaults if no SYSTEM.CNF file exists, matches shell program behavior
+	// Defaults if no SYSTEM.CNF file exists
 	uint32_t tcb = BIOS_DEFAULT_TCB;
 	uint32_t event = BIOS_DEFAULT_EVCB;
 	uint32_t stacktop = BIOS_DEFAULT_STACKTOP;
@@ -420,7 +420,8 @@ void try_boot_cd() {
 
 	exe_header_t * exe_header = (exe_header_t *) (data_buffer + 0x10);
 
-	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function since that's all we can do.
+	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function
+	// since that's all we can do.
 	if (exe_header->load_addr + exe_header->load_size >= &__RO_START__) {
 		#if !defined STEALTH
 			debug_write("Executable won't fit. Using buggy BIOS call.");
@@ -490,7 +491,9 @@ void main() {
 	// Initialize debug screen
 	debug_init();
 
-    debug_write("Integrity check %sed", integrity_ok ? "pass" : "fail");
+	#if !defined STEALTH
+    	debug_write("Integrity check %sed", integrity_ok ? "pass" : "fail");
+	#endif
 	if (!integrity_ok) {
 		return;
 	}

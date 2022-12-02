@@ -150,6 +150,34 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	}
     }
 
+// Beatmania featuring Dreams Come True
+   	if((strcmp("cdrom:\\SLPM_865.97;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Beatmania featuring Dreams Come True");
+		#endif
+		/*
+		D012255C 001E
+		8012255C 0000
+		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+    	*/
+ 		enable_code_1(0x8012255C, 0x0000, 0x001E);
+		install_cheat_engine();
+    }
+
+// Beatmania Best Hits
+   	if((strcmp("cdrom:\\Slpm_865.96;1", bootfile)) == 0) { // 2 different versions, same code works on both rev 0 and rev 1
+   		#if !defined STEALTH
+			//debug_write("Detected Beatmania Best Hits");
+		#endif
+		/*
+		D0151448 001E
+		80151448 0000
+		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+    	*/
+    	enable_code_1(0x80151448, 0x0000, 0x001E);
+    	install_cheat_engine();
+	}
+
 // Beat Mania: The Sound of Tokyo
 	if((strcmp("cdrom:\\SLPM_867.69;1", bootfile)) == 0) { 
    		#if !defined STEALTH
@@ -317,10 +345,52 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     }
 
-// Dancing Stage Featuring True Kiss Destination
+// Dance Dance Revolution: Disney's Rave
+   	if((strcmp("cdrom:\\SLPM_866.67;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Detected Dance Dance Revolution: Disney's Rave");
+		#endif
+		/*
+		D0192248 001E
+		80192248 0000
+		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+    	*/
+    	enable_code_1(0x80192248, 0x0000, 0x001E);
+    	install_cheat_engine();
+    }
+
+// Dance Dance Revolution: Extra Mix
+   	if((strcmp("cdrom:\\SLPM_868.31;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Detected Dance Dance Revolution: Extra Mix");
+		#endif
+		/*
+		D00EB364 001E
+		800EB364 0000
+		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+    	*/
+    	enable_code_1(0x800EB364, 0x0000, 0x001E);
+    	install_cheat_engine();
+    }
+
+// Dancing Stage featuring Dreams Come True
+   	if((strcmp("cdrom:\\SLPM_865.05;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Detected Dancing Stage featuring Dreams Come True");
+		#endif
+		/*
+		D019245C 001E
+		8019245C 0000
+		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+    	*/
+    	enable_code_1(0x8019245C, 0x0000, 0x001E);
+    	install_cheat_engine();
+    }
+
+// Dancing Stage featuring True Kiss Destination
    	if((strcmp("cdrom:\\SLPM_864.11;1", bootfile)) == 0) {
    		#if !defined STEALTH
-			//debug_write("Detected Dancing Stage Ft. Kiss Destination");
+			//debug_write("Detected Dancing Stage featuring True Kiss Destination");
 		#endif
 		/*
 		D019117A 1040
@@ -753,6 +823,20 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     }
 
+// Oha-Studio Dance Dance Revolution
+   	if((strcmp("cdrom:\\SLPM_866.03;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Detected Oha-Studio Dance Dance Revolution");
+		#endif
+		/*
+		D00FAE58 001E
+		800FAE58 0000
+		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+    	*/
+    	enable_code_1(0x800FAE58, 0x0000, 0x001E);
+    	install_cheat_engine();
+    }
+
 // Ore no Ryouri
    	if((strcmp("cdrom:SCPS_100.99;1", bootfile)) == 0) {
    		#if !defined STEALTH
@@ -806,6 +890,20 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
     	*/
  		enable_code_1(0x8009E7E8, 0x0000, 0x001E);
+		install_cheat_engine();
+    }
+
+// Pop'n Music: Disney Tunes
+   	if((strcmp("cdrom:\\SLPM_866.70;1", bootfile)) == 0) {
+   		#if !defined STEALTH
+			//debug_write("Pop'n Music: Disney Tunes");
+		#endif
+		/*
+		D008A45C 001E
+		8008A45C 0000
+		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+    	*/
+ 		enable_code_1(0x8008A45C, 0x0000, 0x001E);
 		install_cheat_engine();
     }
 

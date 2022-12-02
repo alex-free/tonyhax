@@ -73,6 +73,16 @@ _More Info_
 
 ## Downloads
 
+### Version 1.1.4 (12/2/2022)
+
+*   [tonyhax-v1.1.4-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.4i/tonyhax-v1.1.4-international.zip)
+
+Changes:
+
+* Added support for bypassing the [additional anti-piracy copy protection routines](#playing-games-with-additonal-copy-protection-routines) in Pop'n Music: Disney Tunes, Beatmania featuring Dreams Come True, Dancing Stage featuring Dreams Come True, Oha-Studio Dance Dance Revolution, Dance Dance Revolution: Disney's Rave, Dance Dance Revolution: Extra Mix, and Beatmania Best Hits (thanks [trappedinlimbo](https://www.psx-place.com/members/trappedinlimbo.156719/)).
+
+* Controller input in Japanese consoles reverted to proper silent debug_write message polling as in v1.1.2 and below.
+
 ### Version 1.1.3 (11/30/2022)
 
 *   [tonyhax-v1.1.3-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.3i/tonyhax-v1.1.3-international.zip)
@@ -660,6 +670,20 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.
 
+### Beatmania featuring Dreams Come True
+
+- Versions Tested: [Japan](http://redump.org/disc/36188/)).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Beatmania Best Hits
+
+- Versions Tested: [Japan Rev 0](http://redump.org/disc/36175/), [Japan Rev 1](http://redump.org/disc/44332/).
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.
+
 ### Beat Mania: The Sound of Tokyo
 
 - Versions Tested: [Japan](http://redump.org/disc/36163/).
@@ -701,6 +725,27 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions With Anti-Piracy Screen: USA, USA Demo.
 - When Is The Anti-Piracy Screen Check: During the first loading screen.
 - Versions With Anti-Piracy Bypass Support: USA, USA Demo.
+
+### Dance Dance Revolution: Disney's Rave
+
+- Versions Tested: [Japan](http://redump.org/disc/37012/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Dance Dance Revolution: Extra Mix
+
+- Versions Tested: [Japan](http://redump.org/disc/44438/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Dancing Stage Featuring Dreams Come True
+
+- Versions Tested: [Japan](http://redump.org/disc/17882/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: On the first text screen after boot, until right before the first FMV.
+- Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Dancing Stage Featuring True Kiss Destination
 
@@ -869,6 +914,13 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
+### Oha-Studio Dance Dance Revolution
+
+- Versions Tested: [Japan](http://redump.org/disc/33938/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
 ### Ore no Ryouri
 
 - Versions Tested: [Japan](http://redump.org/disc/39643/).
@@ -893,6 +945,13 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 ### Pop'n Music: Animation Melody
 
 - Versions Tested: [Japan](http://redump.org/disc/33223/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Pop'n Music: Disney Tunes
+
+- Versions Tested: [Japan](http://redump.org/disc/34263/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.

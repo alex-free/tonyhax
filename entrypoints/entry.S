@@ -84,8 +84,8 @@ busywait:
 	addi t0, -1
 	bne t0, zero, busywait
 
-	# Load temp buffer address
-	li s2, 0x801F8180
+	# Load temp buffer address (originally was 0x801FA000, - 0x100 from original start addr of Tonyhax: 0x801FA100)
+	li s2, 0x801F8080
 
 	# Load header using FileRead
 	li t1, 0x34

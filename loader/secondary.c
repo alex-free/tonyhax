@@ -15,11 +15,10 @@
 #include "io.h"
 
 uint8_t sscmd;
+uint8_t cdcontrollerver[4];
 
 const char * p5_localized;
 const char * region_name;
-
-uint8_t cdcontrollerver[4];
 
 bool calibrate_laser = 0; // Only Japanese VC2 and VC3 consoles need this so it is off by default
 bool bugged_setsession = 0; // VC0 A, VC0 B, and VC1 A CDROM Controller BIOS versions all have a buggy SetSession command that requires a special work around to use
@@ -78,9 +77,7 @@ bool backdoor_cmd(uint_fast8_t cmd, const char * string) {
 }
 
 bool unlock_drive() {
-    #if !defined STEALTH
-	    debug_write("Drive region: %s", region_name);
-    #endif
+	debug_write("Drive region: %s", region_name);
 
 	// Note the kernel's implementation of strlen returns 0 for nulls.
 	if (
@@ -92,9 +89,7 @@ bool unlock_drive() {
 			!backdoor_cmd(0x55, p5_localized) ||
 			!backdoor_cmd(0x56, NULL)
 	) {
-	    #if !defined STEALTH
-			debug_write("Backdoor failed");
-		#endif
+		debug_write("Backdoor failed");
 		return false;
 	}
 
@@ -133,18 +128,18 @@ bool is_lid_open() {
 	// Always returns one, no need to check either
 	cd_read_reply(cd_reply);
 
-    if(cd_reply[0]==0x10) {
-        return true;
+	if(cd_reply[0]==0x10) {
+		return true;
 	} else {
-        return false;
-    }   
+		return false;
+	}   
 }
 
 bool licensed_drive() {
-    uint8_t getid_response[9];
+	uint8_t getid_response[9];
 	unsigned char gid;
 
-    while(1) {
+	while(1) {
     	cd_command(CD_CMD_GETID,0,0);
 		gid = cd_wait_int();
 		if(gid!=5)
@@ -154,11 +149,11 @@ bool licensed_drive() {
     cd_wait_int();
 	cd_read_reply(getid_response);
 
-    if(getid_response[0]==0x02 && getid_response[1]==0x00 && getid_response[2]==0x20 && getid_response[3]==0x00) {
-        return true;
+	if(getid_response[0]==0x02 && getid_response[1]==0x00 && getid_response[2]==0x20 && getid_response[3]==0x00) {
+		return true;
 	} else {
-        return false;
-    }   
+		return false;
+	}   
 }
 #endif
 
@@ -172,7 +167,7 @@ void try_boot_cd() {
 			wait_lid_status(true);
 			wait_lid_status(false);
 		} else {
-            if(is_lid_open() || !licensed_drive()) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licenesed (if it is not licensed but not open then the drive is closed and the user can open it and license it)    
+			if(is_lid_open() || !licensed_drive()) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licenesed (if it is not licensed but not open then the drive is closed and the user can open it and license it)    
 				debug_write("Put in a real NTSC-J PSX game disc, then block the lid sensor");
 				wait_lid_status(true);
 				wait_lid_status(false); // Blocking lid sensor = 'closing lid'
@@ -180,14 +175,15 @@ void try_boot_cd() {
 	            debug_write("Initializing CD");	// Drive will be in licensed state after this is successful
 				if (!CdInit()) {
 					debug_write("Init failed");
-                    debug_write("Try unblocking then blocking the lid sensor again");
+					debug_write("Try unblocking then blocking the lid sensor again");
 					return;
 				}
 			} // Drive is licensed and the lid is 'closed' at this point
-            debug_write("Drive is licensed");
-            debug_write("Stopping motor");
+			debug_write("Drive is licensed");
+            
+			debug_write("Stopping motor");
 			cd_command(CD_CMD_STOP,0,0); cd_wait_int(); cd_wait_int();
-			
+
 			void * address;		// For Calculating BIOS Functions
 			uint8_t j;			// Joypad
 			uint8_t padbuf[2][0x22];	// Joypad Buffers
@@ -198,16 +194,17 @@ void try_boot_cd() {
 			address = (void *) (GetB0Table()[0x13]);
 			((void (*)(void)) address)();	// BIOS StartPad
 			debug_write("Keep the lid sensor blocked until turning off the console");
-            debug_write("Remove the real NTSC-J PSX game disc");
-            debug_write("Put in a backup/import disc, then press X on controller 1"); // Thanks MottZilla!
-            controller_input = 1; // disable the repeat counter used in debug_write until controller input is done, see debugscreen.c
+			debug_write("Remove the real NTSC-J PSX game disc");
+			debug_write("Put in a backup/import disc, then press X on controller 1"); // Thanks MottZilla!
+			controller_input = 1; // disable the repeat counter used in debug_write until controller input is done, see debugscreen.c
+            
 			while(1) { 
 				j = padbuf[0][3] ^ 0xFF;
 				if( j == 0x40)
 					break;
-
 				debug_write(" "); // Vblank wait for controller input
-			}	
+			}
+	
 		    controller_input = 0; // Set debug_write back to normal (enable repeat counter) as controller input is done
 			// StopPAD() as we are done using Joypad input
 			address = (void *) (GetB0Table()[0x14]);
@@ -239,24 +236,16 @@ void try_boot_cd() {
 		}
 	}
 
-    #if !defined STEALTH
-        debug_write("Reinitializing kernel"); // We have to reinitilize, stop, and init in that order to prevent the process from possibly freezing at this point
-    #endif
-    bios_reinitialize();
+	debug_write("Reinitializing kernel"); // We have to reinitilize, stop, and init in that order to prevent the process from possibly freezing at this point
+	bios_reinitialize();
 	bios_inject_disc_error();
 
-    #if !defined STEALTH
-        debug_write("Stopping motor");
-    #endif	
-    cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
-
-    #if !defined STEALTH
-	    debug_write("Initializing CD");
-    #endif
+	debug_write("Stopping Motor");
+	cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
+	
+	debug_write("Initializing CD");
 	if (!CdInit()) {
-		#if !defined STEALTH
-			debug_write("Init failed");
-		#endif
+		debug_write("Init failed");
 		return;
 	}
 
@@ -270,16 +259,11 @@ void try_boot_cd() {
 	 */
 	uint8_t * data_buffer = (uint8_t *) (bios_is_ps1() ? 0xA000B070 : 0xA000A8D0);
 
-    #if !defined STEALTH
-    	debug_write("Checking game region");
-    #endif
-
+	debug_write("Checking game region");
     #if defined TOCPERFECT	
     	if (CdReadSector(1, 12, data_buffer) != 1) { // Real license data sector is copied to sector 12 by PS1 DemoSwap Patcher before it writes Japanese license data to sector 4
-			#if !defined STEALTH
-				debug_write("Failed to read sector");
-			#endif
-		return;
+			debug_write("Failed to read sector");
+			return;
 		}
 	#else
     	if (CdReadSector(1, 4, data_buffer) != 1) {
@@ -288,10 +272,8 @@ void try_boot_cd() {
 		}
 	#endif
 
-	#if !defined STEALTH
-	    const char * game_region;
-    #endif	
-    bool game_is_pal = false;
+	const char * game_region;
+	bool game_is_pal = false;
 	/*
 	 * EU: "          Licensed  by          Sony Computer Entertainment Euro pe   "
 	 * US: "          Licensed  by          Sony Computer Entertainment Amer  ica "
@@ -300,12 +282,10 @@ void try_boot_cd() {
 	 */
 	switch (data_buffer[0x3C]) {
 		case 'E':
-		    #if !defined STEALTH
-			    game_region = "European";
-            #endif			
-            game_is_pal = true;
+			game_region = "European";
+			game_is_pal = true;
 			break;
-	#if !defined STEALTH
+
 		case 'A':
 			game_region = "American";
 			break;
@@ -316,19 +296,11 @@ void try_boot_cd() {
 
 		default:
 			game_region = "unknown";
-			break;
-    #else
-
-		default:
-			break;
-    #endif        
 	}
-    
-    #if !defined STEALTH
-    	debug_write("Game's region is %s. Using %s video.", game_region, game_is_pal ? "PAL" : "NTSC"); // Does not work on PS2, only on original PS1s.
-    #endif
 
-	// Defaults if no SYSTEM.CNF file exists, matches shell program behavior
+	debug_write("Game's region is %s. Using %s video.", game_region, game_is_pal ? "PAL" : "NTSC");
+
+	// Defaults if no SYSTEM.CNF file exists
 	uint32_t tcb = BIOS_DEFAULT_TCB;
 	uint32_t event = BIOS_DEFAULT_EVCB;
 	uint32_t stacktop = BIOS_DEFAULT_STACKTOP;
@@ -337,15 +309,11 @@ void try_boot_cd() {
 	char bootfilebuf[32];
 
     #if defined TOCPERFECT
-    	#if !defined STEALTH
-    		debug_write("Loading SYSTEM.CN2");
-    	#endif
+		debug_write("Loading SYSTEM.CN2");
 		int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CN2;1", FILE_READ);
     #else
-    	#if !defined STEALTH
-    		debug_write("Loading SYSTEM.CNF");
-    	#endif
-   		int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
+		debug_write("Loading SYSTEM.CNF");
+		int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
    	#endif
     
 	if (cnf_fd > 0) {
@@ -353,10 +321,8 @@ void try_boot_cd() {
 		FileClose(cnf_fd);
 
 		if (read == -1) {
-            #if !defined STEALTH
-			    debug_write("Read error %d", GetLastError());
-            #endif			
-            return;
+			debug_write("Read error %d", GetLastError());
+			return;
 		}
 
 		// Null terminate
@@ -368,17 +334,15 @@ void try_boot_cd() {
 		if (config_get_string((char *) data_buffer, "BOOT", bootfilebuf)) {
 			bootfile = bootfilebuf;
 		}
+
 	} else {
 		uint32_t errorCode = GetLastError();
 		if (errorCode != FILEERR_NOT_FOUND) {
-			#if !defined STEALTH
-				debug_write("Open error %d", errorCode);
-			#endif
+			debug_write("Open error %d", errorCode);
 			return;
 		}
-		#if !defined STEALTH
-			debug_write("Not found");
-		#endif
+
+		debug_write("Not found");
 	}
 
 	// Use string format to reduce ROM usage
@@ -387,48 +351,36 @@ void try_boot_cd() {
 	debug_write(" * %s = %x", "STACK", stacktop);
 	debug_write(" * %s = %s", "BOOT", bootfile);
 
-    #if !defined STEALTH
-    	debug_write("Configuring kernel");
-    #endif	   
-    SetConf(event, tcb, stacktop);
+	debug_write("Configuring kernel");
+	SetConf(event, tcb, stacktop);
 
-    #if !defined STEALTH
-	    debug_write("Clearing RAM");
-    #endif	
-    uint8_t * user_start = (uint8_t *) 0x80010000;
+	debug_write("Clearing RAM");
+	uint8_t * user_start = (uint8_t *) 0x80010000;
 	bzero(user_start, &__RO_START__ - user_start);
 
-    #if !defined STEALTH
-    	debug_write("Reading executable header");
-    #endif
+	debug_write("Reading executable header");
 	int32_t exe_fd = FileOpen(bootfile, FILE_READ);
 	if (exe_fd <= 0) {
-		#if !defined STEALTH
-			debug_write("Open error %d", GetLastError());
-		#endif
+		debug_write("Open error %d", GetLastError());
 		return;
 	}
 
 	read = FileRead(exe_fd, data_buffer, 2048);
 
 	if (read != 2048) {
-		#if !defined STEALTH
-			debug_write("Read error %d", GetLastError());
-		#endif
+		debug_write("Read error %d", GetLastError());
 		return;
 	}
 
 	exe_header_t * exe_header = (exe_header_t *) (data_buffer + 0x10);
 
-	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function since that's all we can do.
+	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function
+	// since that's all we can do.
 	if (exe_header->load_addr + exe_header->load_size >= &__RO_START__) {
-		#if !defined STEALTH
-			debug_write("Executable won't fit. Using buggy BIOS call.");
-		#endif
+		debug_write("Executable won't fit. Using buggy BIOS call.");
+
 		if (game_is_pal != gpu_is_pal()) {
-			#if !defined STEALTH
-				debug_write("Switching video mode");
-			#endif
+			debug_write("Switching video mode");
 			debug_switch_standard(game_is_pal);
 		}
 
@@ -442,14 +394,10 @@ void try_boot_cd() {
 		return;
 	}
 
-    #if !defined STEALTH
-    	debug_write("Loading executable (%d bytes @ %x)", exe_header->load_size, exe_header->load_addr);
-    #endif
+	debug_write("Loading executable (%d bytes @ %x)", exe_header->load_size, exe_header->load_addr);
 
 	if (FileRead(exe_fd, exe_header->load_addr, exe_header->load_size) != (int32_t) exe_header->load_size) {
-		#if !defined STEALTH
-			debug_write("Read error %d", GetLastError());
-		#endif
+		debug_write("Read error %d", GetLastError());
 		return;
 	}
 	
@@ -459,15 +407,11 @@ void try_boot_cd() {
 	FileClose(exe_fd);
 
 	if (game_is_pal != gpu_is_pal()) {
-		#if !defined STEALTH
-			debug_write("Switching video mode");
-		#endif
+		debug_write("Switching video mode");
 		debug_switch_standard(game_is_pal);
 	}
 
-	#if !defined STEALTH
-		debug_write("Starting");
-	#endif
+	debug_write("Starting");
 
 	// Restore original error handler
 	bios_restore_disc_error();
@@ -484,34 +428,30 @@ void try_boot_cd() {
 void main() {
 	// Undo all possible fuckeries during exploiting
 	bios_reinitialize();
+
 	// Mute the audio
 	audio_halt();
 
 	// Initialize debug screen
 	debug_init();
 
-    debug_write("Integrity check %sed", integrity_ok ? "pass" : "fail");
+	debug_write("Integrity check %sed", integrity_ok ? "pass" : "fail");
 	if (!integrity_ok) {
 		return;
 	}
 
 	bios_inject_disc_error();
-    #if !defined STEALTH
-	    log_bios_version();
-        debug_write("Initializing CD");
-    #endif	
-    if (!cd_drive_init()) {
-		#if !defined STEALTH
-			debug_write("Init failed");
-		#endif
+	log_bios_version();
+    
+	debug_write("Initializing CD");
+	if (!cd_drive_init()) {
+		debug_write("Init failed");
 		return;
 	}
 
 	sscmd = 0x20; cd_command(CD_CMD_TEST,(unsigned char *)&sscmd,1); cd_wait_int(); 
 	cd_read_reply(cdcontrollerver);	// Test Command $19,$20 gets the CDROM BIOS
-	#if !defined STEALTH
-		debug_write("CD BIOS: %x", *(uint32_t*) cdcontrollerver);
-	#endif
+	debug_write("CD BIOS: %x", *(uint32_t*) cdcontrollerver);
    	if(cdcontrollerver[0]==0x94) {    
         bugged_setsession = 1;
         enable_unlock = 0; // VC0 A and VC0 B are both from 1994 and don't support the getregion command to figure out if it is unlockable or not.
@@ -533,9 +473,7 @@ void main() {
 
 		// Should succeed with 3
 		if (cd_wait_int() != 3) {
-			#if !defined STEALTH
-				debug_write("Region read failed");
-			#endif
+			debug_write("Region read failed");
 			return;
 		}
 
@@ -560,22 +498,16 @@ void main() {
 			enable_unlock = 0;
 		} else {
 			// +4 to skip past "for "
-			#if !defined STEALTH
-			    debug_write("Unsupported region: %s", (char *) (cd_reply + 4));
-			#endif
+			debug_write("Unsupported region: %s", (char *) (cd_reply + 4));
 			return;
 		}
 
 		if(enable_unlock) { // Check again, this could be false now
 			#if defined TOCPERFECT // Get TOC via reset + unlock instead of unlock + opening/closing the drive lid for auto loading in TOCPerfect, thanks MottZilla!
-				#if !defined STEALTH
-					debug_write("Resetting drive");
-				#endif
+				debug_write("Resetting drive");
 				cd_drive_reset();
 			#endif
-				#if !defined STEALTH
-					debug_write("Unlocking drive");
-				#endif
+			debug_write("Unlocking drive");
 			if (!unlock_drive())
 				return;
 		}
@@ -584,11 +516,9 @@ void main() {
 	while (1) {
 		try_boot_cd();
 
-		#if !defined STEALTH
-		    debug_write("Reinitializing kernel");
-        #endif
-    	bios_reinitialize();
-    	bios_inject_disc_error();
+		debug_write("Reinitializing kernel");
+		bios_reinitialize();
+		bios_inject_disc_error();
 	}
 }
 

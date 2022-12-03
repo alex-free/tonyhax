@@ -459,7 +459,6 @@ void main() {
     } 
     else if(cdcontrollerver[1] == 0x05 && cdcontrollerver[2] == 0x16 && cdcontrollerver[0] == 0x95 && cdcontrollerver[3] == 0xC1) {     
         bugged_setsession = 1; // NOTE I don't think this will ever be triggered but just in case. Earliest SCPH-3000s and late SCPH-1000s are VC0B and later SCPH-3000s are VC1B. Only unlockable systems have VC1A it seems.
-        bugged_setsession = 1;
     }
     else if((cdcontrollerver[3] == 0xC2) || (cdcontrollerver[3] == 0xC3)) {   
         calibrate_laser = 1;

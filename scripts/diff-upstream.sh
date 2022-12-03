@@ -5,14 +5,16 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
-cd "$(dirname "$0")"/../
+cd "$(dirname "$0")"
 
-if [ -e "docs/tonyhax-vs-tonyhax-international-diffs/tonyhax-international-v"$1".diff" ]; then
+if [ -e "../docs/tonyhax-vs-tonyhax-international-diffs/tonyhax-international-v"$1".diff" ]; then
     echo "Error: the file docs/tonyhax-vs-tonyhax-international-diffs/tonyhax-international-v"$1".diff already exists, please choose a different name as to not overwrite the previous diff"
     exit 1
 fi
 
 set -e
+./gen-html.sh
+cd ../
 make clean
 tmp=$(mktemp -d --tmpdir og-tonyhax.XXX)
 git clone https://github.com/socram8888/tonyhax "$tmp"

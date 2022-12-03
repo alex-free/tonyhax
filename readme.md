@@ -73,6 +73,18 @@ _More Info_
 
 ## Downloads
 
+### Version 1.1.5 (12/3/2022)
+
+*   [tonyhax-v1.1.5-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.5i/tonyhax-v1.1.5-international.zip)
+
+Changes:
+
+* Added support for bypassing the [additional anti-piracy copy protection routines](#playing-games-with-additonal-copy-protection-routines) in Koneko mo Issho.
+
+* Fixed entry.S header temp buffer address.
+
+* More size optimizations (specifcally in ap-bypass.c).
+
 ### Version 1.1.4 (12/2/2022)
 
 *   [tonyhax-v1.1.4-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.4i/tonyhax-v1.1.4-international.zip)
@@ -868,6 +880,13 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 ### Koko Hore! Pukka
 
 - Versions Tested: [Japan](http://redump.org/disc/4812/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Koneko mo Issho
+
+- Versions Tested: [Japan](http://redump.org/disc/6329/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immeditely.
 - Versions With Anti-Piracy Bypass Support: Japan.

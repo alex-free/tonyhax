@@ -547,6 +547,18 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     }
 
+// i-mode Mo Issho - Doko Demo Tsuika Disc
+    if((strcmp("SCPS_101.41;1", stripped_bootfile)) == 0) {
+        	//debug_write("Detected i-mode Mo Issho");
+        /*
+        D01698B4 001E
+        801698B4 0000
+        code generated via aprip by M4x1mumReZ: https://gbatemp.net/members/m4x1mumrez.610331/
+        */
+        enable_code_1(0x801698B4, 0x0000, 0x001E);
+        install_cheat_engine();
+    }
+
 // Jikkyou Powerful Pro Yakyuu '99 Ketteiban
    	if((strcmp("SLPM_864.33;1", stripped_bootfile)) == 0) {
    		//debug_write("Detected Jikkyou Powerful Pro Yakyuu '99 Ketteiban");

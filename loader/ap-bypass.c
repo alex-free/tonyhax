@@ -363,28 +363,28 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 // Dino Crisis
 	if((strcmp("SLUS_009.22;1", stripped_bootfile) == 0)) { // NTSC-U has 2 versions, rev 0 and rev 1 (greatest hits) see https://tcrf.net/Dino_Crisis_(PlayStation)#Revisional_Differences
 		//debug_write("Detected Dino Crisis - USA");
-		ver_check = (load_addr + 0x61); // First different byte between revisions
+	ver_check = (load_addr + 0x61); // First different byte between revisions
 		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
-		ver_check_val = *(uint8_t*) ver_check;
+	ver_check_val = *(uint8_t*) ver_check;
 		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
-		if((ver_check_val == 0xD0)) {
+	if((ver_check_val == 0xD0)) {
 			//debug_write("Rev 0");
-			/*
-			D0149004 959C
-			80149004 9E64
-			Found independently by MottZilla, but actually turns out to be the same code by Epson found on copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml
-			*/
-  		  		enable_code_1(0x80149004, 0x9E64, 0x959C);
-				install_cheat_engine();
+		/*
+		D0149004 959C
+		80149004 9E64
+		Found independently by MottZilla, but actually turns out to be the same code by Epson found on copyconsoleworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml
+		*/
+			enable_code_1(0x80149004, 0x9E64, 0x959C);
+			install_cheat_engine();
 		} else {
 			//debug_write("Rev 1");
-			/*
-			D0148004 8658
-			80148004 8F20
-			my code, the anti-piracy table just moved memory addresses between versions :)
-			*/
- 				enable_code_1(0x80148004, 0x8F20, 0x8658);
-				install_cheat_engine();
+		/*
+		D0148004 8658
+		80148004 8F20
+		my code, the anti-piracy table just moved memory addresses between versions :)
+		*/
+			enable_code_1(0x80148004, 0x8F20, 0x8658);
+			install_cheat_engine();
     	}
 }
 
@@ -549,7 +549,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 
 // i-mode Mo Issho - Doko Demo Issho Tsuika Disc
     if((strcmp("SCPS_101.41;1", stripped_bootfile)) == 0) {
-        //debug_write("Detected i-mode Mo Issho");
+		//debug_write("Detected i-mode Mo Issho");
         /*
         D01698B4 001E
         801698B4 0000

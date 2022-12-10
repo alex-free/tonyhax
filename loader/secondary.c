@@ -22,9 +22,9 @@ const char * region_name;
 
 bool calibrate_laser = 0; // Only Japanese VC2 and VC3 consoles need this so it is off by default
 bool bugged_setsession = 0; // VC0 A, VC0 B, and VC1 A CDROM Controller BIOS versions all have a buggy SetSession command that requires a special work around to use
-bool enable_unlock = 1; // Disabled on VC0 A, VC0 B, and VC1 A Japanese CDROM Controller BIOS versions automatically. On VC1+ the testregion command is run and if the region is Japan it is also disabled.
-bool controller_input = 0; // When enabled, debug_write does not display the repeat messages counter. This is so we can draw a blank line and then wait for controller input using vsync in debug_write
-bool first_rev = 0; // VC0 A and VC0 B do not need any anti-piracy patching as they are immune to addtional copy protection routines because of the lack of the ReadTOC command in the CDROM Controller BIOS Firmware
+bool enable_unlock = 1; // Disabled on VC0A and VC0B Japanese CDROM Controller BIOS versions automatically. On VC1A+ the testregion command is run and if the region is Japan it is also disabled.
+bool controller_input = 0; // When enabled, debug_write does not display the repeat messages counter. This is so we can draw a blank line and then wait for controller input using vsync in debug_write.
+bool first_rev = 0; // VC0 A and VC0 B do not need any anti-piracy patching as they are immune to addtional copy protection routines because of the lack of the ReadTOC command in the CDROM Controller BIOS Firmware.
 
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
@@ -226,7 +226,7 @@ void try_boot_cd() {
 			sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
 		}
 
-		if(calibrate_laser) { // VC2 and VC3s do auto Bias/Gain calibration when reading the real NTSC-J PS1 disc. A swapped in CD-R or just a different disc in general needs this to be updated
+		if(calibrate_laser) { // VC2 and VC3s do auto Bias/Gain calibration when reading a newly inserted real NTSC-J PS1 disc. A swapped in CD-R or just a different disc in general needs this to be updated
         #if !defined STEALTH		
         	debug_write("Calibrating laser");
         #endif		
@@ -234,14 +234,22 @@ void try_boot_cd() {
 			cd_command(CD_CMD_TEST,&cbuf[0],4); 
 			cd_wait_int();
 		}
+
+		/*
+		We have to re-initilize the BIOS, stop, and init in that order to prevent the process from possibly freezing at this point on Japanese consoles. 
+		
+		The first reason this is required is because the SetSessionSuperUltraCommandSmash screws up interrupts since we are sending the 2nd SetSession command before the possible 3rd interrupt (which is a second INT5 response sent if session 2 does not actually exist). 
+		
+		The second reason is because of how we are using the BIOS controller functions, to go back to a clean state a bios re-intialization also accommplishes that.
+		*/
+
+		debug_write("Reinitializing kernel"); 
+		bios_reinitialize();
+		bios_inject_disc_error();
+
+		debug_write("Stopping Motor");
+		cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
 	}
-
-	debug_write("Reinitializing kernel"); // We have to reinitilize, stop, and init in that order to prevent the process from possibly freezing at this point
-	bios_reinitialize();
-	bios_inject_disc_error();
-
-	debug_write("Stopping Motor");
-	cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
 	
 	debug_write("Initializing CD");
 	if (!CdInit()) {
@@ -308,13 +316,13 @@ void try_boot_cd() {
 
 	char bootfilebuf[32];
 
-    #if defined TOCPERFECT
+	#if defined TOCPERFECT
 		debug_write("Loading SYSTEM.CN2");
 		int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CN2;1", FILE_READ);
-    #else
+	#else
 		debug_write("Loading SYSTEM.CNF");
 		int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
-   	#endif
+	#endif
     
 	if (cnf_fd > 0) {
 		read = FileRead(cnf_fd, data_buffer, 2048);
@@ -351,8 +359,17 @@ void try_boot_cd() {
 	debug_write(" * %s = %x", "STACK", stacktop);
 	debug_write(" * %s = %s", "BOOT", bootfile);
 
+	/*
+	 * SetConf is run by BIOS with interrupts disabled.
+	 *
+	 * If an interrupt happens while the BIOS is reinitializing the TCBs (thread control blocks),
+	 * the interrupt handler will store the current thread state in the zero address, wiping
+	 * vital data, like the interrupt trampoline at 0x80.
+	 */
 	debug_write("Configuring kernel");
+	EnterCriticalSection();
 	SetConf(event, tcb, stacktop);
+	ExitCriticalSection();
 
 	debug_write("Clearing RAM");
 	uint8_t * user_start = (uint8_t *) 0x80010000;

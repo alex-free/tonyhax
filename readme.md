@@ -49,6 +49,9 @@ _Boot Methods_
 _More Info_
 
 * [Playing Games With Additional Copy Protection Routines](#playing-games-with-additonal-copy-protection-routines)
+* [List Of Games With Anti-Piracy Bypass Support](#list-of-games-with-anti-piracy-bypass-support)
+* [Known Games That Need Anti-Piracy Bypasses Implemented](#known-games-that-need-anti-piracy-bypasses-implemented)
+* [Bypassing Additional EDC Checks Found In Some Games](#bypassing-additional-edc-checks-found-in-some-games) 
 * [CD-R Media For PS1 Backups](#cd-r-media-for-ps1-backups)
 * [Burning Programs For PS1 Backups](#burning-programs-for-ps1-backups)
 * [Disc Read Errors And PS1 CD Drive Repair](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/)
@@ -65,6 +68,7 @@ _More Info_
 *   [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967)
 *   [GBATemp Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/#post-9922514)
 *   [APrip Homepage](https://alex-free.github.io/aprip)
+*   [My CDRDAO Fork](https://github.com/alex-free/cdrdao)
 *   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap)
 *   [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom)
 *   [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot)
@@ -72,6 +76,22 @@ _More Info_
 *   [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)
 
 ## Downloads
+
+### Version 1.1.6 (12/10/2022)
+
+*   [tonyhax-v1.1.6-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.6i/tonyhax-v1.1.6-international.zip)
+
+Changes:
+
+* Implemented **many speed and size optimizations** for the tonyhax international loader. Can **boot games quicker in some cases**.
+
+* Applied this [commit](https://github.com/socram8888/tonyhax/commit/7f22506857afe66c4f8419ee2e73f62306a125da) from OG [TonyHax](https://github.com/socram8888/tonyhax) to better simulate how the BIOS boots games. As of 12/10/2022, _where applicable_ Tonyhax International is current with the original Tonyhax.
+
+* Added support for bypassing the [additional anti-piracy copy protection routines](#playing-games-with-additonal-copy-protection-routines) in Strider 2, Rockman X5, Rockman X6, Rockman 5, Dance Dance Revolution: Best Hits, Dance Dance Revolution 2nd Remix, Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1, Dance Dance Revolution 2nd Remix: Append Club Version Vol. 2.
+
+* Added support for bypassing the [additional anti-piracy copy protection routines](#playing-games-with-additonal-copy-protection-routines) in i-mode mo Issho: Doko Demo Issho Tsuika Disc (thanks [M4x1mumRez](https://github.com/M4x1mumReZ)).
+
+* Added information on games with additional [EDC Checks](#bypassing-additional-edc-checks-found-in-some-games) found in some games (most notably such checks are found in the Dance Dance Revolution games that I've just added support for bypassing their additional anti-piracy measures). You must [burn](#burning-programs-for-ps1-backups) games containing EDC Checks in a specific way for them to work.
 
 ### Version 1.1.5 (12/3/2022)
 
@@ -639,27 +659,41 @@ If you are having issues booting discs in Tonyhax International, consider wiping
 
 ## Burning Programs For PS1 Backups
 
-*   [IMGBurn](https://www.imgburn.com) (Windows).
-*   [CDRDAO](http://cdrdao.sourceforge.net) (Mac OS X/Linux/\*BSD/Windows).
+_Most,_ **but not all** PSX disc images can be burned with [IMGBurn](https://www.imgburn.com) (avilable for Windows) or [the Official CDRDAO](http://cdrdao.sourceforge.net) (available for Mac OS X/Linux/\*BSD/Windows).
 
-If you use cdrdao, you must use the `--swap` argument for discs with CDDA audio or the game will have no music! Example:
+If you use [the Official CDRDAO](http://cdrdao.sourceforge.net), you must use the `--swap` argument for discs with CDDA audio or the game will have incorrect CD audio playback! Example:
 
-    cdrdao write --speed 1 --swap --eject yourgame.cue
+`cdrdao write --speed 1 --swap --eject psxgame.cue`
+
+IMGBurn and the official CDRDAO can not be used to burn games which have [additional EDC checks in place](#bypassing-additional-edc-checks-found-in-some-games) because they burn the disc in a way which will trip this detection when you actually play the burned CD-R. Therefore, it is recommended to use one the following burning programs, which can be used even for the games which contain EDC checks (and the burned CD-R won't trip the detection):
+
+* [My CDRDAO Fork](https://github.com/alex-free/cdrdao) _with the generic-mmc-raw driver_.
+* [CloneCD](https://www.redfox.bz/en/clonecd.html).
+* [Alcohol 120%](https://www.alcohol-soft.com/) _with "general protected CD" mode_.
+
+Example of using my CDRDAO fork with the raw driver to burn a PSX game (can correctly burn disc images with EDC detection and not cause the protection to trip in game when played from a burned CD-R):
+
+`cdrdao write --speed 1 --driver generic-mmc-raw --eject psxgame.cue`
+
+_NOTE_: You do not need to do the `--swap` argument if you use my cdrdao fork.
 
 ## Playing Games With Additonal Copy Protection Routines
 
 Starting in late 1998, some PSX games began including additional copy protection code that is designed to prevent playing backup CD-R copies of a game. This additional copy protection originally could only detect the first type of mod-chips (known as 'non-stealth') and would only fail if it detected one. **Tonyhax International does not trigger this type of anti-piracy copy protection on stock consoles and these games don't require any patching by Tonyhax International.**
 
-Starting in mid 1999, the additional copy protection code was upgraded again. This updated copy protection code can detect 'non-stealth' mod-chips, 'traditional' swap tricks (which don't update TOC data), and the authenticity of the disc currently running in the PSX console. **This last check causes the anti-piracy copy protection routine to trigger on games booted with Tonyhax International unless you are using a SCPH-1000 or early SCPH-3000 Japanese PSX console model. 
+Starting in mid 1999, the 'standardized' additional copy protection code was updated. This updated copy protection code can detect 'non-stealth' mod-chips, 'traditional' swap tricks (which don't update TOC data), and the authenticity of the disc currently running in the PSX console. This last check causes the anti-piracy copy protection routine to trigger on games booted with Tonyhax International _unless you are using a SCPH-1000 or early SCPH-3000 Japanese PSX console model, which are immune to triggering any addtional anti-piracy copy protection routines of any kind._ 
 
-**Tonyhax International is now capable of game-specific on the fly patching to bypass this type of anti-piracy copy protection routine on ALL consoles.** Below is a list of games which require explicit game-specific anti-piracy bypass support to work and their current status of support as of the latest version of Tonyhax International.**
+Tonyhax International is now capable of [game-specific](#list-of-games-with-anti-piracy-bypass-support) on the fly patching to bypass this type of anti-piracy copy protection routine on **all consoles**.
 
-If you find a game which triggers the 'anti-piracy screen of death' that is not listed below, or you want support to be added for a game that is not yet currently supported but is listed below, please open an [Anti-Piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&template=antipiracy-issue.md&title=) on the [Tonyhax International Github](https://github.com/alex-free/tonyhax). I would eventually like every game that can trigger the anti-piracy copy protection routine when booted via Tonyhax International on a stock console to have a game specific bypass implemented for 100% compatibility.
+If you find a game which triggers the 'anti-piracy screen of death' that is yet supported please open an [Anti-Piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&template=antipiracy-issue.md&title=) on the [Tonyhax International Github](https://github.com/alex-free/tonyhax). I would eventually like every game that can trigger the anti-piracy copy protection routine when booted via Tonyhax International on a stock console to have a game specific bypass implemented for 100% compatibility.
 
-_IMPORTANT NOTE:_ Tonyhax International **does not bypass anti-piracy if your console has an actual non-stealth modchip installed.**
+There is currently a WIP 'todo' list of games that are [known](#known-games-that-need-anti-piracy-bypasses-implemented) to need anti-piracy bypasses, but are not yet supported.
 
-Some PAL games are using a different copy protection scheme known as LibCrypt protection. This protection can be bypassed by burning a backup CD-R in a [very specific way to keep the protection working](https://github.com/Kippykip/SBITools), or just by using an original authentic PAL PSX disc ('imported' for a different region console will work via the Tonyhax International loader).
+_IMPORTANT NOTE **NUMBER 1**:_ Tonyhax International **does not bypass anti-piracy if your console has an actual non-stealth modchip installed.**
 
+_IMPORTANT NOTE **NUMBER 2**:_ Some PAL games are using a different copy protection scheme known as LibCrypt protection. This protection can be bypassed by burning a backup CD-R in a [very specific way to keep the protection working](https://github.com/Kippykip/SBITools), or just by using an original authentic PAL PSX disc ('imported' for a different region console will work via the Tonyhax International loader).
+
+## List Of Games With Anti-Piracy Bypass Support
 
 ### Animetic Story Game 1: Card Captor Sakura
 
@@ -719,7 +753,7 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 
 ### Crash Bash
 
-- Versions Tested: [Japan](http://redump.org/disc/3819/), [Japan] Demo](http://redump.org/disc/53589/), [USA](http://redump.org/disc/512/), [USA Demo](http://redump.org/disc/49446/), [Europe](http://redump.org/disc/5483/).
+- Versions Tested: [Japan](http://redump.org/disc/3819/), [Japan Demo](http://redump.org/disc/53589/), [USA](http://redump.org/disc/512/), [USA Demo](http://redump.org/disc/49446/), [Europe](http://redump.org/disc/5483/).
 - Versions With Anti-Piracy Screen: Japan, USA.
 - When Is The Anti-Piracy Screen Check: 'Sony Computer Entertainment Presents' screen.
 - Versions With Anti-Piracy Bypass Support: Japan, USA.
@@ -738,6 +772,13 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - When Is The Anti-Piracy Screen Check: During the first loading screen.
 - Versions With Anti-Piracy Bypass Support: USA, USA Demo.
 
+### Dance Dance Revolution: Best Hits
+
+- Versions Tested: [Japan](http://redump.org/disc/30601/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan. **IMPORTANT: There is an [EDC check](#bypassing-additional-edc-checks-found-in-some-games) in addition to the standardized anti-piracy copy protection routine.**
+
 ### Dance Dance Revolution: Disney's Rave
 
 - Versions Tested: [Japan](http://redump.org/disc/37012/).
@@ -751,6 +792,32 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immeditely.
 - Versions With Anti-Piracy Bypass Support: Japan.
+
+### Dance Dance Revolution 2nd Remix
+
+- Versions Tested: [Japan](http://redump.org/disc/9477/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- **IMPORTANT: There is an [EDC check](#bypassing-additional-edc-checks-found-in-some-games) in addition to the standardized anti-piracy copy protection routine.**
+
+### Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1
+
+- Versions Tested: [Japan](http://redump.org/disc/23382/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: When you use the 'disc change' feature found in Dance Dance Revolution 2nd Remix to boot the disc.
+- Versions With Anti-Piracy Bypass Support: Japan. 
+**IMPORTANT: There is an [EDC check](#bypassing-additional-edc-checks-found-in-some-games) in addition to the standardized anti-piracy copy protection routine.**
+- This game works as intended/completely normal on USA and European consoles. On Japanese PS1 consoles, you must do a **perfect** [mid-game hot-swap trick](#playing-games-that-span-multiple-discs-on-japanese-ps1-consoles) in the 'disc change' feature found in Dance Dance Revolution 2nd Remix to get the game to boot AND for it to have working CD audio. You can not play this game currently on a Japanese PS2 due to the lack of a [mid-game hot-swap trick](#playing-games-that-span-multiple-discs-on-japanese-ps2-consoles) method for PS2s.
+
+### Dance Dance Revolution 2nd Remix: Append Club Version Vol. 2
+
+- Versions Tested: [Japan](http://redump.org/disc/33339/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: When you use the 'disc change' feature found in Dance Dance Revolution 2nd Remix to boot the disc.
+- Versions With Anti-Piracy Bypass Support: Japan.
+**IMPORTANT: There is an [EDC check](#bypassing-additional-edc-checks-found-in-some-games) in addition to the standardized anti-piracy copy protection routine.**
+- This game works as intended/completely normal on USA and European consoles. On Japanese PS1 consoles, you must do a **perfect** [mid-game hot-swap trick](#playing-games-that-span-multiple-discs-on-japanese-ps1-consoles) in the 'disc change' feature found in Dance Dance Revolution 2nd Remix to get the game to boot AND for it to have working CD audio. You can not play this game currently on a Japanese PS2 due to the lack of a [mid-game hot-swap trick](#playing-games-that-span-multiple-discs-on-japanese-ps2-consoles) method for PS2s.
 
 ### Dancing Stage Featuring Dreams Come True
 
@@ -807,13 +874,6 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
-### Glint Glitters
-
-- Versions Tested: [Japan](http://redump.org/disc/15969/).
-- Versions With Anti-Piracy Screen: Japan.
-- When Is The Anti-Piracy Screen Check: Immediately.
-- Versions With Anti-Piracy Bypass Support: **TODO: NOT SUPPORTED YET**
-
 ### Goo! Goo! Soundry
 
 - Versions Tested: [Japan](http://redump.org/disc/16027/).
@@ -842,14 +902,14 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - When Is The Anti-Piracy Screen Check: At the first loading screen after boot.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
-### Hyper Value 2800: Hanafuda
+### Hyper Value 2800: Mahjong
 
-- Versions Tested: [Japan](http://redump.org/disc/15791/).
+- Versions Tested: [Japan](http://redump.org/disc/15793/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately after boot.
-- Versions With Anti-Piracy Bypass Support:  **TODO: NOT SUPPORTED YET**
+- Versions With Anti-Piracy Bypass Support: Japan.
 
-### Hyper Value 2800: Mahjong
+### i-mode mo Issho: Doko Demo Issho Tsuika Disc
 
 - Versions Tested: [Japan](http://redump.org/disc/15793/).
 - Versions With Anti-Piracy Screen: Japan.
@@ -925,6 +985,13 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - Versions With Anti-Piracy Screen: Japan, Japan Demo.
 - When Is The Anti-Piracy Screen Check: Immediately on boot.
 - Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.
+
+### MediEvil II
+
+- Versions Tested: [USA](http://redump.org/disc/2503/), [Europe Release 1](http://redump.org/disc/593/), [Europe Release 2](http://redump.org/disc/1547/), [Europe Demo](http://redump.org/disc/45822/).
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: At the Whitechapel level loading screen (quite far in the game).
+- Versions With Anti-Piracy Bypass Support: USA.
 
 ### My Garden
 
@@ -1044,6 +1111,27 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
+## Rockman 5: Blues no Wana!?
+
+- Versions Tested: [Japan](http://redump.org/disc/6095/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Rockman X5
+
+- Versions Tested: [Japan](http://redump.org/disc/4779/)
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Rockman X6
+
+- Versions Tested: [Japan](http://redump.org/disc/4778/)
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
 ### Rockman 6
 
 - Versions Tested: [Japan](http://redump.org/disc/6096/).
@@ -1058,12 +1146,12 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan, Japan Demo, Europe, USA.
 
-### Tokimeki Memorial 2
+### Strider 2
 
-- Versions Tested: Japan Rev 0, Japan Rev 1, Japan Limited Box.
-- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Limited Box.
-- When Is The Anti-Piracy Screen Check: Immediately.
-- Versions With Anti-Piracy Bypass Support: **TODO: NOT SUPPORTED YET**
+- Versions Tested: [USA](http://redump.org/disc/1231/), [Europe](http://redump.org/disc/3917/).
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: First now Loading screen.
+- Versions With Anti-Piracy Bypass Support: USA.
 
 ### Tomba! 2: The Evil Swine Return
 
@@ -1107,19 +1195,47 @@ Some PAL games are using a different copy protection scheme known as LibCrypt pr
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan, Japan Genteiban Edition, USA,
 
+## Known Games That Need Anti-Piracy Bypasses Implemented
+
+This is a small 'todo list' of games which need further investigation to defeat the additional anti-piracy routines contained within them. Currently there is no support for playing them in Tonyhax International.
+
+### Glint Glitters
+
+- Versions Tested: [Japan](http://redump.org/disc/15969/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+
+### Hyper Value 2800: Hanafuda
+
+- Versions Tested: [Japan](http://redump.org/disc/15791/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately after boot.
+
+### Tokimeki Memorial 2
+
+- Versions Tested: Japan Rev 0, Japan Rev 1, Japan Limited Box.
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Limited Box.
+- When Is The Anti-Piracy Screen Check: Immediately.
+
+## Bypassing Additional EDC Checks Found In Some Games
+
+Some games may also have a different kind of anti-piracy measure, known as the EDC check. The EDC check can be defeated by **forcing the EDC to not be re-generated when [burning the disc image](#burning-programs-for-ps1-backups)**. Below is a WIP list of games found with this type of protection:
+
+* Dance Dance Revolution [Japan](http://redump.org/disc/1562/), [USA](http://redump.org/disc/16075/).
+* Dance Dance Revolution: Best Hits [Japan](http://redump.org/disc/30601/).
+* Dance Dance Revolution 2nd Remix [Japan](http://redump.org/disc/9477/).
+* Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1 [Japan](http://redump.org/disc/23382/).
+* Dance Dance Revolution 2nd Remix: Append Club Version Vol. 2 [Japan](http://redump.org/disc/33339/).
+* Dance Dance Revolution 3rd Mix [Japan](http://redump.org/disc/9536/)
+* Dance Dance Revolution 4th Mix [Japan](http://redump.org/disc/34157/)
+
 ## Known Incompatible Games
 
-This is a small list of games that have been _confirmed by myself_ to not currently work with **both Tonyhax International AND the original [Tonyhax](https://github.com/socram8888/tonyhax).** I am waiting for a fix from the original Tonyhax [developer](https://github.com/socram8888) for these games as these are not Tonyhax International specific issues.
+Here is where a list of games that don't work would be listed. At this time, there are no games which are known to not work for non-anti-piracy reasons. While there are definitely still some games which need an anti-piracy bypass [implemented](#known-games-that-need-anti-piracy-bypasses-implemented) for them to work, that is a seperate compatibility list in itself.
 
-* [Dance Dance Revolution](http://redump.org/disc/1562/) - [Tonyhax Issue 121](https://github.com/socram8888/tonyhax/issues/121).
-* [Dance Dance Revolution 2nd Remix](http://redump.org/disc/9477/) - [Tonyhax Issue 121](https://github.com/socram8888/tonyhax/issues/121).
-* [Dance Dance Revolution Best Hits](http://redump.org/disc/30601/) - [Tonyhax International Issue 10](https://github.com/alex-free/tonyhax/issues/10) and [Tonyhax Issue 133](https://github.com/socram8888/tonyhax/issues/133).
-* [Dance Dance Revolution 3rd Mix](http://redump.org/disc/9536/) - [Tonyhax Issue 133](https://github.com/socram8888/tonyhax/issues/133).
-* [Dance Dance Revolution 4th Mix](http://redump.org/disc/34157/) - [Tonyhax Issue 133](https://github.com/socram8888/tonyhax/issues/133).
-
+If you find such a game however, please open an issue on the [issue](https://github.com/alex-free/tonyhax/issues/new/choose) on Github.
 
 ## Building From Source
-
 
 Obtain the **complete Tonyhax International current source tree from GitHub using git**, using the command below:
 
@@ -1146,7 +1262,7 @@ If you are running _Fedora or Debian_ (Windows Subsystem For Linux can run these
 
 Next, you need to build the tool-chain. Execute the `build-tool-chain.sh` script, which is found in the `scripts` directory of Tonyhax International source tree. **This will take some time to build, depending on how fast your computer is.**
 
-With everything installed, you can now build Tonyhax International with the `build.sh` script found in the `scripts` directory of the TOnyhax International source tree. After you build Tonyhax International a release `.zip` file will be generated in the root of the source directory.
+With everything installed, you can now build Tonyhax International with the `build.sh` script found in the `scripts` directory of the Tonyhax International source tree. After you build Tonyhax International a release `.zip` file will be generated in the root of the source directory.
 
 ## Credits
 

@@ -29,7 +29,7 @@ echo -n "tonyhax ${version}" | dd status=none conv=notrunc bs=1 seek=132 of="$mc
 dd status=none conv=notrunc bs=1 seek=384 if=$bin_file of="$mcs_file"
 
 # Insert address at 0xC0 and length at 0xC4, which is 0x40 and 0x44 inside the save file header
-echo -ne "\x${ro_start:6:2}\x${ro_start:4:2}\x${ro_start:2:2}\x${ro_start:0:2}\x${load_len:6:2}\x${load_len:4:2}\x${load_len:2:2}\x${load_len:0:2}" | dd status=none conv=notrunc of=tonyhax.mcs bs=1 seek=192
+echo -ne "\x${ro_start:6:2}\x${ro_start:4:2}\x${ro_start:2:2}\x${ro_start:0:2}\x${load_len:6:2}\x${load_len:4:2}\x${load_len:2:2}\x${load_len:0:2}" | dd status=none conv=notrunc of="$mcs_file" bs=1 seek=192
 
 # Cleanup
 rm $bin_file

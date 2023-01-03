@@ -106,7 +106,8 @@ int cd_check_op(int op) {
 		*((uint32_t *) 0) = i;
 	}
 
-	// This is really bizarre, why a less than? (Most likely because VC0 A/VC0 B consoles do not have readtoc in the firmware and would otherwise always fail!)
+	// This is really bizarre, why a less than?
+	// (Most likely because VC0 A/VC0 B consoles do not have readtoc in the firmware and would otherwise always fail!)
 	if (cd_ackd_ints < CD_OPERATIONS[op].expected_ints) {
 		return 0;
 	}
@@ -303,6 +304,7 @@ void antipiracy_main(int blocking) {
 					default:
 						retval = 6;
 				}
+				break;
 
 			case 7:
 				retval = cd_read_reply(CD_OP_SET_LOCATION);
@@ -328,6 +330,44 @@ void antipiracy_main(int blocking) {
 					default:
 						retval = 7;
 				}
+				break;
+
+			case 8:
+				retval = cd_read_reply(CD_OP_SET_MODE);
+
+				switch (retval) {
+					case CD_RET_FAIL:
+						ap_cur_step = 1;
+						break;
+
+					case CD_RET_TRAY_OPEN:
+						cd_start_op(CD_OP_GET_STATUS);
+						ap_cur_step = 17;
+						retval = 8;
+						break;
+
+					case CD_RET_SUCCESS:
+						retval = 8;
+						dword_800738F8 = VSync(-1);
+						ap_cur_step = 9;
+						break;
+
+					default:
+						retval = 8;
+						break;
+				}
+				break;
+
+			case 9:
+				if (VSync(-1) - dword_800738F8 >= 3) {
+					cd_send_cmd(CD_OP_SEEK_AUDIO);
+					ap_cur_step = 10;
+				}
+				retval = 9;
+				break;
+
+			case 10:
+			
 	} while (blocking && retval != 0);
 
 	return retval;

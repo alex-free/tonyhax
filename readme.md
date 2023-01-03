@@ -52,8 +52,8 @@ _More Info_
 * [List Of Games With Anti-Piracy Bypass Support](#list-of-games-with-anti-piracy-bypass-support)
 * [Known Games That Need Anti-Piracy Bypasses Implemented](#known-games-that-need-anti-piracy-bypasses-implemented)
 * [Bypassing Additional EDC Checks Found In Some Games](#bypassing-additional-edc-checks-found-in-some-games) 
-* [CD-R Media For PS1 Backups](#cd-r-media-for-ps1-backups)
-* [Burning Programs For PS1 Backups](#burning-programs-for-ps1-backups)
+* [CD-R Media For PSX Backups](#cd-r-media-for-psx-backups)
+* [Burning PSX CD-Rs](#burning-psx-cd-rs)
 * [Disc Read Errors And PS1 CD Drive Repair](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/)
 * [Building From Source](#building-from-source)
 * [Known Incompatible Games](#known-incompatible-games)
@@ -65,10 +65,10 @@ _More Info_
 *   [Tonyhax International GitHub](https://github.com/alex-free/tonyhax)
 *   [PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/)
 *   [PSX-Place Tonyhax International Resource](https://www.psx-place.com/resources/tonyhax-international.1281/)
+*   [CDRDAO-AF Fork](https://alex-free.github.io/cdrdao)
 *   [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967)
 *   [GBATemp Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/#post-9922514)
 *   [APrip Homepage](https://alex-free.github.io/aprip)
-*   [My CDRDAO Fork](https://github.com/alex-free/cdrdao)
 *   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap)
 *   [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom)
 *   [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot)
@@ -76,6 +76,24 @@ _More Info_
 *   [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)
 
 ## Downloads
+
+### Version 1.1.7 (1/3/2023)
+
+*   [tonyhax-v1.1.7-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.7i/tonyhax-v1.1.7-international.zip)
+
+Changes:
+
+*   Added [save game exploit](#save-game-exploit) support for Final Fantasy IX Japan, Final Fantasy IX USA Rev 0, and Final Fantasy IX USA Rev 1 thanks to Patchouli ([karehaani](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714))!
+
+* **Fixed the `tonyhax.mcs` and `HAX` loader files** for the [save game exploit](#save-game-exploit) boot method. Previously, only the `HAX` loader file _copied via uLaunchElf specifically to a memory card_ was working due to an error accommodating the larger size of the Tonyhax International loader since v1.1.3. **This issue has now been resolved and everything works as expected with both the `tonyhax.mcs` and `HAX` loader files as they are in the correct 'linked' format (you can see this in the memcardrex software for example)**.
+
+* Updated [crosstool-ng](https://crosstool-ng.github.io/) to the latest version. Fixed and updated the crosstool-ng config file used to build the Tonyhax International toolchain to work with the latest version. The new config file also makes a more tuned PSX toolchain. The toolchain is set to be tuned for the r3000, for little-endian, for soft-float (no hardware float support), and for a 32-bit ABI. This means the previous CFLAGS setting these options explicitly are no longer necessary and have been removed from the various `variable.mk*` files in the source.
+
+* Updated the APv2 decompilation documentation (from the latest official Tonyhax).
+
+* Added more info on the RAM setups used by Tonyhax International and how they work. This information can be found in the `ram-setups.txt` file in the `docs` directory of the source.
+
+* Substantially rewrote the documentation with more information.
 
 ### Version 1.1.6 (12/10/2022)
 
@@ -91,7 +109,7 @@ Changes:
 
 * Added support for bypassing the [additional anti-piracy copy protection routines](#playing-games-with-additonal-copy-protection-routines) in i-mode mo Issho: Doko Demo Issho Tsuika Disc (thanks [M4x1mumRez](https://github.com/M4x1mumReZ)).
 
-* Added information on games with additional [EDC Checks](#bypassing-additional-edc-checks-found-in-some-games) found in some games (most notably such checks are found in the Dance Dance Revolution games that I've just added support for bypassing their additional anti-piracy measures). You must [burn](#burning-programs-for-ps1-backups) games containing EDC Checks in a specific way for them to work.
+* Added information on games with additional [EDC Checks](#bypassing-additional-edc-checks-found-in-some-games) found in some games (most notably such checks are found in the Dance Dance Revolution games that I've just added support for bypassing their additional anti-piracy measures). You must [burn](#burning-psx-cd-rs) games containing EDC Checks in a specific way for them to work.
 
 ### Version 1.1.5 (12/3/2022)
 
@@ -195,9 +213,9 @@ Changes:
 
 *   The Tonyhax International loader memory card save file **is now named `HAX` instead of `BESLEM-99999TONYHAX` to allow for more exploitable games**. You will need to update both the save game exploit file for your game as well as the Tonyhax International loader file to use v1.0.7 if you are using a previou version of the save game exploit file for your game that is already on a memory card.
 *   Removed the SetSessionSuperUltraCommandSmash and replaced it with [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867)'s new method of re-reading TOC data for VC0 A, VC0 B, and VC1 A CDROM Controller BIOS firmwares. **This change reduces the time it takes to re-read the TOC data on the backup CD-R or import PS1 disc from 2-10 minutes on the SCPH-1000, SCPH-3000, and some SCPH-3500 japanese consoles to around 30 seconds with 100% reliability!**
-*   Added [save game exploit](#save-game-exploit) support for Tekken 3 Japan/USA/PAL thanks to Patchouli ([karehaani](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=671)) and [krystalgamer](https://github.com/socram8888/tonyhax/pull/20).
+*   Added [save game exploit](#save-game-exploit) support for Tekken 3 Japan/USA/PAL thanks to Patchouli ([karehaani](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)) and [krystalgamer](https://github.com/socram8888/tonyhax/pull/20).
 *   Added [save game exploit](#save-game-exploit) support for Tekken 2 Japan (rev 1 only), USA (rev 0 only), and PAL thanks to Patchouli ([karehaani](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=671)) and [krystalgamer](https://github.com/socram8888/tonyhax/pull/20).
-*   Added [save game exploit](#save-game-exploit) support for Downhill Snow Japan thanks to Patchouli ([karehaani](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=671)).
+*   Added [save game exploit](#save-game-exploit) support for Downhill Snow Japan thanks to Patchouli ([karehaani](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)).
 
 ### Version 1.0.6 (8/3/2022)
 
@@ -481,16 +499,18 @@ Now you can turn on your PSX console without a disc in it, and then select the `
 
 ## Boot CD
 
-CD BIN+CUE files containing the Tonyhax International loader are available. The Boot CD can be booted by a swap trick, or an unofficial boot disc (i.e. PSX Change v2). Inside the Tonyhax International releases (downloadable above) in the `boot-cd` directory are the following files:
+CD BIN+CUE files containing the Tonyhax International loader are available in each Tonyhax International release. The Boot CD can be booted by a swap trick, or an unofficial boot disc (i.e. PSX Change v2). Inside the Tonyhax International releases (downloadable above) in the `boot-cd` directory are the following files:
 
 *   tonyhax-boot-cd-europe.bin
 *   tonyhax-boot-cd-europe.cue
 *   tonyhax-boot-cd-japan.bin
 *   tonyhax-boot-cd-japan.cue
 
-If you have a SCPH-102 use the European BIN+CUE files. For everything else you can use the Japanese BIN+CUE file set.
+If you have a SCPH-102 use the `tonyhax-boot-cd-europe` BIN+CUE files. For every other console you can use the `tonyhax-boot-cd-japan` BIN+CUE file set.
 
-If you have an old enough PlayStation console you can simply use the CD Player Swap Trick method to start the Tonyhax International Boot CD. These PlayStation models have the CD Player Swap Trick:
+## CD Player Swap Trick
+
+If you have an old enough PlayStation console you can just use the CD Player Swap Trick to start the Tonyhax International Boot CD. This is in fact what I had in mind when I added the initial Boot CD support to the original Tonyhax. These PlayStation models have the CD Player Swap Trick:
 
 *   All SCPH-1000 consoles.
 *   Early SCPH-3000 consoles. Compatible consoles have System BIOS v1.1J and CDROM Controller VC0B (example serial number: `A6956171`. Incompatible consoles have System BIOS v2.1J and CDROM Controller VC1B (example serial number: `A7543968`).
@@ -508,107 +528,290 @@ To boot the Tonyhax International Boot CD-R with the CD Player Swap Trick:
 
 ## Save Game Exploit
 
-The original way to boot the Tonyhax International loader is through a special game save on a PS1 memory card that you load while in a specific, supported real PS1 game that you can play normally on your PS1 or early PS2 console (SCPH-10000-SCPH-39004 models). You need to copy the `HAX` file and the game exploit file **specific to the original real PS1 game you own** to the PS1 memory card, then load the save in a specific way in the exploitable game. Described below are 2 different methods to copy these files to a PS1 memory card. One involves using a PS2, the other involves using special hardware that allows you to write to the PS1 memory card directly from your computer.
+The original way to boot the Tonyhax International loader is with _a special game save file_ that is placed on a PS1 memory card that you load while playing a [specific, supported authentic PS1 game disc](#save-game-exploit-supported-games-list) on your console. To use this boot method, you need:
 
-### PS2 Installation Method Requirements
+* A [supported authentic/'black' PS1 game disc](#save-game-exploit-supported-games-list) that your console can boot normally.
 
-You can use a PS2 console to copy the save game exploit files to a PS1 memory card from a USB flash drive. This method of getting the required files on the PS1 memory card requires:
+* A softmodded PS2 console capable of copying files from a USB flash drive or other storage device to a PS1 memory card. There are alternative methods to place the required files on a PS1 memory card with other hardware available, but the softmodded PS2 method is what is documented here in these instructions and what I use.
 
-*   A real PS1 game disc that matches your console's region and has a save game exploit file available.
-*   Any PS1 console, or early PS2 console (SCPH-39000 or lower model number).
-*   An authentic PS1 memory card that has enough space to hold the hacked game save file and the Tonyhax International file.
-*   A FAT32 formatted USB flash drive that your PS2 console can read (**not all USB flash drives seem to work, you may need to do a bit of trial and error testing to find one that you can use**).
-*   A PS2 console that can run uLaunchELF (Models newer then SCPH-39000 can therefore be used for this step, but they can not be used to boot into Tonyhax International using the game save). You could do this with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248).
+* A PS1 memory card with enough space for the special save game exploit file and for the Tonyhax International loader filed.
 
-You want to **use the Raw save game exploit file for your exploitable game (in the `entrypoints` directory) and the Raw loader file `HAX` (in the `loader` directory)** when using the uLaunchELF/PS2 installation method. The Raw filenames for each save game exploit is available in the table below.
+You need to copy the _Tonyhax International Loader_ file and the _Save Game Exploit_ file (specific to your exact exploitable PSX game disc) to the PS1 memory card. Then you can load the _Save Game Exploit_ file in a specific way tp trigger the exploit and start the Tonyhax International loader. Described below are 2 different methods to copy these files to a PS1 memory card. One involves using a PS2, the other involves using special hardware that allows you to write to PS1 memory cards connected directly to your computer.
+
+### PS2 Installation Method
+
+You can use a PS2 console to copy the save game exploit files to a PS1 memory card from a USB flash drive.
+
+Requirements:
+
+* A FAT32 formatted USB flash drive that your PS2 console can read. Please note that not all USB flash drives seem to work with PS2 consoles (due to iffy USB 1.1 support found in some newer USB flash drives). You may need to do a bit of trial and error testing to find a USB flash drive that works.
+
+* A soft-modded (or modchipped) PS2 console that can run uLaunchELF (Models newer then the SCPH-39004 can therefore be used for copying the files to the PS1 memory card, but they can not be used to boot into Tonyhax International). You could do this with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248).
+
+You want to **use the RAW save game exploit file for your exploitable game (in the `entrypoints` directory) and the RAW loader file (in the `loader` directory)** when using this installation method. The RAW filenames are in the [list below](#save-game-exploit-supported-games-list).
+
+Installation:
+
+* Copy the `Tonyhax International Loader RAW File` file and the `Save Game Exploit RAW` file to the FAT32 USB flash drive using a computer.
+
+* Eject the USB flash drive from your computer and insert it into your PS2 console. Insert a PS1 memory card into your PS2 as well. 
+
+* Start the uLaunchElf homebrew program on your PS2 console. Navigate to the `mass` device (this is your USB flash drive) with the `DPAD` on the controller, then select it with the `circle` button. 
+
+* Using the `DPAD` to navigate, press the `cross` button on the controller to highlight both the `Tonyhax International Loader RAW` file and the `Save Game Exploit RAW` file that you previously copied to the USB flash drive. Press the `R1` button on the controller to make the file operations menu appear in uLaunchELF. Use the `DPAD` to move to the copy function and then press the `circle` button to select it.
+
+* Press the `triangle` button to navigate out of the `mass` device. Use the `DPAD` and the circle button to navigate into either the `MC0` (if the PS1 memory card is in slot 1 of the PS2) or `MC1` (if the PS1 memory card is in slot 2 of the PS2) device. 
+
+* Press the `R1` button to again make the file operations menu appear in uLaunchElF. Use the `DPAD` to navigate to the paste option and press the `circle` button to finally paste both the Tonyhax International Loader RAW File` file and the `Save Game Exploit RAW` file. Now you can press the `triangle` button to navigate out of the PS1 memory card device, and remove the memory card from the PS2 console (if you want to use it in a different console).
 
 ### PS3 Memory Card USB Adapter/DexDrive/Computer Installation Method
 
-Instead of using a PS2 to copy the save game exploit files, you can use a Dex Drive or similar with a visual memory card editor (such as [OrionSoft's PS1 Memory Card Manager](http://onorisoft.free.fr/retro.htm?psx/psx.htm) or [Dex-plorer](https://archive.org/details/inter-act-dex-plorer-ver.-1.10.950)), to modify a PS1 memory card's contents directly with a computer. This way of adding the required save game exploit files would only require:
+You can use a Dex Drive (or similar hardware which connects a PS1 memory card to your computer) in combination with a visual memory card editor (such as [OrionSoft's PS1 Memory Card Manager](http://onorisoft.free.fr/retro.htm?psx/psx.htm) or [Dex-plorer](https://archive.org/details/inter-act-dex-plorer-ver.-1.10.950)), to place the save game exploit and Tonyhax International loader files on the PS1 memory card. This method requires:
 
-*   A real PS1 game disc that matches your console's region and that has save game exploit files available.
-*   Any PS1 console, or early PS2 console (SCPH-10000 to SCPH-39000 models).
-*   An authentic PS1 memory card that has enough space to hold the hacked game save file and the tonyhax file.
 *   A DexDrive, PS3 Memory Card USB adapter, or other hardware that allows you to write and modify a PS1 memory card with a computer.
 *   Software such as [OrionSoft's PS1 Memory Card Manager](http://onorisoft.free.fr/retro.htm?psx/psx.htm) (for the PS3 Memory Card USB adapter) or [Dex-plorer](https://archive.org/details/inter-act-dex-plorer-ver.-1.10.950) (for the DexDrive), or [MemcardRex](https://github.com/ShendoXT/memcardrex) (for general memory card file managment and manipulation).
 
-You want to **use the MCS save game exploit file for your exploitable game (in the `entrypoints` directory) and the MCS loader file `tonyhax.mcs` (in the `loader` directory)** when using the uLaunchELF/PS2 installation method. The MCS filenames for each save game exploit is available in the table below.
+You want to **use the MCS save game exploit file for your exploitable game (in the `entrypoints` directory) and the MCS loader file  (in the `loader` directory)** when using this installation method. The MCS filenames are in the list below.
 
-| Game                                                                                                             | Region | Code       | MCS file                           | Raw file             |
-|------------------------------------------------------------------------------------------------------------------|--------|------------|------------------------------------|----------------------|
-| Brunswick Circuit Pro Bowling                                                                                    | NTSC-U | SLUS-00571 | brunswick1-us.mcs                  | BASLUS-00571         |
-| Brunswick Circuit Pro Bowling                                                                                    | PAL-E  | SLES-01376 | brunswick1-eu.mcs                  | BESLES-01376         |
-| Brunswick Circuit Pro Bowling 2                                                                                  | NTSC-U | SLUS-00856 | brunswick2-us.mcs                  | BASLUS-00856         |
-| Brunswick Circuit Pro Bowling 2                                                                                  | PAL-E  | SLES-02618 | brunswick2-eu.mcs                  | BESLES-02618         |
-| Castlevania Chronicle - Akumajou Dracula (only first release of the game (rev 0), rev 1 does not work right now) | NTSC-J | SLPM-86754 | cc-jp.mcs                          | BISLPM-86754DRACULA  |
-| Castrol Honda Superbike [SuperLite 1500 Series]                                                                  | NTSC-J | SLPM-86489 | castrolsb-jp.mcs                   | BISLPM-86489CHSv1    |
-| Castrol Honda Superbike Racing                                                                                   | NTSC-U | SLUS-00882 | castrolsb-us.mcs                   | BASLUS-00882CHSv1    |
-| Castrol Honda Superbike Racing                                                                                   | PAL-E  | SLES-01182 | castrolsb-eu.mcs                   | BESLES_01182CHSv1    |
-| Castrol Honda VTR [SuperLite 1500 Series]                                                                        | NTSC-J | SLPM-86922 | castrolvtr-jp.mcs                  | BISLPM-86922CHSVTRv1 |
-| Castrol Honda VTR                                                                                                | PAL-E  | SLES-02942 | castrolvtr-eu.mcs                  | BESLES-02942CHSVTRv1 |
-| Cool Boarders 4                                                                                                  | NTSC-U | SCUS-94559 | coolbrd4-us.mcs                    | BASCUS-9455916       |
-| Cool Boarders 4                                                                                                  | PAL-E  | SCES-02283 | coolbrd4-eu.mcs                    | BESCES-0228316       |
-| Crash Bandicoot 2: Cortex Strikes Back                                                                           | NTSC-J | SCPS-10047 | crash2-jp.mcs                      | BISCPS-1004700000000 |
-| Crash Bandicoot 2: Cortex Strikes Back                                                                           | NTSC-U | SCUS-94154 | crash2-us.mcs                      | BASCUS-9415400047975 |
-| Crash Bandicoot 2: Cortex Strikes Back                                                                           | PAL-E  | SCES-00967 | crash2-eu.mcs                      | BESCES-0096700765150 |
-| Crash Bandicoot 3: Warped                                                                                        | NTSC-J | SCPS-10073 | crash3-jp.mcs                      | BISCPS-1007300000000 |
-| Crash Bandicoot 3: Warped                                                                                        | NTSC-U | SCUS-94244 | crash3-us.mcs                      | BASCUS-9424400000000 |
-| Crash Bandicoot 3: Warped                                                                                        | PAL-E  | SCES-01420 | crash3-eu.mcs                      | BESCES-0142000000000 |
-| Doki Oki                                                                                                         | NTSC-J | SLPS-00130 | doki-oki-jp.mcs                    | BISLPS-00130DOKIOH   |
-| Downhill Snow                                                                                                    | NTSC-J | SLPS-01391 | downhill-snow-jp.mcs               | BISLPS-01391SKI00S   |
-| Sports Superbike                                                                                                 | PAL-E  | SLES-03057 | superbike1-eu.mcs                  | BESLES-03057SSBv1    |
-| Sports Superbike 2                                                                                               | PAL-E  | SLES-03827 | superbike2-eu.mcs                  | BESLES-03827SSII     |
-| Tekken 2 (only second release of the game (rev 1), rev 0 does not work right now)                                | NTSC-J | SLPS-00300 | tekken2-jp.mcs                     | BISLPS-00300TEKKEN-2 |
-| Tekken 2 (only first release of the game (rev 0), rev 1 does not work right now)                                 | NTSC-U | SLUS-00213 | tekken2-us.mcs                     | BASLUS-00213TEKKEN-2 |
-| Tekken 2                                                                                                         | PAL-E  | SCES-00255 | tekken2-eu.mcs                     | BESCES-00255TEKKEN-2 |
-| Tekken 3                                                                                                         | NTSC-J | SLPS-01300 | tekken3-jp.mcs                     | BISLPS-01300TEKKEN-3 |
-| Tekken 3                                                                                                         | NTSC-U | SLUS-00402 | tekken3-us.mcs                     | BASLUS-00402TEKKEN-3 |
-| Tekken 3                                                                                                         | PAL-E  | SCES-01237 | tekken3-eu.mcs                     | BESCES-01237TEKKEN-3 |
-| The Legend Of Heroes I&II                                                                                        | NTSC-J | SLPS-01323 | the-legend-of-heros-1-and-2-jp.mcs | BISLPS-01323010001   |
-| Tony Hawk's Pro Skater 2                                                                                         | NTSC-J | SLPM-86751 | thps2-jp.mcs                       | BISLPM-86751CEEAG01  |
-| Tony Hawk's Pro Skater 2                                                                                         | NTSC-U | SLUS-01066 | thps2-us.mcs                       | BASLUS-01066TNHXG01  |
-| Tony Hawk's Pro Skater 2                                                                                         | PAL-DE | SLES-02910 | thps2-de.mcs                       | BESLES-02910TNHXG01  |
-| Tony Hawk's Pro Skater 2                                                                                         | PAL-E  | SLES-02908 | thps2-eu.mcs                       | BESLES-02908TNHXG01  |
-| Tony Hawk's Pro Skater 2                                                                                         | PAL-FR | SLES-02909 | thps2-fr.mcs                       | BESLES-02909TNHXG01  |
-| Tony Hawk's Pro Skater 3                                                                                         | NTSC-U | SLUS-01419 | thps3-us.mcs                       | BASLUS-01419TNHXG01  |
-| Tony Hawk's Pro Skater 3                                                                                         | PAL-DE | SLES-03647 | thps3-de.mcs                       | BESLES-03647TNHXG01  |
-| Tony Hawk's Pro Skater 3                                                                                         | PAL-E  | SLES-03645 | thps3-eu.mcs                       | BESLES-03645TNHXG01  |
-| Tony Hawk's Pro Skater 3                                                                                         | PAL-FR | SLES-03646 | thps3-fr.mcs                       | BESLES-03646TNHXG01  |
-| Tony Hawk's Pro Skater 4                                                                                         | NTSC-U | SLUS-01485 | thps4-us.mcs                       | BASLUS-01485TNHXG01  |
-| Tony Hawk's Pro Skater 4                                                                                         | PAL-DE | SLES-03955 | thps4-de.mcs                       | BESLES-03955TNHXG01  |
-| Tony Hawk's Pro Skater 4                                                                                         | PAL-E  | SLES-03954 | thps4-eu.mcs                       | BESLES-03954TNHXG01  |
-| Tony Hawk's Pro Skater 4                                                                                         | PAL-FR | SLES-03956 | thps4-fr.mcs                       | BESLES-03956TNHXG01  |
-| XS Moto                                                                                                          | NTSC-U | SLUS-01506 | xsmoto-us.mcs                      | BASLUS-01506XSMOTOv1 |
-| XS Moto                                                                                                          | PAL-E  | SLES-04095 | xsmoto-eu.mcs                      | BESLES-04095XSMOTO   |
+## Save Game Exploit Supported Games List
 
-### Copying The Files On Your PS1 Memory Card With A PS2
+_Notes:_ 
 
-When using the PS2 to copy the files over, first copy the Raw loader file named `HAX` (found in the `loader` directory in each Tonyhax International release) and the Raw file for your compatible exploitable game (named in the table above, found in the `entrypoints` directory) to the FAT32 USB flash drive that your PS2 can read using a computer.
+* Demo versions of games do not contain load/save game functions and are hence not exploitable.
 
-After the correct memory card save game exploit **Raw** file and the `HAX` file is copied to the FAT32 formatted USB flash drive that your PS2 can read, eject the USB flash drive from your computer and insert it and a PS1 memory card into the PS2. Start the uLaunchElf program and navigate to the `mass` device (this is your USB flash drive) with the `DPAD` on the controller, then select it with the `circle` button. Using the `DPAD` to navigate, press the `cross` button on the controller to highlight both the `HAX` and the **Raw** save game exploit file that you previously copied to the USB flash drive. Now Press the `R1` button on the controller to make the file operations menu appear in uLaunchELF. Use the `DPAD` to move to the copy function and then press the `circle` button to select it. Now press the `triangle` button to navigate out of the `mass` device and then use the `DPAD` and then the circle button to navigate into either the `MC0` (if the PS1 memory card is in slot 1 of the PS2) or `MC1` (if the PS1 memory card is in slot 2 of the PS2) device. Press the `R1` button to again make the file operations menu appear in uLaunchElF. Use the `DPAD` to navigate to the paste option and press the `circle` button to finally paste both the `HAX` and the raw save game exploit file. Now you can press the `triangle` button to navigate out of the PS1 memory card device, and remove the memory card from the PS2 console.
+* Some games have multiple different versions of the same regional release (Rev 0, Rev 1, etc.). Sometimes, one save game exploit file won't work on both versions and multiple different save game exploit files are required. Some specific game/version combinations also do not have a save game exploit file available yet, this is a work in progress. Please see each listing below to see if this is the case for your specific game.
 
-### Using The Save Game Exploit
+* If you are using a Japanese PSX, it is recommended that you power off the console, put in the Japanese version of the game that has a save game exploit file available, block the lid sensor, and then turn on the console and have it boot the authentic PSX game disc which has a supported save game exploit. 
 
-Now that you have the save game exploit files on the PS1 memory card, start the real PS1 game on your console with the PS1 memory card containing the save game files inserted in it. If you are using a Japanese PS1, it is recommended that you power off the console, put in the Japanese version of the game that has a save game exploit file available, block the lid sensor, and then turn on the console and have it boot the game. In either case, follow the instructions for the real PS1 game you are using described below:
+* The _Exploit Instructions_ in each game listing below explain the game specific steps to trigger the exploit which starts the Tonyhax International loader.
 
-| Game                                                  | Specific Instructions                                                                                                                                                                                                                                                                                                                                                     |
-|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Cool Boarders 4                                       | Boot the game. It should say the records and settings have been automatically loaded. Click on ONE PLAYER.                                                                                                                                                                                                                                                                |
-| Crash Bandicoot games                                 | Boot the game, on the title menu, choose LOAD GAME. On the save game list, select TONYHAX and press X.                                                                                                                                                                                                                                                                    |
-| Brunswick games                                       | Boot the game as you'd normally do. On the main menu, select LOAD GAME, then Select MEMORY CARD 1. After about three seconds tonyhax should be running.                                                                                                                                                                                                                   |
-| Castrol Honda Superbike Racing and Sports Superbike 1 | On the language selection screen, if prompted to, select the English language. Enter the Memory Card menu. Load game from the Memory Card. Click accept after it's done loading. On the main menu, select Race, then Single race.                                                                                                                                         |
-| Castrol Honda VTR, Sports Superbike 2 and XS Moto     | If you are using the European version, on the language selection screen select the English language. On the main menu, choose Options. Select Load game and choose the memory card where the save is stored. Back on the main menu, click on either Single Race or Championship.                                                                                          |
-| Downhill Snow                                         | Boot the game as you'd normally do. Use the X button to select SCENARIO, then CONTINUE, now select the save file in slot 1 or slot2. On the next screen after loading the save file select CONFIG, then RANKING, then Moguls. Immeditely after select Moguls press the right directional key until the blue screen appears, then let go of all buttons on the controller. |
-| The Legend Of Heroes I&II (single game compilation)   | Boot the game as you'd normally do. On the main menu, select the Legend Of Heroes I (the I button on the left), not The Legend Of Heroes II (the II button on the right). Once in The Legend Of Heroes I load the save file.                                                                                                                                              |
-| Tony Hawk Pro Skater games                            | Boot the game as you'd normally do. On the main menu, wait until the save file is automatically loaded (it should say Loading TONYHAX EU/US/DE/FR, depending on the game's region). After it's done, choose the CREATE SKATER menu and press X.                                                                                                                           |
+* The _Save Game Exploit_ file can be on a memory card inserted in slot 1 or slot 2 of your console (as long as the game supports loading a save game file from slot 2, **otherwise it must be in slot 1**).
 
-## CD-R Media For PS1 Backups
+* The _Tonyhax International Loader_ file **must be on a memory card inserted in slot 1** of your console.
 
-Only use high-quality CD-R media. If you want good results burning backups for your PS1 your CD-R media should contain:
+### Brunswick Circuit Pro Bowling
 
-*   High quality dye (SuperAZO, AZO, or Phthalocyanine).
-*   A highly reflective layer system.
-*   High quality polycarbonate and "sealing" process combining all parts of the CD-R.
+* Versions Tested: [USA](http://redump.org/disc/13370/), [Europe](http://redump.org/disc/27347/).
+* Versions With Save Game Exploit Support: USA, Europe.
+* Save Game Exploit RAW file: `entrypoints/BASLUS-00571` (USA) or `entrypoints/BESLES-01376` (Europe).
+* Save Game Exploit MCS file: `entrypoints/brunswick1-us.mcs` (USA) or `entrypoints/brunswick1-eu.mcs` (Europe).
+* Tonyhax International Loader RAW file: `loader/HAX`
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`
+* Exploit Instructions: At the main menu select `Load Game` and then the _Save Game Exploit_ file to trigger the exploit.
+
+### Brunswick Circuit Pro Bowling 2
+
+* Versions Tested: [USA](http://redump.org/disc/18447/), [Europe](http://redump.org/disc/11481/).
+* Versions With Save Game Exploit Support: USA, Europe.
+* Save Game Exploit RAW file: `entrypoints/BASLUS-00856` (USA) or `entrypoints/BESLES-02618` (Europe).
+* Save Game Exploit MCS file: `entrypoints/brunswick2-us.mcs` (USA) or `entrypoints/brunswick2-eu.mcs` (Europe).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit Instructions: At the main menu select `Load Game` and then the _Save Game Exploit_ file to trigger the exploit.
+
+### Castlevania Chronicles
+
+* Versions Tested: Japan ([Rev 0](http://redump.org/disc/7481/), [Rev 1](http://redump.org/disc/11230/)), [USA](http://redump.org/disc/9474/), [Europe](http://redump.org/disc/1117/).
+* Versions With Save Game Exploit Support: Japan Rev 0, USA. **Japan Rev 1 and Europe versions are not yet supported**.
+* Save Game Exploit RAW file: `entrypoints/BISLPM-86754DRACULA` (Japan) or `entrypoints/BASLUS-01384DRACULA` (USA).
+* Save Game Exploit MCS file: `entrypoints/cc-jp.mcs` (Japan Rev 0) or `entrypoints/cc-us.mcs` (USA).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit Instructions: At the title screen, select `ORIGINAL MODE`. Go through the intro text, and at the next title screen select `START GAME` to trigger the exploit.
+
+### Castrol Honda Super Bike Racing
+
+* Versions Tested: [Japan](http://redump.org/disc/33156/), [USA](http://redump.org/disc/78231/), [Europe](http://redump.org/disc/25546/).
+* Versions With Save Game Exploit Support: Japan, USA, Europe.
+* Save Game Exploit RAW file: `entrypoints/BISLPM-86489CHSv1` (Japan), `entrypoints/BASLUS-00882CHSv1` (USA), or `entrypoints/BESLES_01182CHSv1` (Europe).
+* Save Game Exploit MCS file: `entrypoints/castrolsb-jp.mcs` (Japan), `entrypoints/castrolsb-us.mcs` (USA), or `entrypoints/castrolsb-eu.mcs` (Europe).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit instructions: If you are using the 'Europe' version select the English language in the language selection screen. On the main menu, choose Options. Select `Load Game` and load the _Save Game Exploit_ file. Back at the main menu, select either the `Single Race` or `Championship` option to trigger the exploit.
+
+### Castrol Honda VTR
+
+* Versions Tested: [Japan](http://redump.org/disc/37769/), [Europe](http://redump.org/disc/29332/).
+* Versions With Save Game Exploit Support: Japan, Europe.
+* Save Game Exploit RAW file: `entrypoints/BISLPM-86922CHSVTRv1` (Japan), `entrypoints/BESLES-02942CHSVTRv1` (Europe).
+* Save Game Exploit MCS file: `entrypoints/castrolvtr-jp.mcs` (Japan), `entrypoints/castrolvtr-eu.mcs` (Europe).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit instructions: If you are using the 'Europe' version select the English language in the language selection screen. On the main menu, choose Options. Select `Load Game` and load the _Save Game Exploit_ file. Back at the main menu, select either the `Single Race` or `Championship` option to trigger the exploit.
+
+### Cool Boarders 4
+
+* Versions Tested: [Japan](http://redump.org/disc/4556/), [USA](http://redump.org/disc/5398/), [Europe](http://redump.org/disc/29332/).
+* Versions With Save Game Exploit Support: USA, Europe. **Japan version is not yet supported.**
+* Save Game Exploit RAW file: `entrypoints/BASCUS-9455916` (USA), `entrypoints/BESCES-0228316` (Europe).
+* Save Game Exploit MCS file: `entrypoints/coolbrd4-us.mcs` (USA), `entrypoints/coolbrd4-eu.mcs` (Europe).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit Instructions: When you get to the title screen, it should say that the records and settings have been automatically loaded. Select the `ONE PLAYER` option to trigger the exploit.
+
+### Crash Bandicoot 2: Cortex Strikes Back
+
+* Versions Tested: [Japan](http://redump.org/disc/2688/), [USA](http://redump.org/disc/2688/), [Europe](http://redump.org/disc/1056/), [Europe EDC](http://redump.org/disc/14827/).
+* Versions With Save Game Exploit Support: Japan, USA, Europe, Europe EDC.
+* Save Game Exploit RAW file: `entrypoints/BISCPS-1004700000000` (Japan), `entrypoints/BASCUS-9415400047975` (USA), `entrypoints/BESCES-0096700765150` (Europe/Europe EDC).
+* Save Game Exploit MCS file: `entrypoints/crash2-jp.mcs` (Japan), `entrypoints/crash2-us.mcs` (USA), `entrypoints/crash2-eu.mcs` (Europe Rev 0 **and** Europe Rev 1).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit Instructions: At the titlescreen select the `LOAD GAME` option. In the save game list, select the _Save Game Exploit_ file (named TONYHAX) to trigger the exploit.
+
+### Crash Bandicoot 3: Warped
+
+* Versions Tested: [Japan](http://redump.org/disc/3576/), [USA](http://redump.org/disc/5006/), [Europe](http://redump.org/disc/248/).
+* Versions With Save Game Exploit Support: USA, Europe. **Japan version is not yet supported.**
+* Save Game Exploit RAW file: `entrypoints/BASCUS-9424400000000` (USA), `entrypoints/BESCES-0142000000000` (Europe).
+* Save Game Exploit MCS file: `entrypoints/crash3-us.mcs` (USA), `entrypoints/crash3-eu.mcs` (Europe).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit Instructions: At the titlescreen select the `LOAD GAME` option. In the save game list, select the _Save Game Exploit_ file (named TONYHAX) to trigger the exploit.
+
+### Dokiou-ki
+
+* Versions Tested: [Japan](http://redump.org/disc/3982/).
+* Versions With Save Game Exploit Support: Japan.
+* Save Game Exploit RAW file: `entrypoints/BISLPS-00130DOKIOH` (Japan).
+* Save Game Exploit MCS file: `entrypoints/dokiou-ki-jp.mcs` (Japan).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`
+* Exploit Instructions: At the title screen, load the _Save Game Exploit_ file. If you don't know Japanese, you can just keep spamming the confirm button (`O`) to navigate through the menu and load the _Save Game Exploit_ file.
+
+### Downhill Snow
+
+* Versions Tested: [Japan](http://redump.org/disc/34593/).
+* Versions With Save Game Exploit Support: Japan.
+* Save Game Exploit RAW file: `entrypoints/BISLPS-01391SKI00S` (Japan).
+* Save Game Exploit MCS file: `entrypoints/downhill-snow-jp.mcs` (Japan).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/doki-oki-jp.mcs`.
+* Exploit Instructions: At the title screen, select `SCENARIO`, then `CONTINUE`. In the memory card file display screen select the _Save Game Exploit_ file. After loading the save game exploit file, select `CONFIG`, then `RANKING`, then `Moguls`. **Immeditely after select Moguls press the right directional key until the blue screen appears, then let go of all buttons on the controller.**
+
+### Final Fantasy IX (Disc 1)
+
+_Note_ Final Fantasy IX has 2 different types of exploits. Exploit type A works on consoles with BIOS versions 1.0-2.0. Exploit type B works on all newer BIOS versions (v2.1 to 5.0). 
+
+Consoles with BIOS v1.0-v2.0:
+
+* All SCPH-1000s.
+* Very early SCPH-3000s, SCPH-1001s, and SCPH-1002s (the ones susceptible to the [CD Player Swap Trick](#cd-player-swap-trick)).
+
+Consoles with BIOS v2.1-v5.0:
+
+* Late SCPH-3000s, SCPH-1001s, SCPH-1002s, and **all newer models** (including PS2s) need to use the type B exploit for Final Fantasy IX.
+
+* Versions Tested: [Japan](http://redump.org/disc/1968/), [USA](http://redump.org/disc/73/), [Spain](http://redump.org/disc/1113/), [Italy](http://redump.org/disc/2714/), [Germany](http://redump.org/disc/737/), [France](http://redump.org/disc/2455/), [Europe](http://redump.org/disc/2371/).
+* Versions With Save Game Exploit Support: Japan, USA. **Spain, Italy, Germany, France, and Europe version are not yet supported**.
+* Save Game Exploit RAW file (Type A Exploit for BIOS v1.0, v1.1, and v2.0 PS1 consoles): `entrypoints/FF9-A-JP/BISLPS-0200000000-00` (Japan) or `entrypoints/FF9-A-US/BASLUS-0125100000-00` (USA).
+* Save Game Exploit RAW file (Type B Exploit for BIOS v2.1 and above, including all PS2s): `entrypoints/FF9-B-JP/BISLPS-0200000000-00` (Japan)  or `entrypoints/FF9-B-US/BASLUS-0125100000-00` (USA).
+* Save Game Exploit MCS file (Type A Exploit for BIOS v1.0, v1.1, and v2.0 PS1 consoles): `entrypoints/FF9-A-JP/ff9-a-jp.mcs` (Japan) or `entrypoints/FF9-A-US/ff9-a-us.mcs` (USA).
+* Save Game Exploit MCS file (Type B Exploit for BIOS v2.1 and above, including all PS2s): `entrypoints/FF9-B-JP/ff9-b-jp.mcs` (Japan) or `entrypoints/FF9-A-US/ff9-b-us.mcs` (USA).
+* Tonyhax International Loader RAW file: `loader/FF9`.
+* Tonyhax International Loader MCS file: `loader/tonyhax-ff9.mcs`.
+* Exploit instructions: Select `Continue` at the title screen, and then the memory card with the _Save Game Exploit_ file. **Note: there are no colours displayed when using the Finaly Fantasy IX exploit, the screen will directly boot to the Tonyhax International loader in a few seconds after being triggered in-game.** Make sure you use the correct Type A or Type B exploit, or else the exploit won't trigger!
+
+### Sports Superbike
+
+* Versions Tested: [Europe](http://redump.org/disc/7824/).
+* Versions With Save Game Exploit Support: Europe.
+* Save Game Exploit RAW file: `entrypoints/BESLES-03057SSBv1` (Europe).
+* Save Game Exploit MCS file: `entrypoints/superbike1-eu.mcs` (Europe).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit instructions: Select the English language in the language selection screen. Enter the Memory Card menu. Load game from the Memory Card. Click accept after it's done loading. Back at the main menu, select `Race`, then `Single Race`.
+
+### Sports Superbike 2
+
+* Versions Tested: [USA](http://redump.org/disc/15326/), [Europe](http://redump.org/disc/19224/).
+* Versions With Save Game Exploit Support: Europe. **USA version is not yet supported**.
+* Save Game Exploit RAW file: `entrypoints/BESLES-03827SSII` (Europe).
+* Save Game Exploit MCS file: `entrypoints/superbike2-eu.mcs` (Europe).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit instructions: If you are using the Europe version, select the English language in the language selection screen. On the main menu, choose Options. Select `Load Game` and load the _Save Game Exploit_ file. Back at the main menu, select either the `Single Race` or `Championship` option.       
+
+### Tekken 2
+
+* Versions Tested: [Japan Rev 0](http://redump.org/disc/38475/), [Japan Rev 1](http://redump.org/disc/1155/), [USA Rev 0](http://redump.org/disc/1836/), [USA Rev 1](http://redump.org/disc/14017/), [Germany](http://redump.org/disc/45460/), [France](http://redump.org/disc/47269/).
+* Versions With Save Game Exploit Support: Japan Rev 1, USA Rev 1, Germany, France. **Japan Rev 0 and USA Rev 0 are not yet supported**.
+* Save Game Exploit RAW file: `entrypoints/BISLPS-00300TEKKEN-2` (Japan Rev 1), `entrypoints/BASLUS-00213TEKKEN-2` (USA Rev 1), `entrypoints/BESCES-00255TEKKEN-2` (France **and** Germany).
+* Save Game Exploit MCS file: `entrypoints/tekken2-jp.mcs` (Japan Rev 1), `entrypoints/tekken2-us.mcs` (USA Rev 1), `entrypoints/tekken2-eu.mcs` (France **and** Germany).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit Instructions: Start a round of `Survival Mode` at the title screen. Die at any point in surivival mode, and the game will go black and trigger the exploit in a few seconds. **Note: there are no colours displayed when using the Tekken exploits, the screen will directly boot to the Tonyhax International loader in a few seconds after being triggered in-game.**
+
+### Tekken 3
+
+* Versions Tested: [Japan Rev 0](http://redump.org/disc/588/), [Japan Rev 1](http://redump.org/disc/30736/), [USA](http://redump.org/disc/1464/), [Europe Rev 0](http://redump.org/disc/483/), [Europe Rev 1](http://redump.org/disc/449/).
+* Versions With Save Game Exploit Support: Japan Rev 0, Japan Rev 1, USA, Europe Rev 0, Europe Rev 1.
+* Save Game Exploit RAW file: `entrypoints/BISLPS-01300TEKKEN-3` (Japan Rev 0 **and** Japan Rev 1), `entrypoints/BASLUS-00402TEKKEN-3` (USA Rev 0 **and** USA Rev 1), `entrypoints/BESCES-01237TEKKEN-3` (Europe Rev 0 **and** Europe Rev 1).
+* Save Game Exploit MCS file: `entrypoints/tekken3-jp.mcs` (Japan Rev 0 **and** Japan Rev 1), `entrypoints/tekken3-us.mcs` (USA Rev 0 **and** USA Rev 1), `entrypoints/tekken3-eu.mcs` (Europe Rev 0 **and** Europe Rev 1).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit Instructions: Start a round of `Survival Mode` at the title screen. Die at any point in surivival mode, and the game will go black and trigger the exploit in a few seconds. **Note: there are no colours displayed when using the Tekken exploits, the screen will directly boot to the Tonyhax International loader in a few seconds after being triggered in-game.**
+
+
+### The Legend of Heroes I & II: Eiyuu Densetsu
+
+* Versions Tested: [Japan](http://redump.org/disc/47491/).
+* Versions With Save Game Exploit Support: Japan.
+* Save Game Exploit RAW file: `entrypoints/BISLPS-01323010001` (Japan).
+* Save Game Exploit MCS file: `entrypoints/the-legend-of-heroes-1-and-2-jp.mcs` (Japan).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit Instructions: At the main menu, **select `The Legend Of Heroes I` (the I button on the left)**, not `The Legend Of Heroes II` (the II button on the right). Once in `The Legend Of Heroes I` game, load the save game exploit file.
+
+### Tony Hawk's Pro Skater 2
+
+* Versions Tested: [Japan](http://redump.org/disc/35439/), [USA](http://redump.org/disc/1319/), [Germany](http://redump.org/disc/5899/), [France](http://redump.org/disc/27627/), [Europe/Australia](http://redump.org/disc/976/).
+* Versions With Save Game Exploit Support: Japan, USA, Germany, France, Europe/Australia. **USA Preview, USA Demo, Australia Demo, and Europe Demo are not yet supported**.
+* Save Game Exploit RAW file: `entrypoints/BISLPM-86751CEEAG01` (Japan), `entrypoints/BASLUS-01066TNHXG01` (USA), `entrypoints/BESLES-02910TNHXG01` (Germany), `entrypoints/BESLES-02909TNHXG01` (France), `entrypoints/BESLES-02908TNHXG01` (Europe/Australia).
+* Save Game Exploit MCS file: `entrypoints/thps2-jp.mcs` (Japan), `entrypoints/thps2-us.mcs` (USA), `entrypoints/thps2-de.mcs` (Germany), `entrypoints/thps2-fr.mcs` (France), `entrypoints/thps2-eu.mcs` (Europe/Australia).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+At the main menu, wait until the save game exploit file is automatically loaded (it should say `Loading TONYHAX JP/US/EU/DE/FR`, depending on the game's region). Next, select `CREATE SKATER` and confirm the selection to start the exploit.
+
+### Tony Hawk's Pro Skater 3
+
+* Versions Tested: [USA](http://redump.org/disc/1320/), [Germany](http://redump.org/disc/3270/), [France](http://redump.org/disc/27628/), [Europe](http://redump.org/disc/1465/).
+* Versions With Save Game Exploit Support: USA, Germany, France, Europe.
+* Save Game Exploit RAW file: `entrypoints/BASLUS-01419TNHXG01` (USA), `entrypoints/BESLES-03647TNHXG01` (Germany), `entrypoints/BESLES-03646TNHXG01` (France), `entrypoints/BESLES-03645TNHXG01` (Europe).
+* Save Game Exploit MCS file: `entrypoints/thps3-us.mcs` (USA), `entrypoints/thps3-de.mcs` (Germany), `entrypoints/thps3-fr.mcs` (France), `entrypoints/thps3-eu.mcs` (Europe).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+At the main menu, wait until the save game exploit file is automatically loaded (it should say `Loading TONYHAX US/EU/DE/FR`, depending on the game's region). Next, select `CREATE SKATER` and confirm the selection to start the exploit.
+
+### Tony Hawk's Pro Skater 4
+
+* Versions Tested: [USA](http://redump.org/disc/1321/), [Germany](http://redump.org/disc/5130/), [France](http://redump.org/disc/27629/), [Europe](http://redump.org/disc/15090/).
+* Versions With Save Game Exploit Support: USA, Germany, France, Europe.
+* Save Game Exploit RAW file: `entrypoints/BASLUS-01485TNHXG01` (USA), `entrypoints/BESLES-03955TNHXG01` (Germany), `entrypoints/BESLES-03956TNHXG01` (France), `entrypoints/BESLES-03954TNHXG01` (Europe).
+* Save Game Exploit MCS file: `entrypoints/thps4-us.mcs` (USA), `entrypoints/thps4-de.mcs` (Germany), `entrypoints/thps4-fr.mcs` (France), `entrypoints/thps4-eu.mcs` (Europe).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit Instructions: At the main menu, wait until the save game exploit file is automatically loaded (it should say `Loading TONYHAX US/EU/DE/FR`, depending on the game's region). Next, select `CREATE SKATER` and confirm the selection to start the exploit.
+
+### XS Moto
+
+* Versions Tested: [USA](http://redump.org/disc/6604/), [Europe](http://redump.org/disc/17764/).
+* Versions With Save Game Exploit Support: USA, Europe.
+* Save Game Exploit RAW file: `entrypoints/BASLUS-01506XSMOTOv1` (USA), `entrypoints/BESLES-04095XSMOTO` (Europe).
+* Save Game Exploit MCS file: `entrypoints/xsmoto-us.mcs` (USA), `entrypoints/xsmoto-eu.mcs` (Europe).
+* Tonyhax International Loader RAW file: `loader/HAX`.
+* Tonyhax International Loader MCS file: `loader/tonyhax.mcs`.
+* Exploit instructions: If you are using the 'Europe' version select the English language in the language selection screen. On the main menu, choose Options. Select `Load Game` and load the _Save Game Exploit_ file. Back at the main menu, select either the `Single Race` or `Championship` option to trigger the exploit.
+
+## CD-R Media For PSX Backups
+
+**Only use high-quality CD-R media for PSX backups.** If you want good results burning backups for your PS1 your CD-R media should contain:
+
+* High quality dye (SuperAZO, AZO, or Phthalocyanine).
+* A highly reflective layer system.
+* High quality polycarbonate and "sealing" process combining all parts of the CD-R.
+
+_Ideally, you want to use 74 minute discs_. The PSX was never designed for the now more common 80 minute discs, and it is easier for the laser to track 74 minute discs due to their wider data spiral track. As of 2023, 74 minute discs are not really manufactured anymore and new old stock can get pricey, so it really may not be worth it as the PSX can read 80 minute discs fine. It just can read 74 minute discs easier as that is closer to what it was designed for originally (which was 72 minute pressed CD-ROMs).
 
 I have found Verbatim DataLifePlus CD-Rs to be really good with PS1 consoles. Here is the ATIP information displayed by `cdrecord -atip` for a Verbatim DataLifePlus CD-R:
 
@@ -657,25 +860,29 @@ Later PS1 consoles (starting at the SCPH-5000 series and newer) and all PS2 cons
 
 If you are having issues booting discs in Tonyhax International, consider wiping with a clean microfiber cloth from the inner ring to the outer edge of the disc in all directions and then trying to boot the disc again.
 
-## Burning Programs For PS1 Backups
+## Burning PSX CD-Rs
 
-_Most,_ **but not all** PSX disc images can be burned with [IMGBurn](https://www.imgburn.com) (avilable for Windows) or [the Official CDRDAO](http://cdrdao.sourceforge.net) (available for Mac OS X/Linux/\*BSD/Windows).
+Not all CD burning programs can correctly burn _all types_ of PSX discs. Below is a small list comparison of a few burning programs and their abilities. The recommended burning program is [my cdrdao fork](#cdrdao-af) due to it being open source and cross platform.
 
-If you use [the Official CDRDAO](http://cdrdao.sourceforge.net), you must use the `--swap` argument for discs with CDDA audio or the game will have incorrect CD audio playback! Example:
+### [CDRDAO-AF](https://alex-free.github.io/cdrdao)
 
-`cdrdao write --speed 1 --swap --eject psxgame.cue`
+* Is Open Source?: Yes. Pre-built Linux x86_64 binaries are also [available](https://alex-free.github.io/cdrdao#downloads).
+* Burns Standard PSX Backup CD-Rs?: Yes. For .bin/.cue CD images, the `--swap` argument is required.
+* Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: Yes, for .bin/.cue CD images, the `--swap` argument is required. You also must use the `generic-mmc-raw` driver.
+* Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: CDRDAO can rip an authentic PAL PSX game disc containing LibCrypt protection correctly into a .toc/.bin CD image file. This file can be burned back by using the `generic-mmc-raw` driver. The much more common .bin/.cue/.sub CD image LibCrypt rips do not work directly however.
 
-IMGBurn and the official CDRDAO can not be used to burn games which have [additional EDC checks in place](#bypassing-additional-edc-checks-found-in-some-games) because they burn the disc in a way which will trip this detection when you actually play the burned CD-R. Therefore, it is recommended to use one the following burning programs, which can be used even for the games which contain EDC checks (and the burned CD-R won't trip the detection):
+### [CloneCD](https://www.redfox.bz/en/clonecd.html)
 
-* [My CDRDAO Fork](https://github.com/alex-free/cdrdao) _with the generic-mmc-raw driver_.
-* [CloneCD](https://www.redfox.bz/en/clonecd.html).
-* [Alcohol 120%](https://www.alcohol-soft.com/) _with "general protected CD" mode_.
+* Is Open Source?: No, it is Windows only FreeWare with a free 'demo' version as well as a full paid version. The 'demo' version can be used however for PSX Backup CD-R burning without limitation.
+* Burns Standard PSX Backup CD-Rs?: Yes, no special options required.
+* Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: Yes, if you use [RAW](https://hydrogenaud.io/index.php?PHPSESSID=3voij6gqs993vdbd15mlmc2k7h&topic=42415.msg371328#msg371328) mode.
+* Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: [Yes](https://github.com/Kippykip/SBITools), (with the proper BIN/CUE/SUB files).
 
-Example of using my CDRDAO fork with the raw driver to burn a PSX game (can correctly burn disc images with EDC detection and not cause the protection to trip in game when played from a burned CD-R):
+### [ImgBurn](https://www.imgburn.com/)
 
-`cdrdao write --speed 1 --driver generic-mmc-raw --eject psxgame.cue`
+* IMGBurn is only available on Windows and is closed source free-ware.
 
-_NOTE_: You do not need to do the `--swap` argument if you use my cdrdao fork.
+* IMGBurn **can not burn** unmodified copies of game which contain additional [EDC related copy protection](#bypassing-additional-edc-checks-found-in-some-games). As long as the game does not have any EDC related copy protection however, IMGBurn will work for burning PSX CD-Rs.
 
 ## Playing Games With Additonal Copy Protection Routines
 
@@ -1219,8 +1426,9 @@ This is a small 'todo list' of games which need further investigation to defeat 
 
 ## Bypassing Additional EDC Checks Found In Some Games
 
-Some games may also have a different kind of anti-piracy measure, known as the EDC check. The EDC check can be defeated by **forcing the EDC to not be re-generated when [burning the disc image](#burning-programs-for-ps1-backups)**. Below is a WIP list of games found with this type of protection:
+Some games may also have a different kind of anti-piracy measure, known as the EDC check. The EDC check can be defeated by **forcing the EDC to not be re-generated when [burning the disc image](#burning-psx-cd-rs)**. Below is a WIP list of games found with this type of protection:
 
+* BeatMania Best Hits Japan ([Rev 0](http://redump.org/disc/36175/), [Rev 1](http://redump.org/disc/44332/)).
 * Dance Dance Revolution [Japan](http://redump.org/disc/1562/), [USA](http://redump.org/disc/16075/).
 * Dance Dance Revolution: Best Hits [Japan](http://redump.org/disc/30601/).
 * Dance Dance Revolution 2nd Remix [Japan](http://redump.org/disc/9477/).
@@ -1260,7 +1468,9 @@ Next, install all the required dependencies:
 
 If you are running _Fedora or Debian_ (Windows Subsystem For Linux can run these operating systems on Windows to provide a sufficient build environment), you can download the build dependencies automatically with the `get-deps.sh` script found in the `scripts` folder of the Tonyhax International [source tree](https//alex-free.github.io/tonyhax). **For any other OS, you'll need to find the above packages and install them manually yourself.**
 
-Next, you need to build the tool-chain. Execute the `build-tool-chain.sh` script, which is found in the `scripts` directory of Tonyhax International source tree. **This will take some time to build, depending on how fast your computer is.**
+Next, you need to build the tool-chain. Execute the `build-tool-chain.sh` script, which is found in the `scripts` directory of the source tree. **This will take some time to build, depending on how fast your computer is.**
+
+After that, build mkpsxsiso. Execute the `build-mkpsxiso.sh` script, which is found in the `scripts` directory of the source tree.
 
 With everything installed, you can now build Tonyhax International with the `build.sh` script found in the `scripts` directory of the Tonyhax International source tree. After you build Tonyhax International a release `.zip` file will be generated in the root of the source directory.
 

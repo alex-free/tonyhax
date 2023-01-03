@@ -70,10 +70,10 @@ realstart:
 	# Save handle
 	move s1, v0
 
-	#ifndef BAREBONES
+#ifndef BAREBONES
 	# If less than zero, it failed
 	blt v0, zero, fatalerror
-	#endif
+#endif
 
 	# The kernel will fail to read if we don't wait a bit (here, ~1/10th of a second)
 	# This is a known issue as specified in LIBOVR46.PDF section 5-11:
@@ -85,7 +85,12 @@ busywait:
 	bne t0, zero, busywait
 
 	# Load temp buffer address (originally was 0x801FA000, - 0x100 from original start addr of Tonyhax: 0x801FA100)
+	# Final Fantasy IX uses 0x801F6300 as the start addr of Tonyhax, so -0x100 from that is the temp buffer address.
+#ifdef FF9
+	li s2, 0x801F6200
+#else
 	li s2, 0x801F8080
+#endif
 
 	# Load header using FileRead
 	li t1, 0x34
@@ -157,4 +162,8 @@ redscreen:
 #endif
 
 splname:
+#ifdef FF9
+	.asciiz "bu00:FF9"
+#else
 	.asciiz "bu00:HAX"
+#endif

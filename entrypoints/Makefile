@@ -13,7 +13,7 @@ $(ENTRY_RAW): $(ENTRY_MCS)
 # BES = PAL BAS = USA BIS = JAP
 
 clean:
-	$(RM) BES* BAS* BIS* $(ENTRY_MCS) *.elf *.bin
+	$(RM) BES* BAS* BIS* $(ENTRY_MCS) *.elf *.bin FF9-A-JP/BIS* FF9-B-JP/BIS* FF9-A-US/BAS* FF9-B-US/BAS*
 
 # Entry target
 
@@ -29,6 +29,14 @@ entry-bb.elf: entry.S
 	$(CC) $(CFLAGS) -DBAREBONES entry.S -o entry-bb.elf
 
 entry-bb.bin: entry-bb.elf
+	$(OBJCOPY) $(OBJCOPYFLAGS) -j .text $< $@
+
+# Entry target for Final Fantasy IX (no color codes, no error handling, smallest size, and different load addr)
+
+entry-ff9.elf: entry.S
+	$(CC) $(CFLAGS) -DBAREBONES -DFF9 entry.S -o entry-ff9.elf
+
+entry-ff9.bin: entry-ff9.elf
 	$(OBJCOPY) $(OBJCOPYFLAGS) -j .text $< $@
 
 # Brunswick Circuit Pro Bowling NTSC-US target
@@ -138,14 +146,34 @@ crash3-eu.mcs: crash3-eu-tpl.mcs entry.bin
 	bash fix-crash-checksum.sh crash3-eu.mcs eu3
 
 # Doki Oki NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
-doki-oki-jp.mcs: doki-oki-jp-tpl.mcs entry.bin
-	cp doki-oki-jp-tpl.mcs doki-oki-jp.mcs
-	dd conv=notrunc if=entry.bin of=doki-oki-jp.mcs bs=1 seek=896
+dokiou-ki-jp.mcs: dokiou-ki-jp-tpl.mcs entry.bin
+	cp dokiou-ki-jp-tpl.mcs dokiou-ki-jp.mcs
+	dd conv=notrunc if=entry.bin of=dokiou-ki-jp.mcs bs=1 seek=896
 
 # Downhill Snow NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
 downhill-snow-jp.mcs: downhill-snow-jp-tpl.mcs entry.bin
 	cp downhill-snow-jp-tpl.mcs downhill-snow-jp.mcs
 	dd conv=notrunc if=entry.bin of=downhill-snow-jp.mcs bs=1 seek=1780
+
+# Final Fantasy IX Disc 1 CEX-1000 BIOS 1.0-2.0 NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
+FF9-A-JP/ff9-a-jp.mcs: FF9-A-JP/ff9-a-jp-tpl.mcs entry-ff9.bin
+	cp FF9-A-JP/ff9-a-jp-tpl.mcs FF9-A-JP/ff9-a-jp.mcs
+	dd conv=notrunc if=entry-ff9.bin of=FF9-A-JP/ff9-a-jp.mcs bs=1 seek=132
+
+# Final Fantasy IX Disc 1 BIOS 2.1 and above NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
+FF9-B-JP/ff9-b-jp.mcs: FF9-B-JP/ff9-b-jp-tpl.mcs entry-ff9.bin
+	cp FF9-B-JP/ff9-b-jp-tpl.mcs FF9-B-JP/ff9-b-jp.mcs
+	dd conv=notrunc if=entry-ff9.bin of=FF9-B-JP/ff9-b-jp.mcs bs=1 seek=132
+
+# Final Fantasy IX Disc 1 CEX-1000 BIOS 1.0-2.0 NTSC-U target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
+FF9-A-US/ff9-a-us.mcs: FF9-A-US/ff9-a-us-tpl.mcs entry-ff9.bin
+	cp FF9-A-US/ff9-a-us-tpl.mcs FF9-A-US/ff9-a-us.mcs
+	dd conv=notrunc if=entry-ff9.bin of=FF9-A-US/ff9-a-us.mcs bs=1 seek=132
+
+# Final Fantasy IX Disc 1 BIOS 2.1 and above NTSC-U target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
+FF9-B-US/ff9-b-us.mcs: FF9-B-US/ff9-b-us-tpl.mcs entry-ff9.bin
+	cp FF9-B-US/ff9-b-us-tpl.mcs FF9-B-US/ff9-b-us.mcs
+	dd conv=notrunc if=entry-ff9.bin of=FF9-B-US/ff9-b-us.mcs bs=1 seek=132
 
 # The Legend Of Heroes I&II NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
 the-legend-of-heroes-1-and-2-jp.mcs: the-legend-of-heroes-1-and-2-jp-tpl.mcs entry.bin

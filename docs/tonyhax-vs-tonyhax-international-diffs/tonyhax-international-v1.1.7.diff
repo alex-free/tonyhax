@@ -1,0 +1,2613 @@
+diff --git a/loader/FF9 b/loader/FF9
+new file mode 100644
+index 0000000..fcf96e2
+Binary files /dev/null and b/loader/FF9 differ
+diff --git a/tmp/og-tonyhax.Enu/loader/Makefile b/loader/Makefile
+index f121ebf..7603534 100644
+--- a/tmp/og-tonyhax.Enu/loader/Makefile
++++ b/loader/Makefile
+@@ -32,7 +32,7 @@ secondary.elf: secondary.ld $(LOADER_OBJECTS)
+ tonyhax.mcs: tonyhax-tpl.mcs secondary.elf
+ 	bash generate-tonyhax-mcs.sh secondary.elf tonyhax-tpl.mcs tonyhax.mcs $(TONYHAX_VERSION)
+ 
+-BESLEM-99999TONYHAX: tonyhax.mcs
++HAX: tonyhax.mcs
+ 	bash ../util/mcs2raw.sh tonyhax.mcs
+ 
+ tonyhax.exe: secondary.elf
+diff --git a/loader/Makefile.ff9 b/loader/Makefile.ff9
+new file mode 100644
+index 0000000..3e8b087
+--- /dev/null
++++ b/loader/Makefile.ff9
+@@ -0,0 +1,39 @@
++
++# Thanks to whoever made https://devhints.io/makefile!
++
++include ../variables.mk
++
++LOADER_AUTOGEN := orca.inc
++LOADER_HEADERS := $(wildcard *.h) $(LOADER_AUTOGEN)
++LOADER_OBJECTS := $(patsubst %.c, %.o, $(patsubst %.S, %.o, $(wildcard *.c *.S)))
++
++all: $(LOADER_FILES)
++
++clean:
++	$(RM) $(LOADER_FILES) *.o *.elf $(LOADER_AUTOGEN)
++
++# Intermediate objects
++
++%.o: %.c $(LOADER_HEADERS)
++	$(CC) $(CFLAGS) -c $<
++
++%.o: %.S $(LOADER_HEADERS)
++	$(CC) $(CFLAGS) -c $<
++
++orca.inc: orca.img
++	bash ../util/bin2h.sh ORCA_IMAGE orca.img orca.inc
++
++secondary.elf: secondary-ff9.ld $(LOADER_OBJECTS)
++	$(LD) $(LDFLAGS) -T secondary-ff9.ld $(LOADER_OBJECTS) -o $@
++	bash insert-tonyhax-crc.sh secondary.elf
++
++# Results
++
++tonyhax.mcs: tonyhax-tpl-ff9.mcs secondary.elf
++	bash generate-tonyhax-mcs.sh secondary.elf tonyhax-tpl-ff9.mcs tonyhax-ff9.mcs $(TONYHAX_VERSION)
++
++HAX: tonyhax.mcs
++	bash ../util/mcs2raw.sh tonyhax-ff9.mcs
++
++tonyhax.exe: secondary.elf
++	bash generate-tonyhax-exe.sh secondary.elf tonyhax.exe
+diff --git a/loader/Makefile.freepsxboot b/loader/Makefile.freepsxboot
+new file mode 100644
+index 0000000..20b067a
+--- /dev/null
++++ b/loader/Makefile.freepsxboot
+@@ -0,0 +1,38 @@
++
++# Thanks to whoever made https://devhints.io/makefile!
++
++include ../variables.mk.freepsxboot
++
++LOADER_HEADERS := $(wildcard *.h) $(LOADER_AUTOGEN)
++LOADER_OBJECTS := $(patsubst %.c, %.o, $(patsubst %.S, %.o, $(wildcard *.c *.S)))
++
++all: $(LOADER_FILES)
++
++clean:
++	$(RM) $(LOADER_FILES) *.o *.elf $(LOADER_AUTOGEN)
++
++# Intermediate objects
++
++%.o: %.c $(LOADER_HEADERS)
++	$(CC) $(CFLAGS) -c $<
++
++%.o: %.S $(LOADER_HEADERS)
++	$(CC) $(CFLAGS) -c $<
++
++orca.inc: orca.img
++	bash ../util/bin2h.sh ORCA_IMAGE orca.img orca.inc
++
++secondary.elf: secondary.ld $(LOADER_OBJECTS)
++	$(LD) $(LDFLAGS) -T secondary.ld $(LOADER_OBJECTS) -o $@
++	bash insert-tonyhax-crc.sh secondary.elf
++
++# Results
++
++tonyhax.mcs: tonyhax-tpl.mcs secondary.elf
++	bash generate-tonyhax-mcs.sh secondary.elf tonyhax-tpl.mcs tonyhax.mcs $(TONYHAX_VERSION)
++
++HAX: tonyhax.mcs
++	bash ../util/mcs2raw.sh tonyhax.mcs
++
++tonyhax.exe: secondary.elf
++	bash generate-tonyhax-exe.sh secondary.elf tonyhax.exe
+diff --git a/loader/Makefile.tocperfect b/loader/Makefile.tocperfect
+new file mode 100644
+index 0000000..d1582a2
+--- /dev/null
++++ b/loader/Makefile.tocperfect
+@@ -0,0 +1,38 @@
++
++# Thanks to whoever made https://devhints.io/makefile!
++
++include ../variables.mk.tocperfect
++
++LOADER_HEADERS := $(wildcard *.h) $(LOADER_AUTOGEN)
++LOADER_OBJECTS := $(patsubst %.c, %.o, $(patsubst %.S, %.o, $(wildcard *.c *.S)))
++
++all: $(LOADER_FILES)
++
++clean:
++	$(RM) $(LOADER_FILES) *.o *.elf $(LOADER_AUTOGEN)
++
++# Intermediate objects
++
++%.o: %.c $(LOADER_HEADERS)
++	$(CC) $(CFLAGS) -c $<
++
++%.o: %.S $(LOADER_HEADERS)
++	$(CC) $(CFLAGS) -c $<
++
++orca.inc: orca.img
++	bash ../util/bin2h.sh ORCA_IMAGE orca.img orca.inc
++
++secondary.elf: secondary.ld $(LOADER_OBJECTS)
++	$(LD) $(LDFLAGS) -T secondary.ld $(LOADER_OBJECTS) -o $@
++	bash insert-tonyhax-crc.sh secondary.elf
++
++# Results
++
++tonyhax.mcs: tonyhax-tpl.mcs secondary.elf
++	bash generate-tonyhax-mcs.sh secondary.elf tonyhax-tpl.mcs tonyhax.mcs $(TONYHAX_VERSION)
++
++HAX: tonyhax.mcs
++	bash ../util/mcs2raw.sh tonyhax.mcs
++
++tonyhax.exe: secondary.elf
++	bash generate-tonyhax-exe.sh secondary.elf tonyhax.exe
+diff --git a/loader/ap-bypass.c b/loader/ap-bypass.c
+new file mode 100644
+index 0000000..fe27dbf
+--- /dev/null
++++ b/loader/ap-bypass.c
+@@ -0,0 +1,1216 @@
++
++#include "bios.h"
++//#include "debugscreen.h"
++#include "str.h"
++#include "ap-bypass.h"
++
++/*
++MottZilla's original notes from his email to me:
++Once this is all done, the Cheat Engine is installed and ready. Now you just have to add cheats.
++
++The cheat list starts at 0xD000 and is in the following format.
++; Code Object: AA = Address 32bit, DD = Data 16bit, JE = Joypad Enable Combo, JD = Joypad Disable Combo
++; EN = Code Enabled or Disabled, CC = Compare Value
++; AA.AA.AA.AA.DD.DD.CC.CC.JE.JE.JD.JD.EN.EN.EN.EN
++
++You can ignore the Joypad stuff as it isn't implemented yet. I might add it in the future. If you look, each cheat entry is 0x10 (16) bytes. So the first cheat is at  0xD000,next at 0xD010, 0xD020, and it keeps going until you run out of cheats. Probably not a great idea to put a million cheats in. =)
++
++So a GameShark code of 80XXXXXX:XXXX, you would write the first part to 0xD000. Then you'd write the second XXXX part to 0xD004 as a 16-bit integer. Then if you want to only write memory if the original value was a specific value you write that original value to 0xD006. Finally to turn the code on you would write any 32-bit non-zero number to 0xD00C.
++*/
++
++const uint32_t gs_enable = 0x01010101;
++
++int32_t code_address_ram_location = 0xD000;
++int32_t code_compare_ram_location = 0xD004;
++int32_t code_change_value_ram_location = 0xD006;
++int32_t code_enable_ram_location = 0xD00C;  
++
++void enable_code(const uint32_t gs1, const uint16_t gs2, const uint16_t gs3) {
++    memcpy((void*)code_address_ram_location, &gs1, 4);
++    memcpy((void*)code_compare_ram_location, &gs2, 2);
++    memcpy((void*)code_change_value_ram_location, &gs3, 2);
++    memcpy((void*)code_enable_ram_location, &gs_enable, 4);
++// Update addresses to write to for an additional code
++	code_address_ram_location = (code_address_ram_location + 0x010);
++	code_compare_ram_location = (code_compare_ram_location + 0x010);
++	code_change_value_ram_location = (code_change_value_ram_location + 0x010);
++	code_enable_ram_location = (code_enable_ram_location + 0x010);
++}
++
++void install_cheat_engine() {
++	//debug_write("Installing MottZilla AP Engine");
++
++const unsigned char MZ_CheatEngine_220820_bin[] = {
++  0xe0, 0xff, 0xbd, 0x27, 0x00, 0x00, 0xa4, 0xaf, 0x04, 0x00, 0xa5, 0xaf,
++  0x08, 0x00, 0xa6, 0xaf, 0x0c, 0x00, 0xa7, 0xaf, 0x00, 0x00, 0x04, 0x3c,
++  0x00, 0xd0, 0x84, 0x34, 0x00, 0x00, 0x87, 0x8c, 0x06, 0x00, 0x85, 0x94,
++  0x1d, 0x00, 0xe0, 0x10, 0x00, 0x00, 0x00, 0x00, 0x0c, 0x00, 0x87, 0x8c,
++  0x00, 0x00, 0x00, 0x00, 0x15, 0x00, 0xe0, 0x10, 0x00, 0x00, 0x00, 0x00,
++  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x86, 0x8c, 0x00, 0xff, 0x07, 0x3c,
++  0x00, 0x00, 0xe7, 0x34, 0x24, 0x30, 0xe6, 0x00, 0x00, 0x80, 0x07, 0x3c,
++  0x00, 0x00, 0xe7, 0x34, 0x0c, 0x00, 0xc7, 0x14, 0x00, 0x00, 0x00, 0x00,
++  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x87, 0x8c, 0x05, 0x00, 0xa0, 0x10,
++  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe6, 0x94, 0x00, 0x00, 0x00, 0x00,
++  0x04, 0x00, 0xc5, 0x14, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x85, 0x94,
++  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe5, 0xa4, 0x10, 0x00, 0x84, 0x24,
++  0xe2, 0xff, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
++  0x00, 0x00, 0xa4, 0x8f, 0x04, 0x00, 0xa5, 0x8f, 0x08, 0x00, 0xa6, 0x8f,
++  0x0c, 0x00, 0xa7, 0x8f, 0x20, 0x00, 0xbd, 0x27, 0x01, 0x00, 0x1a, 0x3c,
++  0xfc, 0xcf, 0x5a, 0x8f, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x40, 0x03,
++  0x00, 0x00, 0x00, 0x00
++};
++
++	memcpy((void*)0xC000, (void*)MZ_CheatEngine_220820_bin, sizeof(MZ_CheatEngine_220820_bin)); // Copy MottZilla's cheat engine assembly binary to 0xC000
++	const uint32_t b0_jump = (*(uint32_t*)0xB4) & 0xFFFF;
++	//debug_write("Got jump address for B0 functions : %x", (uint32_t) b0_jump);
++	const uint32_t b0_base = (*(uint32_t*)(b0_jump + 4)) & 0xFFFF;
++	//debug_write("Got base address for B0 table : %x", (uint32_t) b0_base);
++	const uint32_t b0_entry = b0_base + (0x17 * 4);
++	//debug_write("Got B0 table entry address : %x", (uint32_t) b0_entry);
++	const uint32_t old_table_val = *(uint32_t*) b0_entry;
++	//debug_write("B0 table entry to modify has the original contents : %x", (uint32_t) old_table_val);
++	memcpy((void*)0xCFFC, (void*)&old_table_val, sizeof(old_table_val)); // Copy the original 32 bit number of the B table entry we want to modify to 0xCFFC
++	const uint16_t redirect = 0xC000;
++	memcpy((void*)b0_entry, &redirect, 2); // Write the value 0xC000 to table entry we want to modify
++   //for (volatile int i = 0; i < 0x100000; i++);  // won't be optimized out by -Os, pause
++}
++
++void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr) 
++{
++	int32_t ver_check;
++	uint8_t ver_check_val;
++	int8_t bootfile_len = strlen(bootfile);
++
++	// Aprip code type constants
++	const uint16_t readtoc_compare_val = 0x001E;
++	const uint16_t readtoc_patch_val = 0x0000;
++
++	// Many pre-existing 'skip mod check' or 'force routine ok' type codes from back in the day seem to share these values, so they are a const
++	const uint16_t common_routine_return_compare_val = 0x1040;
++	const uint16_t common_routine_return_patch_val = 0x1000;
++
++	if(bootfile_len > 13) {
++		bootfile = &bootfile[bootfile_len-13]; // XXXX_XXX.XX;1 , we are only chaning the locally declared bootfile here, not in secondary.c
++		//debug_write("Stripped Bootfile: %s", bootfile);
++	} else if(bootfile_len < 13) {
++		return; 
++		// Speed optimization. All anti-piracy games currently have a bootfile name that is at least 13 uchars long when stripped. So if the bootfile happens to have something like 'MAIN.EXE;1' (which is 10 uchars long), we already know not to bother even checking for an anti-piracy bootfile match to apply codes for (which takes time in itself to do as well).
++	}
++
++// Animetic Story Game 1: Card Captor Sakura
++   	if(((strcmp("SLPS_018.30;1", bootfile)) == 0) || ((strcmp("SLPS_018.31;1", bootfile)) == 0)) { // 2 disc game
++   		//debug_write("Detected Animetic Story Game 1: Card Captor Sakura");
++		/*
++		D001516A 1040
++		8001516A 1000
++		code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_c.shtml
++    	*/
++    	enable_code(0x8001516A, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Alundra 2
++	((strcmp("SCPS_101.15;1", bootfile)) == 0) { 
++   		//debug_write("Detected Alundra 2 - Japan");
++		/*
++		D004E91A 1040
++		8004E91A 1000
++		'skip mod check' code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_a.shtml
++    	*/
++    	enable_code(0x8004E91A, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Arc The Lad III
++	(((strcmp("SCPS_101.06;1", bootfile)) == 0) || ((strcmp("SCPS_101.07;1", bootfile)) == 0)) { // 2 Japan versions and each have 2 discs but the same codes per revision
++   		//debug_write("Detected Arc The Lad III - Japan");
++		ver_check = (load_addr + 0x20); // First different byte between revisions
++		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
++		ver_check_val = *(uint8_t*) ver_check;
++		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
++		if((ver_check_val == 0x8C))
++		{
++			//debug_write("REV 0");
++			/*
++			D0021DF6 1040
++			80021DF6 1000
++			code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_a.shtml
++    		*/
++    		enable_code(0x80021DF6, common_routine_return_patch_val, common_routine_return_compare_val);
++    		install_cheat_engine();
++    	} else {
++			//debug_write("REV 1");
++ 			/*
++			D0022206 1040 my code via aprip gameshark code conversion
++			80022206 1000
++    		*/
++			enable_code(0x80022206, common_routine_return_patch_val, common_routine_return_compare_val);
++    		install_cheat_engine();		
++    	}
++    } else if
++
++// Beatmania featuring Dreams Come True
++   	((strcmp("SLPM_865.97;1", bootfile)) == 0) {
++   		//debug_write("Beatmania featuring Dreams Come True");
++		/*
++		D012255C 001E
++		8012255C 0000
++		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
++    	*/
++ 		enable_code(0x8012255C, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Beatmania Best Hits
++   	((strcmp("Slpm_865.96;1", bootfile)) == 0) { // 2 different versions, same code works on both rev 0 and rev 1
++   		//debug_write("Detected Beatmania Best Hits");
++		/*
++		D0151448 001E
++		80151448 0000
++		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
++    	*/
++    	enable_code(0x80151448, readtoc_patch_val, readtoc_compare_val);
++    	install_cheat_engine();
++	} else if
++
++// Beat Mania: The Sound of Tokyo
++	((strcmp("SLPM_867.69;1", bootfile)) == 0) { 
++   		//debug_write("Detected Beat Mania - The Sound of Tokyo");
++    	/*
++		D0134C48 001E
++		80134C48 0000
++		my code to patch out readtoc
++    	*/
++    	enable_code(0x80134C48, readtoc_patch_val, readtoc_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Beat Mania 6thMix + Core Remix
++	((strcmp("SLPM_870.12;1", bootfile)) == 0) { 
++   		//debug_write("Detected Beat Mania 6th Mix + Core Remix");
++		/*
++		D0131B6C 001E
++		80131B6C 001A
++    	my code to patch out readtoc
++    	*/
++    	enable_code(0x80131B6C, readtoc_patch_val, readtoc_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Biohazard 3: The Last Escape
++   	((strcmp("SLPS_023.00;1", bootfile)) == 0) { // 2 different versions
++   		//debug_write("Detected Biohazard 3 - Japan");
++		ver_check = (load_addr + 0x1B0); // First different byte between revisions
++		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
++		ver_check_val = *(uint8_t*) ver_check;
++		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
++		if((ver_check_val == 0xF4))
++		{
++			//debug_write("REV 0");
++			/*
++			D01840E2 1040
++			801840E2 1000
++			'skip check' code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_b.shtml
++    		*/
++    		enable_code(0x801840E2, common_routine_return_patch_val, common_routine_return_compare_val);
++    		install_cheat_engine();
++	    } else {
++			//debug_write("REV 1");
++			/*
++			D018418E 1040
++			8018418E 1000 
++			my code via aprip gameshark code conversion
++    		*/
++    		enable_code(0x8018418E, common_routine_return_patch_val, common_routine_return_compare_val);
++    		install_cheat_engine();
++	    }
++	} else if
++
++   	((strcmp("SLPM_804.85;1", bootfile)) == 0) { // Demo
++   		//debug_write("Detected Bio Hazard 3 Demo");
++		/*
++		D01800E2 1040
++		801800E2 1000 
++		my code via aprip gameshark code conversion
++    	*/
++    	enable_code(0x801800E2, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++	} else if
++
++// Chase The Express
++   	(((strcmp("SCPS_101.09;1", bootfile)) == 0) || ((strcmp("SCPS_101.10;1", bootfile)) == 0) || ((strcmp("PAPX_901.06;1", bootfile)) == 0) || ((strcmp("PCPX_961.89;1", bootfile)) == 0)) { // 2 discs and 2 demos all share the same code
++   		//debug_write("Detected Chase The Express - Japan");
++		/*
++		D00EA6DE 1040
++		800EA6DE 1000
++		'skip mod check' code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_c.shtml
++    	*/
++    	enable_code(0x800EA6DE, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Crash Bash
++  	((strcmp("SCUS_945.70;1", bootfile)) == 0) {
++   		//debug_write("Detected Crash Bash - USA");
++		/*
++		D002D51E 1040
++		8002D51E 1000
++		code from GameHacking: https://gamehacking.org/game/88640, skips mod check
++    	*/
++    	enable_code(0x8002D51E, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++    } else if 
++
++   	((strcmp("SCPS_101.40;1", bootfile)) == 0) {
++   		//debug_write("Detected Crash Bash - Japan");
++		/*
++		D002D7EE 1040
++		8002D7EE 1000
++		code from GameHacking: https://gamehacking.org/game/93827, skips mod check
++    	*/
++    	enable_code(0x8002D7EE, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Crash Bandicoot Racing
++   	((strcmp("SCPS_101.18;1", bootfile)) == 0) {
++   		//debug_write("Detected Crash Bandicoot Racing");
++		/*
++		D001259A 1040
++		8001259A 1000
++		'skip mod check' code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_b.shtml (yes it's on the wrong lettered page)
++    	*/
++    	enable_code(0x8001259A, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++    } else if
++
++   	((strcmp("PCPX_961.83;1", bootfile)) == 0) {
++   		//debug_write("Detected Crash Bandicoot Racing Demo");
++		/*
++    	D001255E 1040
++    	8001255E 1040
++		my code via aprip gameshark code conversion
++    	*/
++    	enable_code(0x8001255E, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Cool Boarders 2001
++   	((strcmp("SCUS_946.25;1", bootfile)) == 0) {
++   		//debug_write("Detected Cool Boarders 2001 - USA Demo");
++		/*
++		D00B35B0 001E
++		800B35B0 0000
++		code generated via aprip
++    	*/
++    	enable_code(0x800B35B0, readtoc_patch_val, readtoc_compare_val);
++    	install_cheat_engine();
++    } else if
++
++   	((strcmp("SCUS_945.97;1", bootfile)) == 0) {
++   		//debug_write("Detected Cool Boarders 2001 - USA");
++		/*
++		D00B35B8 001E
++		800B35B8 0000
++		my code via aprip gameshark code conversion
++    	*/
++    	enable_code(0x800B35B8, readtoc_patch_val, readtoc_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Dance Dance Revolution: Best Hits
++   	((strcmp("SLPM_866.93;1", bootfile)) == 0) {
++   		//debug_write("Detected Dance Dance Revolution: Best Hits");
++		/*
++		D0102FA0 001E
++		80102FA0 0000
++		my code generated via aprip
++    	*/
++    	enable_code(0x80102FA0, readtoc_patch_val, readtoc_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Dance Dance Revolution: Disney's Rave
++   	((strcmp("SLPM_866.67;1", bootfile)) == 0) {
++   		//debug_write("Detected Dance Dance Revolution: Disney's Rave");
++		/*
++		D0192248 001E
++		80192248 0000
++		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
++    	*/
++    	enable_code(0x80192248, readtoc_patch_val, readtoc_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Dance Dance Revolution: Extra Mix
++   	((strcmp("SLPM_868.31;1", bootfile)) == 0) {
++   		//debug_write("Detected Dance Dance Revolution: Extra Mix");
++		/*
++		D00EB364 001E
++		800EB364 0000
++		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
++    	*/
++    	enable_code(0x800EB364, readtoc_patch_val, readtoc_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Dance Dance Revolution 2nd Remix / Dance Dance Revolution 2nd Remix Append Club Vol 1 / Dance Dance Revolution 2nd Remix Append Club Vol 2
++   	((strcmp("SLPM_862.52;1", bootfile)) == 0) { // Dance Dance Revolution 2nd Remix Append Club Vol 1 and Dance Dance Revolution 2nd Remix Append Club Vol 2 discs are booted with a 'disc change' feature within Dance Dance Revolution 2nd Remix (which is a 'base' disc when booting the others, kind of like DLC).
++   		//debug_write("Detected Dance Dance Revolution 2nd Remix");
++		/*
++		Dance Dance Revolution 2nd Remix:
++		D00200A6 1040
++		800200A6 1000
++		*/
++    	enable_code(0x800200A6, common_routine_return_patch_val, common_routine_return_compare_val);
++		/*
++		D0020D64 FFF2
++		80020D64 0001
++		*/
++    	enable_code(0x80020D64, 0x0001, 0xFFF2);
++		/*
++		D01C1BE4 FFF2
++		801C1BE4 0001
++		*/
++    	enable_code(0x801C1BE4, 0x0001, 0xFFF2);
++		/*
++		D01C1C7A 0C07
++		801C1C7A 3002
++		*/
++    	enable_code(0x801C1C7A, 0x3002, 0x0C07);
++		/*
++		D01C2936 1040
++		801C2936 1000
++		*/
++    	enable_code(0x801C2936, common_routine_return_patch_val, common_routine_return_compare_val);
++
++		/*
++		Dance Dance Revolution 2nd Remix Append Club Vol 1
++		D01C2A18 0C92
++		801C2A18 0AA7
++		*/
++    	enable_code(0x801C2A18, 0x0AA7, 0x0C92);
++		/*
++		D01C2EA2 1040
++		801C2EA2 1000
++		*/
++    	enable_code(0x801C2EA2, common_routine_return_patch_val, common_routine_return_compare_val);
++
++		/*
++		Dance Dance Revolution 2nd Remix Append Club Vol 2
++		D01C2F32 1040
++		801C2F32 1000
++		*/
++    	enable_code(0x801C2F32, common_routine_return_patch_val, common_routine_return_compare_val);
++		/*
++		D01C2AA8 0CB6
++		801C2AA8 0ACB
++		*/
++    	enable_code(0x801C2AA8, 0x0ACB, 0x0CB6);
++		// codes are from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml . There are EDC releated codes provided, but they don't seem to actually work (another EDC check still prevents the game from fully starting) and we are not providing EDC bypasses as they can be circumvented by burning CD-Rs as raw without regnerating the EDC.
++    	install_cheat_engine();
++    } else if
++
++// Dancing Stage featuring Dreams Come True
++   	((strcmp("SLPM_865.05;1", bootfile)) == 0) {
++   		//debug_write("Detected Dancing Stage featuring Dreams Come True");
++		/*
++		D019245C 001E
++		8019245C 0000
++		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
++    	*/
++    	enable_code(0x8019245C, readtoc_patch_val, readtoc_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Dancing Stage featuring True Kiss Destination
++   	((strcmp("SLPM_864.11;1", bootfile)) == 0) {
++   		//debug_write("Detected Dancing Stage featuring True Kiss Destination");
++		/*
++		D019117A 1040
++		8019117A 1000
++		code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml
++    	*/
++    	enable_code(0x8019117A, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Dino Crisis
++	((strcmp("SLUS_009.22;1", bootfile) == 0)) { // NTSC-U has 2 versions, rev 0 and rev 1 (greatest hits) see https://tcrf.net/Dino_Crisis_(PlayStation)#Revisional_Differences
++		//debug_write("Detected Dino Crisis - USA");
++		ver_check = (load_addr + 0x61); // First different byte between revisions
++		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
++		ver_check_val = *(uint8_t*) ver_check;
++		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
++		if((ver_check_val == 0xD0)) {
++			//debug_write("Rev 0");
++			/*
++			D0149004 959C
++			80149004 9E64
++			Found independently by MottZilla, but actually turns out to be the same code by Epson found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml
++			*/
++  		  	enable_code(0x80149004, 0x9E64, 0x959C);
++			install_cheat_engine();
++		} else {
++			//debug_write("Rev 1");
++			/*
++			D0148004 8658
++			80148004 8F20
++			my code, the anti-piracy table just moved memory addresses between versions :)
++			*/
++ 			enable_code(0x80148004, 0x8F20, 0x8658);
++			install_cheat_engine();
++    	}
++	} else if
++
++   	((strcmp("SLPS_021.80;1", bootfile)) == 0) { // Same as USA Rev 0
++   		//debug_write("Detected Dino Crisis - Japan");
++		/*
++		D0149004 959C
++		80149004 9E64
++		Found independently by MottZilla, but actually turns out to be the same code by Epson found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml . Yes this is the same code as the USA rev 0 one.
++		*/
++  		enable_code(0x80149004, 0x9E64, 0x959C);
++		install_cheat_engine();
++    } else if
++
++// Dino Crisis 2
++   	((strcmp("SLPM_866.27;1", bootfile)) == 0) {
++   		//debug_write("Detected Dino Crisis 2 - Japan");
++	  	/*
++		D00D7714 001E
++		800D7714 0000
++		my code via aprip to disable readtoc
++		*/
++		enable_code(0x800D7714, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++   	((strcmp("SLPM_805.73;1", bootfile)) == 0) {
++   		//debug_write("Detected Dino Crisis 2 - Japan Demo");
++	  		/*
++		D00CB104 001E
++		800CB104 0000
++		my codevia aprip to disable readtoc
++		*/
++		enable_code(0x800CB104, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Disney's The Emperor's New Groove
++   	((strcmp("SCUS_945.71;1", bootfile)) == 0) {
++   		//debug_write("Detected Disney's The Emperor's New Groove - USA");
++	  		/*
++		D0063004 001E
++		80063004 0000
++		my code via aprip to disable readtoc
++		*/
++		enable_code(0x80063004, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++   	((strcmp("SCES_030.10;1", bootfile)) == 0) {
++   		//debug_write("Detected Disney's The Emperor's New Groove - EUR");
++	  		/*
++		D006351C 001E
++		8006351C 0000
++		my code via aprip to disable readtoc
++		*/
++		enable_code(0x8006351C, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Exciting Bass 2
++   	((strcmp("SLPM_862.95;1", bootfile)) == 0) {
++   		//debug_write("Detected Exciting Bass 2");
++		/*
++		D00177BA 1040
++		800177BA 1000	
++		code found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_e.shtml
++  		*/
++  		enable_code(0x800177BA, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Exciting Bass 3
++   	((strcmp("SLPM_867.29;1", bootfile)) == 0) {
++   		//debug_write("Detected Exciting Bass 3");
++		/*
++		D00B9170 001E
++		800B9170 0000
++		my code to patch out readtoc via aprip
++  		*/
++  		enable_code(0x800B9170, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Gekitotsu Toma L'Arc - L'Arc en Ciel vs Tomarunner
++   	((strcmp("SCPS_101.34;1", bootfile)) == 0) {
++   		//debug_write("Detected Gekitotsu Toma L'Arc - L'Arc en Ciel vs Tomarunner");
++		/*
++		D0195D9C 001E
++		80195D9C 0000
++		my code to patch out readtoc via aprip
++  		*/
++  		enable_code(0x80195D9C, readtoc_patch_val, readtoc_compare_val);
++  		install_cheat_engine();
++    } else if
++
++// Goo! Goo! Soundry
++   	((strcmp("SLPM_862.50;1", bootfile)) == 0) {
++   		//debug_write("Detected Goo Goo Soundry");
++		/*
++		D0055278 001E
++		80055278 0000
++		my code to patch out readtoc via aprip
++  		*/
++  		enable_code(0x80055278, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Grind Session
++   	((strcmp("SCUS_945.68;1", bootfile)) == 0) {
++   		//debug_write("Detected Grind Session");
++		/*
++		D0014274 52A9
++		80014274 50BE
++		code 1 of 2 by 'TheVoice' found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_g.shtml
++    	*/
++  		enable_code(0x80014274, 0x50BE, 0x52A9);
++		/*
++		D00146FE 1040
++		800146FE 1000
++		code 2 of 2 by 'TheVoice' found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_g.shtml
++		*/
++  		enable_code(0x800146FE, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Guitar Freaks
++   	((strcmp("SLPM_862.65;1", bootfile)) == 0) {
++   		//debug_write("Detected Guitar Freaks");
++		/*
++		D001654E 1040
++		8001654E 1000
++		code found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_g.shtml
++    	*/
++  		enable_code(0x8001654E, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Harlem Beat: You're The One
++   	((strcmp("SLPM_863.29;1", bootfile)) == 0) {
++   		//debug_write("Detected Harlem Beat");
++		/*
++		D01A411E 1040
++		801A411E 1000
++		code found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_h.shtml
++    	*/
++  		enable_code(0x801A411E, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Hyper Value 2800: Mahjong
++   	((strcmp("SLPM_862.92;1", bootfile)) == 0) {
++   		//debug_write("Detected Hyper Value 2800 Mahjong");
++		/*
++		D00A0186 1040
++		800A0186 1000
++		code found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_h.shtml
++    	*/
++  		enable_code(0x800A0186, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// i-mode mo Issho: Doko Demo Issho Tsuika Disc
++    ((strcmp("SCPS_101.41;1", bootfile)) == 0) {
++        //debug_write("Detected i-mode mo Issho: Doko Demo Issho Tsuika Disc");
++        /*
++        D01698B4 001E
++        801698B4 0000
++        code generated via aprip by M4x1mumReZ: https://gbatemp.net/members/m4x1mumrez.610331/
++        */
++        enable_code(0x801698B4, readtoc_patch_val, readtoc_compare_val);
++        install_cheat_engine();
++    } else if
++
++// Jikkyou Powerful Pro Yakyuu '99 Ketteiban
++   	((strcmp("SLPM_864.33;1", bootfile)) == 0) {
++   		//debug_write("Detected Jikkyou Powerful Pro Yakyuu '99 Ketteiban");
++	  		/*
++		D016B4D8 001E
++		8016B4D8 0000
++		my code to patch out readtoc via aprip
++		*/
++  		enable_code(0x8016B4D8, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++	} else if
++
++// Jikkyou Powerful Pro Yakyuu '99: Kaimakuban
++   	((strcmp("SLPM_862.53;1", bootfile)) == 0) {
++   		//debug_write("Detected Jikkyou Powerful Pro Yakyuu '99 Kaimakuban");
++		/*
++		D016B268 001E
++		8016B268 0000
++		my code to patch out readtoc via aprip
++		*/
++  		enable_code(0x8016B268, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++	} else if
++
++// JoJo's Bizarre Adventure
++   	((strcmp("SLPS_022.36;1", bootfile)) == 0) {
++   		//debug_write("Detected JoJo's Bizarre Adventure");
++		/*
++		D0035C48 D91E
++		80035C48 D733
++		code 1 of 2 found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_j.shtml
++    	*/
++  		enable_code(0x80035C48, 0xD733, 0xD91E);
++  		/*
++		D00360D2 1040
++		800360D2 1000
++		code 2 of 2 found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_j.shtml
++    	*/
++  		enable_code(0x800360D2, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Koko Hore! Pukka
++	((strcmp("SCPS_101.33;1", bootfile)) == 0) {
++		//debug_write("Detected Kore Hore! Pukka");
++		/*
++		D00A341C 001E
++		800A341C 0000
++		code generated via aprip by https://gbatemp.net/members/m4x1mumrez.610331/
++    	*/
++  		enable_code(0x800A341C, readtoc_patch_val, readtoc_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Koneko mo Issho
++   	((strcmp("SCPS_101.27;1", bootfile)) == 0) {
++   		//debug_write("Detected Koneko mo Issho");
++		/*
++		D016957C 001E
++		8016957C 0000
++		my code generated via aprip
++		*/
++  		enable_code(0x8016957C, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Legend Of Dragoon
++   	(((strcmp("SCPS_101.19;1", bootfile)) == 0) || ((strcmp("scps_101.20;1", bootfile)) == 0) || ((strcmp("scps_101.21;1", bootfile)) == 0) || ((strcmp("scps_101.22;1", bootfile)) == 0)) { // 4 discs
++   		//debug_write("Detected Legend Of Dragoon - Japan");
++		/*
++		D01BF172 1040
++		801BF172 1000
++		code found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_l.shtml
++    	*/
++  		enable_code(0x801BF172, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++   	(((strcmp("SCUS_944.91;1", bootfile)) == 0) || ((strcmp("SCUS_945.84;1", bootfile)) == 0) || ((strcmp("SCUS_945.85;1", bootfile)) == 0) || ((strcmp("SCUS_945.86;1", bootfile)) == 0)) { // 4 discs
++   		//debug_write("Detected Legend Of Dragoon - USA");
++		/*
++		801BF6F6 1040
++		801BF6F6 1000 
++		my code via aprip's gameshark conversion
++   		*/
++  		enable_code(0x801BF6F6, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++   	(((strcmp("SCES_030.43;1", bootfile)) == 0) || ((strcmp("SCES_130.43;1", bootfile)) == 0) || ((strcmp("SCES_230.43;1", bootfile)) == 0) || ((strcmp("SCES_330.43;1", bootfile)) == 0)) { // 4 discs
++   		//debug_write("Detected Legend Of Dragoon - EUR");
++		/*
++		D01C0892 1040
++		801C0892 1000
++		my code via aprip's gameshark conversion
++		*/
++  		enable_code(0x801C0892, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++   	(((strcmp("SCES_030.44;1", bootfile)) == 0) || ((strcmp("SCES_130.44;1", bootfile)) == 0) || ((strcmp("SCES_230.44;1", bootfile)) == 0) || ((strcmp("SCES_330.44;1", bootfile)) == 0)) { // 4 discs
++   		//debug_write("Detected Legend Of Dragoon - FRA");
++		/*
++		D01C0872 1040
++		801C0872 1040
++		my code via aprip's gameshark conversion
++		*/
++  		enable_code(0x801C0872, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++   	(((strcmp("SCES_030.45;1", bootfile)) == 0) || ((strcmp("SCES_130.45;1", bootfile)) == 0) || ((strcmp("SCES_230.45;1", bootfile)) == 0) || ((strcmp("SCES_330.45;1", bootfile)) == 0)) { // 4 discs
++   		//debug_write("Detected Legend Of Dragoon - GER");
++		/*
++		D01C082E 1040
++		801C082E 1000
++		my code via aprip's gameshark conversion
++  		*/
++  		enable_code(0x801C082E, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++   	(((strcmp("SCES_030.46;1", bootfile)) == 0) || ((strcmp("SCES_130.46;1", bootfile)) == 0) || ((strcmp("SCES_230.46;1", bootfile)) == 0) || ((strcmp("SCES_330.46;1", bootfile)) == 0)) { // 4 discs
++   		//debug_write("Detected Legend Of Dragoon - ITA");
++		/*
++		D01C0826 1040
++		801C0826 1000
++		my code via aprip's gameshark conversion
++		*/
++  		enable_code(0x801C0826, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Legend Of Mana
++   	((strcmp("SLPS_021.70;1", bootfile)) == 0) { // Japan
++   		//debug_write("Detected Legend Of Mana");
++		/*
++		D0050ECA 1040 
++		80050ECA 1000
++		code 1 of 2 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_l.shtml
++		*/
++  		enable_code(0x80050ECA, common_routine_return_patch_val, common_routine_return_compare_val);
++    	/*
++		D00360D2 1040
++		800360D2 1000
++		code 2 of 2 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_l.shtml
++		*/
++ 		enable_code(0x800360D2, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Love Hina: Ai wa Kotoba no Naka ni / Love Hina 2: Kotoba wa Konayuki no You ni
++   	(((strcmp("SLPM_866.52;1", bootfile)) == 0) || ((strcmp("SLPM_866.77;1", bootfile)) == 0)) { // Same code works for both games
++   		//debug_write("Detected Love Hina 1 or 2");
++		/*
++		 D01011C0 001E
++		 801011C0 0000
++		code generated via APrip by https://gbatemp.net/members/m4x1mumrez.610331/
++    	*/
++ 		enable_code(0x801011C0, readtoc_patch_val, readtoc_compare_val);
++ 		install_cheat_engine();
++    } else if
++
++// Marvel vs. Capcom: Clash of Super Heroes
++   	(((strcmp("SLPS_023.68;1", bootfile)) == 0) || ((strcmp("SLPM_805.08;1", bootfile)) == 0)) { // Japan/Japan Demo share same code
++   		//debug_write("Detected Marvel vs. Capcom Clash of Super Heroes");
++		/*
++		D00F0C3A 1040
++		800F0C3A 1000
++		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_m.shtml
++    	*/
++ 		enable_code(0x800F0C3A, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Medievil II
++   	((strcmp("SCUS_945.64;1", bootfile)) == 0) {
++   		//debug_write("Detected MediEvil II USA");
++		/*
++		D00E1A58 001E
++		800E1A58 0000
++		my code generated via aprip
++		*/
++  		enable_code(0x800E1A58, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++
++// My Garden
++   	((strcmp("SLPS_022.13;1", bootfile)) == 0) {
++   		//debug_write("Detected My Garden");
++		/*
++		D009E212 1040
++		8009E212 1000
++		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_m.shtml
++    	*/
++ 		enable_code(0x8009E212, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Oha-Studio Dance Dance Revolution
++   	((strcmp("SLPM_866.03;1", bootfile)) == 0) {
++   		//debug_write("Detected Oha-Studio Dance Dance Revolution");
++		/*
++		D00FAE58 001E
++		800FAE58 0000
++		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
++    	*/
++    	enable_code(0x800FAE58, readtoc_patch_val, readtoc_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Ore no Ryouri
++   	((strcmp("SCPS_100.99;1", bootfile)) == 0) {
++   		//debug_write("Detected Ore no Ryouri");
++		/*
++		D0031C1A 1040
++		80031C1A 1000
++		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_m.shtml
++    	*/
++ 		enable_code(0x80031C1A, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Pocket Jiman
++   	((strcmp("SCPS_101.04;1", bootfile)) == 0) { // 3 discs
++   		//debug_write("Detected Pocket Jiman");
++		/*
++		 D0126BDC 001E
++		 80126BDC 0000
++		 code by https://gbatemp.net/members/m4x1mumrez.610331/ generated with APrip
++		*/
++ 		enable_code(0x80126BDC, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// PoPoLoCrois Monogatari II
++   	(((strcmp("SCPS_101.12;1", bootfile)) == 0) || ((strcmp("SCPS_101.13;1", bootfile)) == 0) || ((strcmp("SCPS_101.14;1", bootfile)) == 0)) { // 3 discs
++   		//debug_write("Detected PoPoLoCrois Monogatari II");
++		/*
++		 D00B2612 1040
++		 800B2612 1000
++		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_p.shtml
++		*/
++ 		enable_code(0x800B2612, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Pop'n Music: Animation Melody
++   	((strcmp("SLPM_865.92;1", bootfile)) == 0) {
++   		//debug_write("Pop'n Music: Animation Melody");
++		/*
++		D009E7E8 001E
++		8009E7E8 0000
++		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
++    	*/
++ 		enable_code(0x8009E7E8, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Pop'n Music: Disney Tunes
++   	((strcmp("SLPM_866.70;1", bootfile)) == 0) {
++   		//debug_write("Pop'n Music: Disney Tunes");
++		/*
++		D008A45C 001E
++		8008A45C 0000
++		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
++    	*/
++ 		enable_code(0x8008A45C, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Pop'n Music 2
++   	((strcmp("SLPM_862.94;1", bootfile)) == 0) {
++   		//debug_write("Detected Pop 'N Music 2");
++		/*
++		D0015342 1040
++		80015342 1000
++		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_p.shtml
++    	*/
++ 		enable_code(0x80015342, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Pop'n Music 5
++   	((strcmp("SLPM_869.37;1", bootfile)) == 0) {
++   		//debug_write("Detected Pop'n Music 5");
++	   		/*
++		D0048F34 001E
++		80048F34 0000
++		my code via aprip to patch out readtoc
++		*/
++ 		enable_code(0x80048F34, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Pop'n Music 6
++   	((strcmp("SLPM_870.89;1", bootfile)) == 0) {
++   		//debug_write("Detected Pop'n Music 6");
++	 		/*
++		D004A24C 001E
++		8004A24C 0000
++		my code via aprip to patch out readtoc
++		*/
++ 		enable_code(0x8004A24C, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Resident Evil Survivor
++   	((strcmp("SLPS_025.53;1", bootfile)) == 0) {
++   		//debug_write("Detected Resident Evil Survivor - Japan");
++		/*
++		D0017962 1040
++		80017962 1000
++		'skip mod check' code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_b.shtml
++    	*/
++    	enable_code(0x80017962, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++    } else if
++
++   	((strcmp("SLUS_010.87;1", bootfile)) == 0) {
++   		//debug_write("Detected Resident Evil Survivor - USA");
++		/*
++		D001714E 1040
++		8001714E 1000
++		converted code via aprip
++    	*/
++    	enable_code(0x8001714E, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++    } else if
++
++   	(((strcmp("SLES_027.32;1", bootfile)) == 0) || ((strcmp("SLES_027.44;1", bootfile)) == 0)) { // Same code works on both Europe and France versions
++   		//debug_write("Detected Resident Evil Survivor - EUR/FRA");
++		/*
++		D001713E 1040
++		8001713E 1000
++		converted code via aprip
++    	*/
++    	enable_code(0x8001713E, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Robbit mon Dieu
++   	((strcmp("SCPS_101.03;1", bootfile)) == 0) {
++   		//debug_write("Detected Robbit Mon Dieu");
++		/*
++		D001C646 1040
++		8001C646 1000
++		'skip mod check' code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
++		*/
++ 		enable_code(0x8001C646, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Rockman
++   	((strcmp("SLPS_022.20;1", bootfile)) == 0) {
++   		//debug_write("Detected Rockman 1");
++		/*
++		D006C92A 1040
++		8006C92A 1000
++		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
++		*/
++ 		enable_code(0x8006C92A, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Rockman 2: Dr. Wily no Nazo
++   	((strcmp("SLPS_022.55;1", bootfile)) == 0) {
++   		//debug_write("Detected Rockman 2");
++		/*
++		D006CA82 1040
++		8006CA82 1000
++		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
++		*/
++ 		enable_code(0x8006CA82, common_routine_return_patch_val, common_routine_return_compare_val);
++    	install_cheat_engine();
++    } else if
++
++// Rockman 3: Dr. Wily no Saigo!?
++   	((strcmp("SLPS_022.62;1", bootfile)) == 0) {
++   		//debug_write("Detected Rockman 3");
++		/*
++		D006CA1A 1040
++		8006CA1A 1000
++		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
++		*/
++ 		enable_code(0x8006CA1A, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Rockman 4: Aratanaru Yabou!!
++   	((strcmp("SLPS_023.24;1", bootfile)) == 0) {
++   		//debug_write("Detected Rockman 4");
++	 	/*
++ 		D007009C 001E
++		8007009C 0000
++ 		my code via aprip to patch out readtoc
++		*/
++ 		enable_code(0x8007009C, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Rockman 5: Blues no Wana!?
++   	((strcmp("SLPS_023.38;1", bootfile)) == 0) {
++   		//debug_write("Detected Rockman 5");
++		/*
++		D006FD84 001E
++		8006FD84 0000
++		my code via aprip
++		*/
++ 		enable_code(0x8006FD84, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Rockman X5
++   	((strcmp("SLPM_866.66;1", bootfile)) == 0) {
++   		//debug_write("Detected Rockman X5");
++		/*
++		D0070ED0 001E
++		80070ED0 0000
++		my code via aprip
++		*/
++ 		enable_code(0x80070ED0, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Rockman X6
++   	((strcmp("SLPM_869.59;1", bootfile)) == 0) {
++   		//debug_write("Detected Rockman X6");
++		/*
++		D006EC40 001E
++		8006EC40 0000
++		my code via aprip
++		*/
++ 		enable_code(0x8006EC40, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Rockman 6
++   	((strcmp("SLPS_023.79;1", bootfile)) == 0) {
++   		//debug_write("Detected Rockman 6");
++		/*
++		D006DA7A 1040
++		8006DA7A 1000
++		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
++		*/
++ 		enable_code(0x8006DA7A, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Street Fighter EX2 Plus
++   	((strcmp("SLPS_025.08;1", bootfile)) == 0) {
++   		//debug_write("Detected Street Fighter EX2 Plus");
++		/*
++		D01BD48A 1040
++		801BD48A 1000
++		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_s.shtml
++		*/
++ 		enable_code(0x801BD48A, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++   	((strcmp("SLPM_805.17;1", bootfile)) == 0) {
++   		//debug_write("Detected Street Fighter EX2 Plus Demo");
++		/*
++		D01BD13E 1040
++		801BD13E 1000
++		my code via aprip gameshark code conversion
++		*/
++ 		enable_code(0x801BD48A, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Strider 2
++   	((strcmp("SLUS_011.63;1", bootfile)) == 0) {
++   		//debug_write("Detected Strider 2 - USA");
++		/*
++		D01F6570 001E
++		801F6570 0000
++		my code via aprip
++		*/
++ 		enable_code(0x801F6570, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Tomba! 2: The Evil Swine Return
++   	((strcmp("SCUS_944.54;1", bootfile)) == 0) {
++   		//debug_write("Detected TOMBA! 2 - USA");
++		/*
++		D002542C 001E
++		8002542C 0000
++		my code via aprip
++		*/
++ 		enable_code(0x8002542C, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Vandal Harts II
++   	((strcmp("SLUS_009.40;1", bootfile)) == 0) {
++   		//debug_write("Detected Vandal Harts II - USA");
++	 		/*
++		D00865FC 001E
++		800865FC 0000
++		my code via aprip to patch out readtoc
++		*/
++ 		enable_code(0x800865FC, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Wild Arms 2
++   	(((strcmp("SCUS_944.84;1", bootfile)) == 0) || ((strcmp("SCUS_944.98;1", bootfile)) == 0)) { // 2 discs
++   		//debug_write("Detected Wild Arms 2 - USA");
++	   		/*
++   		D003A4E8 001E
++   		8003A4E8 0000
++ 		my code via aprip to patch out readtoc
++    	*/
++ 		enable_code(0x8003A4E8, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++   	((strcmp("SCUS_945.92;1", bootfile)) == 0) {
++   		//debug_write("Detected Wild Arms 2 - USA Demo");
++		/*
++   		D003A5D4 001E
++   		8003A5D4 0000
++		my code via aprip gameshark code conversion on my own code (code-ception)
++    	*/
++ 		enable_code(0x8003A5D4, readtoc_patch_val, readtoc_compare_val);
++		install_cheat_engine();
++    } else if
++
++// World Soccer Jikkyou Winning Eleven 4
++   	((strcmp("SLPM_862.91;1", bootfile)) == 0) { // 2 revisions, same code works on rev 0 and rev 1
++   		//debug_write("Detected Winning Eleven 4");
++		/*
++   		D01030CA 1040
++		801030CA 1000
++		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_w.shtml
++    	*/
++ 		enable_code(0x801030CA, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// XI[SAI] Jumbo
++   	((strcmp("SCPS_101.23;1", bootfile)) == 0) {
++   		//debug_write("Detected XI[Sai] Jumbo");
++	   	/*
++   		D010178A 1040
++		8010178A 1000
++		code 1 of 3 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_x.shtml
++    	*/
++ 		enable_code(0x8010178A, common_routine_return_patch_val, common_routine_return_compare_val);
++ 		/*
++		D00A370A 1040
++		800A370A 1000
++		code 2 of 3 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_x.shtml
++    	*/
++ 		enable_code(0x800A370A, common_routine_return_patch_val, common_routine_return_compare_val);
++ 		/*
++		D0113C1A 1040
++		80113C1A 1000
++		code 3 of 3 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_x.shtml
++    	*/
++ 		enable_code(0x80113C1A, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    } else if
++
++// Yu-Gi-Oh! Forbidden Memories
++   	(((strcmp("SLPM_863.96;1", bootfile)) == 0) || ((strcmp("SLPM_863.98;1", bootfile)) == 0) || ((strcmp("SLUS_014.11;1", bootfile)) == 0) || ((strcmp("SLES_039.47;1", bootfile)) == 0) || ((strcmp("SLES_039.48;1", bootfile)) == 0) || ((strcmp("SLES_039.49;1", bootfile)) == 0) || ((strcmp("SLES_039.50;1", bootfile)) == 0) || ((strcmp("SLES_039.51;1", bootfile)) == 0)) { //same code skips mod check on ALL VERSIONS EVER!
++   		//debug_write("Detected Yu-Gi-Oh! Forbidden Memories");
++		/*
++		D016818A 1040
++		8016818A 1000
++		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_y.shtml
++    	*/
++ 		enable_code(0x8016818A, common_routine_return_patch_val, common_routine_return_compare_val);
++		install_cheat_engine();
++    }
++}
+diff --git a/loader/ap-bypass.h b/loader/ap-bypass.h
+new file mode 100644
+index 0000000..e267bb5
+--- /dev/null
++++ b/loader/ap-bypass.h
+@@ -0,0 +1,4 @@
++
++#pragma once
++
++void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr);
+diff --git a/tmp/og-tonyhax.Enu/loader/bios-asm.S b/loader/bios-asm.S
+index 93837fa..00f1db1 100644
+--- a/tmp/og-tonyhax.Enu/loader/bios-asm.S
++++ b/loader/bios-asm.S
+@@ -69,11 +69,6 @@ memcpy:
+ 	li t1, 0x2A
+ 	j 0xA0
+ 
+-.global std_out_puts
+-std_out_puts:
+-	li t1, 0x3E
+-	j 0xA0
+-
+ .global DoExecute
+ DoExecute:
+ 	# Pepsiman (J) crashes if s5 is not zero
+diff --git a/tmp/og-tonyhax.Enu/loader/bios.c b/loader/bios.c
+index 0f3d558..8037d94 100644
+--- a/tmp/og-tonyhax.Enu/loader/bios.c
++++ b/loader/bios.c
+@@ -5,21 +5,10 @@
+ #include "debugscreen.h"
+ #include "str.h"
+ 
+-void * original_disc_error;
++// Set to zero unless you are using an emulator or have a physical UART on the PS1, else it'll freeze
++const uint32_t tty_enabled = 0;
+ 
+-bool console_has_tty() {
+-	/*
+-	 * Check if the console has a SCN2681 TTY used for debug by writing data to the control
+-	 * registers and reading it back.
+-	 *
+-	 * The control is 16 bit wide, and is accessed by writing or reading twice the same register.
+-	 */
+-	volatile uint8_t * scn2681modereg = (uint8_t *) 0x1F802020;
+-
+-	*scn2681modereg = 0x55;
+-	*scn2681modereg = 0xAA;
+-	return *scn2681modereg == 0x55 && *scn2681modereg == 0xAA;
+-}
++void * original_disc_error;
+ 
+ void bios_reinitialize() {
+ 	// Disable interrupts
+@@ -28,6 +17,7 @@ void bios_reinitialize() {
+ 	// Clear kernel heap space. Not really needed but nice for debugging.
+ 	bzero((void *) 0xA000E000, 0x2000);
+ 
++#if !defined FREEPSXBOOT // We want to keep the patch to disable the memory card in slot 2 from the FPSXBOOTBUILDER!
+ 	// The following is adapted from the WarmBoot call
+ 
+ 	// Copy the relocatable kernel chunk
+@@ -47,13 +37,14 @@ void bios_reinitialize() {
+ 
+ 	// Restore default exception return function
+ 	SetDefaultExitFromException();
++#endif
+ 
+ 	// Clear interrupts and mask
+ 	I_STAT = 0;
+ 	I_MASK = 0;
+ 
+-	// Setup devices.
+-	InstallDevices(console_has_tty());
++	// Setup devices
++	InstallDevices(tty_enabled);
+ 
+ 	/*
+ 	 * Configure with default values
+diff --git a/tmp/og-tonyhax.Enu/loader/bios.h b/loader/bios.h
+index c5b26f3..d839231 100644
+--- a/tmp/og-tonyhax.Enu/loader/bios.h
++++ b/loader/bios.h
+@@ -219,13 +219,6 @@ void ExitCriticalSection();
+  */
+ uint32_t todigit(char c);
+ 
+-/**
+- * Prints a text through the TTY.
+- *
+- * @param text text to print
+- */
+-void std_out_puts(const char * text);
+-
+ /**
+  * Starts a previously loaded executable.
+  *
+diff --git a/tmp/og-tonyhax.Enu/loader/cdrom.c b/loader/cdrom.c
+index dddc533..bb76965 100644
+--- a/tmp/og-tonyhax.Enu/loader/cdrom.c
++++ b/loader/cdrom.c
+@@ -97,17 +97,13 @@ bool cd_drive_init() {
+ 	return true;
+ }
+ 
+-bool cd_drive_reset() {
+-	// Issue a reset
++void cd_drive_reset() {
++	// Issue a reset (looses authentication and or unlock when completed, so do an unlock after this)
+ 	cd_command(CD_CMD_RESET, NULL, 0);
+ 
+-	// Should succeed with 3
+-	if (cd_wait_int() != 3) {
+-		return false;
+-	}
++	// Should succeed with 3 but doesn't sometimes so we can't check the return value
++	cd_wait_int();
+ 
+ 	// Need to wait for some cycles before it springs back to life
+-	for (int i = 0; i < 0x400000; i++);
+-
+-	return true;
++	for (volatile int i = 0; i < 0x400000; i++); // unmodifiable compiler code when using -Os optimizations
+ }
+diff --git a/tmp/og-tonyhax.Enu/loader/cdrom.h b/loader/cdrom.h
+index 438e7cd..bab9a70 100644
+--- a/tmp/og-tonyhax.Enu/loader/cdrom.h
++++ b/loader/cdrom.h
+@@ -8,6 +8,12 @@
+ #define CD_CMD_TEST 0x19
+ #define CD_CMD_RESET 0x1C
+ #define CD_TEST_REGION 0x22
++#define CD_CMD_SET_SESSION 0x12
++#define CD_CMD_STOP 0x08
++#define CD_CMD_GETID 0x1A
++#define CD_CMD_SETMODE 0x0E
++#define CD_CMD_GETTN 0x13
++#define CD_CMD_GETTD 0x14
+ 
+ /**
+  * Starts executing a CD command.
+@@ -40,9 +46,5 @@ uint_fast8_t cd_read_reply(uint8_t * reply_buffer);
+  */
+ bool cd_drive_init(void);
+ 
+-/**
+- * Resets the drive.
+- *
+- * @returns true if succeded, or false otherwise.
+- */
+-bool cd_drive_reset(void);
++// Resets the drive.
++void cd_drive_reset();
+diff --git a/tmp/og-tonyhax.Enu/loader/debugscreen.c b/loader/debugscreen.c
+index cb8c32e..b528b0a 100644
+--- a/tmp/og-tonyhax.Enu/loader/debugscreen.c
++++ b/loader/debugscreen.c
+@@ -237,9 +237,12 @@ void debug_write(const char * str, ...) {
+ 	} else {
+ 		last_printed_count++;
+ 
+-		// Same line, so print with a repeat counter
+-		mini_sprintf(formatted_repeated, "%s (x%d)", last_printed_line, last_printed_count);
+-
++		// Same line, so print with a repeat counter unless we are waiting for controller input on a Japanese console
++		if(!controller_input) {
++			mini_sprintf(formatted_repeated, "%s (x%d)", last_printed_line, last_printed_count);
++		} else {
++			mini_sprintf(formatted_repeated, "%s", last_printed_line);
++		}
+ 		to_print = formatted_repeated;
+ 	}
+ 
+diff --git a/tmp/og-tonyhax.Enu/loader/debugscreen.h b/loader/debugscreen.h
+index 6ae71a5..d06a360 100644
+--- a/tmp/og-tonyhax.Enu/loader/debugscreen.h
++++ b/loader/debugscreen.h
+@@ -10,3 +10,5 @@ void debug_write(const char * str, ...);
+ void debug_text_at(uint_fast16_t x, uint_fast16_t y, const char * str);
+ 
+ void debug_switch_standard(bool pal);
++
++extern bool controller_input;
+\ No newline at end of file
+diff --git a/tmp/og-tonyhax.Enu/loader/generate-tonyhax-mcs.sh b/loader/generate-tonyhax-mcs.sh
+index 33116fa..2f0d014 100644
+--- a/tmp/og-tonyhax.Enu/loader/generate-tonyhax-mcs.sh
++++ b/loader/generate-tonyhax-mcs.sh
+@@ -29,7 +29,7 @@ echo -n "tonyhax ${version}" | dd status=none conv=notrunc bs=1 seek=132 of="$mc
+ dd status=none conv=notrunc bs=1 seek=384 if=$bin_file of="$mcs_file"
+ 
+ # Insert address at 0xC0 and length at 0xC4, which is 0x40 and 0x44 inside the save file header
+-echo -ne "\x${ro_start:6:2}\x${ro_start:4:2}\x${ro_start:2:2}\x${ro_start:0:2}\x${load_len:6:2}\x${load_len:4:2}\x${load_len:2:2}\x${load_len:0:2}" | dd status=none conv=notrunc of=tonyhax.mcs bs=1 seek=192
++echo -ne "\x${ro_start:6:2}\x${ro_start:4:2}\x${ro_start:2:2}\x${ro_start:0:2}\x${load_len:6:2}\x${load_len:4:2}\x${load_len:2:2}\x${load_len:0:2}" | dd status=none conv=notrunc of="$mcs_file" bs=1 seek=192
+ 
+ # Cleanup
+ rm $bin_file
+diff --git a/tmp/og-tonyhax.Enu/loader/patch-ap.S b/tmp/og-tonyhax.Enu/loader/patch-ap.S
+deleted file mode 100644
+index 85511eb..0000000
+--- a/tmp/og-tonyhax.Enu/loader/patch-ap.S
++++ /dev/null
+@@ -1,196 +0,0 @@
+-
+-#include <regdef.h>
+-
+-.text
+-
+-#
+-# Intercepts the syscall(1) (aka EnterCriticalSection).
+-#
+-# When this code is executed, the registers are as follows:
+-#   - v0: saved thread registers, must NOT be modified.
+-# The rest of the registers are not critical and can be used freely.
+-#
+-.globl patch_ap_start
+-patch_ap_start:
+-	# Load the SP value
+-	lw t0, 0x7C(v0)
+-
+-	#
+-	# If we are being called from an antimodchip module, the call stack will look like this:
+-	#  - (game code)
+-	#  - ap_check
+-	#  - ap_failed
+-	#  - StopCallback
+-	#  - disable_ints
+-	#  - EnterCriticalSection
+-	#
+-	# For all known modules, the return address from StopCallback to ap_failed sits at SP+0x28.
+-	#
+-	# Before reading from this address, we will check that after adding that offset, we do not
+-	# cross a 2MB boundary, which could cause an illegal memory read.
+-	#
+-	# Without this check the following games crash:
+-	#  - Elemental Gearbolt (U) (SLUS-00654), calling with a stack at 0x807FFFE0, as we attempt
+-	#    to read from 0x80800008.
+-	#  - Rival Schools (U) (SLUS-00681), calling with a stack of 0x801FFFD8, as we attempt to
+-	#    read from 0x80200000. A mirror would be generally present here, but not for this game
+-	#    as it calls SetMemSize(2) to intentionally block this.
+-	#
+-	# Some games, like Grind Session (U) (SCUS-94568) use the scratchpad during gameplay for the
+-	# stack, which is only 1KB. For now, we will not add a safety check for this case since the
+-	# vast majority of games store the stack in RAM and no game is known to crash without it.
+-	#
+-	addi t1, t0, 0x28
+-	xor t1, t0
+-	srl t1, 21
+-	bne t1, zero, patch_ap_skip
+-
+-	# Load alledged return address
+-	lw t1, 0x28(t0)
+-
+-	#
+-	# Check now if the loaded value could be a word-aligned address in either the KUSEG
+-	# (0x00000000-0x007FFFFF) or the KSEG0 (0x80000000-0x807FFFFF) regions, which is were user
+-	# code is executed.
+-	#
+-	# Most games use the KSEG0, except for Emperors New Groove (U) (SCUS-94571) whose programmers
+-	# seemed to prefer the KUSEG region.
+-	#
+-	# We cannot limit ourselves to checking the first 2MB of RAM, because some games, like
+-	# Robbit Mon Dieu (J) (SCPS-10103) use a mirror (0x80600000-0x807FFFFF).
+-	#
+-	li t2, 0x7F800003
+-	and t2, t1
+-	bne t2, zero, patch_ap_skip
+-
+-	#
+-	# First, we will attempt to handle a version 1 antimodchip module.
+-	#
+-	# This checks only for the presence of a dumb modchip, by checking if the SCEx counter
+-	# increments when it should not. It is also only capable of displaying the stop screen
+-	# in Japanese.
+-	#
+-	# The offsets for some of the checked games are:
+-	#
+-	# Um Jammer Lammy (PAL-E):
+-	#  - ap_check           (0x801D8008)
+-	#  - ap_failed          (0x801D83E0, called from 0x801D8174)
+-	#  - StopCallback       (0x800356C4, called from 0x801D8400)
+-	#  - disable_ints       (0x80035B54, called from 0x800356E0)
+-	#  - EnterCriticalSection
+-	#
+-	# For Saru! Get You (NTSC-J):
+-	#  - ap_check           (0x80136950)
+-	#  - ap_failed          (0x80136D28, called from 0x80136ABC)
+-	#  - StopCallback       (0x8002E814, called from 0x80136D48)
+-	#  - disable_ints       (0x8002ECA4, called from 0x8002E82C)
+-	#  - EnterCriticalSection
+-	#
+-	# The return call from StopCallback to ap_failed is located at SP+0x28. We will check if
+-	# at this address +0x74 exists a "li v0, 0xE6000002", which is a black rentangle passed to
+-	# the DrawPrim function to clear the screen.
+-	#
+-	# If it exists, we will patch the thread state to return back to ap_check, as if the
+-	# ap_failed function had returned.
+-	#
+-
+-	# Compare signature, and test for v2 if does not match
+-	lw t2, 0x74(t1)
+-	li t3, 0x3C02E600
+-	bne t2, t3, patch_ap_v15
+-
+-	lw t2, 0x78(t1)
+-	li t3, 0x34420002
+-	bne t2, t3, patch_ap_v15
+-
+-	# Load return address from ap_failed to ap_check
+-	lw t1, 0xE8(t0)
+-
+-	# Adjust stack pointer
+-	addi t0, 0xF0
+-
+-	# Save and return
+-	b patch_ap_save
+-
+-	#
+-	# Handle another variant of the v1, used by Vandal Hearts II - Tenjou no Mon (J) (SLPM-86251)
+-	#  - ap_check           (0x800C4868)
+-	#  - ap_failed          (0x800C4C40, called from 0x800C49D4)
+-	#  - StopCallback       (0x800D2700, called from 0x800C4C58)
+-	#  - disable_ints       (0x800D2B90, called from 0x800D2718)
+-	#  - EnterCriticalSection
+-	#
+-	# Same idea, except the load is now a "li v1, 0xE6000002" at +0x64 bytes after ap_failed
+-	# returns to ap_check.
+-	#
+-	# The offsets are the same as for v2, so we will reuse those adjusts.
+-	#
+-patch_ap_v15:
+-	lw t2, 0x64(t1)
+-	li t3, 0x3C03E600
+-	bne t2, t3, patch_ap_v2
+-
+-	lw t2, 0x68(t1)
+-	li t3, 0x34630002
+-	beq t2, t3, patch_ap_adjust_v2
+-
+-	#
+-	# We will now attempt to patch an antimodchip v2 module.
+-	#
+-	# This one is smarter and checks that the SCEx wobble is present in the inner tracks,
+-	# to detect CD swapping; and for dumb modchips by checking for absence of the wobble
+-	# in the outer tracks.
+-	#
+-	# The offsets for some of the checked games are:
+-	#
+-	# Rockman 2 - Dr. Wily no Nazo (J) (SLPS-02255):
+-	#  - ap_check           (0x8006CA58)
+-	#  - ap_failed          (0x8006D654, called from 0x8006CE5C and 0x8006D238)
+-	#  - StopCallback       (0x80024524, called from 0x8006D66C)
+-	#  - disable_ints       (0x800249B4, called from 0x8002453C)
+-	#  - EnterCriticalSection
+-	#
+-	# The return address from StopCallback to ap_failed is located at SP+0x28, exactly as above
+-	# so we will not load it again.
+-	#
+-	# For this other version, we will check if at this return address +0x10 bytes exists a
+-	# "sh zero, 0x1F801DAA", which is used to mute the audio.
+-	#
+-	# If that exists, we will patch the thread state to return back to ap_check.
+-	#
+-patch_ap_v2:
+-	# Compare signature
+-	lw t2, 0x18(t1)
+-	li t3, 0x3C011F80
+-	bne t2, t3, patch_ap_skip
+-
+-	lw t2, 0x1C(t1)
+-	li t3, 0xA4201DAA
+-	bne t2, t3, patch_ap_skip
+-
+-patch_ap_adjust_v2:
+-	# Load return address to from ap_failed to ap_check
+-	lw t1, 0x120(t0)
+-
+-	# Adjust stack pointer
+-	addi t0, 0x128
+-
+-patch_ap_save:
+-	# Zero the s0 and s1 stored in the thread state, so the state machine used by ap_check exits
+-	sw zero, 0x48(v0)
+-	sw zero, 0x4C(v0)
+-
+-	# Save adjusted stack pointer and return address
+-	sw t0, 0x7C(v0)
+-	sw t1, 0x88(v0)
+-
+-.globl patch_ap_success
+-patch_ap_success:
+-	j 0x12341234
+-
+-.globl patch_ap_skip
+-patch_ap_skip:
+-	j 0x12341234
+-
+-.globl patch_ap_end
+-patch_ap_end:
+diff --git a/tmp/og-tonyhax.Enu/loader/patch-fpb.S b/tmp/og-tonyhax.Enu/loader/patch-fpb.S
+deleted file mode 100644
+index e26fb72..0000000
+--- a/tmp/og-tonyhax.Enu/loader/patch-fpb.S
++++ /dev/null
+@@ -1,35 +0,0 @@
+-
+-#include <regdef.h>
+-
+-.text
+-
+-#
+-# The anti-FreePSXBoot patch.
+-#
+-# This patch is called right at the very end of the last step in the read sector finite state
+-# machine:
+-# https://github.com/grumpycoders/pcsx-redux/blob/f6484e8010a40a81e4019d9bfa1a9d408637b614/src/mips/openbios/sio0/card.c#L194
+-#
+-# When this code is executed, the registers are as follows:
+-#   - v0 contains 1, or "success".
+-#   - a1 contains the read buffer
+-#   - a2 contains the current sector number
+-#
+-# If the sector being read is sector 0 and it contains "FPBZ" at +0x7C, we modify the read data
+-# so it is detected as corrupted and the game skips reading from it
+-#
+-# The offsets have been checked against BIOSes 2.2, 3.0, 4.1 and 4.4
+-#
+-.globl patch_fpb_start
+-patch_fpb_start:
+-	lw t0, 0x7C(a1)
+-	li t1, 0x5A425046
+-	bne a2, 0, patch_fpb_ret
+-	bne t0, t1, patch_fpb_ret
+-
+-	sw zero, 0(a1)
+-patch_fpb_ret:
+-	j 0x5B54
+-
+-.globl patch_fpb_end
+-patch_fpb_end:
+diff --git a/tmp/og-tonyhax.Enu/loader/patch-uart.S b/tmp/og-tonyhax.Enu/loader/patch-uart.S
+deleted file mode 100644
+index da95257..0000000
+--- a/tmp/og-tonyhax.Enu/loader/patch-uart.S
++++ /dev/null
+@@ -1,121 +0,0 @@
+-
+-#include <regdef.h>
+-
+-.text
+-
+-#
+-# This is a complete replacement for the original std_out_putc the BIOS has.
+-#
+-# In this function:
+-#  - a0: data to bitbang
+-#  - t0: working registers
+-#  - t1: bits to send
+-#  - t2: last IRQ flag value
+-#  - t3: 0x1F800000 (I/O start address)
+-#  - t4: COP0 SR value
+-#
+-.globl patch_uartputc_start
+-patch_uartputc_start:
+-	# Add start (0) and stop (1) bits to byte
+-	andi a0, 0xFF
+-	sll a0, 1
+-	ori a0, 0x200
+-
+-	# Newline (after processing)
+-	li t0, (0x0A << 1 | 0x200)
+-
+-	# Bits to send (1 start + 8 data + 1 stop)
+-	li t1, 10
+-
+-	# Compare against newline (0x0A)
+-	bne a0, t0, notnl
+-
+-	# If newline, prepend a 0x0D, like the original function did and increment bit count
+-	sll a0, 10
+-	ori a0, (0x0D << 1 | 0x200)
+-	addi t1, 10
+-
+-notnl:
+-	# We will directly manipulate the COP0 status registers instead of using EnterCriticalSection
+-	# to avoid other threads/interrupts from fucking up the timing.
+-	#
+-	# The reason is two-fold:
+-	#  - The kernel does not support reentrant calls - if something calls us while we are
+-	#    executing kernel code and we generate a syscall, we'd nuke the current thread state.
+-	#
+-	#  - SetConf calls printf while re-configuring the TCBs (thread control blocks). Executing
+-	#    *any* interrupt at that point (which includes syscalls) will cause the interrupt
+-	#    handler to write the current thread state to the zero address, wiping the interrupt
+-	#    trampoline at 0x80.
+-	#
+-	# By directly manipulating this register we're opening ourselves to all kinds of race
+-	# conditions, but since this is just for debugging tonyhax, that's good enough for me.
+-
+-	# Load current SR state in t4
+-	mfc0 t4, $12
+-
+-	# Clear bits 10 and 0, the same flags WarmBoot clears
+-	li t0, 0xFFFFFBFE
+-	and t0, t4
+-	mtc0 t0, $12
+-
+-	# Load I/O start
+-	lui t3, 0x1F80
+-
+-	# Set timer 0 target to 293 cycles (33868800Hz/115200bps-1)
+-	li t0, 293
+-	sw t0, 0x1108(t3)
+-
+-	# Start timer 0 in:
+-	# - Source clock to SysClk (33868800Hz)
+-	# - Free-running mode
+-	# - Reset on reaching target value
+-	# - IRQ on repeat mode (can be fired multiple times)
+-	# - Toggle IRQ flag (bit 10) on every IRQ
+-	#
+-	# We must not use the "reached target value" flag because that seems to be affected by some
+-	# kind of undocumented hardware errata. In real hardware, that flag can read zero if the
+-	# elapsed cycles between timer start and read and target values are both even or odd.
+-	#
+-	# Also note that although we are using the IRQ bits, interrupts are actually disabled so
+-	# we will busy poll the corresponding bits.
+-	li t0, 0x04D8
+-	sw t0, 0x1104(t3)
+-
+-	# Current timer IRQ flag status
+-	li t2, 0x0400
+-
+-writebit:
+-	# Emit bit via /JOY pin of port 2.
+-	# We need to invert it, then put it into JOY_CTRL.13.
+-	# The XOR also sets the bit JOY_CTRL.2 which enables outputing the /JOY signal
+-	andi t0, a0, 1
+-	sll t0, 13
+-	xori t0, 0x2002
+-	sh t0, 0x104A(t3)
+-
+-	# Shift right current buffer
+-	srl a0, 1
+-
+-	# Decrement count while we're waiting
+-	addi t1, -1
+-
+-	# Wait until the interrupt flag toggles
+-writewait:
+-	lw t0, 0x1104(t3)
+-	andi t0, 0x0400
+-	beq t0, t2, writewait
+-
+-	# Save current IRQ flag status
+-	move t2, t0
+-
+-	# If not done, keep going
+-	bne t1, zero, writebit
+-
+-	# Restore coprocessor flags
+-	mtc0 t4, $12
+-
+-	jr ra
+-
+-.global patch_uartputc_end
+-patch_uartputc_end:
+diff --git a/tmp/og-tonyhax.Enu/loader/patch-vandal-hearths-2.S b/tmp/og-tonyhax.Enu/loader/patch-vandal-hearths-2.S
+deleted file mode 100644
+index 67f389a..0000000
+--- a/tmp/og-tonyhax.Enu/loader/patch-vandal-hearths-2.S
++++ /dev/null
+@@ -1,35 +0,0 @@
+-
+-#include <regdef.h>
+-
+-.text
+-
+-#
+-# This game needs a special treatment, as it has the regular antipiracy, but also an extra check
+-# by calling CdGetDiskType. If it detects the disc is a burned one, it aborts.
+-#
+-# Furthermore, if the BIOS is an European one, it gets stuck on a loop, calling the AP module
+-# forever.
+-#
+-# So we will just nuke the antipiracy call. This function is supposed to return a nonzero, but
+-# we do not need to patch v0 as there is a load constant into v0 right before the call.
+-#
+-.globl patch_vandal_start
+-patch_vandal_start:
+-	# Load address where the call to antipiracy sits
+-	la t0, 0x80040C98
+-
+-	# Check if it matches "jal 0x80042854"
+-	lw t1, 0(t0)
+-	li t2, 0x0C010A15
+-	bne t1, t2, patch_vandal_return
+-
+-	# If it does, NOP the opcode
+-	sw zero, 0(t0)
+-
+-.globl patch_vandal_return
+-patch_vandal_return:
+-	# This will be replaced with the real address
+-	j 0x12341234
+-
+-.globl patch_vandal_end
+-patch_vandal_end:
+diff --git a/tmp/og-tonyhax.Enu/loader/patcher.c b/tmp/og-tonyhax.Enu/loader/patcher.c
+deleted file mode 100644
+index 27c1c49..0000000
+--- a/tmp/og-tonyhax.Enu/loader/patcher.c
++++ /dev/null
+@@ -1,147 +0,0 @@
+-
+-#include "bios.h"
+-#include "debugscreen.h"
+-#include "str.h"
+-#include "patcher.h"
+-
+-inline void encode_j(void * jump_location, const void * jump_dest) {
+-	uint32_t * words = (uint32_t *) jump_location;
+-	words[0] = 0x08000000 | (((uint32_t) jump_dest >> 2) & 0x3FFFFFF);
+-}
+-
+-inline void encode_jal(void * jump_location, const void * jump_dest) {
+-	uint32_t * words = (uint32_t *) jump_location;
+-	words[0] = 0x0C000000 | (((uint32_t) jump_dest >> 2) & 0x3FFFFFF);
+-}
+-
+-inline void encode_li(void * load_location, int regnum, uint32_t value) {
+-	uint32_t * words = (uint32_t *) load_location;
+-
+-	// LUI - Load Upper Immediate
+-	words[0] = 0x3C000000 | (regnum << 16) | (value >> 16);
+-
+-	// ORI - OR Immediate
+-	words[1] = 0x34000000 | (regnum << 21) | (regnum << 16) | (value & 0xFFFF);
+-}
+-
+-uint8_t * install_generic_antipiracy_patch(uint8_t * install_addr) {
+-	// Exports defined by the patch
+-	extern uint8_t patch_ap_start;
+-	extern uint8_t patch_ap_end;
+-	extern uint8_t patch_ap_skip;
+-	extern uint8_t patch_ap_success;
+-
+-	debug_write(" * Generic antipiracy");
+-
+-	// Get the handler info structure
+-	handler_info_t * syscall_handler = bios_get_syscall_handler();
+-
+-	// Get the start of the verifier function (the only one set)
+-	uint32_t * verifier = (uint32_t *) syscall_handler->verifier;
+-
+-	/*
+-	 * At opcode 20 it accesses an 4-word array which contain where to jump depending on the
+-	 * syscall performed. We're interested in modifying the value for 1 (EnterCriticalSection)
+-	 * so we can intercept it and defuse the antimodchip.
+-	 */
+-	uint32_t lw_op = verifier[20];
+-	if ((lw_op >> 16) != 0x8C39) {
+-		debug_write("Aborted! Please report this!");
+-		return install_addr;
+-	}
+-
+-	// Extract location of cases array
+-	void ** cases_array = (void **) (lw_op & 0xFFFF);
+-
+-	// Copy blob
+-	memcpy(install_addr, &patch_ap_start, &patch_ap_end - &patch_ap_start);
+-
+-	/*
+-	 * Insert the jump to the original code, which we'll use if the call was not originated from
+-	 * an antipiracy module.
+-	 */
+-	encode_j(install_addr + (&patch_ap_skip - &patch_ap_start), cases_array[1]);
+-
+-	/*
+-	 * Insert the jump we'll use to exit the exception handler once we have finished patching up
+-	 * the thread state if the call was indeed originated from an antipiracy module.
+-	 *
+-	 * We'll use the address of syscall(0) which behaves as a nop to exit the exception.
+-	 */
+-	encode_j(install_addr + (&patch_ap_success - &patch_ap_start), cases_array[0]);
+-
+-	// Finally replace
+-	cases_array[1] = install_addr;
+-
+-	return install_addr + (&patch_ap_end - &patch_ap_start);
+-}
+-
+-uint8_t * install_vandal_patch(uint8_t * install_addr) {
+-	// Exports defined by the patch
+-	extern uint8_t patch_vandal_start;
+-	extern uint8_t patch_vandal_return;
+-	extern uint8_t patch_vandal_end;
+-
+-	debug_write(" * Vandal Hearths 2 AP");
+-
+-	// Copy blob
+-	memcpy(install_addr, &patch_vandal_start, &patch_vandal_end - &patch_vandal_start);
+-
+-	// Hook into call 16 of table B (OutdatedPadGetButtons), which is called once per frame
+-	void ** b0_tbl = GetB0Table();
+-
+-	// Insert call to real function
+-	encode_j(install_addr + (&patch_vandal_return - &patch_vandal_start), b0_tbl[0x16]);
+-
+-	// Replace it now
+-	b0_tbl[0x16] = install_addr;
+-
+-	// Advance installation address
+-	return install_addr + (&patch_vandal_end - &patch_vandal_start);
+-}
+-
+-uint8_t * install_fpb_patch(uint8_t * install_addr) {
+-	// Exports defined by the patch
+-	extern uint8_t patch_fpb_start;
+-	extern uint8_t patch_fpb_end;
+-
+-	debug_write(" * FreePSXBoot");
+-
+-	// Copy blob
+-	memcpy(install_addr, &patch_fpb_start, &patch_fpb_end - &patch_fpb_start);
+-
+-	// Install it
+-	encode_jal((void *) 0x5B40, install_addr);
+-
+-	// Advance installation address
+-	return install_addr + (&patch_fpb_end - &patch_fpb_start);
+-}
+-
+-void patcher_apply(const char * boot_file) {
+-	// We have plenty of space at the end of table B
+-	uint8_t * install_addr = (uint8_t *) (GetB0Table() + 0x5E);
+-
+-	// Install patches
+-	debug_write("Installing patches:");
+-
+-	// Install a suitable antimodchip patch
+-	if (strcmp(boot_file, "cdrom:\\SLUS_009.40;1") == 0) {
+-		install_addr = install_vandal_patch(install_addr);
+-	} else {
+-		install_addr = install_generic_antipiracy_patch(install_addr);
+-	}
+-
+-	// FreePSXBoot does not work on PS2 so skip its installation
+-	if (bios_is_ps1()) {
+-		install_addr = install_fpb_patch(install_addr);
+-	}
+-}
+-
+-void patcher_apply_softuart() {
+-	// Exports defined by the patch
+-	extern uint8_t patch_uartputc_start;
+-	extern uint8_t patch_uartputc_end;
+-
+-	// Overwrite BIOS' std_out_putchar function
+-	memcpy(BIOS_A0_TABLE[0x3C], &patch_uartputc_start, &patch_uartputc_end - &patch_uartputc_start);
+-}
+diff --git a/tmp/og-tonyhax.Enu/loader/patcher.h b/tmp/og-tonyhax.Enu/loader/patcher.h
+deleted file mode 100644
+index 5b24f53..0000000
+--- a/tmp/og-tonyhax.Enu/loader/patcher.h
++++ /dev/null
+@@ -1,12 +0,0 @@
+-
+-#pragma once
+-
+-/**
+- * Install and apply suitable BIOS patches.
+- */
+-void patcher_apply(const char * boot_file);
+-
+-/**
+- * Installs the softUART patch.
+- */
+-void patcher_apply_softuart();
+diff --git a/loader/secondary-ff9.ld b/loader/secondary-ff9.ld
+new file mode 100644
+index 0000000..e16567c
+--- /dev/null
++++ b/loader/secondary-ff9.ld
+@@ -0,0 +1,36 @@
++MEMORY {
++	ram(wrx)	:ORIGIN = 0x801F6300, LENGTH = 0x5E80
++}
++SECTIONS {
++	. = 0x801F6300;
++	PROVIDE(__RO_START__ = .);
++	.text :
++	{
++		*(.start)
++		*(.text .text.*)
++	} >ram
++	.rodata :
++	{
++		*(.rodata .rodata.*)
++	} >ram
++	.data :
++	{
++		*(.data .data.*)
++	} >ram
++	PROVIDE(__CRC_START__ = .);
++	.crc :
++	{
++		*(.crc .crc.*)
++	} >ram
++	PROVIDE(__BSS_START__ = .);
++	.bss :
++	{
++		*(.bss .bss.*)
++	} >ram
++	PROVIDE(__BSS_END__ = .);
++	/DISCARD/ :
++	{
++		*(*)
++	}
++}
++ENTRY (start)
+diff --git a/tmp/og-tonyhax.Enu/loader/secondary.c b/loader/secondary.c
+index 18a2cab..51c17fb 100644
+--- a/tmp/og-tonyhax.Enu/loader/secondary.c
++++ b/loader/secondary.c
+@@ -10,10 +10,22 @@
+ #include "crc.h"
+ #include "debugscreen.h"
+ #include "gpu.h"
+-#include "patcher.h"
++#include "ap-bypass.h"
+ #include "integrity.h"
+ #include "io.h"
+ 
++uint8_t sscmd;
++uint8_t cdcontrollerver[4];
++
++const char * p5_localized;
++const char * region_name;
++
++bool calibrate_laser = 0; // Only Japanese VC2 and VC3 consoles need this so it is off by default
++bool bugged_setsession = 0; // VC0 A, VC0 B, and VC1 A CDROM Controller BIOS versions all have a buggy SetSession command that requires a special work around to use
++bool enable_unlock = 1; // Disabled on VC0A and VC0B Japanese CDROM Controller BIOS versions automatically. On VC1A+ the testregion command is run and if the region is Japan it is also disabled.
++bool controller_input = 0; // When enabled, debug_write does not display the repeat messages counter. This is so we can draw a blank line and then wait for controller input using vsync in debug_write.
++bool first_rev = 0; // VC0 A and VC0 B do not need any anti-piracy patching as they are immune to addtional copy protection routines because of the lack of the ReadTOC command in the CDROM Controller BIOS Firmware.
++
+ // Loading address of tonyhax, provided by the secondary.ld linker script
+ extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
+ 
+@@ -31,7 +43,7 @@ void log_bios_version() {
+ 	}
+ 
+ 	debug_write("Console: %s", bios_is_ps1() ? "PS1": "PS2");
+-	debug_write("BIOS: v%s", version);
++	debug_write("Sys BIOS: %s", version);
+ }
+ 
+ bool backdoor_cmd(uint_fast8_t cmd, const char * string) {
+@@ -65,43 +77,6 @@ bool backdoor_cmd(uint_fast8_t cmd, const char * string) {
+ }
+ 
+ bool unlock_drive() {
+-	uint8_t cd_reply[16];
+-
+-	// Run "GetRegion" test
+-	uint8_t test = CD_TEST_REGION;
+-	cd_command(CD_CMD_TEST, &test, 1);
+-
+-	// Should succeed with 3
+-	if (cd_wait_int() != 3) {
+-		debug_write("Region read failed");
+-		return false;
+-	}
+-
+-	// Read actual region text and null terminate it
+-	int len = cd_read_reply(cd_reply);
+-	cd_reply[len] = 0;
+-
+-	// Compare which is the fifth string we have to send to the backdoor
+-	const char * region_name;
+-	const char * p5_localized;
+-	if (strcmp((char *) cd_reply, "for Europe") == 0) {
+-		region_name = "European";
+-		p5_localized = "(Europe)";
+-	} else if (strcmp((char *) cd_reply, "for U/C") == 0) {
+-		region_name = "American";
+-		p5_localized = "of America";
+-	} else if (strcmp((char *) cd_reply, "for NETEU") == 0) {
+-		region_name = "NetYaroze (EU)";
+-		p5_localized = "World wide";
+-	} else if (strcmp((char *) cd_reply, "for NETNA") == 0) {
+-		region_name = "NetYaroze (US)";
+-		p5_localized = "World wide";
+-	} else {
+-		// +4 to skip past "for "
+-		debug_write("Unsupported region: %s", (char *) (cd_reply + 4));
+-		return false;
+-	}
+-
+ 	debug_write("Drive region: %s", region_name);
+ 
+ 	// Note the kernel's implementation of strlen returns 0 for nulls.
+@@ -121,6 +96,7 @@ bool unlock_drive() {
+ 	return true;
+ }
+ 
++#if !defined TOCPERFECT
+ void wait_lid_status(bool open) {
+ 	uint8_t cd_reply[16];
+ 
+@@ -139,13 +115,142 @@ void wait_lid_status(bool open) {
+ 	} while ((cd_reply[0] & 0x10) != expected);
+ }
+ 
++bool is_lid_open() {
++	uint8_t cd_reply[16];
++
++	// Issue Getstat command
++	// We cannot issue the BIOS CD commands yet because we haven't called CdInit
++	cd_command(CD_CMD_GETSTAT, NULL, 0);
++
++	// Always returns 3, no need to check
++	cd_wait_int();
++
++	// Always returns one, no need to check either
++	cd_read_reply(cd_reply);
++
++	if(cd_reply[0]==0x10) {
++		return true;
++	} else {
++		return false;
++	}   
++}
++
++bool licensed_drive() {
++	uint8_t getid_response[9];
++	unsigned char gid;
++
++	while(1) {
++    	cd_command(CD_CMD_GETID,0,0);
++		gid = cd_wait_int();
++		if(gid!=5)
++			break;
++	}
++	
++    cd_wait_int();
++	cd_read_reply(getid_response);
++
++	if(getid_response[0]==0x02 && getid_response[1]==0x00 && getid_response[2]==0x20 && getid_response[3]==0x00) {
++		return true;
++	} else {
++		return false;
++	}   
++}
++#endif
++
+ void try_boot_cd() {
+ 	int32_t read;
++	uint8_t cbuf[4]; // CD Command Buffer
++
++	#if !defined TOCPERFECT
++		if(enable_unlock) {
++			debug_write("Put in a backup or import disc, then close the drive lid");
++			wait_lid_status(true);
++			wait_lid_status(false);
++		} else {
++			if(is_lid_open() || !licensed_drive()) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licenesed (if it is not licensed but not open then the drive is closed and the user can open it and license it)    
++				debug_write("Put in a real NTSC-J PSX game disc, then block the lid sensor");
++				wait_lid_status(true);
++				wait_lid_status(false); // Blocking lid sensor = 'closing lid'
++
++	            debug_write("Initializing CD");	// Drive will be in licensed state after this is successful
++				if (!CdInit()) {
++					debug_write("Init failed");
++					debug_write("Try unblocking then blocking the lid sensor again");
++					return;
++				}
++			} // Drive is licensed and the lid is 'closed' at this point
++			debug_write("Drive is licensed");
++            
++			debug_write("Stopping motor");
++			cd_command(CD_CMD_STOP,0,0); cd_wait_int(); cd_wait_int();
++
++			void * address;		// For Calculating BIOS Functions
++			uint8_t j;			// Joypad
++			uint8_t padbuf[2][0x22];	// Joypad Buffers
++			// BIOS Function InitPAD(buf1,sz1,buf2,sz2)
++			address = (uint32_t *) GetB0Table()[0x12];
++			((void (*)(uint8_t*,uint32_t,uint8_t*,uint32_t)) address)(padbuf[0],0x22,padbuf[1],0x22);
++			// BIOS Function StartPAD()
++			address = (void *) (GetB0Table()[0x13]);
++			((void (*)(void)) address)();	// BIOS StartPad
++			debug_write("Keep the lid sensor blocked until turning off the console");
++			debug_write("Remove the real NTSC-J PSX game disc");
++			debug_write("Put in a backup/import disc, then press X on controller 1"); // Thanks MottZilla!
++			controller_input = 1; // disable the repeat counter used in debug_write until controller input is done, see debugscreen.c
++            
++			while(1) { 
++				j = padbuf[0][3] ^ 0xFF;
++				if( j == 0x40)
++					break;
++				debug_write(" "); // Vblank wait for controller input
++			}
++	
++		    controller_input = 0; // Set debug_write back to normal (enable repeat counter) as controller input is done
++			// StopPAD() as we are done using Joypad input
++			address = (void *) (GetB0Table()[0x14]);
++			((void (*)(void)) address)();	// BIOS StopPad
++		}
++	#endif
++
++	if(!enable_unlock) {
++		if(bugged_setsession) {
++			#if !defined STEALTH
++				debug_write("Sending SetSessionSuperUltraCommandSmash v2, please wait");
++			#endif
++			sscmd = 2; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int(); // There is a 3rd response we are ignoring by sending SetSession 1 next ASAP after SetSession 2.
++			sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
++		} else {
++			#if !defined STEALTH
++				debug_write("Sending SetSession 1");
++			#endif
++			sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
++		}
++
++		if(calibrate_laser) { // VC2 and VC3s do auto Bias/Gain calibration when reading a newly inserted real NTSC-J PS1 disc. A swapped in CD-R or just a different disc in general needs this to be updated
++        #if !defined STEALTH		
++        	debug_write("Calibrating laser");
++        #endif		
++        	cbuf[0] = 0x50; cbuf[1] = 0x38; cbuf[2] = 0x15; cbuf[3] = 0x0A;	// ModeCompensateTrackingAutoGain
++			cd_command(CD_CMD_TEST,&cbuf[0],4); 
++			cd_wait_int();
++		}
++
++		/*
++		We have to re-initilize the BIOS, stop, and init in that order to prevent the process from possibly freezing at this point on Japanese consoles. 
++		
++		The first reason this is required is because the SetSessionSuperUltraCommandSmash screws up interrupts since we are sending the 2nd SetSession command before the possible 3rd interrupt (which is a second INT5 response sent if session 2 does not actually exist). 
++		
++		The second reason is because of how we are using the BIOS controller functions, to go back to a clean state a bios re-intialization also accommplishes that.
++		*/
+ 
+-	debug_write("Swap CD now");
+-	wait_lid_status(true);
+-	wait_lid_status(false);
++		debug_write("Reinitializing kernel"); 
++		bios_reinitialize();
++		bios_inject_disc_error();
+ 
++		debug_write("Stopping Motor");
++		cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
++	}
++	
+ 	debug_write("Initializing CD");
+ 	if (!CdInit()) {
+ 		debug_write("Init failed");
+@@ -163,10 +268,17 @@ void try_boot_cd() {
+ 	uint8_t * data_buffer = (uint8_t *) (bios_is_ps1() ? 0xA000B070 : 0xA000A8D0);
+ 
+ 	debug_write("Checking game region");
+-	if (CdReadSector(1, 4, data_buffer) != 1) {
+-		debug_write("Failed to read sector");
+-		return;
+-	}
++    #if defined TOCPERFECT	
++    	if (CdReadSector(1, 12, data_buffer) != 1) { // Real license data sector is copied to sector 12 by PS1 DemoSwap Patcher before it writes Japanese license data to sector 4
++			debug_write("Failed to read sector");
++			return;
++		}
++	#else
++    	if (CdReadSector(1, 4, data_buffer) != 1) {
++			debug_write("Failed to read sector");
++			return;
++		}
++	#endif
+ 
+ 	const char * game_region;
+ 	bool game_is_pal = false;
+@@ -203,9 +315,15 @@ void try_boot_cd() {
+ 	const char * bootfile = "cdrom:PSX.EXE;1";
+ 
+ 	char bootfilebuf[32];
+-	debug_write("Loading SYSTEM.CNF");
+ 
+-	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
++	#if defined TOCPERFECT
++		debug_write("Loading SYSTEM.CN2");
++		int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CN2;1", FILE_READ);
++	#else
++		debug_write("Loading SYSTEM.CNF");
++		int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
++	#endif
++    
+ 	if (cnf_fd > 0) {
+ 		read = FileRead(cnf_fd, data_buffer, 2048);
+ 		FileClose(cnf_fd);
+@@ -283,6 +401,9 @@ void try_boot_cd() {
+ 			debug_switch_standard(game_is_pal);
+ 		}
+ 
++		if(!first_rev)
++			activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
++
+ 		// Restore original error handler
+ 		bios_restore_disc_error();
+ 
+@@ -296,11 +417,12 @@ void try_boot_cd() {
+ 		debug_write("Read error %d", GetLastError());
+ 		return;
+ 	}
++	
++	if(!first_rev)
++		activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+ 
+ 	FileClose(exe_fd);
+ 
+-	patcher_apply(bootfile);
+-
+ 	if (game_is_pal != gpu_is_pal()) {
+ 		debug_write("Switching video mode");
+ 		debug_switch_standard(game_is_pal);
+@@ -337,24 +459,77 @@ void main() {
+ 
+ 	bios_inject_disc_error();
+ 	log_bios_version();
+-
+-	debug_write("Resetting drive");
++    
++	debug_write("Initializing CD");
+ 	if (!cd_drive_init()) {
+-		debug_write("Reset failed");
++		debug_write("Init failed");
+ 		return;
+ 	}
+ 
+-	debug_write("Unlocking drive");
+-	if (!unlock_drive()) {
+-		return;
++	sscmd = 0x20; cd_command(CD_CMD_TEST,(unsigned char *)&sscmd,1); cd_wait_int(); 
++	cd_read_reply(cdcontrollerver);	// Test Command $19,$20 gets the CDROM BIOS
++	debug_write("CD BIOS: %x", *(uint32_t*) cdcontrollerver);
++   	if(cdcontrollerver[0]==0x94) {    
++        bugged_setsession = 1;
++        enable_unlock = 0; // VC0 A and VC0 B are both from 1994 and don't support the getregion command to figure out if it is unlockable or not.
++        first_rev = 1;
++    } 
++    else if(cdcontrollerver[1] == 0x05 && cdcontrollerver[2] == 0x16 && cdcontrollerver[0] == 0x95 && cdcontrollerver[3] == 0xC1) {     
++        bugged_setsession = 1; // NOTE I don't think this will ever be triggered but just in case. Earliest SCPH-3000s and late SCPH-1000s are VC0B and later SCPH-3000s are VC1B. Only unlockable systems have VC1A it seems.
++    }
++    else if((cdcontrollerver[3] == 0xC2) || (cdcontrollerver[3] == 0xC3)) {   
++        calibrate_laser = 1;
++    }
++
++	if(enable_unlock) {
++		uint8_t cd_reply[16];
++		// Run "GetRegion" test
++		uint8_t test = CD_TEST_REGION;
++		cd_command(CD_CMD_TEST, &test, 1);
++
++		// Should succeed with 3
++		if (cd_wait_int() != 3) {
++			debug_write("Region read failed");
++			return;
++		}
++
++		// Read actual region text and null terminate it
++		int len = cd_read_reply(cd_reply);
++		cd_reply[len] = 0;
++
++		// Compare which is the fifth string we have to send to the backdoor
++		if (strcmp((char *) cd_reply, "for Europe") == 0) {
++			region_name = "European";
++			p5_localized = "(Europe)";
++		} else if (strcmp((char *) cd_reply, "for U/C") == 0) {
++			region_name = "American";
++			p5_localized = "of America";
++		} else if (strcmp((char *) cd_reply, "for NETEU") == 0) {
++			region_name = "NetYaroze (EU)";
++			p5_localized = "World wide";
++		} else if (strcmp((char *) cd_reply, "for NETNA") == 0) {
++			region_name = "NetYaroze (US)";
++			p5_localized = "World wide";
++		} else if (strcmp((char *) cd_reply, "for Japan") == 0) {
++			enable_unlock = 0;
++		} else {
++			// +4 to skip past "for "
++			debug_write("Unsupported region: %s", (char *) (cd_reply + 4));
++			return;
++		}
++
++		if(enable_unlock) { // Check again, this could be false now
++			#if defined TOCPERFECT // Get TOC via reset + unlock instead of unlock + opening/closing the drive lid for auto loading in TOCPerfect, thanks MottZilla!
++				debug_write("Resetting drive");
++				cd_drive_reset();
++			#endif
++			debug_write("Unlocking drive");
++			if (!unlock_drive())
++				return;
++		}
+ 	}
+ 
+ 	while (1) {
+-#if SOFTUART_PATCH
+-		patcher_apply_softuart();
+-		std_out_puts("SoftUART ready\n");
+-#endif
+-
+ 		try_boot_cd();
+ 
+ 		debug_write("Reinitializing kernel");
+diff --git a/tmp/og-tonyhax.Enu/loader/secondary.ld b/loader/secondary.ld
+index 7dc880a..3a91191 100644
+--- a/tmp/og-tonyhax.Enu/loader/secondary.ld
++++ b/loader/secondary.ld
+@@ -1,8 +1,8 @@
+ MEMORY {
+-	ram(wrx)	:ORIGIN = 0x801FA100, LENGTH = 0x3F00
++	ram(wrx)	:ORIGIN = 0x801F8180, LENGTH = 0x5E80
+ }
+ SECTIONS {
+-	. = 0x801FA100;
++	. = 0x801F8180;
+ 	PROVIDE(__RO_START__ = .);
+ 	.text :
+ 	{
+diff --git a/loader/tonyhax-ff9.mcs b/loader/tonyhax-ff9.mcs
+new file mode 100644
+index 0000000..eb8fccb
+Binary files /dev/null and b/loader/tonyhax-ff9.mcs differ
+diff --git a/loader/tonyhax-tpl-ff9.mcs b/loader/tonyhax-tpl-ff9.mcs
+new file mode 100644
+index 0000000..e96caa2
+Binary files /dev/null and b/loader/tonyhax-tpl-ff9.mcs differ
+diff --git a/loader/tonyhax-tpl-old.mcs b/loader/tonyhax-tpl-old.mcs
+new file mode 100644
+index 0000000..50c3fa9
+Binary files /dev/null and b/loader/tonyhax-tpl-old.mcs differ
+diff --git a/tmp/og-tonyhax.Enu/loader/tonyhax-tpl.mcs b/loader/tonyhax-tpl.mcs
+index 50c3fa9..8e7b245 100644
+Binary files a/tmp/og-tonyhax.Enu/loader/tonyhax-tpl.mcs and b/loader/tonyhax-tpl.mcs differ

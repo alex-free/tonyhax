@@ -7,21 +7,31 @@ SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Common variables
 
-TONYHAX_VERSION=v1.1.6-international-freepsxboot
+TONYHAX_VERSION=v1.1.7-international-freepsxboot
 
 CC=mips-linux-gnu-gcc
-CFLAGS=-Os -Wall -Wextra -Wno-main -Werror -EL -march=r3000 -mabi=32 -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION) -DFREEPSXBOOT
+CFLAGS=-Os -Wall -Wextra -Wno-main -Werror -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION) -DFREEPSXBOOT
 
 LD=mips-linux-gnu-ld
-LDFLAGS=-EL --gc-sections
+LDFLAGS=--gc-sections
 
 OBJCOPY=mips-linux-gnu-objcopy
 OBJCOPYFLAGS=-O binary
 
 # Entry point variables
 
-ENTRY_MCS := $(patsubst $(SELF_DIR)/entrypoints/%-tpl.mcs, %.mcs, $(wildcard $(SELF_DIR)/entrypoints/*-tpl.mcs))
+ENTRY_MCS := \
+	$(patsubst $(SELF_DIR)/entrypoints/%-tpl.mcs, %.mcs, $(wildcard $(SELF_DIR)/entrypoints/*-tpl.mcs)) \
+	FF9-A-JP/ff9-a-jp.mcs \
+	FF9-B-JP/ff9-b-jp.mcs \
+	FF9-A-US/ff9-a-us.mcs \
+	FF9-B-US/ff9-b-us.mcs
+
 ENTRY_RAW := \
+	FF9-A-JP/BISLPS-0200000000-00 \
+	FF9-B-JP/BISLPS-0200000000-00 \
+	FF9-A-US/BASLUS-0125100000-00 \
+	FF9-B-US/BASLUS-0125100000-00 \
 	BISLPS-01391SKI00S \
 	BISLPS-00300TEKKEN-2 \
 	BISLPS-01300TEKKEN-3 \

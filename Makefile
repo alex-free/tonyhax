@@ -4,17 +4,17 @@
 include variables.mk
 
 PACKAGE_FILE = tonyhax-$(TONYHAX_VERSION).zip
-PACKAGE_CONTENTS = $(ENTRY_FILES:%=entrypoints/%) $(ROM_FILES:%=rom/%) loader/HAX loader/FF9 loader/tonyhax.mcs loader/tonyhax-ff9.mcs loader/tonyhax.exe $(FREEPSXBOOT_IMAGES:%=freepsxboot/%) $(BOOT_CD_FILES:%=boot-cd/%) $(BOOT_CD_FILES:%=boot-cd/%) readme.html readme.md images/*.jpg LICENSE
+PACKAGE_CONTENTS = $(ENTRY_FILES:%=entrypoints/%) $(ROM_FILES:%=rom/%) loader/HAX loader/FF9 loader/tonyhax.mcs loader/tonyhax-ff9.mcs loader/tonyhax.exe $(FREEPSXBOOT_IMAGES:%=freepsxboot/%) $(BOOT_CD_FILES:%=boot-cd/%) $(GSHAX_FILES:%=gshax/wipeout-usa/%) gshax/wipeout-usa/CODELIST00 *.html *.md images/*.jpg LICENSE
 
 .PHONY: clean modules clean
 
 all: modules $(PACKAGE_FILE)
 
-$(PACKAGE_FILE): $(PACKAGE_CONTENTS)
+$(PACKAGE_FILE): $(PACKAGE_CONTENTS) 
 	$(RM) $(PACKAGE_FILE)
 	zip -9 $(PACKAGE_FILE) $(PACKAGE_CONTENTS)
 
-$(PACKAGE_CONTENTS): modules
+$(PACKAGE_CONTENTS):
 
 modules:
 	$(MAKE) -C util
@@ -27,6 +27,7 @@ modules:
 	$(MAKE) -C loader all
 	$(MAKE) -C boot-cd all
 	$(MAKE) -C rom all
+	$(MAKE) -C gshax all
 
 clean:
 	$(MAKE) -C util clean
@@ -36,4 +37,5 @@ clean:
 	$(MAKE) -C freepsxboot clean
 	$(MAKE) -C boot-cd clean
 	$(MAKE) -C rom clean
+	$(MAKE) -C gshax clean
 	$(RM) tonyhax-*.zip

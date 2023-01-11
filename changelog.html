@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Tonyhax International - History</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #FFFFFF;
+      background-color: #000000;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #58D3F7;
+    }
+    a:visited {
+      color: #58D3F7;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      border: 2px double blue;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border: 2px double blue;
+    }
+    th {
+      border: 2px double blue;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+        border: 2px double blue;
+        padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Tonyhax International - History</h1>
+</header>
+<h2 id="version-1.1.7-132023">Version 1.1.7 (1/3/2023)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.7i/tonyhax-v1.1.7-international.zip">tonyhax-v1.1.7-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li><p>Added <a href="save-game-exploit.html">save game exploit</a> support for Final Fantasy IX Japan, Final Fantasy IX USA Rev 0, and Final Fantasy IX USA Rev 1 thanks to Patchouli (<a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=6714">karehaani</a>)!</p></li>
+<li><p><strong>Fixed the <code>tonyhax.mcs</code> and <code>HAX</code> loader files</strong> for the <a href="save-game-exploit.html">save game exploit</a> boot method. Previously, only the <code>HAX</code> loader file <em>copied via uLaunchElf specifically to a memory card</em> was working due to an error accommodating the larger size of the Tonyhax International loader since v1.1.3. <strong>This issue has now been resolved and everything works as expected with both the <code>tonyhax.mcs</code> and <code>HAX</code> loader files as they are in the correct ‘linked’ format (you can see this in the memcardrex software for example)</strong>.</p></li>
+<li><p>Updated <a href="https://crosstool-ng.github.io/">crosstool-ng</a> to the latest version. Fixed and updated the crosstool-ng config file used to build the Tonyhax International toolchain to work with the latest version. The new config file also makes a more tuned PSX toolchain. The toolchain is set to be tuned for the r3000, for little-endian, for soft-float (no hardware float support), and for a 32-bit ABI. This means the previous CFLAGS setting these options explicitly are no longer necessary and have been removed from the various <code>variable.mk*</code> files in the source.</p></li>
+<li><p>Updated the APv2 decompilation documentation (from the latest official Tonyhax).</p></li>
+<li><p>Added more info on the RAM setups used by Tonyhax International and how they work. This information can be found in the <code>ram-setups.txt</code> file in the <code>docs</code> directory of the source.</p></li>
+<li><p>Substantially rewrote the documentation with more information.</p></li>
+</ul>
+<h2 id="version-1.1.6-12102022">Version 1.1.6 (12/10/2022)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.6i/tonyhax-v1.1.6-international.zip">tonyhax-v1.1.6-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li><p>Implemented <strong>many speed and size optimizations</strong> for the tonyhax international loader. Can <strong>boot games quicker in some cases</strong>.</p></li>
+<li><p>Applied this <a href="https://github.com/socram8888/tonyhax/commit/7f22506857afe66c4f8419ee2e73f62306a125da">commit</a> from OG <a href="https://github.com/socram8888/tonyhax">TonyHax</a> to better simulate how the BIOS boots games. As of 12/10/2022, <em>where applicable</em> Tonyhax International is current with the original Tonyhax.</p></li>
+<li><p>Added support for bypassing the <a href="anti-piracy-bypass.html">additional anti-piracy copy protection routines</a> in Strider 2, Rockman X5, Rockman X6, Rockman 5, Dance Dance Revolution: Best Hits, Dance Dance Revolution 2nd Remix, Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1, Dance Dance Revolution 2nd Remix: Append Club Version Vol. 2.</p></li>
+<li><p>Added support for bypassing the <a href="anti-piracy-bypass.html">additional anti-piracy copy protection routines</a> in i-mode mo Issho: Doko Demo Issho Tsuika Disc (thanks <a href="https://github.com/M4x1mumReZ">M4x1mumRez</a>).</p></li>
+<li><p>Added information on games with additional <a href="anti-piracy-bypass.html#edc">EDC Checks</a> found in some games (most notably such checks are found in the Dance Dance Revolution games that I’ve just added support for bypassing their additional anti-piracy measures). You must burn games containing EDC Checks in a specific way for them to work.</p></li>
+</ul>
+<h2 id="version-1.1.5-1232022">Version 1.1.5 (12/3/2022)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.5i/tonyhax-v1.1.5-international.zip">tonyhax-v1.1.5-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li><p>Added support for bypassing the <a href="anti-piracy-bypass.html">additional anti-piracy copy protection routines</a> in Koneko mo Issho.</p></li>
+<li><p>Fixed entry.S header temp buffer address.</p></li>
+<li><p>More size optimizations (specifcally in ap-bypass.c).</p></li>
+</ul>
+<h2 id="version-1.1.4-1222022">Version 1.1.4 (12/2/2022)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.4i/tonyhax-v1.1.4-international.zip">tonyhax-v1.1.4-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li><p>Added support for bypassing the <a href="anti-piracy-bypass.html">additional anti-piracy copy protection routines</a> in Pop’n Music: Disney Tunes, Beatmania featuring Dreams Come True, Dancing Stage featuring Dreams Come True, Oha-Studio Dance Dance Revolution, Dance Dance Revolution: Disney’s Rave, Dance Dance Revolution: Extra Mix, and Beatmania Best Hits (thanks <a href="https://www.psx-place.com/members/trappedinlimbo.156719/">trappedinlimbo</a>).</p></li>
+<li><p>Controller input in Japanese consoles reverted to proper silent debug_write message polling as in v1.1.2 and below.</p></li>
+</ul>
+<h2 id="version-1.1.3-11302022">Version 1.1.3 (11/30/2022)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.3i/tonyhax-v1.1.3-international.zip">tonyhax-v1.1.3-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li><p>Added support for bypassing the <a href="anti-piracy-bypass.html">additional anti-piracy copy protection routines</a> in Crash Bash/Crash Bandicoot Carnival, Koko Hore! Pukka, Love Hina: Ai wa Kotoba no Naka ni, and Love Hina 2: Kotoba wa Konayuki no You ni (thanks <a href="https://github.com/M4x1mumReZ">M4x1mumRez</a>).</p></li>
+<li><p>Rewrote the Building From Source instructions for clarity and simplicity.</p></li>
+<li><p>Fixed Pop’n Music 6’s anti-piracy bypass and ‘boots to black screen’ issue.</p></li>
+<li><p>Added support for bypassing the <a href="anti-piracy-bypass.html">additional anti-piracy copy protection routines</a> in Pop’N Music: Animation Melody (thanks <a href="https://www.psx-place.com/members/trappedinlimbo.156719/">trappedinlimbo</a>).</p></li>
+<li><p>Merged <strong>all new applicable changes</strong> from the latest <a href="https://github.com/socram8888/tonyhax">O.G. Tonyhax</a> where applicable (as of 11/30/2022 this is up to date with the current source tree). See commits <a href="https://github.com/alex-free/tonyhax/commit/8284633c435a9325dcfd7028d9788bacae94de69">8284633c435a9325dcfd7028d9788bacae94de69</a>, <a href="https://github.com/alex-free/tonyhax/commit/b72b08e5ba814196f07993491b483e5ec8e3fc93">b72b08e5ba814196f07993491b483e5ec8e3fc93</a>, and <a href="https://github.com/alex-free/tonyhax/commit/8934a2bb614973064e45a6638e03fd0c7426e5fc">8934a2bb614973064e45a6638e03fd0c7426e5fc</a> for full details.</p></li>
+<li><p>Changed everything to be cleaner and closer to the latest source tree of the original Tonyhax. There will now be a diff comparing the <code>loader</code> directory of the current Tonyhax <code>loader</code> directory with the Tonyhax International <code>loader</code> directory, enabling easy comparison/documention/review of the current code differences between the fork and upstream. You can find this diff in the <code>docs/tonyhax-vs-tonyhax-international-diffs</code> directory in the source tree.</p></li>
+</ul>
+<h2 id="version-1.1.2-1192022">Version 1.1.2 (11/9/2022)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.2i/tonyhax-v1.1.2-international.zip">tonyhax-v1.1.2-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li><p>Added support for bypassing the <a href="anti-piracy-bypass.html">additional anti-piracy copy protection routines</a> found in all versions of Yu-Gi-Oh! Forbidden Memories, Cool Boarders 2001, Disney’s The Emperor’s New Grove, Resident Evil: Survivor, and Tomba! 2.</p></li>
+<li><p>Added support for bypassing the <a href="anti-piracy-bypass.html">additional anti-piracy copy protection routines</a> found in Pocket Jiman, thanks to the code by <a href="https://gbatemp.net/members/m4x1mumrez.610331/">m4x1mumrez</a> generated with <a href="https://alex-free.github.io/aprip">APrip</a>.</p></li>
+<li><p>Fixes a regression in version 1.1.1 that could possibly cause Japanese consoles to freeze before booting the game completely.</p></li>
+</ul>
+<h2 id="version-1.1.1-10292022">Version 1.1.1 (10/29/2022)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.1i/tonyhax-v1.1.1-international.zip">tonyhax-v1.1.1-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li>A completely new system to bypass <a href="anti-piracy-bypass.html">additional anti-piracy copy protection routines</a> found in some later PSX games <strong>which works on all consoles, including Japanese ones</strong> has replaced the old Socram8888 bios patch. This improves Tonyhax International by giving it the ability to play many more games then ever before, and makes support just as good on the Japanese consoles. Huge thanks to MottZilla for the method to implement gameshark codes in Tonyhax International, which provides this functionality.</li>
+<li>Optimized Tonyhax International’s loader for size and speed. Cleaned up source tree.</li>
+<li>Rewrote documentation in markdown.</li>
+</ul>
+<h2 id="version-1.1.0-9252022">Version 1.1.0 (9/25/2022)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.0i/tonyhax-v1.1.0-international.zip">tonyhax-v1.1.0-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li>Updated to FreePSXBoot v2.1 (my own <a href="https://github.com/alex-free/FreePSXBoot">fork</a> for now so that it compiles on <a href="https://github.com/brad-lin/FreePSXBoot/pull/97">Fedora</a>). This means among other things that those ‘fake’ 64KB chinese PS1 memory cards now work with the FreePSXBoot images.</li>
+<li><strong>Tonyhax International <a href="freepsxboot-exploit.html">FreePSXBoot</a> memory cards no longer need to be removed after booting the loader if they are in slot 2 of the console.</strong> I have completely removed Socram8888’s old FreePSXBoot patch. The new ‘memory card timeout to disable’ patch from the FreePSXBoot builder is now used instead of the ‘pretend memory card is corrupted’ patch from the original Tonyhax. The new patch works with all games, some games did not like the old patch method used. <strong>The new patch also works correctly on every single PS1 BIOS version, including BIOS v1.0, v1.1, and v2.0.</strong> The old patch never worked on BIOS v1.0, 1.1, or 2.0.</li>
+<li>Added tonyhax_scph-3000_v1.1_slot2.mcr, tonyhax_scph-3000_v1.1_slot1.mcr, tonyhax_scph-3000_v2.1_slot2.mcr, and tonyhax_scph-3000_v2.1_slot1.mcr FreePSXBoot memory card files (as there are actually 2 different BIOS versions found in SCPH-3000 consoles).</li>
+<li>All FreePSXBoot images are now created with the <code>-fastload</code> option on to improve how fast Tonyhax International starts with the FreePSXBoot exploit. The <code>-fastload</code> option also provides that cool loading screen you can see in <a href="https://unirom.github.io">Unirom</a>.</li>
+<li>Japanese PlayStations with <strong>VC2 and VC3</strong> CDROM drive controllers are now re-calibrated to improve CD tracking and read performance for these CDROM controllers. VC1 and VC0 do not have equivalent commands, hardware, or even a need for this really since Bias and Gain can only be set manually.</li>
+<li>TOCPerfect changes have been merged from <a href="https://alex-free.github.io/ps1demoswap">PS1 DemoSwap Patcher</a>.</li>
+<li>Removed documentation on PS1 CD drive repair as it is getting it’s own webpage/document in the near future. Reduced the size of releases dramatically by using better compressed images in this document (thanks <a href="https://www.psx-place.com/members/berion.1431/">Berion</a> of <a href="https://psx-place.com">PSX-Place</a>).</li>
+<li>Added notes about video mode switching support on PS2s using <a href="https://www.psx-place.com/threads/ps1vmodeneg-by-sp193.25050/">PS1VModeNeg v1.0.1</a> (thanks <a href="https://www.psx-place.com/members/berion.1431/">Berion</a> of <a href="https://psx-place.com">PSX-Place</a>)</li>
+<li>Cleaned up source tree and we are back to a consistent coding style (Socram8888 would be <a href="https://github.com/socram8888/tonyhax/pull/129">proud</a>).</li>
+<li>Stock (non-modchipped) SCPH-1000 and early SCPH-3000 can now play <strong>any real import discs or backup CD-Rs of games containing anti-piracy detection (excluding PAL region games that also contain libcrypt protection)</strong> with 100% compatibility, even better then the anti-piracy bypass for American/European consoles actually.</li>
+</ul>
+<h2 id="version-1.0.8-8262022">Version 1.0.8 (8/26/2022)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.8i/tonyhax-v1.0.8-international.zip">tonyhax-v1.0.8-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li>Fixed the anti anti-piracy functionality regression for American/European consoles. You can now play backup or import PS1 games that have anti-piracy features (i.e. Dino Crisis) without issue on all American console and European consoles.</li>
+<li>Removed the PAL licensed ROM flasher CD image, as it is not actually not needed. Any console that supports cheat carts (SCPH-1000 up to SCPH-750X models) will boot a CD-R burned via the current <code>tonyhax-rom-flasher.bin+tonyhax-rom-flasher.cue</code> files just fine.</li>
+<li>Updated documentation on burning PS1 backups. Added info on games containing anti-piracy and or libcrypt protection. Also added info on replacing and modifying PS1 CD drives and changing bias/gain/laser resistance values.</li>
+<li>Cleaned up build proccess and source tree.</li>
+</ul>
+<h2 id="version-1.0.7-872022">Version 1.0.7 (8/7/2022)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.7i/tonyhax-v1.0.7-international.zip">tonyhax-v1.0.7-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li>The Tonyhax International loader memory card save file <strong>is now named <code>HAX</code> instead of <code>BESLEM-99999TONYHAX</code> to allow for more exploitable games</strong>. You will need to update both the save game exploit file for your game as well as the Tonyhax International loader file to use v1.0.7 if you are using a previou version of the save game exploit file for your game that is already on a memory card.</li>
+<li>Removed the SetSessionSuperUltraCommandSmash and replaced it with <a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=867">MottZilla</a>’s new method of re-reading TOC data for VC0 A, VC0 B, and VC1 A CDROM Controller BIOS firmwares. <strong>This change reduces the time it takes to re-read the TOC data on the backup CD-R or import PS1 disc from 2-10 minutes on the SCPH-1000, SCPH-3000, and some SCPH-3500 japanese consoles to around 30 seconds with 100% reliability!</strong></li>
+<li>Added <a href="save-game-exploit.html">save game exploit</a> support for Tekken 3 Japan/USA/PAL thanks to Patchouli (<a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=6714">karehaani</a>) and <a href="https://github.com/socram8888/tonyhax/pull/20">krystalgamer</a>.</li>
+<li>Added <a href="save-game-exploit.html">save game exploit</a> support for Tekken 2 Japan (rev 1 only), USA (rev 0 only), and PAL thanks to Patchouli (<a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=671">karehaani</a>) and <a href="https://github.com/socram8888/tonyhax/pull/20">krystalgamer</a>.</li>
+<li>Added <a href="save-game-exploit.html">save game exploit</a> support for Downhill Snow Japan thanks to Patchouli (<a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=6714">karehaani</a>).</li>
+</ul>
+<h2 id="version-1.0.6-832022">Version 1.0.6 (8/3/2022)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.6i/tonyhax-v1.0.6-international.zip">tonyhax-v1.0.6-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li>Added <a href="save-game-exploit.html">save game exploit</a> support for Castlevania Chronicle NTSC-J (only the first release, rev 1 is not working right now) (Alex Free) and 1500 Lite Series Castrol Honda Super Bike Racing NTSC-J (Alex Free).</li>
+<li>Added <a href="save-game-exploit.html">save game exploit</a> support for Tony Hawk Pro Skater 2 NTSC-J (MottZilla) and 1500 Lite Series Castrol Honda VTR (MottZilla).</li>
+</ul>
+<h2 id="version-1.0.5-7272022">Version 1.0.5 (7/27/2022)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.5i/tonyhax-v1.0.5-international.zip">tonyhax-v1.0.5-international</a></li>
+</ul>
+<p>Changes:</p>
+<ul>
+<li>Added <a href="save-game-exploit.html">save game exploit</a> support for Doki Oki (NTSC-J), Crash Bandicoot 3 (NTSC-J), and The Legend Of Heroes I&amp;II (NTSC-J). All these save game exploits were found by <a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=6714">Patchouli (karehaani)</a>.</li>
+</ul>
+<h2 id="version-1.0.4-7232022">Version 1.0.4 (7/23/2022)</h2>
+<ul>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.4i/tonyhax-v1.0.4-international.zip">tonyhax-v1.0.4-international</a></li>
+</ul>
+</body>
+</html>

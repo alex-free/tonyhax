@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Tonyhax International - Flashed Cheat Cartridge/ROM</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #FFFFFF;
+      background-color: #000000;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #58D3F7;
+    }
+    a:visited {
+      color: #58D3F7;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      border: 2px double blue;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border: 2px double blue;
+    }
+    th {
+      border: 2px double blue;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+        border: 2px double blue;
+        padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Tonyhax International - Flashed Cheat Cartridge/ROM</h1>
+</header>
+<h1 id="flashed-cheat-cart">Flashed Cheat Cart</h1>
+<p>You can overwrite the contents of a GameShark, Action Reply, or other PS1 cheat cartridge with the Tonyhax International ROM using a simple flasher CD-R that you burn or a combination of a home-made serial to USB cable, PC, and special program booted on your target PS1 console that supports flashing cheat cartridges over serial.</p>
+<p>When you turn on any PS1 console with the flashed GameShark/Action Reply/cheat device installed to it’s parallel port at the back the console, the system will instead boot into the Tonyhax International loader, rather then the BIOS/Shell (Sony screens/Memory Card/CD Player menu). A PS1 cheat cartridge flashed with the Tonyhax International ROM is essentially a plug and play mod-chip without any hardware modifications whatsoever.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>GameShark, Action Reply, or other cheat cart that you are willing to overwrite with the Tonyhax International ROM.</li>
+<li>A PS1 console with a parallel port for installing the GameShark or other cheat cart (SCPH-1000-SCPH-7502).</li>
+<li>A Blank high quality CD-R (if burning a ROM flasher CD) or a serial cable, PC, and software which supports flashing a PS1 cheat cartridge over serial.</li>
+</ul>
+<h2 id="how-to-flash-your-gamesharkaction-replycheat-cart">How To Flash Your GameShark/Action Reply/Cheat Cart</h2>
+<p>Inside each Tonyhax International release in the <code>rom</code> directory are the following files:</p>
+<ul>
+<li>tonyhax-rom-flasher.bin</li>
+<li>tonyhax-rom-flasher.cue</li>
+<li>tonyhax-*-international.roms</li>
+</ul>
+<p>The BIN+CUE files can be burned to a CD-R. The BIN+CUE files contain the <a href="https://github.com/danhans42/nxflash">NXFlash</a> PS1 executable with the <code>tonyhax-*-international.rom</code> file. This means when you boot the burned flasher CD-R on your PS1 console, you can connect your GameShark/cheat device and press the <code>R2</code> button (<code>RE-DETECT EEPROM</code>) to allow NXFLASH to detect the newly connected cheat cart. Next press the <code>start</code> button (<code>FLASH EEPROM FROM CD</code>), and then press X to flash your GameShark/Cheat device. Now you can simply reset or power off then power on your PS1 console and it will boot Tonyhax International from the GameShark/cheat cart immediately.</p>
+<figure>
+<img src="images/rom-flasher-cd-1.jpg" alt="rom flasher cd 1" /><figcaption aria-hidden="true">rom flasher cd 1</figcaption>
+</figure>
+<figure>
+<img src="images/rom-flasher-cd-2.jpg" alt="rom flasher cd 2" /><figcaption aria-hidden="true">rom flasher cd 2</figcaption>
+</figure>
+<p>If you have an old enough PlayStation console you can simply use the <a href="boot-cd.html#cd-player-swap-trick">CD Player Swap Trick</a> method to start the NXFlasher CD containing the Tonyahx International ROM.</p>
+</body>
+</html>

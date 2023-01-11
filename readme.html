@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>tonyhax international</title>
+  <title>Tonyhax International</title>
   <style>
     html {
       line-height: 1.5;
@@ -151,21 +151,23 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">tonyhax international</h1>
+<h1 class="title">Tonyhax International</h1>
 </header>
-<h1 id="alex-free.github.io"><a href="https://alex-free.github.io">alex-free.github.io</a></h1>
-<h1 id="tonyhax-international-the-ultimate-backupimport-disc-loader-softmod-solution-for-the-original-playstation-early-models-of-playstation-2">Tonyhax International: The Ultimate Backup/Import Disc Loader SoftMod Solution For The Original PlayStation &amp; Early Models Of PlayStation 2</h1>
+<h2 id="alex-free.github.io"><a href="https://alex-free.github.io">alex-free.github.io</a></h2>
+<h2 id="the-ultimate-backup-cd-rimport-disc-loader-soft-mod-solution-for-the-original-playstation-early-models-of-playstation-2">The Ultimate Backup CD-R/Import Disc Loader Soft-Mod Solution For The Original PlayStation &amp; Early Models Of PlayStation 2</h2>
 <p>Brought to you by <a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=867">MottZilla</a>, <a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=6018">Alex Free</a>, and <a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=6714">Patchouli (karehaani)</a>. Built on the work of many <a href="#credits">others</a>.</p>
 <p>Tonyhax International is a fork of the <a href="https://orca.pet/tonyhax/">Tonyhax</a> “Software backup loader exploit thing for the Sony PlayStation 1” originally created by <a href="https://github.com/socram8888">Socram8888</a>. Tonyhax International is developed by Alex Free and MottZilla with many new features and upgrades compared to the original Tonyhax, some of which are listed below:</p>
 <ul>
 <li><p>Supports all PS1 Consoles (Japanese, American, European, SCPH-1000-SCPH-102) <strong>and</strong> Early PS2 Consoles (Japanese, American, European, SCPH-10000-SCPH-39004).</p></li>
-<li><p>Supports more <a href="#save-game-exploit">save game exploits</a>, enabling the use of even more PSX game discs to start the Tonyhax International loader.</p></li>
-<li><p>Supports <a href="#romrom-flasher-cd">flashing</a> the Tonyhax International backup/import loader to a GameShark/Action Reply/cheat cartridge. Whenever the flashed cartridge is plugged into the back of a SCPH-1000-SCPH-7502 PS1 console when you power it on the Tonyhax International will boot instead of the shell program/BIOS (Sony screens/CD Player/Memory Card Manager).</p></li>
-<li><p>Uses the newer <a href="https://github.com/brad-lin/FreePSXBoot">FreePSXBoot</a> exploit/patching methods to disable FreePSXBoot memory cards that boot Tonyhax International after the FreePSXBoot exploit starts the loader from the memory card on all BIOS versions.</p></li>
-<li><p>Supports more <a href="#playing-games-with-additonal-copy-protection-routines">games with additonal copy protection routines</a> using a new anti-piracy bypass system.</p></li>
-<li><p>Completely automated testing/building/development suite of scripts in the source that supports building Tonyhax International on virtually any *nix like OS.</p></li>
+<li><p>Supports starting the Tonyhax International loader with <a href="gameshark-code.html">GameShark Codes</a> and any PSX cheat device using the new GameSharkHAX boot method.</p></li>
+<li><p>Supports <a href="flashed-cheat-cart.html">flashing</a> the Tonyhax International backup/import loader to a GameShark, Action Reply, or similar PSX cheat cartridge. Whenever the flashed cartridge is plugged into the back of a PSX console model with a cartridge port on the back when you power it on the Tonyhax International will boot instead of the shell program/BIOS (Sony screens/CD Player/Memory Card Manager).</p></li>
+<li><p>Supports <strong>more <a href="save-game-exploit.html">save game exploits</a></strong>, enabling the use of even more PSX game discs to start the Tonyhax International loader.</p></li>
+<li><p>Uses the newer <a href="https://github.com/brad-lin/FreePSXBoot">FreePSXBoot</a> exploit and patching methods to disable FreePSXBoot memory cards that boot Tonyhax International after the FreePSXBoot exploit starts the loader from the memory card. This <strong>works on all BIOS versions on all supported consoles.</strong></p></li>
+<li></li>
+<li><p>Supports more <a href="anti-piracy-bypass.html">games with additional copy protection routines</a>, by <strong>using a completely different anti-piracy bypass system.</strong></p></li>
+<li><p>Uses a completely different build system that is portable to many more Linux distributions. This new build system is more efficient and easier to use as well.</p></li>
 </ul>
-<h3 id="usage">Usage</h3>
+<h2 id="usage">Usage</h2>
 <p><em>Japanese PS1 Consoles (SCPH-1000-SCPH-100)</em></p>
 <ul>
 <li><a href="#japanese-ps1-console-loader-instructions">Japanese PS1 Console Loader Instructions</a></li>
@@ -187,22 +189,18 @@
 </ul>
 <p><em>Boot Methods</em></p>
 <ul>
-<li><a href="#romrom-flasher-cd">ROM/ROM Flasher CD</a></li>
-<li><a href="#freepsxboot-exploit-memory-card-images">FreePSXBoot Exploit Memory Card Images</a></li>
-<li><a href="#boot-cd">Boot CD</a></li>
-<li><a href="#save-game-exploit">Save Game Exploit</a></li>
+<li><a href="gameshark-code.html">GameShark Code</a></li>
+<li><a href="flashed-cheat-cart.html">Flashed Cheat Cartridge - ROM/ROM Flasher CD</a></li>
+<li><a href="freepsxboot-exploit.html">FreePSXBoot Exploit Memory Card Images</a></li>
+<li><a href="boot-cd.html">Boot CD</a></li>
+<li><a href="save-game-exploit.html">Save Game Exploit</a></li>
 </ul>
 <p><em>More Info</em></p>
 <ul>
-<li><a href="#playing-games-with-additonal-copy-protection-routines">Playing Games With Additional Copy Protection Routines</a></li>
-<li><a href="#list-of-games-with-anti-piracy-bypass-support">List Of Games With Anti-Piracy Bypass Support</a></li>
-<li><a href="#known-games-that-need-anti-piracy-bypasses-implemented">Known Games That Need Anti-Piracy Bypasses Implemented</a></li>
-<li><a href="#bypassing-additional-edc-checks-found-in-some-games">Bypassing Additional EDC Checks Found In Some Games</a></li>
+<li><a href="anti-piracy-bypass.html">Playing Games With Additional Copy Protection Routines</a></li>
 <li><a href="#cd-r-media-for-psx-backups">CD-R Media For PSX Backups</a></li>
-<li><a href="#burning-psx-cd-rs">Burning PSX CD-Rs</a></li>
 <li><a href="https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/">Disc Read Errors And PS1 CD Drive Repair</a></li>
 <li><a href="#building-from-source">Building From Source</a></li>
-<li><a href="#known-incompatible-games">Known Incompatible Games</a></li>
 <li><a href="#credits">Credits</a></li>
 </ul>
 <h2 id="external-links">External Links</h2>
@@ -213,7 +211,7 @@
 <li><a href="https://www.psx-place.com/resources/tonyhax-international.1281/">PSX-Place Tonyhax International Resource</a></li>
 <li><a href="https://alex-free.github.io/cdrdao">CDRDAO-AF Fork</a></li>
 <li><a href="http://www.psxdev.net/forum/viewtopic.php?f=66&amp;t=3967">PSXDEV Thread</a></li>
-<li><a href="https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/#post-9922514">GBATemp Thread</a></li>
+<li><a href="https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514">GBATemp Thread</a></li>
 <li><a href="https://alex-free.github.io/aprip">APrip Homepage</a></li>
 <li><a href="https://alex-free.github.io/ps1demoswap">PS1 DemoSwap Patcher Homepage</a></li>
 <li><a href="https://alex-free.github.io/psexe2rom">PSEXE2ROM Homepage</a></li>
@@ -222,155 +220,28 @@
 <li><a href="https://orca.pet/tonyhax">Tonyhax (the original) Homepage</a></li>
 </ul>
 <h2 id="downloads">Downloads</h2>
-<h3 id="version-1.1.7-132023">Version 1.1.7 (1/3/2023)</h3>
+<h3 id="version-1.1.8-1112023">Version 1.1.8 (1/11/2023)</h3>
 <ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.7i/tonyhax-v1.1.7-international.zip">tonyhax-v1.1.7-international</a></li>
+<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.8i/tonyhax-v1.1.8-international.zip">tonyhax-v1.1.8-international</a></li>
 </ul>
 <p>Changes:</p>
 <ul>
-<li><p>Added <a href="#save-game-exploit">save game exploit</a> support for Final Fantasy IX Japan, Final Fantasy IX USA Rev 0, and Final Fantasy IX USA Rev 1 thanks to Patchouli (<a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=6714">karehaani</a>)!</p></li>
-<li><p><strong>Fixed the <code>tonyhax.mcs</code> and <code>HAX</code> loader files</strong> for the <a href="#save-game-exploit">save game exploit</a> boot method. Previously, only the <code>HAX</code> loader file <em>copied via uLaunchElf specifically to a memory card</em> was working due to an error accommodating the larger size of the Tonyhax International loader since v1.1.3. <strong>This issue has now been resolved and everything works as expected with both the <code>tonyhax.mcs</code> and <code>HAX</code> loader files as they are in the correct ‘linked’ format (you can see this in the memcardrex software for example)</strong>.</p></li>
-<li><p>Updated <a href="https://crosstool-ng.github.io/">crosstool-ng</a> to the latest version. Fixed and updated the crosstool-ng config file used to build the Tonyhax International toolchain to work with the latest version. The new config file also makes a more tuned PSX toolchain. The toolchain is set to be tuned for the r3000, for little-endian, for soft-float (no hardware float support), and for a 32-bit ABI. This means the previous CFLAGS setting these options explicitly are no longer necessary and have been removed from the various <code>variable.mk*</code> files in the source.</p></li>
-<li><p>Updated the APv2 decompilation documentation (from the latest official Tonyhax).</p></li>
-<li><p>Added more info on the RAM setups used by Tonyhax International and how they work. This information can be found in the <code>ram-setups.txt</code> file in the <code>docs</code> directory of the source.</p></li>
-<li><p>Substantially rewrote the documentation with more information.</p></li>
+<li><p>A new and exciting boot method known as <a href="gameshark-code.html">GameSharkHAX</a> has been added to Tonyhax International. This is a brand new ‘way in’ to the Tonyhax International loader for all PS1 and PS2 consoles that are supported by Tonyhax International (SCPH-1000-SCPH-39004). It uses GameShark codes to boot the Tonyhax International loader off a memory card file <strong>mid-game.</strong></p></li>
+<li><p>Condensed the <a href="boot-cd.html">Boot CD</a> back to just one BIN+CUE file set. It is not actually necessary to have 2 different versions of the Boot CD, the single BIN+CUE file set in all Tonyhax International releases from here on out will work in every supported use case.</p></li>
+<li><p>The documentation has been split into multiple markdown and html files. This makes it much more easy to maintain for me, and easier for you to comprehend, read, and share. The ‘all in one html file’ style before became unmanageable due to the sheer amount of info that has been added since the initial release.</p></li>
 </ul>
-<h3 id="version-1.1.6-12102022">Version 1.1.6 (12/10/2022)</h3>
-<ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.6i/tonyhax-v1.1.6-international.zip">tonyhax-v1.1.6-international</a></li>
-</ul>
-<p>Changes:</p>
-<ul>
-<li><p>Implemented <strong>many speed and size optimizations</strong> for the tonyhax international loader. Can <strong>boot games quicker in some cases</strong>.</p></li>
-<li><p>Applied this <a href="https://github.com/socram8888/tonyhax/commit/7f22506857afe66c4f8419ee2e73f62306a125da">commit</a> from OG <a href="https://github.com/socram8888/tonyhax">TonyHax</a> to better simulate how the BIOS boots games. As of 12/10/2022, <em>where applicable</em> Tonyhax International is current with the original Tonyhax.</p></li>
-<li><p>Added support for bypassing the <a href="#playing-games-with-additonal-copy-protection-routines">additional anti-piracy copy protection routines</a> in Strider 2, Rockman X5, Rockman X6, Rockman 5, Dance Dance Revolution: Best Hits, Dance Dance Revolution 2nd Remix, Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1, Dance Dance Revolution 2nd Remix: Append Club Version Vol. 2.</p></li>
-<li><p>Added support for bypassing the <a href="#playing-games-with-additonal-copy-protection-routines">additional anti-piracy copy protection routines</a> in i-mode mo Issho: Doko Demo Issho Tsuika Disc (thanks <a href="https://github.com/M4x1mumReZ">M4x1mumRez</a>).</p></li>
-<li><p>Added information on games with additional <a href="#bypassing-additional-edc-checks-found-in-some-games">EDC Checks</a> found in some games (most notably such checks are found in the Dance Dance Revolution games that I’ve just added support for bypassing their additional anti-piracy measures). You must <a href="#burning-psx-cd-rs">burn</a> games containing EDC Checks in a specific way for them to work.</p></li>
-</ul>
-<h3 id="version-1.1.5-1232022">Version 1.1.5 (12/3/2022)</h3>
-<ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.5i/tonyhax-v1.1.5-international.zip">tonyhax-v1.1.5-international</a></li>
-</ul>
-<p>Changes:</p>
-<ul>
-<li><p>Added support for bypassing the <a href="#playing-games-with-additonal-copy-protection-routines">additional anti-piracy copy protection routines</a> in Koneko mo Issho.</p></li>
-<li><p>Fixed entry.S header temp buffer address.</p></li>
-<li><p>More size optimizations (specifcally in ap-bypass.c).</p></li>
-</ul>
-<h3 id="version-1.1.4-1222022">Version 1.1.4 (12/2/2022)</h3>
-<ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.4i/tonyhax-v1.1.4-international.zip">tonyhax-v1.1.4-international</a></li>
-</ul>
-<p>Changes:</p>
-<ul>
-<li><p>Added support for bypassing the <a href="#playing-games-with-additonal-copy-protection-routines">additional anti-piracy copy protection routines</a> in Pop’n Music: Disney Tunes, Beatmania featuring Dreams Come True, Dancing Stage featuring Dreams Come True, Oha-Studio Dance Dance Revolution, Dance Dance Revolution: Disney’s Rave, Dance Dance Revolution: Extra Mix, and Beatmania Best Hits (thanks <a href="https://www.psx-place.com/members/trappedinlimbo.156719/">trappedinlimbo</a>).</p></li>
-<li><p>Controller input in Japanese consoles reverted to proper silent debug_write message polling as in v1.1.2 and below.</p></li>
-</ul>
-<h3 id="version-1.1.3-11302022">Version 1.1.3 (11/30/2022)</h3>
-<ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.3i/tonyhax-v1.1.3-international.zip">tonyhax-v1.1.3-international</a></li>
-</ul>
-<p>Changes:</p>
-<ul>
-<li><p>Added support for bypassing the <a href="#playing-games-with-additonal-copy-protection-routines">additional anti-piracy copy protection routines</a> in Crash Bash/Crash Bandicoot Carnival, Koko Hore! Pukka, Love Hina: Ai wa Kotoba no Naka ni, and Love Hina 2: Kotoba wa Konayuki no You ni (thanks <a href="https://github.com/M4x1mumReZ">M4x1mumRez</a>).</p></li>
-<li><p>Added a <a href="#known-incompatible-games">Known Incompatible Games</a> section, which documents games that currently do not work with either the <strong>original <a href="https://github.com/socram8888/tonyhax">Tonyhax</a> OR Tonyhax International.</strong></p></li>
-<li><p>Rewrote the <a href="#building-from-source">Building From Source</a> instructions for clarity and simplicity.</p></li>
-<li><p>Fixed Pop’n Music 6’s anti-piracy bypass and ‘boots to black screen’ issue.</p></li>
-<li><p>Added support for bypassing the <a href="#playing-games-with-additonal-copy-protection-routines">additional anti-piracy copy protection routines</a> in Pop’N Music: Animation Melody (thanks <a href="https://www.psx-place.com/members/trappedinlimbo.156719/">trappedinlimbo</a>).</p></li>
-<li><p>Merged <strong>all new applicable changes</strong> from the latest <a href="https://github.com/socram8888/tonyhax">O.G. Tonyhax</a> where applicable (as of 11/30/2022 this is up to date with the current source tree). See commits <a href="https://github.com/alex-free/tonyhax/commit/8284633c435a9325dcfd7028d9788bacae94de69">8284633c435a9325dcfd7028d9788bacae94de69</a>, <a href="https://github.com/alex-free/tonyhax/commit/b72b08e5ba814196f07993491b483e5ec8e3fc93">b72b08e5ba814196f07993491b483e5ec8e3fc93</a>, and <a href="https://github.com/alex-free/tonyhax/commit/8934a2bb614973064e45a6638e03fd0c7426e5fc">8934a2bb614973064e45a6638e03fd0c7426e5fc</a> for full details.</p></li>
-<li><p>Changed everything to be cleaner and closer to the latest source tree of the original Tonyhax. There will now be a diff comparing the <code>loader</code> directory of the current Tonyhax <code>loader</code> directory with the Tonyhax International <code>loader</code> directory, enabling easy comparison/documention/review of the current code differences between the fork and upstream. You can find this diff in the <code>docs/tonyhax-vs-tonyhax-international-diffs</code> directory in the source tree.</p></li>
-</ul>
-<h3 id="version-1.1.2-1192022">Version 1.1.2 (11/9/2022)</h3>
-<ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.2i/tonyhax-v1.1.2-international.zip">tonyhax-v1.1.2-international</a></li>
-</ul>
-<p>Changes:</p>
-<ul>
-<li><p>Added support for bypassing the <a href="#playing-games-with-additonal-copy-protection-routines">additional anti-piracy copy protection routines</a> found in all versions of Yu-Gi-Oh! Forbidden Memories, Cool Boarders 2001, Disney’s The Emperor’s New Grove, Resident Evil: Survivor, and Tomba! 2.</p></li>
-<li><p>Added support for bypassing the <a href="#playing-games-with-additonal-copy-protection-routines">additional anti-piracy copy protection routines</a> found in Pocket Jiman, thanks to the code by <a href="https://gbatemp.net/members/m4x1mumrez.610331/">m4x1mumrez</a> generated with <a href="https://alex-free.github.io/aprip">APrip</a>.</p></li>
-<li><p>Fixes a regression in version 1.1.1 that could possibly cause Japanese consoles to freeze before booting the game completely.</p></li>
-</ul>
-<h3 id="version-1.1.1-10292022">Version 1.1.1 (10/29/2022)</h3>
-<ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.1i/tonyhax-v1.1.1-international.zip">tonyhax-v1.1.1-international</a></li>
-</ul>
-<p>Changes:</p>
-<ul>
-<li>A completely new system to bypass <a href="#playing-games-with-additonal-copy-protection-routines">additional anti-piracy copy protection routines</a> found in some later PSX games <strong>which works on all consoles, including Japanese ones</strong> has replaced the old Socram8888 bios patch. This improves Tonyhax International by giving it the ability to play many more games then ever before, and makes support just as good on the Japanese consoles. Huge thanks to MottZilla for the method to implement gameshark codes in Tonyhax International, which provides this functionality.</li>
-<li>Optimized Tonyhax International’s loader for size and speed. Cleaned up source tree.</li>
-<li>Rewrote documentation in markdown.</li>
-</ul>
-<h3 id="version-1.1.0-9252022">Version 1.1.0 (9/25/2022)</h3>
-<ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.1.0i/tonyhax-v1.1.0-international.zip">tonyhax-v1.1.0-international</a></li>
-</ul>
-<p>Changes:</p>
-<ul>
-<li>Updated to FreePSXBoot v2.1 (my own <a href="https://github.com/alex-free/FreePSXBoot">fork</a> for now so that it compiles on <a href="https://github.com/brad-lin/FreePSXBoot/pull/97">Fedora</a>). This means among other things that those ‘fake’ 64KB chinese PS1 memory cards now work with the FreePSXBoot images.</li>
-<li><strong>Tonyhax International <a href="#freepsxboot-exploit-memory-card-images">FreePSXBoot</a> memory cards no longer need to be removed after booting the loader if they are in slot 2 of the console.</strong> I have completely removed Socram8888’s old FreePSXBoot patch. The new ‘memory card timeout to disable’ patch from the FreePSXBoot builder is now used instead of the ‘pretend memory card is corrupted’ patch from the original Tonyhax. The new patch works with all games, some games did not like the old patch method used. <strong>The new patch also works correctly on every single PS1 BIOS version, including BIOS v1.0, v1.1, and v2.0.</strong> The old patch never worked on BIOS v1.0, 1.1, or 2.0.</li>
-<li>Added tonyhax_scph-3000_v1.1_slot2.mcr, tonyhax_scph-3000_v1.1_slot1.mcr, tonyhax_scph-3000_v2.1_slot2.mcr, and tonyhax_scph-3000_v2.1_slot1.mcr FreePSXBoot memory card files (as there are actually 2 different BIOS versions found in SCPH-3000 consoles).</li>
-<li>All FreePSXBoot images are now created with the <code>-fastload</code> option on to improve how fast Tonyhax International starts with the FreePSXBoot exploit. The <code>-fastload</code> option also provides that cool loading screen you can see in <a href="https://unirom.github.io">Unirom</a>.</li>
-<li>Japanese PlayStations with <strong>VC2 and VC3</strong> CDROM drive controllers are now re-calibrated to improve CD tracking and read performance for these CDROM controllers. VC1 and VC0 do not have equivalent commands, hardware, or even a need for this really since Bias and Gain can only be set manually.</li>
-<li>TOCPerfect changes have been merged from <a href="https://alex-free.github.io/ps1demoswap">PS1 DemoSwap Patcher</a>.</li>
-<li>Removed documentation on PS1 CD drive repair as it is getting it’s own webpage/document in the near future. Reduced the size of releases dramatically by using better compressed images in this document (thanks <a href="https://www.psx-place.com/members/berion.1431/">Berion</a> of <a href="https://psx-place.com">PSX-Place</a>).</li>
-<li>Added notes about video mode switching support on PS2s using <a href="https://www.psx-place.com/threads/ps1vmodeneg-by-sp193.25050/">PS1VModeNeg v1.0.1</a> (thanks <a href="https://www.psx-place.com/members/berion.1431/">Berion</a> of <a href="https://psx-place.com">PSX-Place</a>)</li>
-<li>Cleaned up source tree and we are back to a consistent coding style (Socram8888 would be <a href="https://github.com/socram8888/tonyhax/pull/129">proud</a>).</li>
-<li>Stock (non-modchipped) SCPH-1000 and early SCPH-3000 can now play <strong>any real import discs or backup CD-Rs of games containing anti-piracy detection (excluding PAL region games that also contain libcrypt protection)</strong> with 100% compatibility, even better then the anti-piracy bypass for American/European consoles actually.</li>
-</ul>
-<h3 id="version-1.0.8-8262022">Version 1.0.8 (8/26/2022)</h3>
-<ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.8i/tonyhax-v1.0.8-international.zip">tonyhax-v1.0.8-international</a></li>
-</ul>
-<p>Changes:</p>
-<ul>
-<li>Fixed the anti anti-piracy functionality regression for American/European consoles. You can now play backup or import PS1 games that have anti-piracy features (i.e. Dino Crisis) without issue on all American console and European consoles.</li>
-<li>Removed the PAL licensed ROM flasher CD image, as it is not actually not needed. Any console that supports cheat carts (SCPH-1000 up to SCPH-750X models) will boot a CD-R burned via the current <code>tonyhax-rom-flasher.bin+tonyhax-rom-flasher.cue</code> files just fine.</li>
-<li>Updated documentation on burning PS1 backups. Added info on games containing anti-piracy and or libcrypt protection. Also added info on replacing and modifying PS1 CD drives and changing bias/gain/laser resistance values.</li>
-<li>Cleaned up build proccess and source tree.</li>
-</ul>
-<h3 id="version-1.0.7-872022">Version 1.0.7 (8/7/2022)</h3>
-<ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.7i/tonyhax-v1.0.7-international.zip">tonyhax-v1.0.7-international</a></li>
-</ul>
-<p>Changes:</p>
-<ul>
-<li>The Tonyhax International loader memory card save file <strong>is now named <code>HAX</code> instead of <code>BESLEM-99999TONYHAX</code> to allow for more exploitable games</strong>. You will need to update both the save game exploit file for your game as well as the Tonyhax International loader file to use v1.0.7 if you are using a previou version of the save game exploit file for your game that is already on a memory card.</li>
-<li>Removed the SetSessionSuperUltraCommandSmash and replaced it with <a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=867">MottZilla</a>’s new method of re-reading TOC data for VC0 A, VC0 B, and VC1 A CDROM Controller BIOS firmwares. <strong>This change reduces the time it takes to re-read the TOC data on the backup CD-R or import PS1 disc from 2-10 minutes on the SCPH-1000, SCPH-3000, and some SCPH-3500 japanese consoles to around 30 seconds with 100% reliability!</strong></li>
-<li>Added <a href="#save-game-exploit">save game exploit</a> support for Tekken 3 Japan/USA/PAL thanks to Patchouli (<a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=6714">karehaani</a>) and <a href="https://github.com/socram8888/tonyhax/pull/20">krystalgamer</a>.</li>
-<li>Added <a href="#save-game-exploit">save game exploit</a> support for Tekken 2 Japan (rev 1 only), USA (rev 0 only), and PAL thanks to Patchouli (<a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=671">karehaani</a>) and <a href="https://github.com/socram8888/tonyhax/pull/20">krystalgamer</a>.</li>
-<li>Added <a href="#save-game-exploit">save game exploit</a> support for Downhill Snow Japan thanks to Patchouli (<a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=6714">karehaani</a>).</li>
-</ul>
-<h3 id="version-1.0.6-832022">Version 1.0.6 (8/3/2022)</h3>
-<ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.6i/tonyhax-v1.0.6-international.zip">tonyhax-v1.0.6-international</a></li>
-</ul>
-<p>Changes:</p>
-<ul>
-<li>Added <a href="#save-game-exploit">save game exploit</a> support for Castlevania Chronicle NTSC-J (only the first release, rev 1 is not working right now) (Alex Free) and 1500 Lite Series Castrol Honda Super Bike Racing NTSC-J (Alex Free).</li>
-<li>Added <a href="#save-game-exploit">save game exploit</a> support for Tony Hawk Pro Skater 2 NTSC-J (MottZilla) and 1500 Lite Series Castrol Honda VTR (MottZilla).</li>
-</ul>
-<h3 id="version-1.0.5-7272022">Version 1.0.5 (7/27/2022)</h3>
-<ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.5i/tonyhax-v1.0.5-international.zip">tonyhax-v1.0.5-international</a></li>
-</ul>
-<p>Changes:</p>
-<ul>
-<li>Added <a href="#save-game-exploit">save game exploit</a> support for Doki Oki (NTSC-J), Crash Bandicoot 3 (NTSC-J), and The Legend Of Heroes I&amp;II (NTSC-J). All these save game exploits were found by <a href="http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&amp;u=6714">Patchouli (karehaani)</a>.</li>
-</ul>
-<h3 id="version-1.0.4-7232022">Version 1.0.4 (7/23/2022)</h3>
-<ul>
-<li><a href="https://github.com/alex-free/tonyhax/releases/download/v1.0.4i/tonyhax-v1.0.4-international.zip">tonyhax-v1.0.4-international</a></li>
-</ul>
+<p><a href="changelog.html">About previous versions</a>.</p>
 <h2 id="usage-1">Usage</h2>
-<p>The Tonyhax International loader is the program that is booted on any PS1 or an early PS2 that enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted on your PS1 with a <a href="#romrom-flasher-cd">GameShark/cheat cart</a>, <a href="#freepsxboot-exploit-memory-card-images">flashed memory card</a>, <a href="#save-game-exploit">save game exploit</a>, or <a href="#boot-cd">CD-R</a>. It provides the ability to properly play backup and import discs on all PS1 consoles, and early PS2 consoles (Japanese, USA, and PAL models SCPH-10000-SCPH-39004).</p>
-<p>If you are using <strong>any Japanese console</strong>, at least one real Japanese NTSC-J PS1 game disc is required (any officially licensed Japanese PS1 disc will do). If you are using a <strong>Japanese PS2 console (SCPH-10000-SCPH-3900-)</strong> a Swap Magic Tool is also required. Neither of these are needed if you are using an American or European PS1/PS2 console.</p>
+<p>The Tonyhax International loader is the program that once started enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted with a [flashed cheat cart] (flashed-cheat-cart.html), a <a href="freepsxboot-exploit.html">flashed memory card</a>, a <a href="save-game-exploit.html">save game exploit</a>, a <a href="boot-cd.html">CD-R</a>, or even a <a href="gameshark-code.html">GameShark Code</a>. The Tonyhax International loader provides the ability to properly play backup CD-R and ‘imported region discs’ on all PS1 consoles, and all supported early PS2 consoles (Japanese, USA, and PAL models SCPH-10000-SCPH-39004).</p>
+<p>If you are using <strong>any Japanese console</strong>, at least one real Japanese NTSC-J PS1 game disc is required (any officially licensed Japanese PS1 disc will do). If you are using a <strong>Japanese PS2 console (SCPH-10000-SCPH-39000)</strong> a Swap Magic Tool is also required. Neither of these are needed if you are using an American or European PS1/PS2 console.</p>
 <h3 id="japanese-ps1-console-loader-instructions">Japanese PS1 Console Loader Instructions</h3>
-<p>Boot into the Tonyhax International loader using one of the boot methods below:</p>
+<p>Start the Tonyhax International loader with a supported boot method:</p>
 <ul>
-<li><a href="#romrom-flasher-cd">ROM/ROM Flasher CD</a></li>
-<li><a href="#freepsxboot-exploit-memory-card-images">FreePSXBoot Memory Card Images</a></li>
-<li><a href="#boot-cd">Boot CD</a></li>
-<li><a href="#save-game-exploit">Save Game Exploit</a></li>
+<li><a href="gameshark-code.html">GameShark Code</a></li>
+<li><a href="flashed-cheat-cart.html">ROM/ROM Flasher CD</a></li>
+<li><a href="freepsxboot-exploit.html">FreePSXBoot Memory Card Images</a></li>
+<li><a href="boot-cd.html">Boot CD</a></li>
+<li><a href="save-game-exploit.html">Save Game Exploit</a></li>
 </ul>
 <p>If you see the text <code>Put in a real NTSC-J PSX game disc, then block the lid sensor</code>:</p>
 <ul>
@@ -403,10 +274,11 @@
 </ul>
 <p>It is important to note however that most games that span multiple discs allow you to load a game save created on disc 1 while playing disc 2. This means you just need to save at the last point possible on disc 1, and then you can just boot disc 2 like normal and load your game save created earlier on disc 1. <strong>Some games however do not allow this</strong> as previously mentioned, so for those games you must use the <strong>mid-game hot-swap trick</strong> described above.</p>
 <h3 id="japanese-ps2-console-loader-instructions">Japanese PS2 Console Loader Instructions</h3>
-<p>Available Boot Methods:</p>
+<p>Start the Tonyhax International loader with a supported boot method:</p>
 <ul>
-<li><a href="#boot-cd">Boot CD</a> (I don’t know of anyway to boot this on an unmodified Japanese PS2 but it is available).</li>
-<li><a href="#save-game-exploit">Save game exploit</a></li>
+<li><a href="boot-cd.html">Boot CD</a> (I don’t know of anyway to boot this on an unmodified Japanese PS2 but it is available).</li>
+<li><a href="save-game-exploit.html">Save game exploit</a></li>
+<li><a href="gameshark-code.html">GameShark Code</a></li>
 </ul>
 <p>Japanese PS2 consoles <strong>must have the DVD drive tray front panel removed to use Tonyhax International</strong>. For the SCPH-10000, you can follow the method below (some newer consoles may slightly differ in the way to remove the DVD drive’s front panel).</p>
 <h3 id="removing-the-dvd-drive-tray-front-panel">Removing The DVD Drive Tray Front Panel</h3>
@@ -422,7 +294,7 @@
 <figure>
 <img src="images/ps2-drive-cover-removed.jpg" alt="ps2 drive cover removed" /><figcaption aria-hidden="true">ps2 drive cover removed</figcaption>
 </figure>
-<p>You can now use one of the supported boot methods to start the Tonyhax International loader on the Japanese PS2 console. You will most likely be using the <a href="#save-game-exploit">Save Game Exploit</a>, however you could be using some kind of intermediate boot disc to boot the <a href="#boot-cd">Boot CD</a> as well if you find one that supports Japanese PS1 consoles. Once you see the text <code>Put in a backup/import disc, then press X</code> appear, you need to use a Swap Magic Slide Tool to release the DVD drive to gain access to it without pressing the eject switch. A <a href="https://www.youtube.com/watch?v=Ffv5m52zlEI">video tutorial</a> is available that shows how to use the Swap Magic Tool (in general), although the exact steps are also explained below. Once you use the Swap Magic Tool to swap in your import/backup CD-R while booted in the Tonyhax International loader, just press the cross button on your PS2 or PS1 controller to boot and play your game.</p>
+<p>You can now use one of the supported boot methods to start the Tonyhax International loader on the Japanese PS2 console. You will most likely be using the <a href="save-game-exploit.html">Save Game Exploit</a>, however you could be using some kind of intermediate boot disc to boot the <a href="boot-cd.html">Boot CD</a> as well if you find one that supports Japanese PS1 consoles. Once you see the text <code>Put in a backup/import disc, then press X</code> appear, you need to use a Swap Magic Slide Tool to release the DVD drive to gain access to it without pressing the eject switch. A <a href="https://www.youtube.com/watch?v=Ffv5m52zlEI">video tutorial</a> is available that shows how to use the Swap Magic Tool (in general), although the exact steps are also explained below. Once you use the Swap Magic Tool to swap in your import/backup CD-R while booted in the Tonyhax International loader, just press the cross button on your PS2 or PS1 controller to boot and play your game.</p>
 <p>Important note: <strong>do not eject the PS1 import or backup CD-R from the Japanese PS2 console until your done playing the game</strong>. Unlike American and European consoles (which do not have this limitation), if you do so your game will stop working, and you will have to start Tonyhax International all over again to boot your import/backup CD-R and start playing again.</p>
 <h3 id="using-the-swap-magic-tool">Using the Swap Magic Tool</h3>
 <p>Slide in the Swap Magic Tool like shown in the image below by the arrow. You need to feel around with the Swap Magic Tool to get the hook to latch on internally inside the DVD drive.</p>
@@ -456,26 +328,29 @@
 <li>Download <a href="https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip">PSVModeNeg v1.0.1</a> and extract the file <code>PS1VModeNeg.elf</code>.</li>
 <li>Copy the file <code>PS1VModeNeg.elf</code> to a FAT32 formatted USB flash drive that works with your soft-modded PS2. You can soft-mod your PS2 with <a href="https://www.ps2-home.com/forum/viewtopic.php?t=5208">FreeHDBoot</a>, <a href="https://github.com/CTurt/FreeDVDBoot">FreeDVDBoot</a> or <a href="https://www.ps2-home.com/forum/viewtopic.php?t=1248">FreeMCBoot</a> to be able to use PS1VModeNEG on your PS2 console.</li>
 <li>Using uLaunchELF or wLaunchELF load the <code>PS1VModeNeg.elf</code> file from the <code>mass</code> device (your flash drive).</li>
-<li>Put in the real Japanese PS1 game disc that you are using with a <a href="#save-game-exploit">save game exploit.</a> when in PS1VModeNeg. The video mode will be forced to PAL now in the PS1 mode of your Japanese PS2.</li>
+<li>Put in the real Japanese PS1 game disc that you are using with a <a href="save-game-exploit.html">save game exploit.</a> when in PS1VModeNeg. The video mode will be forced to PAL now in the PS1 mode of your Japanese PS2.</li>
 <li>Playing through your Japanese PS1 game disc may look or act weird in PAL video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a PAL region import disc or PAL region backup CD-R and the PAL PS1 game will boot in PAL video mode.</li>
 </ul>
 <h2 id="americaneuropean-ps1ps2-console-loader-instructions">American/European PS1/PS2 Console Loader Instructions</h2>
+<p>Start the Tonyhax International loader with a supported boot method.</p>
 <p>Available boot methods for American and European PS2 consoles:</p>
 <ul>
-<li><a href="#boot-cd">Boot CD</a> (you can use something like the code breaker pro PS1 disc to boot it first)</li>
-<li><a href="#save-game-exploit">Save game exploit</a></li>
+<li><a href="boot-cd.html">Boot CD</a>.</li>
+<li><a href="save-game-exploit.html">Save game exploit</a></li>
+<li><a href="gameshark-code.html">GameShark Code</a></li>
 </ul>
 <p>Available boot methods for American and European PS1 consoles:</p>
 <ul>
-<li><a href="#romrom-flasher-cd">ROM Flasher CD</a></li>
+<li><a href="gameshark-code.html">GameShark Code</a></li>
+<li><a href="flashed-cheat-cart.html">ROM Flasher CD</a></li>
 <li><a href="#freepsxboot-memory-card-images">FreePSXBoot Memory Card Images</a></li>
-<li><a href="#boot-cd">Boot CD</a></li>
-<li><a href="#save-game-exploit">Save Game Exploit</a></li>
+<li><a href="boot-cd.html">Boot CD</a></li>
+<li><a href="save-game-exploit.html">Save Game Exploit</a></li>
 </ul>
 <p>Once you see the text <code>Put in a backup/import disc</code> appear, eject the DVD drive (PS2) or open the CD drive (PS1).</p>
 <ul>
-<li>If you are booting the Tonyhax International <a href="#boot-cd">Boot CD</a>, you’ll want to remove the spring or whatever you have blocking down the lid sensor to “open” the CD drive and stop the disc from spinning, allowing you to remove the Boot CD from the console’s CD drive (PS1) or DVD drive (PS2).</li>
-<li>If you are booting Tonyhax International via a <a href="#save-game-exploit">Save Game Exploit</a>, after ejecting the DVD drive (PS2) or opening the CD drive (PS1) the real PS1 game disc you used with a save game exploit will stop spinning, allowing you to remove it from the console’s CD drive (PS1) or DVD drive (PS2).</li>
+<li>If you are booting the Tonyhax International <a href="boot-cd.html">Boot CD</a>, you’ll want to remove the spring or whatever you have blocking down the lid sensor to “open” the CD drive and stop the disc from spinning, allowing you to remove the Boot CD from the console’s CD drive (PS1) or DVD drive (PS2).</li>
+<li>If you are booting Tonyhax International via a <a href="save-game-exploit.html">Save Game Exploit</a>, after ejecting the DVD drive (PS2) or opening the CD drive (PS1) the real PS1 game disc you used with a save game exploit will stop spinning, allowing you to remove it from the console’s CD drive (PS1) or DVD drive (PS2).</li>
 </ul>
 <p>All other boot methods don’t have a disc usually in the drive already, so there is no disc to remove. With no disc currently in your console, you can now put in the backup CD-R or import PSX game disc you want to play. Close the CD drive (PS1) or DVD drive (PS2). The console will detect that the drive has been closed and will spin up your disc. The console will then send some commands and boot the disc.</p>
 <h2 id="playing-games-that-span-multiple-discs-on-americaneuropean-ps1ps2-consoles">Playing Games That Span Multiple Discs On American/European PS1/PS2 Consoles</h2>
@@ -487,7 +362,7 @@
 <li>Copy the file <code>PS1VModeNeg.elf</code> to a FAT32 formatted USB flash drive that works with your soft-modded PS2. You can soft-mod your PS2 with <a href="https://www.ps2-home.com/forum/viewtopic.php?t=5208">FreeHDBoot</a>, <a href="https://github.com/CTurt/FreeDVDBoot">FreeDVDBoot</a> or <a href="https://www.ps2-home.com/forum/viewtopic.php?t=1248">FreeMCBoot</a> to be able to use PS1VModeNEG on your PS2 console.</li>
 <li>Using uLaunchELF or wLaunchELF load the <code>PS1VModeNeg.elf</code> file from the <code>mass</code> device (your flash drive).</li>
 <li>Using uLaunchELF or wLaunchELF load the <code>PS1VModeNeg.elf</code> file from the <code>mass</code> device (your flash drive).</li>
-<li>Put in the real American PS1 game disc that you are using with a <a href="#save-game-exploit">save game exploit.</a> when in PS1VModeNeg. The video mode will be forced to PAL now in the PS1 mode of your American PS2.</li>
+<li>Put in the real American PS1 game disc that you are using with a <a href="save-game-exploit.html">save game exploit.</a> when in PS1VModeNeg. The video mode will be forced to PAL now in the PS1 mode of your American PS2.</li>
 <li>Playing through your American PS1 game disc may look or act weird in PAL video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a PAL region import disc or PAL region backup CD-R and the PAL PS1 game will boot in PAL video mode.</li>
 </ul>
 <h2 id="playing-japaneseamerican-games-on-pal-ps2-consoles">Playing Japanese/American Games On PAL PS2 Consoles</h2>
@@ -496,379 +371,8 @@
 <li>Download <a href="https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip">PSVModeNeg v1.0.1</a> and extract the file <code>PS1VModeNeg.elf</code>.</li>
 <li>Copy the file <code>PS1VModeNeg.elf</code> to a FAT32 formatted USB flash drive that works with your soft-modded PS2. You can soft-mod your PS2 with <a href="https://www.ps2-home.com/forum/viewtopic.php?t=5208">FreeHDBoot</a>, <a href="https://github.com/CTurt/FreeDVDBoot">FreeDVDBoot</a> or <a href="https://www.ps2-home.com/forum/viewtopic.php?t=1248">FreeMCBoot</a> to be able to use PS1VModeNEG on your PS2 console.</li>
 <li>Using uLaunchELF or wLaunchELF load the <code>PS1VModeNeg.elf</code> file from the <code>mass</code> device (your flash drive).</li>
-<li>Put in the real PAL PS1 game disc that you are using with a <a href="#save-game-exploit">save game exploit.</a> when in PS1VModeNeg. The video mode will be forced to NTSC now in the PS1 mode of your PAL PS2.</li>
+<li>Put in the real PAL PS1 game disc that you are using with a <a href="save-game-exploit.html">save game exploit.</a> when in PS1VModeNeg. The video mode will be forced to NTSC now in the PS1 mode of your PAL PS2.</li>
 <li>Playing through your PAL PS1 game disc may look or act weird in NTSC video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a NTSC disc and the NTSC PS1 import or backup disc will boot in NTSC video mode.</li>
-</ul>
-<h2 id="romrom-flasher-cd">Rom/ROM Flasher CD</h2>
-<p>You can overwrite the contents of a GameShark, Action Reply, or other PS1 cheat cartridge with the Tonyhax International ROM using a simple flasher CD-R that you burn or a combination of a home-made serial to USB cable, PC, and special program booted on your target PS1 console that supports flashing cheat cartridges over serial.</p>
-<p>When you turn on any PS1 console with the flashed GameShark/Action Reply/cheat device installed to it’s parallel port at the back the console, the system will instead boot into the Tonyhax International loader, rather then the BIOS/Shell (Sony screens/Memory Card/CD Player menu). A PS1 cheat cartridge flashed with the Tonyhax International ROM is essentially a plug and play modchip without any hardware modifications whatsoever.</p>
-<h3 id="requirements">Requirements</h3>
-<ul>
-<li>GameShark, Action Reply, or other cheat cart that you are willing to overwrite with the Tonyhax International ROM.</li>
-<li>A PS1 console with a parallel port for installing the GameShark or other cheat cart (SCPH-1000-SCPH-7502).</li>
-<li>Blank CD-R (if burning a ROM flasher CD) or a serial cable, PC, and software which supports flashing a PS1 cheat cartridge over serial.</li>
-</ul>
-<h3 id="how-to-flash-your-gamesharkaction-replycheat-cart">How To Flash Your GameShark/Action Reply/Cheat Cart</h3>
-<p>Inside the Tonyhax International releases (<a href="#downloads">download</a> above) in the <code>rom</code> directory are the following files:</p>
-<ul>
-<li>tonyhax-rom-flasher.bin</li>
-<li>tonyhax-rom-flasher.cue</li>
-<li>tonyhax-v1.1.0-international.rom</li>
-</ul>
-<p>The BIN+CUE files can be burned to a CD-R. The BIN+CUE files contain the <a href="https://github.com/danhans42/nxflash">NXFlash</a> PS1 executable with the <code>tonyhax-v1.0.8-international.rom</code> file. This means when you boot the burned flasher CD-R on your PS1 console, you can connect your GameShark/cheat device and press the <code>R2</code> button (<code>RE-DETECT EEPROM</code>) to allow NXFLASH to detect the newly connected cheat cart. Next press the <code>start</code> button (<code>FLASH EEPROM FROM CD</code>), and then press X to flash your GameShark/Cheat device. Now you can simply reset or power off then power on your PS1 console and it will boot Tonyhax International from the GameShark/cheat cart immediately.</p>
-<figure>
-<img src="images/rom-flasher-cd-1.jpg" alt="rom flasher cd 1" /><figcaption aria-hidden="true">rom flasher cd 1</figcaption>
-</figure>
-<figure>
-<img src="images/rom-flasher-cd-2.jpg" alt="rom flasher cd 2" /><figcaption aria-hidden="true">rom flasher cd 2</figcaption>
-</figure>
-<p>If you have an old enough PlayStation console you can simply use the CD Player Swap Trick method to start the NXFlasher CD containing the Tonyahx International ROM. These PlayStation models have the CD Player Swap Trick:</p>
-<ul>
-<li>All SCPH-1000 consoles.</li>
-<li>Early SCPH-3000 consoles. Compatible consoles have System BIOS v1.1J and CDROM Controller VC0B (example serial number: <code>A6956171</code>. Incompatible consoles have System BIOS v2.1J and CDROM Controller VC1B (example serial number: <code>A7543968</code>).</li>
-<li>Early SCPH-1001 consoles. These consoles have a serial number lower then <code>U592XXXX</code> (where X can be any number) according to the original <a href="https://gamefaqs.gamespot.com/ps/916392-playstation/faqs/4708">Swap Trick Guide</a> from 1996. These consoles are either System BIOS v2.0A and CDROM Controller VC1A (example serial number: <code>U5361469</code>, July 1995 manufacture date) or System BIOS v2.1A and CDROM Controller VC1A (example serial number: <code>U5860989</code>, October 1995 manufacture date).</li>
-<li>Early SCPH-1002 consoles. No serial number based info is available for this console model at this time. There also appears to be no date of manufacture available (like Japanese consoles), so it is truly a roll of the dice if a specific SCPH-1002 console has the CD Player Swap Trick or not.</li>
-</ul>
-<p>To boot the ROM Flasher CD with the CD Player Swap Trick:</p>
-<ul>
-<li>Turn on the PlayStation with no game in it.</li>
-<li>Start the CD player.</li>
-<li>Open the PlayStation’s lid, and put in a real PlayStation game that matches your console’s region and plays normally.</li>
-<li>Find something to block the lid sensor. The real PlayStation game will start and then stop spinning.</li>
-<li>Once the real PlayStation game stops spinning, put in your burned ROM Flasher CD-R disc.</li>
-<li>Exit the CD Player menu, and wait for NXFlash to start.</li>
-</ul>
-<h2 id="freepsxboot-exploit-memory-card-images">FreePSXBoot Exploit Memory Card Images</h2>
-<p>Memory card files are included in the <code>freepsxboot</code> directory found in the Tonyhax International releases (<a href="#downloads">downloadable</a> above) for <strong>all BIOS versions</strong>. These memory card files must be ‘restored’ (a.k.a. written raw) to a PSX memory card. One such way to do this is to use <a href="https://www.ps2-home.com/forum/viewtopic.php?t=116">Memory Card Annihilator v2.0</a> with a modded PS2 console and USB flash drive containing the memory card file. Please note that at this time Memory Card Annihilator v2.0 does not work on the SCPH-10000 or SCPH-18000 due to not having an expansion bay (which is not accounted for by the software). Anyways for all SCPH-30000 and newer PS2 consoles here are the steps below to flash your PS1 memory card with the Memory Card Annihilator homebrew software:</p>
-<h3 id="requirements-1">Requirements</h3>
-<ul>
-<li>PS2 console that can run <a href="https://www.psx-place.com/resources/wlaunchelf.713/">wLaunchELF/uLaunchELF and</a> <a href="https://www.ps2-home.com/forum/viewtopic.php?t=116">Memory Card Annihilator v2.0</a>. You need to soft-mod with <a href="https://www.ps2-home.com/forum/viewtopic.php?t=5208">FreeHDBoot</a>, <a href="https://github.com/CTurt/FreeDVDBoot">FreeDVDBoot</a> or <a href="https://www.ps2-home.com/forum/viewtopic.php?t=1248">FreeMCBoot</a> to be able to use these programs on your PS2 console.</li>
-<li>Any PS1 console.</li>
-<li>An authentic PS1 memory card you are willing to dedicate to the FreePSXBoot exploit.</li>
-<li>A fat 32 formatted USB flash drive that your PS2 console can read (<strong>not all USB flash drives seem to work</strong>).</li>
-</ul>
-<h3 id="flashing-the-ps1-memory-card-image-to-a-ps1-memory-card">Flashing The PS1 Memory Card Image To A PS1 Memory Card</h3>
-<p>Copy the correct memory card file for your PSX console’s BIOS version from the <code>freepsxboot</code> directory found in Tonyhax international releases downloadable above to a FAT32 formatted USB flash drive that your PS2 console can read. <strong>It is highly recommend to use the slot 2 memory card files as they do not require you to remove the memory card once booted into the Tonyhax International loader.</strong></p>
-<p>Console models and the BIOS versions they contain are listed below:</p>
-<ul>
-<li>SCPH-1000 - BIOS-1.0-1994-09-22-I</li>
-<li>SCPH-1001 - BIOS-2.0-1995-05-07-A, BIOS-2.1-1995-07-17-A, or BIOS-2.2-1995-12-04-A</li>
-<li>SCPH-1002 - BIOS-2.0-1995-05-10-E, BIOS-2.1-1995-07-17-E, or BIOS-2.2-1995-12-04-E</li>
-<li>SCPH-3000 - BIOS-1.1-1995-01-22-I or BIOS-2.1-1995-07-17-I</li>
-<li>SCPH-3500 - BIOS-2.1-1995-07-17-I</li>
-<li>SCPH-5000 - BIOS-2.2-1995-12-04-I</li>
-<li>SCPH-5001 - BIOS-3.0-1996-11-18-A</li>
-<li>SCPH-5003 - BIOS-2.2-1995-12-04-A</li>
-<li>SCPH-5500 - BIOS-3.0-1996-09-09-I</li>
-<li>SCPH-5501 - BIOS-3.0-1996-11-18-A</li>
-<li>SCPH-5502 - BIOS-3.0-1997-01-06-E</li>
-<li>SCPH-5503 - BIOS-3.0-1996-11-18-A</li>
-<li>SCPH-5552 - BIOS-3.0-1997-01-06-E</li>
-<li>SCPH-5903 - BIOS-2.2-1995-12-04-A</li>
-<li>SCPH-7000 - BIOS-4.0-1997-08-18-I</li>
-<li>SCPH-7001 - BIOS-4.1-1997-12-16-A</li>
-<li>SCPH-7002 - BIOS-4.1-1997-12-16-E</li>
-<li>SCPH-7003 - BIOS-3.0-1996-11-18-A</li>
-<li>SCPH-7500 - BIOS-4.0-1997-08-18-I</li>
-<li>SCPH-7501 - BIOS-4.1-1997-12-16-A</li>
-<li>SCPH-7502 - BIOS-4.1-1997-12-16-E</li>
-<li>SCPH-7503 - BIOS-4.1-1997-12-16-A</li>
-<li>SCPH-9000 - BIOS-4.0-1997-08-18-I</li>
-<li>SCPH-9001 - BIOS-4.1-1997-12-16-A</li>
-<li>SCPH-9002 - BIOS-4.1-1997-12-16-E</li>
-<li>SCPH-9003 - BIOS-4.1-1997-12-16-A</li>
-<li>SCPH-9903 - BIOS-4.1-1997-12-16-A</li>
-<li>SCPH-100 - BIOS-4.3-2000-03-11-I</li>
-<li>SCPH-101 - BIOS-4.4-2000-03-24-A or BIOS-4.5-2000-05-25-A</li>
-<li>SCPH-102 - BIOS-4.4-2000-03-24-E or BIOS-4.5-2000-05-25-E</li>
-<li>SCPH-103 - BIOS-4.5-2000-05-25-A</li>
-</ul>
-<p>If you have a PSX console that can have multiple different BIOS versions, you may have to try each different memory card file one by one until you figure out what BIOS version you need for your PSX console.</p>
-<p>After the correct memory card file is copied to the USB flash drive that your PS2 can read:</p>
-<ul>
-<li>Download the <a href="https://www.ps2-home.com/forum/viewtopic.php?t=116">Memory Card Annihilator v2.0</a> and extract it’s .elf file.</li>
-<li>Copy the Memory Card Annihilator v2 .elf file to a FAT32 formatted USB flash drive that your PS2 console can read.</li>
-<li>Insert the PSX memory card and USB flash drive with the PS2 console off. Boot your modded PS2 (FreeHDBoot or FreeMCBoot, or something like that is required) and start the uLaunchElf program.</li>
-<li>Navigate to the “mass” device and launch the Memory Card Annihilator v2 .elf file you previosly copied to the USB flash drive.</li>
-<li>Select your PS1 memory card in the menu and then select restore. In the file picker navigate to the memory card file you copied to the USB flash drive previously.</li>
-<li>Wait for the restore to complete and press X. Remove your memory card and put it into either Slot 1 or Slot 2 of your PS1 console depending on what memory card image you use.</li>
-</ul>
-<p>Now you can turn on your PSX console without a disc in it, and then select the <code>Memory Card</code> option in the PS1’s startup menu. This will start the Tonyhax international loader. <strong>At this point, if you are using a FreePSXBoot memory card in slot 1 you must remove the FreePSXBoot memory card from slot 1 once the loader starts to ensure successful booting of your backup or import. If you are using a FreePSXBoot memory card in slot 2 you can just leave it in your console at all times</strong>, no need to remove it! It will be disabled from use after booting a game with Tonyhax International.</p>
-<h2 id="boot-cd">Boot CD</h2>
-<p>CD BIN+CUE files containing the Tonyhax International loader are available in each Tonyhax International release. The Boot CD can be booted by a swap trick, or an unofficial boot disc (i.e. PSX Change v2). Inside the Tonyhax International releases (downloadable above) in the <code>boot-cd</code> directory are the following files:</p>
-<ul>
-<li>tonyhax-boot-cd-europe.bin</li>
-<li>tonyhax-boot-cd-europe.cue</li>
-<li>tonyhax-boot-cd-japan.bin</li>
-<li>tonyhax-boot-cd-japan.cue</li>
-</ul>
-<p>If you have a SCPH-102 use the <code>tonyhax-boot-cd-europe</code> BIN+CUE files. For every other console you can use the <code>tonyhax-boot-cd-japan</code> BIN+CUE file set.</p>
-<h2 id="cd-player-swap-trick">CD Player Swap Trick</h2>
-<p>If you have an old enough PlayStation console you can just use the CD Player Swap Trick to start the Tonyhax International Boot CD. This is in fact what I had in mind when I added the initial Boot CD support to the original Tonyhax. These PlayStation models have the CD Player Swap Trick:</p>
-<ul>
-<li>All SCPH-1000 consoles.</li>
-<li>Early SCPH-3000 consoles. Compatible consoles have System BIOS v1.1J and CDROM Controller VC0B (example serial number: <code>A6956171</code>. Incompatible consoles have System BIOS v2.1J and CDROM Controller VC1B (example serial number: <code>A7543968</code>).</li>
-<li>Early SCPH-1001 consoles. These consoles have a serial number lower then <code>U592XXXX</code> (where X can be any number) according to the original <a href="https://gamefaqs.gamespot.com/ps/916392-playstation/faqs/4708">Swap Trick Guide</a> from 1996. These consoles are either System BIOS v2.0A and CDROM Controller VC1A (example serial number: <code>U5361469</code>, July 1995 manufacture date) or System BIOS v2.1A and CDROM Controller VC1A (example serial number: <code>U5860989</code>, October 1995 manufacture date).</li>
-<li>Early SCPH-1002 consoles. No serial number based info is available for this console model at this time. There also appears to be no date of manufacture available (like Japanese consoles), so it is truly a roll of the dice if a specific SCPH-1002 console has the CD Player Swap Trick or not.</li>
-</ul>
-<p>To boot the Tonyhax International Boot CD-R with the CD Player Swap Trick:</p>
-<ul>
-<li>Turn on the PlayStation with no game in it.</li>
-<li>Start the CD player.</li>
-<li>Open the PlayStation’s lid, and put in a real PlayStation game that matches your console’s region and plays normally.</li>
-<li>Find something to block the lid sensor. The real PlayStation game will start and then stop spinning.</li>
-<li>Once the real PlayStation game stops spinning, put in your burned Tonyhax International Boot CD-R disc.</li>
-<li>Exit the CD Player menu, and wait for the Tonyhax International loader to start.</li>
-</ul>
-<h2 id="save-game-exploit">Save Game Exploit</h2>
-<p>The original way to boot the Tonyhax International loader is with <em>a special game save file</em> that is placed on a PS1 memory card that you load while playing a <a href="#save-game-exploit-supported-games-list">specific, supported authentic PS1 game disc</a> on your console. To use this boot method, you need:</p>
-<ul>
-<li><p>A <a href="#save-game-exploit-supported-games-list">supported authentic/‘black’ PS1 game disc</a> that your console can boot normally.</p></li>
-<li><p>A softmodded PS2 console capable of copying files from a USB flash drive or other storage device to a PS1 memory card. There are alternative methods to place the required files on a PS1 memory card with other hardware available, but the softmodded PS2 method is what is documented here in these instructions and what I use.</p></li>
-<li><p>A PS1 memory card with enough space for the special save game exploit file and for the Tonyhax International loader filed.</p></li>
-</ul>
-<p>You need to copy the <em>Tonyhax International Loader</em> file and the <em>Save Game Exploit</em> file (specific to your exact exploitable PSX game disc) to the PS1 memory card. Then you can load the <em>Save Game Exploit</em> file in a specific way tp trigger the exploit and start the Tonyhax International loader. Described below are 2 different methods to copy these files to a PS1 memory card. One involves using a PS2, the other involves using special hardware that allows you to write to PS1 memory cards connected directly to your computer.</p>
-<h3 id="ps2-installation-method">PS2 Installation Method</h3>
-<p>You can use a PS2 console to copy the save game exploit files to a PS1 memory card from a USB flash drive.</p>
-<p>Requirements:</p>
-<ul>
-<li><p>A FAT32 formatted USB flash drive that your PS2 console can read. Please note that not all USB flash drives seem to work with PS2 consoles (due to iffy USB 1.1 support found in some newer USB flash drives). You may need to do a bit of trial and error testing to find a USB flash drive that works.</p></li>
-<li><p>A soft-modded (or modchipped) PS2 console that can run uLaunchELF (Models newer then the SCPH-39004 can therefore be used for copying the files to the PS1 memory card, but they can not be used to boot into Tonyhax International). You could do this with <a href="https://www.ps2-home.com/forum/viewtopic.php?t=5208">FreeHDBoot</a> or <a href="https://www.ps2-home.com/forum/viewtopic.php?t=1248">FreeMCBoot</a>.</p></li>
-</ul>
-<p>You want to <strong>use the RAW save game exploit file for your exploitable game (in the <code>entrypoints</code> directory) and the RAW loader file (in the <code>loader</code> directory)</strong> when using this installation method. The RAW filenames are in the <a href="#save-game-exploit-supported-games-list">list below</a>.</p>
-<p>Installation:</p>
-<ul>
-<li><p>Copy the <code>Tonyhax International Loader RAW File</code> file and the <code>Save Game Exploit RAW</code> file to the FAT32 USB flash drive using a computer.</p></li>
-<li><p>Eject the USB flash drive from your computer and insert it into your PS2 console. Insert a PS1 memory card into your PS2 as well.</p></li>
-<li><p>Start the uLaunchElf homebrew program on your PS2 console. Navigate to the <code>mass</code> device (this is your USB flash drive) with the <code>DPAD</code> on the controller, then select it with the <code>circle</code> button.</p></li>
-<li><p>Using the <code>DPAD</code> to navigate, press the <code>cross</code> button on the controller to highlight both the <code>Tonyhax International Loader RAW</code> file and the <code>Save Game Exploit RAW</code> file that you previously copied to the USB flash drive. Press the <code>R1</code> button on the controller to make the file operations menu appear in uLaunchELF. Use the <code>DPAD</code> to move to the copy function and then press the <code>circle</code> button to select it.</p></li>
-<li><p>Press the <code>triangle</code> button to navigate out of the <code>mass</code> device. Use the <code>DPAD</code> and the circle button to navigate into either the <code>MC0</code> (if the PS1 memory card is in slot 1 of the PS2) or <code>MC1</code> (if the PS1 memory card is in slot 2 of the PS2) device.</p></li>
-<li><p>Press the <code>R1</code> button to again make the file operations menu appear in uLaunchElF. Use the <code>DPAD</code> to navigate to the paste option and press the <code>circle</code> button to finally paste both the Tonyhax International Loader RAW File<code>file and the</code>Save Game Exploit RAW<code>file. Now you can press the</code>triangle` button to navigate out of the PS1 memory card device, and remove the memory card from the PS2 console (if you want to use it in a different console).</p></li>
-</ul>
-<h3 id="ps3-memory-card-usb-adapterdexdrivecomputer-installation-method">PS3 Memory Card USB Adapter/DexDrive/Computer Installation Method</h3>
-<p>You can use a Dex Drive (or similar hardware which connects a PS1 memory card to your computer) in combination with a visual memory card editor (such as <a href="http://onorisoft.free.fr/retro.htm?psx/psx.htm">OrionSoft’s PS1 Memory Card Manager</a> or <a href="https://archive.org/details/inter-act-dex-plorer-ver.-1.10.950">Dex-plorer</a>), to place the save game exploit and Tonyhax International loader files on the PS1 memory card. This method requires:</p>
-<ul>
-<li>A DexDrive, PS3 Memory Card USB adapter, or other hardware that allows you to write and modify a PS1 memory card with a computer.</li>
-<li>Software such as <a href="http://onorisoft.free.fr/retro.htm?psx/psx.htm">OrionSoft’s PS1 Memory Card Manager</a> (for the PS3 Memory Card USB adapter) or <a href="https://archive.org/details/inter-act-dex-plorer-ver.-1.10.950">Dex-plorer</a> (for the DexDrive), or <a href="https://github.com/ShendoXT/memcardrex">MemcardRex</a> (for general memory card file managment and manipulation).</li>
-</ul>
-<p>You want to <strong>use the MCS save game exploit file for your exploitable game (in the <code>entrypoints</code> directory) and the MCS loader file (in the <code>loader</code> directory)</strong> when using this installation method. The MCS filenames are in the list below.</p>
-<h2 id="save-game-exploit-supported-games-list">Save Game Exploit Supported Games List</h2>
-<p><em>Notes:</em></p>
-<ul>
-<li><p>Demo versions of games do not contain load/save game functions and are hence not exploitable.</p></li>
-<li><p>Some games have multiple different versions of the same regional release (Rev 0, Rev 1, etc.). Sometimes, one save game exploit file won’t work on both versions and multiple different save game exploit files are required. Some specific game/version combinations also do not have a save game exploit file available yet, this is a work in progress. Please see each listing below to see if this is the case for your specific game.</p></li>
-<li><p>If you are using a Japanese PSX, it is recommended that you power off the console, put in the Japanese version of the game that has a save game exploit file available, block the lid sensor, and then turn on the console and have it boot the authentic PSX game disc which has a supported save game exploit.</p></li>
-<li><p>The <em>Exploit Instructions</em> in each game listing below explain the game specific steps to trigger the exploit which starts the Tonyhax International loader.</p></li>
-<li><p>The <em>Save Game Exploit</em> file can be on a memory card inserted in slot 1 or slot 2 of your console (as long as the game supports loading a save game file from slot 2, <strong>otherwise it must be in slot 1</strong>).</p></li>
-<li><p>The <em>Tonyhax International Loader</em> file <strong>must be on a memory card inserted in slot 1</strong> of your console.</p></li>
-</ul>
-<h3 id="brunswick-circuit-pro-bowling">Brunswick Circuit Pro Bowling</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/13370/">USA</a>, <a href="http://redump.org/disc/27347/">Europe</a>.</li>
-<li>Versions With Save Game Exploit Support: USA, Europe.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BASLUS-00571</code> (USA) or <code>entrypoints/BESLES-01376</code> (Europe).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/brunswick1-us.mcs</code> (USA) or <code>entrypoints/brunswick1-eu.mcs</code> (Europe).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code></li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code></li>
-<li>Exploit Instructions: At the main menu select <code>Load Game</code> and then the <em>Save Game Exploit</em> file to trigger the exploit.</li>
-</ul>
-<h3 id="brunswick-circuit-pro-bowling-2">Brunswick Circuit Pro Bowling 2</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/18447/">USA</a>, <a href="http://redump.org/disc/11481/">Europe</a>.</li>
-<li>Versions With Save Game Exploit Support: USA, Europe.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BASLUS-00856</code> (USA) or <code>entrypoints/BESLES-02618</code> (Europe).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/brunswick2-us.mcs</code> (USA) or <code>entrypoints/brunswick2-eu.mcs</code> (Europe).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit Instructions: At the main menu select <code>Load Game</code> and then the <em>Save Game Exploit</em> file to trigger the exploit.</li>
-</ul>
-<h3 id="castlevania-chronicles">Castlevania Chronicles</h3>
-<ul>
-<li>Versions Tested: Japan (<a href="http://redump.org/disc/7481/">Rev 0</a>, <a href="http://redump.org/disc/11230/">Rev 1</a>), <a href="http://redump.org/disc/9474/">USA</a>, <a href="http://redump.org/disc/1117/">Europe</a>.</li>
-<li>Versions With Save Game Exploit Support: Japan Rev 0, USA. <strong>Japan Rev 1 and Europe versions are not yet supported</strong>.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BISLPM-86754DRACULA</code> (Japan) or <code>entrypoints/BASLUS-01384DRACULA</code> (USA).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/cc-jp.mcs</code> (Japan Rev 0) or <code>entrypoints/cc-us.mcs</code> (USA).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit Instructions: At the title screen, select <code>ORIGINAL MODE</code>. Go through the intro text, and at the next title screen select <code>START GAME</code> to trigger the exploit.</li>
-</ul>
-<h3 id="castrol-honda-super-bike-racing">Castrol Honda Super Bike Racing</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/33156/">Japan</a>, <a href="http://redump.org/disc/78231/">USA</a>, <a href="http://redump.org/disc/25546/">Europe</a>.</li>
-<li>Versions With Save Game Exploit Support: Japan, USA, Europe.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BISLPM-86489CHSv1</code> (Japan), <code>entrypoints/BASLUS-00882CHSv1</code> (USA), or <code>entrypoints/BESLES_01182CHSv1</code> (Europe).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/castrolsb-jp.mcs</code> (Japan), <code>entrypoints/castrolsb-us.mcs</code> (USA), or <code>entrypoints/castrolsb-eu.mcs</code> (Europe).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit instructions: If you are using the ‘Europe’ version select the English language in the language selection screen. On the main menu, choose Options. Select <code>Load Game</code> and load the <em>Save Game Exploit</em> file. Back at the main menu, select either the <code>Single Race</code> or <code>Championship</code> option to trigger the exploit.</li>
-</ul>
-<h3 id="castrol-honda-vtr">Castrol Honda VTR</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/37769/">Japan</a>, <a href="http://redump.org/disc/29332/">Europe</a>.</li>
-<li>Versions With Save Game Exploit Support: Japan, Europe.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BISLPM-86922CHSVTRv1</code> (Japan), <code>entrypoints/BESLES-02942CHSVTRv1</code> (Europe).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/castrolvtr-jp.mcs</code> (Japan), <code>entrypoints/castrolvtr-eu.mcs</code> (Europe).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit instructions: If you are using the ‘Europe’ version select the English language in the language selection screen. On the main menu, choose Options. Select <code>Load Game</code> and load the <em>Save Game Exploit</em> file. Back at the main menu, select either the <code>Single Race</code> or <code>Championship</code> option to trigger the exploit.</li>
-</ul>
-<h3 id="cool-boarders-4">Cool Boarders 4</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/4556/">Japan</a>, <a href="http://redump.org/disc/5398/">USA</a>, <a href="http://redump.org/disc/29332/">Europe</a>.</li>
-<li>Versions With Save Game Exploit Support: USA, Europe. <strong>Japan version is not yet supported.</strong></li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BASCUS-9455916</code> (USA), <code>entrypoints/BESCES-0228316</code> (Europe).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/coolbrd4-us.mcs</code> (USA), <code>entrypoints/coolbrd4-eu.mcs</code> (Europe).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit Instructions: When you get to the title screen, it should say that the records and settings have been automatically loaded. Select the <code>ONE PLAYER</code> option to trigger the exploit.</li>
-</ul>
-<h3 id="crash-bandicoot-2-cortex-strikes-back">Crash Bandicoot 2: Cortex Strikes Back</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/2688/">Japan</a>, <a href="http://redump.org/disc/2688/">USA</a>, <a href="http://redump.org/disc/1056/">Europe</a>, <a href="http://redump.org/disc/14827/">Europe EDC</a>.</li>
-<li>Versions With Save Game Exploit Support: Japan, USA, Europe, Europe EDC.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BISCPS-1004700000000</code> (Japan), <code>entrypoints/BASCUS-9415400047975</code> (USA), <code>entrypoints/BESCES-0096700765150</code> (Europe/Europe EDC).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/crash2-jp.mcs</code> (Japan), <code>entrypoints/crash2-us.mcs</code> (USA), <code>entrypoints/crash2-eu.mcs</code> (Europe Rev 0 <strong>and</strong> Europe Rev 1).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit Instructions: At the titlescreen select the <code>LOAD GAME</code> option. In the save game list, select the <em>Save Game Exploit</em> file (named TONYHAX) to trigger the exploit.</li>
-</ul>
-<h3 id="crash-bandicoot-3-warped">Crash Bandicoot 3: Warped</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/3576/">Japan</a>, <a href="http://redump.org/disc/5006/">USA</a>, <a href="http://redump.org/disc/248/">Europe</a>.</li>
-<li>Versions With Save Game Exploit Support: USA, Europe. <strong>Japan version is not yet supported.</strong></li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BASCUS-9424400000000</code> (USA), <code>entrypoints/BESCES-0142000000000</code> (Europe).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/crash3-us.mcs</code> (USA), <code>entrypoints/crash3-eu.mcs</code> (Europe).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit Instructions: At the titlescreen select the <code>LOAD GAME</code> option. In the save game list, select the <em>Save Game Exploit</em> file (named TONYHAX) to trigger the exploit.</li>
-</ul>
-<h3 id="dokiou-ki">Dokiou-ki</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/3982/">Japan</a>.</li>
-<li>Versions With Save Game Exploit Support: Japan.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BISLPS-00130DOKIOH</code> (Japan).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/dokiou-ki-jp.mcs</code> (Japan).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code></li>
-<li>Exploit Instructions: At the title screen, load the <em>Save Game Exploit</em> file. If you don’t know Japanese, you can just keep spamming the confirm button (<code>O</code>) to navigate through the menu and load the <em>Save Game Exploit</em> file.</li>
-</ul>
-<h3 id="downhill-snow">Downhill Snow</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/34593/">Japan</a>.</li>
-<li>Versions With Save Game Exploit Support: Japan.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BISLPS-01391SKI00S</code> (Japan).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/downhill-snow-jp.mcs</code> (Japan).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/doki-oki-jp.mcs</code>.</li>
-<li>Exploit Instructions: At the title screen, select <code>SCENARIO</code>, then <code>CONTINUE</code>. In the memory card file display screen select the <em>Save Game Exploit</em> file. After loading the save game exploit file, select <code>CONFIG</code>, then <code>RANKING</code>, then <code>Moguls</code>. <strong>Immeditely after select Moguls press the right directional key until the blue screen appears, then let go of all buttons on the controller.</strong></li>
-</ul>
-<h3 id="final-fantasy-ix-disc-1">Final Fantasy IX (Disc 1)</h3>
-<p><em>Note</em> Final Fantasy IX has 2 different types of exploits. Exploit type A works on consoles with BIOS versions 1.0-2.0. Exploit type B works on all newer BIOS versions (v2.1 to 5.0).</p>
-<p>Consoles with BIOS v1.0-v2.0:</p>
-<ul>
-<li>All SCPH-1000s.</li>
-<li>Very early SCPH-3000s, SCPH-1001s, and SCPH-1002s (the ones susceptible to the <a href="#cd-player-swap-trick">CD Player Swap Trick</a>).</li>
-</ul>
-<p>Consoles with BIOS v2.1-v5.0:</p>
-<ul>
-<li><p>Late SCPH-3000s, SCPH-1001s, SCPH-1002s, and <strong>all newer models</strong> (including PS2s) need to use the type B exploit for Final Fantasy IX.</p></li>
-<li><p>Versions Tested: <a href="http://redump.org/disc/1968/">Japan</a>, <a href="http://redump.org/disc/73/">USA</a>, <a href="http://redump.org/disc/1113/">Spain</a>, <a href="http://redump.org/disc/2714/">Italy</a>, <a href="http://redump.org/disc/737/">Germany</a>, <a href="http://redump.org/disc/2455/">France</a>, <a href="http://redump.org/disc/2371/">Europe</a>.</p></li>
-<li><p>Versions With Save Game Exploit Support: Japan, USA. <strong>Spain, Italy, Germany, France, and Europe version are not yet supported</strong>.</p></li>
-<li><p>Save Game Exploit RAW file (Type A Exploit for BIOS v1.0, v1.1, and v2.0 PS1 consoles): <code>entrypoints/FF9-A-JP/BISLPS-0200000000-00</code> (Japan) or <code>entrypoints/FF9-A-US/BASLUS-0125100000-00</code> (USA).</p></li>
-<li><p>Save Game Exploit RAW file (Type B Exploit for BIOS v2.1 and above, including all PS2s): <code>entrypoints/FF9-B-JP/BISLPS-0200000000-00</code> (Japan) or <code>entrypoints/FF9-B-US/BASLUS-0125100000-00</code> (USA).</p></li>
-<li><p>Save Game Exploit MCS file (Type A Exploit for BIOS v1.0, v1.1, and v2.0 PS1 consoles): <code>entrypoints/FF9-A-JP/ff9-a-jp.mcs</code> (Japan) or <code>entrypoints/FF9-A-US/ff9-a-us.mcs</code> (USA).</p></li>
-<li><p>Save Game Exploit MCS file (Type B Exploit for BIOS v2.1 and above, including all PS2s): <code>entrypoints/FF9-B-JP/ff9-b-jp.mcs</code> (Japan) or <code>entrypoints/FF9-A-US/ff9-b-us.mcs</code> (USA).</p></li>
-<li><p>Tonyhax International Loader RAW file: <code>loader/FF9</code>.</p></li>
-<li><p>Tonyhax International Loader MCS file: <code>loader/tonyhax-ff9.mcs</code>.</p></li>
-<li><p>Exploit instructions: Select <code>Continue</code> at the title screen, and then the memory card with the <em>Save Game Exploit</em> file. <strong>Note: there are no colours displayed when using the Finaly Fantasy IX exploit, the screen will directly boot to the Tonyhax International loader in a few seconds after being triggered in-game.</strong> Make sure you use the correct Type A or Type B exploit, or else the exploit won’t trigger!</p></li>
-</ul>
-<h3 id="sports-superbike">Sports Superbike</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/7824/">Europe</a>.</li>
-<li>Versions With Save Game Exploit Support: Europe.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BESLES-03057SSBv1</code> (Europe).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/superbike1-eu.mcs</code> (Europe).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit instructions: Select the English language in the language selection screen. Enter the Memory Card menu. Load game from the Memory Card. Click accept after it’s done loading. Back at the main menu, select <code>Race</code>, then <code>Single Race</code>.</li>
-</ul>
-<h3 id="sports-superbike-2">Sports Superbike 2</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/15326/">USA</a>, <a href="http://redump.org/disc/19224/">Europe</a>.</li>
-<li>Versions With Save Game Exploit Support: Europe. <strong>USA version is not yet supported</strong>.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BESLES-03827SSII</code> (Europe).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/superbike2-eu.mcs</code> (Europe).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit instructions: If you are using the Europe version, select the English language in the language selection screen. On the main menu, choose Options. Select <code>Load Game</code> and load the <em>Save Game Exploit</em> file. Back at the main menu, select either the <code>Single Race</code> or <code>Championship</code> option.</li>
-</ul>
-<h3 id="tekken-2">Tekken 2</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/38475/">Japan Rev 0</a>, <a href="http://redump.org/disc/1155/">Japan Rev 1</a>, <a href="http://redump.org/disc/1836/">USA Rev 0</a>, <a href="http://redump.org/disc/14017/">USA Rev 1</a>, <a href="http://redump.org/disc/45460/">Germany</a>, <a href="http://redump.org/disc/47269/">France</a>.</li>
-<li>Versions With Save Game Exploit Support: Japan Rev 1, USA Rev 1, Germany, France. <strong>Japan Rev 0 and USA Rev 0 are not yet supported</strong>.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BISLPS-00300TEKKEN-2</code> (Japan Rev 1), <code>entrypoints/BASLUS-00213TEKKEN-2</code> (USA Rev 1), <code>entrypoints/BESCES-00255TEKKEN-2</code> (France <strong>and</strong> Germany).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/tekken2-jp.mcs</code> (Japan Rev 1), <code>entrypoints/tekken2-us.mcs</code> (USA Rev 1), <code>entrypoints/tekken2-eu.mcs</code> (France <strong>and</strong> Germany).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit Instructions: Start a round of <code>Survival Mode</code> at the title screen. Die at any point in surivival mode, and the game will go black and trigger the exploit in a few seconds. <strong>Note: there are no colours displayed when using the Tekken exploits, the screen will directly boot to the Tonyhax International loader in a few seconds after being triggered in-game.</strong></li>
-</ul>
-<h3 id="tekken-3">Tekken 3</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/588/">Japan Rev 0</a>, <a href="http://redump.org/disc/30736/">Japan Rev 1</a>, <a href="http://redump.org/disc/1464/">USA</a>, <a href="http://redump.org/disc/483/">Europe Rev 0</a>, <a href="http://redump.org/disc/449/">Europe Rev 1</a>.</li>
-<li>Versions With Save Game Exploit Support: Japan Rev 0, Japan Rev 1, USA, Europe Rev 0, Europe Rev 1.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BISLPS-01300TEKKEN-3</code> (Japan Rev 0 <strong>and</strong> Japan Rev 1), <code>entrypoints/BASLUS-00402TEKKEN-3</code> (USA Rev 0 <strong>and</strong> USA Rev 1), <code>entrypoints/BESCES-01237TEKKEN-3</code> (Europe Rev 0 <strong>and</strong> Europe Rev 1).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/tekken3-jp.mcs</code> (Japan Rev 0 <strong>and</strong> Japan Rev 1), <code>entrypoints/tekken3-us.mcs</code> (USA Rev 0 <strong>and</strong> USA Rev 1), <code>entrypoints/tekken3-eu.mcs</code> (Europe Rev 0 <strong>and</strong> Europe Rev 1).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit Instructions: Start a round of <code>Survival Mode</code> at the title screen. Die at any point in surivival mode, and the game will go black and trigger the exploit in a few seconds. <strong>Note: there are no colours displayed when using the Tekken exploits, the screen will directly boot to the Tonyhax International loader in a few seconds after being triggered in-game.</strong></li>
-</ul>
-<h3 id="the-legend-of-heroes-i-ii-eiyuu-densetsu">The Legend of Heroes I &amp; II: Eiyuu Densetsu</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/47491/">Japan</a>.</li>
-<li>Versions With Save Game Exploit Support: Japan.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BISLPS-01323010001</code> (Japan).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/the-legend-of-heroes-1-and-2-jp.mcs</code> (Japan).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit Instructions: At the main menu, <strong>select <code>The Legend Of Heroes I</code> (the I button on the left)</strong>, not <code>The Legend Of Heroes II</code> (the II button on the right). Once in <code>The Legend Of Heroes I</code> game, load the save game exploit file.</li>
-</ul>
-<h3 id="tony-hawks-pro-skater-2">Tony Hawk’s Pro Skater 2</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/35439/">Japan</a>, <a href="http://redump.org/disc/1319/">USA</a>, <a href="http://redump.org/disc/5899/">Germany</a>, <a href="http://redump.org/disc/27627/">France</a>, <a href="http://redump.org/disc/976/">Europe/Australia</a>.</li>
-<li>Versions With Save Game Exploit Support: Japan, USA, Germany, France, Europe/Australia. <strong>USA Preview, USA Demo, Australia Demo, and Europe Demo are not yet supported</strong>.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BISLPM-86751CEEAG01</code> (Japan), <code>entrypoints/BASLUS-01066TNHXG01</code> (USA), <code>entrypoints/BESLES-02910TNHXG01</code> (Germany), <code>entrypoints/BESLES-02909TNHXG01</code> (France), <code>entrypoints/BESLES-02908TNHXG01</code> (Europe/Australia).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/thps2-jp.mcs</code> (Japan), <code>entrypoints/thps2-us.mcs</code> (USA), <code>entrypoints/thps2-de.mcs</code> (Germany), <code>entrypoints/thps2-fr.mcs</code> (France), <code>entrypoints/thps2-eu.mcs</code> (Europe/Australia).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>. At the main menu, wait until the save game exploit file is automatically loaded (it should say <code>Loading TONYHAX JP/US/EU/DE/FR</code>, depending on the game’s region). Next, select <code>CREATE SKATER</code> and confirm the selection to start the exploit.</li>
-</ul>
-<h3 id="tony-hawks-pro-skater-3">Tony Hawk’s Pro Skater 3</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/1320/">USA</a>, <a href="http://redump.org/disc/3270/">Germany</a>, <a href="http://redump.org/disc/27628/">France</a>, <a href="http://redump.org/disc/1465/">Europe</a>.</li>
-<li>Versions With Save Game Exploit Support: USA, Germany, France, Europe.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BASLUS-01419TNHXG01</code> (USA), <code>entrypoints/BESLES-03647TNHXG01</code> (Germany), <code>entrypoints/BESLES-03646TNHXG01</code> (France), <code>entrypoints/BESLES-03645TNHXG01</code> (Europe).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/thps3-us.mcs</code> (USA), <code>entrypoints/thps3-de.mcs</code> (Germany), <code>entrypoints/thps3-fr.mcs</code> (France), <code>entrypoints/thps3-eu.mcs</code> (Europe).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>. At the main menu, wait until the save game exploit file is automatically loaded (it should say <code>Loading TONYHAX US/EU/DE/FR</code>, depending on the game’s region). Next, select <code>CREATE SKATER</code> and confirm the selection to start the exploit.</li>
-</ul>
-<h3 id="tony-hawks-pro-skater-4">Tony Hawk’s Pro Skater 4</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/1321/">USA</a>, <a href="http://redump.org/disc/5130/">Germany</a>, <a href="http://redump.org/disc/27629/">France</a>, <a href="http://redump.org/disc/15090/">Europe</a>.</li>
-<li>Versions With Save Game Exploit Support: USA, Germany, France, Europe.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BASLUS-01485TNHXG01</code> (USA), <code>entrypoints/BESLES-03955TNHXG01</code> (Germany), <code>entrypoints/BESLES-03956TNHXG01</code> (France), <code>entrypoints/BESLES-03954TNHXG01</code> (Europe).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/thps4-us.mcs</code> (USA), <code>entrypoints/thps4-de.mcs</code> (Germany), <code>entrypoints/thps4-fr.mcs</code> (France), <code>entrypoints/thps4-eu.mcs</code> (Europe).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit Instructions: At the main menu, wait until the save game exploit file is automatically loaded (it should say <code>Loading TONYHAX US/EU/DE/FR</code>, depending on the game’s region). Next, select <code>CREATE SKATER</code> and confirm the selection to start the exploit.</li>
-</ul>
-<h3 id="xs-moto">XS Moto</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/6604/">USA</a>, <a href="http://redump.org/disc/17764/">Europe</a>.</li>
-<li>Versions With Save Game Exploit Support: USA, Europe.</li>
-<li>Save Game Exploit RAW file: <code>entrypoints/BASLUS-01506XSMOTOv1</code> (USA), <code>entrypoints/BESLES-04095XSMOTO</code> (Europe).</li>
-<li>Save Game Exploit MCS file: <code>entrypoints/xsmoto-us.mcs</code> (USA), <code>entrypoints/xsmoto-eu.mcs</code> (Europe).</li>
-<li>Tonyhax International Loader RAW file: <code>loader/HAX</code>.</li>
-<li>Tonyhax International Loader MCS file: <code>loader/tonyhax.mcs</code>.</li>
-<li>Exploit instructions: If you are using the ‘Europe’ version select the English language in the language selection screen. On the main menu, choose Options. Select <code>Load Game</code> and load the <em>Save Game Exploit</em> file. Back at the main menu, select either the <code>Single Race</code> or <code>Championship</code> option to trigger the exploit.</li>
 </ul>
 <h2 id="cd-r-media-for-psx-backups">CD-R Media For PSX Backups</h2>
 <p><strong>Only use high-quality CD-R media for PSX backups.</strong> If you want good results burning backups for your PS1 your CD-R media should contain:</p>
@@ -918,570 +422,6 @@ Disk type:    Short strategy type (Phthalocyanine or similar)
 Manuf. index: 22
 Manufacturer: Ritek Co.</code></pre>
 <p>If you are having issues booting discs in Tonyhax International, consider wiping with a clean microfiber cloth from the inner ring to the outer edge of the disc in all directions and then trying to boot the disc again.</p>
-<h2 id="burning-psx-cd-rs">Burning PSX CD-Rs</h2>
-<p>Not all CD burning programs can correctly burn <em>all types</em> of PSX discs. Below is a small list comparison of a few burning programs and their abilities. The recommended burning program is <a href="#cdrdao-af">my cdrdao fork</a> due to it being open source and cross platform.</p>
-<h3 id="cdrdao-af"><a href="https://alex-free.github.io/cdrdao">CDRDAO-AF</a></h3>
-<ul>
-<li>Is Open Source?: Yes. Pre-built Linux x86_64 binaries are also <a href="https://alex-free.github.io/cdrdao#downloads">available</a>.</li>
-<li>Burns Standard PSX Backup CD-Rs?: Yes. For .bin/.cue CD images, the <code>--swap</code> argument is required.</li>
-<li>Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: Yes, for .bin/.cue CD images, the <code>--swap</code> argument is required. You also must use the <code>generic-mmc-raw</code> driver.</li>
-<li>Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: CDRDAO can rip an authentic PAL PSX game disc containing LibCrypt protection correctly into a .toc/.bin CD image file. This file can be burned back by using the <code>generic-mmc-raw</code> driver. The much more common .bin/.cue/.sub CD image LibCrypt rips do not work directly however.</li>
-</ul>
-<h3 id="clonecd"><a href="https://www.redfox.bz/en/clonecd.html">CloneCD</a></h3>
-<ul>
-<li>Is Open Source?: No, it is Windows only FreeWare with a free ‘demo’ version as well as a full paid version. The ‘demo’ version can be used however for PSX Backup CD-R burning without limitation.</li>
-<li>Burns Standard PSX Backup CD-Rs?: Yes, no special options required.</li>
-<li>Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: Yes, if you use <a href="https://hydrogenaud.io/index.php?PHPSESSID=3voij6gqs993vdbd15mlmc2k7h&amp;topic=42415.msg371328#msg371328">RAW</a> mode.</li>
-<li>Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: <a href="https://github.com/Kippykip/SBITools">Yes</a>, (with the proper BIN/CUE/SUB files).</li>
-</ul>
-<h3 id="imgburn"><a href="https://www.imgburn.com/">ImgBurn</a></h3>
-<ul>
-<li><p>IMGBurn is only available on Windows and is closed source free-ware.</p></li>
-<li><p>IMGBurn <strong>can not burn</strong> unmodified copies of game which contain additional <a href="#bypassing-additional-edc-checks-found-in-some-games">EDC related copy protection</a>. As long as the game does not have any EDC related copy protection however, IMGBurn will work for burning PSX CD-Rs.</p></li>
-</ul>
-<h2 id="playing-games-with-additonal-copy-protection-routines">Playing Games With Additonal Copy Protection Routines</h2>
-<p>Starting in late 1998, some PSX games began including additional copy protection code that is designed to prevent playing backup CD-R copies of a game. This additional copy protection originally could only detect the first type of mod-chips (known as ‘non-stealth’) and would only fail if it detected one. <strong>Tonyhax International does not trigger this type of anti-piracy copy protection on stock consoles and these games don’t require any patching by Tonyhax International.</strong></p>
-<p>Starting in mid 1999, the ‘standardized’ additional copy protection code was updated. This updated copy protection code can detect ‘non-stealth’ mod-chips, ‘traditional’ swap tricks (which don’t update TOC data), and the authenticity of the disc currently running in the PSX console. This last check causes the anti-piracy copy protection routine to trigger on games booted with Tonyhax International <em>unless you are using a SCPH-1000 or early SCPH-3000 Japanese PSX console model, which are immune to triggering any addtional anti-piracy copy protection routines of any kind.</em></p>
-<p>Tonyhax International is now capable of <a href="#list-of-games-with-anti-piracy-bypass-support">game-specific</a> on the fly patching to bypass this type of anti-piracy copy protection routine on <strong>all consoles</strong>.</p>
-<p>If you find a game which triggers the ‘anti-piracy screen of death’ that is yet supported please open an <a href="https://github.com/alex-free/tonyhax/issues/new?assignees=&amp;labels=antipiracy&amp;template=antipiracy-issue.md&amp;title=">Anti-Piracy issue</a> on the <a href="https://github.com/alex-free/tonyhax">Tonyhax International Github</a>. I would eventually like every game that can trigger the anti-piracy copy protection routine when booted via Tonyhax International on a stock console to have a game specific bypass implemented for 100% compatibility.</p>
-<p>There is currently a WIP ‘todo’ list of games that are <a href="#known-games-that-need-anti-piracy-bypasses-implemented">known</a> to need anti-piracy bypasses, but are not yet supported.</p>
-<p><em>IMPORTANT NOTE <strong>NUMBER 1</strong>:</em> Tonyhax International <strong>does not bypass anti-piracy if your console has an actual non-stealth modchip installed.</strong></p>
-<p><em>IMPORTANT NOTE <strong>NUMBER 2</strong>:</em> Some PAL games are using a different copy protection scheme known as LibCrypt protection. This protection can be bypassed by burning a backup CD-R in a <a href="https://github.com/Kippykip/SBITools">very specific way to keep the protection working</a>, or just by using an original authentic PAL PSX disc (‘imported’ for a different region console will work via the Tonyhax International loader).</p>
-<h2 id="list-of-games-with-anti-piracy-bypass-support">List Of Games With Anti-Piracy Bypass Support</h2>
-<h3 id="animetic-story-game-1-card-captor-sakura">Animetic Story Game 1: Card Captor Sakura</h3>
-<ul>
-<li>Versions Tested: Japan (<a href="http://redump.org/disc/12000/">Disc 1</a>, <a href="http://redump.org/disc/11999/">Disc 2</a>).</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="alundra-2">Alundra 2</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/15641/">Japan</a>, <a href="http://redump.org/disc/6752/">Japan Demo</a>, <a href="http://redump.org/disc/2996/">USA</a>, <a href="http://redump.org/disc/1089/">Europe</a>, <a href="http://redump.org/disc/11603/">German</a>, <a href="http://redump.org/disc/13396/">French</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: When first booting the game during the ‘now loading’ screen.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="arc-the-lad-iii">Arc The Lad III</h3>
-<ul>
-<li>Versions Tested: Japan Rev 0 (<a href="http://redump.org/disc/5897/">Disc 1</a>, <a href="http://redump.org/disc/5898/">Disc 2</a>), Japan Rev 1 (<a href="http://redump.org/disc/34793/">Disc 1</a>, <a href="http://redump.org/disc/34794/">Disc 2</a>), USA (<a href="http://redump.org/disc/674/">Disc 1</a>, <a href="http://redump.org/disc/675/">Disc 2</a>).</li>
-<li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.</li>
-</ul>
-<h3 id="beatmania-featuring-dreams-come-true">Beatmania featuring Dreams Come True</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/36188/">Japan</a>).</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="beatmania-best-hits">Beatmania Best Hits</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/36175/">Japan Rev 0</a>, <a href="http://redump.org/disc/44332/">Japan Rev 1</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.</li>
-</ul>
-<h3 id="beat-mania-the-sound-of-tokyo">Beat Mania: The Sound of Tokyo</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/36163/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="beat-mania-6thmix-core-remix">Beat Mania 6thMix + Core Remix</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/16285/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="chase-the-express">Chase The Express</h3>
-<ul>
-<li>Versions Tested: Japan (<a href="http://redump.org/disc/5637/">Disc 1</a>, <a href="http://redump.org/disc/5638/">Disc 2</a>), <a href="http://redump.org/disc/6551/">Japan Demo 1</a>, <a href="http://redump.org/disc/19589/">Japan Demo 2</a>, Europe (<a href="http://redump.org/disc/27257/">Disc 1</a>, <a href="http://redump.org/disc/27258/">Disc 2</a>), France (<a href="http://redump.org/disc/28137/">Disc 1</a>, <a href="http://redump.org/disc/28138/">Disc 2</a>), Germany (<a href="http://redump.org/disc/7507/">Disc 1</a>, <a href="http://redump.org/disc/7508/">Disc 2</a>), Italy (<a href="http://redump.org/disc/28358/">Disc 1</a>, <a href="http://redump.org/disc/28359/">Disc 2</a>).</li>
-<li>Versions With Anti-Piracy Screen: Japan, Japan Demo 1, Japan Demo 2.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan, Japan Demo 1, Japan Demo 2.</li>
-</ul>
-<h3 id="crash-bash">Crash Bash</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/3819/">Japan</a>, <a href="http://redump.org/disc/53589/">Japan Demo</a>, <a href="http://redump.org/disc/512/">USA</a>, <a href="http://redump.org/disc/49446/">USA Demo</a>, <a href="http://redump.org/disc/5483/">Europe</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan, USA.</li>
-<li>When Is The Anti-Piracy Screen Check: ‘Sony Computer Entertainment Presents’ screen.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan, USA.</li>
-</ul>
-<h3 id="crash-bandicoot-racing">Crash Bandicoot Racing</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/3694/">Japan</a>, <a href="http://redump.org/disc/53590/">Japan Demo</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: When first booting the game when the Naughty Dog box is first visible.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="cool-boarders-2001">Cool Boarders 2001</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/513/">USA</a>, <a href="http://redump.org/disc/42467/">USA Demo</a>.</li>
-<li>Versions With Anti-Piracy Screen: USA, USA Demo.</li>
-<li>When Is The Anti-Piracy Screen Check: During the first loading screen.</li>
-<li>Versions With Anti-Piracy Bypass Support: USA, USA Demo.</li>
-</ul>
-<h3 id="dance-dance-revolution-best-hits">Dance Dance Revolution: Best Hits</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/30601/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan. <strong>IMPORTANT: There is an <a href="#bypassing-additional-edc-checks-found-in-some-games">EDC check</a> in addition to the standardized anti-piracy copy protection routine.</strong></li>
-</ul>
-<h3 id="dance-dance-revolution-disneys-rave">Dance Dance Revolution: Disney’s Rave</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/37012/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="dance-dance-revolution-extra-mix">Dance Dance Revolution: Extra Mix</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/44438/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="dance-dance-revolution-2nd-remix">Dance Dance Revolution 2nd Remix</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/9477/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-<li><strong>IMPORTANT: There is an <a href="#bypassing-additional-edc-checks-found-in-some-games">EDC check</a> in addition to the standardized anti-piracy copy protection routine.</strong></li>
-</ul>
-<h3 id="dance-dance-revolution-2nd-remix-append-club-version-vol.-1">Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/23382/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: When you use the ‘disc change’ feature found in Dance Dance Revolution 2nd Remix to boot the disc.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan. <strong>IMPORTANT: There is an <a href="#bypassing-additional-edc-checks-found-in-some-games">EDC check</a> in addition to the standardized anti-piracy copy protection routine.</strong></li>
-<li>This game works as intended/completely normal on USA and European consoles. On Japanese PS1 consoles, you must do a <strong>perfect</strong> <a href="#playing-games-that-span-multiple-discs-on-japanese-ps1-consoles">mid-game hot-swap trick</a> in the ‘disc change’ feature found in Dance Dance Revolution 2nd Remix to get the game to boot AND for it to have working CD audio. You can not play this game currently on a Japanese PS2 due to the lack of a <a href="#playing-games-that-span-multiple-discs-on-japanese-ps2-consoles">mid-game hot-swap trick</a> method for PS2s.</li>
-</ul>
-<h3 id="dance-dance-revolution-2nd-remix-append-club-version-vol.-2">Dance Dance Revolution 2nd Remix: Append Club Version Vol. 2</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/33339/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: When you use the ‘disc change’ feature found in Dance Dance Revolution 2nd Remix to boot the disc.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan. <strong>IMPORTANT: There is an <a href="#bypassing-additional-edc-checks-found-in-some-games">EDC check</a> in addition to the standardized anti-piracy copy protection routine.</strong></li>
-<li>This game works as intended/completely normal on USA and European consoles. On Japanese PS1 consoles, you must do a <strong>perfect</strong> <a href="#playing-games-that-span-multiple-discs-on-japanese-ps1-consoles">mid-game hot-swap trick</a> in the ‘disc change’ feature found in Dance Dance Revolution 2nd Remix to get the game to boot AND for it to have working CD audio. You can not play this game currently on a Japanese PS2 due to the lack of a <a href="#playing-games-that-span-multiple-discs-on-japanese-ps2-consoles">mid-game hot-swap trick</a> method for PS2s.</li>
-</ul>
-<h3 id="dancing-stage-featuring-dreams-come-true">Dancing Stage Featuring Dreams Come True</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/17882/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: On the first text screen after boot, until right before the first FMV.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="dancing-stage-featuring-true-kiss-destination">Dancing Stage Featuring True Kiss Destination</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/15853/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: On the first text screen after boot, until right before the first FMV.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="dino-crisis">Dino Crisis</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/1598/">Japan</a>, <a href="http://redump.org/disc/459/">USA Rev 0</a>, <a href="http://redump.org/disc/473/">USA Rev 1</a>, <a href="http://redump.org/disc/2942/">USA Demo</a>, <a href="http://redump.org/disc/710/">Europe</a>, <a href="http://redump.org/disc/28171/">Italy</a>, <a href="http://redump.org/disc/7586/">Germany</a>, <a href="http://redump.org/disc/24278/">France</a>, <a href="http://redump.org/disc/27940/">Spain</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan, USA Rev 0, USA Rev 1.</li>
-<li>When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan, USA Rev 0, USA Rev 1.</li>
-</ul>
-<h3 id="dino-crisis-2">Dino Crisis 2</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/1600/">Japan</a>, <a href="http://redump.org/disc/4407/">Japan Demo</a>, <a href="http://redump.org/disc/460/">USA</a>, <a href="http://redump.org/disc/49242/">USA Demo</a>, <a href="http://redump.org/disc/1071/">Europe</a>, <a href="http://redump.org/disc/45993/">Italy</a>, <a href="http://redump.org/disc/10641/">Germany</a>, <a href="http://redump.org/disc/29514/">France</a>, <a href="http://redump.org/disc/27941/">Spain</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan, Japan Demo.</li>
-<li>When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.</li>
-</ul>
-<h3 id="disneys-the-emperors-new-grove">Disney’s The Emperor’s New Grove</h3>
-<ul>
-<li>Versions With Anti-Piracy Screen: <a href="http://redump.org/disc/14583/">USA</a>, <a href="http://redump.org/disc/7565/">Europe</a>.</li>
-<li>When Is The Anti-Piracy Screen Check: Start a new game, after the first FMV on the first loading screen is when the check completes.</li>
-<li>Versions With Anti-Piracy Bypass Support: USA, Europe.</li>
-</ul>
-<h3 id="exciting-bass-2">Exciting Bass 2</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/63487/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="exciting-bass-3">Exciting Bass 3</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/59734/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="gekitotsu-toma-larc---larc-en-ciel-vs-tomarunner">Gekitotsu Toma L’Arc - L’Arc en Ciel vs Tomarunner</h3>
-<ul>
-<li>Versions: <a href="http://redump.org/disc/20715/">Japan</a></li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="goo-goo-soundry">Goo! Goo! Soundry</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/16027/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: On the first ‘now loading’ screen at boot.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="grind-session">Grind Session</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/854/">USA</a>, <a href="http://redump.org/disc/42794/">USA Demo</a>, <a href="http://redump.org/disc/3688/">Europe</a>, <a href="http://redump.org/disc/53879/">Scandinavia</a>.</li>
-<li>Versions With Anti-Piracy Screen: USA.</li>
-<li>When Is The Anti-Piracy Screen Check: After going through the main menu and starting training/single player/a level.</li>
-<li>Versions With Anti-Piracy Bypass Support: USA.</li>
-</ul>
-<h3 id="guitar-freaks">Guitar Freaks</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/2277/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: At the loading screen with the spinning guitars.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="harlem-beat-youre-the-one">Harlem Beat: You’re The One</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/36294/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: At the first loading screen after boot.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="hyper-value-2800-mahjong">Hyper Value 2800: Mahjong</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/15793/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately after boot.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="i-mode-mo-issho-doko-demo-issho-tsuika-disc">i-mode mo Issho: Doko Demo Issho Tsuika Disc</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/15793/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately after boot.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="jikkyou-powerful-pro-yakyuu-99-ketteiban">Jikkyou Powerful Pro Yakyuu ’99: Ketteiban</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/11091/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="jikkyou-powerful-pro-yakyuu-99-kaimakuban">Jikkyou Powerful Pro Yakyuu ’99: Kaimakuban</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/1686/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="jojos-bizarre-adventure">JoJo’s Bizarre Adventure</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/2871/">Japan</a>, <a href="http://redump.org/disc/386/">USA</a>, <a href="http://redump.org/disc/9983/">Europe</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: First loading screen after boot.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="koko-hore-pukka">Koko Hore! Pukka</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/4812/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="koneko-mo-issho">Koneko mo Issho</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/6329/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="legend-of-dragoon">Legend Of Dragoon</h3>
-<ul>
-<li>Versions Tested: Japan (<a href="http://redump.org/disc/22753/">Disc 1</a>, <a href="http://redump.org/disc/22754/">Disc 2</a>, <a href="http://redump.org/disc/22755/">Disc 3</a>, <a href="http://redump.org/disc/22756/">Disc 4</a>), USA (<a href="http://redump.org/disc/153/">Disc 1</a>, <a href="http://redump.org/disc/154/">Disc 2</a>, <a href="http://redump.org/disc/155/">Disc 3</a>, <a href="http://redump.org/disc/156/">Disc 4</a>), Europe (<a href="http://redump.org/disc/2379/">Disc 1</a>, <a href="http://redump.org/disc/2380/">Disc 2</a>, <a href="http://redump.org/disc/2381">Disc 3</a>, <a href="http://redump.org/disc/2382/">Disc 4</a>), France (<a href="http://redump.org/disc/16750/">Disc 1</a>, <a href="http://redump.org/disc/16751/">Disc 2</a>, <a href="http://redump.org/disc/16752/">Disc 3</a>, <a href="http://redump.org/disc/16753/">Disc 4</a>), Germany (<a href="http://redump.org/disc/15580/">Disc 1</a>, <a href="http://redump.org/disc/15581/">Disc 2</a>, <a href="http://redump.org/disc/15582/">Disc 3</a>, <a href="http://redump.org/disc/15583/">Disc 4</a>), Italy (<a href="http://redump.org/disc/30643/">Disc 1</a>, <a href="http://redump.org/disc/30644/">Disc 2</a>, <a href="http://redump.org/disc/30645/">Disc 3</a>, <a href="http://redump.org/disc/30646/">Disc 4</a>).</li>
-<li>Versions With Anti-Piracy Screen: Japan, USA, Europe, France, Germany, Italy.</li>
-<li>When Is The Anti-Piracy Screen Check: First loading screen after boot.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan, USA, Europe, France, Germany, Italy.</li>
-</ul>
-<h3 id="legend-of-mana">Legend Of Mana</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/1940/">Japan</a>, <a href="http://redump.org/disc/96/">USA</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan, USA.</li>
-</ul>
-<h3 id="love-hina-ai-wa-kotoba-no-naka-ni">Love Hina: Ai wa Kotoba no Naka ni</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/7369/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="love-hina-2-kotoba-wa-konayuki-no-you-ni">Love Hina 2: Kotoba wa Konayuki no You ni</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/7370/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="marvel-vs.-capcom-clash-of-super-heroes">Marvel vs. Capcom: Clash of Super Heroes</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/36384/">Japan</a>, <a href="http://redump.org/disc/60646/">Japan Demo</a>, <a href="http://redump.org/disc/1235/">USA</a>, <a href="http://redump.org/disc/3910/">Europe</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan, Japan Demo.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately on boot.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.</li>
-</ul>
-<h3 id="medievil-ii">MediEvil II</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/2503/">USA</a>, <a href="http://redump.org/disc/593/">Europe Release 1</a>, <a href="http://redump.org/disc/1547/">Europe Release 2</a>, <a href="http://redump.org/disc/45822/">Europe Demo</a>.</li>
-<li>Versions With Anti-Piracy Screen: USA.</li>
-<li>When Is The Anti-Piracy Screen Check: At the Whitechapel level loading screen (quite far in the game).</li>
-<li>Versions With Anti-Piracy Bypass Support: USA.</li>
-</ul>
-<h3 id="my-garden">My Garden</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/8300/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="oha-studio-dance-dance-revolution">Oha-Studio Dance Dance Revolution</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/33938/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="ore-no-ryouri">Ore no Ryouri</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/39643/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="pocket-jiman">Pocket Jiman</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/3189/">Japan</a></li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="popolocrois-monogatari-ii">PoPoLoCrois Monogatari II</h3>
-<ul>
-<li>Versions Tested: Japan (<a href="http://redump.org/disc/1653/">Disc 1</a>, <a href="http://redump.org/disc/1654/">Disc 2</a>, <a href="http://redump.org/disc/1651/">Disc 3</a>), <a href="http://redump.org/disc/57327/">Japan Demo</a></li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="popn-music-animation-melody">Pop’n Music: Animation Melody</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/33223/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="popn-music-disney-tunes">Pop’n Music: Disney Tunes</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/34263/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="popn-music-2">Pop’n Music 2</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/9774/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="popn-music-5">Pop’n Music 5</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/9778/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="popn-music-6">Pop’n Music 6</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/9777/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="resident-evil-3-the-last-escape">Resident Evil 3: The Last Escape</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/10/">Japan Rev 0</a>, <a href="http://redump.org/disc/8357/">Japan Rev 1</a>, <a href="http://redump.org/disc/11674/">Japan Demo</a>, <a href="http://redump.org/disc/126/">USA</a>, <a href="http://redump.org/disc/7312/">USA Demo</a>,<a href="http://redump.org/disc/496/">Europe</a>, <a href="http://redump.org/disc/9463/">Europe Demo</a>, <a href="http://redump.org/disc/9753/">France</a>, <a href="http://redump.org/disc/5526/">Germany</a>, <a href="http://redump.org/disc/16397/">Italy</a>, <a href="http://redump.org/disc/28197/">Ireland</a>, <a href="http://redump.org/disc/1387/">Spain</a>,</li>
-<li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo.</li>
-<li>When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots, pause there.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1, Japan Demo.</li>
-</ul>
-<h3 id="resident-evil-survivor">Resident Evil: Survivor</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/8102/">Japan</a>, <a href="http://redump.org/disc/326/">USA</a>, <a href="http://redump.org/disc/801/">Europe</a>, <a href="http://redump.org/disc/5826/">France</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan, USA.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan, USA.</li>
-</ul>
-<h3 id="robbit-mon-dieu">Robbit mon Dieu</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/7227/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately after boot.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="rockman">Rockman</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/6091/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="rockman-2-dr.-wily-no-nazo">Rockman 2: Dr. Wily no Nazo</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/6092/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="rockman-3-dr.-wily-no-saigo">Rockman 3: Dr. Wily no Saigo!?</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/6092/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="rockman-4-aratanaru-yabou">Rockman 4: Aratanaru Yabou!!</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/6094/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h2 id="rockman-5-blues-no-wana">Rockman 5: Blues no Wana!?</h2>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/6095/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="rockman-x5">Rockman X5</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/4779/">Japan</a></li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="rockman-x6">Rockman X6</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/4778/">Japan</a></li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="rockman-6">Rockman 6</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/6096/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="street-fighter-ex2-plus">Street Fighter EX2 Plus</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/12561/">Japan</a>, <a href="http://redump.org/disc/68873/">Japan Demo</a>, <a href="http://redump.org/disc/1233/">USA</a>, <a href="http://redump.org/disc/1006/">Europe</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan, Japan Demo.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan, Japan Demo, Europe, USA.</li>
-</ul>
-<h3 id="strider-2">Strider 2</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/1231/">USA</a>, <a href="http://redump.org/disc/3917/">Europe</a>.</li>
-<li>Versions With Anti-Piracy Screen: USA.</li>
-<li>When Is The Anti-Piracy Screen Check: First now Loading screen.</li>
-<li>Versions With Anti-Piracy Bypass Support: USA.</li>
-</ul>
-<h3 id="tomba-2-the-evil-swine-return">Tomba! 2: The Evil Swine Return</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/16475/">USA</a>, <a href="http://redump.org/disc/32246/">USA Demo</a>, <a href="http://redump.org/disc/31192/">Europe</a>, <a href="http://redump.org/disc/31192/">France</a>, <a href="http://redump.org/disc/31192/">Germany</a>, <a href="http://redump.org/disc/41369/">Italy</a>, <a href="http://redump.org/disc/1582/">Spain</a>.</li>
-<li>Versions With Anti-Piracy Screen: USA.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: USA.</li>
-</ul>
-<h3 id="vandal-harts-ii">Vandal Harts II</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/4854/">Japan</a>, <a href="http://redump.org/disc/4854/">USA</a>, <a href="http://redump.org/disc/4854/">Europe</a>, <a href="http://redump.org/disc/4854/">Italy</a>, <a href="http://redump.org/disc/4854/">Spain</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan, USA.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan (no patch required), USA.</li>
-</ul>
-<h3 id="wild-arms-ii">Wild Arms II</h3>
-<ul>
-<li>Versions Tested: Japan Rev 0 (<a href="http://redump.org/disc/3924/">Disc 1</a>, <a href="http://redump.org/disc/3925/">Disc 2</a>), Japan Rev 1 (<a href="http://redump.org/disc/1902/">Disc 1</a>, <a href="http://redump.org/disc/1903/">Disc 2</a>), <a href="http://redump.org/disc/4799//">Japan Demo</a>, USA (<a href="http://redump.org/disc/171/">Disc 1</a>, <a href="http://redump.org/disc/172/">Disc 2</a>), <a href="http://redump.org/disc/42466/">USA Demo</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo, USA, USA Demo.</li>
-<li>When Is The Anti-Piracy Screen Check: Right after the media vision logo screen fades to black.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan Rev 0 (no patch required), Japan Rev 1 (no patch required), Japan Demo (no patch required), USA, USA Demo.</li>
-</ul>
-<h3 id="world-soccer-jikkyou-winning-eleven-4">World Soccer Jikkyou Winning Eleven 4</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/4934/">Japan Rev 0</a>, <a href="http://redump.org/disc/4934/">Japan Rev 1</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.</li>
-<li>When Is The Anti-Piracy Screen Check: As soon as the Japan Olympic Committee screen appears.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.</li>
-</ul>
-<h3 id="xisai-jumbo">XI[SAI] Jumbo</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/8372/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
-</ul>
-<h3 id="yu-gi-oh-forbidden-memories">Yu-Gi-Oh! Forbidden Memories</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/4173/">Japan</a>, <a href="http://redump.org/disc/51546/">Japan Genteiban Edition</a>, <a href="http://redump.org/disc/820/">USA</a>, <a href="http://redump.org/disc/1053/">Europe</a>, <a href="http://redump.org/disc/28263/">France</a>, <a href="http://redump.org/disc/1256/">Germany</a>, <a href="http://redump.org/disc/30673/">Spain</a>, <a href="http://redump.org/disc/35297/">Italy</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan, Japan Genteiban Edition, USA, Europe, France, Germany, Spain, Italy.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-<li>Versions With Anti-Piracy Bypass Support: Japan, Japan Genteiban Edition, USA,</li>
-</ul>
-<h2 id="known-games-that-need-anti-piracy-bypasses-implemented">Known Games That Need Anti-Piracy Bypasses Implemented</h2>
-<p>This is a small ‘todo list’ of games which need further investigation to defeat the additional anti-piracy routines contained within them. Currently there is no support for playing them in Tonyhax International.</p>
-<h3 id="glint-glitters">Glint Glitters</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/15969/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-</ul>
-<h3 id="hyper-value-2800-hanafuda">Hyper Value 2800: Hanafuda</h3>
-<ul>
-<li>Versions Tested: <a href="http://redump.org/disc/15791/">Japan</a>.</li>
-<li>Versions With Anti-Piracy Screen: Japan.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately after boot.</li>
-</ul>
-<h3 id="tokimeki-memorial-2">Tokimeki Memorial 2</h3>
-<ul>
-<li>Versions Tested: Japan Rev 0, Japan Rev 1, Japan Limited Box.</li>
-<li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Limited Box.</li>
-<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
-</ul>
-<h2 id="bypassing-additional-edc-checks-found-in-some-games">Bypassing Additional EDC Checks Found In Some Games</h2>
-<p>Some games may also have a different kind of anti-piracy measure, known as the EDC check. The EDC check can be defeated by <strong>forcing the EDC to not be re-generated when <a href="#burning-psx-cd-rs">burning the disc image</a></strong>. Below is a WIP list of games found with this type of protection:</p>
-<ul>
-<li>BeatMania Best Hits Japan (<a href="http://redump.org/disc/36175/">Rev 0</a>, <a href="http://redump.org/disc/44332/">Rev 1</a>).</li>
-<li>Dance Dance Revolution <a href="http://redump.org/disc/1562/">Japan</a>, <a href="http://redump.org/disc/16075/">USA</a>.</li>
-<li>Dance Dance Revolution: Best Hits <a href="http://redump.org/disc/30601/">Japan</a>.</li>
-<li>Dance Dance Revolution 2nd Remix <a href="http://redump.org/disc/9477/">Japan</a>.</li>
-<li>Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1 <a href="http://redump.org/disc/23382/">Japan</a>.</li>
-<li>Dance Dance Revolution 2nd Remix: Append Club Version Vol. 2 <a href="http://redump.org/disc/33339/">Japan</a>.</li>
-<li>Dance Dance Revolution 3rd Mix <a href="http://redump.org/disc/9536/">Japan</a></li>
-<li>Dance Dance Revolution 4th Mix <a href="http://redump.org/disc/34157/">Japan</a></li>
-</ul>
-<h2 id="known-incompatible-games">Known Incompatible Games</h2>
-<p>Here is where a list of games that don’t work would be listed. At this time, there are no games which are known to not work for non-anti-piracy reasons. While there are definitely still some games which need an anti-piracy bypass <a href="#known-games-that-need-anti-piracy-bypasses-implemented">implemented</a> for them to work, that is a seperate compatibility list in itself.</p>
-<p>If you find such a game however, please open an issue on the <a href="https://github.com/alex-free/tonyhax/issues/new/choose">issue</a> on Github.</p>
 <h2 id="building-from-source">Building From Source</h2>
 <p>Obtain the <strong>complete Tonyhax International current source tree from GitHub using git</strong>, using the command below:</p>
 <p><code>git clone --recursive https://github.com/alex-free/tonyhax</code></p>
@@ -1519,7 +459,7 @@ Manufacturer: Ritek Co.</code></pre>
 <li><p>Came up with reset+unlock technique for TOCPerfect booting on USA/PAL consoles.</p></li>
 <li><p>Helped debug the <a href="https://github.com/brad-lin/FreePSXBoot">FreePSXBoot</a> builder’s own patch to disable a FreePSXBoot memory card in slot 2.</p></li>
 <li><p>Originally came up with the idea to involve the SetSession 2 command in a fix for the older CDROM controllers.</p></li>
-<li><p>Explained the save game checksum routines in both Tonyhawk Pro Skater 2 (Japanese version) &amp; Castrol Honda VTR (Japanese version) to help me create SuccessCheckSumUpdater (SuccessCU).</p></li>
+<li><p>Explained the save game checksum routines in both Tony Hawk Pro Skater 2 (Japanese version) &amp; Castrol Honda VTR (Japanese version) to help me create SuccessCheckSumUpdater (SuccessCU).</p></li>
 <li><p>Explained to myself how to find/port save game exploits to new games or to different versions of games available in different regions (i.e. Japanese version).</p></li>
 </ul>
 <h3 id="patchoulikarehaani">Patchouli(karehaani)</h3>

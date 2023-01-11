@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Tonyhax International - Playing Games With Additional Anti-Piracy Protection</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #FFFFFF;
+      background-color: #000000;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #58D3F7;
+    }
+    a:visited {
+      color: #58D3F7;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      border: 2px double blue;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border: 2px double blue;
+    }
+    th {
+      border: 2px double blue;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+        border: 2px double blue;
+        padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Tonyhax International - Playing Games With Additional Anti-Piracy Protection</h1>
+</header>
+<h2 id="background-info">Background Info</h2>
+<p>Starting in late 1998, some specific PSX games began implementing additional copy protection designed to prevent playing backup CD-R copies of a game. Different types of additional copy protection have been found in PSX games over the years.</p>
+<h2 id="apv1">APv1</h2>
+<p>The very first kind of ‘standardized’ additional copy protection that appeared in later PSX games. The <em>APv1 style protection can only prevent a backup CD-R of a game from working on a console that has a ‘non-stealth mod-chip’ installed</em>. APv1 style protection <strong>can not detect Tonyhax International</strong> on a stock console without such a mod-chip. This means games with this protection work fine with Tonyhax International and don’t trip the detection.</p>
+<h2 id="apv2">APv2</h2>
+<p>Unlike APv1, <em>APv2 can detect that you have booted a backup CD-R or ‘imported region disc’ with Tonyhax International</em>, and will trip the protection <strong>unless a game disc specific <a href="#apv2-bypasses">APv2 Bypass</a> has been implemented for it in the Tonyhax International loader</strong>.</p>
+<p>When triggered, the APv1 and APv2 style copy protections will trigger an ‘anti-piracy screen of death’. If you encounter an APv2 game that triggers this screen, then the specific game disc is not yet supported (this is a work in progress). In such a case please open an <a href="https://github.com/alex-free/tonyhax/issues/new?assignees=&amp;labels=antipiracy&amp;template=antipiracy-issue.md&amp;title=">Anti-Piracy issue</a> on the <a href="https://github.com/alex-free/tonyhax">Tonyhax International Github</a> to let me know about this specific game which contains APv2 protection. I would eventually like every game that can trigger the anti-piracy copy protection routine when booted via Tonyhax International on a stock console to have a bypass implemented for 100% compatibility.</p>
+<p>There is currently a WIP ‘todo’ list of games that are <a href="#known-games-that-need-anti-piracy-bypasses-implemented">known</a> to need anti-piracy bypasses, but do not have one implemented yet.</p>
+<h2 id="edc">EDC</h2>
+<p>In addition to APv1 or APv2 protection, some later games may also contain a protection measure known as the EDC check. For the affected games, this protection is triggered when you burn the EDC protected PSX CD image with standard CD burning software, which in most cases will changes the EDC data when burning an EDC protected PSX CD image.</p>
+<p>The EDC check can be however be defeated by simply forcing the EDC data to not be changed when burning such a protected PSX CD image. Not every CD burning software has an option which can do this, please see the <a href="#cd-burning">CD Burning</a> section for a more in depth capability comparison of common burning software.</p>
+<p>Real ‘imported region’ PSX game discs with EDC protection will work just fine when booted via Tonyhax International.</p>
+<h2 id="libcrypt">LibCrypt</h2>
+<p>Some PAL PSX games are using a different copy protection scheme known as LibCrypt protection. Similar to EDC protection, LibCrypt protection is triggered when you burn a LibCrypt protected PSX CD image with standard CD burning software, which in most cases changes the SubChannel data when burning such a protected PSX CD image.</p>
+<p>LibCrypt protection can be bypassed by burning a backup CD-R of a LibCrypt game using <a href="#clone-cd">CloneCD</a> in a very <a href="https://github.com/Kippykip/SBITools">specific</a> way.</p>
+<p>Real PAL LibCrypt discs will work just fine when booted via Tonyhax International on a Japanese or American console.</p>
+<h2 id="cd-burning">CD Burning</h2>
+<h3 id="cdrdao-af"><a href="https://alex-free.github.io/cdrdao">CDRDAO-AF</a></h3>
+<ul>
+<li>Is Open Source?: Yes. Pre-built Linux x86_64 binaries are also <a href="https://alex-free.github.io/cdrdao##downloads">available</a>.</li>
+<li>Burns Standard PSX Backup CD-Rs?: Yes. For .bin/.cue CD images, the <code>--swap</code> argument is required.</li>
+<li>Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: Yes, for .bin/.cue CD images, the <code>--swap</code> argument is required. You also must use the <code>generic-mmc-raw</code> driver.</li>
+<li>Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: CDRDAO can rip an authentic PAL PSX game disc containing LibCrypt protection correctly into a .toc/.bin CD image file. This file can be burned back by using the <code>generic-mmc-raw</code> driver. The much more common .bin/.cue/.sub CD image LibCrypt rips do not work directly however.</li>
+</ul>
+<h3 id="clonecd"><a href="https://www.redfox.bz/en/clonecd.html">CloneCD</a></h3>
+<ul>
+<li>Is Open Source?: No, it is Windows only FreeWare with a free ‘demo’ version as well as a full paid version. The ‘demo’ version can be used however for PSX Backup CD-R burning without limitation.</li>
+<li>Burns Standard PSX Backup CD-Rs?: Yes, no special options required.</li>
+<li>Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: Yes, if you use <a href="https://hydrogenaud.io/index.php?PHPSESSID=3voij6gqs993vdbd15mlmc2k7h&amp;topic=42415.msg371328##msg371328">RAW</a> mode.</li>
+<li>Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: <a href="https://github.com/Kippykip/SBITools">Yes</a>, (with the proper BIN/CUE/SUB files).</li>
+</ul>
+<h3 id="imgburn"><a href="https://www.imgburn.com/">ImgBurn</a></h3>
+<ul>
+<li>Is Open Source?: No, it is Windows only FreeWare.</li>
+<li>Burns Standard PSX Backup CD-Rs?: Yes.</li>
+<li>Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: No.</li>
+<li>Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: No.</li>
+</ul>
+<h2 id="games-with-edc-protection">Games With EDC Protection</h2>
+<p>This list is a work in progress, and new games will be added as they are discovered to have this kind of protection. If you know of a game with EDC protection that isn’t listed below, please let me know in a <a href="https://github.com/alex-free/tonyhax/issues/new?assignees=&amp;labels=bug&amp;template=generic-issue.md&amp;title=">generic issue</a> on the <a href="https://github.com/alex-free/tonyhax">Tonyhax International Github</a> so that I can add it to the list in a future Tonyhax International update.</p>
+<ul>
+<li>BeatMania Best Hits Japan (<a href="http://redump.org/disc/36175/">Rev 0</a>, <a href="http://redump.org/disc/44332/">Rev 1</a>).</li>
+<li>Dance Dance Revolution <a href="http://redump.org/disc/1562/">Japan</a>, <a href="http://redump.org/disc/16075/">USA</a>.</li>
+<li>Dance Dance Revolution: Best Hits <a href="http://redump.org/disc/30601/">Japan</a>.</li>
+<li>Dance Dance Revolution 2nd Remix <a href="http://redump.org/disc/9477/">Japan</a>.</li>
+<li>Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1 <a href="http://redump.org/disc/23382/">Japan</a>.</li>
+<li>Dance Dance Revolution 2nd Remix: Append Club Version Vol. 2 <a href="http://redump.org/disc/33339/">Japan</a>.</li>
+<li>Dance Dance Revolution 3rd Mix <a href="http://redump.org/disc/9536/">Japan</a></li>
+<li>Dance Dance Revolution 4th Mix <a href="http://redump.org/disc/34157/">Japan</a></li>
+</ul>
+<h2 id="apv2-bypasses">APv2 Bypasses</h2>
+<h3 id="animetic-story-game-1-card-captor-sakura">Animetic Story Game 1: Card Captor Sakura</h3>
+<ul>
+<li>Versions Tested: Japan (<a href="http://redump.org/disc/12000/">Disc 1</a>, <a href="http://redump.org/disc/11999/">Disc 2</a>).</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="alundra-2">Alundra 2</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/15641/">Japan</a>, <a href="http://redump.org/disc/6752/">Japan Demo</a>, <a href="http://redump.org/disc/2996/">USA</a>, <a href="http://redump.org/disc/1089/">Europe</a>, <a href="http://redump.org/disc/11603/">German</a>, <a href="http://redump.org/disc/13396/">French</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: When first booting the game during the ‘now loading’ screen.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="arc-the-lad-iii">Arc The Lad III</h3>
+<ul>
+<li>Versions Tested: Japan Rev 0 (<a href="http://redump.org/disc/5897/">Disc 1</a>, <a href="http://redump.org/disc/5898/">Disc 2</a>), Japan Rev 1 (<a href="http://redump.org/disc/34793/">Disc 1</a>, <a href="http://redump.org/disc/34794/">Disc 2</a>), USA (<a href="http://redump.org/disc/674/">Disc 1</a>, <a href="http://redump.org/disc/675/">Disc 2</a>).</li>
+<li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.</li>
+</ul>
+<h3 id="beatmania-featuring-dreams-come-true">Beatmania featuring Dreams Come True</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/36188/">Japan</a>).</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="beatmania-best-hits">Beatmania Best Hits</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/36175/">Japan Rev 0</a>, <a href="http://redump.org/disc/44332/">Japan Rev 1</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.</li>
+</ul>
+<h3 id="beat-mania-the-sound-of-tokyo">Beat Mania: The Sound of Tokyo</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/36163/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="beat-mania-6thmix-core-remix">Beat Mania 6thMix + Core Remix</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/16285/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="chase-the-express">Chase The Express</h3>
+<ul>
+<li>Versions Tested: Japan (<a href="http://redump.org/disc/5637/">Disc 1</a>, <a href="http://redump.org/disc/5638/">Disc 2</a>), <a href="http://redump.org/disc/6551/">Japan Demo 1</a>, <a href="http://redump.org/disc/19589/">Japan Demo 2</a>, Europe (<a href="http://redump.org/disc/27257/">Disc 1</a>, <a href="http://redump.org/disc/27258/">Disc 2</a>), France (<a href="http://redump.org/disc/28137/">Disc 1</a>, <a href="http://redump.org/disc/28138/">Disc 2</a>), Germany (<a href="http://redump.org/disc/7507/">Disc 1</a>, <a href="http://redump.org/disc/7508/">Disc 2</a>), Italy (<a href="http://redump.org/disc/28358/">Disc 1</a>, <a href="http://redump.org/disc/28359/">Disc 2</a>).</li>
+<li>Versions With Anti-Piracy Screen: Japan, Japan Demo 1, Japan Demo 2.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan, Japan Demo 1, Japan Demo 2.</li>
+</ul>
+<h3 id="crash-bash">Crash Bash</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/3819/">Japan</a>, <a href="http://redump.org/disc/53589/">Japan Demo</a>, <a href="http://redump.org/disc/512/">USA</a>, <a href="http://redump.org/disc/49446/">USA Demo</a>, <a href="http://redump.org/disc/5483/">Europe</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan, USA.</li>
+<li>When Is The Anti-Piracy Screen Check: ‘Sony Computer Entertainment Presents’ screen.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan, USA.</li>
+</ul>
+<h3 id="crash-bandicoot-racing">Crash Bandicoot Racing</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/3694/">Japan</a>, <a href="http://redump.org/disc/53590/">Japan Demo</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: When first booting the game when the Naughty Dog box is first visible.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="cool-boarders-2001">Cool Boarders 2001</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/513/">USA</a>, <a href="http://redump.org/disc/42467/">USA Demo</a>.</li>
+<li>Versions With Anti-Piracy Screen: USA, USA Demo.</li>
+<li>When Is The Anti-Piracy Screen Check: During the first loading screen.</li>
+<li>Versions With Anti-Piracy Bypass Support: USA, USA Demo.</li>
+</ul>
+<h3 id="dance-dance-revolution-best-hits">Dance Dance Revolution: Best Hits</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/30601/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan. <strong>IMPORTANT: There is an <a href="#bypassing-additional-edc-checks-found-in-some-games">EDC check</a> in addition to the standardized anti-piracy copy protection routine.</strong></li>
+</ul>
+<h3 id="dance-dance-revolution-disneys-rave">Dance Dance Revolution: Disney’s Rave</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/37012/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="dance-dance-revolution-extra-mix">Dance Dance Revolution: Extra Mix</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/44438/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="dance-dance-revolution-2nd-remix">Dance Dance Revolution 2nd Remix</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/9477/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+<li><strong>IMPORTANT: There is an <a href="#bypassing-additional-edc-checks-found-in-some-games">EDC check</a> in addition to the standardized anti-piracy copy protection routine.</strong></li>
+</ul>
+<h3 id="dance-dance-revolution-2nd-remix-append-club-version-vol.-1">Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/23382/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: When you use the ‘disc change’ feature found in Dance Dance Revolution 2nd Remix to boot the disc.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan. <strong>IMPORTANT: There is an <a href="#bypassing-additional-edc-checks-found-in-some-games">EDC check</a> in addition to the standardized anti-piracy copy protection routine.</strong></li>
+<li>This game works as intended/completely normal on USA and European consoles. On Japanese PS1 consoles, you must do a <strong>perfect</strong> <a href="#playing-games-that-span-multiple-discs-on-japanese-ps1-consoles">mid-game hot-swap trick</a> in the ‘disc change’ feature found in Dance Dance Revolution 2nd Remix to get the game to boot AND for it to have working CD audio. You can not play this game currently on a Japanese PS2 due to the lack of a <a href="#playing-games-that-span-multiple-discs-on-japanese-ps2-consoles">mid-game hot-swap trick</a> method for PS2s.</li>
+</ul>
+<h3 id="dance-dance-revolution-2nd-remix-append-club-version-vol.-2">Dance Dance Revolution 2nd Remix: Append Club Version Vol. 2</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/33339/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: When you use the ‘disc change’ feature found in Dance Dance Revolution 2nd Remix to boot the disc.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan. <strong>IMPORTANT: There is an <a href="#bypassing-additional-edc-checks-found-in-some-games">EDC check</a> in addition to the standardized anti-piracy copy protection routine.</strong></li>
+<li>This game works as intended/completely normal on USA and European consoles. On Japanese PS1 consoles, you must do a <strong>perfect</strong> <a href="#playing-games-that-span-multiple-discs-on-japanese-ps1-consoles">mid-game hot-swap trick</a> in the ‘disc change’ feature found in Dance Dance Revolution 2nd Remix to get the game to boot AND for it to have working CD audio. You can not play this game currently on a Japanese PS2 due to the lack of a <a href="#playing-games-that-span-multiple-discs-on-japanese-ps2-consoles">mid-game hot-swap trick</a> method for PS2s.</li>
+</ul>
+<h3 id="dancing-stage-featuring-dreams-come-true">Dancing Stage Featuring Dreams Come True</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/17882/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: On the first text screen after boot, until right before the first FMV.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="dancing-stage-featuring-true-kiss-destination">Dancing Stage Featuring True Kiss Destination</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/15853/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: On the first text screen after boot, until right before the first FMV.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="dino-crisis">Dino Crisis</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/1598/">Japan</a>, <a href="http://redump.org/disc/459/">USA Rev 0</a>, <a href="http://redump.org/disc/473/">USA Rev 1</a>, <a href="http://redump.org/disc/2942/">USA Demo</a>, <a href="http://redump.org/disc/710/">Europe</a>, <a href="http://redump.org/disc/28171/">Italy</a>, <a href="http://redump.org/disc/7586/">Germany</a>, <a href="http://redump.org/disc/24278/">France</a>, <a href="http://redump.org/disc/27940/">Spain</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan, USA Rev 0, USA Rev 1.</li>
+<li>When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan, USA Rev 0, USA Rev 1.</li>
+</ul>
+<h3 id="dino-crisis-2">Dino Crisis 2</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/1600/">Japan</a>, <a href="http://redump.org/disc/4407/">Japan Demo</a>, <a href="http://redump.org/disc/460/">USA</a>, <a href="http://redump.org/disc/49242/">USA Demo</a>, <a href="http://redump.org/disc/1071/">Europe</a>, <a href="http://redump.org/disc/45993/">Italy</a>, <a href="http://redump.org/disc/10641/">Germany</a>, <a href="http://redump.org/disc/29514/">France</a>, <a href="http://redump.org/disc/27941/">Spain</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan, Japan Demo.</li>
+<li>When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.</li>
+</ul>
+<h3 id="disneys-the-emperors-new-grove">Disney’s The Emperor’s New Grove</h3>
+<ul>
+<li>Versions With Anti-Piracy Screen: <a href="http://redump.org/disc/14583/">USA</a>, <a href="http://redump.org/disc/7565/">Europe</a>.</li>
+<li>When Is The Anti-Piracy Screen Check: Start a new game, after the first FMV on the first loading screen is when the check completes.</li>
+<li>Versions With Anti-Piracy Bypass Support: USA, Europe.</li>
+</ul>
+<h3 id="exciting-bass-2">Exciting Bass 2</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/63487/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="exciting-bass-3">Exciting Bass 3</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/59734/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="gekitotsu-toma-larc---larc-en-ciel-vs-tomarunner">Gekitotsu Toma L’Arc - L’Arc en Ciel vs Tomarunner</h3>
+<ul>
+<li>Versions: <a href="http://redump.org/disc/20715/">Japan</a></li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="goo-goo-soundry">Goo! Goo! Soundry</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/16027/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: On the first ‘now loading’ screen at boot.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="grind-session">Grind Session</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/854/">USA</a>, <a href="http://redump.org/disc/42794/">USA Demo</a>, <a href="http://redump.org/disc/3688/">Europe</a>, <a href="http://redump.org/disc/53879/">Scandinavia</a>.</li>
+<li>Versions With Anti-Piracy Screen: USA.</li>
+<li>When Is The Anti-Piracy Screen Check: After going through the main menu and starting training/single player/a level.</li>
+<li>Versions With Anti-Piracy Bypass Support: USA.</li>
+</ul>
+<h3 id="guitar-freaks">Guitar Freaks</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/2277/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: At the loading screen with the spinning guitars.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="harlem-beat-youre-the-one">Harlem Beat: You’re The One</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/36294/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: At the first loading screen after boot.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="hyper-value-2800-mahjong">Hyper Value 2800: Mahjong</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/15793/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately after boot.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="i-mode-mo-issho-doko-demo-issho-tsuika-disc">i-mode mo Issho: Doko Demo Issho Tsuika Disc</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/15793/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately after boot.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="jikkyou-powerful-pro-yakyuu-99-ketteiban">Jikkyou Powerful Pro Yakyuu ’99: Ketteiban</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/11091/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="jikkyou-powerful-pro-yakyuu-99-kaimakuban">Jikkyou Powerful Pro Yakyuu ’99: Kaimakuban</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/1686/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="jojos-bizarre-adventure">JoJo’s Bizarre Adventure</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/2871/">Japan</a>, <a href="http://redump.org/disc/386/">USA</a>, <a href="http://redump.org/disc/9983/">Europe</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: First loading screen after boot.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="koko-hore-pukka">Koko Hore! Pukka</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/4812/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="koneko-mo-issho">Koneko mo Issho</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/6329/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immeditely.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="legend-of-dragoon">Legend Of Dragoon</h3>
+<ul>
+<li>Versions Tested: Japan (<a href="http://redump.org/disc/22753/">Disc 1</a>, <a href="http://redump.org/disc/22754/">Disc 2</a>, <a href="http://redump.org/disc/22755/">Disc 3</a>, <a href="http://redump.org/disc/22756/">Disc 4</a>), USA (<a href="http://redump.org/disc/153/">Disc 1</a>, <a href="http://redump.org/disc/154/">Disc 2</a>, <a href="http://redump.org/disc/155/">Disc 3</a>, <a href="http://redump.org/disc/156/">Disc 4</a>), Europe (<a href="http://redump.org/disc/2379/">Disc 1</a>, <a href="http://redump.org/disc/2380/">Disc 2</a>, <a href="http://redump.org/disc/2381">Disc 3</a>, <a href="http://redump.org/disc/2382/">Disc 4</a>), France (<a href="http://redump.org/disc/16750/">Disc 1</a>, <a href="http://redump.org/disc/16751/">Disc 2</a>, <a href="http://redump.org/disc/16752/">Disc 3</a>, <a href="http://redump.org/disc/16753/">Disc 4</a>), Germany (<a href="http://redump.org/disc/15580/">Disc 1</a>, <a href="http://redump.org/disc/15581/">Disc 2</a>, <a href="http://redump.org/disc/15582/">Disc 3</a>, <a href="http://redump.org/disc/15583/">Disc 4</a>), Italy (<a href="http://redump.org/disc/30643/">Disc 1</a>, <a href="http://redump.org/disc/30644/">Disc 2</a>, <a href="http://redump.org/disc/30645/">Disc 3</a>, <a href="http://redump.org/disc/30646/">Disc 4</a>).</li>
+<li>Versions With Anti-Piracy Screen: Japan, USA, Europe, France, Germany, Italy.</li>
+<li>When Is The Anti-Piracy Screen Check: First loading screen after boot.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan, USA, Europe, France, Germany, Italy.</li>
+</ul>
+<h3 id="legend-of-mana">Legend Of Mana</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/1940/">Japan</a>, <a href="http://redump.org/disc/96/">USA</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan, USA.</li>
+</ul>
+<h3 id="love-hina-ai-wa-kotoba-no-naka-ni">Love Hina: Ai wa Kotoba no Naka ni</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/7369/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="love-hina-2-kotoba-wa-konayuki-no-you-ni">Love Hina 2: Kotoba wa Konayuki no You ni</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/7370/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="marvel-vs.-capcom-clash-of-super-heroes">Marvel vs. Capcom: Clash of Super Heroes</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/36384/">Japan</a>, <a href="http://redump.org/disc/60646/">Japan Demo</a>, <a href="http://redump.org/disc/1235/">USA</a>, <a href="http://redump.org/disc/3910/">Europe</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan, Japan Demo.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately on boot.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.</li>
+</ul>
+<h3 id="medievil-ii">MediEvil II</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/2503/">USA</a>, <a href="http://redump.org/disc/593/">Europe Release 1</a>, <a href="http://redump.org/disc/1547/">Europe Release 2</a>, <a href="http://redump.org/disc/45822/">Europe Demo</a>.</li>
+<li>Versions With Anti-Piracy Screen: USA.</li>
+<li>When Is The Anti-Piracy Screen Check: At the Whitechapel level loading screen (quite far in the game).</li>
+<li>Versions With Anti-Piracy Bypass Support: USA.</li>
+</ul>
+<h3 id="my-garden">My Garden</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/8300/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="oha-studio-dance-dance-revolution">Oha-Studio Dance Dance Revolution</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/33938/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="ore-no-ryouri">Ore no Ryouri</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/39643/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="pocket-jiman">Pocket Jiman</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/3189/">Japan</a></li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="popolocrois-monogatari-ii">PoPoLoCrois Monogatari II</h3>
+<ul>
+<li>Versions Tested: Japan (<a href="http://redump.org/disc/1653/">Disc 1</a>, <a href="http://redump.org/disc/1654/">Disc 2</a>, <a href="http://redump.org/disc/1651/">Disc 3</a>), <a href="http://redump.org/disc/57327/">Japan Demo</a></li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="popn-music-animation-melody">Pop’n Music: Animation Melody</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/33223/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="popn-music-disney-tunes">Pop’n Music: Disney Tunes</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/34263/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="popn-music-2">Pop’n Music 2</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/9774/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="popn-music-5">Pop’n Music 5</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/9778/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="popn-music-6">Pop’n Music 6</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/9777/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="resident-evil-3-the-last-escape">Resident Evil 3: The Last Escape</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/10/">Japan Rev 0</a>, <a href="http://redump.org/disc/8357/">Japan Rev 1</a>, <a href="http://redump.org/disc/11674/">Japan Demo</a>, <a href="http://redump.org/disc/126/">USA</a>, <a href="http://redump.org/disc/7312/">USA Demo</a>,<a href="http://redump.org/disc/496/">Europe</a>, <a href="http://redump.org/disc/9463/">Europe Demo</a>, <a href="http://redump.org/disc/9753/">France</a>, <a href="http://redump.org/disc/5526/">Germany</a>, <a href="http://redump.org/disc/16397/">Italy</a>, <a href="http://redump.org/disc/28197/">Ireland</a>, <a href="http://redump.org/disc/1387/">Spain</a>,</li>
+<li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo.</li>
+<li>When Is The Anti-Piracy Screen Check: On the disclaimer screen after the game boots, pause there.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1, Japan Demo.</li>
+</ul>
+<h3 id="resident-evil-survivor">Resident Evil: Survivor</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/8102/">Japan</a>, <a href="http://redump.org/disc/326/">USA</a>, <a href="http://redump.org/disc/801/">Europe</a>, <a href="http://redump.org/disc/5826/">France</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan, USA.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan, USA.</li>
+</ul>
+<h3 id="robbit-mon-dieu">Robbit mon Dieu</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/7227/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately after boot.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="rockman">Rockman</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/6091/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="rockman-2-dr.-wily-no-nazo">Rockman 2: Dr. Wily no Nazo</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/6092/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="rockman-3-dr.-wily-no-saigo">Rockman 3: Dr. Wily no Saigo!?</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/6092/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="rockman-4-aratanaru-yabou">Rockman 4: Aratanaru Yabou!!</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/6094/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="rockman-5-blues-no-wana">Rockman 5: Blues no Wana!?</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/6095/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="rockman-x5">Rockman X5</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/4779/">Japan</a></li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="rockman-x6">Rockman X6</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/4778/">Japan</a></li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="rockman-6">Rockman 6</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/6096/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="street-fighter-ex2-plus">Street Fighter EX2 Plus</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/12561/">Japan</a>, <a href="http://redump.org/disc/68873/">Japan Demo</a>, <a href="http://redump.org/disc/1233/">USA</a>, <a href="http://redump.org/disc/1006/">Europe</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan, Japan Demo.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan, Japan Demo, Europe, USA.</li>
+</ul>
+<h3 id="strider-2">Strider 2</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/1231/">USA</a>, <a href="http://redump.org/disc/3917/">Europe</a>.</li>
+<li>Versions With Anti-Piracy Screen: USA.</li>
+<li>When Is The Anti-Piracy Screen Check: First now Loading screen.</li>
+<li>Versions With Anti-Piracy Bypass Support: USA.</li>
+</ul>
+<h3 id="tomba-2-the-evil-swine-return">Tomba! 2: The Evil Swine Return</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/16475/">USA</a>, <a href="http://redump.org/disc/32246/">USA Demo</a>, <a href="http://redump.org/disc/31192/">Europe</a>, <a href="http://redump.org/disc/31192/">France</a>, <a href="http://redump.org/disc/31192/">Germany</a>, <a href="http://redump.org/disc/41369/">Italy</a>, <a href="http://redump.org/disc/1582/">Spain</a>.</li>
+<li>Versions With Anti-Piracy Screen: USA.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: USA.</li>
+</ul>
+<h3 id="vandal-harts-ii">Vandal Harts II</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/4854/">Japan</a>, <a href="http://redump.org/disc/4854/">USA</a>, <a href="http://redump.org/disc/4854/">Europe</a>, <a href="http://redump.org/disc/4854/">Italy</a>, <a href="http://redump.org/disc/4854/">Spain</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan, USA.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan (no patch required), USA.</li>
+</ul>
+<h3 id="wild-arms-ii">Wild Arms II</h3>
+<ul>
+<li>Versions Tested: Japan Rev 0 (<a href="http://redump.org/disc/3924/">Disc 1</a>, <a href="http://redump.org/disc/3925/">Disc 2</a>), Japan Rev 1 (<a href="http://redump.org/disc/1902/">Disc 1</a>, <a href="http://redump.org/disc/1903/">Disc 2</a>), <a href="http://redump.org/disc/4799//">Japan Demo</a>, USA (<a href="http://redump.org/disc/171/">Disc 1</a>, <a href="http://redump.org/disc/172/">Disc 2</a>), <a href="http://redump.org/disc/42466/">USA Demo</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo, USA, USA Demo.</li>
+<li>When Is The Anti-Piracy Screen Check: Right after the media vision logo screen fades to black.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan Rev 0 (no patch required), Japan Rev 1 (no patch required), Japan Demo (no patch required), USA, USA Demo.</li>
+</ul>
+<h3 id="world-soccer-jikkyou-winning-eleven-4">World Soccer Jikkyou Winning Eleven 4</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/4934/">Japan Rev 0</a>, <a href="http://redump.org/disc/4934/">Japan Rev 1</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.</li>
+<li>When Is The Anti-Piracy Screen Check: As soon as the Japan Olympic Committee screen appears.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.</li>
+</ul>
+<h3 id="xisai-jumbo">XI[SAI] Jumbo</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/8372/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan.</li>
+</ul>
+<h3 id="yu-gi-oh-forbidden-memories">Yu-Gi-Oh! Forbidden Memories</h3>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/4173/">Japan</a>, <a href="http://redump.org/disc/51546/">Japan Genteiban Edition</a>, <a href="http://redump.org/disc/820/">USA</a>, <a href="http://redump.org/disc/1053/">Europe</a>, <a href="http://redump.org/disc/28263/">France</a>, <a href="http://redump.org/disc/1256/">Germany</a>, <a href="http://redump.org/disc/30673/">Spain</a>, <a href="http://redump.org/disc/35297/">Italy</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan, Japan Genteiban Edition, USA, Europe, France, Germany, Spain, Italy.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+<li>Versions With Anti-Piracy Bypass Support: Japan, Japan Genteiban Edition, USA,</li>
+</ul>
+<h2 id="known-games-that-need-anti-piracy-bypasses-implemented">Known Games That Need Anti-Piracy Bypasses Implemented</h2>
+<p>This is a small ‘todo list’ of games with the APv2 style protection which need further investigation to defeat it (due to non-standard implementation). Currently there is no support for playing them in Tonyhax International.</p>
+<p>This list is a work in progress, and new games will be added as they are discovered. If you know of a game with APv2 protection that isn’t listed below and is not supported, please let me know in an <a href="https://github.com/alex-free/tonyhax/issues/new?assignees=&amp;labels=bug&amp;template=generic-issue.md&amp;title=">anti-piracy issue</a> on the <a href="https://github.com/alex-free/tonyhax">Tonyhax International Github</a> so that I can add it to the list in a future Tonyhax International update.</p>
+<h2 id="glint-glitters">Glint Glitters</h2>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/15969/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+</ul>
+<h2 id="hyper-value-2800-hanafuda">Hyper Value 2800: Hanafuda</h2>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/15791/">Japan</a>.</li>
+<li>Versions With Anti-Piracy Screen: Japan.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately after boot.</li>
+</ul>
+<h2 id="tokimeki-memorial-2">Tokimeki Memorial 2</h2>
+<ul>
+<li>Versions Tested: Japan Rev 0 (<a href="http://redump.org/disc/10670/">Disc 1</a>, <a href="http://redump.org/disc/10671/">Disc 2</a>, <a href="http://redump.org/disc/10672/">Disc 3</a>, <a href="http://redump.org/disc/10673/">Disc 4</a>), Japan Rev 1 (<a href="http://redump.org/disc/24175/">Disc 1</a>, <a href="http://redump.org/disc/24177/">Disc 2</a>, <a href="http://redump.org/disc/24178/">Disc 3</a>, <a href="http://redump.org/disc/24179/">Disc 4</a>), Japan Limited Box (<a href="http://redump.org/disc/67613/">Disc 1</a>, <a href="http://redump.org/disc/67614/">Disc 2</a>, <a href="http://redump.org/disc/67615/">Disc 3</a>, <a href="http://redump.org/disc/67616/">Disc 4</a>).</li>
+<li>Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Limited Box.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+</ul>
+<h2 id="spyro-year-of-the-dragon">Spyro: Year Of The Dragon</h2>
+<ul>
+<li>Versions Tested: <a href="http://redump.org/disc/818/">USA Rev 0</a>, <a href="http://redump.org/disc/818/">USA Rev 1</a>, <a href="http://redump.org/disc/49449/">USA Demo</a>, <a href="http://redump.org/disc/492/">Europe Rev 0</a>, <a href="http://redump.org/disc/19611/">Europe Rev 1</a>.</li>
+<li>Versions With Anti-Piracy Screen: USA Rev 0, USA Rev 1.</li>
+<li>When Is The Anti-Piracy Screen Check: Immediately.</li>
+</ul>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iso_project image_name="tonyhax-boot-cd-europe.bin" cue_sheet="tonyhax-boot-cd-europe.cue" no_xa="0">
+<iso_project image_name="tonyhax-boot-cd.bin" cue_sheet="tonyhax-boot-cd.cue" no_xa="0">
 	<track type="data">
 		<identifiers
 			system          ="PLAYSTATION"
@@ -12,11 +12,11 @@
 		/>
 
 		<!--
-			Use the European license file.
+			Use the Japanese license file.
 
-			This is important since the European consoles check the game's region.
+			This is important since SCPH-3000 consoles check the game's region during the CD Player Swap Trick
 		-->
-		<license file="licensee.dat" />
+		<license file="licensej.dat" />
 
 		<directory_tree>
 			<!-- System configuration file -->

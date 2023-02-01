@@ -5,13 +5,13 @@ include ../variables.mk
 
 .PHONY: clean
 
-all: $(GSHAX_FILES)
+all: gshax wipeout-usa
 
 clean:
-	$(RM) $(GSHAX_FILES) gshax wipeout-usa/wipeout-usa-gshax-code.txt
+	$(RM) wipeout-usa/*.txt wipeout-usa/CODELIST00
 
 gshax: ../entrypoints/entry-bb.bin
-	rm -f gshax; gcc gshax.c -o gshax; 
+	cd ../gshax-tool; make clean; make; 
 	
-wipeout-usa-gshax-code.txt: gshax
-	cp wipeout-usa-gshax-code-tpl.txt wipeout-usa/wipeout-usa-gshax-code.txt; ./gshax 800CBA70 ../entrypoints/entry-bb.bin >> wipeout-usa/wipeout-usa-gshax-code.txt; truncate -s `head -94 wipeout-usa/wipeout-usa-gshax-code.txt | wc -c` wipeout-usa/wipeout-usa-gshax-code.txt
+wipeout-usa: gshax
+	../gshax-tool/gshax -g 801FBDC8 8006C2C4 800CBA70 ../entrypoints/entry-bb.bin 0xb4 wipeout-usa/CODELIST00; ../gshax-tool/gshax -t 801FBDC8 8006C2C4 800CBA70 ../entrypoints/entry-bb.bin 0xb4 wipeout-usa/wipeout-usa-gshax-code.txt

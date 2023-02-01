@@ -330,6 +330,7 @@ Next, install all the required dependencies:
 * cdrdao 
 * python 
 * pandoc
+* pip (and numpy installed via `pip3 install numpy`)
 
 If you are running _Fedora or Debian_ (Windows Subsystem For Linux can run these operating systems on Windows to provide a sufficient build environment), you can download the build dependencies automatically with the `get-deps.sh` script found in the `scripts` folder of the Tonyhax International [source tree](https//alex-free.github.io/tonyhax). **For any other OS, you'll need to find the above packages and install them manually yourself.**
 

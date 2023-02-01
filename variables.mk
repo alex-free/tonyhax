@@ -158,4 +158,4 @@ ROM_FILES := tonyhax-$(TONYHAX_VERSION).rom tonyhax-rom-flasher.bin tonyhax-rom-
 
 # GSHAX files
 
-GSHAX_FILES := wipeout-usa-gshax-code.txt
+GSHAX_FILES := wipeout-usa-gshax-code.txt CODELIST00

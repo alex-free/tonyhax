@@ -4,7 +4,7 @@
 include variables.mk
 
 PACKAGE_FILE = tonyhax-$(TONYHAX_VERSION).zip
-PACKAGE_CONTENTS = $(ENTRY_FILES:%=entrypoints/%) $(ROM_FILES:%=rom/%) loader/HAX loader/FF9 loader/tonyhax.mcs loader/tonyhax-ff9.mcs loader/tonyhax.exe $(FREEPSXBOOT_IMAGES:%=freepsxboot/%) $(BOOT_CD_FILES:%=boot-cd/%) $(GSHAX_FILES:%=gshax/wipeout-usa/%) *.html *.md images/*.jpg LICENSE
+PACKAGE_CONTENTS = $(ENTRY_FILES:%=entrypoints/%) $(ROM_FILES:%=rom/%) loader/HAX loader/FF9 loader/tonyhax.mcs loader/tonyhax-ff9.mcs loader/tonyhax.exe $(FREEPSXBOOT_IMAGES:%=freepsxboot/%) $(BOOT_CD_FILES:%=boot-cd/%) $(GSHAX_FILES:%=gshax/wipeout-usa/%) *.md images/*.jpg LICENSE
 
 .PHONY: clean modules clean
 

@@ -8,7 +8,7 @@ include ../variables.mk
 all: gshax wipeout-usa
 
 clean:
-	$(RM) wipeout-usa/*.txt wipeout-usa/CODELIST00
+	$(RM) wipeout-usa/wipeout-usa-gshax-code.txt wipeout-usa/CODELIST00
 
 gshax: ../entrypoints/entry-bb.bin
 	cd ../gshax-tool; make clean; make; 

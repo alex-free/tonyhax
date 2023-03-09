@@ -4,10 +4,10 @@ The Boot CD is the disc version of Tonyhax International. The BIN+CUE file set c
 
 *   Any PS1 console (SCPH-1000-SCPH-102) or supported early PS2 console (SCPH-10000-SCPH-39004).
 *   A high quality CD-R to burn the Tonyhax International Boot CD to.
-*   A way to start the Boot CD, such as the [CD Player Swap Trick](#cd-player-swap-trick), [GameShark Cart Swap Trick](#gameshark-cheat-cart-swap-trick), or an unlicensed boot disc such as the PS-X-Change v2 disc).
+*   A way to start the Boot CD, such as the [CD Player Swap Trick](#cd-player-swap-trick), [GameShark Cartridge Swap Trick](#gameshark-cartridge-swap-trick), [GameShark CD Swap Trick](#gameshark-cd-swap-trick), or an unlicensed boot disc such as the [PS-X-Change Boot Disc](#ps-x-change-boot-disc).
 *   A supported PS1 or PS2 console.
 
-## PS-X-Change Disc (Or Similar Boot Disc)
+## PS-X-Change Boot Disc
 
 For years special unlicensed 3rd party CD-ROM discs have been available which enable you to boot a backup CD-R using an artificial swap trick. The most famous of these is the PS-X-Change v2, which still seems to be sold through various distributors to this day.
 
@@ -39,11 +39,9 @@ To boot the Tonyhax International Boot CD-R with the CD Player Swap Trick:
 *   Put in your burned Tonyhax International Boot CD-R.
 *   Exit the CD Player, and wait for the Tonyhax International loader to start.
 
-## GameShark Cheat Cart Swap Trick
+## GameShark Cartridge Swap Trick
 
-Some versions of the official GameShark cheat cartridge software have a built-in back door that enables an artificial CD Player Swap Trick. This swap trick is found only in **GameShark v2.0-v3.2 cheat cartridges.** This means that as long as you have such a GameShark version, you can use the GameShark Swap Trick on any PSX console model that has a cartridge port on the back (SCPH-1000-SCPH-7502 models).
-
-To boot the Tonyhax International Boot CD-R with the GameShark Cheat Cart Swap Trick:
+The GameShark v2.0 cartridge introduced the CD Player option in the Explorer feature of the GameShark menu. The GameShark cartridge Swap Trick can boot the Tonyhax International Boot CD directly, which is more convenient then using GSHAX codes. It can be used on all GameShark v2.x and v3.x cartridges as described below:
 
 *   Ensure that the GameShark cheat cart is firmly inserted into the back of your compatible PSX console. 
 *   Find something to block the lid sensor. The CD drive lid should remain 'opened' with the lid sensor blocked for at least the rest of the Swap Trick.
@@ -53,3 +51,14 @@ To boot the Tonyhax International Boot CD-R with the GameShark Cheat Cart Swap T
 *   Replace the authentic PSX game disc (that is the same region as your console) with the burned Tonyhax International Boot CD-R.
 *   Press the `O` button to exit the `CD Audio Player` sub-menu, and to put you back at the `Explorer` sub-menu. Press the `O` button one last time to exit the `Explorer` menu, and to put you back at the main menu.
 *   Use the `D-PAD` to navigate to the `Start Game` option, then select it with the `X` button. This will bring you to the `Start Game Options` sub-menu. Finally, press the `X` button one last time to select the `Start Game Without Codes` option which will boot the Tonyhax International Boot CD-R.
+
+## GameShark CD Swap Trick
+
+The swap trick ability of the GameShark briefly disappeared when the product first shifted from a cartridge to a CD. **There is therefore no swap trick ability available in the GameShark CDX v3.3 or GameShark Lite CD discs** (use the [GameSharkHAX](gameshark-code.md) boot method as an alternative!), a different swap trick was added to the **GameShark v4.0 CD and all newer versions**. It is described below:
+
+*   Find something to block the lid sensor. The CD drive lid should remain 'opened' with the lid sensor blocked for the rest of the Swap Trick.
+*   Turn on the console with the GameShark CD in the CD drive, it will spin up and start the GameShark software.
+*   Once the GameShark software starts, **the GameShark CD will stop in the CD drive.**
+*   Replace the GameShark CD with the burned Tonyhax International Boot CD-R.
+*   Use the `D-PAD` to navigate to the `Start Game` option, then select it with the `X` button. This will bring you to the `Start Game Options` sub-menu. Press the `X` button to select the `Start Game Without Codes` option.
+*   Finally, press the 'X' button one last time to boot the Tonyhax International Boot CD-R.

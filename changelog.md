@@ -1,3 +1,15 @@
+## Version 1.1.8 (1/11/2023)
+
+*   [tonyhax-v1.1.8-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.8i/tonyhax-v1.1.8-international.zip)
+
+Changes:
+
+* A new and exciting boot method known as [GameSharkHAX](gameshark-code.md) has been added to Tonyhax International. This is a brand new 'way in' to the Tonyhax International loader for all PS1 and PS2 consoles that are supported by Tonyhax International (SCPH-1000-SCPH-39004). It uses GameShark codes to boot the Tonyhax International loader off a memory card file **mid-game.**
+ 
+* Condensed the [Boot CD](boot-cd.md) back to just one BIN+CUE file set. It is not actually necessary to have 2 different versions of the Boot CD, the single BIN+CUE file set in all Tonyhax International releases from here on out will work in every supported use case.
+
+* The documentation has been split into multiple markdown and html files. This makes it much more easy to maintain for me, and easier for you to comprehend, read, and share. The 'all in one html file' style before became unmanageable due to the sheer amount of info that has been added since the initial release.
+
 ## Version 1.1.7 (1/3/2023)
 
 *   [tonyhax-v1.1.7-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.7i/tonyhax-v1.1.7-international.zip)

@@ -240,7 +240,7 @@ void try_boot_cd() {
 		
 		The first reason this is required is because the SetSessionSuperUltraCommandSmash screws up interrupts since we are sending the 2nd SetSession command before the possible 3rd interrupt (which is a second INT5 response sent if session 2 does not actually exist). 
 		
-		The second reason is because of how we are using the BIOS controller functions, to go back to a clean state a bios re-intialization also accommplishes that.
+		The second reason is because of how we are using the BIOS controller functions, to go back to a clean state a bios re-intialization also accomplishes that.
 		*/
 
 		debug_write("Reinitializing kernel"); 
@@ -358,6 +358,19 @@ void try_boot_cd() {
 	debug_write(" * %s = %x", "EVENT", event);
 	debug_write(" * %s = %x", "STACK", stacktop);
 	debug_write(" * %s = %s", "BOOT", bootfile);
+
+	debug_write("Reinitializing kernel"); 
+	bios_reinitialize();
+	bios_inject_disc_error();
+
+	debug_write("Stopping Motor");
+	cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
+	
+	debug_write("Initializing CD");
+	if (!CdInit()) {
+		debug_write("Init failed");
+		return;
+	}
 
 	/*
 	 * SetConf is run by BIOS with interrupts disabled.

@@ -16,7 +16,6 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * Uses the newer [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) exploit and patching methods to disable FreePSXBoot memory cards that boot Tonyhax International after the FreePSXBoot exploit starts the loader from the memory card. This **works on all BIOS versions on all supported consoles.**
 
-* 
 * Supports more [games with additional copy protection routines](anti-piracy-bypass.md), by **using a completely different anti-piracy bypass system.**
 
 * Uses a completely different build system that is portable to many more Linux distributions. This new build system is more efficient and easier to use as well.
@@ -64,29 +63,43 @@ _More Info_
 *   [Tonyhax International GitHub](https://github.com/alex-free/tonyhax)
 *   [PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/)
 *   [PSX-Place Tonyhax International Resource](https://www.psx-place.com/resources/tonyhax-international.1281/)
-*   [CDRDAO-AF Fork](https://alex-free.github.io/cdrdao)
+*   [CDRDAO-PLED](https://alex-free.github.io/cdrdao) - recommended burning software for Linux.
 *   [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967)
 *   [GBATemp Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514)
-*   [APrip Homepage](https://alex-free.github.io/aprip)
-*   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap)
-*   [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom)
-*   [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot)
-*   [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax)
+*   [APrip Homepage](https://alex-free.github.io/aprip) - patches some later PSX games with additional anti-piracy copy protection.
+*   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap) - a similar project that uses the Tonyhax International loader.
+*   [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom) - what generates the Tonyhax International ROM file.
+*   [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) - an exploit used in a Tonyhax International boot method.
+*   [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax) - what Tonyhax International is based on (not an official version).
 *   [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)
 
 ## Downloads
 
-### Version 1.1.8 (1/11/2023)
+### Version 1.1.9 (3/9/2023)
 
-*   [tonyhax-v1.1.8-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.8i/tonyhax-v1.1.8-international.zip)
+*   [tonyhax-v1.1.9-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.9i/tonyhax-v1.1.9-international.zip)
 
 Changes:
 
-* A new and exciting boot method known as [GameSharkHAX](gameshark-code.md) has been added to Tonyhax International. This is a brand new 'way in' to the Tonyhax International loader for all PS1 and PS2 consoles that are supported by Tonyhax International (SCPH-1000-SCPH-39004). It uses GameShark codes to boot the Tonyhax International loader off a memory card file **mid-game.**
- 
-* Condensed the [Boot CD](boot-cd.md) back to just one BIN+CUE file set. It is not actually necessary to have 2 different versions of the Boot CD, the single BIN+CUE file set in all Tonyhax International releases from here on out will work in every supported use case.
+* Fixes potential lockups/freezing right before booting.
 
-* The documentation has been split into multiple markdown and html files. This makes it much more easy to maintain for me, and easier for you to comprehend, read, and share. The 'all in one html file' style before became unmanageable due to the sheer amount of info that has been added since the initial release.
+* Fixed the Cool Boarders 4 save game exploit not working correctly (thank you [AngelDavil88](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/post-10067707) for pointing this out)!
+
+* The save game file template 'hack' I was using has been replaced with a proper equivalent for the 24KB `tonyhax.exe` maximum file size RAM setup currently in use (thanks [Shendo](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967&p=22130#p22130))!
+
+* A new [GameSharkHAX](gameshark-code.md) code for Parasite Eve USA is now [available](gameshark-code.md#parasite-eve-usa).
+
+* [GameSharkHAX](gameshark-code.md) codes are all now **auto-generated** in the build step thanks to my new program [GSHAX Tool](https://alex-free.github.io/gshax-tool).
+ 
+* Added more info on the [GameSharkHAX](gameshark-code.md) code method, specifically on which exact GameShark model versions are useful with this boot method (even though all GameShark model versions work regardless of their usefulness).
+
+* The documentation is now only in markdown format (the website is only using auto-generated HTML from said markdown via GitHub pages now). The pandoc requirement hence has been removed from the build step.
+
+* The `build-tool-chain.sh` script now automatically compiles MKPSXISO at the end of building the MIPS toolchain for the PSX.
+
+* Updated [MKPSXISO] to the latest commit as of 3/6/2023.
+
+* Added info to the [Boot CD](boot-cd.md) documentation that explains how to use specific GameShark cartridge or GameShark CD versions to start the Tonyhax International Boot CD.
 
 [About previous versions](changelog.md).
 
@@ -328,17 +341,14 @@ Next, install all the required dependencies:
 * libtinyxml2-devel 
 * cmake 
 * cdrdao 
-* python 
-* pandoc
-* pip (and numpy installed via `pip3 install numpy`)
+* python3
+* python3-pip (and numpy, which is installed via this command: `pip3 install numpy`)
 
 If you are running _Fedora or Debian_ (Windows Subsystem For Linux can run these operating systems on Windows to provide a sufficient build environment), you can download the build dependencies automatically with the `get-deps.sh` script found in the `scripts` folder of the Tonyhax International [source tree](https//alex-free.github.io/tonyhax). **For any other OS, you'll need to find the above packages and install them manually yourself.**
 
 Next, you need to build the tool-chain. Execute the `build-tool-chain.sh` script, which is found in the `scripts` directory of the source tree. **This will take some time to build, depending on how fast your computer is.**
 
-After that, build mkpsxsiso. Execute the `build-mkpsxiso.sh` script, which is found in the `scripts` directory of the source tree.
-
-With everything installed, you can now build Tonyhax International with the `build.sh` script found in the `scripts` directory of the Tonyhax International source tree. After you build Tonyhax International a release `.zip` file will be generated in the root of the source directory.
+With everything now installed, build Tonyhax International with the `build.sh` script found in the `scripts` directory of the Tonyhax International source tree. After you build Tonyhax International a release `.zip` file will be generated in the root of the source directory.
 
 ## Credits
 

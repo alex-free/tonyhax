@@ -7,7 +7,7 @@ SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Common variables
 
-TONYHAX_VERSION=v1.1.8-international
+TONYHAX_VERSION=v1.1.9-international
 
 CC=mips-linux-gnu-gcc
 CFLAGS=-Os -Wall -Wextra -Wno-main -Werror -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION)
@@ -155,7 +155,3 @@ BOOT_CD_FILES := tonyhax-boot-cd.bin tonyhax-boot-cd.cue
 # ROM files
 
 ROM_FILES := tonyhax-$(TONYHAX_VERSION).rom tonyhax-rom-flasher.bin tonyhax-rom-flasher.cue
-
-# GSHAX files
-
-GSHAX_FILES := wipeout-usa-gshax-code.txt CODELIST00

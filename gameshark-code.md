@@ -14,7 +14,7 @@ GameSharkHAX is the newest way to boot the Tonyhax International loader using sp
 |                    |                  |                                                     |                                           |
 |--------------------|------------------|-----------------------------------------------------|-------------------------------------------|
 | Cheat Device       | Type Of Device   | Supports Storing Codes On A Memory Card?            | Has A Built-In Swap Trick Back Door?      |
-| GameShark v1.x     | Cartridge        | Yes                                                  | [Yes](boot-cd.md#gameshark-cartridge-swap-trick)  |
+| GameShark v1.x     | Cartridge        | **No, they are stored in the cartridge only**,                                                   | **No**  |
 | GameShark v2.x     | Cartridge        | Yes                                                 | [Yes](boot-cd.md#gameshark-cartridge-swap-trick)  |
 | GameShark v3.0-3.2 | Cartridge        | Yes                                                 | [Yes](boot-cd.md#gameshark-cartridge-swap-trick)  |
 | **GameShark CDX v3.3** | **CD**               | **No, requires proprietary PS1 memory card  dongle** | **No**                                    |
@@ -104,7 +104,7 @@ Installation With A PS2:
 
 * Power on your PS1 with the memory card containing the `Tonyhax International Loader RAW File` inserted into slot 1 of your console. Start the GameShark.
 
-* Add the GameShark code for your [specific game disc](#gamesharkhax-supported-game-discs) to the GameShark. Official GameShark versions have a code line limit of 64. So you will need to create 2 seperate code entries: `GSHAX1` (containing the first 64 lines of the code) and `GSHAX2` (contains line 65 and above for the rest of the code).
+* Add the GameShark code for your [specific game disc](#gamesharkhax-supported-game-discs) to the GameShark. Official GameShark versions have a code line limit of 64. So you will need to create 2 separate code entries: `GSHAX1` (containing the first 64 lines of the code) and `GSHAX2` (contains line 65 and above for the rest of the code).
 
 * After adding every code line found in the `GameSharkHAX Code File` into the GameShark, ensure that the `GSHAX1` and `GSHAX2`codes are both enabled. Start the authentic PSX game disc of the game that the code is for using the `Start Game With Codes` option.
 

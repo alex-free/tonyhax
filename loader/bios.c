@@ -17,7 +17,6 @@ void bios_reinitialize() {
 	// Clear kernel heap space. Not really needed but nice for debugging.
 	bzero((void *) 0xA000E000, 0x2000);
 
-#if !defined FREEPSXBOOT // We want to keep the patch to disable the memory card in slot 2 from the FPSXBOOTBUILDER!
 	// The following is adapted from the WarmBoot call
 
 	// Copy the relocatable kernel chunk
@@ -37,7 +36,6 @@ void bios_reinitialize() {
 
 	// Restore default exception return function
 	SetDefaultExitFromException();
-#endif
 
 	// Clear interrupts and mask
 	I_STAT = 0;

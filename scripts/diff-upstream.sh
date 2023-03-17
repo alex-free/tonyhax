@@ -13,7 +13,6 @@ if [ -e "../docs/tonyhax-vs-tonyhax-international-diffs/tonyhax-international-v"
 fi
 
 set -e
-./gen-html.sh
 cd ../
 make clean
 tmp=$(mktemp -d --tmpdir og-tonyhax.XXX)

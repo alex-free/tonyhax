@@ -2,7 +2,7 @@
 
 ## The Ultimate Backup CD-R/Import Disc Loader Soft-Mod Solution For The Original PlayStation & Early Models Of PlayStation 2
 
-Brought to you by [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867), [Alex Free](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6018), and [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714). Built on the work of many [others](#credits).
+Brought to you by [Alex Free](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6018), [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867), [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714), and [Sylverrez](https://gbatemp.net/members/sylverrez.610331/). Built on the work of many [others](#credits).
 
 Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Software backup loader exploit thing for the Sony PlayStation 1" originally created by [Socram8888](https://github.com/socram8888). Tonyhax International is developed by Alex Free and MottZilla with many new features and upgrades compared to the original Tonyhax, some of which are listed below:
 
@@ -14,7 +14,7 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * Supports **more [save game exploits](save-game-exploit.md)**, enabling the use of even more PSX game discs to start the Tonyhax International loader.
 
-* Uses the newer [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) exploit and patching methods to disable FreePSXBoot memory cards that boot Tonyhax International after the FreePSXBoot exploit starts the loader from the memory card. This **works on all BIOS versions on all supported consoles.**
+* Supports more games being booted via the [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) exploit successfully. The downside is that **before starting any backup or import disc in the loader YOU MUST REMOVE THE FREEPSXBOOT MEMORY CARD to ensure successful booting of your backup or import disc. THIS APPLIES TO BOTH SLOT 1 AND SLOT 2 FREEPSXBOOT CARDS.**
 
 * Supports more [games with additional copy protection routines](anti-piracy-bypass.md), by **using a completely different anti-piracy bypass system.**
 
@@ -65,41 +65,24 @@ _More Info_
 *   [PSX-Place Tonyhax International Resource](https://www.psx-place.com/resources/tonyhax-international.1281/)
 *   [CDRDAO-PLED](https://alex-free.github.io/cdrdao) - recommended burning software for Linux.
 *   [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967)
-*   [GBATemp Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514)
+*   [GBATemp https://gbatemp.net/members/sylverrez.610331/
+Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514)
 *   [APrip Homepage](https://alex-free.github.io/aprip) - patches some later PSX games with additional anti-piracy copy protection.
 *   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap) - a similar project that uses the Tonyhax International loader.
 *   [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom) - what generates the Tonyhax International ROM file.
 *   [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) - an exploit used in a Tonyhax International boot method.
-*   [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax) - what Tonyhax International is based on (not an official version).
+*   [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax) - what Tonyhax International is based on (_International is not an official version_).
 *   [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)
 
 ## Downloads
 
-### Version 1.1.9 (3/9/2023)
+### Version 1.2.0 (3/17/2023)
 
-*   [tonyhax-v1.1.9-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.9i/tonyhax-v1.1.9-international.zip)
+*   [tonyhax-v1.2.0-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.0i/tonyhax-v1.2.0-international.zip)
 
 Changes:
 
-* Fixes potential lockups/freezing right before booting.
-
-* Fixed the Cool Boarders 4 save game exploit not working correctly (thank you [AngelDavil88](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/post-10067707) for pointing this out)!
-
-* The save game file template 'hack' I was using has been replaced with a proper equivalent for the 24KB `tonyhax.exe` maximum file size RAM setup currently in use (thanks [Shendo](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967&p=22130#p22130))!
-
-* A new [GameSharkHAX](gameshark-code.md) code for Parasite Eve USA is now [available](gameshark-code.md#parasite-eve-usa).
-
-* [GameSharkHAX](gameshark-code.md) codes are all now **auto-generated** in the build step thanks to my new program [GSHAX Tool](https://alex-free.github.io/gshax-tool).
- 
-* Added more info on the [GameSharkHAX](gameshark-code.md) code method, specifically on which exact GameShark model versions are useful with this boot method (even though all GameShark model versions work regardless of their usefulness).
-
-* The documentation is now only in markdown format (the website is only using auto-generated HTML from said markdown via GitHub pages now). The pandoc requirement hence has been removed from the build step.
-
-* The `build-tool-chain.sh` script now automatically compiles MKPSXISO at the end of building the MIPS toolchain for the PSX.
-
-* Updated [MKPSXISO] to the latest commit as of 3/6/2023.
-
-* Added info to the [Boot CD](boot-cd.md) documentation that explains how to use specific GameShark cartridge or GameShark CD versions to start the Tonyhax International Boot CD.
+* Fixes lockup/freezing that only occurred in specific games (i.e. Tekken 3) when using the FreePSXBoot exploit boot method. Now however, **Before starting any backup or import disc in the loader YOU MUST REMOVE THE FREEPSXBOOT MEMORY CARD to ensure successful booting of your backup or import disc. THIS APPLIES TO BOTH SLOT 1 AND SLOT 2 FREEPSXBOOT CARDS.** This enables more games to work through this boot method and simplifies the loader. The loader will tell you to remove the FreePSXBoot memory card as well now.
 
 [About previous versions](changelog.md).
 
@@ -390,6 +373,12 @@ With everything now installed, build Tonyhax International with the `build.sh` s
 *   Tekken 2 Japan (rev 1 only)/USA (rev 0 only)/PAL save game exploits (based off of previous work by [krystalgamer](https://github.com/socram8888/tonyhax/pull/20)).
 
 *   Downhill Snow (Japan) save game exploit.
+
+### Sylverrez
+
+*   Helping with debugging an [APrip](https://alex-free.github.io/aprip) issue on Windows.
+
+*   Contributing APrip GameShark codes to be added to the Tonyhax International loader.
 
 ### Misc Acknowledgements
 

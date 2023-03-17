@@ -1,3 +1,29 @@
+## Version 1.1.9 (3/9/2023)
+
+*   [tonyhax-v1.1.9-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.9i/tonyhax-v1.1.9-international.zip)
+
+Changes:
+
+* Fixes potential lockups/freezing right before booting.
+
+* Fixed the Cool Boarders 4 save game exploit not working correctly (thank you [AngelDavil88](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/post-10067707) for pointing this out)!
+
+* The save game file template 'hack' I was using has been replaced with a proper equivalent for the 24KB `tonyhax.exe` maximum file size RAM setup currently in use (thanks [Shendo](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967&p=22130#p22130))!
+
+* A new [GameSharkHAX](gameshark-code.md) code for Parasite Eve USA is now [available](gameshark-code.md#parasite-eve-usa).
+
+* [GameSharkHAX](gameshark-code.md) codes are all now **auto-generated** in the build step thanks to my new program [GSHAX Tool](https://alex-free.github.io/gshax-tool).
+ 
+* Added more info on the [GameSharkHAX](gameshark-code.md) code method, specifically on which exact GameShark model versions are useful with this boot method (even though all GameShark model versions work regardless of their usefulness).
+
+* The documentation is now only in markdown format (the website is only using auto-generated HTML from said markdown via GitHub pages now). The pandoc requirement hence has been removed from the build step.
+
+* The `build-tool-chain.sh` script now automatically compiles MKPSXISO at the end of building the MIPS toolchain for the PSX.
+
+* Updated [MKPSXISO](https://github.com/lameguy64/mkpsxiso) to the latest commit as of 3/6/2023.
+
+* Added info to the [Boot CD](boot-cd.md) documentation that explains how to use specific GameShark cartridge or GameShark CD versions to start the Tonyhax International Boot CD.
+
 ## Version 1.1.8 (1/11/2023)
 
 *   [tonyhax-v1.1.8-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.8i/tonyhax-v1.1.8-international.zip)

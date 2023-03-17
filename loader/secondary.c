@@ -24,7 +24,7 @@ bool calibrate_laser = 0; // Only Japanese VC2 and VC3 consoles need this so it 
 bool bugged_setsession = 0; // VC0 A, VC0 B, and VC1 A CDROM Controller BIOS versions all have a buggy SetSession command that requires a special work around to use
 bool enable_unlock = 1; // Disabled on VC0A and VC0B Japanese CDROM Controller BIOS versions automatically. On VC1A+ the testregion command is run and if the region is Japan it is also disabled.
 bool controller_input = 0; // When enabled, debug_write does not display the repeat messages counter. This is so we can draw a blank line and then wait for controller input using vsync in debug_write.
-bool first_rev = 0; // VC0 A and VC0 B do not need any anti-piracy patching as they are immune to addtional copy protection routines because of the lack of the ReadTOC command in the CDROM Controller BIOS Firmware.
+bool first_rev = 0; // VC0 A and VC0 B do not need any anti-piracy patching as they are immune to additional copy protection routines because of the lack of the ReadTOC command in the CDROM Controller BIOS Firmware.
 
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
@@ -160,6 +160,10 @@ bool licensed_drive() {
 void try_boot_cd() {
 	int32_t read;
 	uint8_t cbuf[4]; // CD Command Buffer
+
+	#if defined FREEPSXBOOT
+		debug_write("Remove the FreePSXBoot memory card now from your console");
+	#endif
 
 	#if !defined TOCPERFECT
 		if(enable_unlock) {
@@ -363,7 +367,7 @@ void try_boot_cd() {
 	bios_reinitialize();
 	bios_inject_disc_error();
 
-	debug_write("Stopping Motor");
+	debug_write("Stopping Motor"); // Reset one last time to avoid potential lockups (here be dragons)
 	cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
 	
 	debug_write("Initializing CD");
@@ -375,7 +379,7 @@ void try_boot_cd() {
 	/*
 	 * SetConf is run by BIOS with interrupts disabled.
 	 *
-	 * If an interrupt happens while the BIOS is reinitializing the TCBs (thread control blocks),
+	 * If an interrupt happens while the BIOS is re-initializing the TCBs (thread control blocks),
 	 * the interrupt handler will store the current thread state in the zero address, wiping
 	 * vital data, like the interrupt trampoline at 0x80.
 	 */
@@ -456,6 +460,7 @@ void try_boot_cd() {
 }
 
 void main() {
+	
 	// Undo all possible fuckeries during exploiting
 	bios_reinitialize();
 

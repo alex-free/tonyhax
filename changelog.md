@@ -1,3 +1,13 @@
+# Changelog
+
+## Version 1.2.0 (3/17/2023)
+
+*   [tonyhax-v1.2.0-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.0i/tonyhax-v1.2.0-international.zip)
+
+Changes:
+
+* Fixes lockup/freezing that only occurred in specific games (i.e. Tekken 3) when using the FreePSXBoot exploit boot method. Now however, **Before starting any backup or import disc in the loader YOU MUST REMOVE THE FREEPSXBOOT MEMORY CARD to ensure successful booting of your backup or import disc. THIS APPLIES TO BOTH SLOT 1 AND SLOT 2 FREEPSXBOOT CARDS.** This enables more games to work through this boot method and simplifies the loader. The loader will tell you to remove the FreePSXBoot memory card as well now.
+
 ## Version 1.1.9 (3/9/2023)
 
 *   [tonyhax-v1.1.9-international](https://github.com/alex-free/tonyhax/releases/download/v1.1.9i/tonyhax-v1.1.9-international.zip)

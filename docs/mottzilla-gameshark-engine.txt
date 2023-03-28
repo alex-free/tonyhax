@@ -1,0 +1,7 @@
+MottZilla's original email to me from 10/12/2022:
+
+I have attached the assembly source for the cheat engine. It's actually quite compact, which you might expect given the small size of code you copy to the Kernel memory area for it. You can assemble it using No$PSX. Doing so should output an .EXE file which is not an actual PS-EXE, but it is the assembled code.
+
+It actually wouldn't be that much work to modify the code to have the D0 code support where when looping through the codes if it finds a D0 prefix code it simply does the memory check of that address to determine if it should process the next code or skip over it.
+
+And yes, socram8888 had assembly code just like the cheat engine that was simply copied into some unused Kernel memory and then did the same thing modifying some kernel tables to "hook" functions to make the magic happen by calling that code copied previously. 

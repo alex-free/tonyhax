@@ -1,3 +1,5 @@
+# GameSharkHAX
+
 GameSharkHAX is the newest way to boot the Tonyhax International loader using special [game disc specific](#gamesharkhax-supported-game-discs) GameShark codes. GameSharkHAX enables you to use a [GameShark](#psx-gameshark-version-comparison) (or [other cheat device](#gshax-with-other-gameshark-cds-or-cheat-cartridges)) which **doesn't have a built-in swap trick** to stating the Tonyhax International loader.
 
 ## Requirements
@@ -114,18 +116,26 @@ Installation With A PS2:
 
 _Note:_ Currently, I have only made a few GameSharkHAX codes, but more can easily be made and added in future versions of Tonyhax International.
 
-### [WipEout (USA)](http://redump.org/disc/2772/)
-
-* GameSharkHAX Code TXT File: `gshax/wipeout-usa/wipeout-usa-gshax-code.txt`
-* GameShark Lite CD Save RAW File: `gshax/wipeout-usa/CODELIST00`
-* Tonyhax International Loader RAW File: `loader/HAX`
-* Tonyhax International Loader MCS File: `loader/tonyhax.mcs`
-* Instructions: After starting Wipeout USA with the codes enabled, go through the intro FMV and anti-piracy disclaimer to get to the start menu. Press the `start` button and wait a few seconds for the Tonyhax International loader to start.
-
 ### [Parasite Eve (USA) Disc 1](http://redump.org/disc/116/) / [Parasite Eve (USA) Disc 2](http://redump.org/disc/117/)
 
 * GameSharkHAX Code TXT File: `gshax/parasite-eve-usa/parasite-eve-usa-gshax-code.txt`
 * GameShark Lite CD Save RAW File: `gshax/parasite-eve-usa/CODELIST00`
 * Tonyhax International Loader RAW File: `loader/HAX`
 * Tonyhax International Loader MCS File: `loader/tonyhax.mcs`
-* Instructions: After starting Parasite Eve USA **(both disc 1 and disc 2 work!)** with the codes enabled just wait a literal minute for the Tonyhax International loader to start (there will be a black screen and disc seeks for quite a while, be patient!)
+* Instructions: After starting Parasite Eve USA **(both disc 1 and disc 2 work!)** with the codes enabled go through the intro FMV and press `start` at the title screen. Wait a few seconds for the Tonyhax International loader to start.
+
+### [Ridge Racer (USA)](http://redump.org/disc/1869/)
+
+* GameSharkHAX Code TXT File: `gshax/ridge-racer-usa/ridge-racer-usa-gshax-code.txt`
+* GameShark Lite CD Save RAW File: `gshax/ridge-racer-usa/CODELIST00`
+* Tonyhax International Loader RAW File: `loader/HAX`
+* Tonyhax International Loader MCS File: `loader/tonyhax.mcs`
+* Instructions: After starting Ridge Racer with the codes enabled go through the intro FMV and press `start` at the title screen. Then press `start` again at the game options screen. Wait a few seconds for the Tonyhax International loader to start.
+
+### [WipEout (USA)](http://redump.org/disc/2772/)
+
+* GameSharkHAX Code TXT File: `gshax/wipeout-usa/wipeout-usa-gshax-code.txt`
+* GameShark Lite CD Save RAW File: `gshax/wipeout-usa/CODELIST00`
+* Tonyhax International Loader RAW File: `loader/HAX`
+* Tonyhax International Loader MCS File: `loader/tonyhax.mcs`
+* Instructions: After starting Wipeout USA with the codes enabled, go through the intro FMV and anti-piracy disclaimer to get to the start menu. Press the `start` button. Navigate to the `OPTIONS` menu option, and then the `SAVE DATA` option. Wait a few seconds for the Tonyhax International loader to start.

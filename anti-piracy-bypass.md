@@ -1,3 +1,5 @@
+# Anti-Piracy Bypass System
+
 ## Background Info
 
 Starting in late 1998, some specific PSX games began implementing additional copy protection designed to prevent playing backup CD-R copies of a game. Different types of additional copy protection have been found in PSX games over the years.

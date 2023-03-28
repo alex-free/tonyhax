@@ -7,7 +7,7 @@ SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Common variables
 
-TONYHAX_VERSION=v1.2.0-international-freepsxboot
+TONYHAX_VERSION=v1.2.1-international-freepsxboot
 
 CC=mips-linux-gnu-gcc
 CFLAGS=-Os -Wall -Wextra -Wno-main -Werror -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION) -DFREEPSXBOOT
@@ -78,7 +78,7 @@ ENTRY_RAW := \
 	BESLES-03956TNHXG01 \
 	BESLES-04095XSMOTO
 
-ENTRY_FILES := $(ENTRY_MCS) $(ENTRY_RAW)
+ENTRY_FILES := $(ENTRY_MCS) $(ENTRY_RAW) entry-bb.bin entry.bin
 
 # Program loader variables
 

@@ -76,13 +76,19 @@ Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-
 
 ## Downloads
 
-### Version 1.2.0 (3/17/2023)
+### Version 1.2.1 (3/28/2023)
 
-*   [tonyhax-v1.2.0-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.0i/tonyhax-v1.2.0-international.zip)
+*   [tonyhax-1.2.1-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.1i/tonyhax-v1.2.1-international.zip)
 
 Changes:
 
-* Fixes lockup/freezing that only occurred in specific games (i.e. Tekken 3) when using the FreePSXBoot exploit boot method. Now however, **Before starting any backup or import disc in the loader YOU MUST REMOVE THE FREEPSXBOOT MEMORY CARD to ensure successful booting of your backup or import disc. THIS APPLIES TO BOTH SLOT 1 AND SLOT 2 FREEPSXBOOT CARDS.** This enables more games to work through this boot method and simplifies the loader. The loader will tell you to remove the FreePSXBoot memory card as well now.
+* Updated [GSHAX Tool](https://alex-free.github.io/gshax-tool) to v2.0. All [GameSharkHAX](gameshark-code.md) codes have been updated to improved versions. Usage has changed for the WipEout and Parasite Eve codes!
+
+* Thanks to the new GSHAX Tool v2.0 update, a [GameSharkHAX](gameshark-code.md) code for Ridge Racer is now available.
+
+* The first stage loaders: `entry.bin` and `entry-bb.bin` are now included in each release to aid in the development of [GameSharkHAX](gameshark-code.md) and [save game exploits](save-game-exploit.md).
+
+* Added the missing source code to the GameShark cheat engine that MottZilla wrote to the source tree, as well as instructions on assembling it (available at `docs/mottzilla-gameshark-engine.txt`). It is not however 'dynamically generated' by the build system, yet... The compiled version is still hardcoded as an unsigned char array.
 
 [About previous versions](changelog.md).
 

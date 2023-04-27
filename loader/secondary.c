@@ -383,6 +383,7 @@ void try_boot_cd() {
 	 * the interrupt handler will store the current thread state in the zero address, wiping
 	 * vital data, like the interrupt trampoline at 0x80.
 	 */
+	
 	debug_write("Configuring kernel");
 	EnterCriticalSection();
 	SetConf(event, tcb, stacktop);
@@ -479,10 +480,7 @@ void main() {
 	log_bios_version();
     
 	debug_write("Initializing CD");
-	if (!cd_drive_init()) {
-		debug_write("Init failed");
-		return;
-	}
+	cd_drive_init();
 
 	sscmd = 0x20; cd_command(CD_CMD_TEST,(unsigned char *)&sscmd,1); cd_wait_int(); 
 	cd_read_reply(cdcontrollerver);	// Test Command $19,$20 gets the CDROM BIOS

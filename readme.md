@@ -63,39 +63,41 @@ _More Info_
 *   [Tonyhax International GitHub](https://github.com/alex-free/tonyhax)
 *   [PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/)
 *   [PSX-Place Tonyhax International Resource](https://www.psx-place.com/resources/tonyhax-international.1281/)
-*   [CDRDAO-PLED](https://alex-free.github.io/cdrdao) - recommended burning software for Linux.
+*   [CDRDAO-PLED](https://alex-free.github.io/cdrdao) - recommended burning software for Linux for most use cases.
 *   [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967)
-*   [GBATemp https://gbatemp.net/members/sylverrez.610331/
-Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514)
+*   [GBATemp](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514)
 *   [APrip Homepage](https://alex-free.github.io/aprip) - patches some later PSX games with additional anti-piracy copy protection.
 *   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap) - a similar project that uses the Tonyhax International loader.
 *   [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom) - what generates the Tonyhax International ROM file.
+*   [NXFLASH](https://gbatemp.net/threads/do-modern-burners-cds-make-lower-quality-ps1-backups.628708/) - the software which flashes cheat carts with the Tonyhax International ROM.
 *   [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) - an exploit used in a Tonyhax International boot method.
-*   [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax) - what Tonyhax International is based on (_International is not an official version_).
+*   [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax) - what Tonyhax International is based on (_International is not an official version and at this point deviates quite greatly_).
 *   [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)
+*   [Do modern burners/CD's make lower quality PS1 backups?](https://gbatemp.net/threads/do-modern-burners-cds-make-lower-quality-ps1-backups.628708/) - a great discussion on burning PSX backups in current year.
 
 ## Downloads
 
-### Version 1.2.1 (3/28/2023)
+### Version 1.2.2 (4/26/2023)
 
-*   [tonyhax-1.2.1-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.1i/tonyhax-v1.2.1-international.zip)
+*   [tonyhax-1.2.2-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.2i/tonyhax-v1.2.2-international.zip)
 
 Changes:
 
-* Updated [GSHAX Tool](https://alex-free.github.io/gshax-tool) to v2.0. All [GameSharkHAX](gameshark-code.md) codes have been updated to improved versions. Usage has changed for the WipEout and Parasite Eve codes!
+* The Tonyhax International loader now does `SetMemSize(8)`, `SysInitMemory (0xA000E000, 0x2000)`, and `InitDefInt(3)`. This makes it much more similar to how the real PSX BIOS boots games, and it fixes all known issues with booting games via the [GameShark Code](gameshark-code.md) method. 
 
-* Thanks to the new GSHAX Tool v2.0 update, a [GameSharkHAX](gameshark-code.md) code for Ridge Racer is now available.
+* Fixed a race condition that rarely effected booting games via the [flashed cheat cart](flashed-cheat-cart.md) and [GameShark Code](gameshark-code.md). The issue was that sometimes the console BIOS would execute CD commmands before starting the ROM too closely to when Tonyhax International would call the first CD INIT on startup. This issue also could happen in GSHAX, when a game was sending CD commands right before the GSHAX exploit would trigger and then starting the Tonyhax International loader. The issue previously manifested as being stuck on the first `Initializing CD` text forever.
 
-* The first stage loaders: `entry.bin` and `entry-bb.bin` are now included in each release to aid in the development of [GameSharkHAX](gameshark-code.md) and [save game exploits](save-game-exploit.md).
+* Updated [GSHAX Tool](https://alex-free.github.io/gshax-tool) to v2.0.1, which auto-calculates the MIPS assembly binary offset during code generation in the build step.
 
-* Added the missing source code to the GameShark cheat engine that MottZilla wrote to the source tree, as well as instructions on assembling it (available at `docs/mottzilla-gameshark-engine.txt`). It is not however 'dynamically generated' by the build system, yet... The compiled version is still hardcoded as an unsigned char array.
+* Fixed an issue with the `build.sh` script due to missing template folders in the `gshax` directory since the last update.
+
+* Improved documentation.
 
 [About previous versions](changelog.md).
 
 ## Usage
 
-The Tonyhax International loader is the program that once started enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted with a [flashed cheat cart]
-(flashed-cheat-cart.md), a [flashed memory card](freepsxboot-exploit.md), a [save game exploit](save-game-exploit.md), a [CD-R](boot-cd.md), or even a [GameShark Code](gameshark-code.md). The Tonyhax International loader provides the ability to properly play backup CD-R and 'imported region discs' on all PS1 consoles, and all supported early PS2 consoles (Japanese, USA, and PAL models SCPH-10000-SCPH-39004).
+The Tonyhax International loader is the program that once started enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted with a [flashed cheat cart](flashed-cheat-cart.md), a [flashed memory card](freepsxboot-exploit.md), a [save game exploit](save-game-exploit.md), a [CD-R](boot-cd.md), or even a [GameShark Code](gameshark-code.md). The Tonyhax International loader provides the ability to properly play backup CD-R and 'imported region discs' on all PS1 consoles, and all supported early PS2 consoles (Japanese, USA, and PAL models SCPH-10000-SCPH-39004).
 
 If you are using **any Japanese console**, at least one real Japanese NTSC-J PS1 game disc is required (any officially licensed Japanese PS1 disc will do). If you are using a **Japanese PS2 console (SCPH-10000-SCPH-39000)** a Swap Magic Tool is also required. Neither of these are needed if you are using an American or European PS1/PS2 console.
 

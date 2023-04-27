@@ -44,7 +44,9 @@ uint_fast8_t cd_read_reply(uint8_t * reply_buffer);
  *
  * @returns true if succeded, or false otherwise.
  */
-bool cd_drive_init(void);
+//bool cd_drive_init(void);
+// we can't trust that:
+void cd_drive_init();
 
 // Resets the drive.
 void cd_drive_reset();

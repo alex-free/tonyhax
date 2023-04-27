@@ -43,6 +43,40 @@ void cd_command(uint_fast8_t cmd, const uint8_t * params, uint_fast8_t params_le
 	CD_REGS[1] = cmd;
 }
 
+void cd_command_race(uint_fast8_t cmd, const uint8_t * params, uint_fast8_t params_len) {
+
+	// Wait for previous command to finish, if any
+	//while (CD_REGS[0] & 0x80);
+
+	// Switch to page 0
+	cd_set_page(0);
+
+	// Clear read and write FIFOs
+	CD_REGS[3] = 0xC0;
+
+	// Copy request
+	while (params_len != 0) {
+		CD_REGS[2] = *params;
+		params++;
+		params_len--;
+	}
+
+	// Switch to page 1
+	cd_set_page(1);
+
+	// Disable interrupts as we'll poll
+	CD_REGS[2] = 0x00;
+
+	// Acknowledge interrupts, if there were any
+	CD_REGS[3] = 0x07;
+
+	// Switch to page 0
+	cd_set_page(0);
+
+	// Finally write command to start
+	CD_REGS[1] = cmd;
+}
+
 uint_fast8_t cd_wait_int(void) {
 
 	// Wait for command to finish, if any
@@ -64,6 +98,28 @@ uint_fast8_t cd_wait_int(void) {
 	return interrupt;
 }
 
+uint_fast8_t cd_wait_int_race(void) {
+
+	// Wait for command to finish, if any
+	//while (CD_REGS[0] & 0x80);
+
+	// Switch to page 1
+	cd_set_page(1);
+
+	// Wait until an interrupt happens (int != 0)
+	uint_fast8_t interrupt;
+	do {
+		interrupt = CD_REGS[3] & 0x07;
+	} while (interrupt == 0);
+
+	// Acknowledge it
+	CD_REGS[3] = 0x07;
+
+	// Return it
+	return interrupt;
+}
+
+
 uint_fast8_t cd_read_reply(uint8_t * reply_buffer) {
 
 	// Switch to page 1
@@ -81,6 +137,9 @@ uint_fast8_t cd_read_reply(uint8_t * reply_buffer) {
 	return len;
 }
 
+//we can't trust this due to a race condition. If the actual BIOS executes a CD command (affects the Tonyhax International ROM), or a game is in the middle of executing a CD command when Tonyhax International starts (affects GSHAX), and this is executed close enough in the Tonyhax International loader code itself, it will get stuck if done like below:
+
+/*
 bool cd_drive_init() {
 	cd_command(CD_CMD_INIT, NULL, 0);
 
@@ -95,6 +154,14 @@ bool cd_drive_init() {
 	}
 
 	return true;
+}
+*/
+
+void cd_drive_init() {
+	cd_command_race(CD_CMD_INIT, NULL, 0);
+
+	cd_wait_int_race();
+	cd_wait_int_race();
 }
 
 void cd_drive_reset() {

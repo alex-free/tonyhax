@@ -4,19 +4,18 @@ GameSharkHAX is the newest way to boot the Tonyhax International loader using sp
 
 ## Requirements
 
-*   Any PS1 console (SCPH-1000-SCPH-102) or supported early PS2 console (SCPH-10000-SCPH-39004).
-*   A cheat device.
-*   An authentic PSX game disc and [corresponding GameSharkHAX code](#gamesharkhax-supported-game-discs).
+*   Any supported console.
+*   A PSX cheat device compatible with your console (CD or cartridge).
+*   An authentic PSX game disc that your console can normally boot as well as a [corresponding GameSharkHAX code](#gamesharkhax-supported-game-discs).
 *   A PS1 memory card with enough free space to store the _Tonyhax International Loader_ file.
 *   A way to copy file(s) to the PS1 memory card (a soft-modded ps2 can do this).
 
 ## PSX GameShark Version Comparison
 
-
 |                    |                  |                                                     |                                           |
 |--------------------|------------------|-----------------------------------------------------|-------------------------------------------|
 | Cheat Device       | Type Of Device   | Supports Storing Codes On A Memory Card?            | Has A Built-In Swap Trick Back Door?      |
-| GameShark v1.x     | Cartridge        | **No, they are stored in the cartridge only**,                                                   | **No**  |
+| GameShark v1.x     | Cartridge        | ??,                                                   | **No**  |
 | GameShark v2.x     | Cartridge        | Yes                                                 | [Yes](boot-cd.md#gameshark-cartridge-swap-trick)  |
 | GameShark v3.0-3.2 | Cartridge        | Yes                                                 | [Yes](boot-cd.md#gameshark-cartridge-swap-trick)  |
 | **GameShark CDX v3.3** | **CD**               | **No, requires proprietary PS1 memory card  dongle** | **No**                                    |
@@ -38,8 +37,7 @@ With the GameShark Lite game disc specific save game file, it's this easy to use
 *   Wait for GameShark Lite to load through the `This product is NOT licensed or endorsed by SCEA` disclaimer, skip through the FMV, and then select the `Start GS lite` option in the GameShark Lite boot menu.
 *   The GameShark Lite reads from the memory card in slot 1 of the console at boot, looking for any GameShark Lite CD save files. If it finds one it will display the message `Codes Loaded. Press O`.
 *   After Pressing `O` you will be back at the GameShark Lite `Main Menu`. Use the `D-PAD` to navigate to the `Select Cheat Codes` option, and select it by pressing the `X` button.
-*   The `A` game will already be highlighted on this screen as it is the first title entry that appears after loading the save game file. This will automatically set the codes to be enabled. There are 2 codes for each GameSharkHAX game, so if you see in the bottom box the text `2 Cheat Codes Are On` then you can simply press the `O` button to return to the `Main Menu`. If you do not see that text in the bottom box, then there may be other codes that already exist for that game as well. In that case, you should use the `D-PAD` and `X` button to disable every code except the `GSHAX1` and `GSHAX2` ones, those are the only 2 codes that should be on. Once this is done, use the `O` button to return to the `Select Game` menu. Press the `O` button again to return back to the `Main Menu`.
-*   Use the `D-PAD` to navigate to the `Start Game` option, and select it with the `X` button.
+*   The `A` game will already be highlighted on this screen as it is the first title entry that appears after loading the save game file. This will automatically enable the GSHAX codes, notice that in the bottom box the text `2 Cheat Codes Are On` is displayed. From here, press the `START` button.
 *   In the `Start Game Options` menu, the `Start Game With Selected Codes` option will already be highlighted. Press the `X` button to select it. You will see a text box which says `Open PlayStation CD lid. Remove GameShark CD. Insert Game CD. Close CD lid.` follow those instructions, inserting the GameSharkHAX compatible game disc.
 *   Once the GameSharkHAX compatible game boots, follow the [disc-specific instructions](#gamesharkhax-supported-game-discs) to start the Tonyhax International loader from inside the game.
 

@@ -24,4 +24,4 @@ The BIN+CUE files can be burned to a CD-R. The BIN+CUE files contain the [NXFlas
 
 ![rom flasher cd 2](images/rom-flasher-cd-2.jpg)
 
-If you have an old enough PlayStation console you can simply use the [CD Player Swap Trick](boot-cd.html#cd-player-swap-trick) method to start the NXFlasher CD containing the Tonyahx International ROM.
+If you have an old enough PlayStation console you can simply use the [CD Player Swap Trick](boot-cd.html#cd-player-swap-trick) method to start the NXFlasher CD containing the Tonyahx International ROM. Otherwise, you can use [GameSharkHAX](gameshark-code.md), [Save Game Exploit](save-game-exploit.md), or even the [FreePSXBoot](freepsxboot-exploit.md) methods to start the disc.

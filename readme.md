@@ -77,21 +77,17 @@ _More Info_
 
 ## Downloads
 
-### Version 1.2.2 (4/26/2023)
+### Version 1.2.3 (4/28/2023)
 
-*   [tonyhax-1.2.2-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.2i/tonyhax-v1.2.2-international.zip)
+*   [tonyhax-1.2.3-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.3i/tonyhax-v1.2.3-international.zip)
 
 Changes:
 
-* The Tonyhax International loader now does `SetMemSize(8)`, `SysInitMemory (0xA000E000, 0x2000)`, and `InitDefInt(3)`. This makes it much more similar to how the real PSX BIOS boots games, and it fixes all known issues with booting games via the [GameShark Code](gameshark-code.md) method. 
+* Optimized out many unnecessary functions, improving load speed of games slightly.
 
-* Fixed a race condition that rarely effected booting games via the [flashed cheat cart](flashed-cheat-cart.md) and [GameShark Code](gameshark-code.md). The issue was that sometimes the console BIOS would execute CD commmands before starting the ROM too closely to when Tonyhax International would call the first CD INIT on startup. This issue also could happen in GSHAX, when a game was sending CD commands right before the GSHAX exploit would trigger and then starting the Tonyhax International loader. The issue previously manifested as being stuck on the first `Initializing CD` text forever.
+* (Really) fixed an issue with the `build.sh` script due to missing template folders in the `gshax` directory since the last update. Git is dumb about not being able to include empty folders so the `build.sh` script just creates them if they don't exit now.
 
-* Updated [GSHAX Tool](https://alex-free.github.io/gshax-tool) to v2.0.1, which auto-calculates the MIPS assembly binary offset during code generation in the build step.
-
-* Fixed an issue with the `build.sh` script due to missing template folders in the `gshax` directory since the last update.
-
-* Improved documentation.
+* Added info related to a GameShark Lite save game file.
 
 [About previous versions](changelog.md).
 

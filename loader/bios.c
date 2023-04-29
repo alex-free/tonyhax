@@ -15,6 +15,9 @@ void bios_reinitialize() {
 	// Disable interrupts
 	EnterCriticalSection();
 
+	// Clear kernel heap space. Not really needed but nice for debugging.
+	bzero((void *) 0xA000E000, 0x2000);
+
 	// The following is adapted from the WarmBoot call
 
 	// Copy the relocatable kernel chunk
@@ -41,12 +44,6 @@ void bios_reinitialize() {
 
 	// Setup devices
 	InstallDevices(tty_enabled);
-
-	// BIOS calls this with priority 3 (priority of, what though? Maybe this program...)
-	InitDefInit(3);
-
-	// This is what the BIOS does with this memory range, which is more correct then just zeroing out this RAM range which is done in the original Tonyhax.
-	SysInitMemory(0xA000E000, 0x2000);
 
 	// BIOS sets the memory to 8MB (somewhere, haven't seen exactly where but this is well known), which causes the RAM to be mirrored 4 times since there is actually only 2MBs of RAM. The thing is, some games set this to the 'correct' value of 2 for the appropriate 2MBs of RAM. This will cause issues when booting games, so we explicitly set it like the BIOS does which is what every game initially expects at boot.
 	SetMemSize(8);

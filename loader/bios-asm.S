@@ -135,7 +135,7 @@ CdReadSector:
 .global SetMemSize
 SetMemSize:
 	li t1, 0x9F
-	j 0XA0
+	j 0xA0
 
 ###############
 # B-FUNCTIONS #
@@ -194,13 +194,3 @@ InstallDevices:
 AdjustA0Table:
 	li t1, 0x1C
 	j 0xC0
-
-.global InitDefInit
-InitDefInit:
-	li t1, 0x0C
-	j 0XC0
-
-.global SysInitMemory
-SysInitMemory:
-	li t1, 0x08
-	j 0XC0

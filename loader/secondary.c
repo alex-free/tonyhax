@@ -387,7 +387,7 @@ void try_boot_cd() {
 	debug_write("Configuring kernel");
 	EnterCriticalSection();
 	SetConf(event, tcb, stacktop);
-	ExitCriticalSection();
+	//SetConf will enable interrupts on it's own a.k.a. ExitCriticalSection();
 
 	debug_write("Clearing RAM");
 	uint8_t * user_start = (uint8_t *) 0x80010000;

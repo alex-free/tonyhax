@@ -66,7 +66,7 @@ Installation With A PS2:
 
 * Press the `R1` button to again make the file operations menu appear in uLaunchElF. Use the `DPAD` to navigate to the paste option and press the `circle` button to finally paste both the `Tonyhax International Loader RAW File` file and the `GameShark Lite CD Save RAW File` file. Now you can press the `triangle` button to navigate out of the PS1 memory card device, and remove the memory card from the PS2 console (if you want to use it in a different console).
 
-* Power on your American PS1 console and boot the authentic GameShark Lite CD with the memory card containing the `Tonyhax International Loader RAW File` and the `GameShark Lite CD Save RAW File file` inserted into slot 1 of your console. After you start GameShark Lite, it will load and enable the codes pre-entered into the `GameShark Lite CD Save RAW File file` automatically.
+* Power on your American PS1 console and boot the authentic GameShark Lite CD with the memory card containing the `Tonyhax International Loader RAW File` and the `GameShark Lite CD Save RAW File file` inserted into slot 1 of your console. **Due to a bug in the GameShark Lite, you must remove any memory card in slot 2 or the GameShark Lite will not detect the save file on the memory card in slot 1**. After you start GameShark Lite, it will load and enable the codes pre-entered into the `GameShark Lite CD Save RAW File file` automatically.
 
 * After the codes load from the memory card in slot 1, simply start the game with the codes on using the GameShark Lite. Insert the specific game disc that the GameSharkHAX code is for and play through the game as described in the [GameSharkHAX Game Discs list](#gamesharkhax-supported-game-discs) section.
 

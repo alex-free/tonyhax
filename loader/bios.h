@@ -434,21 +434,7 @@ void InstallDevices(uint32_t enable_tty);
 void AdjustA0Table(void);
 
 /**
- * Called by BIOS code with priority 3 as arg
- *
- * Table C, call 0x0C.
- */
-void InitDefInit(uint8_t priority);
-
-/**
  * Called to set the RAM to 8MBs, which enables the mirroring of RAM 4 times in the real 2MBs of RAM (which is exactly what the BIOS ends up doing)
- *
- * Table C, call 0x08.
- */
-void SysInitMemory(uint32_t addr, uint16_t size);
-
-/**
- * Called by BIOS code with priority 3 as arg
  *
  * Table A, call 0x9F.
  */

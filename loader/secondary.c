@@ -29,6 +29,20 @@ bool first_rev = 0; // VC0 A and VC0 B do not need any anti-piracy patching as t
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
 
+// for controller input functions
+void * address;		// For Calculating BIOS Functions
+uint8_t j;			// Joypad
+uint8_t padbuf[2][0x22];	// Joypad Buffers
+
+#ifdef ROM
+void run_shell() { 
+	// runs Sony BIOS. Can access CD Player/Memory Card Manager. Can not boot any discs, even ones that normally work without the flash cart inserted in the console. This has been adapted code from the SCPH-1001 decomp: https://github.com/ogamespec/psxdev/blob/97fbb2d03e5aff4449097afd2b59690002cb2341/reverse/Main.c#L395
+	memcpy((void*)0x80030000, (void*)0xBFC18000, 0x67FF0);
+	FlushCache();
+	((void (*)(void))0x80030000)();
+}
+#endif
+
 void log_bios_version() {
 	/*
 	 * "System ROM Version 4.5 05/25/00 A"
@@ -100,6 +114,51 @@ bool unlock_drive() {
 void wait_lid_status(bool open) {
 	uint8_t cd_reply[16];
 
+#if defined ROM
+	// BIOS Function InitPAD(buf1,sz1,buf2,sz2)
+	address = (uint32_t *) GetB0Table()[0x12];
+	((void (*)(uint8_t*,uint32_t,uint8_t*,uint32_t)) address)(padbuf[0],0x22,padbuf[1],0x22); // BIOS InitPAD(buf1,sz1,buf2,sz2) exec
+	// BIOS Function StartPAD()
+	address = (void *) (GetB0Table()[0x13]);
+	((void (*)(void)) address)();	// BIOS StartPad exec
+
+	controller_input = 1; // disable the repeat counter used in debug_write until controller input is done, see debugscreen.c
+
+	uint8_t expected = open ? 0x10 : 0x00;
+	do {
+
+		j = padbuf[0][3] ^ 0xFF;
+		debug_write(" "); // Vblank wait for controller input
+
+		if(j == 0x40) {
+			controller_input = 0; // Set debug_write back to normal (enable repeat counter) as controller input is done
+			debug_write("Booting Sony BIOS, please wait");
+			// BIOS Function StopPAD()
+			address = (void *) (GetB0Table()[0x14]);
+			// StopPAD() as we are done using Joypad input
+			((void (*)(void)) address)();	// BIOS StopPad exec
+			bios_reinitialize(); // reset after using controller functions
+			run_shell(); // launch Sony BIOS
+		}
+		// Issue Getstat command
+		// We cannot issue the BIOS CD commands yet because we haven't called CdInit
+		cd_command(CD_CMD_GETSTAT, NULL, 0);
+
+		// Always returns 3, no need to check
+		cd_wait_int();
+
+		// Always returns one, no need to check either
+		cd_read_reply(cd_reply);
+
+	} while ((cd_reply[0] & 0x10) != expected);
+	controller_input = 0; // Set debug_write back to normal (enable repeat counter) as controller input is done
+	// BIOS Function StopPAD()
+	address = (void *) (GetB0Table()[0x14]);
+	// StopPAD() as we are done using Joypad input
+	((void (*)(void)) address)();	// BIOS StopPad exec
+	bios_reinitialize(); // reset after using controller functions
+}
+#else
 	uint8_t expected = open ? 0x10 : 0x00;
 	do {
 		// Issue Getstat command
@@ -114,6 +173,7 @@ void wait_lid_status(bool open) {
 
 	} while ((cd_reply[0] & 0x10) != expected);
 }
+#endif
 
 bool is_lid_open() {
 	uint8_t cd_reply[16];
@@ -163,7 +223,12 @@ void try_boot_cd() {
 
 	#if defined FREEPSXBOOT
 		debug_write("Remove the FreePSXBoot memory card now from your console");
-	#endif
+	#elif defined ROM
+		debug_write("");
+		debug_write("Tip: Press X with the CD drive open to boot into the stock");
+		debug_write("Sony BIOS to access the Memory Card Manager/CD Player");
+		debug_write("");
+	#endif 
 
 	#if !defined TOCPERFECT
 		if(enable_unlock) {
@@ -171,7 +236,7 @@ void try_boot_cd() {
 			wait_lid_status(true);
 			wait_lid_status(false);
 		} else {
-			if(is_lid_open() || !licensed_drive()) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licenesed (if it is not licensed but not open then the drive is closed and the user can open it and license it)    
+			if(is_lid_open() || !licensed_drive()) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licensed (if it is not licensed but not open then the drive is closed and the user can open it and license it)    
 				debug_write("Put in a real NTSC-J PSX game disc, then block the lid sensor");
 				wait_lid_status(true);
 				wait_lid_status(false); // Blocking lid sensor = 'closing lid'
@@ -188,9 +253,6 @@ void try_boot_cd() {
 			debug_write("Stopping motor");
 			cd_command(CD_CMD_STOP,0,0); cd_wait_int(); cd_wait_int();
 
-			void * address;		// For Calculating BIOS Functions
-			uint8_t j;			// Joypad
-			uint8_t padbuf[2][0x22];	// Joypad Buffers
 			// BIOS Function InitPAD(buf1,sz1,buf2,sz2)
 			address = (uint32_t *) GetB0Table()[0x12];
 			((void (*)(uint8_t*,uint32_t,uint8_t*,uint32_t)) address)(padbuf[0],0x22,padbuf[1],0x22);
@@ -379,7 +441,7 @@ void try_boot_cd() {
 	/*
 	 * SetConf is run by BIOS with interrupts disabled.
 	 *
-	 * If an interrupt happens while the BIOS is re-initializing the TCBs (thread control blocks),
+	 * If an interrupt happens while the BIOS is reinitializing the TCBs (thread control blocks),
 	 * the interrupt handler will store the current thread state in the zero address, wiping
 	 * vital data, like the interrupt trampoline at 0x80.
 	 */
@@ -387,7 +449,7 @@ void try_boot_cd() {
 	debug_write("Configuring kernel");
 	EnterCriticalSection();
 	SetConf(event, tcb, stacktop);
-	//SetConf will enable interrupts on it's own a.k.a. ExitCriticalSection();
+	ExitCriticalSection(); // unnecesary because SetConf() does this? Waiting on verdict from Socram8888: https://github.com/socram8888/tonyhax/issues/149
 
 	debug_write("Clearing RAM");
 	uint8_t * user_start = (uint8_t *) 0x80010000;
@@ -479,7 +541,7 @@ void main() {
 	bios_inject_disc_error();
 	log_bios_version();
     
-	debug_write("Initializing CD");
+	debug_write("Resetting Drive");
 	cd_drive_init();
 
 	sscmd = 0x20; cd_command(CD_CMD_TEST,(unsigned char *)&sscmd,1); cd_wait_int(); 

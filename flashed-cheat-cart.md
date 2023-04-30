@@ -4,6 +4,13 @@ You can overwrite the contents of a GameShark, Action Reply, or other PS1 cheat 
 
 When you turn on any PS1 console with the flashed GameShark/Action Reply/cheat device installed to it's parallel port at the back the console, the system will instead boot into the Tonyhax International loader, rather then the BIOS/Shell (Sony screens/Memory Card/CD Player menu). A PS1 cheat cartridge flashed with the Tonyhax International ROM is essentially a plug and play mod-chip without any hardware modifications whatsoever.
 
+If you want to use the original Sony BIOS features (Memory Card Manager/CD Player), you do not have to remove the flashed cheat cartridge! Since Tonyhax International v1.2.4, you can now do this:
+
+*   Open the CD drive of the console and power it on with the flashed cheat cartridge plugged in.
+*   Press `X` on a controller when you are prompted to insert a disc by Tonyhax International.
+
+Keep in mind that you can not boot any games from the Sony BIOS which has been started by Tonyhax International. Not even real ones that normally work without the flashed cheat cart plugged in.
+
 ## Requirements
 
 *   GameShark, Action Reply, or other cheat cart that you are willing to overwrite with the Tonyhax International ROM.

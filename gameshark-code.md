@@ -10,6 +10,8 @@ GameSharkHAX is the newest way to boot the Tonyhax International loader using sp
 *   A PS1 memory card with enough free space to store the _Tonyhax International Loader_ file.
 *   A way to copy file(s) to the PS1 memory card (a soft-modded ps2 can do this).
 
+Important Note: Because the GameSharkHAX method uses the `HAX` loader file on a PSX memory card, if you use the stock BIOS Sony memory card manager you will notice that the filenames displayed will be messed up. This is a purely visual bug in the Sony memory card manager. If you need to be able to see the correct filenames, you can remove the memory card containing the `HAX` loader file and then exit/restart the memory card manager. You can also use uLaunchELF or something to temporarily remove the `HAX` file from the affected PSX memory card to get the expected behavior. Because each save game file also has it's own icon, this is even less big of a nuisance then it sounds.
+
 ## PSX GameShark Version Comparison
 
 |                    |                  |                                                     |                                           |

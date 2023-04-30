@@ -19,14 +19,20 @@ $(PACKAGE_CONTENTS):
 modules:
 	$(MAKE) -C util
 	$(MAKE) -C entrypoints all
+	
 	$(MAKE) -C loader -f Makefile.freepsxboot all
 	$(MAKE) -C freepsxboot all
 	$(MAKE) -C loader clean
+
+	$(MAKE) -C loader -f Makefile.rom all
+	$(MAKE) -C rom all
+	$(MAKE) -C loader clean
+
 	$(MAKE) -C loader -f Makefile.ff9 all
 	$(MAKE) -C loader clean
+	
 	$(MAKE) -C loader all
 	$(MAKE) -C boot-cd all
-	$(MAKE) -C rom all
 	$(MAKE) -C gshax all
 
 clean:

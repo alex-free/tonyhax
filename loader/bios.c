@@ -85,11 +85,10 @@ void bios_reinitialize() {
 	// End of code adapted
 
 	// Re-enable interrupts
-	ExitCriticalSection();
+	ExitCriticalSection(); // unnecesary because SetConf() does this? Waiting on verdict from Socram8888: https://github.com/socram8888/tonyhax/issues/149
 
 	// Save for later
 	original_disc_error = BIOS_A0_TABLE[0xA1];
-
 }
 
 bool bios_is_ps1(void) {

@@ -1,5 +1,19 @@
 # Changelog
 
+## Version 1.2.3 (4/28/2023)
+
+*   [tonyhax-1.2.3-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.3i/tonyhax-v1.2.3-international.zip)
+
+Changes:
+
+* Optimized out many unnecessary functions, improving load speed of games slightly.
+
+* (Really) fixed an issue with the `build.sh` script due to missing template folders in the `gshax` directory since the last update. Git is dumb about not being able to include empty folders so the `build.sh` script just creates them if they don't exit now.
+
+* Added info related to a bug in the GameShark Lite itself.
+
+[About previous versions](changelog.md).
+
 ## Version 1.2.2 (4/26/2023)
 
 *   [tonyhax-1.2.2-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.2i/tonyhax-v1.2.2-international.zip)

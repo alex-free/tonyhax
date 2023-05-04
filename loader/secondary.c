@@ -25,6 +25,11 @@ bool bugged_setsession = 0; // VC0 A, VC0 B, and VC1 A CDROM Controller BIOS ver
 bool enable_unlock = 1; // Disabled on VC0A and VC0B Japanese CDROM Controller BIOS versions automatically. On VC1A+ the testregion command is run and if the region is Japan it is also disabled.
 bool controller_input = 0; // When enabled, debug_write does not display the repeat messages counter. This is so we can draw a blank line and then wait for controller input using vsync in debug_write.
 bool first_rev = 0; // VC0 A and VC0 B do not need any anti-piracy patching as they are immune to additional copy protection routines because of the lack of the ReadTOC command in the CDROM Controller BIOS Firmware.
+bool installed_cheat_engine = 0; // The cheat engine is installed when parse_memcard_save_gameshark_codes() completes. Some games may go on to set explicit anti-piracy bypass GameShark codes however, so to prevent the cheat engine from being installed twice (which is wasteful) we set a flag here.
+bool did_read_mc = 0; // We need to set the GameShark codes AFTER the last bios_reintialize(). I want to call bios_reinitilize() after reading the memory card data to prevent anything screwy in booting games, so we can just parse the data later after the final bios_reinitialize since it's still in RAM.
+bool controller_input_switch = 1; // modifies controller input pulling behavior in some functions later on
+uint8_t number_of_gameshark_codes; // part of my basic format to store codes, this tells us how many we will activate
+uint8_t * user_start = (uint8_t *) 0x80010000;
 
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
@@ -34,14 +39,127 @@ void * address;		// For Calculating BIOS Functions
 uint8_t j;			// Joypad
 uint8_t padbuf[2][0x22];	// Joypad Buffers
 
-#ifdef ROM
-void run_shell() { 
+
+//to test ROM functionality in emulation via boot CD, uncomment the following 2 lines:
+//#undef ROM
+//#define ROM
+
+//to test behavior without any APv2 bypasses enabled (useful for testing D0 AP bypass codes via save game file gameshark functionality rather then internal activate_anti_piracy() function), uncomment:
+//#define AP_BYPASS_DISABLE
+
+#if defined ROM
+void run_shell() {
 	// runs Sony BIOS. Can access CD Player/Memory Card Manager. Can not boot any discs, even ones that normally work without the flash cart inserted in the console. This has been adapted code from the SCPH-1001 decomp: https://github.com/ogamespec/psxdev/blob/97fbb2d03e5aff4449097afd2b59690002cb2341/reverse/Main.c#L395
-	memcpy((void*)0x80030000, (void*)0xBFC18000, 0x67FF0);
+
+	debug_write("Starting Sony BIOS...");
+	memcpy((void*)0x80030000, (void*)0xBFC18000, 0x67FF0); // uses 0x80030000-0x80077FF0
 	FlushCache();
 	((void (*)(void))0x80030000)();
 }
 #endif
+
+void controller_input_start() {
+	controller_input = 1; // disable the repeat counter used in debug_write until controller input is done, see debugscreen.c
+	// BIOS Function InitPAD(buf1,sz1,buf2,sz2)
+	address = (uint32_t *) GetB0Table()[0x12];
+	((void (*)(uint8_t*,uint32_t,uint8_t*,uint32_t)) address)(padbuf[0],0x22,padbuf[1],0x22); // BIOS InitPAD(buf1,sz1,buf2,sz2) exec
+	// BIOS Function StartPAD()
+	address = (void *) (GetB0Table()[0x13]);
+	((void (*)(void)) address)();	// BIOS StartPad exec
+}
+
+void controller_input_stop() { // this doubles as 'closing' the memory card functions
+	controller_input = 0; // Set debug_write back to normal (enable repeat counter) as controller input is done
+	// BIOS Function StopPAD()
+	address = (void *) (GetB0Table()[0x14]);
+	// StopPAD() as we are done using Joypad input
+	((void (*)(void)) address)();	// BIOS StopPad exec
+	bios_reinitialize(); // reset after using controller functions
+}
+
+void read_memcard() {
+	debug_write("Reading MC...");
+	int32_t read;
+	// InitCard(pad_enable)
+	address = (uint32_t *) GetB0Table()[0x4A];
+	((void (*)(uint8_t*)) address)(0);
+	// BIOS FunctionStartCard()
+	address = (void *) (GetB0Table()[0x4B]);
+	((void (*)(void)) address)();
+	// BIOS Function _bu_init()
+	address = (void *) (GetB0Table()[0x55]);
+	((void (*)(void)) address)();
+	int32_t mc_fd = FileOpen("bu00:TONYHAXINTGS", FILE_READ);
+	if(mc_fd == -1) {
+		debug_write("Can not read MC");
+	}
+
+	if (mc_fd > 0) {
+		read = FileRead(mc_fd, user_start, 0x2000); // read the entire file "TONYHAXINTGS" to the start of 'user RAM' (which will be cleared later before booting an executable). So 0x80010000-0x80012000 in RAM contains the contents of "TONYHAXINTGS". For "TONYHAXINTGS.mcs" there is an 0x80 byte header since it is a .mcs file. So the same data at 0x180 in the MCS file is at 0x100 in the RAW save file and in the data read here.
+		
+		if (read == -1) {
+			debug_write("Read error %d", GetLastError());
+			return;
+		}
+
+		FileClose(mc_fd);
+		did_read_mc = 1; // set flag to parse codes uploaded to RAM, right before clearing RAM itself and booting the game
+		number_of_gameshark_codes = user_start[0x100];
+		debug_write("%d codes detected", number_of_gameshark_codes);
+	}
+
+	controller_input_stop(); //restart so we can once again pull controller input
+
+	controller_input_start();
+}
+
+void parse_memcard_save_gameshark_codes() {
+	/*
+	format:
+	0x100 = number of codes in hex. 0x01 = 1 code. 0xFF = 255 codes.
+
+	0x101 = first gameshark code address byte. This will be either 0x80 or 0xDO. 
+		
+	If this is 0x80, we read the next 3 bytes and that first one as the gameshark code address. Then we read the following next 2 bytes as the gameshark code address mod values. Since it is an 80 type code, the code is complete.
+
+	If this is 0xD0, we read the next 3 bytes and the first one as the gameshark code address as well. Then we read the following next 2 bytes as the gameshark code address comparison mod values. The comparison mod values are the original bytes found at that address in the running game at some point. Since this is a D0 type code, we need to then read 2 more bytes. These are the gameshark code mod values, which is what will be written to the gameshark code address when the comparison mod values are read during game execution. So:
+
+	80 code = 6 bytes (4 for address, 2 for mod val)
+	D0 code = 8 bytes (4 for address, 2 for mod comparison val, 2 for mod val)
+
+	This is the way we read through the codes and enter each one automatically.
+	*/
+
+	uint32_t gameshark_code_address;
+	uint8_t gameshark_code_type;
+	uint16_t gameshark_code_mod_val;
+	uint16_t gameshark_code_mod_comparison_val;
+	uint16_t mc_base = 0x100;
+
+	for(int i = 0; i < number_of_gameshark_codes; i++) {
+			gameshark_code_type = user_start[mc_base + 1];
+			
+		if(user_start[mc_base + 1] == 0xD0)
+			user_start[mc_base + 1] = 0x80; // we need to convert the prefix to the real address first byte of 0x80 for the cheat engine
+
+		gameshark_code_address = user_start[mc_base + 4] + (user_start[mc_base + 3] << 8) + (user_start[mc_base + 2] << 16) + (user_start[mc_base + 1] << 24);
+		//debug_write("GS Code Addr: %x", gameshark_code_address);
+
+		gameshark_code_mod_val = user_start[mc_base + 6] + (user_start[mc_base + 5] << 8);
+		//debug_write("GS Code Mod Val: %x", gameshark_code_mod_val);
+
+		if(gameshark_code_type == 0x80) {
+			enable_code(gameshark_code_address, gameshark_code_mod_val);
+			mc_base = (mc_base + 6); // 0x106.. etc..
+		} else if(gameshark_code_type == 0xD0) {
+			gameshark_code_mod_comparison_val = user_start[mc_base + 8] + (user_start[mc_base + 7] << 8);
+			//debug_write("GS Code Mod Comparison Val: %x", gameshark_code_mod_comparison_val);
+			enable_compare_code(gameshark_code_address, gameshark_code_mod_comparison_val, gameshark_code_mod_val);
+			mc_base = (mc_base + 8); // 0x108.. etc..
+		}
+	}
+	install_cheat_engine();
+}
 
 void log_bios_version() {
 	/*
@@ -113,16 +231,8 @@ bool unlock_drive() {
 #if !defined TOCPERFECT
 void wait_lid_status(bool open) {
 	uint8_t cd_reply[16];
-
-#if defined ROM
-	// BIOS Function InitPAD(buf1,sz1,buf2,sz2)
-	address = (uint32_t *) GetB0Table()[0x12];
-	((void (*)(uint8_t*,uint32_t,uint8_t*,uint32_t)) address)(padbuf[0],0x22,padbuf[1],0x22); // BIOS InitPAD(buf1,sz1,buf2,sz2) exec
-	// BIOS Function StartPAD()
-	address = (void *) (GetB0Table()[0x13]);
-	((void (*)(void)) address)();	// BIOS StartPad exec
-
-	controller_input = 1; // disable the repeat counter used in debug_write until controller input is done, see debugscreen.c
+	
+	controller_input_start();
 
 	uint8_t expected = open ? 0x10 : 0x00;
 	do {
@@ -130,50 +240,48 @@ void wait_lid_status(bool open) {
 		j = padbuf[0][3] ^ 0xFF;
 		debug_write(" "); // Vblank wait for controller input
 
-		if(j == 0x40) {
-			controller_input = 0; // Set debug_write back to normal (enable repeat counter) as controller input is done
-			debug_write("Booting Sony BIOS, please wait");
-			// BIOS Function StopPAD()
-			address = (void *) (GetB0Table()[0x14]);
-			// StopPAD() as we are done using Joypad input
-			((void (*)(void)) address)();	// BIOS StopPad exec
-			bios_reinitialize(); // reset after using controller functions
-			run_shell(); // launch Sony BIOS
-		}
-		// Issue Getstat command
-		// We cannot issue the BIOS CD commands yet because we haven't called CdInit
-		cd_command(CD_CMD_GETSTAT, NULL, 0);
-
-		// Always returns 3, no need to check
-		cd_wait_int();
-
-		// Always returns one, no need to check either
-		cd_read_reply(cd_reply);
-
-	} while ((cd_reply[0] & 0x10) != expected);
-	controller_input = 0; // Set debug_write back to normal (enable repeat counter) as controller input is done
-	// BIOS Function StopPAD()
-	address = (void *) (GetB0Table()[0x14]);
-	// StopPAD() as we are done using Joypad input
-	((void (*)(void)) address)();	// BIOS StopPad exec
-	bios_reinitialize(); // reset after using controller functions
-}
-#else
-	uint8_t expected = open ? 0x10 : 0x00;
-	do {
-		// Issue Getstat command
-		// We cannot issue the BIOS CD commands yet because we haven't called CdInit
-		cd_command(CD_CMD_GETSTAT, NULL, 0);
-
-		// Always returns 3, no need to check
-		cd_wait_int();
-
-		// Always returns one, no need to check either
-		cd_read_reply(cd_reply);
-
-	} while ((cd_reply[0] & 0x10) != expected);
-}
+		if(controller_input_switch)
+		{
+#if defined ROM // this is more optimized for variable button presses then otherwise if we didn't test both statements in an else if
+			if(j == 0x40) { // X button
+				controller_input_stop();
+				run_shell(); // launch Sony BIOS
+			} else if(j == 0x20) { // Circle button
+				controller_input_switch = 0; // stop pulling for circle button input once we get it, as unlike the run_shell() function (which exits the program entirely) we still have to wait here until the user closes the console CD drive lid
+				read_memcard();
+			}
+#else // booting the shell is unnecessary for every other boot method besides the ROM so we don't include it
+			if(j == 0x20) { // Circle button
+				controller_input_switch = 0; // stop pulling for circle button input once we get it, as unlike the run_shell() function (which exits the program entirely) we still have to wait here until the user closes the console CD drive lid
+				read_memcard();
+			}
 #endif
+
+		#if defined ROM
+		} else { // still allow booting Sony BIOS after reading MC
+			if(j == 0x40) { // X button
+				controller_input_stop();
+				run_shell(); // launch Sony BIOS
+			}
+		}
+		#else
+		}
+		#endif
+
+		// Issue Getstat command
+		// We cannot issue the BIOS CD commands yet because we haven't called CdInit
+		cd_command(CD_CMD_GETSTAT, NULL, 0);
+
+		// Always returns 3, no need to check
+		cd_wait_int();
+
+		// Always returns one, no need to check either
+		cd_read_reply(cd_reply);
+
+	} while ((cd_reply[0] & 0x10) != expected);
+
+	controller_input_stop();
+}
 
 bool is_lid_open() {
 	uint8_t cd_reply[16];
@@ -223,20 +331,22 @@ void try_boot_cd() {
 
 	#if defined FREEPSXBOOT
 		debug_write("Remove the FreePSXBoot memory card now from your console");
-	#elif defined ROM
-		debug_write("");
-		debug_write("Tip: Press X with the CD drive open to boot into the stock");
-		debug_write("Sony BIOS to access the Memory Card Manager/CD Player");
-		debug_write("");
-	#endif 
+	#endif
 
 	#if !defined TOCPERFECT
 		if(enable_unlock) {
+			debug_write("Press O to enable GS codes");
+			#if defined ROM
+				debug_write("Press X to access the Memory Card Manager/CD Player");
+			#endif
 			debug_write("Put in a backup or import disc, then close the drive lid");
-			wait_lid_status(true);
+			wait_lid_status(true); // doesn't wait during the ROM method, unsure why but it is what we want as it allows us to auto-boot with the ROM boot method
 			wait_lid_status(false);
 		} else {
-			if(is_lid_open() || !licensed_drive()) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licensed (if it is not licensed but not open then the drive is closed and the user can open it and license it)    
+			if(is_lid_open() || !licensed_drive()) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licensed (if it is not licensed but not open then the drive is closed and the user can open it and license it)
+				#if defined ROM
+					debug_write("Press X to access the Memory Card Manager/CD Player");
+				#endif
 				debug_write("Put in a real NTSC-J PSX game disc, then block the lid sensor");
 				wait_lid_status(true);
 				wait_lid_status(false); // Blocking lid sensor = 'closing lid'
@@ -253,35 +363,38 @@ void try_boot_cd() {
 			debug_write("Stopping motor");
 			cd_command(CD_CMD_STOP,0,0); cd_wait_int(); cd_wait_int();
 
-			// BIOS Function InitPAD(buf1,sz1,buf2,sz2)
-			address = (uint32_t *) GetB0Table()[0x12];
-			((void (*)(uint8_t*,uint32_t,uint8_t*,uint32_t)) address)(padbuf[0],0x22,padbuf[1],0x22);
-			// BIOS Function StartPAD()
-			address = (void *) (GetB0Table()[0x13]);
-			((void (*)(void)) address)();	// BIOS StartPad
+			debug_write("Press O to enable GS codes");
+			controller_input_start();
+
 			debug_write("Keep the lid sensor blocked until turning off the console");
 			debug_write("Remove the real NTSC-J PSX game disc");
-			debug_write("Put in a backup/import disc, then press X on controller 1"); // Thanks MottZilla!
-			controller_input = 1; // disable the repeat counter used in debug_write until controller input is done, see debugscreen.c
+			debug_write("Put in a backup/import disc, then press X"); // Thanks MottZilla!
             
 			while(1) { 
 				j = padbuf[0][3] ^ 0xFF;
-				if( j == 0x40)
-					break;
+
+				if(controller_input_switch) {
+					if(j == 0x40) {
+						break; // X button boots disc
+					} else if(j == 0x20) { // Circle button enables codes
+						controller_input_switch = 0; // stop pulling for circle button input once we get it, as unlike when the X button is pressed (which breaks this loop) we still have to wait here until the user closes the console CD drive lid
+						read_memcard(); // this allows Japanese console users to enable user supplied GameShark codes without having to unblock the lid sensor, resetting authentication which would just be more unnecessary steps.
+					}
+				} else {
+					if(j == 0x40)
+						break; // X button boots disc
+				}
 				debug_write(" "); // Vblank wait for controller input
 			}
 	
-		    controller_input = 0; // Set debug_write back to normal (enable repeat counter) as controller input is done
-			// StopPAD() as we are done using Joypad input
-			address = (void *) (GetB0Table()[0x14]);
-			((void (*)(void)) address)();	// BIOS StopPad
+		    controller_input_stop();
 		}
 	#endif
 
 	if(!enable_unlock) {
 		if(bugged_setsession) {
 			#if !defined STEALTH
-				debug_write("Sending SetSessionSuperUltraCommandSmash v2, please wait");
+				debug_write("Sending SetSessionSuperUltraCommandSmash v2, please wait"); // always works on real hardware, DuckStation can get stuck here rarely though since it is not that accurate when it comes to emulating the early VC0A/VC0B/VC1A CDROM behavior
 			#endif
 			sscmd = 2; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int(); // There is a 3rd response we are ignoring by sending SetSession 1 next ASAP after SetSession 2.
 			sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
@@ -451,8 +564,10 @@ void try_boot_cd() {
 	SetConf(event, tcb, stacktop);
 	ExitCriticalSection(); // unnecesary because SetConf() does this? Waiting on verdict from Socram8888: https://github.com/socram8888/tonyhax/issues/149
 
+	if(did_read_mc)
+		parse_memcard_save_gameshark_codes();
+
 	debug_write("Clearing RAM");
-	uint8_t * user_start = (uint8_t *) 0x80010000;
 	bzero(user_start, &__RO_START__ - user_start);
 
 	debug_write("Reading executable header");
@@ -481,8 +596,10 @@ void try_boot_cd() {
 			debug_switch_standard(game_is_pal);
 		}
 
-		if(!first_rev)
-			activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+		#if !defined AP_BYPASS_DISABLE
+			if(!first_rev)
+				activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+			#endif
 
 		// Restore original error handler
 		bios_restore_disc_error();
@@ -498,8 +615,10 @@ void try_boot_cd() {
 		return;
 	}
 	
-	if(!first_rev)
-		activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+	#if !defined AP_BYPASS_DISABLE
+		if(!first_rev)
+			activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+	#endif
 
 	FileClose(exe_fd);
 

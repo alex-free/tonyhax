@@ -10,13 +10,15 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * Supports starting the Tonyhax International loader with [GameShark Codes](gameshark-code.md) and any PSX cheat device using the new GameSharkHAX boot method.
 
-* Supports [flashing](flashed-cheat-cart.md) the Tonyhax International backup/import loader to a GameShark, Action Reply, or similar PSX cheat cartridge. Whenever the flashed cartridge is plugged into the back of a PSX console model with a cartridge port on the back when you power it on the Tonyhax International will boot instead of the shell program/BIOS (Sony screens/CD Player/Memory Card Manager).
+* Supports [flashing](flashed-cheat-cart.md) the Tonyhax International backup/import loader to a GameShark, Action Reply, or similar PSX cheat cartridge. Whenever the flashed cartridge is plugged into the back of a PSX console model with a cartridge port on the back when you power it on the Tonyhax International will boot instead of the shell program/BIOS (Sony screens/CD Player/Memory Card Manager). You can still however access the CD Player/Memory Card Manager by powering on the console with the CD drive open, and then pressing `X` when prompted in the Tonyhax International loader.
 
 * Supports **more [save game exploits](save-game-exploit.md)**, enabling the use of even more PSX game discs to start the Tonyhax International loader.
 
-* Supports more games being booted via the [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) exploit successfully. The downside is that **before starting any backup or import disc in the loader YOU MUST REMOVE THE FREEPSXBOOT MEMORY CARD to ensure successful booting of your backup or import disc. THIS APPLIES TO BOTH SLOT 1 AND SLOT 2 FREEPSXBOOT CARDS.**
+* Boots more games via the [FreePSXBoot](freepsxboot-exploit.md) exploit successfully.
 
 * Supports more [games with additional copy protection routines](anti-piracy-bypass.md), by **using a completely different anti-piracy bypass system.**
+
+* Supports [applying user-supplied GameShark codes](gameshark-code-support.md) to any game it booted by the Tonyhax International loader. Dare I say this is the world's first open source PSX GameShark.
 
 * Uses a completely different build system that is portable to many more Linux distributions. This new build system is more efficient and easier to use as well.
 
@@ -51,6 +53,7 @@ _Boot Methods_
 
 _More Info_
 
+* [GameShark Code Support](gameshark-code-support.md)
 * [Playing Games With Additional Copy Protection Routines](anti-piracy-bypass.md)
 * [CD-R Media For PSX Backups](#cd-r-media-for-psx-backups)
 * [Disc Read Errors And PS1 CD Drive Repair](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/)
@@ -69,7 +72,7 @@ _More Info_
 *   [APrip Homepage](https://alex-free.github.io/aprip) - patches some later PSX games with additional anti-piracy copy protection.
 *   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap) - a similar project that uses the Tonyhax International loader.
 *   [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom) - what generates the Tonyhax International ROM file.
-*   [NXFLASH](https://gbatemp.net/threads/do-modern-burners-cds-make-lower-quality-ps1-backups.628708/) - the software which flashes cheat carts with the Tonyhax International ROM.
+*   [NXFLASH](https://github.com/danhans42/nxflash) - the software which flashes cheat carts with the Tonyhax International ROM.
 *   [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) - an exploit used in a Tonyhax International boot method.
 *   [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax) - what Tonyhax International is based on (_International is not an official version and at this point deviates quite greatly_).
 *   [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)
@@ -77,15 +80,15 @@ _More Info_
 
 ## Downloads
 
-### Version 1.2.4 (4/30/2023)
+### Version 1.2.5 (5/4/2023)
 
-*   [tonyhax-1.2.4-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.4i/tonyhax-v1.2.4-international.zip)
+*   [tonyhax-1.2.5-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.5i/tonyhax-v1.2.5-international.zip)
 
 Changes:
 
-* Added the ability to boot into the stock Sony BIOS from the Tonyhax International ROM version. This allows you to access the Memory Card Manager/CD Player functionallity of the stock Sony BIOS without removing the Tonyhax International flashed cheat cart from the back of your console. To use this new feature, simply start your console with the CD drive open, and with the Tonyhax International flash cart in the back of your console. Once Tonyhax International starts, press `X` on a controller when you get to the text stating to insert a disc into the console to continue.
+* Added the ability to apply your own [GameShark Codes](gameshark-code-support.md) to any game you want to boot! Huge thanks to MottZilla's guidance on controller support as well as the original cheat engine used to power all of this.
 
-* Added info about how the `HAX` and `FF9` save files of the Tonyhax International loader for the [GameSharkHAX](gameshark-code.md) and [Save game exploit](save-game-exploit.md) can screw up filenames in the stock Sony BIOS (a non-fatal, just annoying issue).
+* The Tonyhax International loader ROM version now only displays the `Press X to access the Memory Card Manager/CD Player` text when the CD drive is open when the ROM version of the loader starts, for a more clean interactive look.
 
 [About previous versions](changelog.md).
 

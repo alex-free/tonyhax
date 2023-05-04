@@ -46,7 +46,7 @@ void bios_reinitialize() {
 	InstallDevices(tty_enabled);
 
 	// BIOS sets the memory to 8MB (somewhere, haven't seen exactly where but this is well known), which causes the RAM to be mirrored 4 times since there is actually only 2MBs of RAM. The thing is, some games set this to the 'correct' value of 2 for the appropriate 2MBs of RAM. This will cause issues when booting games, so we explicitly set it like the BIOS does which is what every game initially expects at boot.
-	SetMemSize(8);
+	SetMemSize(8); // fixes Ridge Racer USA GSHAX boot method getting stuck at the doexecute() call for discs such as the Tonyhax International ROM Flasher CD
 
 	/*
 	 * Configure with default values

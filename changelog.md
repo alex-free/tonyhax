@@ -1,5 +1,16 @@
 # Changelog
 
+
+## Version 1.2.4 (4/30/2023)
+
+*   [tonyhax-1.2.4-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.4i/tonyhax-v1.2.4-international.zip)
+
+Changes:
+
+* Added the ability to boot into the stock Sony BIOS from the Tonyhax International ROM version. This allows you to access the Memory Card Manager/CD Player functionallity of the stock Sony BIOS without removing the Tonyhax International flashed cheat cart from the back of your console. To use this new feature, simply start your console with the CD drive open, and with the Tonyhax International flash cart in the back of your console. Once Tonyhax International starts, press `X` on a controller when you get to the text stating to insert a disc into the console to continue.
+
+* Added info about how the `HAX` and `FF9` save files of the Tonyhax International loader for the [GameSharkHAX](gameshark-code.md) and [Save game exploit](save-game-exploit.md) can screw up filenames in the stock Sony BIOS memory card manager (a non-fatal, just annoying issue).
+
 ## Version 1.2.3 (4/28/2023)
 
 *   [tonyhax-1.2.3-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.3i/tonyhax-v1.2.3-international.zip)

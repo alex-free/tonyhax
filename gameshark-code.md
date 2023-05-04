@@ -10,7 +10,7 @@ GameSharkHAX is the newest way to boot the Tonyhax International loader using sp
 *   A PS1 memory card with enough free space to store the _Tonyhax International Loader_ file.
 *   A way to copy file(s) to the PS1 memory card (a soft-modded ps2 can do this).
 
-Important Note: Because the GameSharkHAX method uses the `HAX` loader file on a PSX memory card, if you use the stock BIOS Sony memory card manager you will notice that the filenames displayed will be messed up. This is a purely visual bug in the Sony memory card manager. If you need to be able to see the correct filenames, you can remove the memory card containing the `HAX` loader file and then exit/restart the memory card manager. You can also use uLaunchELF or something to temporarily remove the `HAX` file from the affected PSX memory card to get the expected behavior. Because each save game file also has it's own icon, this is even less big of a nuisance then it sounds.
+Important Note: Because the GameSharkHAX method uses the `HAX` loader file on a PSX memory card, if you use the stock BIOS Sony memory card manager you will notice that the filenames displayed will be messed up. This is a purely visual bug in the Sony memory card manager. If you need to be able to see the correct filenames, you can remove the memory card containing the `HAX` loader file and then exit/restart the memory card manager. You can also use [WLaunchELF](https://github.com/ps2homebrew/wLaunchELF) or something to temporarily remove the `HAX` file from the affected PSX memory card to get the expected behavior. Because each save game file also has it's own icon, this is even less big of a nuisance then it sounds.
 
 ## PSX GameShark Version Comparison
 
@@ -52,7 +52,7 @@ Requirements:
 
 * A FAT32 formatted USB flash drive that your PS2 console can read. Please note that not all USB flash drives seem to work with PS2 consoles (due to iffy USB 1.1 support found in some newer USB flash drives). You may need to do a bit of trial and error testing to find a USB flash drive that works.
 
-* A soft-modded (or modchipped) PS2 console that can run uLaunchELF (Models newer then the SCPH-39004 can therefore be used for copying the files to the PS1 memory card, but they can not be used to boot into Tonyhax International). You could do this with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248).
+* A soft-modded (or modchipped) PS2 console that can run [WLaunchELF](https://github.com/ps2homebrew/wLaunchELF) (Models newer then the SCPH-39004 can therefore be used for copying the files to the PS1 memory card, but they can not be used to boot into Tonyhax International). You could do this with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248).
 
 Installation With A PS2:
 
@@ -60,13 +60,13 @@ Installation With A PS2:
 
 * Eject the USB flash drive from your computer and insert it into your PS2 console. Insert a PS1 memory card into your PS2 as well. 
 
-* Start the uLaunchElf homebrew program on your PS2 console. Navigate to the `mass` device (this is your USB flash drive) with the `DPAD` on the controller, then select it with the `circle` button. 
+* Start the [WLaunchELF](https://github.com/ps2homebrew/wLaunchELF) homebrew program on your PS2 console. Navigate to the `mass` device (this is your USB flash drive) with the `DPAD` on the controller, then select it with the `circle` button. 
 
-* Using the `DPAD` to navigate, press the `cross` button on the controller to highlight both the `Tonyhax International Loader RAW` file and the `GameShark Lite CD Save RAW File` file that you previously copied to the USB flash drive. Press the `R1` button on the controller to make the file operations menu appear in uLaunchELF. Use the `DPAD` to move to the copy function and then press the `circle` button to select it.
+* Using the `DPAD` to navigate, press the `cross` button on the controller to highlight both the `Tonyhax International Loader RAW` file and the `GameShark Lite CD Save RAW File` file that you previously copied to the USB flash drive. Press the `R1` button on the controller to make the file operations menu appear in [WLaunchELF](https://github.com/ps2homebrew/wLaunchELF). Use the `DPAD` to move to the copy function and then press the `circle` button to select it.
 
 * Press the `triangle` button to navigate out of the `mass` device. Use the `DPAD` and the circle button to navigate into either the `MC0` (if the PS1 memory card is in slot 1 of the PS2) or `MC1` (if the PS1 memory card is in slot 2 of the PS2) device. 
 
-* Press the `R1` button to again make the file operations menu appear in uLaunchElF. Use the `DPAD` to navigate to the paste option and press the `circle` button to finally paste both the `Tonyhax International Loader RAW File` file and the `GameShark Lite CD Save RAW File` file. Now you can press the `triangle` button to navigate out of the PS1 memory card device, and remove the memory card from the PS2 console (if you want to use it in a different console).
+* Press the `R1` button to again make the file operations menu appear in [WLaunchELF](https://github.com/ps2homebrew/wLaunchELF). Use the `DPAD` to navigate to the paste option and press the `circle` button to finally paste both the `Tonyhax International Loader RAW File` file and the `GameShark Lite CD Save RAW File` file. Now you can press the `triangle` button to navigate out of the PS1 memory card device, and remove the memory card from the PS2 console (if you want to use it in a different console).
 
 * Power on your American PS1 console and boot the authentic GameShark Lite CD with the memory card containing the `Tonyhax International Loader RAW File` and the `GameShark Lite CD Save RAW File file` inserted into slot 1 of your console. **Due to a bug in the GameShark Lite, you must remove any memory card in slot 2 or the GameShark Lite will not detect the save file on the memory card in slot 1**. After you start GameShark Lite, it will load and enable the codes pre-entered into the `GameShark Lite CD Save RAW File file` automatically.
 
@@ -88,7 +88,7 @@ Requirements:
 
 * A FAT32 formatted USB flash drive that your PS2 console can read. Please note that not all USB flash drives seem to work with PS2 consoles (due to iffy USB 1.1 support found in some newer USB flash drives). You may need to do a bit of trial and error testing to find a USB flash drive that works.
 
-* A soft-modded (or mod-chipped) PS2 console that can run uLaunchELF (Models newer then the SCPH-39004 can therefore be used for copying the files to the PS1 memory card, but they can not be used to boot into Tonyhax International). You could do this with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248).
+* A soft-modded (or mod-chipped) PS2 console that can run [WLaunchELF](https://github.com/ps2homebrew/wLaunchELF) (Models newer then the SCPH-39004 can therefore be used for copying the files to the PS1 memory card, but they can not be used to boot into Tonyhax International). You could do this with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248).
 
 Installation With A PS2:
 
@@ -96,13 +96,13 @@ Installation With A PS2:
 
 * Eject the USB flash drive from your computer and insert it into your PS2 console. Insert a PS1 memory card into your PS2 as well. 
 
-* Start the uLaunchElf homebrew program on your PS2 console. Navigate to the `mass` device (this is your USB flash drive) with the `DPAD` on the controller, then select it with the `circle` button. 
+* Start the [WLaunchELF](https://github.com/ps2homebrew/wLaunchELF) homebrew program on your PS2 console. Navigate to the `mass` device (this is your USB flash drive) with the `DPAD` on the controller, then select it with the `circle` button. 
 
-* Using the `DPAD` to navigate, press the `cross` button on the controller to highlight the `Tonyhax International Loader RAW File` that you previously copied to the USB flash drive. Press the `R1` button on the controller to make the file operations menu appear in uLaunchELF. Use the `DPAD` to move to the copy function and then press the `circle` button to select it.
+* Using the `DPAD` to navigate, press the `cross` button on the controller to highlight the `Tonyhax International Loader RAW File` that you previously copied to the USB flash drive. Press the `R1` button on the controller to make the file operations menu appear in [WLaunchELF](https://github.com/ps2homebrew/wLaunchELF). Use the `DPAD` to move to the copy function and then press the `circle` button to select it.
 
 * Press the `triangle` button to navigate out of the `mass` device. Use the `DPAD` and the circle button to navigate into either the `MC0` (if the PS1 memory card is in slot 1 of the PS2) or `MC1` (if the PS1 memory card is in slot 2 of the PS2) device. 
 
-* Press the `R1` button to again make the file operations menu appear in uLaunchElF. Use the `DPAD` to navigate to the paste option and press the `circle` button to finally paste the `Tonyhax International Loader RAW File` file. Now you can press the `triangle` button to navigate out of the PS1 memory card device, and remove the memory card from the PS2 console (if you want to use it in a different console).
+* Press the `R1` button to again make the file operations menu appear in [WLaunchELF](https://github.com/ps2homebrew/wLaunchELF). Use the `DPAD` to navigate to the paste option and press the `circle` button to finally paste the `Tonyhax International Loader RAW File` file. Now you can press the `triangle` button to navigate out of the PS1 memory card device, and remove the memory card from the PS2 console (if you want to use it in a different console).
 
 * Power on your PS1 with the memory card containing the `Tonyhax International Loader RAW File` inserted into slot 1 of your console. Start the GameShark.
 

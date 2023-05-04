@@ -66,7 +66,7 @@ void parse() {
 int main (int argc, const char * argv[]) 
 {
 
-    printf("Tonyhax International GameShark Generator (THIGSGEN) v1.0 By Alex Free\n");
+    printf("Tonyhax International GameShark Generator (THIGSGEN) v1.0.1 By Alex Free\n");
 
    if(argc != 4)
     {
@@ -87,18 +87,20 @@ int main (int argc, const char * argv[])
       return(1);
     }
     
+    if((txt = fopen(argv[2], "r")) == NULL)
+    {
+        printf("Error: Cannot read the input txt file: %s\n", argv[2]);
+        return(1);
+    }
+
     if((out = fopen(argv[3], "wb+")) == NULL)
     {
         printf("Error: Cannot create the output file: %s\n", argv[3]);
+        fclose(txt);
         return(1);
     }
 
 
-    if((txt = fopen(argv[2], "r")) == NULL)
-    {
-        printf("Error: Cannot create the output file: %s\n", argv[2]);
-        return(1);
-    }
 
     fseek(out, 0, SEEK_SET);
     fseek(txt, 0, SEEK_SET);

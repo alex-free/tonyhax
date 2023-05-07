@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 1.2.5 (5/4/2023)
+
+*   [tonyhax-1.2.5-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.5i/tonyhax-v1.2.5-international.zip)
+
+Changes:
+
+* Added the ability to apply your own [GameShark Codes](gameshark-code-support.md) to any game you want to boot! Huge thanks to MottZilla's guidance on controller support as well as the original cheat engine used to power all of this.
+
+* The Tonyhax International loader ROM version now only displays the `Press X to access the Memory Card Manager/CD Player` text when the CD drive is open when the ROM version of the loader starts, for a more clean interactive look.
 
 ## Version 1.2.4 (4/30/2023)
 

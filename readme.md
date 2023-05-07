@@ -80,15 +80,23 @@ _More Info_
 
 ## Downloads
 
-### Version 1.2.5 (5/4/2023)
+### Version 1.2.6 (5/7/2023)
 
-*   [tonyhax-1.2.5-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.5i/tonyhax-v1.2.5-international.zip)
+*   [tonyhax-1.2.6-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.6i/tonyhax-v1.2.6-international.zip)
 
 Changes:
 
-* Added the ability to apply your own [GameShark Codes](gameshark-code-support.md) to any game you want to boot! Huge thanks to MottZilla's guidance on controller support as well as the original cheat engine used to power all of this.
+* Fixed the ability to apply your own [GameShark Codes](gameshark-code-support.md) to any game you want to boot for consoles that did not have BIOS v3.0. Only consoles with BIOS v3.0 were previously working, this has now been fixed and all PSX/PS2 consoles are now confirmed working correctly.
 
-* The Tonyhax International loader ROM version now only displays the `Press X to access the Memory Card Manager/CD Player` text when the CD drive is open when the ROM version of the loader starts, for a more clean interactive look.
+* Expanded the amount of codes able to be applied by the anti-piracy bypass system for future-proofing.
+
+* The Tonyhax International loader ROM version now only displays the `Press X to access the Memory Card Manager/CD Player` text when the CD drive is open when the ROM version of the loader starts for Japanese consoles as well, to match the behavior of the other USA/PAL consoles for consistency.
+
+* Updated [PSEXE2ROM](https://alex-free.github.io/psexe2rom) and [MKPSXISO](https://github.com/lameguy64/mkpsxiso) to the latest versions.
+
+* Updated the Tonyhax International GameShark Generator program to v1.0.2. Now you can simply drag and drop the txt file of GameShark codes directly onto the `thigsgen.exe` or `thigsgen` executable file to generate the raw save file named `TONYHAXINTGS` which contains the GameShark codes you want to load with Tonyhax International.
+
+* Added info about how the Final Fantasy IX save exploit file being present when using the SCPH-1000 memory card manager will lock up the console (so don't use it like that :)).
 
 [About previous versions](changelog.md).
 
@@ -184,7 +192,7 @@ With your import/backup CD-R in the Japanese PS2 console, use your hand to push 
 
 ![ps2 push in released drive](images/ps2-push-in-released-drive.jpg)
 
-Now that the DVD drive tray is pushed all the way back in, the Swap Magic Tool can be used to "lock" the drive. Like before, slide in the Swap Magic Tool to the right most position like shown in the image below. Remember to feel around with the Swap Magic Tool to get the hook to latch on internally inside the DVD drive. Now that your Swap Magic Tool is once again latched on internally inside the DVD drive, move it straight to the left side. This movement will feel correct and nice when you are properly using the Swap Magic Tool, reassuring you are using it correctly. Once you get to the end of this movement (when you can't go any more to the left) the DVD drive tray will fully go back inside the DVD drive to put the DVD drive into the "locked" state.
+Now that the DVD drive tray is pushed all the way back in, the Swap Magic Tool can be used to "lock" the drive. Like before, slide in the Swap Magic Tool to the right most position like shown in the image below. Remember to feel around with the Swap Magic Tool to get the hook to latch on internally inside the DVD drive. Now that your Swap Magic Tool is once again latched on internally inside the DVD drive, move it straight to the left side. This movement will feel correct and nice when you are properly using the Swap Magic Tool, reassuring you are using it correctly. Once you get to the end of this movement (when you can't go any more to the left) the DVD drive tray will fully go back inside the DVD drive to put the DVD drive into the "locked" state. **You must ensure that the DVD drive is fully back in or Tonyhax International will lock up loading the disc**.
 
 ![ps2 slide tool moved to lock drive](images/ps2-slide-tool-moved-to-lock-drive.jpg)
 

@@ -30,6 +30,7 @@ bool did_read_mc = 0; // We need to set the GameShark codes AFTER the last bios_
 bool controller_input_switch = 1; // modifies controller input pulling behavior in some functions later on
 uint8_t number_of_gameshark_codes; // part of my basic format to store codes, this tells us how many we will activate
 uint8_t * user_start = (uint8_t *) 0x80010000;
+uint16_t mc_base = 0x102; // start of gs code data in memcard buffer
 
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
@@ -95,6 +96,7 @@ void read_memcard() {
 	}
 
 	if (mc_fd > 0) {
+		//bzero(user_start, 0x2000); // zero out mc buf
 		read = FileRead(mc_fd, user_start, 0x2000); // read the entire file "TONYHAXINTGS" to the start of 'user RAM' (which will be cleared later before booting an executable). So 0x80010000-0x80012000 in RAM contains the contents of "TONYHAXINTGS". For "TONYHAXINTGS.mcs" there is an 0x80 byte header since it is a .mcs file. So the same data at 0x180 in the MCS file is at 0x100 in the RAW save file and in the data read here.
 		
 		if (read == -1) {
@@ -104,13 +106,27 @@ void read_memcard() {
 
 		FileClose(mc_fd);
 		did_read_mc = 1; // set flag to parse codes uploaded to RAM, right before clearing RAM itself and booting the game
-		number_of_gameshark_codes = user_start[0x100];
+		number_of_gameshark_codes = user_start[mc_base];
 		debug_write("%d codes detected", number_of_gameshark_codes);
 	}
 
 	controller_input_stop(); //restart so we can once again pull controller input
 
 	controller_input_start();
+	/*
+	uint32_t sum;
+	uint8_t prev = 0;
+	uint8_t next;
+	for (int i = 0; i < 0x2000; i++)
+	{
+		debug_write("%x: @ %x", &user_start[i], user_start[i]);
+		next = user_start[i];
+		sum = prev + next;
+		sum &= 0xFF;
+		prev = sum;
+	}
+	debug_write("Checksum: %x", sum);
+	*/
 }
 
 void parse_memcard_save_gameshark_codes() {
@@ -134,10 +150,26 @@ void parse_memcard_save_gameshark_codes() {
 	uint8_t gameshark_code_type;
 	uint16_t gameshark_code_mod_val;
 	uint16_t gameshark_code_mod_comparison_val;
-	uint16_t mc_base = 0x100;
+
+	/*
+	uint32_t sum;
+	uint8_t prev = 0;
+	uint8_t next;
+	for (int i = 0; i < 0x2000; i++)
+	{
+		debug_write("%x: @ %x", &user_start[i], user_start[i]);
+		next = user_start[i];
+		sum = prev + next;
+		sum &= 0xFF;
+		prev = sum;
+	}
+	debug_write("Memory card buffer checksum: %x", sum);
+	for (volatile int i = 0; i < 0x100000; i++);  // won't be optimized out by -Os, pause
+	*/
 
 	for(int i = 0; i < number_of_gameshark_codes; i++) {
-			gameshark_code_type = user_start[mc_base + 1];
+		
+		gameshark_code_type = user_start[mc_base + 1];
 			
 		if(user_start[mc_base + 1] == 0xD0)
 			user_start[mc_base + 1] = 0x80; // we need to convert the prefix to the real address first byte of 0x80 for the cheat engine
@@ -150,12 +182,12 @@ void parse_memcard_save_gameshark_codes() {
 
 		if(gameshark_code_type == 0x80) {
 			enable_code(gameshark_code_address, gameshark_code_mod_val);
-			mc_base = (mc_base + 6); // 0x106.. etc..
+			mc_base = (mc_base + 6); // 0x108.. etc..
 		} else if(gameshark_code_type == 0xD0) {
 			gameshark_code_mod_comparison_val = user_start[mc_base + 8] + (user_start[mc_base + 7] << 8);
 			//debug_write("GS Code Mod Comparison Val: %x", gameshark_code_mod_comparison_val);
 			enable_compare_code(gameshark_code_address, gameshark_code_mod_comparison_val, gameshark_code_mod_val);
-			mc_base = (mc_base + 8); // 0x108.. etc..
+			mc_base = (mc_base + 8); // 0x10A.. etc..
 		}
 	}
 	install_cheat_engine();
@@ -233,6 +265,9 @@ void wait_lid_status(bool open) {
 	uint8_t cd_reply[16];
 	
 	controller_input_start();
+	#if defined ROM
+		debug_write("Press X to access the Memory Card Manager/CD Player");
+	#endif
 
 	uint8_t expected = open ? 0x10 : 0x00;
 	do {
@@ -336,17 +371,11 @@ void try_boot_cd() {
 	#if !defined TOCPERFECT
 		if(enable_unlock) {
 			debug_write("Press O to enable GS codes");
-			#if defined ROM
-				debug_write("Press X to access the Memory Card Manager/CD Player");
-			#endif
 			debug_write("Put in a backup or import disc, then close the drive lid");
 			wait_lid_status(true); // doesn't wait during the ROM method, unsure why but it is what we want as it allows us to auto-boot with the ROM boot method
 			wait_lid_status(false);
 		} else {
 			if(is_lid_open() || !licensed_drive()) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licensed (if it is not licensed but not open then the drive is closed and the user can open it and license it)
-				#if defined ROM
-					debug_write("Press X to access the Memory Card Manager/CD Player");
-				#endif
 				debug_write("Put in a real NTSC-J PSX game disc, then block the lid sensor");
 				wait_lid_status(true);
 				wait_lid_status(false); // Blocking lid sensor = 'closing lid'
@@ -564,7 +593,9 @@ void try_boot_cd() {
 	SetConf(event, tcb, stacktop);
 	ExitCriticalSection(); // unnecesary because SetConf() does this? Waiting on verdict from Socram8888: https://github.com/socram8888/tonyhax/issues/149
 
-	if(did_read_mc)
+	bzero((void*)0xD000, 0xF78); // 0xD000-0xDF78 are to be zeroed out to ensure correct parsing by the cheat engine (used for gs codes loaded via memcard AND for APv2 bypasses). 0xDF80 is used to contain BIOS patches so we stop 2 bytes previous to it. Every BIOS besides v3.0 has enough garbage in this 'reserved' area to break the cheat engine if we don't do this.
+
+	if(did_read_mc) // before clearing RAM (which contains our mem card buffer if applicable) but after last bios_reinitalize/setconf()
 		parse_memcard_save_gameshark_codes();
 
 	debug_write("Clearing RAM");
@@ -584,6 +615,37 @@ void try_boot_cd() {
 		return;
 	}
 
+	/*
+	uint32_t sum;
+	uint8_t prev = 0;
+	uint8_t next;
+	uint8_t * ce = (uint8_t *) 0xC000;
+
+	for (int i = 0; i < 0x100; i++)
+	{
+		//debug_write("%x: @ %x", &ce[i], ce[i]);
+		next = ce[i];
+		sum = prev + next;
+		sum &= 0xFF;
+		prev = sum;
+	}
+	debug_write("Cheat engine checksum: %x", sum);
+	for (volatile int i = 0; i < 0x100000; i++);  // won't be optimized out by -Os, pause
+	
+	uint8_t * codes = (uint8_t *) 0xD000;
+
+	for (int i = 0; i < 0x1FFB; i++)
+	{
+		//debug_write("%x: @ %x", &codes[i], codes[i]);
+		next = codes[i];
+		sum = prev + next;
+		sum &= 0xFF;
+		prev = sum;
+	}
+	debug_write("Cheat engine enabled codes Checksum: %x", sum);
+	for (volatile int i = 0; i < 0x100000; i++);  // won't be optimized out by -Os, pause
+	*/
+
 	exe_header_t * exe_header = (exe_header_t *) (data_buffer + 0x10);
 
 	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function
@@ -599,7 +661,7 @@ void try_boot_cd() {
 		#if !defined AP_BYPASS_DISABLE
 			if(!first_rev)
 				activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
-			#endif
+		#endif
 
 		// Restore original error handler
 		bios_restore_disc_error();

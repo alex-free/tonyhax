@@ -6,10 +6,10 @@ When you turn on any PS1 console with the flashed GameShark/Action Reply/cheat d
 
 If you want to use the original Sony BIOS features (Memory Card Manager/CD Player), you do not have to remove the flashed cheat cartridge! Since Tonyhax International v1.2.4, you can now do this:
 
-*   Open the CD drive of the console and power it on with the flashed cheat cartridge plugged in.
+*   Open the CD drive of the console **first, then power it on** with the flashed cheat cartridge plugged in.
 *   Press `X` on a controller when you are prompted to insert a disc by Tonyhax International.
 
-Keep in mind that you can not boot any games from the Sony BIOS which has been started by Tonyhax International. Not even real ones that normally work without the flashed cheat cart plugged in.
+Keep in mind that you can not boot any games from the Sony BIOS which has been started by Tonyhax International. Not even real ones that normally work without the flashed cheat cart plugged in. This may be fixed in the future, but the whole point of this feature is to gain back the ability to use the stock memory card manager/CD player without ever needing to remove the flashed cheat cartridge itself.
 
 ## Requirements
 

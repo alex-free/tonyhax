@@ -2,11 +2,11 @@
 CC=gcc
 CFLAGS=-Wall -Werror
 
-clean-exe:
-	rm -rf thigsgen.exe thigsgen
-
 thigsgen: clean-exe
 	$(CC) $(CFLAGS) thigsgen.c -o thigsgen
+
+clean-exe:
+	rm -rf thigsgen.exe thigsgen
 
 clean:
 	rm -rf thigsgen.exe thigsgen linux_x86_64_static linux_x86_static windows_x86_64 windows_x86

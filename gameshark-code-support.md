@@ -19,12 +19,14 @@ Tonyhax International now has the ability to apply user-supplied GameShark codes
 Currently these code types are supported:
 
 80 - 16-bit constant write codes. I.e., `801D6DFC 0001`
-*D0/80 - 16-bit write on comparison match codes. I.e, `D0149004 959C
-80149004 9E64`. 
 
-_*Important Note On D0/80 codes:_ currently any D0 code type must match the corresponding 80 code on the next line. What this means is the code: `D0149004 959C 80149004 9E64` works because the first part `D0149004` matches the `80149004` part. An example of a code that does not match is like `D0160022 9404 80240246 0001` because the `D0160022` part does not match the `80240246` part. Such codes **do not work yet**.
+*D0/80 - 16-bit write on comparison match codes. I.e, `D0149004 959C 80149004 9E64`. 
 
-It is unknown how many codes will all simultaneously work on real hardware. I tried 91 simulations codes, and while they work on emulation on real hardware the whole console locks up so definitely less then that. Keep in mind that some later games containing [anti-piracy](anti-piracy-bypass.md) functions use a few GameShark codes automatically to bypass the detection by Tonyhax International, so those games might support a total amount of simultaneous codes slightly less so then other games without such anti-piracy.
+_*Important Note On D0/80 codes:_ currently any D0 code type must match the corresponding 80 code on the next line. What this means is the code: `D0149004 959C 80149004 9E64` works because the first part `D0149004` matches the next `80149004` part. An example of a code that does not match is like `D0160022 9404 80240246 0001` because the `D0160022` part does not match the `80240246` part. Such codes **do not work yet**.
+
+It is unknown how many codes will all simultaneously work on real hardware. I tried 91 simulations codes and it worked successfully (I tested all of the [GSHAX](gameshark-code.md) codes, how meta is that). The hard limit is 255, but let me know if you find this to not actually be the case.
+
+More code types will be supported in future releases. This initial support has only just been added after all.
 
 ## Usage
 
@@ -39,37 +41,7 @@ This is a command line program found in the `gameshark` directory of each Tonyha
 
 So find the correct binary to use for your computer in one of the folders above. It will be named `thigsgen.exe` (Windows) or `thigsgen` (Linux). 
 
-Then, open `COMMAND.EXE` (Windows) or your Terminal in Linux. Drag the executable into the `COMMAND.EXE` or Terminal window.
-
-![raw output](images/thigsgen-usage.png)
-
-The first argument given must be either -m (for .MCS format output) or -r (for RAW save file output). The .MCS format is useful for working with emulators and or the MemCardRex software. The RAW format is useful for working with [WLaunchELF](https://github.com/ps2homebrew/wLaunchELF) and real consoles. You most likely want the RAW format.
-
-The second argument given is the filename of a .txt file that contains gameshark codes listed line by line. These codes are the ones which will be included in the generated save file.
-
-The 3rd argument is the name of the save file, which must be `TONYHAXINTGS` if working with the RAW save file format. The .MCS format does not care what you provide as output file name, since it actually includes the exact filename of the RAW save file internally in it's format.
-
-So, example usage could look like this:
-
-`thigsgen -r gs.txt TONYHAXINTGS` - this reads all codes in the file `gs.txt` and generates a RAW save file that can be used on a real console.
-
-![raw output](images/thigsgen-raw.png)
-
-`thigsgen -m gs.txt tonyhax-codes.mcs` - this reads all codes in the file `gs.txt` and generates a MCS save file that can be used in emulators and or the MemCardRex software.
-
-![mcs output](images/thigsgen-mcs.png)
-
-The `gs.txt` file could look like this:
-
-`801D6DFC 0001`
-
-`801DB008 0001`
-
-`80176C00 00FF`
-
-The first 2 codes enable all cars. The last code enables all tracks. These codes are for the game [Ridge Racer USA](http://redump.org/disc/1869/).
-
-**Note that each code line must be on it's own line in the txt file, without any gaps.**
+On Windows, and most Linux distros, you can simply drag and drop the **the txt file (containing each code line on it's own line, without any gaps)** on top of the `thigsgen.exe` or `thigsgen` executable file. This will generate the `TONYHAXINTGS` raw save file containing the codes.
 
 ## Copying The TONYHAXINGS File To A PSX Memory Card
 

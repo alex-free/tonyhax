@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso_project image_name="tonyhax-boot-cd-japan.bin" cue_sheet="tonyhax-boot-cd-japan.cue" no_xa="0">
+	<track type="data">
+		<identifiers
+			system          ="PLAYSTATION"
+			application     ="PLAYSTATION"
+			volume          ="TONYHAX"
+			volume_set      ="TONYHAX"
+			publisher       ="SOCRAM8888"
+			data_preparer   ="MKPSXISO"
+			copyright       ="WTFPL"
+		/>
+
+		<!--
+			Use the Japanese license file.
+
+			This is important since Japanese consoles check the game's region.
+		-->
+		<license file="licensej.dat" />
+
+		<directory_tree>
+			<!-- System configuration file -->
+			<file name="SYSTEM.CNF" type="data" source="system.cnf" />
+
+			<!-- Main executable -->
+			<file name="TONYHAX.EXE" type="data" source="../loader/tonyhax.exe" />
+
+			<!-- Generate a 16MB (8192 sectors) dummy file -->
+			<dummy sectors="8192" />
+		</directory_tree>
+	</track>
+</iso_project>

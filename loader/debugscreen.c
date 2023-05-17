@@ -113,7 +113,7 @@ void debug_init() {
 	gpu_flush_cache();
 
 	// Draw border
-	debug_text_at(TH_MARGIN, 40, "tonyhax " STRINGIFY(TONYHAX_VERSION));
+	debug_text_at(TH_MARGIN, 40, "tonyhax international " STRINGIFY(TONYHAX_VERSION));
 	struct gpu_solid_rect band = {
 		.pos = {
 			.x = 0,

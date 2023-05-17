@@ -10,5 +10,5 @@ all: $(BOOT_CD_FILES)
 clean:
 	$(RM) $(BOOT_CD_FILES)
 
-$(BOOT_CD_FILES): ../loader/tonyhax.exe cd.xml licensej.dat system.cnf
-	mkpsxiso -y cd.xml
+$(BOOT_CD_FILES): ../loader/tonyhax.exe cd-e.xml cd-j.xml licensee.dat licensej.dat system.cnf
+	mkpsxiso -y cd-e.xml; mkpsxiso -y cd-j.xml

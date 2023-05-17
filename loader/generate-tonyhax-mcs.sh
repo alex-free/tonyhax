@@ -25,7 +25,7 @@ load_len=$(printf "%08X" $(stat -c %s $bin_file))
 
 # Create file
 cp "$tpl_file" "$mcs_file"
-echo -n "tonyhax ${version}" | dd status=none conv=notrunc bs=1 seek=132 of="$mcs_file"
+echo -n "tonyhax-i ${version}" | dd status=none conv=notrunc bs=1 seek=132 of="$mcs_file"
 dd status=none conv=notrunc bs=1 seek=384 if=$bin_file of="$mcs_file"
 
 # Insert address at 0xC0 and length at 0xC4, which is 0x40 and 0x44 inside the save file header

@@ -7,7 +7,7 @@ SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Common variables
 
-TONYHAX_VERSION=v1.2.6-international
+TONYHAX_VERSION=v1.2.7
 
 CC=mips-linux-gnu-gcc
 CFLAGS=-Os -Wall -Wextra -Wno-main -Werror -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION)
@@ -150,8 +150,8 @@ FREEPSXBOOT_IMAGES := \
 
 # Boot CD files
 
-BOOT_CD_FILES := tonyhax-boot-cd.bin tonyhax-boot-cd.cue
+BOOT_CD_FILES := tonyhax-boot-cd-japan.bin tonyhax-boot-cd-japan.cue tonyhax-boot-cd-europe.bin tonyhax-boot-cd-europe.cue
 
 # ROM files
 
-ROM_FILES := tonyhax-$(TONYHAX_VERSION).rom tonyhax-rom-flasher.bin tonyhax-rom-flasher.cue
+ROM_FILES := tonyhax-international-$(TONYHAX_VERSION).rom tonyhax-rom-flasher.bin tonyhax-rom-flasher.cue

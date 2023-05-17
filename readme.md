@@ -80,23 +80,19 @@ _More Info_
 
 ## Downloads
 
-### Version 1.2.6 (5/7/2023)
+### Version 1.2.7 (5/17/2023)
 
-*   [tonyhax-1.2.6-international](https://github.com/alex-free/tonyhax/releases/download/v1.2.6i/tonyhax-v1.2.6-international.zip)
+*   [tonyhax-international-v1.2.7](https://github.com/alex-free/tonyhax/releases/download/v1.2.7i/tonyhax-international-v1.2.7.zip)
 
 Changes:
 
-* Fixed the ability to apply your own [GameShark Codes](gameshark-code-support.md) to any game you want to boot for consoles that did not have BIOS v3.0. Only consoles with BIOS v3.0 were previously working, this has now been fixed and all PSX/PS2 consoles are now confirmed working correctly.
+* **REWROTE** the [GameShark functionality](gameshark-code-support.md) to support **ALL of the following GameShark code types: `50, 80, 30, D0, E0`**. This rewrite includes things like a `TONYHAXINTGS` save file checksum system, a new and improved GameShark cheat code engine, and optimizations to THIGSGEN, now at v2.0.
 
-* Expanded the amount of codes able to be applied by the anti-piracy bypass system for future-proofing.
+* Fixed an issue with the `-rom` version that would cause it to display the `Press X to boot Sony BIOS` text twice.
 
-* The Tonyhax International loader ROM version now only displays the `Press X to access the Memory Card Manager/CD Player` text when the CD drive is open when the ROM version of the loader starts for Japanese consoles as well, to match the behavior of the other USA/PAL consoles for consistency.
+* Added back the PAL/European [Boot CD](boot-cd.md) image to releases since it is now useful for GameShark code support.
 
-* Updated [PSEXE2ROM](https://alex-free.github.io/psexe2rom) and [MKPSXISO](https://github.com/lameguy64/mkpsxiso) to the latest versions.
-
-* Updated the Tonyhax International GameShark Generator program to v1.0.2. Now you can simply drag and drop the txt file of GameShark codes directly onto the `thigsgen.exe` or `thigsgen` executable file to generate the raw save file named `TONYHAXINTGS` which contains the GameShark codes you want to load with Tonyhax International.
-
-* Added info about how the Final Fantasy IX save exploit file being present when using the SCPH-1000 memory card manager will lock up the console (so don't use it like that :)).
+* Added some YouTube video tutorial links (by [Jay Time](https://www.youtube.com/@JLMtime)) to the [ROM](flashed-cheat-cart.md) and [GameShark Support](gameshark-code-support.md) pages.
 
 [About previous versions](changelog.md).
 

@@ -11,6 +11,11 @@ If you want to use the original Sony BIOS features (Memory Card Manager/CD Playe
 
 Keep in mind that you can not boot any games from the Sony BIOS which has been started by Tonyhax International. Not even real ones that normally work without the flashed cheat cart plugged in. This may be fixed in the future, but the whole point of this feature is to gain back the ability to use the stock memory card manager/CD player without ever needing to remove the flashed cheat cartridge itself.
 
+## YouTube Videos On This Functionality
+
+My friend [JMaxxl](https://github.com/JMaxxL) has created a tutorial on YouTube: [HOW TO: Tonyhax International - flash to a parallel cheat device PS1](https://www.youtube.com/watch?v=sujXwGnPtqQ).
+
+
 ## Requirements
 
 *   GameShark, Action Reply, or other cheat cart that you are willing to overwrite with the Tonyhax International ROM.

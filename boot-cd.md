@@ -2,6 +2,8 @@
 
 The Boot CD is the disc version of Tonyhax International. The BIN+CUE file set can be found in the `boot-cd` directory of each Tonyhax International release.
 
+If you have a PAL/European console, use the `tonyhax-boot-cd-europe` bin/cue files. If you have any other console use the `tonyahax-boot-cd-japan` bin/cue files.
+
 ## Requirements
 
 *   Any PS1 console (SCPH-1000-SCPH-102) or supported early PS2 console (SCPH-10000-SCPH-39004).

@@ -7,4 +7,4 @@ if [ -z "$1" ] || [ -z "$2" ]; then
 fi
 cd "$(dirname "$0")"/../
 make clean
-find variables.mk* -type f -exec sed -i 's/'TONYHAX_VERSION=v"${1}"-international'/'TONYHAX_VERSION=v"${2}"-international'/' {} \;
+find variables.mk* -type f -exec sed -i 's/'TONYHAX_VERSION=v"${1}"'/'TONYHAX_VERSION=v"${2}"'/' {} \;

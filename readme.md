@@ -80,19 +80,15 @@ _More Info_
 
 ## Downloads
 
-### Version 1.2.7 (5/17/2023)
+### Version 1.2.8 (5/19/2023)
 
-*   [tonyhax-international-v1.2.7](https://github.com/alex-free/tonyhax/releases/download/v1.2.7i/tonyhax-international-v1.2.7.zip)
+*   [tonyhax-international-v1.2.8](https://github.com/alex-free/tonyhax/releases/download/v1.2.8i/tonyhax-international-v1.2.8.zip)
 
 Changes:
 
-* **REWROTE** the [GameShark functionality](gameshark-code-support.md) to support **ALL of the following GameShark code types: `50, 80, 30, D0, E0`**. This rewrite includes things like a `TONYHAXINTGS` save file checksum system, a new and improved GameShark cheat code engine, and optimizations to THIGSGEN, now at v2.0.
+* Added support for GameShark code types `E1` and `D1`. Tonyhax International now [supports applying the following GameShark code types](gameshark-code-support.md): `50, 80, 30, D0, E0` `D1` `E1`.
 
-* Fixed an issue with the `-rom` version that would cause it to display the `Press X to boot Sony BIOS` text twice.
-
-* Added back the PAL/European [Boot CD](boot-cd.md) image to releases since it is now useful for GameShark code support.
-
-* Added some YouTube video tutorial links (by [Jay Time](https://www.youtube.com/@JLMtime)) to the [ROM](flashed-cheat-cart.md) and [GameShark Support](gameshark-code-support.md) pages.
+* Significantly optimized the GameShark cheat engine (now at v1.0.2) with the help of MottZilla.
 
 [About previous versions](changelog.md).
 

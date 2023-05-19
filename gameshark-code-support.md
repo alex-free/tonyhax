@@ -27,14 +27,16 @@ Here's some awesome vids by my friend [JMaxxl](https://github.com/JMaxxL):
 All codes beginning with the one of the following prefixes are supported:
 
 * `30`
+* `50`
 * `80`
 * `D0`
+* `D1`
 * `E0`
-* `50`
-
-The amount of codes that may be enabled all at one time simultaneously is hard capped at 255. Up to 139 codes have been verified to work all at once on real PSX hardware.
+* `E1`
 
 More code types will be supported in future releases.
+
+The amount of codes that may be enabled all at one time simultaneously is hard capped at 255. Up to 139 codes have been verified to work all at once on real PSX hardware.
 
 ## Usage
 
@@ -50,6 +52,8 @@ This is a command line program found in the `gameshark` directory of each Tonyha
 So find the correct binary to use for your computer in one of the folders above. It will be named `thigsgen.exe` (Windows) or `thigsgen` (Linux). 
 
 On Windows, and most Linux distros, you can simply drag and drop the **the txt file (containing each code line on it's own line, without any gaps)** on top of the `thigsgen.exe` or `thigsgen` executable file. This will generate the `TONYHAXINTGS` raw save file containing the codes.
+
+_Note:_ If you put a code line in your txt that has a code prefix that isn't supported, the `TONYHAXINTGS` file will not be generated. You can only have code lines with the above supported code prefixes.
 
 ## Copying The TONYHAXINGS File To A PSX Memory Card
 

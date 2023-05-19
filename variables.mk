@@ -7,7 +7,7 @@ SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Common variables
 
-TONYHAX_VERSION=v1.2.7
+TONYHAX_VERSION=v1.2.8
 
 CC=mips-linux-gnu-gcc
 CFLAGS=-Os -Wall -Wextra -Wno-main -Werror -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION)

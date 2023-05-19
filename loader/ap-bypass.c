@@ -12,7 +12,7 @@ int32_t code_address_ram_location = 0xD000;
 int32_t code_compare_ram_location = 0xD004;
 int32_t code_enable_ram_location = 0xD00C;  
 
-void enable_code_8(const uint32_t gs1, const uint8_t gs2) {
+void add_30_code(const uint32_t gs1, const uint8_t gs2) {
 	gs_code_type = 0x30;
     memcpy((void*)code_address_ram_location, &gs1, 4);
     memcpy((void*)code_compare_ram_location, &gs2, 1);
@@ -23,7 +23,7 @@ void enable_code_8(const uint32_t gs1, const uint8_t gs2) {
 	code_enable_ram_location = (code_enable_ram_location + 0x010);
 }
 
-void enable_compare_code_8(const uint32_t gs1, const uint8_t gs2) {
+void add_E0_code(const uint32_t gs1, const uint8_t gs2) {
 	gs_code_type = 0xE0;
     memcpy((void*)code_address_ram_location, &gs1, 4);
     memcpy((void*)code_compare_ram_location, &gs2, 1);
@@ -34,8 +34,18 @@ void enable_compare_code_8(const uint32_t gs1, const uint8_t gs2) {
 	code_enable_ram_location = (code_enable_ram_location + 0x010);
 }
 
+void add_E1_code(const uint32_t gs1, const uint8_t gs2) {
+	gs_code_type = 0xE1;
+    memcpy((void*)code_address_ram_location, &gs1, 4);
+    memcpy((void*)code_compare_ram_location, &gs2, 1);
+    memcpy((void*)code_enable_ram_location, &gs_code_type, 1);
+// Update addresses to write to for an additional code
+	code_address_ram_location = (code_address_ram_location + 0x010);
+	code_compare_ram_location = (code_compare_ram_location + 0x010);
+	code_enable_ram_location = (code_enable_ram_location + 0x010);
+}
 
-void enable_code_16(const uint32_t gs1, const uint16_t gs2) {
+void add_80_code(const uint32_t gs1, const uint16_t gs2) {
 	gs_code_type = 0x80;
     memcpy((void*)code_address_ram_location, &gs1, 4);
     memcpy((void*)code_compare_ram_location, &gs2, 2);
@@ -46,7 +56,7 @@ void enable_code_16(const uint32_t gs1, const uint16_t gs2) {
 	code_enable_ram_location = (code_enable_ram_location + 0x010);
 }
 
-void enable_compare_code_16(const uint32_t gs1, const uint16_t gs2) {
+void add_D0_code(const uint32_t gs1, const uint16_t gs2) {
 	gs_code_type = 0xD0;
     memcpy((void*)code_address_ram_location, &gs1, 4);
     memcpy((void*)code_compare_ram_location, &gs2, 2);
@@ -57,49 +67,59 @@ void enable_compare_code_16(const uint32_t gs1, const uint16_t gs2) {
 	code_enable_ram_location = (code_enable_ram_location + 0x010);
 }
 
-void install_cheat_engine() {
+void add_D1_code(const uint32_t gs1, const uint16_t gs2) {
+	gs_code_type = 0xD1;
+    memcpy((void*)code_address_ram_location, &gs1, 4);
+    memcpy((void*)code_compare_ram_location, &gs2, 2);
+    memcpy((void*)code_enable_ram_location, &gs_code_type, 1);
+// Update addresses to write to for an additional code
+	code_address_ram_location = (code_address_ram_location + 0x010);
+	code_compare_ram_location = (code_compare_ram_location + 0x010);
+	code_enable_ram_location = (code_enable_ram_location + 0x010);
+}
 
-const unsigned char cheat_engine_v1_0_1[] = {
+void install_cheat_engine() {
+// generate with `scripts/stealth-engine-xxd.sh` after compiling .EXE file with No $ PSX Assembler
+const unsigned char cheat_engine_v1_0_2[] = {
 0xe0, 0xff, 0xbd, 0x27, 0x00, 0x00, 0xa4, 0xaf,
   0x04, 0x00, 0xa5, 0xaf, 0x08, 0x00, 0xa6, 0xaf, 0x0c, 0x00, 0xa7, 0xaf,
-  0x00, 0x00, 0x04, 0x3c, 0x00, 0xd0, 0x84, 0x34, 0x00, 0x00, 0x87, 0x8c,
-  0x00, 0x00, 0x00, 0x00, 0x55, 0x00, 0xe0, 0x10, 0x00, 0x00, 0x05, 0x3c,
-  0x00, 0x00, 0xa5, 0x34, 0x00, 0x00, 0x06, 0x3c, 0x00, 0x00, 0xc6, 0x34,
-  0x00, 0x00, 0x07, 0x3c, 0x00, 0x00, 0xe7, 0x34, 0x0c, 0x00, 0x86, 0x8c,
-  0x30, 0x00, 0x07, 0x34, 0x00, 0x00, 0x00, 0x00, 0x3c, 0x00, 0xc7, 0x10,
-  0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x07, 0x34, 0x00, 0x00, 0x00, 0x00,
-  0x24, 0x00, 0xc7, 0x10, 0x00, 0x00, 0x00, 0x00, 0xe0, 0x00, 0x07, 0x34,
-  0x00, 0x00, 0x00, 0x00, 0x26, 0x00, 0xc7, 0x10, 0x00, 0x00, 0x00, 0x00,
-  0xd0, 0x00, 0x07, 0x34, 0x00, 0x00, 0x00, 0x00, 0x0d, 0x00, 0xc7, 0x10,
-  0x00, 0x00, 0x05, 0x3c, 0x00, 0x00, 0xa5, 0x34, 0x00, 0x00, 0x06, 0x3c,
-  0x00, 0x00, 0xc6, 0x34, 0x00, 0x00, 0x07, 0x3c, 0x00, 0x00, 0xe7, 0x34,
-  0x1c, 0x00, 0x86, 0x8c, 0x30, 0x00, 0x07, 0x34, 0x00, 0x00, 0x00, 0x00,
-  0x21, 0x00, 0xc7, 0x10, 0x80, 0x00, 0x07, 0x34, 0x00, 0x00, 0x00, 0x00,
-  0x09, 0x00, 0xc7, 0x10, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x85, 0x94,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x87, 0x8c, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0xe6, 0x94, 0x00, 0x00, 0x00, 0x00, 0x22, 0x00, 0xc5, 0x14,
-  0xea, 0xff, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x10, 0x00, 0x87, 0x8c,
-  0x14, 0x00, 0x85, 0x94, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe5, 0xa4,
-  0x1b, 0x00, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x87, 0x8c,
-  0x04, 0x00, 0x85, 0x94, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe5, 0xa4,
-  0x19, 0x00, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x85, 0x90,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x87, 0x8c, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0xe6, 0x90, 0x00, 0x00, 0x00, 0x00, 0x0d, 0x00, 0xc5, 0x14,
-  0xd5, 0xff, 0x00, 0x18, 0x10, 0x00, 0x87, 0x8c, 0x14, 0x00, 0x85, 0x90,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe5, 0xa0, 0x07, 0x00, 0x00, 0x18,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x87, 0x8c, 0x04, 0x00, 0x85, 0x90,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe5, 0xa0, 0x00, 0x00, 0x00, 0x00,
-  0x04, 0x00, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x84, 0x24,
-  0xad, 0xff, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x10, 0x00, 0x84, 0x24, 0xa9, 0xff, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0xa4, 0x8f, 0x04, 0x00, 0xa5, 0x8f, 0x08, 0x00, 0xa6, 0x8f,
-  0x0c, 0x00, 0xa7, 0x8f, 0x20, 0x00, 0xbd, 0x27, 0x01, 0x00, 0x1a, 0x3c,
-  0xfc, 0xcf, 0x5a, 0x8f, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x40, 0x03,
-  0x00, 0x00, 0x00, 0x00
+  0x00, 0x00, 0x04, 0x3c, 0x00, 0xd0, 0x84, 0x34, 0x00, 0x00, 0x00, 0x00,
+  0x0c, 0x00, 0x86, 0x8c, 0x00, 0x00, 0x00, 0x00, 0x53, 0x00, 0xc0, 0x10,
+  0x30, 0x00, 0x07, 0x34, 0x00, 0x00, 0x00, 0x00, 0x1b, 0x00, 0xc7, 0x10,
+  0x80, 0x00, 0x07, 0x34, 0x00, 0x00, 0x00, 0x00, 0x13, 0x00, 0xc7, 0x10,
+  0xe0, 0x00, 0x07, 0x34, 0x00, 0x00, 0x00, 0x00, 0x1a, 0x00, 0xc7, 0x10,
+  0xd0, 0x00, 0x07, 0x34, 0x00, 0x00, 0x00, 0x00, 0x27, 0x00, 0xc7, 0x10,
+  0xe1, 0x00, 0x07, 0x34, 0x00, 0x00, 0x00, 0x00, 0x1c, 0x00, 0xc7, 0x10,
+  0xd1, 0x00, 0x07, 0x34, 0x00, 0x00, 0x00, 0x00, 0x29, 0x00, 0xc7, 0x10,
+  0x30, 0x00, 0x07, 0x34, 0x1c, 0x00, 0x86, 0x8c, 0x00, 0x00, 0x00, 0x00,
+  0x2d, 0x00, 0xc7, 0x10, 0x80, 0x00, 0x07, 0x34, 0x00, 0x00, 0x00, 0x00,
+  0x2f, 0x00, 0xc7, 0x10, 0x04, 0x00, 0x85, 0x94, 0x00, 0x00, 0x87, 0x8c,
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe5, 0xa4, 0x32, 0x00, 0x00, 0x18,
+  0x04, 0x00, 0x85, 0x90, 0x00, 0x00, 0x87, 0x8c, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0xe5, 0xa0, 0x2d, 0x00, 0x00, 0x18, 0x04, 0x00, 0x85, 0x90,
+  0x00, 0x00, 0x87, 0x8c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe6, 0x90,
+  0x00, 0x00, 0x00, 0x00, 0x24, 0x00, 0xc5, 0x14, 0x00, 0x00, 0x00, 0x00,
+  0xe7, 0xff, 0x00, 0x18, 0x04, 0x00, 0x85, 0x90, 0x00, 0x00, 0x87, 0x8c,
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe6, 0x90, 0x00, 0x00, 0x00, 0x00,
+  0x1c, 0x00, 0xc5, 0x10, 0x00, 0x00, 0x00, 0x00, 0xdf, 0xff, 0x00, 0x18,
+  0x04, 0x00, 0x85, 0x94, 0x00, 0x00, 0x87, 0x8c, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0xe6, 0x94, 0x00, 0x00, 0x00, 0x00, 0x14, 0x00, 0xc5, 0x14,
+  0x00, 0x00, 0x00, 0x00, 0xd7, 0xff, 0x00, 0x18, 0x04, 0x00, 0x85, 0x94,
+  0x00, 0x00, 0x87, 0x8c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe6, 0x94,
+  0x00, 0x00, 0x00, 0x00, 0x0c, 0x00, 0xc5, 0x10, 0x00, 0x00, 0x00, 0x00,
+  0xcf, 0xff, 0x00, 0x18, 0x14, 0x00, 0x85, 0x90, 0x10, 0x00, 0x87, 0x8c,
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe5, 0xa0, 0x05, 0x00, 0x00, 0x18,
+  0x14, 0x00, 0x85, 0x94, 0x10, 0x00, 0x87, 0x8c, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0xe5, 0xa4, 0x00, 0x00, 0x00, 0x18, 0x20, 0x00, 0x84, 0x24,
+  0xae, 0xff, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x10, 0x00, 0x84, 0x24,
+  0xab, 0xff, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xa4, 0x8f,
+  0x04, 0x00, 0xa5, 0x8f, 0x08, 0x00, 0xa6, 0x8f, 0x0c, 0x00, 0xa7, 0x8f,
+  0x20, 0x00, 0xbd, 0x27, 0x01, 0x00, 0x1a, 0x3c, 0xfc, 0xcf, 0x5a, 0x8f,
+  0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x40, 0x03, 0x00, 0x00, 0x00, 0x00
 };
 
 	//debug_write("Installing MottZilla AP Engine");
-	memcpy((void*)0xC000, (void*)cheat_engine_v1_0_1, sizeof(cheat_engine_v1_0_1)); // Copy MottZilla's cheat engine assembly binary to 0xC000
+	memcpy((void*)0xC000, (void*)cheat_engine_v1_0_2, sizeof(cheat_engine_v1_0_2)); // Copy MottZilla's cheat engine assembly binary to 0xC000
 	const uint32_t b0_jump = (*(uint32_t*)0xB4) & 0xFFFF;
 	//debug_write("Got jump address for B0 functions : %x", (uint32_t) b0_jump);
 	const uint32_t b0_base = (*(uint32_t*)(b0_jump + 4)) & 0xFFFF;
@@ -145,8 +165,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8001516A 1000
 		code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_c.shtml
     	*/
-    	enable_compare_code_16(0x8001516A, common_routine_return_compare_val);
-		enable_code_16(0x8001516A, common_routine_return_patch_val);
+    	add_D0_code(0x8001516A, common_routine_return_compare_val);
+		add_80_code(0x8001516A, common_routine_return_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -158,8 +178,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8004E91A 1000
 		'skip mod check' code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_a.shtml
     	*/
-    	enable_compare_code_16(0x8004E91A, common_routine_return_compare_val);
-		enable_code_16(0x8004E91A, common_routine_return_patch_val);
+    	add_D0_code(0x8004E91A, common_routine_return_compare_val);
+		add_80_code(0x8004E91A, common_routine_return_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -178,8 +198,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 			80021DF6 1000
 			code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_a.shtml
     		*/
-	    	enable_compare_code_16(0x80021DF6, common_routine_return_compare_val);
-			enable_code_16(0x80021DF6, common_routine_return_patch_val);
+	    	add_D0_code(0x80021DF6, common_routine_return_compare_val);
+			add_80_code(0x80021DF6, common_routine_return_patch_val);
     		install_cheat_engine();
     	} else {
 			//debug_write("REV 1");
@@ -187,8 +207,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 			D0022206 1040 my code via aprip gameshark code conversion
 			80022206 1000
     		*/
-	    	enable_compare_code_16(0x80022206, common_routine_return_compare_val);
-			enable_code_16(0x80022206, common_routine_return_patch_val);
+	    	add_D0_code(0x80022206, common_routine_return_compare_val);
+			add_80_code(0x80022206, common_routine_return_patch_val);
     		install_cheat_engine();		
     	}
     } else if
@@ -201,8 +221,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8012255C 0000
 		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
     	*/
-	    enable_compare_code_16(0x8012255C, readtoc_compare_val);
-		enable_code_16(0x8012255C, readtoc_patch_val);
+	    add_D0_code(0x8012255C, readtoc_compare_val);
+		add_80_code(0x8012255C, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -214,8 +234,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80151448 0000
 		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
     	*/
-	    enable_compare_code_16(0x80151448, readtoc_compare_val);
-		enable_code_16(0x80151448, readtoc_patch_val);
+	    add_D0_code(0x80151448, readtoc_compare_val);
+		add_80_code(0x80151448, readtoc_patch_val);
     	install_cheat_engine();
 	} else if
 
@@ -227,8 +247,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80134C48 0000
 		my code to patch out readtoc
     	*/
-	    enable_compare_code_16(0x80134C48, readtoc_compare_val);
-		enable_code_16(0x80134C48, readtoc_patch_val);
+	    add_D0_code(0x80134C48, readtoc_compare_val);
+		add_80_code(0x80134C48, readtoc_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -240,8 +260,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80131B6C 001A
     	my code to patch out readtoc
     	*/
-	    enable_compare_code_16(0x80131B6C, readtoc_compare_val);
-		enable_code_16(0x80131B6C, readtoc_patch_val);
+	    add_D0_code(0x80131B6C, readtoc_compare_val);
+		add_80_code(0x80131B6C, readtoc_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -260,8 +280,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 			801840E2 1000
 			'skip check' code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_b.shtml
     		*/
-	    	enable_compare_code_16(0x801840E2, common_routine_return_compare_val);
-			enable_code_16(0x801840E2, common_routine_return_patch_val);
+	    	add_D0_code(0x801840E2, common_routine_return_compare_val);
+			add_80_code(0x801840E2, common_routine_return_patch_val);
     		install_cheat_engine();
 	    } else {
 			//debug_write("REV 1");
@@ -270,8 +290,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 			8018418E 1000 
 			my code via aprip gameshark code conversion
     		*/
-	    	enable_compare_code_16(0x8018418E, common_routine_return_compare_val);
-			enable_code_16(0x8018418E, common_routine_return_patch_val);
+	    	add_D0_code(0x8018418E, common_routine_return_compare_val);
+			add_80_code(0x8018418E, common_routine_return_patch_val);
     		install_cheat_engine();
 	    }
 	} else if
@@ -283,8 +303,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801800E2 1000 
 		my code via aprip gameshark code conversion
     	*/
-	    enable_compare_code_16(0x801800E2, common_routine_return_compare_val);
-		enable_code_16(0x801800E2, common_routine_return_patch_val);
+	    add_D0_code(0x801800E2, common_routine_return_compare_val);
+		add_80_code(0x801800E2, common_routine_return_patch_val);
     	install_cheat_engine();
 	} else if
 
@@ -296,8 +316,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800EA6DE 1000
 		'skip mod check' code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_c.shtml
     	*/
-	    enable_compare_code_16(0x800EA6DE, common_routine_return_compare_val);
-		enable_code_16(0x800EA6DE, common_routine_return_patch_val);
+	    add_D0_code(0x800EA6DE, common_routine_return_compare_val);
+		add_80_code(0x800EA6DE, common_routine_return_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -309,8 +329,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8002D51E 1000
 		code from GameHacking: https://gamehacking.org/game/88640, skips mod check
     	*/
-	    enable_compare_code_16(0x8002D51E, common_routine_return_compare_val);
-		enable_code_16(0x8002D51E, common_routine_return_patch_val);
+	    add_D0_code(0x8002D51E, common_routine_return_compare_val);
+		add_80_code(0x8002D51E, common_routine_return_patch_val);
     	install_cheat_engine();
     } else if 
 
@@ -321,8 +341,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8002D7EE 1000
 		code from GameHacking: https://gamehacking.org/game/93827, skips mod check
     	*/
-	    enable_compare_code_16(0x8002D7EE, common_routine_return_compare_val);
-		enable_code_16(0x8002D7EE, common_routine_return_patch_val);
+	    add_D0_code(0x8002D7EE, common_routine_return_compare_val);
+		add_80_code(0x8002D7EE, common_routine_return_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -334,8 +354,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8001259A 1000
 		'skip mod check' code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_b.shtml (yes it's on the wrong lettered page)
     	*/
-	    enable_compare_code_16(0x8001259A, common_routine_return_compare_val);
-		enable_code_16(0x8001259A, common_routine_return_patch_val);
+	    add_D0_code(0x8001259A, common_routine_return_compare_val);
+		add_80_code(0x8001259A, common_routine_return_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -346,8 +366,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	8001255E 1040
 		my code via aprip gameshark code conversion
     	*/
-	    enable_compare_code_16(0x8001255E, common_routine_return_compare_val);
-		enable_code_16(0x8001255E, common_routine_return_patch_val);
+	    add_D0_code(0x8001255E, common_routine_return_compare_val);
+		add_80_code(0x8001255E, common_routine_return_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -359,8 +379,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800B35B0 0000
 		code generated via aprip
     	*/
-	    enable_compare_code_16(0x800B35B0, readtoc_compare_val);
-		enable_code_16(0x800B35B0, readtoc_patch_val);
+	    add_D0_code(0x800B35B0, readtoc_compare_val);
+		add_80_code(0x800B35B0, readtoc_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -371,8 +391,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800B35B8 0000
 		my code via aprip gameshark code conversion
     	*/
-	    enable_compare_code_16(0x800B35B8, readtoc_compare_val);
-		enable_code_16(0x800B35B8, readtoc_patch_val);
+	    add_D0_code(0x800B35B8, readtoc_compare_val);
+		add_80_code(0x800B35B8, readtoc_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -384,8 +404,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80102FA0 0000
 		my code generated via aprip
     	*/
-	    enable_compare_code_16(0x80102FA0, readtoc_compare_val);
-		enable_code_16(0x80102FA0, readtoc_patch_val);
+	    add_D0_code(0x80102FA0, readtoc_compare_val);
+		add_80_code(0x80102FA0, readtoc_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -397,8 +417,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80192248 0000
 		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
     	*/
-	    enable_compare_code_16(0x80192248, readtoc_compare_val);
-		enable_code_16(0x80192248, readtoc_patch_val);
+	    add_D0_code(0x80192248, readtoc_compare_val);
+		add_80_code(0x80192248, readtoc_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -410,8 +430,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800EB364 0000
 		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
     	*/
-	    enable_compare_code_16(0x800EB364, readtoc_compare_val);
-		enable_code_16(0x800EB364, readtoc_patch_val);
+	    add_D0_code(0x800EB364, readtoc_compare_val);
+		add_80_code(0x800EB364, readtoc_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -423,60 +443,60 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		D00200A6 1040
 		800200A6 1000
 		*/
-	    enable_compare_code_16(0x800200A6, common_routine_return_compare_val);
-		enable_code_16(0x800200A6, common_routine_return_patch_val);
+	    add_D0_code(0x800200A6, common_routine_return_compare_val);
+		add_80_code(0x800200A6, common_routine_return_patch_val);
 		/*
 		D0020D64 FFF2
 		80020D64 0001
 		*/
-    	enable_compare_code_16(0x80020D64, 0xFFF2);
-    	enable_code_16(0x80020D64, 0x0001);
+    	add_D0_code(0x80020D64, 0xFFF2);
+    	add_80_code(0x80020D64, 0x0001);
 		/*
 		D01C1BE4 FFF2
 		801C1BE4 0001
 		*/
-    	enable_compare_code_16(0x801C1BE4, 0xFFF2);
-    	enable_code_16(0x801C1BE4, 0x0001);
+    	add_D0_code(0x801C1BE4, 0xFFF2);
+    	add_80_code(0x801C1BE4, 0x0001);
 
 		/*
 		D01C1C7A 0C07
 		801C1C7A 3002
 		*/
-    	enable_compare_code_16(0x801C1C7A, 0x0C07);
-    	enable_code_16(0x801C1C7A, 0x3002);
+    	add_D0_code(0x801C1C7A, 0x0C07);
+    	add_80_code(0x801C1C7A, 0x3002);
 		/*
 		D01C2936 1040
 		801C2936 1000
 		*/
-    	enable_compare_code_16(0x801C2936, common_routine_return_compare_val);
-    	enable_code_16(0x801C2936, common_routine_return_patch_val);
+    	add_D0_code(0x801C2936, common_routine_return_compare_val);
+    	add_80_code(0x801C2936, common_routine_return_patch_val);
 		/*
 		Dance Dance Revolution 2nd Remix Append Club Vol 1
 		D01C2A18 0C92
 		801C2A18 0AA7
 		*/
-    	enable_compare_code_16(0x801C2A18, 0x0C92);
-    	enable_code_16(0x801C2A18, 0x0AA7);
+    	add_D0_code(0x801C2A18, 0x0C92);
+    	add_80_code(0x801C2A18, 0x0AA7);
 		/*
 		D01C2EA2 1040
 		801C2EA2 1000
 		*/
-    	enable_compare_code_16(0x801C2EA2,common_routine_return_compare_val);
-    	enable_code_16(0x801C2EA2, common_routine_return_patch_val);
+    	add_D0_code(0x801C2EA2,common_routine_return_compare_val);
+    	add_80_code(0x801C2EA2, common_routine_return_patch_val);
 
 		/*
 		Dance Dance Revolution 2nd Remix Append Club Vol 2
 		D01C2F32 1040
 		801C2F32 1000
 		*/
-    	enable_compare_code_16(0x801C2F32, common_routine_return_compare_val);
-    	enable_code_16(0x801C2F32, common_routine_return_patch_val);
+    	add_D0_code(0x801C2F32, common_routine_return_compare_val);
+    	add_80_code(0x801C2F32, common_routine_return_patch_val);
 		/*
 		D01C2AA8 0CB6
 		801C2AA8 0ACB
 		*/
-    	enable_compare_code_16(0x801C2AA8, 0x0CB6);
-    	enable_code_16(0x801C2AA8, 0x0ACB);
+    	add_D0_code(0x801C2AA8, 0x0CB6);
+    	add_80_code(0x801C2AA8, 0x0ACB);
 		// codes are from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml . There are EDC releated codes provided, but they don't seem to actually work (another EDC check still prevents the game from fully starting) and we are not providing EDC bypasses as they can be circumvented by burning CD-Rs as raw without regnerating the EDC.
     	install_cheat_engine();
     } else if
@@ -489,8 +509,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8019245C 0000
 		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
     	*/
-    	enable_compare_code_16(0x8019245C, readtoc_compare_val);
-    	enable_code_16(0x8019245C, readtoc_patch_val);
+    	add_D0_code(0x8019245C, readtoc_compare_val);
+    	add_80_code(0x8019245C, readtoc_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -502,8 +522,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8019117A 1000
 		code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml
     	*/
-    	enable_compare_code_16(0x8019117A, common_routine_return_compare_val);
-    	enable_code_16(0x8019117A, common_routine_return_patch_val);
+    	add_D0_code(0x8019117A, common_routine_return_compare_val);
+    	add_80_code(0x8019117A, common_routine_return_patch_val);
 
     	install_cheat_engine();
     } else if
@@ -522,8 +542,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 			80149004 9E64
 			Found independently by MottZilla, but actually turns out to be the same code by Epson found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml
 			*/
-  		  	enable_compare_code_16(0x80149004, 0x959C);
-  		  	enable_code_16(0x80149004, 0x9E64);
+  		  	add_D0_code(0x80149004, 0x959C);
+  		  	add_80_code(0x80149004, 0x9E64);
 			install_cheat_engine();
 		} else {
 			//debug_write("Rev 1");
@@ -532,8 +552,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 			80148004 8F20
 			my code, the anti-piracy table just moved memory addresses between versions :)
 			*/
- 			enable_compare_code_16(0x80148004, 0x8658);
- 			enable_code_16(0x80148004, 0x8F20);
+ 			add_D0_code(0x80148004, 0x8658);
+ 			add_80_code(0x80148004, 0x8F20);
 			install_cheat_engine();
     	}
 	} else if
@@ -545,8 +565,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80149004 9E64
 		Found independently by MottZilla, but actually turns out to be the same code by Epson found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml . Yes this is the same code as the USA rev 0 one.
 		*/
-  		enable_compare_code_16(0x80149004, 0x959C);
-  		enable_code_16(0x80149004, 0x9E64);
+  		add_D0_code(0x80149004, 0x959C);
+  		add_80_code(0x80149004, 0x9E64);
 		install_cheat_engine();
     } else if
 
@@ -558,8 +578,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800D7714 0000
 		my code via aprip to disable readtoc
 		*/
-		enable_compare_code_16(0x800D7714, readtoc_compare_val);
-		enable_code_16(0x800D7714, readtoc_patch_val);
+		add_D0_code(0x800D7714, readtoc_compare_val);
+		add_80_code(0x800D7714, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -570,8 +590,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800CB104 0000
 		my codevia aprip to disable readtoc
 		*/
-		enable_compare_code_16(0x800CB104, readtoc_compare_val);
-		enable_code_16(0x800CB104, readtoc_patch_val);
+		add_D0_code(0x800CB104, readtoc_compare_val);
+		add_80_code(0x800CB104, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -583,8 +603,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80063004 0000
 		my code via aprip to disable readtoc
 		*/
-		enable_compare_code_16(0x80063004, readtoc_compare_val);
-		enable_code_16(0x80063004, readtoc_patch_val);
+		add_D0_code(0x80063004, readtoc_compare_val);
+		add_80_code(0x80063004, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -595,8 +615,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8006351C 0000
 		my code via aprip to disable readtoc
 		*/
-		enable_compare_code_16(0x8006351C, readtoc_compare_val);
-		enable_code_16(0x8006351C, readtoc_patch_val);
+		add_D0_code(0x8006351C, readtoc_compare_val);
+		add_80_code(0x8006351C, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -608,8 +628,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800177BA 1000	
 		code found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_e.shtml
   		*/
-  		enable_compare_code_16(0x800177BA, common_routine_return_compare_val);
-  		enable_code_16(0x800177BA, common_routine_return_patch_val);
+  		add_D0_code(0x800177BA, common_routine_return_compare_val);
+  		add_80_code(0x800177BA, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -621,8 +641,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800B9170 0000
 		my code to patch out readtoc via aprip
   		*/
-		enable_compare_code_16(0x800B9170, readtoc_compare_val);
-		enable_code_16(0x800B9170, readtoc_patch_val);
+		add_D0_code(0x800B9170, readtoc_compare_val);
+		add_80_code(0x800B9170, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -634,8 +654,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80195D9C 0000
 		my code to patch out readtoc via aprip
   		*/
-		enable_compare_code_16(0x80195D9C, readtoc_compare_val);
-		enable_code_16(0x80195D9C, readtoc_patch_val);
+		add_D0_code(0x80195D9C, readtoc_compare_val);
+		add_80_code(0x80195D9C, readtoc_patch_val);
   		install_cheat_engine();
     } else if
 
@@ -647,8 +667,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80055278 0000
 		my code to patch out readtoc via aprip
   		*/
-		enable_compare_code_16(0x80055278, readtoc_compare_val);
-		enable_code_16(0x80055278, readtoc_patch_val);
+		add_D0_code(0x80055278, readtoc_compare_val);
+		add_80_code(0x80055278, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -660,15 +680,15 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80014274 50BE
 		code 1 of 2 by 'TheVoice' found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_g.shtml
     	*/
-  		enable_compare_code_16(0x80014274, 0x52A9);
-  		enable_code_16(0x80014274, 0x50BE);
+  		add_D0_code(0x80014274, 0x52A9);
+  		add_80_code(0x80014274, 0x50BE);
 		/*
 		D00146FE 1040
 		800146FE 1000
 		code 2 of 2 by 'TheVoice' found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_g.shtml
 		*/
-  		enable_compare_code_16(0x800146FE, common_routine_return_compare_val);
-  		enable_code_16(0x800146FE, common_routine_return_patch_val);
+  		add_D0_code(0x800146FE, common_routine_return_compare_val);
+  		add_80_code(0x800146FE, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -680,8 +700,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8001654E 1000
 		code found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_g.shtml
     	*/
-  		enable_compare_code_16(0x8001654E, common_routine_return_compare_val);
-  		enable_code_16(0x8001654E, common_routine_return_patch_val);
+  		add_D0_code(0x8001654E, common_routine_return_compare_val);
+  		add_80_code(0x8001654E, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -693,8 +713,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801A411E 1000
 		code found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_h.shtml
     	*/
-  		enable_compare_code_16(0x801A411E, common_routine_return_compare_val);
-  		enable_code_16(0x801A411E, common_routine_return_patch_val);
+  		add_D0_code(0x801A411E, common_routine_return_compare_val);
+  		add_80_code(0x801A411E, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -706,8 +726,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800A0186 1000
 		code found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_h.shtml
     	*/
-  		enable_compare_code_16(0x800A0186, common_routine_return_compare_val);
-  		enable_code_16(0x800A0186, common_routine_return_patch_val);
+  		add_D0_code(0x800A0186, common_routine_return_compare_val);
+  		add_80_code(0x800A0186, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -719,8 +739,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
         801698B4 0000
         code generated via aprip by M4x1mumReZ: https://gbatemp.net/members/m4x1mumrez.610331/
         */
-        enable_compare_code_16(0x801698B4, readtoc_compare_val);
-        enable_code_16(0x801698B4, readtoc_patch_val);
+        add_D0_code(0x801698B4, readtoc_compare_val);
+        add_80_code(0x801698B4, readtoc_patch_val);
         install_cheat_engine();
     } else if
 
@@ -732,8 +752,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8016B4D8 0000
 		my code to patch out readtoc via aprip
 		*/
-        enable_compare_code_16(0x8016B4D8, readtoc_compare_val);
-        enable_code_16(0x8016B4D8, readtoc_patch_val);
+        add_D0_code(0x8016B4D8, readtoc_compare_val);
+        add_80_code(0x8016B4D8, readtoc_patch_val);
 		install_cheat_engine();
 	} else if
 
@@ -745,8 +765,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8016B268 0000
 		my code to patch out readtoc via aprip
 		*/
-        enable_compare_code_16(0x8016B268, readtoc_compare_val);
-        enable_code_16(0x8016B268, readtoc_patch_val);
+        add_D0_code(0x8016B268, readtoc_compare_val);
+        add_80_code(0x8016B268, readtoc_patch_val);
 		install_cheat_engine();
 	} else if
 
@@ -758,15 +778,15 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80035C48 D733
 		code 1 of 2 found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_j.shtml
     	*/
-  		enable_compare_code_16(0x80035C48, 0xD91E);
-  		enable_code_16(0x80035C48, 0xD733);
+  		add_D0_code(0x80035C48, 0xD91E);
+  		add_80_code(0x80035C48, 0xD733);
   		/*
 		D00360D2 1040
 		800360D2 1000
 		code 2 of 2 found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_j.shtml
     	*/
-  		enable_compare_code_16(0x800360D2, common_routine_return_compare_val);
-  		enable_code_16(0x800360D2, common_routine_return_patch_val);
+  		add_D0_code(0x800360D2, common_routine_return_compare_val);
+  		add_80_code(0x800360D2, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -778,8 +798,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800A341C 0000
 		code generated via aprip by https://gbatemp.net/members/m4x1mumrez.610331/
     	*/
-  		enable_compare_code_16(0x800A341C, readtoc_compare_val);
-  		enable_code_16(0x800A341C, readtoc_patch_val);
+  		add_D0_code(0x800A341C, readtoc_compare_val);
+  		add_80_code(0x800A341C, readtoc_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -791,8 +811,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8016957C 0000
 		my code generated via aprip
 		*/
-  		enable_compare_code_16(0x8016957C, readtoc_compare_val);
-  		enable_code_16(0x8016957C, readtoc_patch_val);
+  		add_D0_code(0x8016957C, readtoc_compare_val);
+  		add_80_code(0x8016957C, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -804,8 +824,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801BF172 1000
 		code found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_l.shtml
     	*/
-  		enable_compare_code_16(0x801BF172, common_routine_return_compare_val);
-  		enable_code_16(0x801BF172, common_routine_return_patch_val);
+  		add_D0_code(0x801BF172, common_routine_return_compare_val);
+  		add_80_code(0x801BF172, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -816,8 +836,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801BF6F6 1000 
 		my code via aprip's gameshark conversion
    		*/
-  		enable_compare_code_16(0x801BF6F6, common_routine_return_compare_val);
-  		enable_code_16(0x801BF6F6, common_routine_return_patch_val);
+  		add_D0_code(0x801BF6F6, common_routine_return_compare_val);
+  		add_80_code(0x801BF6F6, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -828,8 +848,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801C0892 1000
 		my code via aprip's gameshark conversion
 		*/
-  		enable_compare_code_16(0x801C0892, common_routine_return_compare_val);
-  		enable_code_16(0x801C0892, common_routine_return_patch_val);
+  		add_D0_code(0x801C0892, common_routine_return_compare_val);
+  		add_80_code(0x801C0892, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -840,8 +860,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801C0872 1040
 		my code via aprip's gameshark conversion
 		*/
-  		enable_compare_code_16(0x801C0872, common_routine_return_compare_val);
-  		enable_code_16(0x801C0872, common_routine_return_patch_val);
+  		add_D0_code(0x801C0872, common_routine_return_compare_val);
+  		add_80_code(0x801C0872, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -852,8 +872,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801C082E 1000
 		my code via aprip's gameshark conversion
   		*/
-  		enable_compare_code_16(0x801C082E, common_routine_return_compare_val);
-  		enable_code_16(0x801C082E, common_routine_return_patch_val);
+  		add_D0_code(0x801C082E, common_routine_return_compare_val);
+  		add_80_code(0x801C082E, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -864,8 +884,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801C0826 1000
 		my code via aprip's gameshark conversion
 		*/
-  		enable_compare_code_16(0x801C0826, common_routine_return_compare_val);
-  		enable_code_16(0x801C0826, common_routine_return_patch_val);
+  		add_D0_code(0x801C0826, common_routine_return_compare_val);
+  		add_80_code(0x801C0826, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -877,15 +897,15 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80050ECA 1000
 		code 1 of 2 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_l.shtml
 		*/
-  		enable_compare_code_16(0x80050ECA, common_routine_return_compare_val);
-  		enable_code_16(0x80050ECA, common_routine_return_patch_val);
+  		add_D0_code(0x80050ECA, common_routine_return_compare_val);
+  		add_80_code(0x80050ECA, common_routine_return_patch_val);
     	/*
 		D00360D2 1040
 		800360D2 1000
 		code 2 of 2 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_l.shtml
 		*/
-  		enable_compare_code_16(0x800360D2, common_routine_return_compare_val);
-  		enable_code_16(0x800360D2, common_routine_return_patch_val);
+  		add_D0_code(0x800360D2, common_routine_return_compare_val);
+  		add_80_code(0x800360D2, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -897,8 +917,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		 801011C0 0000
 		code generated via APrip by https://gbatemp.net/members/m4x1mumrez.610331/
     	*/
- 		enable_compare_code_16(0x801011C0, readtoc_compare_val);
- 		enable_code_16(0x801011C0, readtoc_patch_val);
+ 		add_D0_code(0x801011C0, readtoc_compare_val);
+ 		add_80_code(0x801011C0, readtoc_patch_val);
  		install_cheat_engine();
     } else if
 
@@ -910,8 +930,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800F0C3A 1000
 		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_m.shtml
     	*/
-  		enable_compare_code_16(0x800F0C3A, common_routine_return_compare_val);
-  		enable_code_16(0x800F0C3A, common_routine_return_patch_val);
+  		add_D0_code(0x800F0C3A, common_routine_return_compare_val);
+  		add_80_code(0x800F0C3A, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -923,8 +943,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800E1A58 0000
 		my code generated via aprip
 		*/
-  		enable_compare_code_16(0x800E1A58, readtoc_compare_val);
-  		enable_code_16(0x800E1A58, readtoc_patch_val);
+  		add_D0_code(0x800E1A58, readtoc_compare_val);
+  		add_80_code(0x800E1A58, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -937,8 +957,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8009E212 1000
 		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_m.shtml
     	*/
-  		enable_compare_code_16(0x8009E212, common_routine_return_compare_val);
-  		enable_code_16(0x8009E212, common_routine_return_patch_val);
+  		add_D0_code(0x8009E212, common_routine_return_compare_val);
+  		add_80_code(0x8009E212, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -950,8 +970,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800FAE58 0000
 		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
     	*/
-  		enable_compare_code_16(0x800FAE58, readtoc_compare_val);
-  		enable_code_16(0x800FAE58, readtoc_patch_val);
+  		add_D0_code(0x800FAE58, readtoc_compare_val);
+  		add_80_code(0x800FAE58, readtoc_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -963,8 +983,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80031C1A 1000
 		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_m.shtml
     	*/
-  		enable_compare_code_16(0x80031C1A, common_routine_return_compare_val);
-  		enable_code_16(0x80031C1A, common_routine_return_patch_val);
+  		add_D0_code(0x80031C1A, common_routine_return_compare_val);
+  		add_80_code(0x80031C1A, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -976,8 +996,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		 80126BDC 0000
 		 code by https://gbatemp.net/members/m4x1mumrez.610331/ generated with APrip
 		*/
-  		enable_compare_code_16(0x80126BDC, readtoc_compare_val);
-  		enable_code_16(0x80126BDC, readtoc_patch_val);
+  		add_D0_code(0x80126BDC, readtoc_compare_val);
+  		add_80_code(0x80126BDC, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -989,8 +1009,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		 800B2612 1000
 		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_p.shtml
 		*/
-  		enable_compare_code_16(0x800B2612, common_routine_return_compare_val);
-  		enable_code_16(0x800B2612, common_routine_return_patch_val);
+  		add_D0_code(0x800B2612, common_routine_return_compare_val);
+  		add_80_code(0x800B2612, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1002,8 +1022,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8009E7E8 0000
 		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
     	*/
-  		enable_compare_code_16(0x8009E7E8, readtoc_compare_val);
-  		enable_code_16(0x8009E7E8, readtoc_patch_val);
+  		add_D0_code(0x8009E7E8, readtoc_compare_val);
+  		add_80_code(0x8009E7E8, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1015,8 +1035,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8008A45C 0000
 		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
     	*/
-  		enable_compare_code_16(0x8008A45C, readtoc_compare_val);
-  		enable_code_16(0x8008A45C, readtoc_patch_val);
+  		add_D0_code(0x8008A45C, readtoc_compare_val);
+  		add_80_code(0x8008A45C, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1028,8 +1048,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80015342 1000
 		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_p.shtml
     	*/
-  		enable_compare_code_16(0x80015342, common_routine_return_compare_val);
-  		enable_code_16(0x80015342, common_routine_return_patch_val);
+  		add_D0_code(0x80015342, common_routine_return_compare_val);
+  		add_80_code(0x80015342, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1041,8 +1061,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80048F34 0000
 		my code via aprip to patch out readtoc
 		*/
-  		enable_compare_code_16(0x80048F34, readtoc_compare_val);
-  		enable_code_16(0x80048F34, readtoc_patch_val);
+  		add_D0_code(0x80048F34, readtoc_compare_val);
+  		add_80_code(0x80048F34, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1054,8 +1074,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8004A24C 0000
 		my code via aprip to patch out readtoc
 		*/
-  		enable_compare_code_16(0x8004A24C, readtoc_compare_val);
-  		enable_code_16(0x8004A24C, readtoc_patch_val);
+  		add_D0_code(0x8004A24C, readtoc_compare_val);
+  		add_80_code(0x8004A24C, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1067,8 +1087,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80017962 1000
 		'skip mod check' code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_b.shtml
     	*/
-  		enable_compare_code_16(0x80017962, common_routine_return_compare_val);
-  		enable_code_16(0x80017962, common_routine_return_patch_val);
+  		add_D0_code(0x80017962, common_routine_return_compare_val);
+  		add_80_code(0x80017962, common_routine_return_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -1079,8 +1099,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8001714E 1000
 		converted code via aprip
     	*/
-  		enable_compare_code_16(0x8001714E, common_routine_return_compare_val);
-  		enable_code_16(0x8001714E, common_routine_return_patch_val);
+  		add_D0_code(0x8001714E, common_routine_return_compare_val);
+  		add_80_code(0x8001714E, common_routine_return_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -1091,8 +1111,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8001713E 1000
 		converted code via aprip
     	*/
-  		enable_compare_code_16(0x8001713E, common_routine_return_compare_val);
-  		enable_code_16(0x8001713E, common_routine_return_patch_val);
+  		add_D0_code(0x8001713E, common_routine_return_compare_val);
+  		add_80_code(0x8001713E, common_routine_return_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -1104,8 +1124,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8001C646 1000
 		'skip mod check' code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
 		*/
-  		enable_compare_code_16(0x8001C646, common_routine_return_compare_val);
-  		enable_code_16(0x8001C646, common_routine_return_patch_val);
+  		add_D0_code(0x8001C646, common_routine_return_compare_val);
+  		add_80_code(0x8001C646, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1117,8 +1137,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8006C92A 1000
 		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
 		*/
-  		enable_compare_code_16(0x8006C92A, common_routine_return_compare_val);
-  		enable_code_16(0x8006C92A, common_routine_return_patch_val);
+  		add_D0_code(0x8006C92A, common_routine_return_compare_val);
+  		add_80_code(0x8006C92A, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1130,8 +1150,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8006CA82 1000
 		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
 		*/
-  		enable_compare_code_16(0x8006CA82, common_routine_return_compare_val);
-  		enable_code_16(0x8006CA82, common_routine_return_patch_val);
+  		add_D0_code(0x8006CA82, common_routine_return_compare_val);
+  		add_80_code(0x8006CA82, common_routine_return_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -1143,8 +1163,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8006CA1A 1000
 		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
 		*/
-  		enable_compare_code_16(0x8006CA1A, common_routine_return_compare_val);
-  		enable_code_16(0x8006CA1A, common_routine_return_patch_val);
+  		add_D0_code(0x8006CA1A, common_routine_return_compare_val);
+  		add_80_code(0x8006CA1A, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1156,8 +1176,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8007009C 0000
  		my code via aprip to patch out readtoc
 		*/
-  		enable_compare_code_16(0x8007009C, readtoc_compare_val);
-  		enable_code_16(0x8007009C, readtoc_patch_val);
+  		add_D0_code(0x8007009C, readtoc_compare_val);
+  		add_80_code(0x8007009C, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1169,8 +1189,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8006FD84 0000
 		my code via aprip
 		*/
-  		enable_compare_code_16(0x8006FD84, readtoc_compare_val);
-  		enable_code_16(0x8006FD84, readtoc_patch_val);
+  		add_D0_code(0x8006FD84, readtoc_compare_val);
+  		add_80_code(0x8006FD84, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1182,8 +1202,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80070ED0 0000
 		my code via aprip
 		*/
-  		enable_compare_code_16(0x80070ED0, readtoc_compare_val);
-  		enable_code_16(0x80070ED0, readtoc_patch_val);
+  		add_D0_code(0x80070ED0, readtoc_compare_val);
+  		add_80_code(0x80070ED0, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1195,8 +1215,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8006EC40 0000
 		my code via aprip
 		*/
-  		enable_compare_code_16(0x8006EC40, readtoc_compare_val);
-  		enable_code_16(0x8006EC40, readtoc_patch_val);
+  		add_D0_code(0x8006EC40, readtoc_compare_val);
+  		add_80_code(0x8006EC40, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1208,8 +1228,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8006DA7A 1000
 		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
 		*/
-  		enable_compare_code_16(0x8006DA7A, common_routine_return_compare_val);
-  		enable_code_16(0x8006DA7A, common_routine_return_patch_val);
+  		add_D0_code(0x8006DA7A, common_routine_return_compare_val);
+  		add_80_code(0x8006DA7A, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1221,8 +1241,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801BD48A 1000
 		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_s.shtml
 		*/
-  		enable_compare_code_16(0x801BD48A, common_routine_return_compare_val);
-  		enable_code_16(0x801BD48A, common_routine_return_patch_val);
+  		add_D0_code(0x801BD48A, common_routine_return_compare_val);
+  		add_80_code(0x801BD48A, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1233,8 +1253,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801BD13E 1000
 		my code via aprip gameshark code conversion
 		*/
-  		enable_compare_code_16(0x801BD48A, common_routine_return_compare_val);
-  		enable_code_16(0x801BD13E, common_routine_return_patch_val);
+  		add_D0_code(0x801BD48A, common_routine_return_compare_val);
+  		add_80_code(0x801BD13E, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1246,8 +1266,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801F6570 0000
 		my code via aprip
 		*/
-  		enable_compare_code_16(0x801F6570, readtoc_compare_val);
-  		enable_code_16(0x801F6570, readtoc_patch_val);
+  		add_D0_code(0x801F6570, readtoc_compare_val);
+  		add_80_code(0x801F6570, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1259,8 +1279,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8002542C 0000
 		my code via aprip
 		*/
-  		enable_compare_code_16(0x8002542C, readtoc_compare_val);
-  		enable_code_16(0x8002542C, readtoc_patch_val);
+  		add_D0_code(0x8002542C, readtoc_compare_val);
+  		add_80_code(0x8002542C, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1272,8 +1292,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800865FC 0000
 		my code via aprip to patch out readtoc
 		*/
-  		enable_compare_code_16(0x800865FC, readtoc_compare_val);
-  		enable_code_16(0x800865FC, readtoc_patch_val);
+  		add_D0_code(0x800865FC, readtoc_compare_val);
+  		add_80_code(0x800865FC, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1285,8 +1305,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
    		8003A4E8 0000
  		my code via aprip to patch out readtoc
     	*/
-  		enable_compare_code_16(0x8003A4E8, readtoc_compare_val);
-  		enable_code_16(0x8003A4E8, readtoc_patch_val);
+  		add_D0_code(0x8003A4E8, readtoc_compare_val);
+  		add_80_code(0x8003A4E8, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1297,8 +1317,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
    		8003A5D4 0000
 		my code via aprip gameshark code conversion on my own code (code-ception)
     	*/
-  		enable_compare_code_16(0x8003A5D4, readtoc_compare_val);
-  		enable_code_16(0x8003A5D4, readtoc_patch_val);
+  		add_D0_code(0x8003A5D4, readtoc_compare_val);
+  		add_80_code(0x8003A5D4, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1310,8 +1330,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801030CA 1000
 		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_w.shtml
     	*/
-  		enable_compare_code_16(0x801030CA, common_routine_return_compare_val);
-  		enable_code_16(0x801030CA, common_routine_return_patch_val);
+  		add_D0_code(0x801030CA, common_routine_return_compare_val);
+  		add_80_code(0x801030CA, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1323,22 +1343,22 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8010178A 1000
 		code 1 of 3 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_x.shtml
     	*/
-  		enable_compare_code_16(0x8010178A, common_routine_return_compare_val);
-  		enable_code_16(0x8010178A, common_routine_return_patch_val);
+  		add_D0_code(0x8010178A, common_routine_return_compare_val);
+  		add_80_code(0x8010178A, common_routine_return_patch_val);
  		/*
 		D00A370A 1040
 		800A370A 1000
 		code 2 of 3 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_x.shtml
     	*/
-  		enable_compare_code_16(0x800A370A, common_routine_return_compare_val);
-  		enable_code_16(0x800A370A, common_routine_return_patch_val);
+  		add_D0_code(0x800A370A, common_routine_return_compare_val);
+  		add_80_code(0x800A370A, common_routine_return_patch_val);
  		/*
 		D0113C1A 1040
 		80113C1A 1000
 		code 3 of 3 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_x.shtml
     	*/
-  		enable_compare_code_16(0x80113C1A, common_routine_return_compare_val);
-  		enable_code_16(0x80113C1A, common_routine_return_patch_val);
+  		add_D0_code(0x80113C1A, common_routine_return_compare_val);
+  		add_80_code(0x80113C1A, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1350,8 +1370,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8016818A 1000
 		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_y.shtml
     	*/
-  		enable_compare_code_16(0x8016818A, common_routine_return_compare_val);
-  		enable_code_16(0x8016818A, common_routine_return_patch_val);
+  		add_D0_code(0x8016818A, common_routine_return_compare_val);
+  		add_80_code(0x8016818A, common_routine_return_patch_val);
 		install_cheat_engine();
     }
 }

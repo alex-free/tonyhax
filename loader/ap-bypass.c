@@ -131,7 +131,7 @@ const unsigned char cheat_engine_v1_0_2[] = {
 	memcpy((void*)0xCFFC, (void*)&old_table_val, sizeof(old_table_val)); // Copy the original 32 bit number of the B table entry we want to modify to 0xCFFC
 	const uint16_t redirect = 0xC000;
 	memcpy((void*)b0_entry, &redirect, 2); // Write the value 0xC000 to table entry we want to modify
-   //for (volatile int i = 0; i < 0x100000; i++);  // won't be optimized out by -Os, pause
+   //for(volatile int i = 0; i < 0x100000; i++);  // won't be optimized out by -Os, pause
    cheat_engine_installed = 1;
 }
 
@@ -150,11 +150,11 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 	const uint16_t common_routine_return_patch_val = 0x1000;
 
 	if(bootfile_len > 13) {
-		bootfile = &bootfile[bootfile_len-13]; // XXXX_XXX.XX;1 , we are only chaning the locally declared bootfile here, not in secondary.c
+		bootfile = &bootfile[bootfile_len-13]; // XXXX_XXX.XX;1 , we are only changing the locally declared bootfile here, not in secondary.c.
 		//debug_write("Stripped Bootfile: %s", bootfile);
 	} else if(bootfile_len < 13) {
 		return; 
-		// Speed optimization. All anti-piracy games currently have a bootfile name that is at least 13 uchars long when stripped. So if the bootfile happens to have something like 'MAIN.EXE;1' (which is 10 uchars long), we already know not to bother even checking for an anti-piracy bootfile match to apply codes for (which takes time in itself to do as well).
+		// Speed optimization. All anti-piracy games currently have a bootfile name that is at least 13 uchars long when stripped. So if the bootfile happens to have something like 'MAIN.EXE;1' (which is 10 in length), we already know not to bother even checking for an anti-piracy bootfile match to apply codes for (which takes time in itself to do as well).
 	}
 
 // Animetic Story Game 1: Card Captor Sakura
@@ -529,7 +529,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Dino Crisis
-	((strcmp("SLUS_009.22;1", bootfile) == 0)) { // NTSC-U has 2 versions, rev 0 and rev 1 (greatest hits) see https://tcrf.net/Dino_Crisis_(PlayStation)#Revisional_Differences
+	((strcmp("SLUS_009.22;1", bootfile)) == 0) { // NTSC-U has 2 versions, rev 0 and rev 1 (greatest hits) see https://tcrf.net/Dino_Crisis_(PlayStation)#Revisional_Differences
 		//debug_write("Detected Dino Crisis - USA");
 		ver_check = (load_addr + 0x61); // First different byte between revisions
 		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
@@ -948,6 +948,18 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
+// MLB 2002 Demo, MLB 2002, MLB 2003 Demo, MLB 2003, MLB 2004
+   	(((strcmp("SCUS_946.48;1", bootfile)) == 0) || ((strcmp("SCUS_946.38;1", bootfile)) == 0) || ((strcmp("SCUS_946.72;1", bootfile)) == 0) || ((strcmp("SCUS_946.53;1", bootfile)) == 0) || ((strcmp("SCUS_946.89;1", bootfile)) == 0)) {
+   		//debug_write("Detected MLB 2002-2004");
+		/*
+		D0028DB4 001E
+		80028DB4 0000
+		my code generated via aprip
+    	*/
+  		add_D0_code(0x80028DB4, readtoc_compare_val);
+  		add_80_code(0x80028DB4, readtoc_patch_val);
+		install_cheat_engine();
+    } else if
 
 // My Garden
    	((strcmp("SLPS_022.13;1", bootfile)) == 0) {
@@ -960,6 +972,181 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
   		add_D0_code(0x8009E212, common_routine_return_compare_val);
   		add_80_code(0x8009E212, common_routine_return_patch_val);
 		install_cheat_engine();
+    } else if
+
+// NBA Shootout 2001 and NBA Shootout 2001 Demo
+   	((strcmp("SCUS_945.81;1", bootfile)) == 0) { // this game is nuts. Seriously what the fuck is this. The demo and retail versions share not only the same executable filename, the demo executable file is the exact same with 0 diffs compared to the retail version. I guess retail functionallity is being enabled by some other file in track 01 (which do in fact differ between the demo and retail versions). EVEN FUCKING WORSE is that the demo version has serial number SCUS_945.82, but the boot file is SCUS_945.81! For now we enable both demo and retail codes for both versions to ensure it boots, since we can't detect this off of bootfile alone. To do this in a less ugly way we would need to find the file in track 01 that differs (to enable retail functionallity) and then diff that in memory.
+		/*
+		D01D1340 001E
+		801D1340 0000
+		my code generated via aprip (retail)
+		*/
+		add_D0_code(0x801D1340, readtoc_compare_val);
+		add_80_code(0x801D1340, readtoc_patch_val);
+		/*
+		D01CFD68 001E
+		801CFD68 0000
+		my code generated via aprip (demo)
+		*/
+		add_D0_code(0x801CFD68, readtoc_compare_val);
+		add_80_code(0x801CFD68, readtoc_patch_val);
+		install_cheat_engine();
+    } else if
+
+// NBA Shootout 2002 Demo
+   	((strcmp("SCUS_946.60;1", bootfile)) == 0) {
+		//debug_write("Detected NBA Shootout 2002 Demo");
+		/*
+		D01D0FF4 001E
+		801D0FF4 0000
+		my code generated via aprip
+		*/
+		add_D0_code(0x801D0FF4, readtoc_compare_val);
+		add_80_code(0x801D0FF4, readtoc_patch_val);
+		install_cheat_engine();
+    } else if
+
+// NBA Shootout 2002
+   	((strcmp("SCUS_946.41;1", bootfile)) == 0) {
+		//debug_write("Detected NBA Shootout 2002");
+		/*
+		D01D2724 001E
+		801D2724 0000
+		my code generated via aprip
+		*/
+		add_D0_code(0x801D2724, readtoc_compare_val);
+		add_80_code(0x801D2724, readtoc_patch_val);
+		install_cheat_engine();
+    } else if
+
+// NBA Shootout 2003
+   	((strcmp("SCUS_946.73;1", bootfile)) == 0) {
+		//debug_write("Detected NBA Shootout 2003");
+		/*
+		D01D2860 001E
+		801D2860 0000
+		my code generated via aprip
+		*/
+		add_D0_code(0x801D2860, readtoc_compare_val);
+		add_80_code(0x801D2860, readtoc_patch_val);
+		install_cheat_engine();
+    } else if
+
+// NBA Shootout 2004
+   	((strcmp("SCUS_946.91;1", bootfile)) == 0) {
+		//debug_write("Detected NBA Shootout 2003");
+		/*
+		D01D2928 001E
+		801D2928 0000
+		my code generated via aprip
+		*/
+		add_D0_code(0x801D2928, readtoc_compare_val);
+		add_80_code(0x801D2928, readtoc_patch_val);
+		install_cheat_engine();
+    } else if
+
+// NCAA FinalFour 2001
+   	((strcmp("SCUS_945.79;1", bootfile)) == 0) {
+   		//debug_write("Detected NCAA Final Four 2001");
+		/*
+		D005B6A8 001E
+		8005B6A8 0000
+		my code generated via aprip
+    	*/
+  		add_D0_code(0x8005B6A8, readtoc_compare_val);
+  		add_80_code(0x8005B6A8, readtoc_patch_val);
+    	install_cheat_engine();
+    } else if
+
+// NCAA GameBreaker 2001 and NCAA GameBreaker 2001 Demo
+   	(((strcmp("SCUS_945.74;1", bootfile)) == 0) || ((strcmp("SCUS_945.73;1", bootfile)) == 0)) {
+   		//debug_write("Detected NCAA GameBreaker 2001 or NCAA GameBreaker 2001 Demo");
+		/*
+		D0112338 001E
+		80112338 0000
+		my code generated via aprip
+    	*/
+  		add_D0_code(0x80112338, readtoc_compare_val);
+  		add_80_code(0x80112338, readtoc_patch_val);
+    	install_cheat_engine();
+    } else if
+
+// NFL GameDay 2001
+   	((strcmp("SCUS_945.75;1", bootfile)) == 0) {
+   		//debug_write("Detected NFL GameDay 2001");
+		/*
+		D0112404 001E
+		80112404 0000
+		my code generated via aprip
+    	*/
+  		add_D0_code(0x80112404, readtoc_compare_val);
+  		add_80_code(0x80112404, readtoc_patch_val);
+    	install_cheat_engine();
+    } else if
+
+// NFL GameDay 2001 Demo
+   	((strcmp("SCUS_945.76;1", bootfile)) == 0) {
+   		//debug_write("Detected NFL GameDay 2001 Demo");
+		/*
+		D0112388 001E
+		80112388 0000
+		my code generated via aprip
+    	*/
+  		add_D0_code(0x80112388, readtoc_compare_val);
+  		add_80_code(0x80112388, readtoc_patch_val);
+    	install_cheat_engine();
+    } else if
+
+// NFL GameDay 2002
+   	((strcmp("SCUS_946.39;1", bootfile)) == 0) {
+   		//debug_write("Detected NFL GameDay 2002");
+		/*
+		D0032640 001E
+		80032640 0000
+		my code generated via aprip
+    	*/
+  		add_D0_code(0x80032640, readtoc_compare_val);
+  		add_80_code(0x80032640, readtoc_patch_val);
+    	install_cheat_engine();
+    } else if
+
+// NFL GameDay 2003, NFL GameDay 2004, and NFL GameDay 2005 (lmao they gave up?)
+   	(((strcmp("SCUS_946.65;1", bootfile)) == 0) || ((strcmp("SCUS_946.90;1", bootfile)) == 0) || ((strcmp("SCUS_946.95;1", bootfile)) == 0)) {
+   		//debug_write("Detected NFL GameDay 2003, 2004, or 2005");
+		/*
+		D0032ACC 001E
+		80032ACC 0000
+		my code generated via aprip
+    	*/
+  		add_D0_code(0x80032ACC, readtoc_compare_val);
+  		add_80_code(0x80032ACC, readtoc_patch_val);
+    	install_cheat_engine();
+    } else if
+
+// NHL FaceOff 2001 Demo
+   	((strcmp("SCUS_945.78;1", bootfile)) == 0) {
+   		//debug_write("Detected NHL FaceOff 2001 Demo");
+		/*
+		D00F1938 001E
+		800F1938 0000
+		my code generated via aprip
+    	*/
+  		add_D0_code(0x800F1938, readtoc_compare_val);
+  		add_80_code(0x800F1938, readtoc_patch_val);
+    	install_cheat_engine();
+    } else if
+
+// NHL FaceOff 2001
+   	((strcmp("SCUS_945.77;1", bootfile)) == 0) {
+   		//debug_write("Detected NHL FaceOff 2001");
+		/*
+		D00F2470 001E
+		800F2470 0000
+		my code generated via aprip
+    	*/
+  		add_D0_code(0x800F2470, readtoc_compare_val);
+  		add_80_code(0x800F2470, readtoc_patch_val);
+    	install_cheat_engine();
     } else if
 
 // Oha-Studio Dance Dance Revolution
@@ -1281,6 +1468,19 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		*/
   		add_D0_code(0x8002542C, readtoc_compare_val);
   		add_80_code(0x8002542C, readtoc_patch_val);
+		install_cheat_engine();
+    } else if
+
+// Tron ni Kobun
+   	((strcmp("SLPS_021.08;1", bootfile)) == 0) {
+   		//debug_write("Detected Tron ni Kobun ");
+		/*
+		D004E168 001E
+		8004E168 0000
+		my code via aprip
+		*/
+  		add_D0_code(0xD004E168, readtoc_compare_val);
+  		add_80_code(0x8004E168, readtoc_patch_val);
 		install_cheat_engine();
     } else if
 

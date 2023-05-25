@@ -368,12 +368,117 @@ This list is a work in progress, and new games will be added as they are discove
 - When Is The Anti-Piracy Screen Check: At the Whitechapel level loading screen (quite far in the game).
 - Versions With Anti-Piracy Bypass Support: USA.
 
+### MLB 2002
+
+- Versions Tested: [USA](http://redump.org/disc/826/), [USA Demo](http://redump.org/disc/43238/).
+- Versions With Anti-Piracy Screen: USA, USA Demo.
+- When Is The Anti-Piracy Screen Check: First loading screen.
+- Versions With Anti-Piracy Bypass Support: USA, USA Demo.
+
+### MLB 2003
+
+- Versions Tested: [USA](http://redump.org/disc/16660/), [USA Demo](http://redump.org/disc/50864/).
+- Versions With Anti-Piracy Screen: USA, USA Demo.
+- When Is The Anti-Piracy Screen Check: First loading screen.
+- Versions With Anti-Piracy Bypass Support: USA, USA Demo.
+
+### MLB 2004
+
+- Versions Tested: [USA](http://redump.org/disc/15325/).
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: First loading screen.
+- Versions With Anti-Piracy Bypass Support: USA.
+
 ### My Garden
 
 - Versions Tested: [Japan](http://redump.org/disc/8300/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
+
+## NBA Shootout 2001
+
+- Versions Tested: [USA](http://redump.org/disc/16764/), [USA Demo](http://redump.org/disc/42465/).
+- Versions With Anti-Piracy Screen: USA, USA Demo.
+- When Is The Anti-Piracy Screen Check: At the end of the first loading screen.
+- Versions With Anti-Piracy Bypass Support: USA, USA Demo.
+
+## NBA Shootout 2002
+
+- Versions Tested: [USA](http://redump.org/disc/14527/), [USA Demo](http://redump.org/disc/44305/).
+- Versions With Anti-Piracy Screen: USA, USA Demo.
+- When Is The Anti-Piracy Screen Check: At the end of the first loading screen.
+- Versions With Anti-Piracy Bypass Support: USA, USA Demo.
+
+## NBA Shootout 2003
+
+- Versions Tested: [USA](http://redump.org/disc/14566/).
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: At the end of the first loading screen.
+- Versions With Anti-Piracy Bypass Support: USA.
+
+## NBA Shootout 2004
+
+- Versions Tested: [USA](http://redump.org/disc/20551/).
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: At the end of the first loading screen.
+- Versions With Anti-Piracy Bypass Support: USA.
+
+## NCAA Final Four 2001
+
+- Versions Tested: [USA](http://redump.org/disc/16765/)
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: First Loading screen.
+- Versions With Anti-Piracy Bypass Support: USA.
+
+## NCAA Game Breaker 2001
+
+- Versions Tested: [USA](http://redump.org/disc/14374/), [USA Demo](http://redump.org/disc/43879/)
+- Versions With Anti-Piracy Screen: USA, USA Demo.
+- When Is The Anti-Piracy Screen Check: Second Loading screen.
+- Versions With Anti-Piracy Bypass Support: USA.
+
+## NFL GameDay 2001
+
+- Versions Tested: [USA](http://redump.org/disc/21065/), [USA Demo](http://redump.org/disc/50868/).
+- Versions With Anti-Piracy Screen: USA, USA Demo.
+- When Is The Anti-Piracy Screen Check: First Loading screen.
+- Versions With Anti-Piracy Bypass Support: USA.
+
+## NFL GameDay 2002
+
+- Versions Tested: [USA](http://redump.org/disc/2725/)
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: Second Loading screen.
+- Versions With Anti-Piracy Bypass Support: USA.
+
+## NFL GameDay 2003
+
+- Versions Tested: [USA](http://redump.org/disc/13364/)
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: Third Loading screen.
+- Versions With Anti-Piracy Bypass Support: USA.
+
+## NFL GameDay 2004
+
+- Versions Tested: [USA](http://redump.org/disc/14523/)
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: Third Loading screen.
+- Versions With Anti-Piracy Bypass Support: USA.
+
+## NFL GameDay 2005
+
+- Versions Tested: [USA](http://redump.org/disc/15995/)
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: Third Loading screen.
+- Versions With Anti-Piracy Bypass Support: USA.
+
+## NHL FaceOff 2001
+
+- Versions Tested: [USA](http://redump.org/disc/12934/), [USA Demo](http://redump.org/disc/43880/)
+- Versions With Anti-Piracy Screen: USA, USA Demo.
+- When Is The Anti-Piracy Screen Check: When the main menu starts.
+- Versions With Anti-Piracy Bypass Support: USA, USA Demo.
 
 ### Oha-Studio Dance Dance Revolution
 
@@ -534,6 +639,13 @@ This list is a work in progress, and new games will be added as they are discove
 - Versions With Anti-Piracy Screen: USA.
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: USA.
+
+### Tron ni Kobun
+
+- Versions Tested: [Japan](http://redump.org/disc/10765/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Before first now loading screen.
+- Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Vandal Harts II
 

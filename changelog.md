@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 1.2.8 (5/19/2023)
+
+*   [tonyhax-international-v1.2.8](https://github.com/alex-free/tonyhax/releases/download/v1.2.8i/tonyhax-international-v1.2.8.zip)
+
+Changes:
+
+* Added support for GameShark code types `E1` and `D1`. Tonyhax International now [supports applying the following GameShark code types](gameshark-code-support.md): `50, 80, 30, D0, E0` `D1` `E1`.
+
+* Significantly optimized the GameShark cheat engine (now at v1.0.2) with the help of MottZilla.
+
 ## Version 1.2.7 (5/17/2023)
 
 *   [tonyhax-international-v1.2.7](https://github.com/alex-free/tonyhax/releases/download/v1.2.7i/tonyhax-international-v1.2.7.zip)

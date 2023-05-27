@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 1.2.9 (5/24/2023)
+
+*   [tonyhax-international-v1.2.9](https://github.com/alex-free/tonyhax/releases/download/v1.2.9i/tonyhax-international-v1.2.9.zip)
+
+Changes:
+
+* Added [APv2 bypasses](anti-piracy-bypass.md) for Tron ni Kobun, NFL GameDay 2001, NFL GameDay 2001 Demo, NFL GameDay 2002, NFL GameDay 2003, NFL GameDay 2004, NFL GameDay 2005, NHL FaceOff 2001 Demo, NHL FaceOff 2001, NCAA Final Four 2001, NCAA Game Breaker 2001, NCAA Game Breaker 2001 Demo, NBA Shootout 2001, NBA Shootout 2001 Demo, NBA Shootout 2002, NBA Shootout 2002 demo, NBA Shootout 2003, NBA Shootout 2004, MLB 2002, MLB 2002 Demo, MLB 2003, MLB 2003 Demo, and MLB 2004.
+
 ## Version 1.2.8 (5/19/2023)
 
 *   [tonyhax-international-v1.2.8](https://github.com/alex-free/tonyhax/releases/download/v1.2.8i/tonyhax-international-v1.2.8.zip)

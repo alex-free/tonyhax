@@ -80,13 +80,15 @@ _More Info_
 
 ## Downloads
 
-### Version 1.2.9 (5/24/2023)
+### Version 1.3.0 (5/27/2023)
 
-*   [tonyhax-international-v1.2.9](https://github.com/alex-free/tonyhax/releases/download/v1.2.9i/tonyhax-international-v1.2.9.zip)
+*   [tonyhax-international-v1.3.0](https://github.com/alex-free/tonyhax/releases/download/v1.3.0i/tonyhax-international-v1.3.0.zip)
 
 Changes:
 
-* Added [APv2 bypasses](anti-piracy-bypass.md) for Tron ni Kobun, NFL GameDay 2001, NFL GameDay 2001 Demo, NFL GameDay 2002, NFL GameDay 2003, NFL GameDay 2004, NFL GameDay 2005, NHL FaceOff 2001 Demo, NHL FaceOff 2001, NCAA Final Four 2001, NCAA Game Breaker 2001, NCAA Game Breaker 2001 Demo, NBA Shootout 2001, NBA Shootout 2001 Demo, NBA Shootout 2002, NBA Shootout 2002 demo, NBA Shootout 2003, NBA Shootout 2004, MLB 2002, MLB 2002 Demo, MLB 2003, MLB 2003 Demo, and MLB 2004.
+* Added [APv2 bypasses](anti-piracy-bypass.md) for Spyro: Year Of The Dragon USA Rev 0 and USA Rev 1!
+
+* Updated the loader ram layout from last usable 24k to last usable 32k to allow for larger executable size. Tonyhax International `HAX` and `FF9` save files now take up 4 slots instead of 3 on a PSX memory card. **PLEASE** make sure to update your save game exploit files and or gshax codes/files.
 
 [About previous versions](changelog.md).
 

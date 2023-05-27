@@ -1445,6 +1445,79 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
+// Spyro: Year Of The Dragon
+// codes co-developed by MottZilla (mostly) and myself. Get rekt anti-tamper/apv1/apv2
+	((strcmp("SCUS_944.67;1", bootfile)) == 0) { // has 2 versions, rev 0 and rev 1
+		//debug_write("Detected Spyro: Year Of The Dragon- USA");
+		ver_check = (load_addr); // First different byte between revisions is well the first byte :)
+		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
+		ver_check_val = *(uint8_t*) ver_check;
+		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
+		if((ver_check_val == 0xF4)) { 
+			//debug_write("Rev 0");
+			add_D0_code(0x8007F08C, 0x0001);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x0002);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x0003);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x0004);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x0005);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x0006);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x0007);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x0008);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x0009);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x000A);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x000B);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x000C);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x000D);
+			add_80_code(0x8007F08C, 0x0000);
+			add_D0_code(0x8007F08C, 0x000E);
+			add_80_code(0x8007F08C, 0x0000);
+			install_cheat_engine();
+		} else { // 0x08
+			//debug_write("Rev 1");
+			add_D0_code(0x8007F23C, 0x0001);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x0002);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x0003);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x0004);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x0005);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x0006);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x0007);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x0008);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x0009);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x000A);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x000B);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x000C);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x000D);
+			add_80_code(0x8007F23C, 0x0000);
+			add_D0_code(0x8007F23C, 0x000E);
+			add_80_code(0x8007F23C, 0x0000);
+			install_cheat_engine();
+    	}
+	} else if
+
 // Strider 2
    	((strcmp("SLUS_011.63;1", bootfile)) == 0) {
    		//debug_write("Detected Strider 2 - USA");

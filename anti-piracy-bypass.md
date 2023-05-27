@@ -417,63 +417,63 @@ This list is a work in progress, and new games will be added as they are discove
 - When Is The Anti-Piracy Screen Check: At the end of the first loading screen.
 - Versions With Anti-Piracy Bypass Support: USA.
 
-## NBA Shootout 2004
+### NBA Shootout 2004
 
 - Versions Tested: [USA](http://redump.org/disc/20551/).
 - Versions With Anti-Piracy Screen: USA.
 - When Is The Anti-Piracy Screen Check: At the end of the first loading screen.
 - Versions With Anti-Piracy Bypass Support: USA.
 
-## NCAA Final Four 2001
+### NCAA Final Four 2001
 
 - Versions Tested: [USA](http://redump.org/disc/16765/)
 - Versions With Anti-Piracy Screen: USA.
 - When Is The Anti-Piracy Screen Check: First Loading screen.
 - Versions With Anti-Piracy Bypass Support: USA.
 
-## NCAA Game Breaker 2001
+### NCAA Game Breaker 2001
 
 - Versions Tested: [USA](http://redump.org/disc/14374/), [USA Demo](http://redump.org/disc/43879/)
 - Versions With Anti-Piracy Screen: USA, USA Demo.
 - When Is The Anti-Piracy Screen Check: Second Loading screen.
 - Versions With Anti-Piracy Bypass Support: USA.
 
-## NFL GameDay 2001
+### NFL GameDay 2001
 
 - Versions Tested: [USA](http://redump.org/disc/21065/), [USA Demo](http://redump.org/disc/50868/).
 - Versions With Anti-Piracy Screen: USA, USA Demo.
 - When Is The Anti-Piracy Screen Check: First Loading screen.
 - Versions With Anti-Piracy Bypass Support: USA.
 
-## NFL GameDay 2002
+### NFL GameDay 2002
 
 - Versions Tested: [USA](http://redump.org/disc/2725/)
 - Versions With Anti-Piracy Screen: USA.
 - When Is The Anti-Piracy Screen Check: Second Loading screen.
 - Versions With Anti-Piracy Bypass Support: USA.
 
-## NFL GameDay 2003
+### NFL GameDay 2003
 
 - Versions Tested: [USA](http://redump.org/disc/13364/)
 - Versions With Anti-Piracy Screen: USA.
 - When Is The Anti-Piracy Screen Check: Third Loading screen.
 - Versions With Anti-Piracy Bypass Support: USA.
 
-## NFL GameDay 2004
+### NFL GameDay 2004
 
 - Versions Tested: [USA](http://redump.org/disc/14523/)
 - Versions With Anti-Piracy Screen: USA.
 - When Is The Anti-Piracy Screen Check: Third Loading screen.
 - Versions With Anti-Piracy Bypass Support: USA.
 
-## NFL GameDay 2005
+### NFL GameDay 2005
 
 - Versions Tested: [USA](http://redump.org/disc/15995/)
 - Versions With Anti-Piracy Screen: USA.
 - When Is The Anti-Piracy Screen Check: Third Loading screen.
 - Versions With Anti-Piracy Bypass Support: USA.
 
-## NHL FaceOff 2001
+### NHL FaceOff 2001
 
 - Versions Tested: [USA](http://redump.org/disc/12934/), [USA Demo](http://redump.org/disc/43880/)
 - Versions With Anti-Piracy Screen: USA, USA Demo.
@@ -619,6 +619,16 @@ This list is a work in progress, and new games will be added as they are discove
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
+### Spyro: Year Of The Dragon
+
+- Versions Tested: [USA Rev 0](http://redump.org/disc/818/), [USA Rev 1](http://redump.org/disc/818/), [USA Demo](http://redump.org/disc/49449/), [Europe Rev 0](http://redump.org/disc/492/), [Europe Rev 1](http://redump.org/disc/19611/).
+- Versions With Anti-Piracy Screen: USA Rev 0, USA Rev 1.
+- When Is The Anti-Piracy Screen Check: Insomniac screen before start menu.
+- Versions With Anti-Piracy Bypass Support: USA Rev 0, USA Rev 1.
+
+**NOTE**: do not use the memory card GameShark feature to enable additional codes or the anti-tamper protection will trigger. There is also a ~15 second pause before the start menu appears, be patient and the game will unfreeze and work as intended! The protection is completely disabled by Tonyhax International so no issues will happen when playing.
+
+
 ### Street Fighter EX2 Plus
 
 - Versions Tested: [Japan](http://redump.org/disc/12561/), [Japan Demo](http://redump.org/disc/68873/), [USA](http://redump.org/disc/1233/), [Europe](http://redump.org/disc/1006/).
@@ -706,8 +716,3 @@ This list is a work in progress, and new games will be added as they are discove
 - Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Limited Box.
 - When Is The Anti-Piracy Screen Check: Immediately.
 
-## Spyro: Year Of The Dragon
-
-- Versions Tested: [USA Rev 0](http://redump.org/disc/818/), [USA Rev 1](http://redump.org/disc/818/), [USA Demo](http://redump.org/disc/49449/), [Europe Rev 0](http://redump.org/disc/492/), [Europe Rev 1](http://redump.org/disc/19611/).
-- Versions With Anti-Piracy Screen: USA Rev 0, USA Rev 1.
-- When Is The Anti-Piracy Screen Check: Immediately.

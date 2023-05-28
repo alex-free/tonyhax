@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 1.3.0 (5/27/2023)
+
+*   [tonyhax-international-v1.3.0](https://github.com/alex-free/tonyhax/releases/download/v1.3.0i/tonyhax-international-v1.3.0.zip)
+
+Changes:
+
+* Added [APv2 bypasses](anti-piracy-bypass.md) for Spyro: Year Of The Dragon USA Rev 0 and USA Rev 1!
+
+* Updated the loader ram layout from last usable 24k to last usable 32k to allow for larger executable size. Tonyhax International `HAX` and `FF9` save files now take up 4 slots instead of 3 on a PSX memory card. **PLEASE** make sure to update your save game exploit files and or gshax codes/files.
+
 ## Version 1.2.9 (5/24/2023)
 
 *   [tonyhax-international-v1.2.9](https://github.com/alex-free/tonyhax/releases/download/v1.2.9i/tonyhax-international-v1.2.9.zip)

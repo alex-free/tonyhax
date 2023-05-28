@@ -92,10 +92,10 @@ void read_memcard() {
 	int32_t mc_fd = FileOpen("bu00:TONYHAXINTGS", FILE_READ);
 	if(mc_fd == -1) {
 		debug_write("Can not read MC");
+		return;
 	}
 
 	if (mc_fd > 0) {
-		//bzero(user_start, 0x2000); // zero out mc buf
 		read = FileRead(mc_fd, user_start, 0x2000); // read the entire file "TONYHAXINTGS" to the start of 'user RAM' (which will be cleared later before booting an executable). So 0x80010000-0x80012000 in RAM contains the contents of "TONYHAXINTGS". 
 		
 		if (read == -1) {
@@ -130,7 +130,8 @@ void read_memcard() {
 		debug_write("Checksum: %x Verified", sum);
 		did_read_mc = 1; // set flag to parse codes uploaded to RAM, right before clearing RAM itself and booting the game
 	} else {
-		debug_write("Checksum: %x did not match! Can not read MC", sum);
+		debug_write("Checksum: %x did not match the expected checksum %x!", sum, checksum_in_save_file);
+		debug_write("Can not enable codes, check that the TONYHAXINTGS file is not corrupted");
 	}
 }
 

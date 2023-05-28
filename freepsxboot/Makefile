@@ -1,5 +1,6 @@
 
 # Thanks to whoever made https://devhints.io/makefile!
+# NOTE: DO NOT EVER USE -fastload option it not only unreliably triggers the loading screen on different consoles, it screws up reading from memory cards after exploit!
 
 include ../variables.mk
 
@@ -11,100 +12,100 @@ clean:
 	$(RM) $(FREEPSXBOOT_IMAGES) FreePSXBoot/builder/builder
 
 tonyhax_scph-1000_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 1.0-19940922-I -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 1.0-19940922-I -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-1000_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 1.0-19940922-I -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 1.0-19940922-I -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-3000_v1.1_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 1.1-19950122-I -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 1.1-19950122-I -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-3000_v1.1_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 1.1-19950122-I -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 1.1-19950122-I -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-3000_v2.1_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.1-19950717-I -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.1-19950717-I -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-3000_v2.1_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.1-19950717-I -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.1-19950717-I -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-3500_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.1-19950717-I -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.1-19950717-I -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-3500_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.1-19950717-I -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.1-19950717-I -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-5000_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.2-19951204-I -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.2-19951204-I -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-5000_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.2-19951204-I -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.2-19951204-I -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-5500_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 3.0-19960909-I -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 3.0-19960909-I -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-5500_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 3.0-19960909-I -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 3.0-19960909-I -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-7000_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.0-19970818-I -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.0-19970818-I -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-7000_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.0-19970818-I -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.0-19970818-I -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-7500_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.0-19970818-I -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.0-19970818-I -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-7500_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.0-19970818-I -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.0-19970818-I -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-9000_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.0-19970818-I -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.0-19970818-I -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-9000_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.0-19970818-I -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.0-19970818-I -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-100_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.3-20000311-I -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.3-20000311-I -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-100_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.3-20000311-I -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.3-20000311-I -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-1001_v2.0_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.0-19950507-A -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.0-19950507-A -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-1001_v2.0_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.0-19950507-A -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.0-19950507-A -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-1001_v2.1_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.1-19950717-A -slot 1 -in ../loader/tonyhax.exe -slot 1 -out $@
+	FreePSXBoot/builder/builder -bios 2.1-19950717-A -slot 1 -in ../loader/tonyhax.exe -slot 1 -out $@
 
 tonyhax_scph-1001_v2.1_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.1-19950717-A -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.1-19950717-A -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-1001_v2.2_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.2-19951204-A -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.2-19951204-A -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-1001_v2.2_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.2-19951204-A -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.2-19951204-A -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-1002_v2.0_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.0-19950510-E -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.0-19950510-E -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-1002_v2.0_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.0-19950510-E -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.0-19950510-E -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-1002_v2.1_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.1-19950717-E -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.1-19950717-E -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-1002_v2.1_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.1-19950717-E -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.1-19950717-E -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-1002_v2.2_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.2-19951204-E -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.2-19951204-E -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-1002_v2.2_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 2.2-19951204-E -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 2.2-19951204-E -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-5001_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
 	FreePSXBoot/builder/builder -model 5001 -slot 1 -in ../loader/tonyhax.exe -out $@
@@ -167,28 +168,28 @@ tonyhax_scph-9002_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
 	FreePSXBoot/builder/builder -model 9002 -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-101_v4.4_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.4-20000324-A -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.4-20000324-A -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-101_v4.4_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.4-20000324-A -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.4-20000324-A -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-101_v4.5_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.5-20000525-E -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.5-20000525-E -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-101_v4.5_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.5-20000525-E -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.5-20000525-E -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-102_v4.4_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.4-20000324-A -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.4-20000324-A -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-102_v4.4_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.4-20000324-A -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.4-20000324-A -slot 2 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-102_v4.5_slot1.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.5-20000525-E -slot 1 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.5-20000525-E -slot 1 -in ../loader/tonyhax.exe -out $@
 
 tonyhax_scph-102_v4.5_slot2.mcr: ../loader/tonyhax.exe | FreePSXBoot/builder/builder
-	FreePSXBoot/builder/builder -fastload -bios 4.5-20000525-E -slot 2 -in ../loader/tonyhax.exe -out $@
+	FreePSXBoot/builder/builder -bios 4.5-20000525-E -slot 2 -in ../loader/tonyhax.exe -out $@
 
 FreePSXBoot/builder/builder:
 	make -C FreePSXBoot/builder all

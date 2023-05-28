@@ -63,7 +63,8 @@ DO_CHEAT_LOOP:
 	mov	r7,0D1h ; 0xD1
 	nop ; Load delay slot for r7
 	je	r6,r7,HANDLE_D1_CODE
-	; Never get here because we gaurentee valid input from Tonyhax International loader
+	nop ; branch delay slot
+	; Never get here because we guarantee valid input from Tonyhax International loader
 
 DO_CHEAT_LOOP_FOR_COMPARE:
 	; Check for prefixes/code type (only check for these 2 since we came from a compare code and they can't be recursive)
@@ -71,10 +72,12 @@ DO_CHEAT_LOOP_FOR_COMPARE:
 	mov	r6,[r4+1Ch]	; Load code type of code on next line
 	nop ; Load delay slot for R6
 	je	r6,r7,HANDLE_30_CODE_FOR_COMPARE
+	nop ; branch delay slot
 	mov	r7,80h
 	nop ; Load delay slot for R7
 	je	r6,r7,HANDLE_80_CODE_FOR_COMPARE
-	; Never get here because we gaurentee valid input from Tonyhax International loader
+	nop ; branch delay slot
+	; Never get here because we guarantee valid input from Tonyhax International loader
 
 HANDLE_80_CODE:
 	movh r5,[r4+4h]	; Load 16bit value to write
@@ -82,6 +85,7 @@ HANDLE_80_CODE:
 	nop ; Load delay slot for R7
 	movh [r7],r5		; Write 16bit value
 	jrel NEXT_CHEAT
+	nop
 
 HANDLE_30_CODE:
 	movb	r5,[r4+4h]	; Load 8bit value to write
@@ -89,6 +93,7 @@ HANDLE_30_CODE:
 	nop ; Load delay slot for R7
 	movb [r7],r5		; Write 8bit value
 	jrel NEXT_CHEAT
+	nop ; branch delay slot
 
 HANDLE_E0_CODE:
 	movb	r5,[r4+4h] ; Load 8bit compare value at current code line
@@ -99,6 +104,7 @@ HANDLE_E0_CODE:
 	jne	r6,r5,NEXT_CHEAT_AFTER_COMPARE
 	nop ; Branch delay slot
 	jrel DO_CHEAT_LOOP_FOR_COMPARE
+	nop ; branch delay slot
 
 HANDLE_E1_CODE:
 	movb	r5,[r4+4h] ; Load 8bit compare value at current code line
@@ -109,6 +115,7 @@ HANDLE_E1_CODE:
 	je r6,r5,NEXT_CHEAT_AFTER_COMPARE
 	nop ; Branch delay slot
 	jrel DO_CHEAT_LOOP_FOR_COMPARE
+	nop ; branch delay slot
 
 HANDLE_D0_CODE:
 	movh	r5,[r4+4h]	; Load 16bit compare value at current code line
@@ -119,6 +126,7 @@ HANDLE_D0_CODE:
 	jne	r6,r5,NEXT_CHEAT_AFTER_COMPARE
 	nop ; Branch delay slot
 	jrel DO_CHEAT_LOOP_FOR_COMPARE
+	nop ; branch delay slot
 
 HANDLE_D1_CODE:
 	movh	r5,[r4+4h]	; Load 16bit compare value at current code line
@@ -129,6 +137,7 @@ HANDLE_D1_CODE:
 	je r6,r5,NEXT_CHEAT_AFTER_COMPARE
 	nop ; Branch delay slot
 	jrel DO_CHEAT_LOOP_FOR_COMPARE
+	nop ; branch delay slot
 
 HANDLE_30_CODE_FOR_COMPARE:
 	movb	r5,[r4+14h]	; load 8bit data to write to this address
@@ -136,6 +145,7 @@ HANDLE_30_CODE_FOR_COMPARE:
 	nop ; Load delay slot for R7
 	movb	[r7],r5		; Write 8bit value
 	jrel NEXT_CHEAT_AFTER_COMPARE
+	nop ; branch delay slot
 
 HANDLE_80_CODE_FOR_COMPARE:
 	movh	r5,[r4+14h]	; load 16bit data to write to this address
@@ -143,16 +153,17 @@ HANDLE_80_CODE_FOR_COMPARE:
 	nop ; Load delay slot for R7
 	movh	[r7],r5		; Write 16bit value
 	jrel NEXT_CHEAT_AFTER_COMPARE
+	nop ; branch delay slot
 
 NEXT_CHEAT_AFTER_COMPARE:
 	add	r4,20h;	Skip the next code line since it was part of the compare code just parsed
 	jrel	DO_CHEAT_LOOP
-	nop ; Branch delay slot since we will immediely read from R4
+	nop ; branch delay slot
 
 NEXT_CHEAT:
 	add	r4,10h; Advance to next code line
 	jrel	DO_CHEAT_LOOP
-	nop ; Branch delay slot since we will immediely read from R4
+	nop ; branch delay slot
 
 CHEATS_DONE:
 	mov	r4,[sp+00h]

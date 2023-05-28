@@ -80,15 +80,15 @@ _More Info_
 
 ## Downloads
 
-### Version 1.3.0 (5/27/2023)
+### Version 1.3.1 (5/28/2023)
 
-*   [tonyhax-international-v1.3.0](https://github.com/alex-free/tonyhax/releases/download/v1.3.0i/tonyhax-international-v1.3.0.zip)
+*   [tonyhax-international-v1.3.1](https://github.com/alex-free/tonyhax/releases/download/v1.3.1i/tonyhax-international-v1.3.1.zip)
 
 Changes:
 
-* Added [APv2 bypasses](anti-piracy-bypass.md) for Spyro: Year Of The Dragon USA Rev 0 and USA Rev 1!
+* Fixed an issue caused by FreePSXBoot's builder program's `-fastload` option that resulted in failure to read GameShark codes from the memory card on BIOS v4.4-v4.5. This issue has now been resolved by removing that argument and having the same generate command as the original Tonyhax did.
 
-* Updated the loader ram layout from last usable 24k to last usable 32k to allow for larger executable size. Tonyhax International `HAX` and `FF9` save files now take up 4 slots instead of 3 on a PSX memory card. **PLEASE** make sure to update your save game exploit files and or gshax codes/files.
+* Fixed regressions in GameShark cheat engine due to some previous overly-aggressive optimizations.
 
 [About previous versions](changelog.md).
 

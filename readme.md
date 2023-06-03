@@ -80,15 +80,13 @@ _More Info_
 
 ## Downloads
 
-### Version 1.3.1 (5/28/2023)
+### Version 1.3.2 (6/3/2023)
 
-*   [tonyhax-international-v1.3.1](https://github.com/alex-free/tonyhax/releases/download/v1.3.1i/tonyhax-international-v1.3.1.zip)
+*   [tonyhax-international-v1.3.2](https://github.com/alex-free/tonyhax/releases/download/v1.3.2i/tonyhax-international-v1.3.2.zip)
 
 Changes:
 
-* Fixed an issue caused by FreePSXBoot's builder program's `-fastload` option that resulted in failure to read GameShark codes from the memory card on BIOS v4.4-v4.5. This issue has now been resolved by removing that argument and having the same generate command as the original Tonyhax did.
-
-* Fixed regressions in GameShark cheat engine due to some previous overly-aggressive optimizations.
+* Added [APv2 bypasses](anti-piracy-bypass.md) for Breath of Fire IV Japan, Breath of Fire IV E3 2000/USA Beta, Capcom vs. SNK: Millennium Fight 2000 Pro Japan, Glint Glitters, Hyper Value 2800: Hanafuda, Tokimeki Memorial 2 Emotional Voice System Append Discs 1-3, Tokimeki Memorial 2 rev 0, Tokimeki Memorial 2 rev 1, and Tokimeki Memorial 2 limited edition box version.
 
 [About previous versions](changelog.md).
 

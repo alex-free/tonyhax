@@ -6,15 +6,17 @@ Starting in late 1998, some specific PSX games began implementing additional cop
 
 ## APv1
 
-The very first kind of 'standardized' additional copy protection that appeared in later PSX games. The _APv1 style protection can only prevent a backup CD-R of a game from working on a console that has a 'non-stealth mod-chip' installed_. APv1 style protection **can not detect Tonyhax International** on a stock console without such a mod-chip. This means games with this protection work fine with Tonyhax International and don't trip the detection.
+The very first kind of 'standardized' additional copy protection that appeared in later PSX games. The _APv1 style protection can only prevent a backup CD-R of a game from working on a console that has a 'non-stealth mod-chip' installed_. APv1 style protection **can not detect games booted with Tonyhax International** on a stock console without a _non-stealth_ mod-chip. This means that all games with this protection work already with Tonyhax International.
 
 ## APv2
 
-Unlike APv1, _APv2 can detect that you have booted a backup CD-R or 'imported region disc' with Tonyhax International_, and will trip the protection **unless a game disc specific [APv2 Bypass](#apv2-bypasses) has been implemented for it in the Tonyhax International loader**.
+Unlike APv1, APv2 does trigger when games are booted with Tonyhax International on a stock console **unless a game disc specific [APv2 Bypass](#apv2-bypasses) has been implemented for it in the Tonyhax International loader**. The good news is at this point almost all if not every single game with this protection now has a working bypass implemented.
+
+There is one exception though. The very early SCPH-3000 Japanese consoles, and all SCPH-1000 Japanese consoles are immune to APv2 as long as they are stock and not containing a 'non-stealth' mod-chip. These consoles will work with every game without a bypass even being needed. In fact, Tonyhax International does not even apply the APv2 bypasses for these consoles when they are detected.
+
+## What Happens When Protection Is Triggered
 
 When triggered, the APv1 and APv2 style copy protections will trigger an 'anti-piracy screen of death'. If you encounter an APv2 game that triggers this screen, then the specific game disc is not yet supported (this is a work in progress). In such a case please open an [Anti-Piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&template=antipiracy-issue.md&title=) on the [Tonyhax International Github](https://github.com/alex-free/tonyhax) to let me know about this specific game which contains APv2 protection. I would eventually like every game that can trigger the anti-piracy copy protection routine when booted via Tonyhax International on a stock console to have a  bypass implemented for 100% compatibility.
-
-There is currently a WIP 'todo' list of games that are [known](#known-games-that-need-anti-piracy-bypasses-implemented) to need anti-piracy bypasses, but do not have one implemented yet.
 
 ## EDC
 
@@ -30,11 +32,11 @@ Some PAL PSX games are using a different copy protection scheme known as LibCryp
 
 LibCrypt protection can be bypassed by burning a backup CD-R of a LibCrypt game using [CloneCD](#clone-cd) in a very [specific](https://github.com/Kippykip/SBITools) way.
 
-Real PAL LibCrypt discs will work just fine when booted via Tonyhax International on a Japanese or American console.
+Real PAL LibCrypt discs booted via Tonyhax International on USA or Japanese consoles ('imports') will not trip the detection.
 
-## CD Burning
+## CD Burning For EDCs
 
-### [CDRDAO-AF](https://alex-free.github.io/cdrdao)
+### [CDRDAO-PLED](https://alex-free.github.io/cdrdao)
 
 * Is Open Source?: Yes. Pre-built Linux x86_64 binaries are also [available](https://alex-free.github.io/cdrdao##downloads).
 * Burns Standard PSX Backup CD-Rs?: Yes. For .bin/.cue CD images, the `--swap` argument is required.
@@ -70,6 +72,8 @@ This list is a work in progress, and new games will be added as they are discove
 
 ## APv2 Bypasses
 
+This is the complete list of games with bypasses anti-piracy measures that are supported by Tonyhax International. They will all boot and play correctly on stock consoles:
+
 ### Animetic Story Game 1: Card Captor Sakura
 
 - Versions Tested: Japan ([Disc 1](http://redump.org/disc/12000/), [Disc 2](http://redump.org/disc/11999/)).
@@ -93,7 +97,7 @@ This list is a work in progress, and new games will be added as they are discove
 
 ### Beatmania featuring Dreams Come True
 
-- Versions Tested: [Japan](http://redump.org/disc/36188/)).
+- Versions Tested: [Japan](http://redump.org/disc/36188/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
@@ -119,6 +123,20 @@ This list is a work in progress, and new games will be added as they are discove
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
+### Breath of Fire IV
+
+- Versions Tested: [Japan](http://redump.org/disc/1554/), [E3 2000/Beta USA](http://redump.org/disc/59620/), [USA](http://redump.org/disc/1222/), [Europe](http://redump.org/disc/549/).
+- Versions With Anti-Piracy Screen: Japan, E3 2000/Beta USA.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan, E3 2000/Beta USA.
+
+### Capcom vs. SNK: Millennium Fight 2000 Pro
+- Versions Tested: [Japan](http://redump.org/disc/37359/
+), [Japan Demo](http://redump.org/disc/62464/), [Europe](http://redump.org/disc/3904/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
 ### Chase The Express
 
 - Versions Tested: Japan ([Disc 1](http://redump.org/disc/5637/), [Disc 2](http://redump.org/disc/5638/)), [Japan Demo 1](http://redump.org/disc/6551/), [Japan Demo 2](http://redump.org/disc/19589/), Europe ([Disc 1](http://redump.org/disc/27257/), [Disc 2](http://redump.org/disc/27258/)), France ([Disc 1](http://redump.org/disc/28137/), [Disc 2](http://redump.org/disc/28138/)), Germany ([Disc 1](http://redump.org/disc/7507/), [Disc 2](http://redump.org/disc/7508/)), Italy ([Disc 1](http://redump.org/disc/28358/), [Disc 2](http://redump.org/disc/28359/)).
@@ -136,9 +154,9 @@ This list is a work in progress, and new games will be added as they are discove
 ### Crash Bandicoot Racing
 
 - Versions Tested: [Japan](http://redump.org/disc/3694/), [Japan Demo](http://redump.org/disc/53590/).
-- Versions With Anti-Piracy Screen: Japan.
+- Versions With Anti-Piracy Screen: Japan, Japan Demo.
 - When Is The Anti-Piracy Screen Check: When first booting the game when the Naughty Dog box is first visible.
-- Versions With Anti-Piracy Bypass Support: Japan.
+- Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.
 
 ### Cool Boarders 2001
 
@@ -249,6 +267,13 @@ This list is a work in progress, and new games will be added as they are discove
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
+## Glint Glitters
+
+- Versions Tested: [Japan](http://redump.org/disc/15969/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
 ### Goo! Goo! Soundry
 
 - Versions Tested: [Japan](http://redump.org/disc/16027/).
@@ -275,6 +300,13 @@ This list is a work in progress, and new games will be added as they are discove
 - Versions Tested: [Japan](http://redump.org/disc/36294/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: At the first loading screen after boot.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Hyper Value 2800: Hanafuda
+
+- Versions Tested: [Japan](http://redump.org/disc/15791/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately after boot.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Hyper Value 2800: Mahjong
@@ -553,9 +585,9 @@ This list is a work in progress, and new games will be added as they are discove
 ### Resident Evil: Survivor
 
 - Versions Tested: [Japan](http://redump.org/disc/8102/), [USA](http://redump.org/disc/326/), [Europe](http://redump.org/disc/801/), [France](http://redump.org/disc/5826/).
-- Versions With Anti-Piracy Screen: Japan, USA.
+- Versions With Anti-Piracy Screen: Japan, USA, Europe, France
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Versions With Anti-Piracy Bypass Support: Japan, USA.
+- Versions With Anti-Piracy Bypass Support: Japan, USA, Europe, France.
 
 ### Robbit mon Dieu
 - Versions Tested: [Japan](http://redump.org/disc/7227/).
@@ -643,6 +675,34 @@ This list is a work in progress, and new games will be added as they are discove
 - When Is The Anti-Piracy Screen Check: First now Loading screen.
 - Versions With Anti-Piracy Bypass Support: USA.
 
+## Tokimeki Memorial 2
+
+- Versions Tested: Japan Rev 0 ([Disc 1](http://redump.org/disc/10670/), [Disc 2](http://redump.org/disc/10671/), [Disc 3](http://redump.org/disc/10672/), [Disc 4](http://redump.org/disc/10673/), [Disc 5](http://redump.org/disc/10674/)), Japan Rev 1 ([Disc 1](http://redump.org/disc/24175/), [Disc 2](http://redump.org/disc/24177/), [Disc 3](http://redump.org/disc/24178/), [Disc 4](http://redump.org/disc/24179/), [Disc 5](http://redump.org/disc/24176/)), Japan Limited Box ([Disc 1](http://redump.org/disc/67613/), [Disc 2](http://redump.org/disc/67614/), [Disc 3](http://redump.org/disc/67615/), [Disc 4](http://redump.org/disc/67616/), [Disc 5](http://redump.org/disc/67617/)).
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Limited Box.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0 ([Disc 1](http://redump.org/disc/10670/), [Disc 2](http://redump.org/disc/10671/), [Disc 3](http://redump.org/disc/10672/), [Disc 4](http://redump.org/disc/10673/), [Disc 5](http://redump.org/disc/10674/)), Japan Rev 1 ([Disc 1](http://redump.org/disc/24175/), [Disc 2](http://redump.org/disc/24177/), [Disc 3](http://redump.org/disc/24178/), [Disc 4](http://redump.org/disc/24179/), [Disc 5](http://redump.org/disc/24176/)), Japan Limited Box ([Disc 1](http://redump.org/disc/67613/), [Disc 2](http://redump.org/disc/67614/), [Disc 3](http://redump.org/disc/67615/), [Disc 4](http://redump.org/disc/67616/), [Disc 5](http://redump.org/disc/67617/)).
+
+### Tokimeki Memorial 2 Emotional Voice System Append Disc (Disc 1) (Minadzuki - Kotobuki - Sakura)
+
+- Versions Tested: [Japan](http://redump.org/disc/53927/).
+- Versions With Anti-Piracy Screen: Japan
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Tokimeki Memorial 2 Emotional Voice System Append Disc (Disc 2) (Akai - Ichimonji - Yae)
+
+- Versions Tested: [Japan](http://redump.org/disc/53945/).
+- Versions With Anti-Piracy Screen: Japan
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Tokimeki Memorial 2 Emotional Voice System Append Disc (Disc 3) (Shirayuki - Ijuin - Nozaki)
+
+- Versions Tested: [Japan](http://redump.org/disc/53946/).
+- Versions With Anti-Piracy Screen: Japan
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
 ### Tomba! 2: The Evil Swine Return
 
 - Versions Tested: [USA](http://redump.org/disc/16475/), [USA Demo](http://redump.org/disc/32246/), [Europe](http://redump.org/disc/31192/), [France](http://redump.org/disc/31192/), [Germany](http://redump.org/disc/31192/), [Italy](http://redump.org/disc/41369/), [Spain](http://redump.org/disc/1582/).
@@ -691,28 +751,3 @@ This list is a work in progress, and new games will be added as they are discove
 - Versions With Anti-Piracy Screen: Japan, Japan Genteiban Edition, USA, Europe, France, Germany, Spain, Italy.
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan, Japan Genteiban Edition, USA,
-
-## Known Games That Need Anti-Piracy Bypasses Implemented
-
-This is a small 'todo list' of games with the APv2 style protection which need further investigation to defeat it (due to non-standard implementation). Currently there is no support for playing them in Tonyhax International.
-
-This list is a work in progress, and new games will be added as they are discovered. If you know of a game with APv2 protection that isn't listed below and is not supported, please let me know in an [anti-piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=bug&template=generic-issue.md&title=) on the [Tonyhax International Github](https://github.com/alex-free/tonyhax) so that I can add it to the list in a future Tonyhax International update.
-
-## Glint Glitters
-
-- Versions Tested: [Japan](http://redump.org/disc/15969/).
-- Versions With Anti-Piracy Screen: Japan.
-- When Is The Anti-Piracy Screen Check: Immediately.
-
-## Hyper Value 2800: Hanafuda
-
-- Versions Tested: [Japan](http://redump.org/disc/15791/).
-- Versions With Anti-Piracy Screen: Japan.
-- When Is The Anti-Piracy Screen Check: Immediately after boot.
-
-## Tokimeki Memorial 2
-
-- Versions Tested: Japan Rev 0 ([Disc 1](http://redump.org/disc/10670/), [Disc 2](http://redump.org/disc/10671/), [Disc 3](http://redump.org/disc/10672/), [Disc 4](http://redump.org/disc/10673/)), Japan Rev 1 ([Disc 1](http://redump.org/disc/24175/), [Disc 2](http://redump.org/disc/24177/), [Disc 3](http://redump.org/disc/24178/), [Disc 4](http://redump.org/disc/24179/)), Japan Limited Box ([Disc 1](http://redump.org/disc/67613/), [Disc 2](http://redump.org/disc/67614/), [Disc 3](http://redump.org/disc/67615/), [Disc 4](http://redump.org/disc/67616/)).
-- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Limited Box.
-- When Is The Anti-Piracy Screen Check: Immediately.
-

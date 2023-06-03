@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 1.3.1 (5/28/2023)
+
+*   [tonyhax-international-v1.3.1](https://github.com/alex-free/tonyhax/releases/download/v1.3.1i/tonyhax-international-v1.3.1.zip)
+
+Changes:
+
+* Fixed an issue caused by FreePSXBoot's builder program's `-fastload` option that resulted in failure to read GameShark codes from the memory card on BIOS v4.4-v4.5. This issue has now been resolved by removing that argument and having the same generate command as the original Tonyhax did.
+
+* Fixed regressions in GameShark cheat engine due to some previous overly-aggressive optimizations.
+
 ## Version 1.3.0 (5/27/2023)
 
 *   [tonyhax-international-v1.3.0](https://github.com/alex-free/tonyhax/releases/download/v1.3.0i/tonyhax-international-v1.3.0.zip)

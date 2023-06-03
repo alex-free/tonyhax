@@ -162,8 +162,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 	}
 
 // Animetic Story Game 1: Card Captor Sakura
-   	if(((strcmp("SLPS_018.30;1", bootfile)) == 0) || ((strcmp("SLPS_018.31;1", bootfile)) == 0)) { // 2 disc game
-   		//debug_write("Detected Animetic Story Game 1: Card Captor Sakura");
+   	if(
+	((strcmp("SLPS_018.30;1", bootfile)) == 0) // Japan Disc 1
+	|| ((strcmp("SLPS_018.31;1", bootfile)) == 0) // Japan Disc 2
+	) { // 2 disc game
 		/*
 		D001516A 1040
 		8001516A 1000
@@ -175,8 +177,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Alundra 2
-	((strcmp("SCPS_101.15;1", bootfile)) == 0) { 
-   		//debug_write("Detected Alundra 2 - Japan");
+	((strcmp("SCPS_101.15;1", bootfile)) == 0) { // Japan
 		/*
 		D004E91A 1040
 		8004E91A 1000
@@ -188,15 +189,16 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Arc The Lad III
-	(((strcmp("SCPS_101.06;1", bootfile)) == 0) || ((strcmp("SCPS_101.07;1", bootfile)) == 0)) { // 2 Japan versions and each have 2 discs but the same codes per revision
-   		//debug_write("Detected Arc The Lad III - Japan");
+	(
+	((strcmp("SCPS_101.06;1", bootfile)) == 0) // Japan Rev 0/Rev 1 Disc 1
+	|| ((strcmp("SCPS_101.07;1", bootfile)) == 0) // Japan Rev 0/Rev 1 Disc 2
+	) {
 		ver_check = (load_addr + 0x20); // First different byte between revisions
 		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
 		ver_check_val = *(uint8_t*) ver_check;
 		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
-		if((ver_check_val == 0x8C))
+		if((ver_check_val == 0x8C)) // Rev 0
 		{
-			//debug_write("REV 0");
 			/*
 			D0021DF6 1040
 			80021DF6 1000
@@ -205,8 +207,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 	    	add_D0_code(0x80021DF6, common_routine_return_compare_val);
 			add_80_code(0x80021DF6, common_routine_return_patch_val);
     		install_cheat_engine();
-    	} else {
-			//debug_write("REV 1");
+    	} else { // Rev 1
  			/*
 			D0022206 1040 my code via aprip gameshark code conversion
 			80022206 1000
@@ -218,8 +219,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Beatmania featuring Dreams Come True
-   	((strcmp("SLPM_865.97;1", bootfile)) == 0) {
-   		//debug_write("Beatmania featuring Dreams Come True");
+   	((strcmp("SLPM_865.97;1", bootfile)) == 0) { // Japan
 		/*
 		D012255C 001E
 		8012255C 0000
@@ -231,8 +231,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Beatmania Best Hits
-   	((strcmp("Slpm_865.96;1", bootfile)) == 0) { // 2 different versions, same code works on both rev 0 and rev 1
-   		//debug_write("Detected Beatmania Best Hits");
+   	((strcmp("Slpm_865.96;1", bootfile)) == 0) { // Japan Rev 0/Rev 1
+		// not a typo, weird asf filename
 		/*
 		D0151448 001E
 		80151448 0000
@@ -244,8 +244,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 	} else if
 
 // Beat Mania: The Sound of Tokyo
-	((strcmp("SLPM_867.69;1", bootfile)) == 0) { 
-   		//debug_write("Detected Beat Mania - The Sound of Tokyo");
+	((strcmp("SLPM_867.69;1", bootfile)) == 0) { // Japan
     	/*
 		D0134C48 001E
 		80134C48 0000
@@ -257,8 +256,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Beat Mania 6thMix + Core Remix
-	((strcmp("SLPM_870.12;1", bootfile)) == 0) { 
-   		//debug_write("Detected Beat Mania 6th Mix + Core Remix");
+	((strcmp("SLPM_870.12;1", bootfile)) == 0) { // Japan
 		/*
 		D0131B6C 001E
 		80131B6C 001A
@@ -269,52 +267,37 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if
 
-// Biohazard 3: The Last Escape
-   	((strcmp("SLPS_023.00;1", bootfile)) == 0) { // 2 different versions
-   		//debug_write("Detected Biohazard 3 - Japan");
-		ver_check = (load_addr + 0x1B0); // First different byte between revisions
-		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
-		ver_check_val = *(uint8_t*) ver_check;
-		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
-		if((ver_check_val == 0xF4))
-		{
-			//debug_write("REV 0");
-			/*
-			D01840E2 1040
-			801840E2 1000
-			'skip check' code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_b.shtml
-    		*/
-	    	add_D0_code(0x801840E2, common_routine_return_compare_val);
-			add_80_code(0x801840E2, common_routine_return_patch_val);
-    		install_cheat_engine();
-	    } else {
-			//debug_write("REV 1");
-			/*
-			D018418E 1040
-			8018418E 1000 
-			my code via aprip gameshark code conversion
-    		*/
-	    	add_D0_code(0x8018418E, common_routine_return_compare_val);
-			add_80_code(0x8018418E, common_routine_return_patch_val);
-    		install_cheat_engine();
-	    }
-	} else if
-
-   	((strcmp("SLPM_804.85;1", bootfile)) == 0) { // Demo
-   		//debug_write("Detected Bio Hazard 3 Demo");
+// Breath of Fire IV
+   	((strcmp("SLPS_027.28;1", bootfile)) == 0) { // Japan / USA E3 2000 Beta Build
 		/*
-		D01800E2 1040
-		801800E2 1000 
+		D01D0698 001E
+		801D0698 0000
 		my code via aprip gameshark code conversion
     	*/
-	    add_D0_code(0x801800E2, common_routine_return_compare_val);
-		add_80_code(0x801800E2, common_routine_return_patch_val);
+	    add_D0_code(0x801D0698, readtoc_compare_val);
+		add_80_code(0x801D0698, readtoc_patch_val);
+    	install_cheat_engine();
+	} else if
+
+// Capcom vs. SNK: Millennium Fight 2000 Pro
+   	((strcmp("SLPM_870.53;1", bootfile)) == 0) { // Japan
+		/*
+		D0051B60 001E
+		80051B60 0000
+		my code via aprip gameshark code conversion
+    	*/
+	    add_D0_code(0x80051B60, readtoc_compare_val);
+		add_80_code(0x80051B60, readtoc_patch_val);
     	install_cheat_engine();
 	} else if
 
 // Chase The Express
-   	(((strcmp("SCPS_101.09;1", bootfile)) == 0) || ((strcmp("SCPS_101.10;1", bootfile)) == 0) || ((strcmp("PAPX_901.06;1", bootfile)) == 0) || ((strcmp("PCPX_961.89;1", bootfile)) == 0)) { // 2 discs and 2 demos all share the same code
-   		//debug_write("Detected Chase The Express - Japan");
+   	(
+	((strcmp("SCPS_101.09;1", bootfile)) == 0) // Japan Disc 1
+	|| ((strcmp("SCPS_101.10;1", bootfile)) == 0) // Japan Disc 2
+	|| ((strcmp("PAPX_901.06;1", bootfile)) == 0) // Japan Demo 1
+	|| ((strcmp("PCPX_961.89;1", bootfile)) == 0) // Japan Demo 2
+	) {
 		/*
 		D00EA6DE 1040
 		800EA6DE 1000
@@ -326,8 +309,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Crash Bash
-  	((strcmp("SCUS_945.70;1", bootfile)) == 0) {
-   		//debug_write("Detected Crash Bash - USA");
+  	((strcmp("SCUS_945.70;1", bootfile)) == 0) { // USA
 		/*
 		D002D51E 1040
 		8002D51E 1000
@@ -338,8 +320,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if 
 
-   	((strcmp("SCPS_101.40;1", bootfile)) == 0) {
-   		//debug_write("Detected Crash Bash - Japan");
+   	((strcmp("SCPS_101.40;1", bootfile)) == 0) { // Japan
 		/*
 		D002D7EE 1040
 		8002D7EE 1000
@@ -351,8 +332,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Crash Bandicoot Racing
-   	((strcmp("SCPS_101.18;1", bootfile)) == 0) {
-   		//debug_write("Detected Crash Bandicoot Racing");
+   	((strcmp("SCPS_101.18;1", bootfile)) == 0) { // Japan
 		/*
 		D001259A 1040
 		8001259A 1000
@@ -363,8 +343,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if
 
-   	((strcmp("PCPX_961.83;1", bootfile)) == 0) {
-   		//debug_write("Detected Crash Bandicoot Racing Demo");
+   	((strcmp("PCPX_961.83;1", bootfile)) == 0) { // Japan Demo
 		/*
     	D001255E 1040
     	8001255E 1040
@@ -376,8 +355,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Cool Boarders 2001
-   	((strcmp("SCUS_946.25;1", bootfile)) == 0) {
-   		//debug_write("Detected Cool Boarders 2001 - USA Demo");
+   	((strcmp("SCUS_946.25;1", bootfile)) == 0) { // USA Demo
 		/*
 		D00B35B0 001E
 		800B35B0 0000
@@ -388,8 +366,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if
 
-   	((strcmp("SCUS_945.97;1", bootfile)) == 0) {
-   		//debug_write("Detected Cool Boarders 2001 - USA");
+   	((strcmp("SCUS_945.97;1", bootfile)) == 0) { // USA
 		/*
 		D00B35B8 001E
 		800B35B8 0000
@@ -401,8 +378,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Dance Dance Revolution: Best Hits
-   	((strcmp("SLPM_866.93;1", bootfile)) == 0) {
-   		//debug_write("Detected Dance Dance Revolution: Best Hits");
+   	((strcmp("SLPM_866.93;1", bootfile)) == 0) { // Japan
 		/*
 		D0102FA0 001E
 		80102FA0 0000
@@ -414,8 +390,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Dance Dance Revolution: Disney's Rave
-   	((strcmp("SLPM_866.67;1", bootfile)) == 0) {
-   		//debug_write("Detected Dance Dance Revolution: Disney's Rave");
+   	((strcmp("SLPM_866.67;1", bootfile)) == 0) { // Japan
 		/*
 		D0192248 001E
 		80192248 0000
@@ -427,8 +402,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Dance Dance Revolution: Extra Mix
-   	((strcmp("SLPM_868.31;1", bootfile)) == 0) {
-   		//debug_write("Detected Dance Dance Revolution: Extra Mix");
+   	((strcmp("SLPM_868.31;1", bootfile)) == 0) { // Japan
 		/*
 		D00EB364 001E
 		800EB364 0000
@@ -439,9 +413,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if
 
-// Dance Dance Revolution 2nd Remix / Dance Dance Revolution 2nd Remix Append Club Vol 1 / Dance Dance Revolution 2nd Remix Append Club Vol 2
+// Dance Dance Revolution 2nd Remix
    	((strcmp("SLPM_862.52;1", bootfile)) == 0) { // Dance Dance Revolution 2nd Remix Append Club Vol 1 and Dance Dance Revolution 2nd Remix Append Club Vol 2 discs are booted with a 'disc change' feature within Dance Dance Revolution 2nd Remix (which is a 'base' disc when booting the others, kind of like DLC).
-   		//debug_write("Detected Dance Dance Revolution 2nd Remix");
 		/*
 		Dance Dance Revolution 2nd Remix:
 		D00200A6 1040
@@ -501,13 +474,12 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		*/
     	add_D0_code(0x801C2AA8, 0x0CB6);
     	add_80_code(0x801C2AA8, 0x0ACB);
-		// codes are from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml . There are EDC releated codes provided, but they don't seem to actually work (another EDC check still prevents the game from fully starting) and we are not providing EDC bypasses as they can be circumvented by burning CD-Rs as raw without regnerating the EDC.
+		// codes are from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_d.shtml .
     	install_cheat_engine();
     } else if
 
 // Dancing Stage featuring Dreams Come True
-   	((strcmp("SLPM_865.05;1", bootfile)) == 0) {
-   		//debug_write("Detected Dancing Stage featuring Dreams Come True");
+   	((strcmp("SLPM_865.05;1", bootfile)) == 0) { // Japan
 		/*
 		D019245C 001E
 		8019245C 0000
@@ -519,8 +491,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Dancing Stage featuring True Kiss Destination
-   	((strcmp("SLPM_864.11;1", bootfile)) == 0) {
-   		//debug_write("Detected Dancing Stage featuring True Kiss Destination");
+   	((strcmp("SLPM_864.11;1", bootfile)) == 0) { // Japan
 		/*
 		D019117A 1040
 		8019117A 1000
@@ -528,19 +499,16 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	*/
     	add_D0_code(0x8019117A, common_routine_return_compare_val);
     	add_80_code(0x8019117A, common_routine_return_patch_val);
-
     	install_cheat_engine();
     } else if
 
 // Dino Crisis
-	((strcmp("SLUS_009.22;1", bootfile)) == 0) { // NTSC-U has 2 versions, rev 0 and rev 1 (greatest hits) see https://tcrf.net/Dino_Crisis_(PlayStation)#Revisional_Differences
-		//debug_write("Detected Dino Crisis - USA");
+	((strcmp("SLUS_009.22;1", bootfile)) == 0) { // USA Rev 0/USA Rev 1
 		ver_check = (load_addr + 0x61); // First different byte between revisions
 		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
 		ver_check_val = *(uint8_t*) ver_check;
 		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
-		if((ver_check_val == 0xD0)) {
-			//debug_write("Rev 0");
+		if(ver_check_val == 0xD0) { // Rev 0
 			/*
 			D0149004 959C
 			80149004 9E64
@@ -549,8 +517,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
   		  	add_D0_code(0x80149004, 0x959C);
   		  	add_80_code(0x80149004, 0x9E64);
 			install_cheat_engine();
-		} else {
-			//debug_write("Rev 1");
+		} else { // Rev 1
 			/*
 			D0148004 8658
 			80148004 8F20
@@ -562,8 +529,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	}
 	} else if
 
-   	((strcmp("SLPS_021.80;1", bootfile)) == 0) { // Same as USA Rev 0
-   		//debug_write("Detected Dino Crisis - Japan");
+   	((strcmp("SLPS_021.80;1", bootfile)) == 0) { // Japan
 		/*
 		D0149004 959C
 		80149004 9E64
@@ -575,8 +541,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Dino Crisis 2
-   	((strcmp("SLPM_866.27;1", bootfile)) == 0) {
-   		//debug_write("Detected Dino Crisis 2 - Japan");
+   	((strcmp("SLPM_866.27;1", bootfile)) == 0) { // Japan
 	  	/*
 		D00D7714 001E
 		800D7714 0000
@@ -587,9 +552,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
-   	((strcmp("SLPM_805.73;1", bootfile)) == 0) {
-   		//debug_write("Detected Dino Crisis 2 - Japan Demo");
-	  		/*
+   	((strcmp("SLPM_805.73;1", bootfile)) == 0) { // Japan Demo
+	  	/*
 		D00CB104 001E
 		800CB104 0000
 		my codevia aprip to disable readtoc
@@ -600,9 +564,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Disney's The Emperor's New Groove
-   	((strcmp("SCUS_945.71;1", bootfile)) == 0) {
-   		//debug_write("Detected Disney's The Emperor's New Groove - USA");
-	  		/*
+   	((strcmp("SCUS_945.71;1", bootfile)) == 0) { // USA
+	  	/*
 		D0063004 001E
 		80063004 0000
 		my code via aprip to disable readtoc
@@ -612,9 +575,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
-   	((strcmp("SCES_030.10;1", bootfile)) == 0) {
-   		//debug_write("Detected Disney's The Emperor's New Groove - EUR");
-	  		/*
+   	((strcmp("SCES_030.10;1", bootfile)) == 0) { // Europe
+  		/*
 		D006351C 001E
 		8006351C 0000
 		my code via aprip to disable readtoc
@@ -625,8 +587,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Exciting Bass 2
-   	((strcmp("SLPM_862.95;1", bootfile)) == 0) {
-   		//debug_write("Detected Exciting Bass 2");
+   	((strcmp("SLPM_862.95;1", bootfile)) == 0) { // Japan
 		/*
 		D00177BA 1040
 		800177BA 1000	
@@ -638,8 +599,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Exciting Bass 3
-   	((strcmp("SLPM_867.29;1", bootfile)) == 0) {
-   		//debug_write("Detected Exciting Bass 3");
+   	((strcmp("SLPM_867.29;1", bootfile)) == 0) { // Japan
 		/*
 		D00B9170 001E
 		800B9170 0000
@@ -651,8 +611,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Gekitotsu Toma L'Arc - L'Arc en Ciel vs Tomarunner
-   	((strcmp("SCPS_101.34;1", bootfile)) == 0) {
-   		//debug_write("Detected Gekitotsu Toma L'Arc - L'Arc en Ciel vs Tomarunner");
+   	((strcmp("SCPS_101.34;1", bootfile)) == 0) { // Japan
 		/*
 		D0195D9C 001E
 		80195D9C 0000
@@ -663,9 +622,20 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
   		install_cheat_engine();
     } else if
 
+// Glint Glitters
+   	((strcmp("SLPM_862.00;1", bootfile)) == 0) { // Japan
+		/*
+		D01B3188 001E
+		801B3188 0000
+		my code to patch out readtoc via aprip
+  		*/
+		add_D0_code(0x801B3188, readtoc_compare_val);
+		add_80_code(0x801B3188, readtoc_patch_val);
+		install_cheat_engine();
+    } else if
+
 // Goo! Goo! Soundry
-   	((strcmp("SLPM_862.50;1", bootfile)) == 0) {
-   		//debug_write("Detected Goo Goo Soundry");
+   	((strcmp("SLPM_862.50;1", bootfile)) == 0) { // Japan
 		/*
 		D0055278 001E
 		80055278 0000
@@ -677,8 +647,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Grind Session
-   	((strcmp("SCUS_945.68;1", bootfile)) == 0) {
-   		//debug_write("Detected Grind Session");
+   	((strcmp("SCUS_945.68;1", bootfile)) == 0) { // USA
 		/*
 		D0014274 52A9
 		80014274 50BE
@@ -697,8 +666,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Guitar Freaks
-   	((strcmp("SLPM_862.65;1", bootfile)) == 0) {
-   		//debug_write("Detected Guitar Freaks");
+   	((strcmp("SLPM_862.65;1", bootfile)) == 0) { // Japan
 		/*
 		D001654E 1040
 		8001654E 1000
@@ -710,8 +678,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Harlem Beat: You're The One
-   	((strcmp("SLPM_863.29;1", bootfile)) == 0) {
-   		//debug_write("Detected Harlem Beat");
+   	((strcmp("SLPM_863.29;1", bootfile)) == 0) { // Japan
 		/*
 		D01A411E 1040
 		801A411E 1000
@@ -722,9 +689,20 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
+// Hyper Value 2800: Hanafuda
+   	((strcmp("SLPM_864.17;1", bootfile)) == 0) { // Japan
+		/*
+		D00A1188 001E
+		800A1188 0000
+		code found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_h.shtml
+    	*/
+  		add_D0_code(0x800A1188, readtoc_compare_val);
+  		add_80_code(0x800A1188, readtoc_patch_val);
+		install_cheat_engine();
+    } else if
+
 // Hyper Value 2800: Mahjong
-   	((strcmp("SLPM_862.92;1", bootfile)) == 0) {
-   		//debug_write("Detected Hyper Value 2800 Mahjong");
+   	((strcmp("SLPM_862.92;1", bootfile)) == 0) { // Japan
 		/*
 		D00A0186 1040
 		800A0186 1000
@@ -736,8 +714,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // i-mode mo Issho: Doko Demo Issho Tsuika Disc
-    ((strcmp("SCPS_101.41;1", bootfile)) == 0) {
-        //debug_write("Detected i-mode mo Issho: Doko Demo Issho Tsuika Disc");
+    ((strcmp("SCPS_101.41;1", bootfile)) == 0) { // Japan
         /*
         D01698B4 001E
         801698B4 0000
@@ -749,9 +726,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Jikkyou Powerful Pro Yakyuu '99 Ketteiban
-   	((strcmp("SLPM_864.33;1", bootfile)) == 0) {
-   		//debug_write("Detected Jikkyou Powerful Pro Yakyuu '99 Ketteiban");
-	  		/*
+   	((strcmp("SLPM_864.33;1", bootfile)) == 0) { // Japan
+  		/*
 		D016B4D8 001E
 		8016B4D8 0000
 		my code to patch out readtoc via aprip
@@ -762,8 +738,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 	} else if
 
 // Jikkyou Powerful Pro Yakyuu '99: Kaimakuban
-   	((strcmp("SLPM_862.53;1", bootfile)) == 0) {
-   		//debug_write("Detected Jikkyou Powerful Pro Yakyuu '99 Kaimakuban");
+   	((strcmp("SLPM_862.53;1", bootfile)) == 0) { // Japan
 		/*
 		D016B268 001E
 		8016B268 0000
@@ -775,8 +750,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 	} else if
 
 // JoJo's Bizarre Adventure
-   	((strcmp("SLPS_022.36;1", bootfile)) == 0) {
-   		//debug_write("Detected JoJo's Bizarre Adventure");
+   	((strcmp("SLPS_022.36;1", bootfile)) == 0) { // Japan
 		/*
 		D0035C48 D91E
 		80035C48 D733
@@ -795,8 +769,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Koko Hore! Pukka
-	((strcmp("SCPS_101.33;1", bootfile)) == 0) {
-		//debug_write("Detected Kore Hore! Pukka");
+	((strcmp("SCPS_101.33;1", bootfile)) == 0) { // Japan
 		/*
 		D00A341C 001E
 		800A341C 0000
@@ -808,8 +781,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Koneko mo Issho
-   	((strcmp("SCPS_101.27;1", bootfile)) == 0) {
-   		//debug_write("Detected Koneko mo Issho");
+   	((strcmp("SCPS_101.27;1", bootfile)) == 0) { // Japan
 		/*
 		D016957C 001E
 		8016957C 0000
@@ -821,8 +793,12 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Legend Of Dragoon
-   	(((strcmp("SCPS_101.19;1", bootfile)) == 0) || ((strcmp("scps_101.20;1", bootfile)) == 0) || ((strcmp("scps_101.21;1", bootfile)) == 0) || ((strcmp("scps_101.22;1", bootfile)) == 0)) { // 4 discs
-   		//debug_write("Detected Legend Of Dragoon - Japan");
+   	(
+	((strcmp("SCPS_101.19;1", bootfile)) == 0) // Japan Disc 1
+	|| ((strcmp("scps_101.20;1", bootfile)) == 0) // Japan Disc 2 (weird ass filename not a typo)
+	|| ((strcmp("scps_101.21;1", bootfile)) == 0) // Japan Disc 3 (weird ass filename not a typo)
+	|| ((strcmp("scps_101.22;1", bootfile)) == 0) // Japan Disc 4 (weird ass filename not a typo)
+	) {
 		/*
 		D01BF172 1040
 		801BF172 1000
@@ -833,8 +809,12 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
-   	(((strcmp("SCUS_944.91;1", bootfile)) == 0) || ((strcmp("SCUS_945.84;1", bootfile)) == 0) || ((strcmp("SCUS_945.85;1", bootfile)) == 0) || ((strcmp("SCUS_945.86;1", bootfile)) == 0)) { // 4 discs
-   		//debug_write("Detected Legend Of Dragoon - USA");
+   	(
+	((strcmp("SCUS_944.91;1", bootfile)) == 0) // USA Disc 1
+	|| ((strcmp("SCUS_945.84;1", bootfile)) == 0) // USA Disc 2
+	|| ((strcmp("SCUS_945.85;1", bootfile)) == 0) // USA Disc 3
+	|| ((strcmp("SCUS_945.86;1", bootfile)) == 0) // USA Disc 4
+	) {
 		/*
 		801BF6F6 1040
 		801BF6F6 1000 
@@ -845,8 +825,13 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
-   	(((strcmp("SCES_030.43;1", bootfile)) == 0) || ((strcmp("SCES_130.43;1", bootfile)) == 0) || ((strcmp("SCES_230.43;1", bootfile)) == 0) || ((strcmp("SCES_330.43;1", bootfile)) == 0)) { // 4 discs
-   		//debug_write("Detected Legend Of Dragoon - EUR");
+   	(
+	(
+	(strcmp("SCES_030.43;1", bootfile)) == 0) // Europe Disc 1
+	|| ((strcmp("SCES_130.43;1", bootfile)) == 0) // Europe Disc 2
+	|| ((strcmp("SCES_230.43;1", bootfile)) == 0) // Europe Disc 3
+	|| ((strcmp("SCES_330.43;1", bootfile)) == 0) // Europe Disc 4
+	) {
 		/*
 		D01C0892 1040
 		801C0892 1000
@@ -857,8 +842,12 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
-   	(((strcmp("SCES_030.44;1", bootfile)) == 0) || ((strcmp("SCES_130.44;1", bootfile)) == 0) || ((strcmp("SCES_230.44;1", bootfile)) == 0) || ((strcmp("SCES_330.44;1", bootfile)) == 0)) { // 4 discs
-   		//debug_write("Detected Legend Of Dragoon - FRA");
+   	(
+	((strcmp("SCES_030.44;1", bootfile)) == 0) // France Disc 1
+	|| ((strcmp("SCES_130.44;1", bootfile)) == 0) // France Disc 2
+	|| ((strcmp("SCES_230.44;1", bootfile)) == 0) // France Disc 3
+	|| ((strcmp("SCES_330.44;1", bootfile)) == 0) // France Disc 4
+	) {
 		/*
 		D01C0872 1040
 		801C0872 1040
@@ -869,8 +858,12 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
-   	(((strcmp("SCES_030.45;1", bootfile)) == 0) || ((strcmp("SCES_130.45;1", bootfile)) == 0) || ((strcmp("SCES_230.45;1", bootfile)) == 0) || ((strcmp("SCES_330.45;1", bootfile)) == 0)) { // 4 discs
-   		//debug_write("Detected Legend Of Dragoon - GER");
+   	(
+	((strcmp("SCES_030.45;1", bootfile)) == 0) // Germany Disc 1
+	|| ((strcmp("SCES_130.45;1", bootfile)) == 0) // Germany Disc 2
+	|| ((strcmp("SCES_230.45;1", bootfile)) == 0) // Germany Disc 3
+	|| ((strcmp("SCES_330.45;1", bootfile)) == 0)// Germany Disc 4
+	) { 
 		/*
 		D01C082E 1040
 		801C082E 1000
@@ -881,8 +874,12 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
-   	(((strcmp("SCES_030.46;1", bootfile)) == 0) || ((strcmp("SCES_130.46;1", bootfile)) == 0) || ((strcmp("SCES_230.46;1", bootfile)) == 0) || ((strcmp("SCES_330.46;1", bootfile)) == 0)) { // 4 discs
-   		//debug_write("Detected Legend Of Dragoon - ITA");
+   	(
+	((strcmp("SCES_030.46;1", bootfile)) == 0) // Italian Disc 1
+	|| ((strcmp("SCES_130.46;1", bootfile)) == 0) // Italian Disc 2
+	|| ((strcmp("SCES_230.46;1", bootfile)) == 0) // Italian Disc 3
+	|| ((strcmp("SCES_330.46;1", bootfile)) == 0)// Italian Disc 4
+	) {
 		/*
 		D01C0826 1040
 		801C0826 1000
@@ -914,8 +911,11 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Love Hina: Ai wa Kotoba no Naka ni / Love Hina 2: Kotoba wa Konayuki no You ni
-   	(((strcmp("SLPM_866.52;1", bootfile)) == 0) || ((strcmp("SLPM_866.77;1", bootfile)) == 0)) { // Same code works for both games
-   		//debug_write("Detected Love Hina 1 or 2");
+   	(
+	((strcmp("SLPM_866.52;1", bootfile)) == 0) // Love Hina: Ai wa Kotoba no Naka ni
+	|| ((strcmp("SLPM_866.77;1", bootfile)) == 0) // Love Hina 2: Kotoba wa Konayuki no You ni
+	) { 
+		// Same code works for both games
 		/*
 		 D01011C0 001E
 		 801011C0 0000
@@ -927,8 +927,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Marvel vs. Capcom: Clash of Super Heroes
-   	(((strcmp("SLPS_023.68;1", bootfile)) == 0) || ((strcmp("SLPM_805.08;1", bootfile)) == 0)) { // Japan/Japan Demo share same code
-   		//debug_write("Detected Marvel vs. Capcom Clash of Super Heroes");
+   	(
+	((strcmp("SLPS_023.68;1", bootfile)) == 0) // Japan
+	|| ((strcmp("SLPM_805.08;1", bootfile)) == 0) // Japan Demo
+	) {
 		/*
 		D00F0C3A 1040
 		800F0C3A 1000
@@ -941,20 +943,24 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 
 // Medievil II
    	((strcmp("SCUS_945.64;1", bootfile)) == 0) {
-   		//debug_write("Detected MediEvil II USA");
 		/*
-		D00E1A58 001E
-		800E1A58 0000
-		my code generated via aprip
+		D0098804 023A
+		80098806 1000
+		code via https://gamehacking.org/game/89269
 		*/
-  		add_D0_code(0x800E1A58, readtoc_compare_val);
-  		add_80_code(0x800E1A58, readtoc_patch_val);
+  		add_D0_code(0x80098804, 0x023A);
+  		add_80_code(0x80098806, 0x1000);
 		install_cheat_engine();
     } else if
 
 // MLB 2002 Demo, MLB 2002, MLB 2003 Demo, MLB 2003, MLB 2004
-   	(((strcmp("SCUS_946.48;1", bootfile)) == 0) || ((strcmp("SCUS_946.38;1", bootfile)) == 0) || ((strcmp("SCUS_946.72;1", bootfile)) == 0) || ((strcmp("SCUS_946.53;1", bootfile)) == 0) || ((strcmp("SCUS_946.89;1", bootfile)) == 0)) {
-   		//debug_write("Detected MLB 2002-2004");
+   	(
+	((strcmp("SCUS_946.48;1", bootfile)) == 0) // MLB 2002 USA Demo
+	|| ((strcmp("SCUS_946.38;1", bootfile)) == 0) // MLB 2002 USA
+	|| ((strcmp("SCUS_946.72;1", bootfile)) == 0) // MLB 2003 USA Demo
+	|| ((strcmp("SCUS_946.53;1", bootfile)) == 0) // MLB 2003 USA
+	|| ((strcmp("SCUS_946.89;1", bootfile)) == 0) // MLB 2004 USA
+	) {
 		/*
 		D0028DB4 001E
 		80028DB4 0000
@@ -966,8 +972,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // My Garden
-   	((strcmp("SLPS_022.13;1", bootfile)) == 0) {
-   		//debug_write("Detected My Garden");
+   	((strcmp("SLPS_022.13;1", bootfile)) == 0) { // Japan
 		/*
 		D009E212 1040
 		8009E212 1000
@@ -983,14 +988,14 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D01D1340 001E
 		801D1340 0000
-		my code generated via aprip (retail)
+		my code generated via aprip (USA)
 		*/
 		add_D0_code(0x801D1340, readtoc_compare_val);
 		add_80_code(0x801D1340, readtoc_patch_val);
 		/*
 		D01CFD68 001E
 		801CFD68 0000
-		my code generated via aprip (demo)
+		my code generated via aprip (USA Demo)
 		*/
 		add_D0_code(0x801CFD68, readtoc_compare_val);
 		add_80_code(0x801CFD68, readtoc_patch_val);
@@ -998,8 +1003,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // NBA Shootout 2002 Demo
-   	((strcmp("SCUS_946.60;1", bootfile)) == 0) {
-		//debug_write("Detected NBA Shootout 2002 Demo");
+   	((strcmp("SCUS_946.60;1", bootfile)) == 0) { // USA
 		/*
 		D01D0FF4 001E
 		801D0FF4 0000
@@ -1011,8 +1015,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // NBA Shootout 2002
-   	((strcmp("SCUS_946.41;1", bootfile)) == 0) {
-		//debug_write("Detected NBA Shootout 2002");
+   	((strcmp("SCUS_946.41;1", bootfile)) == 0) { // USA
 		/*
 		D01D2724 001E
 		801D2724 0000
@@ -1024,8 +1027,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // NBA Shootout 2003
-   	((strcmp("SCUS_946.73;1", bootfile)) == 0) {
-		//debug_write("Detected NBA Shootout 2003");
+   	((strcmp("SCUS_946.73;1", bootfile)) == 0) { // USA
 		/*
 		D01D2860 001E
 		801D2860 0000
@@ -1037,8 +1039,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // NBA Shootout 2004
-   	((strcmp("SCUS_946.91;1", bootfile)) == 0) {
-		//debug_write("Detected NBA Shootout 2003");
+   	((strcmp("SCUS_946.91;1", bootfile)) == 0) { // USA
 		/*
 		D01D2928 001E
 		801D2928 0000
@@ -1050,8 +1051,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // NCAA FinalFour 2001
-   	((strcmp("SCUS_945.79;1", bootfile)) == 0) {
-   		//debug_write("Detected NCAA Final Four 2001");
+   	((strcmp("SCUS_945.79;1", bootfile)) == 0) { // USA
 		/*
 		D005B6A8 001E
 		8005B6A8 0000
@@ -1062,9 +1062,11 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if
 
-// NCAA GameBreaker 2001 and NCAA GameBreaker 2001 Demo
-   	(((strcmp("SCUS_945.74;1", bootfile)) == 0) || ((strcmp("SCUS_945.73;1", bootfile)) == 0)) {
-   		//debug_write("Detected NCAA GameBreaker 2001 or NCAA GameBreaker 2001 Demo");
+// NCAA GameBreaker 2001
+   	(
+	((strcmp("SCUS_945.74;1", bootfile)) == 0) // NCAA GameBreaker 2001 USA
+	|| ((strcmp("SCUS_945.73;1", bootfile)) == 0) // NCAA GameBreaker 2001 USA Demo
+	) {
 		/*
 		D0112338 001E
 		80112338 0000
@@ -1076,8 +1078,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // NFL GameDay 2001
-   	((strcmp("SCUS_945.75;1", bootfile)) == 0) {
-   		//debug_write("Detected NFL GameDay 2001");
+   	((strcmp("SCUS_945.75;1", bootfile)) == 0) { // USA
 		/*
 		D0112404 001E
 		80112404 0000
@@ -1089,8 +1090,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // NFL GameDay 2001 Demo
-   	((strcmp("SCUS_945.76;1", bootfile)) == 0) {
-   		//debug_write("Detected NFL GameDay 2001 Demo");
+   	((strcmp("SCUS_945.76;1", bootfile)) == 0) { // USA
 		/*
 		D0112388 001E
 		80112388 0000
@@ -1102,8 +1102,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // NFL GameDay 2002
-   	((strcmp("SCUS_946.39;1", bootfile)) == 0) {
-   		//debug_write("Detected NFL GameDay 2002");
+   	((strcmp("SCUS_946.39;1", bootfile)) == 0) { // USA
 		/*
 		D0032640 001E
 		80032640 0000
@@ -1115,8 +1114,11 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // NFL GameDay 2003, NFL GameDay 2004, and NFL GameDay 2005 (lmao they gave up?)
-   	(((strcmp("SCUS_946.65;1", bootfile)) == 0) || ((strcmp("SCUS_946.90;1", bootfile)) == 0) || ((strcmp("SCUS_946.95;1", bootfile)) == 0)) {
-   		//debug_write("Detected NFL GameDay 2003, 2004, or 2005");
+   	(
+	((strcmp("SCUS_946.65;1", bootfile)) == 0) // NFL GameDay 2003 USA
+	|| ((strcmp("SCUS_946.90;1", bootfile)) == 0) // NFL GameDay 2004 USA
+	|| ((strcmp("SCUS_946.95;1", bootfile)) == 0) // NFL GameDay 2005 USA
+	) {
 		/*
 		D0032ACC 001E
 		80032ACC 0000
@@ -1127,22 +1129,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if
 
-// NHL FaceOff 2001 Demo
-   	((strcmp("SCUS_945.78;1", bootfile)) == 0) {
-   		//debug_write("Detected NHL FaceOff 2001 Demo");
-		/*
-		D00F1938 001E
-		800F1938 0000
-		my code generated via aprip
-    	*/
-  		add_D0_code(0x800F1938, readtoc_compare_val);
-  		add_80_code(0x800F1938, readtoc_patch_val);
-    	install_cheat_engine();
-    } else if
-
 // NHL FaceOff 2001
-   	((strcmp("SCUS_945.77;1", bootfile)) == 0) {
-   		//debug_write("Detected NHL FaceOff 2001");
+   	((strcmp("SCUS_945.77;1", bootfile)) == 0) { // USA
 		/*
 		D00F2470 001E
 		800F2470 0000
@@ -1153,9 +1141,19 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if
 
+   	((strcmp("SCUS_945.78;1", bootfile)) == 0) { // USA Demo
+		/*
+		D00F1938 001E
+		800F1938 0000
+		my code generated via aprip
+    	*/
+  		add_D0_code(0x800F1938, readtoc_compare_val);
+  		add_80_code(0x800F1938, readtoc_patch_val);
+    	install_cheat_engine();
+    } else if
+
 // Oha-Studio Dance Dance Revolution
-   	((strcmp("SLPM_866.03;1", bootfile)) == 0) {
-   		//debug_write("Detected Oha-Studio Dance Dance Revolution");
+   	((strcmp("SLPM_866.03;1", bootfile)) == 0) { // Japan
 		/*
 		D00FAE58 001E
 		800FAE58 0000
@@ -1167,8 +1165,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Ore no Ryouri
-   	((strcmp("SCPS_100.99;1", bootfile)) == 0) {
-   		//debug_write("Detected Ore no Ryouri");
+   	((strcmp("SCPS_100.99;1", bootfile)) == 0) { // Japan
 		/*
 		D0031C1A 1040
 		80031C1A 1000
@@ -1180,8 +1177,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Pocket Jiman
-   	((strcmp("SCPS_101.04;1", bootfile)) == 0) { // 3 discs
-   		//debug_write("Detected Pocket Jiman");
+   	((strcmp("SCPS_101.04;1", bootfile)) == 0) { // Japan
 		/*
 		 D0126BDC 001E
 		 80126BDC 0000
@@ -1193,8 +1189,11 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // PoPoLoCrois Monogatari II
-   	(((strcmp("SCPS_101.12;1", bootfile)) == 0) || ((strcmp("SCPS_101.13;1", bootfile)) == 0) || ((strcmp("SCPS_101.14;1", bootfile)) == 0)) { // 3 discs
-   		//debug_write("Detected PoPoLoCrois Monogatari II");
+   	(
+	((strcmp("SCPS_101.12;1", bootfile)) == 0) // Japan Disc 1
+	|| ((strcmp("SCPS_101.13;1", bootfile)) == 0) // Japan Disc 2
+	|| ((strcmp("SCPS_101.14;1", bootfile)) == 0) // Japan Disc 3
+	) {
 		/*
 		 D00B2612 1040
 		 800B2612 1000
@@ -1206,8 +1205,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Pop'n Music: Animation Melody
-   	((strcmp("SLPM_865.92;1", bootfile)) == 0) {
-   		//debug_write("Pop'n Music: Animation Melody");
+   	((strcmp("SLPM_865.92;1", bootfile)) == 0) { // Japan
 		/*
 		D009E7E8 001E
 		8009E7E8 0000
@@ -1219,8 +1217,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Pop'n Music: Disney Tunes
-   	((strcmp("SLPM_866.70;1", bootfile)) == 0) {
-   		//debug_write("Pop'n Music: Disney Tunes");
+   	((strcmp("SLPM_866.70;1", bootfile)) == 0) { // Japan
 		/*
 		D008A45C 001E
 		8008A45C 0000
@@ -1232,8 +1229,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Pop'n Music 2
-   	((strcmp("SLPM_862.94;1", bootfile)) == 0) {
-   		//debug_write("Detected Pop 'N Music 2");
+   	((strcmp("SLPM_862.94;1", bootfile)) == 0) { // Japan
 		/*
 		D0015342 1040
 		80015342 1000
@@ -1245,9 +1241,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Pop'n Music 5
-   	((strcmp("SLPM_869.37;1", bootfile)) == 0) {
-   		//debug_write("Detected Pop'n Music 5");
-	   		/*
+   	((strcmp("SLPM_869.37;1", bootfile)) == 0) { // Japan
+   		/*
 		D0048F34 001E
 		80048F34 0000
 		my code via aprip to patch out readtoc
@@ -1258,9 +1253,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Pop'n Music 6
-   	((strcmp("SLPM_870.89;1", bootfile)) == 0) {
-   		//debug_write("Detected Pop'n Music 6");
-	 		/*
+   	((strcmp("SLPM_870.89;1", bootfile)) == 0) { // Japan
+		/*
 		D004A24C 001E
 		8004A24C 0000
 		my code via aprip to patch out readtoc
@@ -1270,9 +1264,47 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
+// Resident Evil 3: The Last Escape
+   	((strcmp("SLPS_023.00;1", bootfile)) == 0) { // Japan Rev 0/ Japan Rev 1
+		ver_check = (load_addr + 0x1B0); // First different byte between revisions
+		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
+		ver_check_val = *(uint8_t*) ver_check;
+		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
+		if((ver_check_val == 0xF4)) // Rev 0
+		{
+			/*
+			D01840E2 1040
+			801840E2 1000
+			'skip check' code is from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_b.shtml
+    		*/
+	    	add_D0_code(0x801840E2, common_routine_return_compare_val);
+			add_80_code(0x801840E2, common_routine_return_patch_val);
+    		install_cheat_engine();
+	    } else { // Rev 1
+			/*
+			D018418E 1040
+			8018418E 1000 
+			my code via aprip gameshark code conversion
+    		*/
+	    	add_D0_code(0x8018418E, common_routine_return_compare_val);
+			add_80_code(0x8018418E, common_routine_return_patch_val);
+    		install_cheat_engine();
+	    }
+	} else if
+
+   	((strcmp("SLPM_804.85;1", bootfile)) == 0) { // Japan Demo
+		/*
+		D01800E2 1040
+		801800E2 1000 
+		my code via aprip gameshark code conversion
+    	*/
+	    add_D0_code(0x801800E2, common_routine_return_compare_val);
+		add_80_code(0x801800E2, common_routine_return_patch_val);
+    	install_cheat_engine();
+	} else if
+
 // Resident Evil Survivor
-   	((strcmp("SLPS_025.53;1", bootfile)) == 0) {
-   		//debug_write("Detected Resident Evil Survivor - Japan");
+   	((strcmp("SLPS_025.53;1", bootfile)) == 0) { // Japan
 		/*
 		D0017962 1040
 		80017962 1000
@@ -1283,8 +1315,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if
 
-   	((strcmp("SLUS_010.87;1", bootfile)) == 0) {
-   		//debug_write("Detected Resident Evil Survivor - USA");
+   	((strcmp("SLUS_010.87;1", bootfile)) == 0) { // USA
 		/*
 		D001714E 1040
 		8001714E 1000
@@ -1295,8 +1326,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if
 
-   	(((strcmp("SLES_027.32;1", bootfile)) == 0) || ((strcmp("SLES_027.44;1", bootfile)) == 0)) { // Same code works on both Europe and France versions
-   		//debug_write("Detected Resident Evil Survivor - EUR/FRA");
+   	(
+	((strcmp("SLES_027.32;1", bootfile)) == 0) // Europe
+	|| ((strcmp("SLES_027.44;1", bootfile)) == 0) // France
+	) {
 		/*
 		D001713E 1040
 		8001713E 1000
@@ -1308,8 +1341,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Robbit mon Dieu
-   	((strcmp("SCPS_101.03;1", bootfile)) == 0) {
-   		//debug_write("Detected Robbit Mon Dieu");
+   	((strcmp("SCPS_101.03;1", bootfile)) == 0) { // Japan
 		/*
 		D001C646 1040
 		8001C646 1000
@@ -1321,8 +1353,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Rockman
-   	((strcmp("SLPS_022.20;1", bootfile)) == 0) {
-   		//debug_write("Detected Rockman 1");
+   	((strcmp("SLPS_022.20;1", bootfile)) == 0) { // Japan
 		/*
 		D006C92A 1040
 		8006C92A 1000
@@ -1334,8 +1365,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Rockman 2: Dr. Wily no Nazo
-   	((strcmp("SLPS_022.55;1", bootfile)) == 0) {
-   		//debug_write("Detected Rockman 2");
+   	((strcmp("SLPS_022.55;1", bootfile)) == 0) { // Japan
 		/*
 		D006CA82 1040
 		8006CA82 1000
@@ -1347,8 +1377,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Rockman 3: Dr. Wily no Saigo!?
-   	((strcmp("SLPS_022.62;1", bootfile)) == 0) {
-   		//debug_write("Detected Rockman 3");
+   	((strcmp("SLPS_022.62;1", bootfile)) == 0) { // Japan
 		/*
 		D006CA1A 1040
 		8006CA1A 1000
@@ -1360,8 +1389,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Rockman 4: Aratanaru Yabou!!
-   	((strcmp("SLPS_023.24;1", bootfile)) == 0) {
-   		//debug_write("Detected Rockman 4");
+   	((strcmp("SLPS_023.24;1", bootfile)) == 0) { // Japan
 	 	/*
  		D007009C 001E
 		8007009C 0000
@@ -1373,8 +1401,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Rockman 5: Blues no Wana!?
-   	((strcmp("SLPS_023.38;1", bootfile)) == 0) {
-   		//debug_write("Detected Rockman 5");
+   	((strcmp("SLPS_023.38;1", bootfile)) == 0) { // Japan
 		/*
 		D006FD84 001E
 		8006FD84 0000
@@ -1385,9 +1412,20 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
+// Rockman 6
+   	((strcmp("SLPS_023.79;1", bootfile)) == 0) { // Japan
+		/*
+		D006DA7A 1040
+		8006DA7A 1000
+		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
+		*/
+  		add_D0_code(0x8006DA7A, common_routine_return_compare_val);
+  		add_80_code(0x8006DA7A, common_routine_return_patch_val);
+		install_cheat_engine();
+    } else if
+
 // Rockman X5
-   	((strcmp("SLPM_866.66;1", bootfile)) == 0) {
-   		//debug_write("Detected Rockman X5");
+   	((strcmp("SLPM_866.66;1", bootfile)) == 0) { // Japan
 		/*
 		D0070ED0 001E
 		80070ED0 0000
@@ -1399,8 +1437,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Rockman X6
-   	((strcmp("SLPM_869.59;1", bootfile)) == 0) {
-   		//debug_write("Detected Rockman X6");
+   	((strcmp("SLPM_869.59;1", bootfile)) == 0) { // Japan
 		/*
 		D006EC40 001E
 		8006EC40 0000
@@ -1411,22 +1448,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
-// Rockman 6
-   	((strcmp("SLPS_023.79;1", bootfile)) == 0) {
-   		//debug_write("Detected Rockman 6");
-		/*
-		D006DA7A 1040
-		8006DA7A 1000
-		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_r.shtml
-		*/
-  		add_D0_code(0x8006DA7A, common_routine_return_compare_val);
-  		add_80_code(0x8006DA7A, common_routine_return_patch_val);
-		install_cheat_engine();
-    } else if
-
 // Street Fighter EX2 Plus
-   	((strcmp("SLPS_025.08;1", bootfile)) == 0) {
-   		//debug_write("Detected Street Fighter EX2 Plus");
+   	((strcmp("SLPS_025.08;1", bootfile)) == 0) { // Japan
 		/*
 		D01BD48A 1040
 		801BD48A 1000
@@ -1437,8 +1460,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
-   	((strcmp("SLPM_805.17;1", bootfile)) == 0) {
-   		//debug_write("Detected Street Fighter EX2 Plus Demo");
+   	((strcmp("SLPM_805.17;1", bootfile)) == 0) { // Japan Demo
 		/*
 		D01BD13E 1040
 		801BD13E 1000
@@ -1452,13 +1474,11 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 // Spyro: Year Of The Dragon
 // codes co-developed by MottZilla (mostly) and myself. Get rekt anti-tamper/apv1/apv2
 	((strcmp("SCUS_944.67;1", bootfile)) == 0) { // has 2 versions, rev 0 and rev 1
-		//debug_write("Detected Spyro: Year Of The Dragon- USA");
 		ver_check = (load_addr); // First different byte between revisions is well the first byte :)
 		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
 		ver_check_val = *(uint8_t*) ver_check;
 		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
-		if((ver_check_val == 0xF4)) { 
-			//debug_write("Rev 0");
+		if(ver_check_val == 0xF4) { // Rev 0
 			add_D0_code(0x8007F08C, 0x0001);
 			add_80_code(0x8007F08C, 0x0000);
 			add_D0_code(0x8007F08C, 0x0002);
@@ -1488,8 +1508,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 			add_D0_code(0x8007F08C, 0x000E);
 			add_80_code(0x8007F08C, 0x0000);
 			install_cheat_engine();
-		} else { // 0x08
-			//debug_write("Rev 1");
+		} else { // 0x08 = Rev 1
 			add_D0_code(0x8007F23C, 0x0001);
 			add_80_code(0x8007F23C, 0x0000);
 			add_D0_code(0x8007F23C, 0x0002);
@@ -1523,8 +1542,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 	} else if
 
 // Strider 2
-   	((strcmp("SLUS_011.63;1", bootfile)) == 0) {
-   		//debug_write("Detected Strider 2 - USA");
+   	((strcmp("SLUS_011.63;1", bootfile)) == 0) { // USA
 		/*
 		D01F6570 001E
 		801F6570 0000
@@ -1535,9 +1553,36 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
+// Tokimeki Memorial 2 (soo many god damn discs/versions/bootfiles)
+   	(
+	// main game (5 discs)
+	   ((strcmp("SLPM_863.55;1", bootfile)) == 0) // Tokimeki Memorial 2 Rev 0/Rev 1 Disc 1
+	|| ((strcmp("SLPM_863.50;1", bootfile)) == 0) // Tokimeki Memorial 2 Limited Box Disc 1
+	|| ((strcmp("SLPM_863.56;1", bootfile)) == 0) // Tokimeki Memorial 2 Rev 0/Rev 1 Disc 2
+	|| ((strcmp("SLPM_863.51;1", bootfile)) == 0) // Tokimeki Memorial 2 Limited Box Disc 2
+	|| ((strcmp("SLPM_863.57;1", bootfile)) == 0) // Tokimeki Memorial 2 Rev 0/Rev 1 Disc 3
+	|| ((strcmp("SLPM_863.52;1", bootfile)) == 0) // Tokimeki Memorial 2 Limited Box Disc 3
+	|| ((strcmp("SLPM_863.58;1", bootfile)) == 0) // Tokimeki Memorial 2 Rev 0/Rev 1 Disc 4
+	|| ((strcmp("SLPM_863.53;1", bootfile)) == 0) // Tokimeki Memorial 2 Limited Box Disc 4
+	|| ((strcmp("SLPM_863.59;1", bootfile)) == 0) // Tokimeki Memorial 2 Rev 0/Rev 1 Disc 5
+	|| ((strcmp("SLPM_863.54;1", bootfile)) == 0) // Tokimeki Memorial 2 Limited Box Disc 5
+	// dlc evs (3 discs)
+	|| ((strcmp("SLPM_805.27;1", bootfile)) == 0) // Tokimeki Memorial 2 Emotional Voice System Append Disc 1
+	|| ((strcmp("SLPM_805.44;1", bootfile)) == 0) // Tokimeki Memorial 2 Emotional Voice System Append Disc 2
+	|| ((strcmp("SLPM_805.50;1", bootfile)) == 0) // Tokimeki Memorial 2 Emotional Voice System Append Disc 3
+	) {
+		/*
+		D0011514 001E
+		80011514 0000
+		my code via aprip
+		*/
+  		add_D0_code(0x80011514, readtoc_compare_val);
+  		add_80_code(0x80011514, readtoc_patch_val);
+		install_cheat_engine();
+    } else if
+
 // Tomba! 2: The Evil Swine Return
-   	((strcmp("SCUS_944.54;1", bootfile)) == 0) {
-   		//debug_write("Detected TOMBA! 2 - USA");
+   	((strcmp("SCUS_944.54;1", bootfile)) == 0) { // USA
 		/*
 		D002542C 001E
 		8002542C 0000
@@ -1549,8 +1594,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Tron ni Kobun
-   	((strcmp("SLPS_021.08;1", bootfile)) == 0) {
-   		//debug_write("Detected Tron ni Kobun ");
+   	((strcmp("SLPS_021.08;1", bootfile)) == 0) {  // Japan
 		/*
 		D004E168 001E
 		8004E168 0000
@@ -1562,9 +1606,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Vandal Harts II
-   	((strcmp("SLUS_009.40;1", bootfile)) == 0) {
-   		//debug_write("Detected Vandal Harts II - USA");
-	 		/*
+   	((strcmp("SLUS_009.40;1", bootfile)) == 0) { // USA
+ 		/*
 		D00865FC 001E
 		800865FC 0000
 		my code via aprip to patch out readtoc
@@ -1575,9 +1618,11 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Wild Arms 2
-   	(((strcmp("SCUS_944.84;1", bootfile)) == 0) || ((strcmp("SCUS_944.98;1", bootfile)) == 0)) { // 2 discs
-   		//debug_write("Detected Wild Arms 2 - USA");
-	   		/*
+   	(
+	((strcmp("SCUS_944.84;1", bootfile)) == 0) // USA Disc 1
+	|| ((strcmp("SCUS_944.98;1", bootfile)) == 0) // USA Disc 2
+	) {
+   		/*
    		D003A4E8 001E
    		8003A4E8 0000
  		my code via aprip to patch out readtoc
@@ -1587,8 +1632,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
-   	((strcmp("SCUS_945.92;1", bootfile)) == 0) {
-   		//debug_write("Detected Wild Arms 2 - USA Demo");
+   	((strcmp("SCUS_945.92;1", bootfile)) == 0) { // USA Demo
 		/*
    		D003A5D4 001E
    		8003A5D4 0000
@@ -1600,8 +1644,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // World Soccer Jikkyou Winning Eleven 4
-   	((strcmp("SLPM_862.91;1", bootfile)) == 0) { // 2 revisions, same code works on rev 0 and rev 1
-   		//debug_write("Detected Winning Eleven 4");
+   	((strcmp("SLPM_862.91;1", bootfile)) == 0) { // Japan Rev 0/Japan Rev 1
 		/*
    		D01030CA 1040
 		801030CA 1000
@@ -1613,8 +1656,7 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // XI[SAI] Jumbo
-   	((strcmp("SCPS_101.23;1", bootfile)) == 0) {
-   		//debug_write("Detected XI[Sai] Jumbo");
+   	((strcmp("SCPS_101.23;1", bootfile)) == 0) { // Japan
 	   	/*
    		D010178A 1040
 		8010178A 1000
@@ -1640,8 +1682,16 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Yu-Gi-Oh! Forbidden Memories
-   	(((strcmp("SLPM_863.96;1", bootfile)) == 0) || ((strcmp("SLPM_863.98;1", bootfile)) == 0) || ((strcmp("SLUS_014.11;1", bootfile)) == 0) || ((strcmp("SLES_039.47;1", bootfile)) == 0) || ((strcmp("SLES_039.48;1", bootfile)) == 0) || ((strcmp("SLES_039.49;1", bootfile)) == 0) || ((strcmp("SLES_039.50;1", bootfile)) == 0) || ((strcmp("SLES_039.51;1", bootfile)) == 0)) { //same code skips mod check on ALL VERSIONS EVER!
-   		//debug_write("Detected Yu-Gi-Oh! Forbidden Memories");
+   	(
+	((strcmp("SLPM_863.96;1", bootfile)) == 0) // Japan
+	|| ((strcmp("SLPM_863.98;1", bootfile)) == 0) // Japan Demo
+	|| ((strcmp("SLUS_014.11;1", bootfile)) == 0) // USA
+	|| ((strcmp("SLES_039.47;1", bootfile)) == 0) // Europe
+	|| ((strcmp("SLES_039.48;1", bootfile)) == 0) // France
+	|| ((strcmp("SLES_039.49;1", bootfile)) == 0) // Germany
+	|| ((strcmp("SLES_039.50;1", bootfile)) == 0) // Spain
+	|| ((strcmp("SLES_039.51;1", bootfile)) == 0) // Italy
+	) {
 		/*
 		D016818A 1040
 		8016818A 1000

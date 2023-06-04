@@ -14,7 +14,13 @@ Unlike APv1, APv2 does trigger when games are booted with Tonyhax International 
 
 There is one exception though. The very early SCPH-3000 Japanese consoles, and all SCPH-1000 Japanese consoles are immune to APv2 as long as they are stock and not containing a 'non-stealth' mod-chip. These consoles will work with every game without a bypass even being needed. In fact, Tonyhax International does not even apply the APv2 bypasses for these consoles when they are detected.
 
-## What Happens When Protection Is Triggered
+## What Happens When Additional Anti-Piracy Protection Is Triggered
+
+![poporogue japan rev 0 apv1 triggered](images/poporogue-japan-non-stealth-mod-chip-apv1-triggered.png)
+
+![dino crisis usa rev 0 apv2 triggered](images/dino-crisis-usa-rev-0-non-stealth-mod-chip-apv2-triggered.png)
+
+![spyro year of the dragon usa rev 0 apv2 triggered](images/spyro-year-of-the-dragon-usa-rev-0-non-stealth-mod-chip-apv2-triggered.png)
 
 When triggered, the APv1 and APv2 style copy protections will trigger an 'anti-piracy screen of death'. If you encounter an APv2 game that triggers this screen, then the specific game disc is not yet supported (this is a work in progress). In such a case please open an [Anti-Piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&template=antipiracy-issue.md&title=) on the [Tonyhax International Github](https://github.com/alex-free/tonyhax) to let me know about this specific game which contains APv2 protection. I would eventually like every game that can trigger the anti-piracy copy protection routine when booted via Tonyhax International on a stock console to have a  bypass implemented for 100% compatibility.
 
@@ -22,7 +28,7 @@ When triggered, the APv1 and APv2 style copy protections will trigger an 'anti-p
 
 In addition to APv1 or APv2 protection, some later games may also contain a protection measure known as the EDC check. For the affected games, this protection is triggered when you burn the EDC protected PSX CD image with standard CD burning software, which in most cases will changes the EDC data when burning an EDC protected PSX CD image.
 
-The EDC check can be however be defeated by simply forcing the EDC data to not be changed when burning such a protected PSX CD image. Not every CD burning software has an option which can do this, please see the [CD Burning](#cd-burning) section for a more in depth capability comparison of common burning software.
+The EDC check can be however be defeated by simply forcing the EDC data to not be changed when burning such a protected PSX CD image. Not every CD burning software has an option which can do this, please see the [CD Burning](#cd-burning-for-edc) section for a more in depth capability comparison of common burning software.
 
 Real 'imported region' PSX game discs with EDC protection will work just fine when booted via Tonyhax International.
 
@@ -34,7 +40,7 @@ LibCrypt protection can be bypassed by burning a backup CD-R of a LibCrypt game 
 
 Real PAL LibCrypt discs booted via Tonyhax International on USA or Japanese consoles ('imports') will not trip the detection.
 
-## CD Burning For EDCs
+## CD Burning For EDC
 
 ### [CDRDAO-PLED](https://alex-free.github.io/cdrdao)
 

@@ -80,13 +80,15 @@ _More Info_
 
 ## Downloads
 
-### Version 1.3.2 (6/3/2023)
+### Version 1.3.3 (6/5/2023)
 
-*   [tonyhax-international-v1.3.2](https://github.com/alex-free/tonyhax/releases/download/v1.3.2i/tonyhax-international-v1.3.2.zip)
+*   [tonyhax-international-v1.3.3](https://github.com/alex-free/tonyhax/releases/download/v1.3.3i/tonyhax-international-v1.3.3.zip)
 
 Changes:
 
-* Added [APv2 bypasses](anti-piracy-bypass.md) for Breath of Fire IV Japan, Breath of Fire IV E3 2000/USA Beta, Capcom vs. SNK: Millennium Fight 2000 Pro Japan, Glint Glitters, Hyper Value 2800: Hanafuda, Tokimeki Memorial 2 Emotional Voice System Append Discs 1-3, Tokimeki Memorial 2 rev 0, Tokimeki Memorial 2 rev 1, and Tokimeki Memorial 2 limited edition box version.
+* Added a [APv2 bypass](anti-piracy-bypass.md) for Boku no Natsuyasumi: Summer Holiday 20th Century Japan to close this [issue](https://github.com/alex-free/tonyhax/issues/28). Enjoy, [Bloom-Haven](https://github.com/Bloom-Haven)!!!
+
+* Added a ton of real hardware screen captures to the docs and improved documentation itself immensely with more in-depth steps.
 
 [About previous versions](changelog.md).
 

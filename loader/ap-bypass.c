@@ -267,6 +267,18 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if
 
+// Boku no Natsuyasumi: Summer Holiday 20th Century
+	((strcmp("SCPS_100.88;1", bootfile)) == 0) { // Japan
+		/*
+		D0068B30 001E
+		80068B30 0000
+    	my code to patch out readtoc
+    	*/
+	    add_D0_code(0x80068B30, readtoc_compare_val);
+		add_80_code(0x80068B30, readtoc_patch_val);
+    	install_cheat_engine();
+    } else if
+
 // Breath of Fire IV
    	((strcmp("SLPS_027.28;1", bootfile)) == 0) { // Japan / USA E3 2000 Beta Build
 		/*

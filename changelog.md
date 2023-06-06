@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 1.3.2 (6/3/2023)
+
+*   [tonyhax-international-v1.3.2](https://github.com/alex-free/tonyhax/releases/download/v1.3.2i/tonyhax-international-v1.3.2.zip)
+
+Added APv2 bypasses for Breath of Fire IV Japan, Breath of Fire IV E3 2000/USA Beta, Capcom vs. SNK: Millennium Fight 2000 Pro Japan, Glint Glitters, Hyper Value 2800: Hanafuda, Tokimeki Memorial 2 Emotional Voice System Append Discs 1-3, Tokimeki Memorial 2 rev 0, Tokimeki Memorial 2 rev 1, and Tokimeki Memorial 2 limited edition box version.
+
 ## Version 1.3.1 (5/28/2023)
 
 *   [tonyhax-international-v1.3.1](https://github.com/alex-free/tonyhax/releases/download/v1.3.1i/tonyhax-international-v1.3.1.zip)

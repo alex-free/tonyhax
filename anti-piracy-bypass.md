@@ -129,6 +129,13 @@ This is the complete list of games with bypasses anti-piracy measures that are s
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
+### Boku no Natsuyasumi: Summer Holiday 20th Century
+
+- Versions Tested: [Japan](http://redump.org/disc/4890/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
 ### Breath of Fire IV
 
 - Versions Tested: [Japan](http://redump.org/disc/1554/), [E3 2000/Beta USA](http://redump.org/disc/59620/), [USA](http://redump.org/disc/1222/), [Europe](http://redump.org/disc/549/).

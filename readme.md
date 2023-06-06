@@ -208,7 +208,7 @@ The early PS2 models that Tonyhax International supports have the PS1 mode which
 
 *   Download [PSVModeNeg v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip) and extract the file `PS1VModeNeg.elf`.
 *   Copy the file `PS1VModeNeg.elf` to a FAT32 formatted USB flash drive that works with your soft-modded PS2. You can soft-mod your PS2 with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208), [FreeDVDBoot](https://github.com/CTurt/FreeDVDBoot) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248) to be able to use PS1VModeNEG on your PS2 console.
-*   Using uLaunchELF or wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
+*   Using wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
 *   Put in the real Japanese PS1 game disc that you are using with a [save game exploit.](save-game-exploit.md) when in PS1VModeNeg. The video mode will be forced to PAL now in the PS1 mode of your Japanese PS2.
 *   Playing through your Japanese PS1 game disc may look or act weird in PAL video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a PAL region import disc or PAL region backup CD-R and the PAL PS1 game will boot in PAL video mode.
 
@@ -251,8 +251,8 @@ The early PS2 models that Tonyhax International supports have the PS1 mode which
 
 *   Download [PSVModeNeg v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip) and extract the file `PS1VModeNeg.elf`.
 *   Copy the file `PS1VModeNeg.elf` to a FAT32 formatted USB flash drive that works with your soft-modded PS2. You can soft-mod your PS2 with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208), [FreeDVDBoot](https://github.com/CTurt/FreeDVDBoot) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248) to be able to use PS1VModeNEG on your PS2 console.
-*   Using uLaunchELF or wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
-*   Using uLaunchELF or wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
+*   Using wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
+*   Using wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
 *   Put in the real American PS1 game disc that you are using with a [save game exploit.](save-game-exploit.md) when in PS1VModeNeg. The video mode will be forced to PAL now in the PS1 mode of your American PS2.
 *   Playing through your American PS1 game disc may look or act weird in PAL video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a PAL region import disc or PAL region backup CD-R and the PAL PS1 game will boot in PAL video mode.
 
@@ -262,7 +262,7 @@ The early PS2 models that Tonyhax International supports have the PS1 mode which
 
 *   Download [PSVModeNeg v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip) and extract the file `PS1VModeNeg.elf`.
 *   Copy the file `PS1VModeNeg.elf` to a FAT32 formatted USB flash drive that works with your soft-modded PS2. You can soft-mod your PS2 with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208), [FreeDVDBoot](https://github.com/CTurt/FreeDVDBoot) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248) to be able to use PS1VModeNEG on your PS2 console.
-*   Using uLaunchELF or wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
+*   Using wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
 *   Put in the real PAL PS1 game disc that you are using with a [save game exploit.](save-game-exploit.md) when in PS1VModeNeg. The video mode will be forced to NTSC now in the PS1 mode of your PAL PS2.
 *   Playing through your PAL PS1 game disc may look or act weird in NTSC video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a NTSC disc and the NTSC PS1 import or backup disc will boot in NTSC video mode.
 

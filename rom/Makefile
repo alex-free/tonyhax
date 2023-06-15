@@ -2,6 +2,7 @@
 # Thanks to whoever made https://devhints.io/makefile!
 
 include ../variables.mk
+include ../variables-shared.mk
 
 .PHONY: clean
 

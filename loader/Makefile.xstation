@@ -1,17 +1,16 @@
 
 # Thanks to whoever made https://devhints.io/makefile!
 
-include ../variables.mk
+include ../variables.mk.xstation
 include ../variables-shared.mk
 
-LOADER_AUTOGEN := orca.inc
 LOADER_HEADERS := $(wildcard *.h) $(LOADER_AUTOGEN)
 LOADER_OBJECTS := $(patsubst %.c, %.o, $(patsubst %.S, %.o, $(wildcard *.c *.S)))
 
 all: $(LOADER_FILES)
 
 clean:
-	$(RM) $(LOADER_FILES) FF9 tonyhax-ff9.mcs *.o *.elf $(LOADER_AUTOGEN)
+	$(RM) $(LOADER_FILES) *.o *.elf $(LOADER_AUTOGEN)
 
 # Intermediate objects
 
@@ -24,17 +23,17 @@ clean:
 orca.inc: orca.img
 	bash ../util/bin2h.sh ORCA_IMAGE orca.img orca.inc
 
-secondary.elf: secondary-ff9.ld $(LOADER_OBJECTS)
-	$(LD) $(LDFLAGS) -T secondary-ff9.ld $(LOADER_OBJECTS) -o $@
+secondary.elf: secondary.ld $(LOADER_OBJECTS)
+	$(LD) $(LDFLAGS) -T secondary.ld $(LOADER_OBJECTS) -o $@
 	bash insert-tonyhax-crc.sh secondary.elf
 
 # Results
 
-tonyhax.mcs: tonyhax-tpl-ff9.mcs secondary.elf
-	bash generate-tonyhax-mcs.sh secondary.elf tonyhax-tpl-ff9.mcs tonyhax-ff9.mcs $(TONYHAX_VERSION)
+tonyhax.mcs: tonyhax-tpl.mcs secondary.elf
+	bash generate-tonyhax-mcs.sh secondary.elf tonyhax-tpl.mcs tonyhax.mcs $(TONYHAX_VERSION)
 
 HAX: tonyhax.mcs
-	bash ../util/mcs2raw.sh tonyhax-ff9.mcs
+	bash ../util/mcs2raw.sh tonyhax.mcs
 
 tonyhax.exe: secondary.elf
 	bash generate-tonyhax-exe.sh secondary.elf tonyhax.exe

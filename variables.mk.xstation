@@ -1,0 +1,9 @@
+
+.DELETE_ON_ERROR:
+
+.PHONY: clean
+
+SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
+
+TONYHAX_VERSION=v1.3.4-xstation
+CFLAGS=-Os -Wall -Wextra -Wno-main -Werror -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION) -DXSTATION -DROM

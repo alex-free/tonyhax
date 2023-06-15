@@ -20,6 +20,8 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * Supports [applying user-supplied GameShark codes](gameshark-code-support.md) to any game it booted by the Tonyhax International loader. Dare I say this is the world's first open source PSX GameShark.
 
+* Enables speeding up xStation boot time and allows for applying codes to games `Full Boot`ed by xStation. This is accomplished by a [special xStation ROM version](xstation.md).
+
 * Uses a completely different build system that is portable to many more Linux distributions. This new build system is more efficient and easier to use as well.
 
 ## Usage
@@ -54,6 +56,7 @@ _Boot Methods_
 _More Info_
 
 * [GameShark Code Support](gameshark-code-support.md)
+* [XStation ROM Version](xstation.md)
 * [Playing Games With Additional Copy Protection Routines](anti-piracy-bypass.md)
 * [CD-R Media For PSX Backups](#cd-r-media-for-psx-backups)
 * [Disc Read Errors And PS1 CD Drive Repair](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/)
@@ -80,15 +83,22 @@ _More Info_
 
 ## Downloads
 
-### Version 1.3.3 (6/5/2023)
+### Version 1.3.4 (6/14/2023)
 
-*   [tonyhax-international-v1.3.3](https://github.com/alex-free/tonyhax/releases/download/v1.3.3i/tonyhax-international-v1.3.3.zip)
+*   [tonyhax-international-v1.3.4](https://github.com/alex-free/tonyhax/releases/download/v1.3.4i/tonyhax-international-v1.3.4.zip)
 
 Changes:
 
-* Added a [APv2 bypass](anti-piracy-bypass.md) for Boku no Natsuyasumi: Summer Holiday 20th Century Japan to close this [issue](https://github.com/alex-free/tonyhax/issues/28). Enjoy, [Bloom-Haven](https://github.com/Bloom-Haven)!!!
+* Added a special [xStation ROM version](xstation.md) due to request by 
+[L10N37](https://github.com/L10N37). This is actually super cool.
 
-* Added a ton of real hardware screen captures to the docs and improved documentation itself immensely with more in-depth steps.
+* Added more in-depth info to the [CD-R Media For PSX Backups](#cd-r-media-for-psx-backups) section thanks to [XxTriviumxX](https://github.com/XxTriviumxX).
+
+* Added even more real hardware screen captures to the docs and improved documentation itself immensely with more in-depth steps (specifically related to the [FreePSXBoot exploit](freepsxboot-exploit.md) but also touched a few other pages).
+
+* Updated [MKPSXISO](https://github.com/Lameguy64/mkpsxiso) to the latest version.
+
+* Build system/source cleanup/comment improvements.
 
 [About previous versions](changelog.md).
 
@@ -276,9 +286,15 @@ The early PS2 models that Tonyhax International supports have the PS1 mode which
 * A highly reflective layer system.
 * High quality polycarbonate and "sealing" process combining all parts of the CD-R.
 
-_Ideally, you want to use 74 minute discs_. The PSX was never designed for the now more common 80 minute discs, and it is easier for the laser to track 74 minute discs due to their wider data spiral track. As of 2023, 74 minute discs are not really manufactured anymore and new old stock can get pricey, so it really may not be worth it as the PSX can read 80 minute discs fine. It just can read 74 minute discs easier as that is closer to what it was designed for originally (which was 72 minute pressed CD-ROMs).
+_You want to use 74 minute discs_. The PSX was never designed for the now more common 80 minute discs, and it is easier for the laser to track 74 minute discs due to their wider data spiral track. As of 2023, 74 minute discs are not really manufactured anymore and new old stock can get pricey, so it really may not be worth it as the PSX can read 80 minute discs okay (just not as optimally, you may experience longer load times or even straight up disc read errors on worn CD drives). 
 
-I have found Verbatim DataLifePlus CD-Rs to be really good with PS1 consoles. Here is the ATIP information displayed by `cdrecord -atip` for a Verbatim DataLifePlus CD-R:
+The PSX can read 74 minute discs easier as that is closer to what it was designed for originally (which was 72 minute pressed CD-ROMs). Verbatim DataLifePlus 74min discs with a copyright date of 1997 or 1999 on the back of the CD case may be among the best media to acquire.
+
+Later PSX consoles and all PS2s appear to handle 80min discs much better then the earliest models.
+
+It is extremely important to note that as of 2023 one single monopoly known as CMC magnetics has [bought out every good manufacturer of CD-R media](https://github.com/alex-free/tonyhax/issues/30). Quality has seemed to [gone down due to this](https://gbatemp.net/threads/do-modern-burners-cds-make-lower-quality-ps1-backups.628708/page-3#post-10182249), so new old stock 74min media really is optimal. 
+
+I have found Verbatim DataLifePlus CD-Rs to be really good with PS1 consoles. Here is the ATIP information displayed by `cdrecord -atip` for a Verbatim DataLifePlus 80min modern CD-R:
 
     ATIP info from disk:
       Indicated writing power: 4
@@ -291,7 +307,7 @@ I have found Verbatim DataLifePlus CD-Rs to be really good with PS1 consoles. He
     Manuf. index: 11
     Manufacturer: Mitsubishi Chemical Corporation
 
-Verbatim UltraLife Archival Grade Gold CD-Rs also are really good, although they are more expensive then Verbatim DataLifePlus. I think Verbatim DataLifePlus CD-Rs are slightly better with the PS1 as well, but they are an option. Here is the ATIP information displayed by `cdrecord -atip` for a Verbatim DataLifePlus CD-R:
+Verbatim UltraLife Archival Grade Gold CD-Rs also are really good, although they are more expensive then Verbatim DataLifePlus. I think Verbatim DataLifePlus CD-Rs are slightly better with the PS1 as well, but they are an option. Here is the ATIP information displayed by `cdrecord -atip` for a Verbatim UltraLife Archival Grade Gold 80min modern CD-R:
 
     ATIP info from disk:
       Indicated writing power: 5
@@ -304,13 +320,26 @@ Verbatim UltraLife Archival Grade Gold CD-Rs also are really good, although they
     Manuf. index: 26
     Manufacturer: TDK Corporation
 
+CMC Pro discs have been [reported](https://github.com/alex-free/tonyhax/issues/30) to work very well with the PSX by [XxTriviumxX](https://github.com/XxTriviumxX). Here is the ATIP information displayed by `cdrecord -atip` for a CMC Pro 80min modern CD-R:
+
+    ATIP info from disk:
+      Indicated writing power: 4
+    Disk Is not unrestricted
+    Disk Is not erasable
+      Disk sub type: Medium Type A, high Beta category (A+) (3)
+      ATIP start of lead in:  -11849 (97:24/01)
+      ATIP start of lead out: 359847 (79:59/72)
+    Disk type:    Long strategy type (Cyanine, AZO or similar)
+    Manuf. index: 25
+    Manufacturer: Taiyo Yuden Company Limited
+
 **Do not use cheap/poor quality CD-R media, which is almost always all that is available in retail stores and most likely any CD-R that is not "archival grade"**. Poor quality cheap CD-R media _can_ result in:
 
 *   Slower loading times/in-game lag because of CD drive tracking errors (bad noises from the CD drive).
 *   Issues reading data off of the disc possibly resulting in a game to freeze and motor power off in the CD drive.
 *   Skipping/silent audio and or music.
 
-Later PS1 consoles (starting at the SCPH-5000 series and newer) and all PS2 consoles have a much greater tolerance to poor quality CD-R media, and _may_ work fine with it however in general it is still best to just always use Verbatim DataLifePlus/UltraLife CD-Rs or something of similar quality. Here is the ATIP information displayed by `cdrecord -atip` for a Maxell Music CD-R (which is a poor quality brand/CD-R media that is **highly not recommended**.
+Here is the ATIP information displayed by `cdrecord -atip` for a Maxell Music CD-R (which is a poor quality brand/CD-R media that is **highly not recommended**.
 
     ATIP info from disk:
       Indicated writing power: 4
@@ -323,7 +352,7 @@ Later PS1 consoles (starting at the SCPH-5000 series and newer) and all PS2 cons
     Manuf. index: 22
     Manufacturer: Ritek Co.
 
-If you are having issues booting discs in Tonyhax International, consider wiping with a clean microfiber cloth from the inner ring to the outer edge of the disc in all directions and then trying to boot the disc again.
+If you are still having issues booting discs in Tonyhax International, consider wiping with a clean microfiber cloth from the inner ring to the outer edge of the disc in all directions and then trying to boot the disc again.
 
 ## Building From Source
 
@@ -358,11 +387,14 @@ With everything now installed, build Tonyhax International with the `build.sh` s
 
 ### MottZilla
 
-*	Guidance on increasing the size of the Tonyhax International loader.
+*	Guidance on increasing the size of the Tonyhax International loader and my general goto mentor on this project.
 
-*	Wrote the GameShark Code Engine now used by the anti-piracy bypass features and explained how to use it.
+* Co-developed the Spyro Year Of The Dragon GameShark code bypass method.
+
+*	Wrote the GameShark Code Engine, used first in the APv2 bypass system. With MottZilla's guidance this code has even been expanded and adapted for general use [GameShark Code Support](gameshark-code.md).
 
 *   The original sole creator of [PS1 DemoSwap Patcher v1.0](https://www.psx-place.com/threads/mctool-tonyhax-freepsxboot-installer.36569). MottZilla re-implemented the TOCPerfect concept into a much superior method, and included his implementation alongside of his DemoSwap idea in PS1 DemoSwap Patcher.
+
 *   Wrote the controller input support for Tonyhax International.
 
 *   Wrote the laser re-calibration function for VC2 and VC3 CDROM controllers.
@@ -373,9 +405,7 @@ With everything now installed, build Tonyhax International with the `build.sh` s
 
 *   Came up with reset+unlock technique for TOCPerfect booting on USA/PAL consoles.
 
-*   Helped debug the [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) builder's own patch to disable a FreePSXBoot memory card in slot 2.
-
-*   Originally came up with the idea to involve the SetSession 2 command in a fix for the older CDROM controllers.
+*   Originally came up with the idea to involve the SetSession 2 command in a fix for the older CDROM controllers which resulted in the eventual discovery of the SetSessionSuperUltraCommandSmash v2.
 
 *   Explained the save game checksum routines in both Tony Hawk Pro Skater 2 (Japanese version) & Castrol Honda VTR (Japanese version) to help me create SuccessCheckSumUpdater (SuccessCU).
 
@@ -395,15 +425,18 @@ With everything now installed, build Tonyhax International with the `build.sh` s
 
 *   Downhill Snow (Japan) save game exploit.
 
+*   Final Fantasy IX (Japan and USA) save game exploit.
+
 ### SylverReZ (M4x1mumReZ)
 
 *   Helping with debugging an [APrip](https://alex-free.github.io/aprip) issue on Windows.
 
-*   Contributing APrip GameShark codes to be added to the Tonyhax International loader.
+*   Generated Aprip codes for APv2 bypasses for i-mode mo Issho: Doko Demo Issho Tsuika Disc, Koko Hore! Pukka, Love Hina: Ai wa Kotoba no Naka ni / Love Hina 2: Kotoba wa Konayuki no You ni, Pocket Jiman.
 
 ### Misc Acknowledgements
 
 *   [Berion](https://www.psx-place.com/members/berion.1431/) of [PSX-Place](https://psx-place.com) compressed the images of this document properly (this is the first time I've edited photos).
+
 *   Martin Korth for confirming the SetSession bug found in VC0A, VC0B, and VC1A CDROM controller BIOS versions, and for the priceless [PSX-SPX](http://problemkaputt.de/psx-spx.htm) document.
 
 *   [Peppe90](https://www.psx-place.com/members/peppe90.42412/) of [PSX-Place](https://psx-place.com) for testing NTSC gamems on a PAL PS2. His results have confirmed that the video mode can not be changed from PS1 software in PS1 mode on a PS1. It must be changed in PS1DRV from the PS2, as PS1 mode is set to always display the same video mode that the console shipped with (for the early PS2s that Tonyhax International supports). He mentioned that PS1VModeNeg v1.0.1 can be used to overcome this. The original Tonyhax [issue](https://github.com/socram8888/tonyhax/issues/25) explaining this also was helpful in figuring out how to bypass this PS2 level limitation.

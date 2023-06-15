@@ -4,6 +4,7 @@
 # Seek value = offset to start of entry loader, which will be updated on code changes to entry.S
 
 include ../variables.mk
+include ../variables-shared.mk
 
 all: $(ENTRY_MCS) $(ENTRY_RAW)
 

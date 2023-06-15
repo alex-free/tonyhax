@@ -3,6 +3,7 @@
 # NOTE: DO NOT EVER USE -fastload option it not only unreliably triggers the loading screen on different consoles, it screws up reading from memory cards after exploit!
 
 include ../variables.mk
+include ../variables-shared.mk
 
 .PHONY: clean FreePSXBoot/builder/builder
 

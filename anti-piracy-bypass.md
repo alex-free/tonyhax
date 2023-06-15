@@ -28,7 +28,7 @@ When triggered, the APv1 and APv2 style copy protections will trigger an 'anti-p
 
 In addition to APv1 or APv2 protection, some later games may also contain a protection measure known as the EDC check. For the affected games, this protection is triggered when you burn the EDC protected PSX CD image with standard CD burning software, which in most cases will changes the EDC data when burning an EDC protected PSX CD image.
 
-The EDC check can be however be defeated by simply forcing the EDC data to not be changed when burning such a protected PSX CD image. Not every CD burning software has an option which can do this, please see the [CD Burning](#cd-burning-for-edc) section for a more in depth capability comparison of common burning software.
+The EDC check can be however be defeated by simply forcing the EDC data to not be changed when burning such a protected PSX CD image. Not every CD burning software has an option which can do this, please see the [CD Burning](#cd-burning) section for a more in depth capability comparison of common burning software.
 
 Real 'imported region' PSX game discs with EDC protection will work just fine when booted via Tonyhax International.
 
@@ -40,7 +40,7 @@ LibCrypt protection can be bypassed by burning a backup CD-R of a LibCrypt game 
 
 Real PAL LibCrypt discs booted via Tonyhax International on USA or Japanese consoles ('imports') will not trip the detection.
 
-## CD Burning For EDC
+## CD Burning
 
 ### [CDRDAO-PLED](https://alex-free.github.io/cdrdao)
 
@@ -441,21 +441,21 @@ This is the complete list of games with bypasses anti-piracy measures that are s
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
-## NBA Shootout 2001
+### NBA Shootout 2001
 
 - Versions Tested: [USA](http://redump.org/disc/16764/), [USA Demo](http://redump.org/disc/42465/).
 - Versions With Anti-Piracy Screen: USA, USA Demo.
 - When Is The Anti-Piracy Screen Check: At the end of the first loading screen.
 - Versions With Anti-Piracy Bypass Support: USA, USA Demo.
 
-## NBA Shootout 2002
+### NBA Shootout 2002
 
 - Versions Tested: [USA](http://redump.org/disc/14527/), [USA Demo](http://redump.org/disc/44305/).
 - Versions With Anti-Piracy Screen: USA, USA Demo.
 - When Is The Anti-Piracy Screen Check: At the end of the first loading screen.
 - Versions With Anti-Piracy Bypass Support: USA, USA Demo.
 
-## NBA Shootout 2003
+### NBA Shootout 2003
 
 - Versions Tested: [USA](http://redump.org/disc/14566/).
 - Versions With Anti-Piracy Screen: USA.

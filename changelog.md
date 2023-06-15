@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 1.3.3 (6/5/2023)
+
+*   [tonyhax-international-v1.3.3](https://github.com/alex-free/tonyhax/releases/download/v1.3.3i/tonyhax-international-v1.3.3.zip)
+
+Changes:
+
+* Added a [APv2 bypass](anti-piracy-bypass.md) for Boku no Natsuyasumi: Summer Holiday 20th Century Japan to close this [issue](https://github.com/alex-free/tonyhax/issues/28). Enjoy, [Bloom-Haven](https://github.com/Bloom-Haven)!!!
+
+* Added a ton of real hardware screen captures to the docs and improved documentation itself immensely with more in-depth steps.
+
 ## Version 1.3.2 (6/3/2023)
 
 *   [tonyhax-international-v1.3.2](https://github.com/alex-free/tonyhax/releases/download/v1.3.2i/tonyhax-international-v1.3.2.zip)

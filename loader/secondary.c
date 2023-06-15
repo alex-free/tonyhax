@@ -14,6 +14,19 @@
 #include "integrity.h"
 #include "io.h"
 
+//to test ROM functionality in emulation via boot CD, uncomment the following 2 lines:
+//#undef ROM
+//#define ROM
+
+//to test XSTATION ROM functionality in emulation via boot CD, uncomment the following 4 lines:
+//#undef XSTATION
+//#define XSTATION
+//#undef ROM
+//#define ROM
+
+//to test behavior without any APv2 bypasses enabled (useful for testing D0 AP bypass codes via save game file gameshark functionality rather then internal activate_anti_piracy() function), uncomment:
+//#define AP_BYPASS_DISABLE
+
 uint8_t sscmd;
 uint8_t cdcontrollerver[4];
 
@@ -39,14 +52,6 @@ extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
 void * address;		// For Calculating BIOS Functions
 uint8_t j;			// Joypad
 uint8_t padbuf[2][0x22];	// Joypad Buffers
-
-
-//to test ROM functionality in emulation via boot CD, uncomment the following 2 lines:
-//#undef ROM
-//#define ROM
-
-//to test behavior without any APv2 bypasses enabled (useful for testing D0 AP bypass codes via save game file gameshark functionality rather then internal activate_anti_piracy() function), uncomment:
-//#define AP_BYPASS_DISABLE
 
 #if defined ROM
 void run_shell() {
@@ -226,7 +231,7 @@ void log_bios_version() {
 	}
 
 	debug_write("Console: %s", bios_is_ps1() ? "PS1": "PS2");
-	debug_write("Sys BIOS: %s", version);
+	debug_write("System BIOS: %s", version);
 }
 
 bool backdoor_cmd(uint_fast8_t cmd, const char * string) {
@@ -308,16 +313,16 @@ void wait_lid_status(bool open) {
 			}
 #endif
 
-		#if defined ROM
+#if defined ROM
 		} else { // still allow booting Sony BIOS after reading MC
 			if(j == 0x40) { // X button
 				controller_input_stop();
 				run_shell(); // launch Sony BIOS
 			}
 		}
-		#else
+#else
 		}
-		#endif
+#endif
 
 		// Issue Getstat command
 		// We cannot issue the BIOS CD commands yet because we haven't called CdInit
@@ -374,87 +379,99 @@ bool licensed_drive() {
 		return false;
 	}   
 }
-#endif
+#endif // TOCPERFECT
+
+void re_cd_init() {
+	debug_write("Reinitializing kernel"); 
+	bios_reinitialize();
+	bios_inject_disc_error();
+	debug_write("Stopping Motor"); // Reset one last time to avoid potential lockups (here be dragons)
+	cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
+	
+	debug_write("Initializing CD");
+	if (!CdInit()) {
+		debug_write("Init failed");
+		return;
+	}
+}
 
 void try_boot_cd() {
 	int32_t read;
+#if defined FREEPSXBOOT
+	debug_write("Remove the FreePSXBoot memory card now from your console");
+#elif defined ROM
+	debug_write("With the CD drive open, press X to boot the Sony BIOS or");
+	debug_write("Press O to enable GS codes");
+#endif
+
+#if !defined XSTATION
 	uint8_t cbuf[4]; // CD Command Buffer
 
-	#if defined FREEPSXBOOT
-		debug_write("Remove the FreePSXBoot memory card now from your console");
-	#elif defined ROM
-		debug_write("With the CD drive open, press X to boot the Sony BIOS");
-	#endif
+#if !defined TOCPERFECT
+	if(enable_unlock) {
+		#if !defined ROM
+		debug_write("With the CD drive open, press O to enable GS codes");
+		#endif
+		debug_write("Put in a backup or import disc, then close the drive lid");
+		wait_lid_status(true); // doesn't wait during the ROM method, unsure why but it is what we want as it allows us to auto-boot with the ROM boot method
+		wait_lid_status(false);
+	} else {
+		if(is_lid_open() || !licensed_drive()) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licensed (if it is not licensed but not open then the drive is closed and the user can open it and license it)
+			debug_write("Put in a real NTSC-J PSX game disc, then block the lid sensor");
+			wait_lid_status(true);
+			wait_lid_status(false); // Blocking lid sensor = 'closing lid'
 
-	#if !defined TOCPERFECT
-		if(enable_unlock) {
-			debug_write("Press O to enable GS codes");
-			debug_write("Put in a backup or import disc, then close the drive lid");
-			wait_lid_status(true); // doesn't wait during the ROM method, unsure why but it is what we want as it allows us to auto-boot with the ROM boot method
-			wait_lid_status(false);
-		} else {
-			if(is_lid_open() || !licensed_drive()) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licensed (if it is not licensed but not open then the drive is closed and the user can open it and license it)
-				debug_write("Put in a real NTSC-J PSX game disc, then block the lid sensor");
-				wait_lid_status(true);
-				wait_lid_status(false); // Blocking lid sensor = 'closing lid'
-
-	            debug_write("Initializing CD");	// Drive will be in licensed state after this is successful
-				if (!CdInit()) {
-					debug_write("Init failed");
-					debug_write("Try unblocking then blocking the lid sensor again");
-					return;
-				}
-			} // Drive is licensed and the lid is 'closed' at this point
-			debug_write("Drive is licensed");
-            
-			debug_write("Stopping motor");
-			cd_command(CD_CMD_STOP,0,0); cd_wait_int(); cd_wait_int();
-
-			debug_write("Press O to enable GS codes");
-			controller_input_start();
-
-			debug_write("Keep the lid sensor blocked until turning off the console");
-			debug_write("Remove the real NTSC-J PSX game disc");
-			debug_write("Put in a backup/import disc, then press X"); // Thanks MottZilla!
-            
-			while(1) { 
-				j = padbuf[0][3] ^ 0xFF;
-
-				if(controller_input_switch) {
-					if(j == 0x40) {
-						break; // X button boots disc
-					} else if(j == 0x20) { // Circle button enables codes
-						controller_input_switch = 0; // stop pulling for circle button input once we get it, as unlike when the X button is pressed (which breaks this loop) we still have to wait here until the user closes the console CD drive lid
-						read_memcard(); // this allows Japanese console users to enable user supplied GameShark codes without having to unblock the lid sensor, resetting authentication which would just be more unnecessary steps.
-					}
-				} else {
-					if(j == 0x40)
-						break; // X button boots disc
-				}
-				debug_write(" "); // Vblank wait for controller input
+            debug_write("Initializing CD");	// Drive will be in licensed state after this is successful
+			if (!CdInit()) {
+				debug_write("Init failed");
+				debug_write("Try unblocking then blocking the lid sensor again");
+				return;
 			}
-		    controller_input_stop();
+		} // Drive is licensed and the lid is 'closed' at this point
+		debug_write("Drive is licensed");
+           
+		debug_write("Stopping motor");
+		cd_command(CD_CMD_STOP,0,0); cd_wait_int(); cd_wait_int();
+
+		debug_write("Press O to enable GS codes");
+		controller_input_start();
+
+		debug_write("Keep the lid sensor blocked until turning off the console");
+		debug_write("Remove the real NTSC-J PSX game disc");
+		debug_write("Put in a backup/import disc, then press X"); // Thanks MottZilla!
+            
+		while(1) { 
+			j = padbuf[0][3] ^ 0xFF;
+
+			if(controller_input_switch) {
+				if(j == 0x40) {
+					break; // X button boots disc
+				} else if(j == 0x20) { // Circle button enables codes
+					controller_input_switch = 0; // stop pulling for circle button input once we get it, as unlike when the X button is pressed (which breaks this loop) we still have to wait here until the user closes the console CD drive lid
+					read_memcard(); // this allows Japanese console users to enable user supplied GameShark codes without having to unblock the lid sensor, resetting authentication which would just be more unnecessary steps.
+				}
+			} else {
+				if(j == 0x40)
+					break; // X button boots disc
+			}
+			debug_write(" "); // Vblank wait for controller input
 		}
-	#endif
+	    controller_input_stop();
+	}
+#endif // TOCPERFECT
 
 	if(!enable_unlock) {
 		if(bugged_setsession) {
-			#if !defined STEALTH
-				debug_write("Sending SetSessionSuperUltraCommandSmash v2, please wait"); // always works on real hardware, DuckStation can get stuck here rarely though since it is not that accurate when it comes to emulating the early VC0A/VC0B/VC1A CDROM behavior
-			#endif
+			debug_write("Sending SetSessionSuperUltraCommandSmash v2, please wait"); // always works on real hardware, DuckStation can get stuck here rarely though since it is not that accurate when it comes to emulating the early VC0A/VC0B/VC1A CDROM behavior
 			sscmd = 2; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int(); // There is a 3rd response we are ignoring by sending SetSession 1 next ASAP after SetSession 2.
 			sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
 		} else {
-			#if !defined STEALTH
-				debug_write("Sending SetSession 1");
-			#endif
+			debug_write("Sending SetSession 1");
 			sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
 		}
 
 		if(calibrate_laser) { // VC2 and VC3s do auto Bias/Gain calibration when reading a newly inserted real NTSC-J PS1 disc. A swapped in CD-R or just a different disc in general needs this to be updated
-        #if !defined STEALTH		
         	debug_write("Calibrating laser");
-        #endif		
         	cbuf[0] = 0x50; cbuf[1] = 0x38; cbuf[2] = 0x15; cbuf[3] = 0x0A;	// ModeCompensateTrackingAutoGain
 			cd_command(CD_CMD_TEST,&cbuf[0],4); 
 			cd_wait_int();
@@ -468,19 +485,14 @@ void try_boot_cd() {
 		The second reason is because of how we are using the BIOS controller functions, to go back to a clean state a bios re-intialization also accomplishes that.
 		*/
 
-		debug_write("Reinitializing kernel"); 
-		bios_reinitialize();
-		bios_inject_disc_error();
-
-		debug_write("Stopping Motor");
-		cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
+		re_cd_init();
 	}
-	
-	debug_write("Initializing CD");
-	if (!CdInit()) {
-		debug_write("Init failed");
-		return;
-	}
+#else // XSTATION DEFINED
+	debug_write("Open and then close the CD drive lid");
+	wait_lid_status(true); // doesn't wait during the ROM method, unsure why but it is what we want as it allows us to auto-boot with the ROM boot method
+	wait_lid_status(false);
+	re_cd_init();
+#endif // XSTATION
 
 	/*
 	 * Use the space the BIOS has allocated for reading CD sectors.
@@ -493,17 +505,17 @@ void try_boot_cd() {
 	uint8_t * data_buffer = (uint8_t *) (bios_is_ps1() ? 0xA000B070 : 0xA000A8D0);
 
 	debug_write("Checking game region");
-    #if defined TOCPERFECT	
-    	if (CdReadSector(1, 12, data_buffer) != 1) { // Real license data sector is copied to sector 12 by PS1 DemoSwap Patcher before it writes Japanese license data to sector 4
-			debug_write("Failed to read sector");
-			return;
-		}
-	#else
-    	if (CdReadSector(1, 4, data_buffer) != 1) {
-			debug_write("Failed to read sector");
-			return;
-		}
-	#endif
+#if defined TOCPERFECT	
+    if (CdReadSector(1, 12, data_buffer) != 1) { // Real license data sector is copied to sector 12 by PS1 DemoSwap Patcher before it writes Japanese license data to sector 4
+		debug_write("Failed to read sector");
+		return;
+	}
+#else
+    if (CdReadSector(1, 4, data_buffer) != 1) {
+		debug_write("Failed to read sector");
+		return;
+	}
+#endif
 
 	const char * game_region;
 	bool game_is_pal = false;
@@ -541,13 +553,13 @@ void try_boot_cd() {
 
 	char bootfilebuf[32];
 
-	#if defined TOCPERFECT
-		debug_write("Loading SYSTEM.CN2");
-		int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CN2;1", FILE_READ);
-	#else
-		debug_write("Loading SYSTEM.CNF");
-		int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
-	#endif
+#if defined TOCPERFECT
+	debug_write("Loading SYSTEM.CN2");
+	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CN2;1", FILE_READ);
+#else
+	debug_write("Loading SYSTEM.CNF");
+	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
+#endif
     
 	if (cnf_fd > 0) {
 		read = FileRead(cnf_fd, data_buffer, 2048);
@@ -584,18 +596,7 @@ void try_boot_cd() {
 	debug_write(" * %s = %x", "STACK", stacktop);
 	debug_write(" * %s = %s", "BOOT", bootfile);
 
-	debug_write("Reinitializing kernel"); 
-	bios_reinitialize();
-	bios_inject_disc_error();
-
-	debug_write("Stopping Motor"); // Reset one last time to avoid potential lockups (here be dragons)
-	cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
-	
-	debug_write("Initializing CD");
-	if (!CdInit()) {
-		debug_write("Init failed");
-		return;
-	}
+	re_cd_init(); // Reset one last time to avoid potential lockups (here be dragons)
 
 	/*
 	 * SetConf is run by BIOS with interrupts disabled.
@@ -678,9 +679,11 @@ void try_boot_cd() {
 		// Restore original error handler
 		bios_restore_disc_error();
 
+		#if !defined XSTATION
 		#if !defined AP_BYPASS_DISABLE
-			if(!first_rev)
-				activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+		if(!first_rev)
+			activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+		#endif
 		#endif
 
 		if((did_read_mc) && (!cheat_engine_installed))
@@ -709,10 +712,12 @@ void try_boot_cd() {
 	// Restore original error handler
 	bios_restore_disc_error();
 
-	#if !defined AP_BYPASS_DISABLE
-		if(!first_rev)
-			activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
-	#endif
+#if !defined XSTATION
+#if !defined AP_BYPASS_DISABLE
+	if(!first_rev)
+		activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+#endif
+#endif
 
 	if((did_read_mc) && (!cheat_engine_installed))
 		install_cheat_engine();
@@ -751,7 +756,7 @@ void main() {
 	sscmd = 0x20; cd_command(CD_CMD_TEST,(unsigned char *)&sscmd,1); cd_wait_int(); 
 	cd_read_reply(cdcontrollerver);	// Test Command $19,$20 gets the CDROM BIOS
 	debug_write("CD BIOS: %x", *(uint32_t*) cdcontrollerver);
-   	if(cdcontrollerver[0]==0x94) {    
+   	if(cdcontrollerver[0] == 0x94) {    
         bugged_setsession = 1;
         enable_unlock = 0; // VC0 A and VC0 B are both from 1994 and don't support the getregion command to figure out if it is unlockable or not.
         first_rev = 1;
@@ -763,6 +768,7 @@ void main() {
         calibrate_laser = 1;
     }
 
+#if !defined XSTATION
 	if(enable_unlock) {
 		uint8_t cd_reply[16];
 		// Run "GetRegion" test
@@ -810,6 +816,7 @@ void main() {
 				return;
 		}
 	}
+#endif // XSTATION
 
 	while (1) {
 		try_boot_cd();

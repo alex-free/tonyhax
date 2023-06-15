@@ -2,6 +2,7 @@
 # Thanks to whoever made https://devhints.io/makefile!
 
 include ../variables.mk.tocperfect
+include ../variables-shared.mk
 
 LOADER_HEADERS := $(wildcard *.h) $(LOADER_AUTOGEN)
 LOADER_OBJECTS := $(patsubst %.c, %.o, $(patsubst %.S, %.o, $(wildcard *.c *.S)))

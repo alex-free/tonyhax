@@ -476,23 +476,22 @@ void try_boot_cd() {
 			cd_command(CD_CMD_TEST,&cbuf[0],4); 
 			cd_wait_int();
 		}
-
-		/*
-		We have to re-initilize the BIOS, stop, and init in that order to prevent the process from possibly freezing at this point on Japanese consoles. 
-		
-		The first reason this is required is because the SetSessionSuperUltraCommandSmash screws up interrupts since we are sending the 2nd SetSession command before the possible 3rd interrupt (which is a second INT5 response sent if session 2 does not actually exist). 
-		
-		The second reason is because of how we are using the BIOS controller functions, to go back to a clean state a bios re-intialization also accomplishes that.
-		*/
-
-		re_cd_init();
 	}
 #else // XSTATION DEFINED
 	debug_write("Open and then close the CD drive lid");
 	wait_lid_status(true); // doesn't wait during the ROM method, unsure why but it is what we want as it allows us to auto-boot with the ROM boot method
 	wait_lid_status(false);
-	re_cd_init();
 #endif // XSTATION
+
+	/*
+	We have to re-initilize the BIOS, stop, and init in that order to prevent the process from possibly freezing at this point on Japanese consoles. 
+	
+	The first reason this is required is because the SetSessionSuperUltraCommandSmash screws up interrupts since we are sending the 2nd SetSession command before the possible 3rd interrupt (which is a second INT5 response sent if session 2 does not actually exist). 
+		
+	The second reason is because of how we are using the BIOS controller functions, to go back to a clean state a bios re-intialization also accomplishes that.
+	*/
+
+	re_cd_init();
 
 	/*
 	 * Use the space the BIOS has allocated for reading CD sectors.

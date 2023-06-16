@@ -6,3 +6,4 @@ cd ../
 cp -rv *.md ~/dev/alex-free.github.io/tonyhax-international
 rm -rf ~/dev/alex-free.github.io/tonyhax-international/images
 cp -rv images ~/dev/alex-free.github.io/tonyhax-international
+mv readme.md index.md

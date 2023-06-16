@@ -87,9 +87,7 @@ _More Info_
 
 *   [tonyhax-international-v1.3.5](https://github.com/alex-free/tonyhax/releases/download/v1.3.5i/tonyhax-international-v1.3.5.zip)
 
-* Fixed a serious regression introduced in v1.3.4 that caused almost all boot methods to hang at `checking game region` step.
-
-* Added more info the the [CD-R Media For PSX Backups](#cd-r-media-for-psx-backups) section.
+* Fixed a serious regression introduced in v1.3.4 that caused almost all boot methods to hang at `checking game region` step. Seriously, sorry, I ran out of CD-Rs and was over confident in my ability to test with emulation alone (and not real hardware). Never again.
 
 [About previous versions](changelog.md).
 
@@ -277,15 +275,11 @@ The early PS2 models that Tonyhax International supports have the PS1 mode which
 * A highly reflective layer system.
 * High quality polycarbonate and "sealing" process combining all parts of the CD-R.
 
-Burn **as slow as possible**. If you have a game with [additional anti-piracy](anti-piracy-bypass.md) measures, you may need to use a specific [burning software](anti-piracy-bypass.md#cd-burning).
-
-16x is way too fast for most CD-Rs and the PSX (CMC Pro is reported okay and working at this speed though). I burn everything at 10x, the slowest speed my drive supports, and it works.
-
 _You want to use 74 minute discs_. The PSX was never designed for the now more common 80 minute discs, and it is easier for the laser to track 74 minute discs due to their wider data spiral track. As of 2023, 74 minute discs are not really manufactured anymore and new old stock can get pricey, so it really may not be worth it as the PSX can read 80 minute discs okay (just not as optimally, you may experience longer load times or even straight up disc read errors on worn CD drives). 
 
 The PSX can read 74 minute discs easier as that is closer to what it was designed for originally (which was 72 minute pressed CD-ROMs). Verbatim DataLifePlus 74min discs with a copyright date of 1997 or 1999 on the back of the CD case may be among the best media to acquire.
 
-Later PSX consoles and all PS2s appear to handle 80min discs much better then the earliest models. There is however a [PS2 specific issue with burning _some games_ to 80min media](https://github.com/socram8888/tonyhax/issues/24), but luckily this has a [workaround](https://github.com/socram8888/tonyhax/issues/24#issuecomment-1593582861)
+Later PSX consoles and all PS2s appear to handle 80min discs much better then the earliest models.
 
 It is extremely important to note that as of 2023 one single monopoly known as CMC magnetics has [bought out every good manufacturer of CD-R media](https://github.com/alex-free/tonyhax/issues/30). Quality has seemed to [gone down due to this](https://gbatemp.net/threads/do-modern-burners-cds-make-lower-quality-ps1-backups.628708/page-3#post-10182249), so new old stock 74min media really is optimal. 
 

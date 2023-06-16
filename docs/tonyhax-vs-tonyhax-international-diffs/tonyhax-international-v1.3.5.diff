@@ -1,6 +1,6 @@
-diff --git a/tmp/og-tonyhax.CFG/loader/Makefile b/loader/Makefile
+diff --git a/tmp/og-tonyhax.6Cs/loader/Makefile b/loader/Makefile
 index f121ebf..955f671 100644
---- a/tmp/og-tonyhax.CFG/loader/Makefile
+--- a/tmp/og-tonyhax.6Cs/loader/Makefile
 +++ b/loader/Makefile
 @@ -2,6 +2,7 @@
  # Thanks to whoever made https://devhints.io/makefile!
@@ -1990,9 +1990,9 @@ index 0000000..ddff419
 +void install_cheat_engine();
 +
 +extern bool cheat_engine_installed;
-diff --git a/tmp/og-tonyhax.CFG/loader/bios-asm.S b/loader/bios-asm.S
+diff --git a/tmp/og-tonyhax.6Cs/loader/bios-asm.S b/loader/bios-asm.S
 index 93837fa..a71573d 100644
---- a/tmp/og-tonyhax.CFG/loader/bios-asm.S
+--- a/tmp/og-tonyhax.6Cs/loader/bios-asm.S
 +++ b/loader/bios-asm.S
 @@ -69,11 +69,6 @@ memcpy:
  	li t1, 0x2A
@@ -2018,9 +2018,9 @@ index 93837fa..a71573d 100644
  ###############
  # B-FUNCTIONS #
  ###############
-diff --git a/tmp/og-tonyhax.CFG/loader/bios.c b/loader/bios.c
+diff --git a/tmp/og-tonyhax.6Cs/loader/bios.c b/loader/bios.c
 index 0f3d558..2ec6a3f 100644
---- a/tmp/og-tonyhax.CFG/loader/bios.c
+--- a/tmp/og-tonyhax.6Cs/loader/bios.c
 +++ b/loader/bios.c
 @@ -5,23 +5,13 @@
  #include "debugscreen.h"
@@ -2073,9 +2073,9 @@ index 0f3d558..2ec6a3f 100644
  
  	// Save for later
  	original_disc_error = BIOS_A0_TABLE[0xA1];
-diff --git a/tmp/og-tonyhax.CFG/loader/bios.h b/loader/bios.h
+diff --git a/tmp/og-tonyhax.6Cs/loader/bios.h b/loader/bios.h
 index c5b26f3..9498989 100644
---- a/tmp/og-tonyhax.CFG/loader/bios.h
+--- a/tmp/og-tonyhax.6Cs/loader/bios.h
 +++ b/loader/bios.h
 @@ -219,13 +219,6 @@ void ExitCriticalSection();
   */
@@ -2103,9 +2103,9 @@ index c5b26f3..9498989 100644
 + */
 +void SetMemSize(uint8_t mem_size);
 \ No newline at end of file
-diff --git a/tmp/og-tonyhax.CFG/loader/cdrom.c b/loader/cdrom.c
+diff --git a/tmp/og-tonyhax.6Cs/loader/cdrom.c b/loader/cdrom.c
 index dddc533..40d9b6f 100644
---- a/tmp/og-tonyhax.CFG/loader/cdrom.c
+--- a/tmp/og-tonyhax.6Cs/loader/cdrom.c
 +++ b/loader/cdrom.c
 @@ -43,6 +43,40 @@ void cd_command(uint_fast8_t cmd, const uint8_t * params, uint_fast8_t params_le
  	CD_REGS[1] = cmd;
@@ -2219,9 +2219,9 @@ index dddc533..40d9b6f 100644
 -	return true;
 +	for (volatile int i = 0; i < 0x400000; i++); // unmodifiable compiler code when using -Os optimizations
  }
-diff --git a/tmp/og-tonyhax.CFG/loader/cdrom.h b/loader/cdrom.h
+diff --git a/tmp/og-tonyhax.6Cs/loader/cdrom.h b/loader/cdrom.h
 index 438e7cd..c26874d 100644
---- a/tmp/og-tonyhax.CFG/loader/cdrom.h
+--- a/tmp/og-tonyhax.6Cs/loader/cdrom.h
 +++ b/loader/cdrom.h
 @@ -8,6 +8,12 @@
  #define CD_CMD_TEST 0x19
@@ -2253,9 +2253,9 @@ index 438e7cd..c26874d 100644
 -bool cd_drive_reset(void);
 +// Resets the drive.
 +void cd_drive_reset();
-diff --git a/tmp/og-tonyhax.CFG/loader/debugscreen.c b/loader/debugscreen.c
+diff --git a/tmp/og-tonyhax.6Cs/loader/debugscreen.c b/loader/debugscreen.c
 index cb8c32e..926cb0c 100644
---- a/tmp/og-tonyhax.CFG/loader/debugscreen.c
+--- a/tmp/og-tonyhax.6Cs/loader/debugscreen.c
 +++ b/loader/debugscreen.c
 @@ -113,7 +113,7 @@ void debug_init() {
  	gpu_flush_cache();
@@ -2282,9 +2282,9 @@ index cb8c32e..926cb0c 100644
  		to_print = formatted_repeated;
  	}
  
-diff --git a/tmp/og-tonyhax.CFG/loader/debugscreen.h b/loader/debugscreen.h
+diff --git a/tmp/og-tonyhax.6Cs/loader/debugscreen.h b/loader/debugscreen.h
 index 6ae71a5..d06a360 100644
---- a/tmp/og-tonyhax.CFG/loader/debugscreen.h
+--- a/tmp/og-tonyhax.6Cs/loader/debugscreen.h
 +++ b/loader/debugscreen.h
 @@ -10,3 +10,5 @@ void debug_write(const char * str, ...);
  void debug_text_at(uint_fast16_t x, uint_fast16_t y, const char * str);
@@ -2293,9 +2293,9 @@ index 6ae71a5..d06a360 100644
 +
 +extern bool controller_input;
 \ No newline at end of file
-diff --git a/tmp/og-tonyhax.CFG/loader/generate-tonyhax-mcs.sh b/loader/generate-tonyhax-mcs.sh
+diff --git a/tmp/og-tonyhax.6Cs/loader/generate-tonyhax-mcs.sh b/loader/generate-tonyhax-mcs.sh
 index 33116fa..b01a8b9 100644
---- a/tmp/og-tonyhax.CFG/loader/generate-tonyhax-mcs.sh
+--- a/tmp/og-tonyhax.6Cs/loader/generate-tonyhax-mcs.sh
 +++ b/loader/generate-tonyhax-mcs.sh
 @@ -25,11 +25,11 @@ load_len=$(printf "%08X" $(stat -c %s $bin_file))
  
@@ -2311,10 +2311,10 @@ index 33116fa..b01a8b9 100644
  
  # Cleanup
  rm $bin_file
-diff --git a/tmp/og-tonyhax.CFG/loader/patch-ap.S b/tmp/og-tonyhax.CFG/loader/patch-ap.S
+diff --git a/tmp/og-tonyhax.6Cs/loader/patch-ap.S b/tmp/og-tonyhax.6Cs/loader/patch-ap.S
 deleted file mode 100644
 index 85511eb..0000000
---- a/tmp/og-tonyhax.CFG/loader/patch-ap.S
+--- a/tmp/og-tonyhax.6Cs/loader/patch-ap.S
 +++ /dev/null
 @@ -1,196 +0,0 @@
 -
@@ -2513,10 +2513,10 @@ index 85511eb..0000000
 -
 -.globl patch_ap_end
 -patch_ap_end:
-diff --git a/tmp/og-tonyhax.CFG/loader/patch-fpb.S b/tmp/og-tonyhax.CFG/loader/patch-fpb.S
+diff --git a/tmp/og-tonyhax.6Cs/loader/patch-fpb.S b/tmp/og-tonyhax.6Cs/loader/patch-fpb.S
 deleted file mode 100644
 index e26fb72..0000000
---- a/tmp/og-tonyhax.CFG/loader/patch-fpb.S
+--- a/tmp/og-tonyhax.6Cs/loader/patch-fpb.S
 +++ /dev/null
 @@ -1,35 +0,0 @@
 -
@@ -2554,10 +2554,10 @@ index e26fb72..0000000
 -
 -.globl patch_fpb_end
 -patch_fpb_end:
-diff --git a/tmp/og-tonyhax.CFG/loader/patch-uart.S b/tmp/og-tonyhax.CFG/loader/patch-uart.S
+diff --git a/tmp/og-tonyhax.6Cs/loader/patch-uart.S b/tmp/og-tonyhax.6Cs/loader/patch-uart.S
 deleted file mode 100644
 index da95257..0000000
---- a/tmp/og-tonyhax.CFG/loader/patch-uart.S
+--- a/tmp/og-tonyhax.6Cs/loader/patch-uart.S
 +++ /dev/null
 @@ -1,121 +0,0 @@
 -
@@ -2681,10 +2681,10 @@ index da95257..0000000
 -
 -.global patch_uartputc_end
 -patch_uartputc_end:
-diff --git a/tmp/og-tonyhax.CFG/loader/patch-vandal-hearths-2.S b/tmp/og-tonyhax.CFG/loader/patch-vandal-hearths-2.S
+diff --git a/tmp/og-tonyhax.6Cs/loader/patch-vandal-hearths-2.S b/tmp/og-tonyhax.6Cs/loader/patch-vandal-hearths-2.S
 deleted file mode 100644
 index 67f389a..0000000
---- a/tmp/og-tonyhax.CFG/loader/patch-vandal-hearths-2.S
+--- a/tmp/og-tonyhax.6Cs/loader/patch-vandal-hearths-2.S
 +++ /dev/null
 @@ -1,35 +0,0 @@
 -
@@ -2722,10 +2722,10 @@ index 67f389a..0000000
 -
 -.globl patch_vandal_end
 -patch_vandal_end:
-diff --git a/tmp/og-tonyhax.CFG/loader/patcher.c b/tmp/og-tonyhax.CFG/loader/patcher.c
+diff --git a/tmp/og-tonyhax.6Cs/loader/patcher.c b/tmp/og-tonyhax.6Cs/loader/patcher.c
 deleted file mode 100644
 index 27c1c49..0000000
---- a/tmp/og-tonyhax.CFG/loader/patcher.c
+--- a/tmp/og-tonyhax.6Cs/loader/patcher.c
 +++ /dev/null
 @@ -1,147 +0,0 @@
 -
@@ -2875,10 +2875,10 @@ index 27c1c49..0000000
 -	// Overwrite BIOS' std_out_putchar function
 -	memcpy(BIOS_A0_TABLE[0x3C], &patch_uartputc_start, &patch_uartputc_end - &patch_uartputc_start);
 -}
-diff --git a/tmp/og-tonyhax.CFG/loader/patcher.h b/tmp/og-tonyhax.CFG/loader/patcher.h
+diff --git a/tmp/og-tonyhax.6Cs/loader/patcher.h b/tmp/og-tonyhax.6Cs/loader/patcher.h
 deleted file mode 100644
 index 5b24f53..0000000
---- a/tmp/og-tonyhax.CFG/loader/patcher.h
+--- a/tmp/og-tonyhax.6Cs/loader/patcher.h
 +++ /dev/null
 @@ -1,12 +0,0 @@
 -
@@ -2935,9 +2935,9 @@ index 0000000..bd6af40
 +	}
 +}
 +ENTRY (start)
-diff --git a/tmp/og-tonyhax.CFG/loader/secondary.c b/loader/secondary.c
-index 18a2cab..73fc4e3 100644
---- a/tmp/og-tonyhax.CFG/loader/secondary.c
+diff --git a/tmp/og-tonyhax.6Cs/loader/secondary.c b/loader/secondary.c
+index 18a2cab..0ca4d0d 100644
+--- a/tmp/og-tonyhax.6Cs/loader/secondary.c
 +++ b/loader/secondary.c
 @@ -10,13 +10,213 @@
  #include "crc.h"
@@ -3254,7 +3254,7 @@ index 18a2cab..73fc4e3 100644
  		// Issue Getstat command
  		// We cannot issue the BIOS CD commands yet because we haven't called CdInit
  		cd_command(CD_CMD_GETSTAT, NULL, 0);
-@@ -137,20 +335,164 @@ void wait_lid_status(bool open) {
+@@ -137,20 +335,163 @@ void wait_lid_status(bool open) {
  		cd_read_reply(cd_reply);
  
  	} while ((cd_reply[0] & 0x10) != expected);
@@ -3404,27 +3404,26 @@ index 18a2cab..73fc4e3 100644
 +			cd_command(CD_CMD_TEST,&cbuf[0],4); 
 +			cd_wait_int();
 +		}
-+
-+		/*
-+		We have to re-initilize the BIOS, stop, and init in that order to prevent the process from possibly freezing at this point on Japanese consoles. 
-+		
-+		The first reason this is required is because the SetSessionSuperUltraCommandSmash screws up interrupts since we are sending the 2nd SetSession command before the possible 3rd interrupt (which is a second INT5 response sent if session 2 does not actually exist). 
-+		
-+		The second reason is because of how we are using the BIOS controller functions, to go back to a clean state a bios re-intialization also accomplishes that.
-+		*/
-+
-+		re_cd_init();
 +	}
 +#else // XSTATION DEFINED
 +	debug_write("Open and then close the CD drive lid");
 +	wait_lid_status(true); // doesn't wait during the ROM method, unsure why but it is what we want as it allows us to auto-boot with the ROM boot method
 +	wait_lid_status(false);
-+	re_cd_init();
 +#endif // XSTATION
++
++	/*
++	We have to re-initilize the BIOS, stop, and init in that order to prevent the process from possibly freezing at this point on Japanese consoles. 
++	
++	The first reason this is required is because the SetSessionSuperUltraCommandSmash screws up interrupts since we are sending the 2nd SetSession command before the possible 3rd interrupt (which is a second INT5 response sent if session 2 does not actually exist). 
++		
++	The second reason is because of how we are using the BIOS controller functions, to go back to a clean state a bios re-intialization also accomplishes that.
++	*/
++
++	re_cd_init();
  
  	/*
  	 * Use the space the BIOS has allocated for reading CD sectors.
-@@ -163,10 +505,17 @@ void try_boot_cd() {
+@@ -163,10 +504,17 @@ void try_boot_cd() {
  	uint8_t * data_buffer = (uint8_t *) (bios_is_ps1() ? 0xA000B070 : 0xA000A8D0);
  
  	debug_write("Checking game region");
@@ -3443,7 +3442,7 @@ index 18a2cab..73fc4e3 100644
  
  	const char * game_region;
  	bool game_is_pal = false;
-@@ -203,9 +552,15 @@ void try_boot_cd() {
+@@ -203,9 +551,15 @@ void try_boot_cd() {
  	const char * bootfile = "cdrom:PSX.EXE;1";
  
  	char bootfilebuf[32];
@@ -3460,7 +3459,7 @@ index 18a2cab..73fc4e3 100644
  	if (cnf_fd > 0) {
  		read = FileRead(cnf_fd, data_buffer, 2048);
  		FileClose(cnf_fd);
-@@ -241,6 +596,8 @@ void try_boot_cd() {
+@@ -241,6 +595,8 @@ void try_boot_cd() {
  	debug_write(" * %s = %x", "STACK", stacktop);
  	debug_write(" * %s = %s", "BOOT", bootfile);
  
@@ -3469,7 +3468,7 @@ index 18a2cab..73fc4e3 100644
  	/*
  	 * SetConf is run by BIOS with interrupts disabled.
  	 *
-@@ -248,13 +605,18 @@ void try_boot_cd() {
+@@ -248,13 +604,18 @@ void try_boot_cd() {
  	 * the interrupt handler will store the current thread state in the zero address, wiping
  	 * vital data, like the interrupt trampoline at 0x80.
  	 */
@@ -3490,7 +3489,7 @@ index 18a2cab..73fc4e3 100644
  	bzero(user_start, &__RO_START__ - user_start);
  
  	debug_write("Reading executable header");
-@@ -271,6 +633,37 @@ void try_boot_cd() {
+@@ -271,6 +632,37 @@ void try_boot_cd() {
  		return;
  	}
  
@@ -3528,7 +3527,7 @@ index 18a2cab..73fc4e3 100644
  	exe_header_t * exe_header = (exe_header_t *) (data_buffer + 0x10);
  
  	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function
-@@ -286,6 +679,16 @@ void try_boot_cd() {
+@@ -286,6 +678,16 @@ void try_boot_cd() {
  		// Restore original error handler
  		bios_restore_disc_error();
  
@@ -3545,7 +3544,7 @@ index 18a2cab..73fc4e3 100644
  		LoadAndExecute(bootfile, exe_header->initial_sp_base, exe_header->initial_sp_offset);
  		return;
  	}
-@@ -299,8 +702,6 @@ void try_boot_cd() {
+@@ -299,8 +701,6 @@ void try_boot_cd() {
  
  	FileClose(exe_fd);
  
@@ -3554,7 +3553,7 @@ index 18a2cab..73fc4e3 100644
  	if (game_is_pal != gpu_is_pal()) {
  		debug_write("Switching video mode");
  		debug_switch_standard(game_is_pal);
-@@ -311,6 +712,16 @@ void try_boot_cd() {
+@@ -311,6 +711,16 @@ void try_boot_cd() {
  	// Restore original error handler
  	bios_restore_disc_error();
  
@@ -3571,7 +3570,7 @@ index 18a2cab..73fc4e3 100644
  	// Games from WarmBoot start with interrupts disabled
  	EnterCriticalSection();
  
-@@ -321,6 +732,7 @@ void try_boot_cd() {
+@@ -321,6 +731,7 @@ void try_boot_cd() {
  }
  
  void main() {
@@ -3579,7 +3578,7 @@ index 18a2cab..73fc4e3 100644
  	// Undo all possible fuckeries during exploiting
  	bios_reinitialize();
  
-@@ -337,24 +749,76 @@ void main() {
+@@ -337,24 +748,76 @@ void main() {
  
  	bios_inject_disc_error();
  	log_bios_version();
@@ -3669,9 +3668,9 @@ index 18a2cab..73fc4e3 100644
  		try_boot_cd();
  
  		debug_write("Reinitializing kernel");
-diff --git a/tmp/og-tonyhax.CFG/loader/secondary.ld b/loader/secondary.ld
+diff --git a/tmp/og-tonyhax.6Cs/loader/secondary.ld b/loader/secondary.ld
 index 7dc880a..dfd4eaa 100644
---- a/tmp/og-tonyhax.CFG/loader/secondary.ld
+--- a/tmp/og-tonyhax.6Cs/loader/secondary.ld
 +++ b/loader/secondary.ld
 @@ -1,8 +1,8 @@
  MEMORY {
@@ -3692,6 +3691,6 @@ diff --git a/loader/tonyhax-tpl-old.mcs b/loader/tonyhax-tpl-old.mcs
 new file mode 100644
 index 0000000..50c3fa9
 Binary files /dev/null and b/loader/tonyhax-tpl-old.mcs differ
-diff --git a/tmp/og-tonyhax.CFG/loader/tonyhax-tpl.mcs b/loader/tonyhax-tpl.mcs
+diff --git a/tmp/og-tonyhax.6Cs/loader/tonyhax-tpl.mcs b/loader/tonyhax-tpl.mcs
 index 50c3fa9..0aab208 100644
-Binary files a/tmp/og-tonyhax.CFG/loader/tonyhax-tpl.mcs and b/loader/tonyhax-tpl.mcs differ
+Binary files a/tmp/og-tonyhax.6Cs/loader/tonyhax-tpl.mcs and b/loader/tonyhax-tpl.mcs differ

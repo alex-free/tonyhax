@@ -1,5 +1,22 @@
 # Changelog
 
+## Version 1.3.4 (6/14/2023)
+
+*   [tonyhax-international-v1.3.4](https://github.com/alex-free/tonyhax/releases/download/v1.3.4i/tonyhax-international-v1.3.4.zip)
+
+Changes:
+
+* Added a special [xStation ROM version](xstation.md) due to request by 
+[L10N37](https://github.com/L10N37). This is actually super cool.
+
+* Added more in-depth info to the [CD-R Media For PSX Backups](#cd-r-media-for-psx-backups) section thanks to [XxTriviumxX](https://github.com/XxTriviumxX).
+
+* Added even more real hardware screen captures to the docs and improved documentation itself immensely with more in-depth steps (specifically related to the [FreePSXBoot exploit](freepsxboot-exploit.md) but also touched a few other pages).
+
+* Updated [MKPSXISO](https://github.com/Lameguy64/mkpsxiso) to the latest version.
+
+* Build system/source cleanup/comment improvements.
+
 ## Version 1.3.3 (6/5/2023)
 
 *   [tonyhax-international-v1.3.3](https://github.com/alex-free/tonyhax/releases/download/v1.3.3i/tonyhax-international-v1.3.3.zip)

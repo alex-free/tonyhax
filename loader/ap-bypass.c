@@ -490,6 +490,42 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if
 
+// Dance Dance Revolution: 3rd Mix
+   	((strcmp("SLPM_865.03;1", bootfile)) == 0) { // Japan
+		/*
+		D00C4260 001E 
+		800C4260 0000
+		my code generated via aprip
+    	*/
+    	add_D0_code(0x800C4260, readtoc_compare_val);
+    	add_80_code(0x800C4260, readtoc_patch_val);
+    	install_cheat_engine();
+    } else if
+
+// Dance Dance Revolution: 4th Mix
+   	((strcmp("SLPM_867.52;1", bootfile)) == 0) { // Japan
+		/*
+		D00EB3E4 001E
+		800EB3E4 0000
+		my code generated via aprip
+    	*/
+    	add_D0_code(0x800EB3E4, readtoc_compare_val);
+    	add_80_code(0x800EB3E4, readtoc_patch_val);
+    	install_cheat_engine();
+    } else if
+
+// Dance Dance Revolution: 5th Mix
+   	((strcmp("SLPM_868.97;1", bootfile)) == 0) { // Japan
+		/*
+		D0177140 001E 
+		80177140 0000
+		my code generated via aprip
+    	*/
+    	add_D0_code(0x80177140, readtoc_compare_val);
+    	add_80_code(0x80177140, readtoc_patch_val);
+    	install_cheat_engine();
+    } else if
+
 // Dancing Stage featuring Dreams Come True
    	((strcmp("SLPM_865.05;1", bootfile)) == 0) { // Japan
 		/*

@@ -505,7 +505,7 @@ void try_boot_cd() {
 
 	debug_write("Checking game region");
 #if defined TOCPERFECT	
-    if (CdReadSector(1, 12, data_buffer) != 1) { // Real license data sector is copied to sector 12 by PS1 DemoSwap Patcher before it writes Japanese license data to sector 4
+    if (CdReadSector(1, 15, data_buffer) != 1) { // Real license data sector is copied to sector 15 by PS1 DemoSwap Patcher before it writes Japanese license data to sector 4
 		debug_write("Failed to read sector");
 		return;
 	}
@@ -552,13 +552,8 @@ void try_boot_cd() {
 
 	char bootfilebuf[32];
 
-#if defined TOCPERFECT
-	debug_write("Loading SYSTEM.CN2");
-	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CN2;1", FILE_READ);
-#else
 	debug_write("Loading SYSTEM.CNF");
 	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
-#endif
     
 	if (cnf_fd > 0) {
 		read = FileRead(cnf_fd, data_buffer, 2048);
@@ -575,18 +570,32 @@ void try_boot_cd() {
 		config_get_hex((char *) data_buffer, "TCB", &tcb);
 		config_get_hex((char *) data_buffer, "EVENT", &event);
 		config_get_hex((char *) data_buffer, "STACK", &stacktop);
+
+#if defined TOCPERFECT
+		if (config_get_string((char *) data_buffer, "BOOY", bootfilebuf)) {
+			bootfile = bootfilebuf;
+		} else {
+			uint32_t errorCode = GetLastError();
+			if (errorCode != FILEERR_NOT_FOUND) {
+				debug_write("Open error %d", errorCode);
+				return;
+			}
+
+			debug_write("Not found");
+		}
+#else
 		if (config_get_string((char *) data_buffer, "BOOT", bootfilebuf)) {
 			bootfile = bootfilebuf;
-		}
+		} else {
+			uint32_t errorCode = GetLastError();
+			if (errorCode != FILEERR_NOT_FOUND) {
+				debug_write("Open error %d", errorCode);
+				return;
+			}
 
-	} else {
-		uint32_t errorCode = GetLastError();
-		if (errorCode != FILEERR_NOT_FOUND) {
-			debug_write("Open error %d", errorCode);
-			return;
+			debug_write("Not found");
 		}
-
-		debug_write("Not found");
+#endif
 	}
 
 	// Use string format to reduce ROM usage

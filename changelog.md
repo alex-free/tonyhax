@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 1.3.5 (6/16/2023)
+
+*   [tonyhax-international-v1.3.5](https://github.com/alex-free/tonyhax/releases/download/v1.3.5i/tonyhax-international-v1.3.5.zip)
+
+Changes:
+
+* Fixed a serious regression introduced in v1.3.4 that caused almost all boot methods to hang at `checking game region` step.
+
+* Added more info the the [CD-R Media For PSX Backups](#cd-r-media-for-psx-backups) section.
+
+
 ## Version 1.3.4 (6/14/2023)
 
 *   [tonyhax-international-v1.3.4](https://github.com/alex-free/tonyhax/releases/download/v1.3.4i/tonyhax-international-v1.3.4.zip)

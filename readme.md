@@ -83,13 +83,21 @@ _More Info_
 
 ## Downloads
 
-### Version 1.3.5 (6/16/2023)
+### Version 1.3.6 (7/26/2023)
 
-*   [tonyhax-international-v1.3.5](https://github.com/alex-free/tonyhax/releases/download/v1.3.5i/tonyhax-international-v1.3.5.zip)
+*   [tonyhax-international-v1.3.6](https://github.com/alex-free/tonyhax/releases/download/v1.3.6i/tonyhax-international-v1.3.6.zip)
 
-* Fixed a serious regression introduced in v1.3.4 that caused almost all boot methods to hang at `checking game region` step.
+Changes:
 
-* Added more info the the [CD-R Media For PSX Backups](#cd-r-media-for-psx-backups) section.
+* Added [APv2 bypass support](anti-piracy-bypass.md) for Dance Dance Revolution 3rd Mix, Dance Dance Revolution 4th Mix, and Dance Dance Revolution 5th Mix.
+
+* Added TOCPerfect changes for [PS1 DemoSwap Patcher v1.0.9](https://alex-free.github.io/ps1demoswap).
+
+* Added support for building on APT based Linux distributions (I just switched to PopOS).
+
+* Addded info on [dealing with EDC Protected games](anti-piracy-bypass.md#edc) to the [anti-piracy page](anti-piracy-bypass.md).
+
+* Added info about non-stock mod-chips to the [anti-piracy page](anti-piracy-bypass.md),
 
 [About previous versions](changelog.md).
 
@@ -279,15 +287,30 @@ The early PS2 models that Tonyhax International supports have the PS1 mode which
 
 Burn **as slow as possible**. If you have a game with [additional anti-piracy](anti-piracy-bypass.md) measures, you may need to use a specific [burning software](anti-piracy-bypass.md#cd-burning).
 
-16x is way too fast for most CD-Rs and the PSX (CMC Pro is reported okay and working at this speed though). I burn everything at 10x, the slowest speed my drive supports, and it works.
-
-_You want to use 74 minute discs_. The PSX was never designed for the now more common 80 minute discs, and it is easier for the laser to track 74 minute discs due to their wider data spiral track. As of 2023, 74 minute discs are not really manufactured anymore and new old stock can get pricey, so it really may not be worth it as the PSX can read 80 minute discs okay (just not as optimally, you may experience longer load times or even straight up disc read errors on worn CD drives). 
+_You want to use 74 minute discs_. The PSX was never designed for the now more common 80 minute discs, and it is easier for the laser sled to track 74 minute discs due to their wider data spiral windings. However as of 2023, 74 minute discs are not manufactured anymore and new old stock can get pricey, so it really may not be worth it as the PSX can read 80 minute discs okay (just not as optimally, you may experience longer load times or even straight up disc read errors on worn CD drives). 
 
 The PSX can read 74 minute discs easier as that is closer to what it was designed for originally (which was 72 minute pressed CD-ROMs). Verbatim DataLifePlus 74min discs with a copyright date of 1997 or 1999 on the back of the CD case may be among the best media to acquire.
 
-Later PSX consoles and all PS2s appear to handle 80min discs much better then the earliest models. There is however a [PS2 specific issue with burning _some games_ to 80min media](https://github.com/socram8888/tonyhax/issues/24), but luckily this has a [workaround](https://github.com/socram8888/tonyhax/issues/24#issuecomment-1593582861)
+Later PSX consoles appear to handle 80min discs much better then the earliest models. 
+
+The early PS2 console models that Tonyhax International supports have issues reading [_some games_ to 80min media](https://github.com/socram8888/tonyhax/issues/24), but luckily this has a  workaround now by patching the CD image before burning it with the [PSX 80 Minute Patcher](https://alex-free.github.io/psx80mp).
 
 It is extremely important to note that as of 2023 one single monopoly known as CMC magnetics has [bought out every good manufacturer of CD-R media](https://github.com/alex-free/tonyhax/issues/30). Quality has seemed to [gone down due to this](https://gbatemp.net/threads/do-modern-burners-cds-make-lower-quality-ps1-backups.628708/page-3#post-10182249), so new old stock 74min media really is optimal. 
+
+### Recommended CD-Rs
+
+CMC Pro discs work the best with the PSX. Here is the ATIP information displayed by `cdrecord -atip` for a CMC Pro 80min modern CD-R:
+
+    ATIP info from disk:
+      Indicated writing power: 4
+    Disk Is not unrestricted
+    Disk Is not erasable
+      Disk sub type: Medium Type A, high Beta category (A+) (3)
+      ATIP start of lead in:  -11849 (97:24/01)
+      ATIP start of lead out: 359847 (79:59/72)
+    Disk type:    Long strategy type (Cyanine, AZO or similar)
+    Manuf. index: 25
+    Manufacturer: Taiyo Yuden Company Limited
 
 I have found Verbatim DataLifePlus CD-Rs to be really good with PS1 consoles. Here is the ATIP information displayed by `cdrecord -atip` for a Verbatim DataLifePlus 80min modern CD-R:
 
@@ -315,18 +338,7 @@ Verbatim UltraLife Archival Grade Gold CD-Rs also are really good, although they
     Manuf. index: 26
     Manufacturer: TDK Corporation
 
-CMC Pro discs have been [reported](https://github.com/alex-free/tonyhax/issues/30) to work very well with the PSX by [XxTriviumxX](https://github.com/XxTriviumxX). Here is the ATIP information displayed by `cdrecord -atip` for a CMC Pro 80min modern CD-R:
-
-    ATIP info from disk:
-      Indicated writing power: 4
-    Disk Is not unrestricted
-    Disk Is not erasable
-      Disk sub type: Medium Type A, high Beta category (A+) (3)
-      ATIP start of lead in:  -11849 (97:24/01)
-      ATIP start of lead out: 359847 (79:59/72)
-    Disk type:    Long strategy type (Cyanine, AZO or similar)
-    Manuf. index: 25
-    Manufacturer: Taiyo Yuden Company Limited
+### Bad CD-Rs
 
 **Do not use cheap/poor quality CD-R media, which is almost always all that is available in retail stores and most likely any CD-R that is not "archival grade"**. Poor quality cheap CD-R media _can_ result in:
 
@@ -372,7 +384,7 @@ Next, install all the required dependencies:
 * python3
 * python3-pip (and numpy, which is installed via this command: `pip3 install numpy`)
 
-If you are running _Fedora or Debian_ (Windows Subsystem For Linux can run these operating systems on Windows to provide a sufficient build environment), you can download the build dependencies automatically with the `get-deps.sh` script found in the `scripts` folder of the Tonyhax International [source tree](https//alex-free.github.io/tonyhax). **For any other OS, you'll need to find the above packages and install them manually yourself.**
+If you have the `dnf` or `apt` package manager, you can download the build dependencies automatically with the `get-deps.sh` script found in the `scripts` folder of the Tonyhax International [source tree](https//alex-free.github.io/tonyhax). **For any other OS, you'll need to find the above packages and install them manually yourself.** Please feel free to add support for your package manager.
 
 Next, you need to build the tool-chain. Execute the `build-tool-chain.sh` script, which is found in the `scripts` directory of the source tree. **This will take some time to build, depending on how fast your computer is.**
 

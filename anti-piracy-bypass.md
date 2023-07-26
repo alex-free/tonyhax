@@ -24,13 +24,130 @@ There is one exception though. The very early SCPH-3000 Japanese consoles, and a
 
 When triggered, the APv1 and APv2 style copy protections will trigger an 'anti-piracy screen of death'. If you encounter an APv2 game that triggers this screen, then the specific game disc is not yet supported (this is a work in progress). In such a case please open an [Anti-Piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&template=antipiracy-issue.md&title=) on the [Tonyhax International Github](https://github.com/alex-free/tonyhax) to let me know about this specific game which contains APv2 protection. I would eventually like every game that can trigger the anti-piracy copy protection routine when booted via Tonyhax International on a stock console to have a  bypass implemented for 100% compatibility.
 
+## Non-Stealth Mod-Chips (Irrelevant To Stock Consoles)
+
+Unlike the [original Tonyhax](https://github.com/socram8888/tonyhax), **Tonyhax International does not bypass anti-piracy checks that fail on consoles equipped with the original, old-style mod-chips** which spam SCEX strings to the CDROM drive controller constantly at all times. **Tonyhax International only bypasses the anti-piracy detection features that fail on stock consoles and prevent play on them**. This is a design decision to keep the Tonyhax International executable size small, and not a limitation of the patching method.
+
+If you have a non-stealth mod-chip and want to use Tonyhax International with a game containing either APv1 or APv2, you totally still can. You can patch out the anti-piracy functions for APv1/APv2 in most games with the [CD Image Patching](https://alex-free.github.io/aprip/#patching-the-cd-image) mode of [APrip](https://alex-free.github.io/aprip). And for all games with APv1/APv2 (including the ones in which CD Image Patching with APrip fails to find a match to patch) you can [Generate GameShark Codes](https://alex-free.github.io/aprip/#generating-gameshark-codes) that are able to be [applied by Tonyhax International](https://alex-free.github.io/aprip/#generating-gameshark-codes) to make these games work.
+
+If you are using generated APrip GameShark codes for an APv2 game, **you don't need the last one (which is in this format)** if you use Tonyhax International and the game has an [APv2 bypass](#apv2-bypasses) already implemented for stock consoles:
+
+`D0XXXXXX 001E`
+`80XXXXXX 0000`
+
+This is because the stock console bypasses already set this code, as it is the one required for stock consoles to successfully bypass APv2.
+
 ## EDC
 
-In addition to APv1 or APv2 protection, some later games may also contain a protection measure known as the EDC check. For the affected games, this protection is triggered when you burn the EDC protected PSX CD image with standard CD burning software, which in most cases will changes the EDC data when burning an EDC protected PSX CD image.
+In addition to [APv1](#apv1) or [APv2](#apv2) protection, [most Dance Dance Revolution PSX games](#edc-protected-psx-games) contain an EDC-based protection measure. For the affected games, this protection is triggered when you burn the EDC protected PSX CD image with standard CD burning software, which in most cases will changes the EDC data when burning an EDC protected PSX CD image.
 
-The EDC check can be however be defeated by simply forcing the EDC data to not be changed when burning such a protected PSX CD image. Not every CD burning software has an option which can do this, please see the [CD Burning](#cd-burning) section for a more in depth capability comparison of common burning software.
+### PSX EDC Anti-Piracy Protection
 
-Real 'imported region' PSX game discs with EDC protection will work just fine when booted via Tonyhax International.
+The idea of EDC/EEC based additional anti-piracy protection is a brilliantly flawed one. See, Sony's tools to generate disc images back in the day were [buggy](http://www.psxdev.net/forum/viewtopic.php?t=1475). One such bug appears to be that the [reserved sectors 12-15](http://problemkaputt.de/psx-spx.htm#cdromisovolumedescriptors), which are zero filled in the user data portion of the sector, _also_ **have an EDC checksum of zero**. The correct checksum for a zero-filled user data sector _should be_ `3F 13 B0 BE`, _but it isn't_. It's `00 00 00 00` like the rest of the sector besides the sync data. This actually doesn't matter in practice, so the bug went unoticed and the technically invalid sector 12-15s shipped on real licensed PSX CD-ROMs. This apparently got fixed eventually in some newer version of the `cdgen` Sony tool that created disc images.
+
+Someone working on the Dance Dance Revolution PSX games noticed this strange behavior and figured out that it could be exploited as an additional anti-piracy protection measure. If the real licensed PSX CD-ROM discs were shipped with an EDC checksum of zero in sector 12-15, then when someone went to rip the real licensed PSX CD-ROM disc and then burn it back to a CD-R, the EDC checksum in sector 12-15 would no longer be `00 00 00 00`, it would be the expected `3F 13 B0 BE`. [Game code](https://github.com/socram8888/tonyhax/issues/121#issuecomment-1341381549) can read the EDC checksum on the disc at sector 12, and a routine could then lock up the game if the EDC data is non-zero to deter piracy.
+
+
+### Burning EDC Protected PSX Games Correctly
+
+I recommend using the latest CDRDAO v1.2.5 which unlike previous versions supports burning EDC Protected PSX games with CD audio tracks correctly using the `generic-mmc-raw` driver. There are pre-built portable releases of a new enough CDRDAO for Linux [available](https://alex-free.github.io/cdrdao).
+
+**Run [edcre](https://alex-free.github.io/edcre) on the first data track bin file of the disc image before burning with the CDRDAO RAW driver** as described below.
+
+`cdrdao write --speed 1 --driver generic-mmc-raw --swap -n --eject yourgame.cue`
+
+![TOCPerfect Patching And EDCRE Patching Dance Dance Revolution 2nd Remix Japan](images/ddr2j-tp.png)
+
+![Burning Dance Dance Revolution 2nd Remix Japan](images/ddr2j-burning.png)
+
+### CDRDAO Command Explanation
+
+The `--speed 1` argument sets the writing speed to the slowest your CD burner supports.
+
+The `--driver generic-mmc-raw` arguments specifies CDRDAO to use the `generic-mmc-raw` driver, which burns the CD image exactly as it is. The default driver used without specifiying these arguments is the **`generic-mmc` driver, which like the other drivers in CDRDAO will auto-regenerate EDC data as the CD image is burned.** This can change the EDC data read from the burned disc later, which some PSX games use as an additional anti-piracy check which if failed will lock up [the game](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#games-with-edc-protection).
+
+The `--swap` argument is neccesary if the BIN/CUE CD image contains CD audio. Without it, you will get loud static when the CD audio tracks are played as they are by default byte-swapped by CDRDAO if this argument is not specified.
+
+The `-n` argument disables the 10 second waiting period before burning.
+
+The `--eject` argument will automatically eject the disc immediately after a successful burn.
+
+
+### EDC Protected PSX Games
+
+Every Dance Dance Revolution PSX game has EDC protection with the exception of the game [Dance Dance Revolution: Disney's Rave](http://redump.org/disc/37012/) / [Dance Dance Revolution: Disney Mix](http://redump.org/disc/13669/).
+
+ Almost every Dance Dance Revolution PSX game containing EDC protection also have either [APv2](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#apv2) or [APv1](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#apv1) based anti-piracy detection code. While [Tonyhax International](https://alex-free.github.io/tonyhax-international) has [Anti-Piracy Screen Bypasses](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#apv2-bypasses) implemented to ensure these games run correctly on stock consoles (only APv2 can trigger Tonyhax International if an APv2 bypass is not implemented), **if your console has a non-stealth modchip** you'll need to [patch the first data track bin file](https://alex-free.github.io/aprip/#patching-the-cd-image) with [APrip](https://alex-free.github.io/aprip) first and then use EDCRE, or use [GameShark Codes](https://alex-free.github.io/aprip/#generating-gameshark-codes) generated by APrip to get these games working (if disc image patching is not possible with APrip, see below for per-game details). Please note that [Tonyhax International](https://alex-free.github.io/tonyhax-international) does have the ability to apply user supplied [GameShark Codes](https://alex-free.github.io/tonyhax-international/gameshark-code-support.html).
+
+#### Dance Dance Revolution
+
+- Versions Tested: [Japan](http://redump.org/disc/1562/), [USA](http://redump.org/disc/16075/).
+- Versions With EDC Protection: Japan, USA.
+- When Is The EDC Protection: First `NOW LOADING` blinking text screen after selecting the first default option in the main  menu at start.
+- Versions With Anti-Piracy Screen ([APv1](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#apv1)): Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+
+Tonyhax International Anti-Piracy Screen Bypass Support For Stock Consoles? - Not needed ([APv1](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#apv1)).
+
+#### Dance Dance Revolution: Best Hits
+
+- Versions Tested: [Japan](http://redump.org/disc/30601/).
+- When Is The EDC Protection: First `NOW LOADING` blinking text screen after selecting the first default option in the main  menu at start.
+- Versions With Anti-Piracy Screen ([APv2](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#apv2)): Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+
+#### Dance Dance Revolution Konamix
+
+- Versions Tested: [USA](http://redump.org/disc/1238/).
+- When Is The EDC Protection: Immedietly there is a `NOW LOADING` blinking text screen and the CD drive goes crazy.
+- Versions With Anti-Piracy Screen: None
+
+#### Dance Dance Revolution Extra Mix
+
+- Versions Tested: [Japan](http://redump.org/disc/44438/).
+- Versions With EDC Protection: Japan.
+- When Is The EDC Protection: First `NOW LOADING` blinking text screen after selecting the first option in the  start menu.
+- Versions With Anti-Piracy Screen ([APv2](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#apv2)): Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+#### Dance Dance Revolution 2nd Remix
+
+- Versions Tested: [Japan](http://redump.org/disc/9477/).
+- Versions With EDC Protection: Japan.
+- When Is The EDC Protection: Immedietly at first screen with text.
+- Versions With Anti-Piracy Screen ([APv2](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#apv2)): Japan. _Note:_ this game also contains (disabled) [APv1](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#apv1) code.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+#### Dance Dance Revolution 3rd Mix
+
+- Versions Tested: [Japan](http://redump.org/disc/9536/).
+- Versions With EDC Protection: Japan.
+- When Is The EDC Protection: First `NOW LOADING` blinking text screen after selecting the first option in the  start menu.
+- Versions With Anti-Piracy Screen ([APv2](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#apv2)): Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+#### Dance Dance Revolution 4th Mix
+
+- Versions Tested: [Japan](http://redump.org/disc/34157/).
+- Versions With EDC Protection: Japan.
+- When Is The EDC Protection: First `NOW LOADING` blinking text screen after selecting the `TRAINING` option in the  start menu.
+- Versions With Anti-Piracy Screen ([APv2](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#apv2)): Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+#### Dance Dance Revolution 5th Mix
+
+- Versions Tested: [Japan](http://redump.org/disc/34157/).
+- Versions With EDC Protection: Japan.
+- When Is The EDC Protection: First `NOW LOADING` blinking text screen after selecting the `TRAINING` option in the  start menu.
+- Versions With Anti-Piracy Screen ([APv2](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#apv2)): Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
 
 ## LibCrypt
 
@@ -46,14 +163,14 @@ Real PAL LibCrypt discs booted via Tonyhax International on USA or Japanese cons
 
 * Is Open Source?: Yes. Pre-built Linux x86_64 binaries are also [available](https://alex-free.github.io/cdrdao##downloads).
 * Burns Standard PSX Backup CD-Rs?: Yes. For .bin/.cue CD images, the `--swap` argument is required.
-* Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: Yes, for .bin/.cue CD images, the `--swap` argument is required. You also must use the `generic-mmc-raw` driver.
+* Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: Yes, After running [EDCRE](https://alex-free.github.io/edcre) use the `--swap` and  `--driver generic-mmc-raw` arguments.
 * Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: CDRDAO can rip an authentic PAL PSX game disc containing LibCrypt protection correctly into a .toc/.bin CD image file. This file can be burned back by using the `generic-mmc-raw` driver. The much more common .bin/.cue/.sub CD image LibCrypt rips do not work directly however.
 
 ### [CloneCD](https://www.redfox.bz/en/clonecd.html)
 
 * Is Open Source?: No, it is Windows only FreeWare with a free 'demo' version as well as a full paid version. The 'demo' version can be used however for PSX Backup CD-R burning without limitation.
 * Burns Standard PSX Backup CD-Rs?: Yes, no special options required.
-* Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: Yes, if you use [RAW](https://hydrogenaud.io/index.php?PHPSESSID=3voij6gqs993vdbd15mlmc2k7h&topic=42415.msg371328##msg371328) mode.
+* Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: Yes, After running [EDCRE](https://alex-free.github.io/edcre) use [RAW](https://hydrogenaud.io/index.php?PHPSESSID=3voij6gqs993vdbd15mlmc2k7h&topic=42415.msg371328##msg371328) mode.
 * Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: [Yes](https://github.com/Kippykip/SBITools), (with the proper BIN/CUE/SUB files).
 
 ### [ImgBurn](https://www.imgburn.com/)
@@ -62,19 +179,6 @@ Real PAL LibCrypt discs booted via Tonyhax International on USA or Japanese cons
 * Burns Standard PSX Backup CD-Rs?: Yes.
 * Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: No.
 * Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: No.
-
-## Games With EDC Protection
-
-This list is a work in progress, and new games will be added as they are discovered to have this kind of protection. If you know of a game with EDC protection that isn't listed below, please let me know in a [generic issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=bug&template=generic-issue.md&title=) on the [Tonyhax International Github](https://github.com/alex-free/tonyhax) so that I can add it to the list in a future Tonyhax International update.
-
-* BeatMania Best Hits Japan ([Rev 0](http://redump.org/disc/36175/), [Rev 1](http://redump.org/disc/44332/)).
-* Dance Dance Revolution [Japan](http://redump.org/disc/1562/), [USA](http://redump.org/disc/16075/).
-* Dance Dance Revolution: Best Hits [Japan](http://redump.org/disc/30601/).
-* Dance Dance Revolution 2nd Remix [Japan](http://redump.org/disc/9477/).
-* Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1 [Japan](http://redump.org/disc/23382/).
-* Dance Dance Revolution 2nd Remix: Append Club Version Vol. 2 [Japan](http://redump.org/disc/33339/).
-* Dance Dance Revolution 3rd Mix [Japan](http://redump.org/disc/9536/)
-* Dance Dance Revolution 4th Mix [Japan](http://redump.org/disc/34157/)
 
 ## APv2 Bypasses
 
@@ -183,7 +287,7 @@ This is the complete list of games with bypasses anti-piracy measures that are s
 - Versions Tested: [Japan](http://redump.org/disc/30601/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immeditely.
-- Versions With Anti-Piracy Bypass Support: Japan. **IMPORTANT: There is an [EDC check](#bypassing-additional-edc-checks-found-in-some-games) in addition to the standardized anti-piracy copy protection routine.**
+- Versions With Anti-Piracy Bypass Support: Japan. **IMPORTANT: There is [EDC Protection](#edc) in addition to the standardized anti-piracy copy protection routine.**
 
 ### Dance Dance Revolution: Disney's Rave
 
@@ -192,9 +296,11 @@ This is the complete list of games with bypasses anti-piracy measures that are s
 - When Is The Anti-Piracy Screen Check: Immeditely.
 - Versions With Anti-Piracy Bypass Support: Japan.
 
-### Dance Dance Revolution: Extra Mix
+### Dance Dance Revolution Extra Mix
 
 - Versions Tested: [Japan](http://redump.org/disc/44438/).
+- Versions With EDC Protection: Japan.
+- When Is The EDC Protection: First `NOW LOADING` blinking text screen after selecting the first option in the  start menu.
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immeditely.
 - Versions With Anti-Piracy Bypass Support: Japan.
@@ -202,10 +308,11 @@ This is the complete list of games with bypasses anti-piracy measures that are s
 ### Dance Dance Revolution 2nd Remix
 
 - Versions Tested: [Japan](http://redump.org/disc/9477/).
+- Versions With [EDC Protection](#edc): Japan.
+- When Is The EDC Protection: Immedietly at first screen with text.
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immeditely.
 - Versions With Anti-Piracy Bypass Support: Japan.
-- **IMPORTANT: There is an [EDC check](#bypassing-additional-edc-checks-found-in-some-games) in addition to the standardized anti-piracy copy protection routine.**
 
 ### Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1
 
@@ -213,7 +320,6 @@ This is the complete list of games with bypasses anti-piracy measures that are s
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: When you use the 'disc change' feature found in Dance Dance Revolution 2nd Remix to boot the disc.
 - Versions With Anti-Piracy Bypass Support: Japan. 
-**IMPORTANT: There is an [EDC check](#bypassing-additional-edc-checks-found-in-some-games) in addition to the standardized anti-piracy copy protection routine.**
 - This game works as intended/completely normal on USA and European consoles. On Japanese PS1 consoles, you must do a **perfect** [mid-game hot-swap trick](#playing-games-that-span-multiple-discs-on-japanese-ps1-consoles) in the 'disc change' feature found in Dance Dance Revolution 2nd Remix to get the game to boot AND for it to have working CD audio. You can not play this game currently on a Japanese PS2 due to the lack of a [mid-game hot-swap trick](#playing-games-that-span-multiple-discs-on-japanese-ps2-consoles) method for PS2s.
 
 ### Dance Dance Revolution 2nd Remix: Append Club Version Vol. 2
@@ -222,8 +328,34 @@ This is the complete list of games with bypasses anti-piracy measures that are s
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: When you use the 'disc change' feature found in Dance Dance Revolution 2nd Remix to boot the disc.
 - Versions With Anti-Piracy Bypass Support: Japan.
-**IMPORTANT: There is an [EDC check](#bypassing-additional-edc-checks-found-in-some-games) in addition to the standardized anti-piracy copy protection routine.**
 - This game works as intended/completely normal on USA and European consoles. On Japanese PS1 consoles, you must do a **perfect** [mid-game hot-swap trick](#playing-games-that-span-multiple-discs-on-japanese-ps1-consoles) in the 'disc change' feature found in Dance Dance Revolution 2nd Remix to get the game to boot AND for it to have working CD audio. You can not play this game currently on a Japanese PS2 due to the lack of a [mid-game hot-swap trick](#playing-games-that-span-multiple-discs-on-japanese-ps2-consoles) method for PS2s.
+
+### Dance Dance Revolution 3rd Mix
+
+- Versions Tested: [Japan](http://redump.org/disc/9536/).
+- Versions With [EDC Protection](#edc): Japan.
+- When Is The EDC Protection: First `NOW LOADING` blinking text screen after selecting the first option in the  start menu.
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Dance Dance Revolution 4th Mix
+
+- Versions Tested: [Japan](http://redump.org/disc/34157/).
+- Versions With [EDC Protection](#edc): Japan.
+- When Is The EDC Protection: First `NOW LOADING` blinking text screen after selecting the `TRAINING` option in the  start menu.
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
+
+### Dance Dance Revolution 5th Mix
+
+- Versions Tested: [Japan](http://redump.org/disc/34157/).
+- Versions With [EDC Protection](#edc): Japan.
+- When Is The EDC Protection: First `NOW LOADING` blinking text screen after selecting the `TRAINING` option in the  start menu.
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immeditely.
+- Versions With Anti-Piracy Bypass Support: Japan.
 
 ### Dancing Stage Featuring Dreams Come True
 

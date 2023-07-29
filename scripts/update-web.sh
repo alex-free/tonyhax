@@ -1,9 +1,10 @@
 #!/bin/bash
 
-cd "$(dirname "$0")"
+web_page="/home/alex/dev/alex-free.github.io/tonyhax-international"
 set -e
-cd ../
-cp -rv *.md ~/dev/alex-free.github.io/tonyhax-international
-rm -rf ~/dev/alex-free.github.io/tonyhax-international/images
-cp -rv images ~/dev/alex-free.github.io/tonyhax-international
-mv readme.md index.md
+
+cd "$(dirname "$0")"/../
+cp -rv *.md "$web_page"
+rm -rf "$web_page"/images
+cp -rv images "$web_page"
+mv "$web_page"/readme.md "$web_page"/index.md

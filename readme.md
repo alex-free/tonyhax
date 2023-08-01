@@ -29,75 +29,114 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 _Japanese PS1 Consoles (SCPH-1000-SCPH-100)_
 
 *   [Japanese PS1 Console Loader Instructions](#japanese-ps1-console-loader-instructions)
+
 *   [Playing Games That Span Multiple Discs On Japanese PS1 Consoles](#playing-games-that-span-multiple-discs-on-japanese-ps1-consoles)
 
 _Japanese PS2 Consoles (SCPH-10000-SCPH-39000)_
 
 *   [Japanese PS2 Console Loader Instructions](#japanese-ps2-console-loader-instructions)
+
 *   [Using the Swap Magic Tool](#using-the-swap-magic-tool)
+
 *   [Playing Games That Span Multiple Discs On Japanese PS2 Consoles](#playing-games-that-span-multiple-discs-on-japanese-ps2-consoles)
+
 *   [Playing PAL Region Games On Japanese PS2 Consoles](#playing-pal-region-games-on-japanese-ps2-consoles)
 
 _American/European PS1/PS2 Consoles (SCPH-1001-SCPH-39004)_
 
 *   [American/European PS1/PS2 Console Loader Instructions](#americaneuropean-ps1ps2-console-loader-instructions)
+
 *   [Playing Games That Span Multiple Discs On American/European PS1/PS2 Consoles](#playing-games-that-span-multiple-discs-on-americaneuropean-ps1ps2-consoles)
+
 *   [Playing PAL Games On American PS2 Consoles](#playing-pal-games-on-american-ps2-consoles)
+
 *   [Playing Japanese/American Games On PAL PS2 Consoles](#playing-japaneseamerican-games-on-pal-ps2-consoles)
 
 _Boot Methods_
 
 *   [GameShark Code](gameshark-code.md)
+
 *   [Flashed Cheat Cartridge - ROM/ROM Flasher CD](flashed-cheat-cart.md)
+
 *   [FreePSXBoot Exploit Memory Card Images](freepsxboot-exploit.md)
+
 *   [Boot CD](boot-cd.md)
+
 *   [Save Game Exploit](save-game-exploit.md)
 
 _More Info_
 
 * [GameShark Code Support](gameshark-code-support.md)
+
 * [XStation ROM Version](xstation.md)
+
 * [Playing Games With Additional Copy Protection Routines](anti-piracy-bypass.md)
+
 * [CD-R Media For PSX Backups](#cd-r-media-for-psx-backups)
-* [Disc Read Errors And PS1 CD Drive Repair](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/)
+
 * [Building From Source](#building-from-source)
+
 * [Credits](#credits)
 
-## External Links
+## Links
+
+_Home Pages_
 
 *   [Tonyhax International Homepage](https://alex-free.github.io/tonyhax-international)
 *   [Tonyhax International GitHub](https://github.com/alex-free/tonyhax)
+
+_Threads_
+
 *   [PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/)
 *   [PSX-Place Tonyhax International Resource](https://www.psx-place.com/resources/tonyhax-international.1281/)
-*   [CDRDAO-PLED](https://alex-free.github.io/cdrdao) - recommended burning software for Linux for most use cases.
 *   [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967)
 *   [GBATemp](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514)
+
+_Relevant Software_
+
+*   [CDRDAO-PLED](https://alex-free.github.io/cdrdao) - recommended burning software for Linux.
+
+*   [EDCRE](https://alex-free.github.io/edcre) - EDC/EEC regenerator to allow EDC protected PSX games to be burned by CDRDAO-PLED's generic-mmc-raw driver correctly.
+
 *   [APrip Homepage](https://alex-free.github.io/aprip) - patches some later PSX games with additional anti-piracy copy protection.
+
 *   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap) - a similar project that uses the Tonyhax International loader.
+
 *   [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom) - what generates the Tonyhax International ROM file.
+
 *   [NXFLASH](https://github.com/danhans42/nxflash) - the software which flashes cheat carts with the Tonyhax International ROM.
+
 *   [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) - an exploit used in a Tonyhax International boot method.
+
 *   [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax) - what Tonyhax International is based on (_International is not an official version and at this point deviates quite greatly_).
+
 *   [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)
-*   [Do modern burners/CD's make lower quality PS1 backups?](https://gbatemp.net/threads/do-modern-burners-cds-make-lower-quality-ps1-backups.628708/) - a great discussion on burning PSX backups in current year.
+
+_Advice_
+
+*   [Do modern burners/CD's make lower quality PS1 backups?](https://gbatemp.net/threads/do-modern-burners-cds-make-lower-quality-ps1-backups.628708/) - a great discussion on burning PSX backups in the current year.
+
+* [Unofficial PS1 CD Drive Service Manual](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/) - Refurbish your PSX CD drive to read discs better.
 
 ## Downloads
 
-### Version 1.3.6 (7/26/2023)
+### Version 1.3.7 (8/1/2023)
 
-*   [tonyhax-international-v1.3.6](https://github.com/alex-free/tonyhax/releases/download/v1.3.6i/tonyhax-international-v1.3.6.zip)
+*   [tonyhax-international-v1.3.7](https://github.com/alex-free/tonyhax/releases/download/v1.3.7i/tonyhax-international-v1.3.7.zip)
 
 Changes:
 
-* Added [APv2 bypass support](anti-piracy-bypass.md) for Dance Dance Revolution 3rd Mix, Dance Dance Revolution 4th Mix, and Dance Dance Revolution 5th Mix.
+* You can now use GameShark Codes with the prefixes: `E2`, `E3`, `D2`, and `D3` using the [GameShark code feature](gameshark-code-support.md).
 
-* Added TOCPerfect changes for [PS1 DemoSwap Patcher v1.0.9](https://alex-free.github.io/ps1demoswap).
+* THIGSGEN updated to v2.0.2. 
 
-* Added support for building on APT based Linux distributions (I just switched to PopOS).
+* Stealth GameShark cheat engine updated to v1.0.4, which has been optimized for maximum performance over size.
 
-* Addded info on [dealing with EDC Protected games](anti-piracy-bypass.md#edc) to the [anti-piracy page](anti-piracy-bypass.md).
+* Size optimizations to Tonyhax International loader.
 
-* Added info about non-stock mod-chips to the [anti-piracy page](anti-piracy-bypass.md),
+* Rewritten GameShark code type parsing functions in Tonyhax International loader.
+
+* Updated [anti-piracy bypass](anti-piracy-bypass.md) documentation.
 
 [About previous versions](changelog.md).
 

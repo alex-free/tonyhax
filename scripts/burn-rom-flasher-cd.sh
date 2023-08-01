@@ -2,4 +2,5 @@
 
 cd "$(dirname "$0")"
 cd ../rom
-cdrdao write --speed 1 --swap --eject -n tonyhax-rom-flasher.cue
+# no need for --swap since disc has no audio tracks
+cdrdao write --driver --generic-mmc-raw --speed 1 --eject -n tonyhax-rom-flasher.cue

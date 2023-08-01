@@ -1,5 +1,21 @@
 # Changelog
 
+## Version 1.3.6 (7/26/2023)
+
+*   [tonyhax-international-v1.3.6](https://github.com/alex-free/tonyhax/releases/download/v1.3.6i/tonyhax-international-v1.3.6.zip)
+
+Changes:
+
+* Added [APv2 bypass support](anti-piracy-bypass.md) for Dance Dance Revolution 3rd Mix, Dance Dance Revolution 4th Mix, and Dance Dance Revolution 5th Mix.
+
+* Added TOCPerfect changes for [PS1 DemoSwap Patcher v1.0.9](https://alex-free.github.io/ps1demoswap).
+
+* Added support for building on APT based Linux distributions (I just switched to PopOS).
+
+* Addded info on [dealing with EDC Protected games](anti-piracy-bypass.md#edc) to the [anti-piracy page](anti-piracy-bypass.md).
+
+* Added info about non-stock mod-chips to the [anti-piracy page](anti-piracy-bypass.md).
+
 ## Version 1.3.5 (6/16/2023)
 
 *   [tonyhax-international-v1.3.5](https://github.com/alex-free/tonyhax/releases/download/v1.3.5i/tonyhax-international-v1.3.5.zip)

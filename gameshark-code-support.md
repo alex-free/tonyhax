@@ -11,7 +11,10 @@ Tonyhax International now has the ability to apply user-supplied GameShark codes
 3) Put the memory card in Slot 1 of your PSX console. Start Tonyhax International using any boot method.
 
 4) When you see the text `Press O to enable GS codes` in the Tonyhax International loader, press the circle button on your controller. You will then see the text `Reading MC...`, followed by `X code lines detected` (where `X` is the number of code lines that were found in the save file. Please note that this can be more then the amount of lines in the txt file used to generate the save file due to how GameShark codes work.
+
 5) Boot your game as normal, and enjoy the GameShark codes.
+
+![THIGSGEN Parasite Eve Debug Room Gen](images/thigsgen-parasite-eve-debug-room-gen.png)
 
 ## YouTube Videos On This Functionality
 
@@ -31,8 +34,12 @@ All codes beginning with the one of the following prefixes are supported:
 * `80`
 * `D0`
 * `D1`
+* `D2`
+* `D3`
 * `E0`
 * `E1`
+* `E2`
+* `E3`
 
 More code types will be supported in future releases.
 

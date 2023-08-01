@@ -160,7 +160,7 @@ void parse_memcard_save_gameshark_codes() {
 	*/
 
 	uint32_t gameshark_code_address;
-	uint8_t gameshark_code_type;
+	uint8_t gs_code_type;
 
 	/*
 	uint32_t sum;
@@ -180,39 +180,52 @@ void parse_memcard_save_gameshark_codes() {
 
 	for(int i = 0; i < number_of_gameshark_code_lines; i++) {
 		
-		gameshark_code_type = user_start[mc_base + 5];
+		gs_code_type = user_start[mc_base + 5];
 			
-		if((gameshark_code_type == 0xD0) || (gameshark_code_type == 0xD1) || (gameshark_code_type == 0xE0) || (gameshark_code_type == 0xE1) || (gameshark_code_type == 0x30))
+		if(
+			(gs_code_type == 0xD0) || 
+			(gs_code_type == 0xD1) || 
+			(gs_code_type == 0xD2) || 
+			(gs_code_type == 0xD3) || 
+			(gs_code_type == 0xE0) || 
+			(gs_code_type == 0xE1) ||
+			(gs_code_type == 0xE2) || 
+			(gs_code_type == 0xE3) || 
+			(gs_code_type == 0x30)
+		) {
 			user_start[mc_base + 5] = 0x80; // we need to convert the prefix to the real address first byte of 0x80 for the cheat engine
+		}
 
 		gameshark_code_address = user_start[mc_base + 2] + (user_start[mc_base + 3] << 8) + (user_start[mc_base + 4] << 16) + (user_start[mc_base + 5] << 24);
 		//debug_write("GS Code Addr: %x", gameshark_code_address);
 
-		if(gameshark_code_type == 0x80) {
+
+		if(
+			(gs_code_type == 0x80) || 
+			(gs_code_type == 0xD0) || 
+			(gs_code_type == 0xD1) || 
+			(gs_code_type == 0xD2) || 
+			(gs_code_type == 0xD3)
+
+		) {
 			uint16_t gameshark_code_mod_val = user_start[mc_base + 6] + (user_start[mc_base + 7] << 8);
 			//debug_write("GS Code Mod Val: %x", gameshark_code_mod_val);
-			add_80_code(gameshark_code_address, gameshark_code_mod_val);
-		} else if(gameshark_code_type == 0xD0) {
-			uint16_t gameshark_code_mod_val = user_start[mc_base + 6] + (user_start[mc_base + 7] << 8);
-			//debug_write("GS Code Mod Val: %x", gameshark_code_mod_val);
-			add_D0_code(gameshark_code_address, gameshark_code_mod_val);
-		} else if(gameshark_code_type == 0xD1) {
-			uint16_t gameshark_code_mod_val = user_start[mc_base + 6] + (user_start[mc_base + 7] << 8);
-			//debug_write("GS Code Mod Val: %x", gameshark_code_mod_val);
-			add_D1_code(gameshark_code_address, gameshark_code_mod_val);
-		} else if(gameshark_code_type == 0x30) {
-			uint8_t gameshark_code_mod_val = user_start[mc_base + 6];
-			//debug_write("GS Code Mod Val: %x", gameshark_code_mod_val);
-			add_30_code(gameshark_code_address, gameshark_code_mod_val);
-		} else if(gameshark_code_type == 0xE0) {
-			uint8_t gameshark_code_mod_val = user_start[mc_base + 6];
-			//debug_write("GS Code Mod Val: %x", gameshark_code_mod_val);
-			add_E0_code(gameshark_code_address, gameshark_code_mod_val);
-		} else if(gameshark_code_type == 0xE1) {
-			uint8_t gameshark_code_mod_val = user_start[mc_base + 6];
-			//debug_write("GS Code Mod Val: %x", gameshark_code_mod_val);
-			add_E1_code(gameshark_code_address, gameshark_code_mod_val);
+			add_16bit_code(gameshark_code_address, gameshark_code_mod_val, gs_code_type);
 		}
+
+		if(
+			(gs_code_type == 0x30) || 
+			(gs_code_type == 0xE0) || 
+			(gs_code_type == 0xE1) || 
+			(gs_code_type == 0xE2) || 
+			(gs_code_type == 0xE3) 
+
+		) {
+			uint8_t gameshark_code_mod_val = user_start[mc_base + 6];
+			//debug_write("GS Code Mod Val: %x", gameshark_code_mod_val);
+			add_8bit_code(gameshark_code_address, gameshark_code_mod_val, gs_code_type);
+		}
+			
 		mc_base = (mc_base + 6); // advance 6 bytes from current val
 	}
 }

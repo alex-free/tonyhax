@@ -30,7 +30,21 @@ bool parse()
   bytes = (uint8_t *)&gameshark_code_address;
   uint8_t gameshark_code_type = bytes[3];
 
-  if((gameshark_code_type != 0x50) && (gameshark_code_type != 0x80) && (gameshark_code_type != 0xD0) && (gameshark_code_type != 0xD1) && (gameshark_code_type != 0x30) && (gameshark_code_type != 0xE0) && (gameshark_code_type != 0xE1))
+  if(
+    (gameshark_code_type != 0x50) &&
+
+    (gameshark_code_type != 0x80) && 
+    (gameshark_code_type != 0xD0) && 
+    (gameshark_code_type != 0xD1) && 
+    (gameshark_code_type != 0xD2) && 
+    (gameshark_code_type != 0xD3) &&
+ 
+    (gameshark_code_type != 0x30) && 
+    (gameshark_code_type != 0xE0) && 
+    (gameshark_code_type != 0xE1) && 
+    (gameshark_code_type != 0xE2) && 
+    (gameshark_code_type != 0xE3)
+    )
   {
     printf("Error, unsupported code type: %02X, bailing...\n", gameshark_code_type);
     fclose(txt);
@@ -71,7 +85,7 @@ bool parse()
 int main(int argc, const char *argv[])
 {
 
-  printf("Tonyhax International GameShark Generator (THIGSGEN) v2.0.1 By Alex Free\n");
+  printf("Tonyhax International GameShark Generator (THIGSGEN) v2.0.2 By Alex Free\n");
 
   if (argc != 2)
   {

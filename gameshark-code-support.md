@@ -14,8 +14,6 @@ Tonyhax International now has the ability to apply user-supplied GameShark codes
 
 5) Boot your game as normal, and enjoy the GameShark codes.
 
-![THIGSGEN Parasite Eve Debug Room Gen](images/thigsgen-parasite-eve-debug-room-gen.png)
-
 ## YouTube Videos On This Functionality
 
 Here's some awesome vids by my friend [JMaxxl](https://github.com/JMaxxL):
@@ -62,7 +60,9 @@ On Windows, and most Linux distros, you can simply drag and drop the **the txt f
 
 _Note:_ If you put a code line in your txt that has a code prefix that isn't supported, the `TONYHAXINTGS` file will not be generated. You can only have code lines with the above supported code prefixes.
 
-## Copying The TONYHAXINGS File To A PSX Memory Card
+![THIGSGEN Parasite Eve Debug Room Gen](images/thigsgen-parasite-eve-debug-room-gen.png)
+
+## Copying The TONYHAXINTGS File To A PSX Memory Card
 
 So now you should have a TONYHAXINTGS file containing the GameShark codes you desire to use. The next step is to copy this file to your PSX memory card.
 

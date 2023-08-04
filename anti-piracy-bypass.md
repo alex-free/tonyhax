@@ -876,4 +876,4 @@ This is the complete list of games with bypasses anti-piracy measures that are s
 - Versions Tested: [Japan](http://redump.org/disc/4173/), [Japan Genteiban Edition](http://redump.org/disc/51546/), [USA](http://redump.org/disc/820/), [Europe](http://redump.org/disc/1053/), [France](http://redump.org/disc/28263/), [Germany](http://redump.org/disc/1256/), [Spain](http://redump.org/disc/30673/), [Italy](http://redump.org/disc/35297/).
 - Versions With Anti-Piracy Screen: Japan, Japan Genteiban Edition, USA, Europe, France, Germany, Spain, Italy.
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Versions With Anti-Piracy Bypass Support: Japan, Japan Genteiban Edition, USA,
+- Versions With Anti-Piracy Bypass Support: Japan, Japan Genteiban Edition, USA, Europe, France, Germany, Spain, Italy.

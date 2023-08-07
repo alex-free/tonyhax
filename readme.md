@@ -156,7 +156,7 @@ Start the Tonyhax International loader with a supported boot method:
 *   [Boot CD](boot-cd.md)
 *   [Save Game Exploit](save-game-exploit.md)
 
-If you see the text `Put in a real NTSC-J PSX game disc, then block the lid sensor`:
+If you see the text `Put in a real NTSC-J PSX game disc`, then block the lid sensor:
 
 *   Open the CD drive of your PS1 console.
 *   Put in a real NTSC-J Japanese PS1 game disc in the CD drive, but don't close the CD drive lid.

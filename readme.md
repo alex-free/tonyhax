@@ -2,7 +2,7 @@
 
 ## The Ultimate Backup CD-R/Import Disc Loader Soft-Mod Solution For The Original PlayStation & Early Models Of PlayStation 2
 
-Brought to you by [Alex Free](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6018), [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867), [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714), and [SylverReZ (M4x1mumReZ)](https://gbatemp.net/members/sylverrez.610331/). Built on the work of many [others](#credits).
+Brought to you by [Alex Free](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6018), [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867), [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714), and [SylverReZ (M4x1mumReZ)](https://gbatemp.net/members/sylverrez.610331/). Built on the work of many [others](credits.md).
 
 Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Software backup loader exploit thing for the Sony PlayStation 1" originally created by [Socram8888](https://github.com/socram8888). Tonyhax International is developed by Alex Free and MottZilla with many new features and upgrades compared to the original Tonyhax, some of which are listed below:
 
@@ -20,9 +20,18 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * Supports [applying user-supplied GameShark codes](gameshark-code-support.md) to any game it booted by the Tonyhax International loader. Dare I say this is the world's first open source PSX GameShark.
 
+* Supports [TOCPerfect Patching](https://alex-free.github.io/tocperfect) a CD image directly to use the Tonyhax International loader as a way to remove some of the limitations of using the CD Player Swap Trick as a boot method.
+
 * Enables speeding up xStation boot time and allows for applying codes to games `Full Boot`ed by xStation. This is accomplished by a [special xStation ROM version](xstation.md).
 
 * Uses a completely different build system that is portable to many more Linux distributions. This new build system is more efficient and easier to use as well.
+
+
+## Important Info
+
+*   [The Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr) - everything you need to know when making your own PSX backup CD-Rs.
+
+*   [Unofficial PS1 CD Drive Service Manual](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/) - How to refurbish your PSX CD drive to read discs better if it has issues.
 
 ## Usage
 
@@ -54,6 +63,8 @@ _American/European PS1/PS2 Consoles (SCPH-1001-SCPH-39004)_
 
 _Boot Methods_
 
+*   [TOCPerfect Patching](https://alex-free.github.io/tocperfect)
+
 *   [GameShark Code](gameshark-code.md)
 
 *   [Flashed Cheat Cartridge - ROM/ROM Flasher CD](flashed-cheat-cart.md)
@@ -72,11 +83,11 @@ _More Info_
 
 * [Playing Games With Additional Copy Protection Routines](anti-piracy-bypass.md)
 
-* [CD-R Media For PSX Backups](#cd-r-media-for-psx-backups)
+* [CD-R Media For PSX Backups](cdr-burning.md)
 
-* [Building From Source](#building-from-source)
+* [Building From Source](build.md)
 
-* [Credits](#credits)
+* [Credits](credits.md)
 
 ## Links
 
@@ -93,6 +104,8 @@ _Threads_
 *   [GBATemp](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514)
 
 _Relevant Software_
+
+*   [TOCPerfect Patcher](https://alex-free.github.io/tocperfect) - patch the Tonyhax International loader into a disc image directly to expand the capabilities of the CD Player Swap Trick.
 
 *   [CDRDAO-PLED](https://alex-free.github.io/cdrdao) - recommended burning software for Linux.
 
@@ -112,31 +125,21 @@ _Relevant Software_
 
 *   [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)
 
-_Advice_
-
-*   [Do modern burners/CD's make lower quality PS1 backups?](https://gbatemp.net/threads/do-modern-burners-cds-make-lower-quality-ps1-backups.628708/) - a great discussion on burning PSX backups in the current year.
-
-* [Unofficial PS1 CD Drive Service Manual](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/) - Refurbish your PSX CD drive to read discs better.
-
 ## Downloads
 
-### Version 1.3.7 (8/1/2023)
+### Version 1.3.8 (9/2/2023)
 
-*   [tonyhax-international-v1.3.7](https://github.com/alex-free/tonyhax/releases/download/v1.3.7i/tonyhax-international-v1.3.7.zip)
+*   [tonyhax-international-v1.3.8](https://github.com/alex-free/tonyhax/releases/download/v1.3.8i/tonyhax-international-v1.3.8.zip)
 
 Changes:
 
-* You can now use GameShark Codes with the prefixes: `E2`, `E3`, `D2`, and `D3` using the [GameShark code feature](gameshark-code-support.md).
+*   Improved memory card reading and handling for the user supplied [GameShark Codes](gameshark-code-support.md) feature. Fixes the rare `Can not read MC` issue, and also allows you to read the memory card any number of times. You can even change your mind without restarting Tonyhax International, and put in a different memory card and then read that instead of whatever previous one was already read.
 
-* THIGSGEN updated to v2.0.2. 
+*   Added support for playing the [english translation](http://redump.org/disc/37878/) of [Planet Laika](http://redump.org/disc/37878/) with one huge crevet, you can not currently apply your own [GameShark Codes](gameshark-code-support.md) via the memory card method or it will break this game (black screen after hitting the `New Game` option in the title screen). This should be addressed possible in a future update. This fixes [issue 39](https://github.com/alex-free/tonyhax/issues/39).
 
-* Stealth GameShark cheat engine updated to v1.0.4, which has been optimized for maximum performance over size.
+*   Improved TOCPerfect build with even more size optimizations. The new [TOCPerfect Patcher](https://alex-free.github.io/tocperfect) is also linked and explained everywhere in the docs.
 
-* Size optimizations to Tonyhax International loader.
-
-* Rewritten GameShark code type parsing functions in Tonyhax International loader.
-
-* Updated [anti-piracy bypass](anti-piracy-bypass.md) documentation.
+*   The 'CD-R Media For PSX Backups' section has been expanded into it's [own webpage](https://alex-free.github.io/psx-cdr) on [my website](https://alex-free.github.io). **Please read it!**.
 
 [About previous versions](changelog.md).
 
@@ -150,6 +153,7 @@ If you are using **any Japanese console**, at least one real Japanese NTSC-J PS1
 
 Start the Tonyhax International loader with a supported boot method:
 
+*   [TOCPerfect Patching](https://alex-free.github.io/tocperfect)
 *   [GameShark Code](gameshark-code.md)
 *   [ROM/ROM Flasher CD](flashed-cheat-cart.md)
 *   [FreePSXBoot Memory Card Images](freepsxboot-exploit.md)
@@ -274,6 +278,7 @@ Available boot methods for American and European PS2 consoles:
 
 Available boot methods for American and European PS1 consoles:
 
+*   [TOCPerfect Patching](https://alex-free.github.io/tocperfect)
 *   [GameShark Code](gameshark-code.md)
 *   [ROM Flasher CD](flashed-cheat-cart.md)
 *   [FreePSXBoot Memory Card Images](#freepsxboot-memory-card-images)
@@ -315,188 +320,3 @@ The early PS2 models that Tonyhax International supports have the PS1 mode which
 *   Using wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
 *   Put in the real PAL PS1 game disc that you are using with a [save game exploit.](save-game-exploit.md) when in PS1VModeNeg. The video mode will be forced to NTSC now in the PS1 mode of your PAL PS2.
 *   Playing through your PAL PS1 game disc may look or act weird in NTSC video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a NTSC disc and the NTSC PS1 import or backup disc will boot in NTSC video mode.
-
-## CD-R Media For PSX Backups
-
-**Only use high-quality CD-R media for PSX backups.** If you want good results burning backups for your PS1 your CD-R media should contain:
-
-* High quality dye (SuperAZO, AZO, or Phthalocyanine).
-* A highly reflective layer system.
-* High quality polycarbonate and "sealing" process combining all parts of the CD-R.
-
-Burn **as slow as possible**. If you have a game with [additional anti-piracy](anti-piracy-bypass.md) measures, you may need to use a specific [burning software](anti-piracy-bypass.md#cd-burning).
-
-_You want to use 74 minute discs_. The PSX was never designed for the now more common 80 minute discs, and it is easier for the laser sled to track 74 minute discs due to their wider data spiral windings. However as of 2023, 74 minute discs are not manufactured anymore and new old stock can get pricey, so it really may not be worth it as the PSX can read 80 minute discs okay (just not as optimally, you may experience longer load times or even straight up disc read errors on worn CD drives). 
-
-The PSX can read 74 minute discs easier as that is closer to what it was designed for originally (which was 72 minute pressed CD-ROMs). Verbatim DataLifePlus 74min discs with a copyright date of 1997 or 1999 on the back of the CD case may be among the best media to acquire.
-
-Later PSX consoles appear to handle 80min discs much better then the earliest models. 
-
-The early PS2 console models that Tonyhax International supports have issues reading [_some games_ to 80min media](https://github.com/socram8888/tonyhax/issues/24), but luckily this has a  workaround now by patching the CD image before burning it with the [PSX 80 Minute Patcher](https://alex-free.github.io/psx80mp).
-
-It is extremely important to note that as of 2023 one single monopoly known as CMC magnetics has [bought out every good manufacturer of CD-R media](https://github.com/alex-free/tonyhax/issues/30). Quality has seemed to [gone down due to this](https://gbatemp.net/threads/do-modern-burners-cds-make-lower-quality-ps1-backups.628708/page-3#post-10182249), so new old stock 74min media really is optimal. 
-
-### Recommended CD-Rs
-
-CMC Pro discs work the best with the PSX. Here is the ATIP information displayed by `cdrecord -atip` for a CMC Pro 80min modern CD-R:
-
-    ATIP info from disk:
-      Indicated writing power: 4
-    Disk Is not unrestricted
-    Disk Is not erasable
-      Disk sub type: Medium Type A, high Beta category (A+) (3)
-      ATIP start of lead in:  -11849 (97:24/01)
-      ATIP start of lead out: 359847 (79:59/72)
-    Disk type:    Long strategy type (Cyanine, AZO or similar)
-    Manuf. index: 25
-    Manufacturer: Taiyo Yuden Company Limited
-
-I have found Verbatim DataLifePlus CD-Rs to be really good with PS1 consoles. Here is the ATIP information displayed by `cdrecord -atip` for a Verbatim DataLifePlus 80min modern CD-R:
-
-    ATIP info from disk:
-      Indicated writing power: 4
-    Disk Is not unrestricted
-    Disk Is not erasable
-      Disk sub type: Medium Type A, high Beta category (A+) (3)
-      ATIP start of lead in:  -11077 (97:34/23)
-      ATIP start of lead out: 359848 (79:59/73)
-    Disk type:    Long strategy type (Cyanine, AZO or similar)
-    Manuf. index: 11
-    Manufacturer: Mitsubishi Chemical Corporation
-
-Verbatim UltraLife Archival Grade Gold CD-Rs also are really good, although they are more expensive then Verbatim DataLifePlus. I think Verbatim DataLifePlus CD-Rs are slightly better with the PS1 as well, but they are an option. Here is the ATIP information displayed by `cdrecord -atip` for a Verbatim UltraLife Archival Grade Gold 80min modern CD-R:
-
-    ATIP info from disk:
-      Indicated writing power: 5
-    Disk Is not unrestricted
-    Disk Is not erasable
-      Disk sub type: Medium Type B, low Beta category (B-) (4)
-      ATIP start of lead in:  -12520 (97:15/05)
-      ATIP start of lead out: 359849 (79:59/74)
-    Disk type:    Short strategy type (Phthalocyanine or similar)
-    Manuf. index: 26
-    Manufacturer: TDK Corporation
-
-### Bad CD-Rs
-
-**Do not use cheap/poor quality CD-R media, which is almost always all that is available in retail stores and most likely any CD-R that is not "archival grade"**. Poor quality cheap CD-R media _can_ result in:
-
-*   Slower loading times/in-game lag because of CD drive tracking errors (bad noises from the CD drive).
-*   Issues reading data off of the disc possibly resulting in a game to freeze and motor power off in the CD drive.
-*   Skipping/silent audio and or music.
-
-Here is the ATIP information displayed by `cdrecord -atip` for a Maxell Music CD-R (which is a poor quality brand/CD-R media that is **highly not recommended**.
-
-    ATIP info from disk:
-      Indicated writing power: 4
-    Disk Is unrestricted
-    Disk Is not erasable
-      Disk sub type: Medium Type A, low Beta category (A-) (2)
-      ATIP start of lead in:  -12508 (97:15/17)
-      ATIP start of lead out: 359845 (79:59/70)
-    Disk type:    Short strategy type (Phthalocyanine or similar)
-    Manuf. index: 22
-    Manufacturer: Ritek Co.
-
-If you are still having issues booting discs in Tonyhax International, consider wiping with a clean microfiber cloth from the inner ring to the outer edge of the disc in all directions and then trying to boot the disc again.
-
-## Building From Source
-
-Obtain the **complete Tonyhax International current source tree from GitHub using git**, using the command below:
-
-`git clone --recursive https://github.com/alex-free/tonyhax`
-
-Next, install all the required dependencies:
-
-* git 
-* autoconf 
-* automake
-* g++ 
-* make 
-* libtool 
-* texinfo 
-* help2man 
-* ncurses-devel 
-* libtinyxml2-devel 
-* cmake 
-* cdrdao 
-* python3
-* python3-pip (and numpy, which is installed via this command: `pip3 install numpy`)
-
-If you have the `dnf` or `apt` package manager, you can download the build dependencies automatically with the `get-deps.sh` script found in the `scripts` folder of the Tonyhax International [source tree](https//alex-free.github.io/tonyhax). **For any other OS, you'll need to find the above packages and install them manually yourself.** Please feel free to add support for your package manager.
-
-Next, you need to build the tool-chain. Execute the `build-tool-chain.sh` script, which is found in the `scripts` directory of the source tree. **This will take some time to build, depending on how fast your computer is.**
-
-With everything now installed, build Tonyhax International with the `build.sh` script found in the `scripts` directory of the Tonyhax International source tree. After you build Tonyhax International a release `.zip` file will be generated in the root of the source directory.
-
-## Credits
-
-### MottZilla
-
-*	Guidance on increasing the size of the Tonyhax International loader and my general goto mentor on this project.
-
-* Co-developed the Spyro Year Of The Dragon GameShark code bypass method.
-
-*	Wrote the GameShark Code Engine, used first in the APv2 bypass system. With MottZilla's guidance this code has even been expanded and adapted for general use [GameShark Code Support](gameshark-code.md).
-
-*   The original sole creator of [PS1 DemoSwap Patcher v1.0](https://www.psx-place.com/threads/mctool-tonyhax-freepsxboot-installer.36569). MottZilla re-implemented the TOCPerfect concept into a much superior method, and included his implementation alongside of his DemoSwap idea in PS1 DemoSwap Patcher.
-
-*   Wrote the controller input support for Tonyhax International.
-
-*   Wrote the laser re-calibration function for VC2 and VC3 CDROM controllers.
-
-*   Developed the first Japanese save game exploit for Crash Bandicoot 2.
-
-*   Developed the PS-EXE loader used on GameShark/cheat cartridges to run Tonyhax International.
-
-*   Came up with reset+unlock technique for TOCPerfect booting on USA/PAL consoles.
-
-*   Originally came up with the idea to involve the SetSession 2 command in a fix for the older CDROM controllers which resulted in the eventual discovery of the SetSessionSuperUltraCommandSmash v2.
-
-*   Explained the save game checksum routines in both Tony Hawk Pro Skater 2 (Japanese version) & Castrol Honda VTR (Japanese version) to help me create SuccessCheckSumUpdater (SuccessCU).
-
-*   Explained to myself how to find/port save game exploits to new games or to different versions of games available in different regions (i.e. Japanese version).
-
-### Patchouli(karehaani)
-
-*   Doki Oki (Japan) save game exploit.
-
-*   Crash Bandicoot 3 (Japan) save game exploit.
-
-*   The Lengend Of Heroes I&II (Japan) save game exploit.
-
-*   Tekken 3 Japan/USA/PAL save game exploits (based off of previous work by [krystalgamer](https://github.com/socram8888/tonyhax/pull/20)).
-
-*   Tekken 2 Japan (rev 1 only)/USA (rev 0 only)/PAL save game exploits (based off of previous work by [krystalgamer](https://github.com/socram8888/tonyhax/pull/20)).
-
-*   Downhill Snow (Japan) save game exploit.
-
-*   Final Fantasy IX (Japan and USA) save game exploit.
-
-### SylverReZ (M4x1mumReZ)
-
-*   Helping with debugging an [APrip](https://alex-free.github.io/aprip) issue on Windows.
-
-*   Generated Aprip codes for APv2 bypasses for i-mode mo Issho: Doko Demo Issho Tsuika Disc, Koko Hore! Pukka, Love Hina: Ai wa Kotoba no Naka ni / Love Hina 2: Kotoba wa Konayuki no You ni, Pocket Jiman.
-
-### Misc Acknowledgements
-
-*   [Berion](https://www.psx-place.com/members/berion.1431/) of [PSX-Place](https://psx-place.com) compressed the images of this document properly (this is the first time I've edited photos).
-
-*   Martin Korth for confirming the SetSession bug found in VC0A, VC0B, and VC1A CDROM controller BIOS versions, and for the priceless [PSX-SPX](http://problemkaputt.de/psx-spx.htm) document.
-
-*   [Peppe90](https://www.psx-place.com/members/peppe90.42412/) of [PSX-Place](https://psx-place.com) for testing NTSC gamems on a PAL PS2. His results have confirmed that the video mode can not be changed from PS1 software in PS1 mode on a PS1. It must be changed in PS1DRV from the PS2, as PS1 mode is set to always display the same video mode that the console shipped with (for the early PS2s that Tonyhax International supports). He mentioned that PS1VModeNeg v1.0.1 can be used to overcome this. The original Tonyhax [issue](https://github.com/socram8888/tonyhax/issues/25) explaining this also was helpful in figuring out how to bypass this PS2 level limitation.
-
-### O.G. Tonyhax Acknowledgements
-
-[Socram8888](https://github.com/socram8888) is the original developer of the Tonyhax loader. The original Tonyhax loader credits are below, in alphabetical order:
-
-*   Alex Free for adding the boot CD image.
-*   ChampionLeake for documenting the Brunswick exploits at PlayStation dev wiki.
-*   Gerardo Rodriguez for suggesting Cool Boarders 4 on a YouTube comment.
-*   @FMecha for suggesting Castrol Honda VTR on Twitter.
-*   John Wilbert Villamor (aka Lameguy64) for creating mkpsxiso.
-*   Jose Silva for adding support for Sports Superbike II and XS Moto.
-*   Martin Korth for his super awesome technical documentation page that was vital for the development of this project, as well as for developing the no$psx emulator that was also essential for debugging.
-*   Patrick Vogt for testing on multiple development PS1 consoles.
-*   Everyone that's reported the issues on GitHub and helped Socram8888 make it better.

@@ -1,5 +1,24 @@
 # Changelog
 
+## Version 1.3.7 (8/1/2023)
+
+*   [tonyhax-international-v1.3.7](https://github.com/alex-free/tonyhax/releases/download/v1.3.7i/tonyhax-international-v1.3.7.zip)
+
+Changes:
+
+* You can now use GameShark Codes with the prefixes: `E2`, `E3`, `D2`, and `D3` using the [GameShark code feature](gameshark-code-support.md).
+
+* THIGSGEN updated to v2.0.2. 
+
+* Stealth GameShark cheat engine updated to v1.0.4, which has been optimized for maximum performance over size.
+
+* Size optimizations to Tonyhax International loader.
+
+* Rewritten GameShark code type parsing functions in Tonyhax International loader.
+
+* Updated [anti-piracy bypass](anti-piracy-bypass.md) documentation.
+
+
 ## Version 1.3.6 (7/26/2023)
 
 *   [tonyhax-international-v1.3.6](https://github.com/alex-free/tonyhax/releases/download/v1.3.6i/tonyhax-international-v1.3.6.zip)

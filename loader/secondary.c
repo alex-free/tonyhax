@@ -40,10 +40,9 @@ bool controller_input = 0; // When enabled, debug_write does not display the rep
 bool first_rev = 0; // VC0 A and VC0 B do not need any anti-piracy patching as they are immune to additional copy protection routines because of the lack of the ReadTOC command in the CDROM Controller BIOS Firmware.
 bool installed_cheat_engine = 0; // The cheat engine is installed when parse_memcard_save_gameshark_codes() completes. Some games may go on to set explicit anti-piracy bypass GameShark codes however, so to prevent the cheat engine from being installed twice (which is wasteful) we set a flag here.
 bool did_read_mc = 0; // We need to set the GameShark codes AFTER the last bios_reintialize(). I want to call bios_reinitilize() after reading the memory card data to prevent anything screwy in booting games, so we can just parse the data later after the final bios_reinitialize since it's still in RAM.
-bool controller_input_switch = 1; // modifies controller input pulling behavior in some functions later on
 uint8_t number_of_gameshark_code_lines; // part of my basic format to store codes, this tells us how many we will activate
 uint8_t * user_start = (uint8_t *) 0x80010000;
-uint16_t mc_base = 0x102; // start of gs code data in memcard buffer
+uint16_t mc_base = 0x102; // start of gs code data in memory card buffer
 
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
@@ -53,6 +52,7 @@ void * address;		// For Calculating BIOS Functions
 uint8_t j;			// Joypad
 uint8_t padbuf[2][0x22];	// Joypad Buffers
 
+#if !defined TOCPERFECT
 #if defined ROM
 void run_shell() {
 	// runs Sony BIOS. Can access CD Player/Memory Card Manager. Can not boot any discs, even ones that normally work without the flash cart inserted in the console. This has been adapted code from the SCPH-1001 decomp: https://github.com/ogamespec/psxdev/blob/97fbb2d03e5aff4449097afd2b59690002cb2341/reverse/Main.c#L395
@@ -83,12 +83,30 @@ void controller_input_stop() { // this doubles as 'closing' the memory card func
 }
 
 void read_memcard() {
+/*
+InitCARD
+Initialize Memory Card BIOS.
+Library Header File Introduced Documentation Date
+libcard.lib libapi.h 3.0 12/14/98
+Syntax
+void InitCARD(
+long val) Specify sharing with controller
+Explanation
+Initializes the Memory Card BIOS and enters an idle state. val specifies whether or not there is sharing with
+the controller. (0: not shared; 1: shared.)
+When the BIOS is subsequently put into operation by StartCARD(), the low-level interface functions that
+begin with “ _card” can be used directly.
+The Memory Card file system uses these interfaces internally, so InitCARD() needs to be executed before
+_bu_init().
+There is no effect on the controller.
+*/
 	debug_write("Reading MC...");
 	int32_t read;
-	// InitCard(pad_enable)
+	// BIOS Function InitCard(pad_enable)
+	int32_t pad_enable = 1; 
 	address = (uint32_t *) GetB0Table()[0x4A];
-	((void (*)(uint8_t*)) address)(0);
-	// BIOS FunctionStartCard()
+	((void (*)(int32_t*)) address)(&pad_enable);
+	// BIOS Function StartCard()
 	address = (void *) (GetB0Table()[0x4B]);
 	((void (*)(void)) address)();
 	// BIOS Function _bu_init()
@@ -96,8 +114,8 @@ void read_memcard() {
 	((void (*)(void)) address)();
 	int32_t mc_fd = FileOpen("bu00:TONYHAXINTGS", FILE_READ);
 	if(mc_fd == -1) {
-		debug_write("Can not read MC");
-		return;
+		debug_write("Can not read MC, read error %d", GetLastError());
+		debug_write("Make sure the MC is inserted into slot 1 correctly and try again");
 	}
 
 	if (mc_fd > 0) {
@@ -111,32 +129,28 @@ void read_memcard() {
 		FileClose(mc_fd);
 		number_of_gameshark_code_lines = user_start[mc_base + 1];
 		debug_write("%d code lines detected", number_of_gameshark_code_lines);
-	}
 
-	controller_input_stop(); //restart so we can once again pull controller input
+		uint8_t sum;
+		uint8_t prev = 0;
+		uint8_t next;
+		uint8_t checksum_in_save_file = user_start[mc_base];
 
-	controller_input_start();
+		for (int i = 0x103; i < 0x2000; i++)
+		{
+			//debug_write("%x: @ %x", &user_start[i], user_start[i]);
+			next = user_start[i];
+			sum = prev + next;
+			sum &= 0xFF;
+			prev = sum;
+		}
 
-	uint8_t sum;
-	uint8_t prev = 0;
-	uint8_t next;
-	uint8_t checksum_in_save_file = user_start[mc_base];
-
-	for (int i = 0x103; i < 0x2000; i++)
-	{
-		//debug_write("%x: @ %x", &user_start[i], user_start[i]);
-		next = user_start[i];
-		sum = prev + next;
-		sum &= 0xFF;
-		prev = sum;
-	}
-
-	if(checksum_in_save_file == sum) {
-		debug_write("Checksum: %x Verified", sum);
-		did_read_mc = 1; // set flag to parse codes uploaded to RAM, right before clearing RAM itself and booting the game
-	} else {
-		debug_write("Checksum: %x did not match the expected checksum %x!", sum, checksum_in_save_file);
-		debug_write("Can not enable codes, check that the TONYHAXINTGS file is not corrupted");
+		if(checksum_in_save_file == sum) {
+			debug_write("Checksum: %x Verified", sum);
+			did_read_mc = 1; // set flag to parse codes uploaded to RAM, right before clearing RAM itself and booting the game
+		} else {
+			debug_write("Checksum: %x did not match the expected checksum %x!", sum, checksum_in_save_file);
+			debug_write("Can not enable codes, check that the TONYHAXINTGS file is not corrupted");
+		}
 	}
 }
 
@@ -229,6 +243,7 @@ void parse_memcard_save_gameshark_codes() {
 		mc_base = (mc_base + 6); // advance 6 bytes from current val
 	}
 }
+#endif // TOCPERFECT
 
 void log_bios_version() {
 	/*
@@ -309,33 +324,18 @@ void wait_lid_status(bool open) {
 		j = padbuf[0][3] ^ 0xFF;
 		debug_write(" "); // Vblank wait for controller input
 
-		if(controller_input_switch)
-		{
 #if defined ROM // this is more optimized for variable button presses then otherwise if we didn't test both statements in an else if
-			if(j == 0x40) { // X button
-				controller_input_stop();
-				run_shell(); // launch Sony BIOS
-			} else if(j == 0x20) { // Circle button
-				controller_input_switch = 0; // stop pulling for circle button input once we get it, as unlike the run_shell() function (which exits the program entirely) we still have to wait here until the user closes the console CD drive lid
-				read_memcard();
-			}
+		if(j == 0x40) { // X button
+			controller_input_stop();
+			run_shell(); // launch Sony BIOS
+		} else if(j == 0x20) { // Circle button
+			read_memcard();
+		}
 #else // booting the shell is unnecessary for every other boot method besides the ROM so we don't include it
-			if(j == 0x20) { // Circle button
-				controller_input_switch = 0; // stop pulling for circle button input once we get it, as unlike the run_shell() function (which exits the program entirely) we still have to wait here until the user closes the console CD drive lid
-				read_memcard();
-			}
-#endif
-
-#if defined ROM
-		} else { // still allow booting Sony BIOS after reading MC
-			if(j == 0x40) { // X button
-				controller_input_stop();
-				run_shell(); // launch Sony BIOS
-			}
+		if(j == 0x20) { // Circle button
+			read_memcard();
 		}
-#else
-		}
-#endif
+#endif // ROM
 
 		// Issue Getstat command
 		// We cannot issue the BIOS CD commands yet because we haven't called CdInit
@@ -456,17 +456,12 @@ void try_boot_cd() {
 		while(1) { 
 			j = padbuf[0][3] ^ 0xFF;
 
-			if(controller_input_switch) {
-				if(j == 0x40) {
-					break; // X button boots disc
-				} else if(j == 0x20) { // Circle button enables codes
-					controller_input_switch = 0; // stop pulling for circle button input once we get it, as unlike when the X button is pressed (which breaks this loop) we still have to wait here until the user closes the console CD drive lid
-					read_memcard(); // this allows Japanese console users to enable user supplied GameShark codes without having to unblock the lid sensor, resetting authentication which would just be more unnecessary steps.
-				}
-			} else {
-				if(j == 0x40)
-					break; // X button boots disc
+			if(j == 0x40) {
+				break; // X button boots disc
+			} else if(j == 0x20) { // Circle button enables codes
+				read_memcard(); // this allows Japanese console users to enable user supplied GameShark codes without having to unblock the lid sensor, resetting authentication which would just be more unnecessary steps.
 			}
+
 			debug_write(" "); // Vblank wait for controller input
 		}
 	    controller_input_stop();
@@ -518,7 +513,7 @@ void try_boot_cd() {
 
 	debug_write("Checking game region");
 #if defined TOCPERFECT	
-    if (CdReadSector(1, 15, data_buffer) != 1) { // Real license data sector is copied to sector 15 by PS1 DemoSwap Patcher before it writes Japanese license data to sector 4
+    if (CdReadSector(1, 15, data_buffer) != 1) { // Real license data sector is copied to sector 15 by TOCPerfect Patch before it writes Japanese license data to sector 4 to allow booting via CD Player Swap Trick on early SCPH-3000 models
 		debug_write("Failed to read sector");
 		return;
 	}
@@ -632,10 +627,10 @@ void try_boot_cd() {
 	SetConf(event, tcb, stacktop);
 	ExitCriticalSection(); // unnecessary because SetConf() does this? Waiting on verdict from Socram8888: https://github.com/socram8888/tonyhax/issues/149
 
-	bzero((void*)0xD000, 0xF78); // 0xD000-0xDF78 are to be zeroed out to ensure correct parsing by the cheat engine (used for gs codes loaded via memcard AND for APv2 bypasses). 0xDF80 is used to contain BIOS patches so we stop 2 bytes previous to it. Every BIOS besides v3.0 has enough garbage in this 'reserved' area to break the cheat engine if we don't do this.
-
+#if !defined TOCPERFECT
 	if(did_read_mc) // before clearing RAM (which contains our mem card buffer if applicable) but after last bios_reinitalize/setconf()
 		parse_memcard_save_gameshark_codes();
+#endif
 
 	debug_write("Clearing RAM");
 	bzero(user_start, &__RO_START__ - user_start);

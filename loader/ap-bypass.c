@@ -12,7 +12,14 @@ int32_t code_address_ram_location = 0xD000;
 int32_t code_compare_ram_location = 0xD004;
 int32_t code_enable_ram_location = 0xD00C;  
 
+void clear_gs_code_line_ram () {
+	bzero((void*)0xD000, 0xF78); // 0xD000-0xDF78 are to be zeroed out to ensure correct parsing by the cheat engine (used for gs codes loaded via memcard AND for APv2 bypasses). 0xDF80 is used to contain BIOS patches so we stop 2 bytes previous to it. Every BIOS besides v3.0 has enough garbage in this 'reserved' area to break the cheat engine if we don't do this. Previously this zero-out was always done regardless of if the gameshark feature was actually being used. Now this is only done if the gameshark engine is active OR if this is an anti-piracy game to fix issue 39: https://github.com/alex-free/tonyhax/issues/39
+}
+
 void add_8bit_code(const uint32_t gs1, const uint8_t gs2, const uint8_t gs_code_type) {
+	if(code_address_ram_location == 0xD000)
+		clear_gs_code_line_ram(); // before writing first code line clear RAM
+
     memcpy((void*)code_address_ram_location, &gs1, 4);
     memcpy((void*)code_compare_ram_location, &gs2, 1);
     memcpy((void*)code_enable_ram_location, &gs_code_type, 1);
@@ -23,6 +30,10 @@ void add_8bit_code(const uint32_t gs1, const uint8_t gs2, const uint8_t gs_code_
 }
 
 void add_16bit_code(const uint32_t gs1, const uint16_t gs2, const uint8_t gs_code_type) {
+
+	if(code_address_ram_location == 0xD000)
+		clear_gs_code_line_ram(); // before writing first code line clear RAM
+
     memcpy((void*)code_address_ram_location, &gs1, 4);
     memcpy((void*)code_compare_ram_location, &gs2, 2);
     memcpy((void*)code_enable_ram_location, &gs_code_type, 1);
@@ -120,8 +131,6 @@ const unsigned char cheat_engine_v1_0_4[] = {
 	const uint16_t redirect = 0xC000;
 	memcpy((void*)b0_entry, &redirect, 2); // Write the value 0xC000 to table entry we want to modify
    //for(volatile int i = 0; i < 0x100000; i++);  // won't be optimized out by -Os, pause
-
-	bzero((void*)0xD000, 0xF78); // 0xD000-0xDF78 are to be zeroed out to ensure correct parsing by the cheat engine (used for gs codes loaded via memcard AND for APv2 bypasses). 0xDF80 is used to contain BIOS patches so we stop 2 bytes previous to it. Every BIOS besides v3.0 has enough of something non-zero (garbage??) in this 'reserved' area to break the cheat engine if we don't do this. Previously this zero-out was always done regardless of if the gameshark feature was actually being used. Now this is only done if the gameshark engine is active to fix issue 39: https://github.com/alex-free/tonyhax/issues/39 . This fix does not allow that game to be used with gameshark codes yet, but it isn't an anti-piracy game so you can play it as normal as long as codes are not active
    cheat_engine_installed = 1;
 }
 

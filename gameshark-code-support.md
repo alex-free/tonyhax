@@ -14,6 +14,14 @@ Tonyhax International now has the ability to apply user-supplied GameShark codes
 
 5) Boot your game as normal, and enjoy the GameShark codes.
 
+**Note** If you reset the console (while in the International loader) when using the GameShark cheat cartridge boot method and then try to read the memory card after the loader restarts it won't work work until you reinsert the memory card.
+
+## Games That Can't Be Used With The GameShark Feature
+
+You can not use the GameShark feature with the [english translation](http://redump.org/disc/37878/) of [Planet Laika](http://redump.org/disc/37878/) due to the translation using the same RAM this uses.
+
+You can not use the GameShark feature with Spyro YOTD releases without tripping the anti-tamper anti-piracy measure.
+
 ## YouTube Videos On This Functionality
 
 Here's some awesome vids by my friend [JMaxxl](https://github.com/JMaxxL):

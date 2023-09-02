@@ -115,7 +115,7 @@ There is no effect on the controller.
 	int32_t mc_fd = FileOpen("bu00:TONYHAXINTGS", FILE_READ);
 	if(mc_fd == -1) {
 		debug_write("Can not read MC, read error %d", GetLastError());
-		debug_write("Make sure the MC is inserted into slot 1 correctly and try again");
+		debug_write("Please try reinserting the memory card");
 	}
 
 	if (mc_fd > 0) {

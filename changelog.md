@@ -1,5 +1,20 @@
 # Changelog
 
+## Version 1.3.8 (9/2/2023)
+
+*   [tonyhax-international-v1.3.8](https://github.com/alex-free/tonyhax/releases/download/v1.3.8i/tonyhax-international-v1.3.8.zip)
+
+Changes:
+
+*   Improved memory card reading and handling for the user supplied [GameShark Codes](gameshark-code-support.md) feature. Fixes the rare `Can not read MC` issue, and also allows you to read the memory card any number of times. You can even change your mind without restarting Tonyhax International, and put in a different memory card and then read that instead of whatever previous one was already read.
+
+*   Added support for playing the [english translation](http://redump.org/disc/37878/) of [Planet Laika](http://redump.org/disc/37878/) with one huge crevet, you can not currently apply your own [GameShark Codes](gameshark-code-support.md) via the memory card method or it will break this game (black screen after hitting the `New Game` option in the title screen). This should be addressed possible in a future update. This fixes [issue 39](https://github.com/alex-free/tonyhax/issues/39).
+
+*   Improved TOCPerfect build with even more size optimizations. The new [TOCPerfect Patcher](https://alex-free.github.io/tocperfect) is also linked and explained everywhere in the docs.
+
+*   The 'CD-R Media For PSX Backups' section has been expanded into it's [own webpage](https://alex-free.github.io/psx-cdr) on [my website](https://alex-free.github.io). **Please read it!**.
+
+
 ## Version 1.3.7 (8/1/2023)
 
 *   [tonyhax-international-v1.3.7](https://github.com/alex-free/tonyhax/releases/download/v1.3.7i/tonyhax-international-v1.3.7.zip)

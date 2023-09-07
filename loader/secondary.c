@@ -82,8 +82,14 @@ void controller_input_stop() { // this doubles as 'closing' the memory card func
 	((void (*)(void)) address)();	// BIOS StopPad exec
 }
 
+void mc_controller_wait_on_error() {
+	for(volatile int i = 0; i < 0x100000; i++); // Pause to not spam a memory card read error message if O is pressed down
+}
+
 void read_memcard() {
 /*
+PSX Official Docs
+
 InitCARD
 Initialize Memory Card BIOS.
 Library Header File Introduced Documentation Date
@@ -100,6 +106,24 @@ The Memory Card file system uses these interfaces internally, so InitCARD() need
 _bu_init().
 There is no effect on the controller.
 */
+
+/*
+No $ PSX SPX File Error info
+
+File Error Numbers for B(54h) and B(55h)
+  00h okay (though many successful functions leave old error code unchanged)
+  02h file not found
+  06h bad device port number (tty2 and up)
+  09h invalid or unused file handle
+  10h general error (physical I/O error, unformatted, disk changed for old fcb)
+  11h file already exists error (create/undelete/rename)
+  12h tried to rename a file from one device to another device
+  13h unknown device name
+  16h sector alignment error, or fpos>=filesize, unknown seektype or ioctl cmd
+  18h not enough free file handles
+  1Ch not enough free memory card blocks
+  FFFFFFFFh invalid or unused file handle passed to B(55h) function
+*/
 	debug_write("Reading MC...");
 	int32_t read;
 	// BIOS Function InitCard(pad_enable)
@@ -114,42 +138,47 @@ There is no effect on the controller.
 	((void (*)(void)) address)();
 	int32_t mc_fd = FileOpen("bu00:TONYHAXINTGS", FILE_READ);
 	if(mc_fd == -1) {
+		mc_controller_wait_on_error();
 		debug_write("Can not read MC, read error %d", GetLastError());
-		debug_write("Please try reinserting the memory card");
+		#if defined FREEPSXBOOT
+			debug_write("Ensure the FreePSXBoot memory card has been removed");
+		#endif
+		debug_write("Please try reinserting MC");
 	}
 
 	if (mc_fd > 0) {
 		read = FileRead(mc_fd, user_start, 0x2000); // read the entire file "TONYHAXINTGS" to the start of 'user RAM' (which will be cleared later before booting an executable). So 0x80010000-0x80012000 in RAM contains the contents of "TONYHAXINTGS". 
+		// 8192 % 64 = 128
+		FileClose(mc_fd);
 		
 		if (read == -1) {
-			debug_write("Read error %d", GetLastError());
-			return;
-		}
-
-		FileClose(mc_fd);
-		number_of_gameshark_code_lines = user_start[mc_base + 1];
-		debug_write("%d code lines detected", number_of_gameshark_code_lines);
-
-		uint8_t sum;
-		uint8_t prev = 0;
-		uint8_t next;
-		uint8_t checksum_in_save_file = user_start[mc_base];
-
-		for (int i = 0x103; i < 0x2000; i++)
-		{
-			//debug_write("%x: @ %x", &user_start[i], user_start[i]);
-			next = user_start[i];
-			sum = prev + next;
-			sum &= 0xFF;
-			prev = sum;
-		}
-
-		if(checksum_in_save_file == sum) {
-			debug_write("Checksum: %x Verified", sum);
-			did_read_mc = 1; // set flag to parse codes uploaded to RAM, right before clearing RAM itself and booting the game
+			mc_controller_wait_on_error();
+			debug_write("TONYHAXINTGS read error %d", GetLastError());
 		} else {
-			debug_write("Checksum: %x did not match the expected checksum %x!", sum, checksum_in_save_file);
-			debug_write("Can not enable codes, check that the TONYHAXINTGS file is not corrupted");
+			number_of_gameshark_code_lines = user_start[mc_base + 1];
+			debug_write("%d code lines detected", number_of_gameshark_code_lines);
+
+			uint8_t sum;
+			uint8_t prev = 0;
+			uint8_t next;
+			uint8_t checksum_in_save_file = user_start[mc_base];
+
+			for (int i = 0x103; i < 0x2000; i++)
+			{
+				//debug_write("%x: @ %x", &user_start[i], user_start[i]);
+				next = user_start[i];
+				sum = prev + next;
+				sum &= 0xFF;
+				prev = sum;
+			}
+
+			if(checksum_in_save_file == sum) {
+				debug_write("Checksum: %x Verified", sum);
+				did_read_mc = 1; // set flag to parse codes uploaded to RAM, right before clearing RAM itself and booting the game
+			} else {
+				debug_write("Checksum: %x did not match the expected checksum %x!", sum, checksum_in_save_file);
+				debug_write("No codes enabled, the TONYHAXINTGS file may corrupted");
+			}
 		}
 	}
 }
@@ -212,7 +241,6 @@ void parse_memcard_save_gameshark_codes() {
 
 		gameshark_code_address = user_start[mc_base + 2] + (user_start[mc_base + 3] << 8) + (user_start[mc_base + 4] << 16) + (user_start[mc_base + 5] << 24);
 		//debug_write("GS Code Addr: %x", gameshark_code_address);
-
 
 		if(
 			(gs_code_type == 0x80) || 
@@ -398,7 +426,7 @@ void re_cd_init() {
 	debug_write("Reinitializing kernel"); 
 	bios_reinitialize();
 	bios_inject_disc_error();
-	debug_write("Stopping Motor"); // Reset one last time to avoid potential lockups (here be dragons)
+	debug_write("Stopping Motor"); // Significantly improves reading data from disc
 	cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
 	
 	debug_write("Initializing CD");
@@ -476,13 +504,13 @@ void try_boot_cd() {
 		} else {
 			debug_write("Sending SetSession 1");
 			sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
-		}
-
-		if(calibrate_laser) { // VC2 and VC3s do auto Bias/Gain calibration when reading a newly inserted real NTSC-J PS1 disc. A swapped in CD-R or just a different disc in general needs this to be updated
-        	debug_write("Calibrating laser");
-        	cbuf[0] = 0x50; cbuf[1] = 0x38; cbuf[2] = 0x15; cbuf[3] = 0x0A;	// ModeCompensateTrackingAutoGain
-			cd_command(CD_CMD_TEST,&cbuf[0],4); 
-			cd_wait_int();
+		
+			if(calibrate_laser) { // VC2 and VC3s do auto Bias/Gain calibration when reading a newly inserted real NTSC-J PS1 disc. A swapped in CD-R or just a different disc in general needs this to be updated
+        		debug_write("Calibrating laser");
+        		cbuf[0] = 0x50; cbuf[1] = 0x38; cbuf[2] = 0x15; cbuf[3] = 0x0A;	// ModeCompensateTrackingAutoGain
+				cd_command(CD_CMD_TEST,&cbuf[0],4); 
+				cd_wait_int();
+			}		
 		}
 	}
 #else // XSTATION DEFINED

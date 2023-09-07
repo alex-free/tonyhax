@@ -13,7 +13,8 @@ int32_t code_compare_ram_location = 0xD004;
 int32_t code_enable_ram_location = 0xD00C;  
 
 void clear_gs_code_line_ram () {
-	bzero((void*)0xD000, 0xF78); // 0xD000-0xDF78 are to be zeroed out to ensure correct parsing by the cheat engine (used for gs codes loaded via memcard AND for APv2 bypasses). 0xDF80 is used to contain BIOS patches so we stop 2 bytes previous to it. Every BIOS besides v3.0 has enough garbage in this 'reserved' area to break the cheat engine if we don't do this. Previously this zero-out was always done regardless of if the gameshark feature was actually being used. Now this is only done if the gameshark engine is active OR if this is an anti-piracy game to fix issue 39: https://github.com/alex-free/tonyhax/issues/39
+	bzero((void*)0xD000, 0x600); 
+// 255 code line limit * 6 bytes per code + 6 bytes of padding = 1536/0x600. 0xD000-0xD600 are to be zeroed out to ensure correct parsing by the cheat engine (used for gs codes loaded via memcard AND for APv2 bypasses). Every BIOS besides v3.0 has enough garbage? in this 'reserved' area to break the cheat engine parsing if we don't do this. Previously this zero-out was always done regardless of if the gameshark feature was actually being used. Now this is only done if the GameShark engine is active OR if this is an anti-piracy game to fix issue 39: https://github.com/alex-free/tonyhax/issues/39 .
 }
 
 void add_8bit_code(const uint32_t gs1, const uint8_t gs2, const uint8_t gs_code_type) {
@@ -935,7 +936,6 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 
 // Legend Of Mana
    	((strcmp("SLPS_021.70;1", bootfile)) == 0) { // Japan
-   		//debug_write("Detected Legend Of Mana");
 		/*
 		D0050ECA 1040 
 		80050ECA 1000

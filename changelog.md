@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 1.3.9 (9/2/2023)
+
+*   [tonyhax-international-v1.3.9](https://github.com/alex-free/tonyhax/releases/download/v1.3.9i/tonyhax-international-v1.3.9.zip)
+
+Changes:
+
+*   Fixed a GameShark parsing bug introduced in v1.3.8 that broke the feature.
+*   Added more info to the [GameShark Code](gameshark-code-support.md) page.
+
 ## Version 1.3.8 (9/2/2023)
 
 *   [tonyhax-international-v1.3.8](https://github.com/alex-free/tonyhax/releases/download/v1.3.8i/tonyhax-international-v1.3.8.zip)

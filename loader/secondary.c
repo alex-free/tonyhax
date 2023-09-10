@@ -587,10 +587,9 @@ void try_boot_cd() {
 	const char * bootfile = "cdrom:PSX.EXE;1";
 
 	char bootfilebuf[32];
-
 	debug_write("Loading SYSTEM.CNF");
+
 	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
-    
 	if (cnf_fd > 0) {
 		read = FileRead(cnf_fd, data_buffer, 2048);
 		FileClose(cnf_fd);
@@ -648,8 +647,9 @@ void try_boot_cd() {
 	 * If an interrupt happens while the BIOS is reinitializing the TCBs (thread control blocks),
 	 * the interrupt handler will store the current thread state in the zero address, wiping
 	 * vital data, like the interrupt trampoline at 0x80.
+	 *
+	 * We do not need to reenable the interrupts because SetConf already does it for us.
 	 */
-	
 	debug_write("Configuring kernel");
 	EnterCriticalSection();
 	SetConf(event, tcb, stacktop);

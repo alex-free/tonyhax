@@ -61,7 +61,7 @@ _American/European PS1/PS2 Consoles (SCPH-1001-SCPH-39004)_
 
 *   [Playing Japanese/American Games On PAL PS2 Consoles](#playing-japaneseamerican-games-on-pal-ps2-consoles)
 
-_Boot Methods_
+## Boot Methods
 
 *   [TOCPerfect Patching](https://alex-free.github.io/tocperfect)
 
@@ -75,15 +75,13 @@ _Boot Methods_
 
 *   [Save Game Exploit](save-game-exploit.md)
 
-_More Info_
+## More Info
 
 * [GameShark Code Support](gameshark-code-support.md)
 
 * [XStation ROM Version](xstation.md)
 
 * [Playing Games With Additional Copy Protection Routines](anti-piracy-bypass.md)
-
-* [CD-R Media For PSX Backups](cdr-burning.md)
 
 * [Building From Source](build.md)
 

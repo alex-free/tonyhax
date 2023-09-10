@@ -653,7 +653,6 @@ void try_boot_cd() {
 	debug_write("Configuring kernel");
 	EnterCriticalSection();
 	SetConf(event, tcb, stacktop);
-	ExitCriticalSection(); // unnecessary because SetConf() does this? Waiting on verdict from Socram8888: https://github.com/socram8888/tonyhax/issues/149
 
 #if !defined TOCPERFECT
 	if(did_read_mc) // before clearing RAM (which contains our mem card buffer if applicable) but after last bios_reinitalize/setconf()

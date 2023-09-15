@@ -547,6 +547,13 @@ This is the complete list of games with bypasses anti-piracy measures that are s
 - When Is The Anti-Piracy Screen Check: First loading screen.
 - Versions With Anti-Piracy Bypass Support: USA.
 
+### MLB 2005
+
+- Versions Tested: [USA](http://redump.org/disc/7212/).
+- Versions With Anti-Piracy Screen: USA.
+- When Is The Anti-Piracy Screen Check: First loading screen.
+- Versions With Anti-Piracy Bypass Support: USA.
+
 ### My Garden
 
 - Versions Tested: [Japan](http://redump.org/disc/8300/).

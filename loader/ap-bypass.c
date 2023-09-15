@@ -996,13 +996,14 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		install_cheat_engine();
     } else if
 
-// MLB 2002 Demo, MLB 2002, MLB 2003 Demo, MLB 2003, MLB 2004
+// MLB 2002 Demo, MLB 2002, MLB 2003 Demo, MLB 2003, MLB 2004, MLB 2005
    	(
 	((strcmp("SCUS_946.48;1", bootfile)) == 0) // MLB 2002 USA Demo
 	|| ((strcmp("SCUS_946.38;1", bootfile)) == 0) // MLB 2002 USA
 	|| ((strcmp("SCUS_946.72;1", bootfile)) == 0) // MLB 2003 USA Demo
 	|| ((strcmp("SCUS_946.53;1", bootfile)) == 0) // MLB 2003 USA
 	|| ((strcmp("SCUS_946.89;1", bootfile)) == 0) // MLB 2004 USA
+	|| ((strcmp("SCUS_946.92;1", bootfile)) == 0) // MLB 2005 USA
 	) {
 		/*
 		D0028DB4 001E

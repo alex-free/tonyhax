@@ -26,7 +26,6 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * Uses a completely different build system that is portable to many more Linux distributions. This new build system is more efficient and easier to use as well.
 
-
 ## Important Info
 
 *   [The Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr) - everything you need to know when making your own PSX backup CD-Rs.
@@ -125,15 +124,21 @@ _Relevant Software_
 
 ## Downloads
 
-### Version 1.4.0 (9/7/2023)
+### Version 1.4.1 (9/15/2023)
 
-*   [tonyhax-international-v1.4.0](https://github.com/alex-free/tonyhax/releases/download/v1.4.0i/tonyhax-international-v1.4.0.zip)
+*   [tonyhax-international-v1.4.1](https://github.com/alex-free/tonyhax/releases/download/v1.4.1i/tonyhax-international-v1.4.1.zip)
 
 Changes:
 
-*   Slight speed optimization for SCPH-1000 and early SCPH-3000 consoles.
-*   Improved Memory card handling for the user supplied [GameShark](gameshark-code-support.md) code support. When no `TONYHAXINTGS` file is present on the memory card in slot 1 the read error text no longer spams multiple times.
-*   Slight speed optimization when the GameShark cheat engine is installed (only zero out RAM that supports up to the hard 255 code limit).
+*   Implemented a small wait period between open() and read() for memory card reading as per PSX specs to prevent any other possible rare fail to read memory card issues involving the [user supplied GameShark codes feature](gameshark-code-support.md).
+
+*   Removed a [redundant](https://github.com/socram8888/tonyhax/issues/149) exitcritcalsection() call after the final setconf (thanks Socram8888)!
+
+*   Added an [APv2 bypass](anti-piracy-bypass.md) for MLB 2005.
+
+*   Cleaned up source code to be more similar to original Tonyhax.
+
+*   Updated [MKPSXISO](https://github.com/Lameguy64/mkpsxiso) to latest commit.
 
 [About previous versions](changelog.md).
 

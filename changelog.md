@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 1.4.0 (9/7/2023)
+
+*   [tonyhax-international-v1.4.0](https://github.com/alex-free/tonyhax/releases/download/v1.4.0i/tonyhax-international-v1.4.0.zip)
+
+Changes:
+
+*   Slight speed optimization for SCPH-1000 and early SCPH-3000 consoles.
+*   Improved Memory card handling for the user supplied [GameShark](gameshark-code-support.md) code support. When no `TONYHAXINTGS` file is present on the memory card in slot 1 the read error text no longer spams multiple times.
+*   Slight speed optimization when the GameShark cheat engine is installed (only zero out RAM that supports up to the hard 255 code limit).
+
+
 ## Version 1.3.9 (9/2/2023)
 
 *   [tonyhax-international-v1.3.9](https://github.com/alex-free/tonyhax/releases/download/v1.3.9i/tonyhax-international-v1.3.9.zip)

@@ -137,6 +137,10 @@ File Error Numbers for B(54h) and B(55h)
 	address = (void *) (GetB0Table()[0x55]);
 	((void (*)(void)) address)();
 	int32_t mc_fd = FileOpen("bu00:TONYHAXINTGS", FILE_READ);
+
+	// The kernel will fail to read if we don't wait a bit (here, ~1/10th of a second) (NOTE: this is not exactly 1/10th of a second, what I'm doing here, it is a bit more). This is a known issue as specified in LIBOVR46.PDF section 5-11: "If read() or write() is issued immediately after open(), an error occurs". I noticed that entry.S does this so I do it here as well now
+	mc_controller_wait_on_error();
+
 	if(mc_fd == -1) {
 		mc_controller_wait_on_error();
 		debug_write("Can not read MC, read error %d", GetLastError());

@@ -141,9 +141,13 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 	uint8_t ver_check_val;
 	int8_t bootfile_len = strlen(bootfile);
 
-	// Aprip code type constants
-	const uint16_t readtoc_compare_val = 0x001E;
-	const uint16_t readtoc_patch_val = 0x0000;
+	// Aprip fake VC0 bypass code type constants
+	const uint16_t fake_vc0_bypass_compare_val = 0x001E;
+	const uint16_t fake_vc0_bypass_patch_val = 0x0000;
+
+	// Aprip fake PAL BIOS bypass code type constants
+	const uint16_t fake_pal_bios_bypass_compare_val = 0x1062;
+	const uint16_t fake_pal_bios_bypass_patch_val = 0x1800;
 
 	// Many pre-existing 'skip mod check' or 'force routine ok' type codes from back in the day seem to share these values, so they are a const
 	const uint16_t common_routine_return_compare_val = 0x1040;
@@ -219,10 +223,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D012255C 001E
 		8012255C 0000
-		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+		code generated via aprip
     	*/
-	    add_D0_code(0x8012255C, readtoc_compare_val);
-		add_80_code(0x8012255C, readtoc_patch_val);
+	    add_D0_code(0x8012255C, fake_vc0_bypass_compare_val);
+		add_80_code(0x8012255C, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -232,10 +236,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D0151448 001E
 		80151448 0000
-		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+		code generated via aprip
     	*/
-	    add_D0_code(0x80151448, readtoc_compare_val);
-		add_80_code(0x80151448, readtoc_patch_val);
+	    add_D0_code(0x80151448, fake_vc0_bypass_compare_val);
+		add_80_code(0x80151448, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
 	} else if
 
@@ -246,8 +250,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80134C48 0000
 		my code to patch out readtoc
     	*/
-	    add_D0_code(0x80134C48, readtoc_compare_val);
-		add_80_code(0x80134C48, readtoc_patch_val);
+	    add_D0_code(0x80134C48, fake_vc0_bypass_compare_val);
+		add_80_code(0x80134C48, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -258,8 +262,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80131B6C 001A
     	my code to patch out readtoc
     	*/
-	    add_D0_code(0x80131B6C, readtoc_compare_val);
-		add_80_code(0x80131B6C, readtoc_patch_val);
+	    add_D0_code(0x80131B6C, fake_vc0_bypass_compare_val);
+		add_80_code(0x80131B6C, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -270,20 +274,20 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80068B30 0000
     	my code to patch out readtoc
     	*/
-	    add_D0_code(0x80068B30, readtoc_compare_val);
-		add_80_code(0x80068B30, readtoc_patch_val);
+	    add_D0_code(0x80068B30, fake_vc0_bypass_compare_val);
+		add_80_code(0x80068B30, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
 // Breath of Fire IV
    	((strcmp("SLPS_027.28;1", bootfile)) == 0) { // Japan / USA E3 2000 Beta Build
 		/*
-		D01D0698 001E
-		801D0698 0000
+		D01CE39A 1062
+		801CE39A 1800
 		my code via aprip gameshark code conversion
     	*/
-	    add_D0_code(0x801D0698, readtoc_compare_val);
-		add_80_code(0x801D0698, readtoc_patch_val);
+	    add_D0_code(0x801CE39A, fake_pal_bios_bypass_compare_val);
+		add_80_code(0x801CE39A, fake_pal_bios_bypass_patch_val);
     	install_cheat_engine();
 	} else if
 
@@ -294,8 +298,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80051B60 0000
 		my code via aprip gameshark code conversion
     	*/
-	    add_D0_code(0x80051B60, readtoc_compare_val);
-		add_80_code(0x80051B60, readtoc_patch_val);
+	    add_D0_code(0x80051B60, fake_vc0_bypass_compare_val);
+		add_80_code(0x80051B60, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
 	} else if
 
@@ -363,25 +367,18 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
     } else if
 
 // Cool Boarders 2001
-   	((strcmp("SCUS_946.25;1", bootfile)) == 0) { // USA Demo
+   	(
+	((strcmp("SCUS_946.25;1", bootfile)) == 0) // USA Demo
+	|| ((strcmp("SCUS_945.97;1", bootfile)) == 0) // USA
+	)
+	{ 
 		/*
-		D00B35B0 001E
-		800B35B0 0000
-		code generated via aprip
+		D00B1146 1062
+		800B1146 1800
+		my code generated via aprip
     	*/
-	    add_D0_code(0x800B35B0, readtoc_compare_val);
-		add_80_code(0x800B35B0, readtoc_patch_val);
-    	install_cheat_engine();
-    } else if
-
-   	((strcmp("SCUS_945.97;1", bootfile)) == 0) { // USA
-		/*
-		D00B35B8 001E
-		800B35B8 0000
-		my code via aprip gameshark code conversion
-    	*/
-	    add_D0_code(0x800B35B8, readtoc_compare_val);
-		add_80_code(0x800B35B8, readtoc_patch_val);
+	    add_D0_code(0x800B1146, fake_pal_bios_bypass_compare_val);
+		add_80_code(0x800B1146, fake_pal_bios_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -392,8 +389,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80102FA0 0000
 		my code generated via aprip
     	*/
-	    add_D0_code(0x80102FA0, readtoc_compare_val);
-		add_80_code(0x80102FA0, readtoc_patch_val);
+	    add_D0_code(0x80102FA0, fake_vc0_bypass_compare_val);
+		add_80_code(0x80102FA0, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -402,10 +399,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D0192248 001E
 		80192248 0000
-		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+		code generated via aprip
     	*/
-	    add_D0_code(0x80192248, readtoc_compare_val);
-		add_80_code(0x80192248, readtoc_patch_val);
+	    add_D0_code(0x80192248, fake_vc0_bypass_compare_val);
+		add_80_code(0x80192248, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -414,10 +411,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D00EB364 001E
 		800EB364 0000
-		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+		code generated via aprip
     	*/
-	    add_D0_code(0x800EB364, readtoc_compare_val);
-		add_80_code(0x800EB364, readtoc_patch_val);
+	    add_D0_code(0x800EB364, fake_vc0_bypass_compare_val);
+		add_80_code(0x800EB364, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -493,8 +490,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800C4260 0000
 		my code generated via aprip
     	*/
-    	add_D0_code(0x800C4260, readtoc_compare_val);
-    	add_80_code(0x800C4260, readtoc_patch_val);
+    	add_D0_code(0x800C4260, fake_vc0_bypass_compare_val);
+    	add_80_code(0x800C4260, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -505,8 +502,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800EB3E4 0000
 		my code generated via aprip
     	*/
-    	add_D0_code(0x800EB3E4, readtoc_compare_val);
-    	add_80_code(0x800EB3E4, readtoc_patch_val);
+    	add_D0_code(0x800EB3E4, fake_vc0_bypass_compare_val);
+    	add_80_code(0x800EB3E4, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -517,8 +514,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80177140 0000
 		my code generated via aprip
     	*/
-    	add_D0_code(0x80177140, readtoc_compare_val);
-    	add_80_code(0x80177140, readtoc_patch_val);
+    	add_D0_code(0x80177140, fake_vc0_bypass_compare_val);
+    	add_80_code(0x80177140, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -527,10 +524,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D019245C 001E
 		8019245C 0000
-		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+		code generated via aprip
     	*/
-    	add_D0_code(0x8019245C, readtoc_compare_val);
-    	add_80_code(0x8019245C, readtoc_patch_val);
+    	add_D0_code(0x8019245C, fake_vc0_bypass_compare_val);
+    	add_80_code(0x8019245C, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -591,8 +588,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800D7714 0000
 		my code via aprip to disable readtoc
 		*/
-		add_D0_code(0x800D7714, readtoc_compare_val);
-		add_80_code(0x800D7714, readtoc_patch_val);
+		add_D0_code(0x800D7714, fake_vc0_bypass_compare_val);
+		add_80_code(0x800D7714, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -602,31 +599,31 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800CB104 0000
 		my codevia aprip to disable readtoc
 		*/
-		add_D0_code(0x800CB104, readtoc_compare_val);
-		add_80_code(0x800CB104, readtoc_patch_val);
+		add_D0_code(0x800CB104, fake_vc0_bypass_compare_val);
+		add_80_code(0x800CB104, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
 // Disney's The Emperor's New Groove
    	((strcmp("SCUS_945.71;1", bootfile)) == 0) { // USA
 	  	/*
-		D0063004 001E
-		80063004 0000
+		D004C6E2 1062
+		8004C6E2 1800
 		my code via aprip to disable readtoc
 		*/
-		add_D0_code(0x80063004, readtoc_compare_val);
-		add_80_code(0x80063004, readtoc_patch_val);
+		add_D0_code(0x8004C6E2, fake_pal_bios_bypass_compare_val);
+		add_80_code(0x8004C6E2, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
    	((strcmp("SCES_030.10;1", bootfile)) == 0) { // Europe
   		/*
-		D006351C 001E
-		8006351C 0000
+		D004CBDA 1062
+		8004CBDA 1800
 		my code via aprip to disable readtoc
 		*/
-		add_D0_code(0x8006351C, readtoc_compare_val);
-		add_80_code(0x8006351C, readtoc_patch_val);
+		add_D0_code(0x8004CBDA, fake_pal_bios_bypass_compare_val);
+		add_80_code(0x8004CBDA, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -649,8 +646,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800B9170 0000
 		my code to patch out readtoc via aprip
   		*/
-		add_D0_code(0x800B9170, readtoc_compare_val);
-		add_80_code(0x800B9170, readtoc_patch_val);
+		add_D0_code(0x800B9170, fake_vc0_bypass_compare_val);
+		add_80_code(0x800B9170, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -661,8 +658,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80195D9C 0000
 		my code to patch out readtoc via aprip
   		*/
-		add_D0_code(0x80195D9C, readtoc_compare_val);
-		add_80_code(0x80195D9C, readtoc_patch_val);
+		add_D0_code(0x80195D9C, fake_vc0_bypass_compare_val);
+		add_80_code(0x80195D9C, fake_vc0_bypass_patch_val);
   		install_cheat_engine();
     } else if
 
@@ -673,8 +670,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		801B3188 0000
 		my code to patch out readtoc via aprip
   		*/
-		add_D0_code(0x801B3188, readtoc_compare_val);
-		add_80_code(0x801B3188, readtoc_patch_val);
+		add_D0_code(0x801B3188, fake_vc0_bypass_compare_val);
+		add_80_code(0x801B3188, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -685,27 +682,20 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80055278 0000
 		my code to patch out readtoc via aprip
   		*/
-		add_D0_code(0x80055278, readtoc_compare_val);
-		add_80_code(0x80055278, readtoc_patch_val);
+		add_D0_code(0x80055278, fake_vc0_bypass_compare_val);
+		add_80_code(0x80055278, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
 // Grind Session
    	((strcmp("SCUS_945.68;1", bootfile)) == 0) { // USA
 		/*
-		D0014274 52A9
-		80014274 50BE
-		code 1 of 2 by 'TheVoice' found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_g.shtml
+		D0013F3A 1062
+		80013F3A 1800
+		my code via aprip
     	*/
-  		add_D0_code(0x80014274, 0x52A9);
-  		add_80_code(0x80014274, 0x50BE);
-		/*
-		D00146FE 1040
-		800146FE 1000
-		code 2 of 2 by 'TheVoice' found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_g.shtml
-		*/
-  		add_D0_code(0x800146FE, common_routine_return_compare_val);
-  		add_80_code(0x800146FE, common_routine_return_patch_val);
+  		add_D0_code(0x80013F3A, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x80013F3A, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -740,8 +730,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800A1188 0000
 		code found on consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_h.shtml
     	*/
-  		add_D0_code(0x800A1188, readtoc_compare_val);
-  		add_80_code(0x800A1188, readtoc_patch_val);
+  		add_D0_code(0x800A1188, fake_vc0_bypass_compare_val);
+  		add_80_code(0x800A1188, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -764,8 +754,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
         801698B4 0000
         code generated via aprip by M4x1mumReZ: https://gbatemp.net/members/m4x1mumrez.610331/
         */
-        add_D0_code(0x801698B4, readtoc_compare_val);
-        add_80_code(0x801698B4, readtoc_patch_val);
+        add_D0_code(0x801698B4, fake_vc0_bypass_compare_val);
+        add_80_code(0x801698B4, fake_vc0_bypass_patch_val);
         install_cheat_engine();
     } else if
 
@@ -776,8 +766,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8016B4D8 0000
 		my code to patch out readtoc via aprip
 		*/
-        add_D0_code(0x8016B4D8, readtoc_compare_val);
-        add_80_code(0x8016B4D8, readtoc_patch_val);
+        add_D0_code(0x8016B4D8, fake_vc0_bypass_compare_val);
+        add_80_code(0x8016B4D8, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
 	} else if
 
@@ -788,8 +778,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8016B268 0000
 		my code to patch out readtoc via aprip
 		*/
-        add_D0_code(0x8016B268, readtoc_compare_val);
-        add_80_code(0x8016B268, readtoc_patch_val);
+        add_D0_code(0x8016B268, fake_vc0_bypass_compare_val);
+        add_80_code(0x8016B268, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
 	} else if
 
@@ -819,8 +809,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		800A341C 0000
 		code generated via aprip by https://gbatemp.net/members/m4x1mumrez.610331/
     	*/
-  		add_D0_code(0x800A341C, readtoc_compare_val);
-  		add_80_code(0x800A341C, readtoc_patch_val);
+  		add_D0_code(0x800A341C, fake_vc0_bypass_compare_val);
+  		add_80_code(0x800A341C, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -831,8 +821,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8016957C 0000
 		my code generated via aprip
 		*/
-  		add_D0_code(0x8016957C, readtoc_compare_val);
-  		add_80_code(0x8016957C, readtoc_patch_val);
+  		add_D0_code(0x8016957C, fake_vc0_bypass_compare_val);
+  		add_80_code(0x8016957C, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -964,8 +954,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		 801011C0 0000
 		code generated via APrip by https://gbatemp.net/members/m4x1mumrez.610331/
     	*/
- 		add_D0_code(0x801011C0, readtoc_compare_val);
- 		add_80_code(0x801011C0, readtoc_patch_val);
+ 		add_D0_code(0x801011C0, fake_vc0_bypass_compare_val);
+ 		add_80_code(0x801011C0, fake_vc0_bypass_patch_val);
  		install_cheat_engine();
     } else if
 
@@ -987,12 +977,12 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 // Medievil II
    	((strcmp("SCUS_945.64;1", bootfile)) == 0) {
 		/*
-		D0098804 023A
-		80098806 1000
-		code via https://gamehacking.org/game/89269
+		D009877E 1062
+		8009877E 1800
+		my code via aprip
 		*/
-  		add_D0_code(0x80098804, 0x023A);
-  		add_80_code(0x80098806, 0x1000);
+  		add_D0_code(0x8009877E, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x8009877E, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1006,12 +996,12 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 	|| ((strcmp("SCUS_946.92;1", bootfile)) == 0) // MLB 2005 USA
 	) {
 		/*
-		D0028DB4 001E
-		80028DB4 0000
+		D002024A 1062
+		8002024A 1800
 		my code generated via aprip
     	*/
-  		add_D0_code(0x80028DB4, readtoc_compare_val);
-  		add_80_code(0x80028DB4, readtoc_patch_val);
+  		add_D0_code(0x8002024A, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x8002024A, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1030,169 +1020,149 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 // NBA Shootout 2001 and NBA Shootout 2001 Demo
    	((strcmp("SCUS_945.81;1", bootfile)) == 0) { // this game is nuts. Seriously what the fuck is this. The demo and retail versions share not only the same executable filename, the demo executable file is the exact same with 0 diffs compared to the retail version. I guess retail functionallity is being enabled by some other file in track 01 (which do in fact differ between the demo and retail versions). EVEN FUCKING WORSE is that the demo version has serial number SCUS_945.82, but the boot file is SCUS_945.81! For now we enable both demo and retail codes for both versions to ensure it boots, since we can't detect this off of bootfile alone. To do this in a less ugly way we would need to find the file in track 01 that differs (to enable retail functionallity) and then diff that in memory.
 		/*
-		D01D1340 001E
-		801D1340 0000
+		D01AD562 1062
+		801AD562 1800
 		my code generated via aprip (USA)
 		*/
-		add_D0_code(0x801D1340, readtoc_compare_val);
-		add_80_code(0x801D1340, readtoc_patch_val);
+		add_D0_code(0x801AD562, fake_pal_bios_bypass_compare_val);
+		add_80_code(0x801AD562, fake_pal_bios_bypass_patch_val);
 		/*
-		D01CFD68 001E
-		801CFD68 0000
+		D01ABF9A 1062
+		801ABF9A 1800
 		my code generated via aprip (USA Demo)
 		*/
-		add_D0_code(0x801CFD68, readtoc_compare_val);
-		add_80_code(0x801CFD68, readtoc_patch_val);
-		install_cheat_engine();
-    } else if
-
-// NBA Shootout 2002 Demo
-   	((strcmp("SCUS_946.60;1", bootfile)) == 0) { // USA
-		/*
-		D01D0FF4 001E
-		801D0FF4 0000
-		my code generated via aprip
-		*/
-		add_D0_code(0x801D0FF4, readtoc_compare_val);
-		add_80_code(0x801D0FF4, readtoc_patch_val);
+		add_D0_code(0x801ABF9A, fake_pal_bios_bypass_compare_val);
+		add_80_code(0x801ABF9A, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
 // NBA Shootout 2002
-   	((strcmp("SCUS_946.41;1", bootfile)) == 0) { // USA
+   	((strcmp("SCUS_946.60;1", bootfile)) == 0) { // USA Demo
 		/*
-		D01D2724 001E
-		801D2724 0000
+		D01AC5E6 1062
+		801AC5E6 1800
 		my code generated via aprip
 		*/
-		add_D0_code(0x801D2724, readtoc_compare_val);
-		add_80_code(0x801D2724, readtoc_patch_val);
+		add_D0_code(0x801AC5E6, fake_pal_bios_bypass_compare_val);
+		add_80_code(0x801AC5E6, fake_pal_bios_bypass_patch_val);
+		install_cheat_engine();
+    } else if
+
+   	((strcmp("SCUS_946.41;1", bootfile)) == 0) { // USA
+		/*
+		D01ADD06 1062
+		801ADD06 1800
+		my code generated via aprip
+		*/
+		add_D0_code(0x801ADD06, fake_pal_bios_bypass_compare_val);
+		add_80_code(0x801ADD06, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
 // NBA Shootout 2003
    	((strcmp("SCUS_946.73;1", bootfile)) == 0) { // USA
 		/*
-		D01D2860 001E
-		801D2860 0000
+		D01ADE42 1062
+		801ADE42 1800
 		my code generated via aprip
 		*/
-		add_D0_code(0x801D2860, readtoc_compare_val);
-		add_80_code(0x801D2860, readtoc_patch_val);
+		add_D0_code(0x801ADE42, fake_pal_bios_bypass_compare_val);
+		add_80_code(0x801ADE42, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
 // NBA Shootout 2004
    	((strcmp("SCUS_946.91;1", bootfile)) == 0) { // USA
 		/*
-		D01D2928 001E
-		801D2928 0000
+		D01ADF0A 1062
+		801ADF0A 1800
 		my code generated via aprip
 		*/
-		add_D0_code(0x801D2928, readtoc_compare_val);
-		add_80_code(0x801D2928, readtoc_patch_val);
+		add_D0_code(0x801ADF0A, fake_pal_bios_bypass_compare_val);
+		add_80_code(0x801ADF0A, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
 // NCAA FinalFour 2001
    	((strcmp("SCUS_945.79;1", bootfile)) == 0) { // USA
 		/*
-		D005B6A8 001E
-		8005B6A8 0000
+		D001DE06 1062
+		8001DE06 1800
 		my code generated via aprip
     	*/
-  		add_D0_code(0x8005B6A8, readtoc_compare_val);
-  		add_80_code(0x8005B6A8, readtoc_patch_val);
+  		add_D0_code(0x8001DE06, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x8001DE06, fake_pal_bios_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
 // NCAA GameBreaker 2001
    	(
-	((strcmp("SCUS_945.74;1", bootfile)) == 0) // NCAA GameBreaker 2001 USA
-	|| ((strcmp("SCUS_945.73;1", bootfile)) == 0) // NCAA GameBreaker 2001 USA Demo
+	((strcmp("SCUS_945.74;1", bootfile)) == 0) // USA
+	|| ((strcmp("SCUS_945.73;1", bootfile)) == 0) // USA Demo
 	) {
 		/*
-		D0112338 001E
-		80112338 0000
+		D0100A5A 1062
+		80100A5A 1800
 		my code generated via aprip
     	*/
-  		add_D0_code(0x80112338, readtoc_compare_val);
-  		add_80_code(0x80112338, readtoc_patch_val);
+  		add_D0_code(0x80100A5A, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x80100A5A, fake_pal_bios_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
 // NFL GameDay 2001
-   	((strcmp("SCUS_945.75;1", bootfile)) == 0) { // USA
-		/*
-		D0112404 001E
-		80112404 0000
-		my code generated via aprip
-    	*/
-  		add_D0_code(0x80112404, readtoc_compare_val);
-  		add_80_code(0x80112404, readtoc_patch_val);
-    	install_cheat_engine();
-    } else if
-
-// NFL GameDay 2001 Demo
-   	((strcmp("SCUS_945.76;1", bootfile)) == 0) { // USA
-		/*
-		D0112388 001E
-		80112388 0000
-		my code generated via aprip
-    	*/
-  		add_D0_code(0x80112388, readtoc_compare_val);
-  		add_80_code(0x80112388, readtoc_patch_val);
-    	install_cheat_engine();
-    } else if
-
-// NFL GameDay 2002
-   	((strcmp("SCUS_946.39;1", bootfile)) == 0) { // USA
-		/*
-		D0032640 001E
-		80032640 0000
-		my code generated via aprip
-    	*/
-  		add_D0_code(0x80032640, readtoc_compare_val);
-  		add_80_code(0x80032640, readtoc_patch_val);
-    	install_cheat_engine();
-    } else if
-
-// NFL GameDay 2003, NFL GameDay 2004, and NFL GameDay 2005 (lmao they gave up?)
    	(
-	((strcmp("SCUS_946.65;1", bootfile)) == 0) // NFL GameDay 2003 USA
+	((strcmp("SCUS_945.75;1", bootfile)) == 0) // USA
+	|| ((strcmp("SCUS_945.76;1", bootfile)) == 0) // USA Demo
+	)
+	 { // USA
+		/*
+		D010000E 1062
+		8010000E 1800
+		my code generated via aprip
+    	*/
+  		add_D0_code(0x8010000E, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x8010000E, fake_pal_bios_bypass_patch_val);
+    	install_cheat_engine();
+    } else if
+
+// NFL GameDay 2002, NFL GameDay 2003, NFL GameDay 2004, and NFL GameDay 2005
+   	(
+	((strcmp("SCUS_946.39;1", bootfile)) == 0) // NFL GameDay 2002 USA
+	|| ((strcmp("SCUS_946.65;1", bootfile)) == 0) // NFL GameDay 2003 USA
 	|| ((strcmp("SCUS_946.90;1", bootfile)) == 0) // NFL GameDay 2004 USA
 	|| ((strcmp("SCUS_946.95;1", bootfile)) == 0) // NFL GameDay 2005 USA
 	) {
 		/*
-		D0032ACC 001E
-		80032ACC 0000
+		D002000E 1062
+		8002000E 1800
 		my code generated via aprip
     	*/
-  		add_D0_code(0x80032ACC, readtoc_compare_val);
-  		add_80_code(0x80032ACC, readtoc_patch_val);
+  		add_D0_code(0x8002000E, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x8002000E, fake_pal_bios_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
 // NHL FaceOff 2001
    	((strcmp("SCUS_945.77;1", bootfile)) == 0) { // USA
 		/*
-		D00F2470 001E
-		800F2470 0000
+		D00F1126 1062
+		800F1126 1800
 		my code generated via aprip
     	*/
-  		add_D0_code(0x800F2470, readtoc_compare_val);
-  		add_80_code(0x800F2470, readtoc_patch_val);
+  		add_D0_code(0x800F1126, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x800F1126, fake_pal_bios_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
    	((strcmp("SCUS_945.78;1", bootfile)) == 0) { // USA Demo
 		/*
-		D00F1938 001E
-		800F1938 0000
+		D00F05EE 1062
+		800F05EE 1800
 		my code generated via aprip
     	*/
-  		add_D0_code(0x800F1938, readtoc_compare_val);
-  		add_80_code(0x800F1938, readtoc_patch_val);
+  		add_D0_code(0x800F05EE, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x800F05EE, fake_pal_bios_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -1201,10 +1171,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D00FAE58 001E
 		800FAE58 0000
-		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+		code generated via aprip
     	*/
-  		add_D0_code(0x800FAE58, readtoc_compare_val);
-  		add_80_code(0x800FAE58, readtoc_patch_val);
+  		add_D0_code(0x800FAE58, fake_vc0_bypass_compare_val);
+  		add_80_code(0x800FAE58, fake_vc0_bypass_patch_val);
     	install_cheat_engine();
     } else if
 
@@ -1227,8 +1197,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		 80126BDC 0000
 		 code by https://gbatemp.net/members/m4x1mumrez.610331/ generated with APrip
 		*/
-  		add_D0_code(0x80126BDC, readtoc_compare_val);
-  		add_80_code(0x80126BDC, readtoc_patch_val);
+  		add_D0_code(0x80126BDC, fake_vc0_bypass_compare_val);
+  		add_80_code(0x80126BDC, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1253,10 +1223,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D009E7E8 001E
 		8009E7E8 0000
-		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+		code generated via aprip
     	*/
-  		add_D0_code(0x8009E7E8, readtoc_compare_val);
-  		add_80_code(0x8009E7E8, readtoc_patch_val);
+  		add_D0_code(0x8009E7E8, fake_vc0_bypass_compare_val);
+  		add_80_code(0x8009E7E8, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1265,10 +1235,10 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		/*
 		D008A45C 001E
 		8008A45C 0000
-		code generated via aprip by https://www.psx-place.com/members/trappedinlimbo.156719/
+		code generated via aprip
     	*/
-  		add_D0_code(0x8008A45C, readtoc_compare_val);
-  		add_80_code(0x8008A45C, readtoc_patch_val);
+  		add_D0_code(0x8008A45C, fake_vc0_bypass_compare_val);
+  		add_80_code(0x8008A45C, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1291,8 +1261,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80048F34 0000
 		my code via aprip to patch out readtoc
 		*/
-  		add_D0_code(0x80048F34, readtoc_compare_val);
-  		add_80_code(0x80048F34, readtoc_patch_val);
+  		add_D0_code(0x80048F34, fake_vc0_bypass_compare_val);
+  		add_80_code(0x80048F34, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1303,8 +1273,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8004A24C 0000
 		my code via aprip to patch out readtoc
 		*/
-  		add_D0_code(0x8004A24C, readtoc_compare_val);
-  		add_80_code(0x8004A24C, readtoc_patch_val);
+  		add_D0_code(0x8004A24C, fake_vc0_bypass_compare_val);
+  		add_80_code(0x8004A24C, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1439,8 +1409,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8007009C 0000
  		my code via aprip to patch out readtoc
 		*/
-  		add_D0_code(0x8007009C, readtoc_compare_val);
-  		add_80_code(0x8007009C, readtoc_patch_val);
+  		add_D0_code(0x8007009C, fake_vc0_bypass_compare_val);
+  		add_80_code(0x8007009C, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1451,8 +1421,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8006FD84 0000
 		my code via aprip
 		*/
-  		add_D0_code(0x8006FD84, readtoc_compare_val);
-  		add_80_code(0x8006FD84, readtoc_patch_val);
+  		add_D0_code(0x8006FD84, fake_vc0_bypass_compare_val);
+  		add_80_code(0x8006FD84, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1475,8 +1445,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80070ED0 0000
 		my code via aprip
 		*/
-  		add_D0_code(0x80070ED0, readtoc_compare_val);
-  		add_80_code(0x80070ED0, readtoc_patch_val);
+  		add_D0_code(0x80070ED0, fake_vc0_bypass_compare_val);
+  		add_80_code(0x80070ED0, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1487,8 +1457,8 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8006EC40 0000
 		my code via aprip
 		*/
-  		add_D0_code(0x8006EC40, readtoc_compare_val);
-  		add_80_code(0x8006EC40, readtoc_patch_val);
+  		add_D0_code(0x8006EC40, fake_vc0_bypass_compare_val);
+  		add_80_code(0x8006EC40, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1588,12 +1558,12 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 // Strider 2
    	((strcmp("SLUS_011.63;1", bootfile)) == 0) { // USA
 		/*
-		D01F6570 001E
-		801F6570 0000
+		D01F4D5E 1062
+		801F4D5E 1800
 		my code via aprip
 		*/
-  		add_D0_code(0x801F6570, readtoc_compare_val);
-  		add_80_code(0x801F6570, readtoc_patch_val);
+  		add_D0_code(0x801F4D5E, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x801F4D5E, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1620,20 +1590,20 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		80011514 0000
 		my code via aprip
 		*/
-  		add_D0_code(0x80011514, readtoc_compare_val);
-  		add_80_code(0x80011514, readtoc_patch_val);
+  		add_D0_code(0x80011514, fake_vc0_bypass_compare_val);
+  		add_80_code(0x80011514, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
 // Tomba! 2: The Evil Swine Return
    	((strcmp("SCUS_944.54;1", bootfile)) == 0) { // USA
 		/*
-		D002542C 001E
-		8002542C 0000
+		D0011A1A 1062
+		80011A1A 1800
 		my code via aprip
 		*/
-  		add_D0_code(0x8002542C, readtoc_compare_val);
-  		add_80_code(0x8002542C, readtoc_patch_val);
+  		add_D0_code(0x80011A1A, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x80011A1A, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1644,20 +1614,20 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 		8004E168 0000
 		my code via aprip
 		*/
-  		add_D0_code(0xD004E168, readtoc_compare_val);
-  		add_80_code(0x8004E168, readtoc_patch_val);
+  		add_D0_code(0xD004E168, fake_vc0_bypass_compare_val);
+  		add_80_code(0x8004E168, fake_vc0_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
 // Vandal Harts II
    	((strcmp("SLUS_009.40;1", bootfile)) == 0) { // USA
- 		/*
-		D00865FC 001E
-		800865FC 0000
-		my code via aprip to patch out readtoc
+ 		/*	
+    	D0040C90 000B
+    	80040C92 1000 
+		code from http://archive.thegia.com/news/9912/n09a.html
 		*/
-  		add_D0_code(0x800865FC, readtoc_compare_val);
-  		add_80_code(0x800865FC, readtoc_patch_val);
+  		add_D0_code(0x80040C90, 0x000B);
+  		add_80_code(0x80040C92, 0x1000);
 		install_cheat_engine();
     } else if
 
@@ -1667,23 +1637,23 @@ void activate_anti_anti_piracy(const char * bootfile, const int32_t load_addr)
 	|| ((strcmp("SCUS_944.98;1", bootfile)) == 0) // USA Disc 2
 	) {
    		/*
-   		D003A4E8 001E
-   		8003A4E8 0000
+   		D00282CE 1062
+		800282CE 1800
  		my code via aprip to patch out readtoc
     	*/
-  		add_D0_code(0x8003A4E8, readtoc_compare_val);
-  		add_80_code(0x8003A4E8, readtoc_patch_val);
+  		add_D0_code(0x800282CE, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x800282CE, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 
    	((strcmp("SCUS_945.92;1", bootfile)) == 0) { // USA Demo
 		/*
-   		D003A5D4 001E
-   		8003A5D4 0000
+   		D00283C6 1062
+		800283C6 1800
 		my code via aprip gameshark code conversion on my own code (code-ception)
     	*/
-  		add_D0_code(0x8003A5D4, readtoc_compare_val);
-  		add_80_code(0x8003A5D4, readtoc_patch_val);
+  		add_D0_code(0x800283C6, fake_pal_bios_bypass_compare_val);
+  		add_80_code(0x800283C6, fake_pal_bios_bypass_patch_val);
 		install_cheat_engine();
     } else if
 

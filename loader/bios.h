@@ -438,4 +438,4 @@ void AdjustA0Table(void);
  *
  * Table A, call 0x9F.
  */
-void SetMemSize(uint8_t mem_size);
+void SetMemSize(uint32_t mem_size);

@@ -28,6 +28,8 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Important Info
 
+*   [Playing Protected Games With Additional Copy Protection](anti-piracy-bypass.md).
+
 *   [The Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr) - everything you need to know when making your own PSX backup CD-Rs.
 
 *   [Unofficial PS1 CD Drive Service Manual](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/) - How to refurbish your PSX CD drive to read discs better if it has issues.
@@ -80,8 +82,6 @@ _American/European PS1/PS2 Consoles (SCPH-1001-SCPH-39004)_
 
 * [XStation ROM Version](xstation.md)
 
-* [Playing Games With Additional Copy Protection Routines](anti-piracy-bypass.md)
-
 * [Building From Source](build.md)
 
 * [Credits](credits.md)
@@ -106,7 +106,7 @@ _Relevant Software_
 
 *   [CDRDAO-PLED](https://alex-free.github.io/cdrdao) - recommended burning software for Linux.
 
-*   [EDCRE](https://alex-free.github.io/edcre) - EDC/EEC regenerator to allow EDC protected PSX games to be burned by CDRDAO-PLED's generic-mmc-raw driver correctly.
+*   [EDCRE](https://alex-free.github.io/edcre) - EDC/EEC regenerator to allow patched EDC protected PSX games to be burned by CDRDAO-PLED's generic-mmc-raw driver correctly.
 
 *   [APrip Homepage](https://alex-free.github.io/aprip) - patches some later PSX games with additional anti-piracy copy protection.
 
@@ -124,21 +124,25 @@ _Relevant Software_
 
 ## Downloads
 
-### Version 1.4.1 (9/15/2023)
+### Version 1.4.2 (10/2/2023)
 
-*   [tonyhax-international-v1.4.1](https://github.com/alex-free/tonyhax/releases/download/v1.4.1i/tonyhax-international-v1.4.1.zip)
+*   [tonyhax-international-v1.4.2](https://github.com/alex-free/tonyhax/releases/download/v1.4.2i/tonyhax-international-v1.4.2.zip)
 
 Changes:
 
-*   Implemented a small wait period between open() and read() for memory card reading as per PSX specs to prevent any other possible rare fail to read memory card issues involving the [user supplied GameShark codes feature](gameshark-code-support.md).
+*   Upgraded all APv2 bypasses to support non-stealth mod-chips! International now supports playing every known protected game which triggers protection on both non-stealth mod-chip consoles and stock consoles (APv2). Stock consoles without non-stealth mod-chips can play all known protected games using International.
 
-*   Removed a [redundant](https://github.com/socram8888/tonyhax/issues/149) exitcritcalsection() call after the final setconf (thanks Socram8888)!
+*   Protected games that only trigger on non-stealth mod-chip consoles and not on stock consoles (APv1) are now supported, but only a few have bypasses added so far as of v1.4.2.
 
-*   Added an [APv2 bypass](anti-piracy-bypass.md) for MLB 2005.
+*   International is now the first soft-mod to support playing i-mode mo Issho: Doko Demo Issho Tsuika Disc and Koneko mo Issho on PAL consoles (there is a special additional protection that causes these games to lockup when detecting a PAL BIOS, but this is now bypassed by International).
 
-*   Cleaned up source code to be more similar to original Tonyhax.
+*   International now supports playing King's Field Japan (before even the original Tonyhax has added support). Any other early Japanese launch titles that didn't work previously should now also work fine (PSX.EXE, no SYSTEM.CNF titles). The [english translation patch for the game](https://www.romhacking.net/translations/1067/) also works (make sure you get the [save/load screen fix for real hardware](https://www.angelfire.com/art3/weissvulf/kings_field_japanese_to_english_patch_download.html)).
 
-*   Updated [MKPSXISO](https://github.com/Lameguy64/mkpsxiso) to latest commit.
+*   Added APv2 bypasses for Jikkyou Powerful Pro Yakyuu 2000: Kaimakuban, Jikkyou Powerful Pro Yakyuu 2000: Ketteiban, Jikkyou Powerful Pro Yakyuu 2001: Ketteiban, Jikkyou Powerful Pro Yakyuu 2001, Jikkyou Powerful Pro Yakyuu 2002: Haru, Jikkyou Powerful Pro Yakyuu: Premium-ban, Resident Evil 3 USA Demo.
+
+*   Added APv1 bypasses for Vandal Hearts II Japan, Dance Dance Revolution Japan, Ape Escape Japan Rev 0, Ape Escape Japan Rev 1, Ape Escape Japan Demo, Bishi Bashi Special 2, Bishi Bashi Special 2 Japan, Jikkyou Kyousouba Ikusei Simulation Game: Breeding Stud '99 Japan, Bust A Move 2: Dance Tengoku Mix, Minna no Golf 2 Japan Rev 0, Minna no Golf 2 Japan Rev 1, Final Fantasy VIII Japan, Doko Demo Issho Japan Rev 0, Doko Demo Issho Japan Rev 1, Doko Demo Issho Calpis Water Version, Doko Demo Issho Japan Demo 1, (**NOTE: I Can not find a Doko Demo Issho Japan Demo 2 CD image (PAPX 90086) http://redump.org/disc/83081/ to add support for that yet, someone please send me that ;)**).
+
+*   Changed my SetMemSize(8) call to be more similar to original Tonyhax (which has now added SetMemSize!).
 
 [About previous versions](changelog.md).
 

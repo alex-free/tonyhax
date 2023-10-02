@@ -45,9 +45,6 @@ void bios_reinitialize() {
 	// Setup devices
 	InstallDevices(tty_enabled);
 
-	// BIOS sets the memory to 8MB (somewhere, haven't seen exactly where but this is well known), which causes the RAM to be mirrored 4 times since there is actually only 2MBs of RAM. The thing is, some games set this to the 'correct' value of 2 for the appropriate 2MBs of RAM. This will cause issues when booting games (example: NXFLASH CD) with the GSHAX Ridge Racer USA boot method, so we explicitly set it like the BIOS does which is what every game initially expects at boot.
-	SetMemSize(8);
-
 	/*
 	 * Configure with default values
 	 *
@@ -84,6 +81,15 @@ void bios_reinitialize() {
 
 	// End of code adapted
 
+	/*
+	 * Set RAM size to 8MB, which is incorrect but it's what the BIOS sets.
+	 *
+	 * This is required because the entrypoint game might've set it to 2MB, and a target
+	 * game might accidentally access an address in the mirror region (expecting the default 8MB setting from BIOS boot), causing a fault to be caused
+	 * in real hardware.
+	 */
+	SetMemSize(8);
+	
 	// Re-enable interrupts
 	ExitCriticalSection();
 

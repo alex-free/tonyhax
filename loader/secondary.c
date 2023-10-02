@@ -37,13 +37,12 @@ bool calibrate_laser = 0; // Only Japanese VC2 and VC3 consoles need this so it 
 bool bugged_setsession = 0; // VC0 A, VC0 B, and VC1 A CDROM Controller BIOS versions all have a buggy SetSession command that requires a special work around to use
 bool enable_unlock = 1; // Disabled on VC0A and VC0B Japanese CDROM Controller BIOS versions automatically. On VC1A+ the testregion command is run and if the region is Japan it is also disabled.
 bool controller_input = 0; // When enabled, debug_write does not display the repeat messages counter. This is so we can draw a blank line and then wait for controller input using vsync in debug_write.
-bool first_rev = 0; // VC0 A and VC0 B do not need any anti-piracy patching as they are immune to additional copy protection routines because of the lack of the ReadTOC command in the CDROM Controller BIOS Firmware.
 bool installed_cheat_engine = 0; // The cheat engine is installed when parse_memcard_save_gameshark_codes() completes. Some games may go on to set explicit anti-piracy bypass GameShark codes however, so to prevent the cheat engine from being installed twice (which is wasteful) we set a flag here.
 bool did_read_mc = 0; // We need to set the GameShark codes AFTER the last bios_reintialize(). I want to call bios_reinitilize() after reading the memory card data to prevent anything screwy in booting games, so we can just parse the data later after the final bios_reinitialize since it's still in RAM.
 uint8_t number_of_gameshark_code_lines; // part of my basic format to store codes, this tells us how many we will activate
 uint8_t * user_start = (uint8_t *) 0x80010000;
 uint16_t mc_base = 0x102; // start of gs code data in memory card buffer
-
+bool no_system_cnf = 0;
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
 
@@ -502,7 +501,7 @@ void try_boot_cd() {
 
 	if(!enable_unlock) {
 		if(bugged_setsession) {
-			debug_write("Sending SetSessionSuperUltraCommandSmash v2, please wait"); // always works on real hardware, DuckStation can get stuck here rarely though since it is not that accurate when it comes to emulating the early VC0A/VC0B/VC1A CDROM behavior
+			debug_write("Sending SetSessionSuperUltraCommandSmash v2, please wait"); // DuckStation can get stuck here if you swap the disc and don't wait a few seconds (DuckStation auto starts the motor on disc swap which is actually super annoying since if this executes while it is doing the emulated motor on it will lock up, and it doesn't even need to work like that since real hardware doesn't and game code always starts up a swap disc for i.e. multi-disc games). DuckStation also always emulates a VC1A which triggers this code path with any Japanese BIOS.
 			sscmd = 2; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int(); // There is a 3rd response we are ignoring by sending SetSession 1 next ASAP after SetSession 2.
 			sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
 		} else {
@@ -635,6 +634,8 @@ void try_boot_cd() {
 			debug_write("Not found");
 		}
 #endif
+	} else {
+		no_system_cnf = true;
 	}
 
 	// Use string format to reduce ROM usage
@@ -678,6 +679,22 @@ void try_boot_cd() {
 	if (read != 2048) {
 		debug_write("Read error %d", GetLastError());
 		return;
+	}
+
+	/* 
+	King's Field Japan (SLPS_00017) is a very early PSX.EXE Japan game. While the PSX.EXE is having 0x34/0x38 contain SP values, these are apparently garbage and not being used in reality by a real BIOS boot. These ARE being used by both our exec calls below however so we need to zero out that garbage so it is not used, which finally allows King's Feild (and most likely other PSX.EXE games) to boot correctly.
+
+	From No $ PSX SPX:
+
+  	030h      Initial SP/R29 & FP/R30 Base (usually 801FFFF0h) (or 0=None)
+  	034h      Initial SP/R29 & FP/R30 Offs (usually 0, added to above Base)
+	
+	Note: In bootfiles, SP is usually 801FFFF0h (ie. not 801FFF00h as in system.cnf). When SP is 0, the unmodified caller's stack is used. In most cases (except when manually calling DoExecute), the stack values in the exeheader seem to be ignored though (eg. replaced by the SYSTEM.CNF value)
+	*/
+	if(no_system_cnf) {
+		for(int i = 0; i < 8; i++) {
+    		data_buffer[0x30 + i] = 0;
+		}
 	}
 
 	/*
@@ -726,12 +743,11 @@ void try_boot_cd() {
 		// Restore original error handler
 		bios_restore_disc_error();
 
-		#if !defined XSTATION
-		#if !defined AP_BYPASS_DISABLE
-		if(!first_rev)
-			activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
-		#endif
-		#endif
+#if !defined XSTATION
+#if !defined AP_BYPASS_DISABLE
+		activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+#endif
+#endif
 
 		if((did_read_mc) && (!cheat_engine_installed))
 			install_cheat_engine();
@@ -761,8 +777,7 @@ void try_boot_cd() {
 
 #if !defined XSTATION
 #if !defined AP_BYPASS_DISABLE
-	if(!first_rev)
-		activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+	activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
 #endif
 #endif
 
@@ -806,7 +821,6 @@ void main() {
    	if(cdcontrollerver[0] == 0x94) {    
         bugged_setsession = 1;
         enable_unlock = 0; // VC0 A and VC0 B are both from 1994 and don't support the getregion command to figure out if it is unlockable or not.
-        first_rev = 1;
     } 
     else if(cdcontrollerver[1] == 0x05 && cdcontrollerver[2] == 0x16 && cdcontrollerver[0] == 0x95 && cdcontrollerver[3] == 0xC1) {     
         bugged_setsession = 1; // NOTE I don't think this will ever be triggered but just in case. Earliest SCPH-3000s and late SCPH-1000s are VC0B and later SCPH-3000s are VC1B. Only unlockable systems have VC1A it seems.

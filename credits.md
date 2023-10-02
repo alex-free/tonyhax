@@ -2,6 +2,10 @@
 
 ## MottZilla
 
+*   Help with the custom anti-piracy bypasses for Koneko mo Issho and i-mode mo Issho: Doko Demo Issho Tsuika Disc.
+
+*   Co-developed the 'fake PAL BIOS bypass' method for APv2 bypasses.
+
 *	Guidance on increasing the size of the Tonyhax International loader and my general goto mentor on this project.
 
 * Co-developed the Spyro Year Of The Dragon GameShark code bypass method.

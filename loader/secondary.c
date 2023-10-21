@@ -442,7 +442,7 @@ void re_cd_init() {
 void try_boot_cd() {
 	int32_t read;
 #if defined FREEPSXBOOT
-	debug_write("Remove the FreePSXBoot memory card now from your console");
+	debug_write("REMOVE THE FREEPSXBOOT MEMORY CARD FROM YOUR CONSOLE NOW");
 #elif defined ROM
 	debug_write("With the CD drive open, press X to boot the Sony BIOS or");
 	debug_write("Press O to enable GS codes");
@@ -587,7 +587,7 @@ void try_boot_cd() {
 	uint32_t tcb = BIOS_DEFAULT_TCB;
 	uint32_t event = BIOS_DEFAULT_EVCB;
 	uint32_t stacktop = BIOS_DEFAULT_STACKTOP;
-	const char * bootfile = "cdrom:PSX.EXE;1";
+	char * bootfile = "cdrom:PSX.EXE;1";
 
 	char bootfilebuf[32];
 	debug_write("Loading SYSTEM.CNF");

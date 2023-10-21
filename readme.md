@@ -20,133 +20,60 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * Supports [applying user-supplied GameShark codes](gameshark-code-support.md) to any game it booted by the Tonyhax International loader. Dare I say this is the world's first open source PSX GameShark.
 
-* Supports [TOCPerfect Patching](https://alex-free.github.io/tocperfect) a CD image directly to use the Tonyhax International loader as a way to remove some of the limitations of using the CD Player Swap Trick as a boot method.
+* Supports [TOCPerfect Patching](https://alex-free.github.io/tocperfect) a CD image directly to use the Tonyhax International loader as a way to remove some of the limitations of using the CD Player Swap Trick as a boot method, or to make a 'protected non-stealth mod-chip console compatible patched CD-R' that directly boots without needing to go through any other boot method.
 
 * Enables speeding up xStation boot time and allows for applying codes to games `Full Boot`ed by xStation. This is accomplished by a [special xStation ROM version](xstation.md).
 
-* Uses a completely different build system that is portable to many more Linux distributions. This new build system is more efficient and easier to use as well.
+* Uses a completely different [build system](build.md) that is portable to many more Linux distributions. This new build system is more efficient and easier to use as well.
 
-## Important Info
+## Table Of Contents
 
-*   [Playing Protected Games With Additional Copy Protection](anti-piracy-bypass.md).
-
-*   [The Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr) - everything you need to know when making your own PSX backup CD-Rs.
-
-*   [Unofficial PS1 CD Drive Service Manual](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/) - How to refurbish your PSX CD drive to read discs better if it has issues.
-
-## Usage
-
-_Japanese PS1 Consoles (SCPH-1000-SCPH-100)_
-
-*   [Japanese PS1 Console Loader Instructions](#japanese-ps1-console-loader-instructions)
-
-*   [Playing Games That Span Multiple Discs On Japanese PS1 Consoles](#playing-games-that-span-multiple-discs-on-japanese-ps1-consoles)
-
-_Japanese PS2 Consoles (SCPH-10000-SCPH-39000)_
-
-*   [Japanese PS2 Console Loader Instructions](#japanese-ps2-console-loader-instructions)
-
-*   [Using the Swap Magic Tool](#using-the-swap-magic-tool)
-
-*   [Playing Games That Span Multiple Discs On Japanese PS2 Consoles](#playing-games-that-span-multiple-discs-on-japanese-ps2-consoles)
-
-*   [Playing PAL Region Games On Japanese PS2 Consoles](#playing-pal-region-games-on-japanese-ps2-consoles)
-
-_American/European PS1/PS2 Consoles (SCPH-1001-SCPH-39004)_
-
-*   [American/European PS1/PS2 Console Loader Instructions](#americaneuropean-ps1ps2-console-loader-instructions)
-
-*   [Playing Games That Span Multiple Discs On American/European PS1/PS2 Consoles](#playing-games-that-span-multiple-discs-on-americaneuropean-ps1ps2-consoles)
-
-*   [Playing PAL Games On American PS2 Consoles](#playing-pal-games-on-american-ps2-consoles)
-
-*   [Playing Japanese/American Games On PAL PS2 Consoles](#playing-japaneseamerican-games-on-pal-ps2-consoles)
-
-## Boot Methods
-
-*   [TOCPerfect Patching](https://alex-free.github.io/tocperfect)
-
-*   [GameShark Code](gameshark-code.md)
-
-*   [Flashed Cheat Cartridge - ROM/ROM Flasher CD](flashed-cheat-cart.md)
-
-*   [FreePSXBoot Exploit Memory Card Images](freepsxboot-exploit.md)
-
-*   [Boot CD](boot-cd.md)
-
-*   [Save Game Exploit](save-game-exploit.md)
-
-## More Info
-
-* [GameShark Code Support](gameshark-code-support.md)
-
-* [XStation ROM Version](xstation.md)
-
-* [Building From Source](build.md)
-
-* [Credits](credits.md)
+[Downloads](#downloads)
+[Usage](#usage)
+[Frequently Asked Questions](#faq)
+[Relevant Software](#relevant-software)
+[Building From Source](build.md)
+[Credits](credits.md)
 
 ## Links
 
-_Home Pages_
-
-*   [Tonyhax International Homepage](https://alex-free.github.io/tonyhax-international)
-*   [Tonyhax International GitHub](https://github.com/alex-free/tonyhax)
-
-_Threads_
-
-*   [PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/)
-*   [PSX-Place Tonyhax International Resource](https://www.psx-place.com/resources/tonyhax-international.1281/)
-*   [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967)
-*   [GBATemp](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514)
-
-_Relevant Software_
-
-*   [TOCPerfect Patcher](https://alex-free.github.io/tocperfect) - patch the Tonyhax International loader into a disc image directly to expand the capabilities of the CD Player Swap Trick.
-
-*   [CDRDAO-PLED](https://alex-free.github.io/cdrdao) - recommended burning software for Linux.
-
-*   [EDCRE](https://alex-free.github.io/edcre) - EDC/EEC regenerator to allow patched EDC protected PSX games to be burned by CDRDAO-PLED's generic-mmc-raw driver correctly.
-
-*   [APrip Homepage](https://alex-free.github.io/aprip) - patches some later PSX games with additional anti-piracy copy protection.
-
-*   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap) - a similar project that uses the Tonyhax International loader.
-
-*   [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom) - what generates the Tonyhax International ROM file.
-
-*   [NXFLASH](https://github.com/danhans42/nxflash) - the software which flashes cheat carts with the Tonyhax International ROM.
-
-*   [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) - an exploit used in a Tonyhax International boot method.
-
-*   [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax) - what Tonyhax International is based on (_International is not an official version and at this point deviates quite greatly_).
-
-*   [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)
+[Tonyhax International Homepage](https://alex-free.github.io/tonyhax-international) 
+[Tonyhax International GitHub](https://github.com/alex-free/tonyhax)
+[PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/) 
+[PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967)
+[GBATemp Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514)
 
 ## Downloads
 
-### Version 1.4.2 (10/2/2023)
+### Version 1.4.3 (10/21/2023)
 
-*   [tonyhax-international-v1.4.2](https://github.com/alex-free/tonyhax/releases/download/v1.4.2i/tonyhax-international-v1.4.2.zip)
+*   [tonyhax-international-v1.4.3](https://github.com/alex-free/tonyhax/releases/download/v1.4.3i/tonyhax-international-v1.4.3.zip)
 
 Changes:
 
-*   Upgraded all APv2 bypasses to support non-stealth mod-chips! International now supports playing every known protected game which triggers protection on both non-stealth mod-chip consoles and stock consoles (APv2). Stock consoles without non-stealth mod-chips can play all known protected games using International.
+*   Added APv1 bypasses (allowing play of said game on non-stealth mod-chip consoles when booted with Tonyhax International) for Dancing Blade Katte ni Momotenshi II: Tears of Eden Japan, Global Force: Shin Sentou Kokka Japan Rev 0, Global Force: Shin Sentou Kokka Japan Rev 1, Global Force: Shin Sentou Kokka Japan Demo, I.Q Final Japan Demo 1, I.Q Final Japan Demo 2, Shiritsu Justice Gakuen: Nekketsu Seishun Nikki 2, Konami 80's Arcade Gallery, Lord Of Monsters Japan, Lord Of Monsters Japan Demo, Magical Tetris Challenge featuring Mickey Japan, Metal Gear Solid: Integral Japan, Panekit: Infinitive Crafting Toy Case Japan Rev 0, Pocket MuuMuu Japan,  Planet Laika Japan, PoPoRoGue Japan Rev 0, PoPoRoGue Japan Rev 1, Silent Hill Japan Rev 0, Silent Hill Japan Rev 1, Spyro The Dragon Japan, Spyro The Dragon Shokai Genteiban, Tokimeki Memorial Drama Series Vol. 3: Tabidachi no Uta, and Um Jammer Lammy Japan.
 
-*   Protected games that only trigger on non-stealth mod-chip consoles and not on stock consoles (APv1) are now supported, but only a few have bypasses added so far as of v1.4.2.
+*   Beatmania featuring Dreams Come True now works on non-stealth mod-chip consoles as well as unmodified ones.
 
-*   International is now the first soft-mod to support playing i-mode mo Issho: Doko Demo Issho Tsuika Disc and Koneko mo Issho on PAL consoles (there is a special additional protection that causes these games to lockup when detecting a PAL BIOS, but this is now bypassed by International).
+*   Added an APv2 bypass (allows playing on non-stealth mod-chip consoles and unmodified ones) for Hyper Value 2800: Hyper Pachinko.
 
-*   International now supports playing King's Field Japan (before even the original Tonyhax has added support). Any other early Japanese launch titles that didn't work previously should now also work fine (PSX.EXE, no SYSTEM.CNF titles). The [english translation patch for the game](https://www.romhacking.net/translations/1067/) also works (make sure you get the [save/load screen fix for real hardware](https://www.angelfire.com/art3/weissvulf/kings_field_japanese_to_english_patch_download.html)).
+*   Faster anti-piracy system activation and parsing for protected titles.
 
-*   Added APv2 bypasses for Jikkyou Powerful Pro Yakyuu 2000: Kaimakuban, Jikkyou Powerful Pro Yakyuu 2000: Ketteiban, Jikkyou Powerful Pro Yakyuu 2001: Ketteiban, Jikkyou Powerful Pro Yakyuu 2001, Jikkyou Powerful Pro Yakyuu 2002: Haru, Jikkyou Powerful Pro Yakyuu: Premium-ban, Resident Evil 3 USA Demo.
-
-*   Added APv1 bypasses for Vandal Hearts II Japan, Dance Dance Revolution Japan, Ape Escape Japan Rev 0, Ape Escape Japan Rev 1, Ape Escape Japan Demo, Bishi Bashi Special 2, Bishi Bashi Special 2 Japan, Jikkyou Kyousouba Ikusei Simulation Game: Breeding Stud '99 Japan, Bust A Move 2: Dance Tengoku Mix, Minna no Golf 2 Japan Rev 0, Minna no Golf 2 Japan Rev 1, Final Fantasy VIII Japan, Doko Demo Issho Japan Rev 0, Doko Demo Issho Japan Rev 1, Doko Demo Issho Calpis Water Version, Doko Demo Issho Japan Demo 1, (**NOTE: I Can not find a Doko Demo Issho Japan Demo 2 CD image (PAPX 90086) http://redump.org/disc/83081/ to add support for that yet, someone please send me that ;)**).
-
-*   Changed my SetMemSize(8) call to be more similar to original Tonyhax (which has now added SetMemSize!).
+*   PoPoRoGue Japan Rev 0 now always works on unmodified SCPH-1000 and early SCPH-3000 consoles. There is a [bug in PoPoRoGue Japan Rev 0 that sometimes even occurs with a real game disc on unmodified hardware](https://geocities.restorativland.org/SiliconValley/Station/8269/) due to the supper buggy anti-piracy checks) thanks to the newly introduced anti-piracy bypass for this game.
 
 [About previous versions](changelog.md).
 
 ## Usage
+
+*   [Japanese PS1 Console Loader Instructions (SCPH-1000-SCPH-100)](#japanese-ps1-console-loader-instructions)
+
+*   [Japanese PS2 Console Loader Instructions (SCPH-10000-SCPH-39000)](#japanese-ps2-console-loader-instructions)
+
+*   [American/European PS1/PS2 Console Loader Instructions (SCPH-1001-SCPH-39004)](#americaneuropean-ps1ps2-console-loader-instructions)
+
+* [GameShark Code Support](gameshark-code-support.md)
+
+* [XStation ROM Version](xstation.md)
 
 The Tonyhax International loader is the program that once started enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted with a [flashed cheat cart](flashed-cheat-cart.md), a [flashed memory card](freepsxboot-exploit.md), a [save game exploit](save-game-exploit.md), a [CD-R](boot-cd.md), or even a [GameShark Code](gameshark-code.md). The Tonyhax International loader provides the ability to properly play backup CD-R and 'imported region discs' on all PS1 consoles, and all supported early PS2 consoles (Japanese, USA, and PAL models SCPH-10000-SCPH-39004).
 
@@ -188,16 +115,6 @@ After blocking the lid sensor, your real Japanese PS1 game will spin up and then
 Put in the backup CD-R or import PSX game disc you want to play **without unblocking the lid sensor**. Once you press X, the console will run some commands automatically, followed by the game booting with perfect CD audio playback. Note that you can not unblock the lid sensor while playing the game on **Japanese consoles**, if you do so the game will stop working.
 
 ![scph 1000 booting backup](images/scph-1000-loader-rom-booting-duke-nukem-total-meltdown-usa.png)
-
-### Playing Games That Span Multiple Discs On Japanese PS1 Consoles
-
-There are some games which span multiple discs. And some of these games (such as Parasite Eve, Fear Effect, and Crono Cross) that span multiple discs require you to open the CD drive, remove disc 1, insert disc 2, and close the CD drive at some point in the game without providing a save game option at the disc swap. If you encounter this type of game on a Japanese PS1 console you have to do the "mid-game hot-swap trick":
-
-*   When the game asks you to insert disc 2, unblock the lid sensor and remove the CD.
-*   Put **any real authentic Japanese PSX disc** into the PS1 drive.
-*   You will now be performing a _mid-game hot-swap trick_. Have the disc 2 you want to play in one hand, and whatever your using to block the lid sensor in another. Now block the lid sensor, freeing your one hand. Wait until the original real Japanese PSX disc stats spinning fast (~3 seconds) and **immediately** swap the disc with your free hand, and put in the actual disc 2 you want to play. You can now continue playing your game that spans multiple discs normally! This trick would work for games that span even more then 2 discs as well.
-
-It is important to note however that most games that span multiple discs allow you to load a game save created on disc 1 while playing disc 2. This means you just need to save at the last point possible on disc 1, and then you can just boot disc 2 like normal and load your game save created earlier on disc 1. **Some games however do not allow this** as previously mentioned, so for those games you must use the **mid-game hot-swap trick** described above.
 
 ### Japanese PS2 Console Loader Instructions
 
@@ -255,20 +172,6 @@ Now that the DVD drive tray is pushed all the way back in, the Swap Magic Tool c
 
 ![scph-10000 ff9 exploit loader 2](images/scph-10000-ff9-exploit-loader-2.png)
 
-### Playing Games That Span Multiple Discs on Japanese PS2 Consoles
-
-There are some games which span multiple discs. And **some of these games** (such as Parasite Eve, Fear Effect, and Crono Cross) that span multiple discs require you to open the CD drive, remove disc 1, insert disc 2, and close the CD drive at some point in the game. **Unfortunately only for Japanese PS2 consoles, you can not do this with Tonyhax International.** If you get to a point in a game that requires ejecting the drive and putting in a new game, you have to play this part of the game on a different console (Any PS1 or American/European PS2 works). It is important to note however that most games that span multiple discs allow you to load a game save created on disc 1 while playing disc 2. This means you just need to save at the last point possible on disc 1, and then you can just boot disc 2 with Tonyhax International like normal and load your game save created earlier on disc 1, bypassing this limitation for certain games that allow saving right at disc swap mid-game.
-
-### Playing PAL Region Games On Japanese PS2 Consoles
-
-The early PS2 models that Tonyhax International supports have the PS1 mode which runs PS1 software hard-coded to NTSC video mode. This can cause a problem with Tonyhax International if you want to play a European/PAL PS1 backup CD-R or import disc on a Japanese PS2 in PAL video mode. Since PS1 software can not change the video mode correctly from PS1 mode running on a PS2, you have to resort to the **PS2 homebrew software known as [PSVModeNeg](https://www.psx-place.com/threads/ps1vmodeneg-by-sp193.25050/)**. This software allows you to explicitly change the video mode to PAL. An older version of PSVModeNeg is required if you want to use it's effects with Tonyhax International, specifically [v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip). This version simply inverses the current video mode of the console, rather then reading the PS1 game disc to figure out what video mode the disc itself expects. Here are the steps below to change your Japanese PS2 console to PAL video mode for Tonyhax International:
-
-*   Download [PSVModeNeg v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip) and extract the file `PS1VModeNeg.elf`.
-*   Copy the file `PS1VModeNeg.elf` to a FAT32 formatted USB flash drive that works with your soft-modded PS2. You can soft-mod your PS2 with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208), [FreeDVDBoot](https://github.com/CTurt/FreeDVDBoot) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248) to be able to use PS1VModeNEG on your PS2 console.
-*   Using wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
-*   Put in the real Japanese PS1 game disc that you are using with a [save game exploit.](save-game-exploit.md) when in PS1VModeNeg. The video mode will be forced to PAL now in the PS1 mode of your Japanese PS2.
-*   Playing through your Japanese PS1 game disc may look or act weird in PAL video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a PAL region import disc or PAL region backup CD-R and the PAL PS1 game will boot in PAL video mode.
-
 ## American/European PS1/PS2 Console Loader Instructions
 
 Start the Tonyhax International loader with a supported boot method.
@@ -299,27 +202,78 @@ All other boot methods don't have a disc usually in the drive already, so there 
 
 ![scph 5501 rom booting parasite eve usa disc 2](images/scph-5501-booting-parasite-eve-usa-disc-2.png)
 
-## Playing Games That Span Multiple Discs On American/European PS1/PS2 Consoles
+## F.A.Q.
 
-All American and European consoles do not have the same limitations as the Japanese consoles and can play games that span multiple discs like normal.
+### Q: Does the type of CD-R I am using matter?
+A: Yes, and so does the burner you use. I have wrote about my findings and put together [The Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr).
 
-## Playing PAL Games On American PS2 Consoles
+### Q: My game doesn't boot or it locks up?
+A: This is probably a disc read issue. Ensure you are using high quality CD-Rs and a good burner. If that doesn't help, you may need to [refurbish](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/) your console. If all of that doesn't help, maybe there is an issue in International. Please open a [generic issue](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/).
 
-The early PS2 models that Tonyhax International supports have the PS1 mode which runs PS1 software hard-coded to NTSC video mode. This can cause a problem with Tonyhax International if you want to play a European/PAL PS1 backup CD-R or import disc on a American PS2 in PAL video mode. Since PS1 software can not change the video mode correctly from PS1 mode running on a PS2, you have to resort to the **PS2 homebrew software known as [PSVModeNeg](https://www.psx-place.com/threads/ps1vmodeneg-by-sp193.25050/)**. This software allows you to explicitly change the video mode to PAL. An older version of PSVModeNeg is required if you want to use it's effects with Tonyhax International, specifically [v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip). This version simply inverses the current video mode of the console, rather then reading the PS1 game disc to figure out what video mode the disc itself expects. Here are the steps below to change your American PS2 console to PAL video mode for Tonyhax International:
+### Q: My game's FMVs or audio is stuttering or locking up?
+A: This is almost certainly a disc read issue, please see the above answer.
+
+### Q: Can I use International to play protected games, and will it turn my non-stealth mod-chip into a stealth mod-chip?
+A: Yes, International automatically detects protected games and applies a bypass to enable play. Each game is supported on a game by game basis, and there is a [list](anti-piracy-bypass.md#protected-games-support). If you know of a protected game that isn't on the list, or isn't working in some situation, please open an [anti-piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&projects=&template=antipiracy-issue.md&title=) and tell me all about it.
+
+### Q: Can I play games that span multiple discs (i.e. Fear Effect) / have disc change features?
+A: If you have any USA or PAL console, yes. The Japanese consoles can not currently support this in the same way. However many multi-disc games may allow you to save before you need to disc swap. So then you can reset the console, restart International, boot disc 2, and then load the save from disc 2. Games that don't have such a save file work around include Parasite Eve, Chrono Chross, and Fear Effect. Let me know if you have found other games like this. 
+
+If you really must play a multi-disc game on your Japanese console, **you can perform a mid-game hot-swap-trick but I highly don't recommend doing this since you risk damaging the psx and your discs.** A proper software-based seamless workaround is planned for the Japanese consoles.
+
+PS1 Mid-Game Hot-Swap-Trick:
+
+*   When the game asks you to insert disc 2, unblock the lid sensor and remove the CD.
+*   Put **any real authentic Japanese PSX disc** into the PS1 drive.
+*   You will now be performing a _mid-game hot-swap trick_. Have the disc 2 you want to play in one hand, and whatever your using to block the lid sensor in another. Now block the lid sensor, freeing your one hand. Wait until the original real Japanese PSX disc stats spinning fast (~3 seconds) and **immediately** swap the disc with your free hand, and put in the actual disc 2 you want to play. You can now continue playing your game that spans multiple discs normally! This trick would work for games that span even more then 2 discs as well.
+
+PS2 Mid-Game Hot-Swap Trick
+
+This [swap trick method](https://consolecopyworld.com/ps2/ps2swap/lesson1.shtml) probably will suffice but I haven't tried it nor am I interested in it since again the goal is to implement a software-based approach to workaround this issue for all Japanese consoles.
+
+### Q: Why not combine Tonyhax and Tonyhax International into one project?
+A: Socram8888 does not own a Japanese console, nor is he interested in getting one. While Socram888 and I do work together to fix issues that effect both the original Tonyhax and Tonyhax International, we have different goals in regards to what the project should support so it makes the most sense to keep these 2 projects separate.
+
+### Q: Why Can't Tonyhax/Tonyhax International Change The Video Mode From PAL to NTSC or vice versa on PS2s?
+A: The early PS2 models that Tonyhax International supports do not have the ability to change the video mode from within PS1 mode from what we understand. 
+
+You can change the video mode first while in PS2 mode however. For now you can resort to the **PS2 homebrew software known as [PSVModeNeg](https://www.psx-place.com/threads/ps1vmodeneg-by-sp193.25050/)**, this software allows you to explicitly change the video mode. An older version of PSVModeNeg is required if you want to use it's effects with Tonyhax International, specifically [v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip). This version simply inverses the current video mode of the console, rather then reading the PS1 game disc to figure out what video mode the disc itself expects (which is problematic when using the save game exploit since that disc must match your console's region). Here are the steps below to accomplish this:
 
 *   Download [PSVModeNeg v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip) and extract the file `PS1VModeNeg.elf`.
+
 *   Copy the file `PS1VModeNeg.elf` to a FAT32 formatted USB flash drive that works with your soft-modded PS2. You can soft-mod your PS2 with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208), [FreeDVDBoot](https://github.com/CTurt/FreeDVDBoot) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248) to be able to use PS1VModeNEG on your PS2 console.
-*   Using wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
-*   Using wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
-*   Put in the real American PS1 game disc that you are using with a [save game exploit.](save-game-exploit.md) when in PS1VModeNeg. The video mode will be forced to PAL now in the PS1 mode of your American PS2.
-*   Playing through your American PS1 game disc may look or act weird in PAL video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a PAL region import disc or PAL region backup CD-R and the PAL PS1 game will boot in PAL video mode.
 
-## Playing Japanese/American Games On PAL PS2 Consoles
-
-The early PS2 models that Tonyhax International supports have the PS1 mode which runs PS1 software hard-coded to NTSC video mode. This can cause a problem with Tonyhax International if you want to play a Japanese/American PS1 backup CD-R or import discs on a PAL PS2 in NTSC video mode. Since PS1 software can not change the video mode correctly from PS1 mode running on a PS2, you have to resort to the **PS2 homebrew software known as [PSVModeNeg](https://www.psx-place.com/threads/ps1vmodeneg-by-sp193.25050/)**. This software allows you to explicitly change the video mode to PAL. An older version of PSVModeNeg is required if you want to use it's effects with Tonyhax International, specifically [v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip). This version simply inverses the current video mode of the console, rather then reading the PS1 game disc to figure out what video mode the disc itself expects. Here are the steps below to change your PAL PS2 console to NTSC video mode for Tonyhax International:
-
-*   Download [PSVModeNeg v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip) and extract the file `PS1VModeNeg.elf`.
-*   Copy the file `PS1VModeNeg.elf` to a FAT32 formatted USB flash drive that works with your soft-modded PS2. You can soft-mod your PS2 with [FreeHDBoot](https://www.ps2-home.com/forum/viewtopic.php?t=5208), [FreeDVDBoot](https://github.com/CTurt/FreeDVDBoot) or [FreeMCBoot](https://www.ps2-home.com/forum/viewtopic.php?t=1248) to be able to use PS1VModeNEG on your PS2 console.
 *   Using wLaunchELF load the `PS1VModeNeg.elf` file from the `mass` device (your flash drive).
-*   Put in the real PAL PS1 game disc that you are using with a [save game exploit.](save-game-exploit.md) when in PS1VModeNeg. The video mode will be forced to NTSC now in the PS1 mode of your PAL PS2.
-*   Playing through your PAL PS1 game disc may look or act weird in NTSC video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in a NTSC disc and the NTSC PS1 import or backup disc will boot in NTSC video mode.
+
+*   Put in the real PSX game disc that you are using with a [save game exploit](save-game-exploit.md) when in PS1VModeNeg. The video mode will be forced to the inverse of the native one your console runs in.
+
+*   Playing through your real PSX game disc may look or act weird in the changed video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in the import disc or backup CD-R and the PS1 game will boot at last.
+
+### Q. How Can I Help?
+A. If you know C/MIPS assembly and can improve any of the code in International, open a [pull request](https://github.com/alex-free/tonyhax/pulls) with your changes. 
+
+If you don't have programming experience something else that you could help out with is bring to my attention any protected games that are not yet supported in an [anti-piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&projects=&template=antipiracy-issue.md&title=). 
+
+I also can not find a [few game revisions](anti-piracy-bypass.md#needed-games) that need anti-piracy support, if you can somehow get those to me that would make it easy to bypass the protection in them.
+
+## Relevant Software
+
+*   [TOCPerfect Patcher](https://alex-free.github.io/tocperfect) - patch the Tonyhax International loader into a disc image directly to expand the capabilities of the CD Player Swap Trick.
+
+*   [CDRDAO-PLED](https://alex-free.github.io/cdrdao) - recommended burning software for Linux.
+
+*   [EDCRE](https://alex-free.github.io/edcre) - EDC/EEC regenerator to allow patched EDC protected PSX games to be burned by CDRDAO-PLED's generic-mmc-raw driver correctly.
+
+*   [APrip Homepage](https://alex-free.github.io/aprip) - patches some later PSX games with additional anti-piracy copy protection.
+
+*   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap) - a similar project that uses the Tonyhax International loader.
+
+*   [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom) - what generates the Tonyhax International ROM file.
+
+*   [NXFLASH](https://github.com/danhans42/nxflash) - the software which flashes cheat carts with the Tonyhax International ROM.
+
+*   [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) - an exploit used in a Tonyhax International boot method.
+
+*   [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax) - what Tonyhax International is based on (_International is not an official version and at this point deviates quite greatly_).
+
+*   [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)

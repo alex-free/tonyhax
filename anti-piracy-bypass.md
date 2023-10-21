@@ -4,20 +4,20 @@
 
 Starting in late 1998, some specific PSX games began implementing additional copy protection designed to prevent playing backup CD-R copies of a game. Different types of additional copy protection have been found in PSX games over the years. Tonyhax International supports such games on a game by game basis, with a goal of finding and adding the ability to play all such games eventually.
 
+## [Full Supported Protected Games List](#protected-games-support)
+
 ## Types Of Protection
 
 *   [APv1](#apv1) - only effects non-stealth mod-chip consoles.
 *   [APv2](#apv2) - effects both non-stealth mod-chip consoles and stock, unmodified consoles.
-*   [EDC](#edc) -.
+*   [EDC](#edc).
 *   [LibCrypt](#libcrypt).
-
-## [Supported Protected Games List](#protected-games-support)
 
 ## APv1
 
 The very first kind of 'standardized' additional copy protection that appeared in later PSX games. This is only found in some Japanese games. The _APv1 style protection can only prevent a backup CD-R of a game from working on a console that has a 'non-stealth mod-chip' installed_. APv1 style protection can not detect games booted with Tonyhax International on a stock console without a _non-stealth_ mod-chip. 
 
-At this time only a few of the many APv1 games have support at this time. Newer updates to International will add support for many more of these games.
+Quite a few of the many APv1 games have support at this time. Newer updates to International will add support for more APv1 games.
 
 ## APv2
 
@@ -63,7 +63,7 @@ The `--eject` argument will automatically eject the disc immediately after a suc
 
 Some PAL PSX games are using a different copy protection scheme known as LibCrypt protection. Similar to EDC protection, LibCrypt protection is triggered when you burn a LibCrypt protected PSX CD image with standard CD burning software, which in most cases changes the SubChannel data when burning such a protected PSX CD image.
 
-LibCrypt protection can be bypassed by burning a backup CD-R of a LibCrypt game using [CloneCD](#clone-cd) in a very [specific](https://github.com/Kippykip/SBITools) way, however non-stealth mod-chip consoles will still trigger the protection. This will only work for stock, unmodified consoles currently.
+LibCrypt protection can be bypassed by burning a backup CD-R of a LibCrypt game using [CloneCD](#clone-cd) in a very [specific](https://github.com/Kippykip/SBITools) way, however non-stealth mod-chip consoles will still trigger the protection for some games. This will only work for stock, unmodified consoles currently.
 
 ## CD Burning Software For Protected Games
 
@@ -237,7 +237,14 @@ This is the complete list of all protected games with bypasses for the additiona
 - Versions With Anti-Piracy Bypass Support: USA, USA Demo.
 - Anti-Piracy Version: APv2.
 
-#### Dance Dance Revolution
+### Dancing Blade Katte ni Momotenshi II: Tears of Eden (Disc 1)
+- Versions Tested: Japan ([Disc 1](http://redump.org/disc/14229/), [Disc 2](http://redump.org/disc/14230/), [Disc 3](http://redump.org/disc/14228/)).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: During the Konami logo screen.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv1.
+
+### Dance Dance Revolution
 
 - Versions Tested: [Japan](http://redump.org/disc/1562/), [USA](http://redump.org/disc/16075/).
 - Versions With EDC Protection: Japan, USA.
@@ -383,8 +390,8 @@ This is the complete list of all protected games with bypasses for the additiona
 
 - Versions tested: [Japan Rev 0](http://redump.org/disc/1335/), [Japan Rev 1](http://redump.org/disc/20288/), [Japan Water Calpis Version](http://redump.org/disc/49161/), [Japan Demo 1](http://redump.org/disc/6755/).
 - Versions With Anti-Piracy Screen: [Japan Rev 0](http://redump.org/disc/1335/), [Japan Rev 1](http://redump.org/disc/20288/), [Japan Water Calpis Version](http://redump.org/disc/49161/), [Japan Demo 1](http://redump.org/disc/6755/), [Japan Demo 2](http://redump.org/disc/83081/).
-- When Is The Anti-Piracy Screen Check: Immediately
-- Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1, Japan Water Calpis Version, Japan Demo 1. **I can not find Japan Demo 2, someone please send me it so I can add support.**
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1, Japan Water Calpis Version, Japan Demo 1. **NOTE: I can not find Japan Demo 2, someone please send me it so I can add support.**
 - Anti-Piracy Version: APv1.
 
 ### Exciting Bass 2
@@ -427,6 +434,14 @@ This is the complete list of all protected games with bypasses for the additiona
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
 
+## Global Force: Shin Sentou Kokka
+
+- Versions: [Japan](http://redump.org/disc/20715/), [Japan Rev 1](http://redump.org/disc/4819/), [Japan Demo](http://redump.org/disc/4819/).
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1, Japan Demo.
+- Anti-Piracy Version: APv1.
+
 ### Goo! Goo! Soundry
 
 - Versions Tested: [Japan](http://redump.org/disc/16027/).
@@ -451,6 +466,14 @@ This is the complete list of all protected games with bypasses for the additiona
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
 
+### Gungauge
+
+- Versions Tested: [Japan](http://redump.org/disc/6328/), [Europe](http://redump.org/disc/7315/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv2.
+
 ### Harlem Beat: You're The One
 
 - Versions Tested: [Japan](http://redump.org/disc/36294/).
@@ -462,6 +485,14 @@ This is the complete list of all protected games with bypasses for the additiona
 ### Hyper Value 2800: Hanafuda
 
 - Versions Tested: [Japan](http://redump.org/disc/15791/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately after boot.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv2.
+
+### Hyper Value 2800: Hyper Pachinko
+
+- Versions Tested: [Japan](http://redump.org/disc/15792/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately after boot.
 - Versions With Anti-Piracy Bypass Support: Japan.
@@ -482,6 +513,15 @@ This is the complete list of all protected games with bypasses for the additiona
 - When Is The Anti-Piracy Screen Check: Immediately after boot.
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
+
+### I.Q Final
+
+- Versions Tested: [Japan](http://redump.org/disc/1504/), [Japan Demo 1](http://redump.org/disc/6649/), [Japan Demo 2](http://redump.org/disc/32988/).
+- Versions With Anti-Piracy Screen: Japan Demo 1, Japan Demo 2.
+- When Is The Anti-Piracy Screen Check: Immediately after boot.
+- Versions With Anti-Piracy Bypass Support: Japan Demo 1, Japan Demo 2.
+- Anti-Piracy Version: APv1.
+
 
 ### Jikkyou Kyousouba Ikusei Simulation Game: Breeding Stud '99
 
@@ -563,6 +603,14 @@ This is the complete list of all protected games with bypasses for the additiona
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
 
+### Shiritsu Justice Gakuen: Nekketsu Seishun Nikki 2
+
+- Versions Tested: [Japan](http://redump.org/disc/33493/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: After title screen on first loading screen.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv1.
+
 ### Koko Hore! Pukka
 
 - Versions Tested: [Japan](http://redump.org/disc/4812/).
@@ -578,6 +626,14 @@ This is the complete list of all protected games with bypasses for the additiona
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
+
+### Konami 80's Arcade Gallery
+
+- Versions Tested: [Japan](http://redump.org/disc/16955/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv1.
 
 ### Legend Of Dragoon
 
@@ -595,6 +651,14 @@ This is the complete list of all protected games with bypasses for the additiona
 - Versions With Anti-Piracy Bypass Support: Japan, USA.
 - Anti-Piracy Version: APv2.
 
+### Lord Of Monsters
+
+- Versions Tested: [Japan](http://redump.org/disc/58023/), [Japan Demo](http://redump.org/disc/68358/).
+- Versions With Anti-Piracy Screen: Japan, Japan Demo
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan, Japan Demo.
+- Anti-Piracy Version: APv1.
+
 ### Love Hina: Ai wa Kotoba no Naka ni
 
 - Versions Tested: [Japan](http://redump.org/disc/7369/).
@@ -611,6 +675,14 @@ This is the complete list of all protected games with bypasses for the additiona
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
 
+### Magical Tetris Challenge featuring Mickey
+
+- Versions Tested: [Japan](http://redump.org/disc/19170/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv1.
+
 ### Marvel vs. Capcom: Clash of Super Heroes
 
 - Versions Tested: [Japan](http://redump.org/disc/36384/), [Japan Demo](http://redump.org/disc/60646/), [USA](http://redump.org/disc/1235/), [Europe](http://redump.org/disc/3910/).
@@ -626,6 +698,14 @@ This is the complete list of all protected games with bypasses for the additiona
 - When Is The Anti-Piracy Screen Check: At the Whitechapel level loading screen (quite far in the game).
 - Versions With Anti-Piracy Bypass Support: USA.
 - Anti-Piracy Version: APv2.
+
+### Metal Gear Solid: Integral
+
+- Versions Tested: Japan ([Disc 1](http://redump.org/disc/423/), [Disc 2](http://redump.org/disc/424/), [Disc 3](http://redump.org/disc/426/)).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv1.
 
 ### Minna no Golf 2 / Everybody's Golf 2
 
@@ -779,13 +859,38 @@ This is the complete list of all protected games with bypasses for the additiona
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
 
-### Ore no Ryouri
+### Ore no Ryouri / My Cooking
 
 - Versions Tested: [Japan](http://redump.org/disc/39643/).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
+
+### Ore no Shikabane o Koete Yuke
+
+- Versions Tested: [Japan](http://redump.org/disc/3983/), [Japan Demo](http://redump.org/disc/82897/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Start a new game and proceed through the beginning intro text, it is quite a bit to go through to see it trigger. Once you finish making your character it will trigger, google translate is your friend here.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv1.
+
+### Panekit: Infinitive Crafting Toy Case
+
+- Versions Tested: [Japan Rev 0](http://redump.org/disc/5364/), [Japan Rev 1](http://redump.org/disc/5364/) - **NOTE: Japan Rev 1 should work but I can not find a copy of it to confirm.**
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.
+- Anti-Piracy Version: APv1.
+
+### Planet Laika
+
+- Versions Tested: [Japan](http://redump.org/disc/37878/)
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv1.
+- Note: The fan english translation already has this bypassed and International explicitly does not set it's own bypass for this game to prevent it from locking up.
 
 ### Pocket Jiman
 
@@ -795,6 +900,14 @@ This is the complete list of all protected games with bypasses for the additiona
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
 
+### Pocket MuuMuu
+
+- Versions Tested: [Japan](http://redump.org/disc/16166/)
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv1.
+
 ### PoPoLoCrois Monogatari II
 
 - Versions Tested: Japan ([Disc 1](http://redump.org/disc/1653/), [Disc 2](http://redump.org/disc/1654/), [Disc 3](http://redump.org/disc/1651/)), [Japan Demo](http://redump.org/disc/57327/)
@@ -802,6 +915,14 @@ This is the complete list of all protected games with bypasses for the additiona
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
+
+### PoPoRoGue
+
+- Versions Tested: [Japan Rev 0](http://redump.org/disc/1552/), [Japan Rev 1](http://redump.org/disc/8313/), [Japan Demo](http://redump.org/disc/1552/).
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.
+- When Is The Anti-Piracy Screen Check: Sony Computer Entertainment presents screen.
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.
+- Anti-Piracy Version: APv1.
 
 ### Pop'n Music: Animation Melody
 
@@ -930,6 +1051,38 @@ This is the complete list of all protected games with bypasses for the additiona
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
 
+### SaGa Frontier II
+
+- Versions Tested: [Japan](http://redump.org/disc/1605/), [USA](http://redump.org/disc/1535/), [Europe](http://redump.org/disc/280/), [France](http://redump.org/disc/28278/), [Germany](http://redump.org/disc/2605/).
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv1.
+
+### Saru! Get You!/Ape Escape
+
+- Versions Tested: [Japan Rev 0](http://redump.org/disc/17061/), [Japan Rev 1](http://redump.org/disc/17062/), [Japan Demo](http://redump.org/disc/5668/), [USA](http://redump.org/disc/3086/), [USA Demo 1](http://redump.org/disc/12309/), [USA Demo Toys R Us](http://redump.org/disc/50386/), [USA Demo 2](http://redump.org/disc/12309/), [Europe](http://redump.org/disc/6147/), [Europe Demo](http://redump.org/disc/995/), [France](http://redump.org/disc/28260/), [Germany](http://redump.org/disc/26604/), [Italy](http://redump.org/disc/27680/).
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0 (APv1), Japan Rev 1 (APv1), Japan Demo (APv1).
+- Anti-Piracy Version: APv1.
+
+### Silent Hill
+
+- Versions Tested: [Japan Rev 0](http://redump.org/disc/134/), [Japan Rev 1](http://redump.org/disc/82898/),  [Japan Demo](http://redump.org/disc/33473/), [Japan Rev 2](http://redump.org/disc/18251/) **Note: Need to find Japan Rev 2 to confirm it works as well**.
+- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Rev 2.
+- When Is The Anti-Piracy Screen Check: Immediately.
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1, Japan Rev 2.
+- Anti-Piracy Version: APv1.
+
+### Spyro The Dragon
+
+- Versions Tested: [Japan](http://redump.org/disc/42739/), [Shokai Genteiban](http://redump.org/disc/11432/),  [Japan Demo](http://redump.org/disc/68768/).
+- Versions With Anti-Piracy Screen: Japan, Shokai Genteiban.
+- When Is The Anti-Piracy Screen Check: Immediately after the universal logo.
+- Versions With Anti-Piracy Bypass Support: Japan, Shokai Genteiban.
+- Anti-Piracy Version: APv1.
+
 ### Spyro: Year Of The Dragon
 
 - Versions Tested: [USA Rev 0](http://redump.org/disc/818/), [USA Rev 1](http://redump.org/disc/818/), [USA Demo](http://redump.org/disc/49449/), [Europe Rev 0](http://redump.org/disc/492/), [Europe Rev 1](http://redump.org/disc/19611/).
@@ -939,14 +1092,6 @@ This is the complete list of all protected games with bypasses for the additiona
 - Anti-Piracy Version: APv2.
 
 **NOTE**: do not use the memory card GameShark feature to enable additional codes or the anti-tamper protection will trigger. There is also a ~15 second pause before the start menu appears, be patient and the game will unfreeze and work as intended! The protection is completely disabled by Tonyhax International so no issues will happen when playing.
-
-### Saru! Get You!/Ape Escape
-
-- Versions Tested: [Japan Rev 0](http://redump.org/disc/17061/), [Japan Rev 1](http://redump.org/disc/17062/), [Japan Demo](http://redump.org/disc/5668/), [USA](http://redump.org/disc/3086/), [USA Demo 1](http://redump.org/disc/12309/), [USA Demo Toys R Us](http://redump.org/disc/50386/), [USA Demo 2](http://redump.org/disc/12309/), [Europe](http://redump.org/disc/6147/), [Europe Demo](http://redump.org/disc/995/), [France](http://redump.org/disc/28260/), [Germany](http://redump.org/disc/26604/), [Italy](http://redump.org/disc/27680/).
-- Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Demo.
-- When Is The Anti-Piracy Screen Check: Immediately.
-- Versions With Anti-Piracy Bypass Support: Japan Rev 0 (APv1), Japan Rev 1 (APv1), Japan Demo (APv1).
-- Anti-Piracy Version: APv1.
 
 ### Street Fighter EX2 Plus
 
@@ -996,6 +1141,14 @@ This is the complete list of all protected games with bypasses for the additiona
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
 
+### Tokimeki Memorial Drama Series Vol. 3: Tabidachi no Uta
+
+- Versions Tested: Japan ([Disc 1](http://redump.org/disc/29081/), [Disc 2](http://redump.org/disc/29081/)).
+- Versions With Anti-Piracy Screen: Japan
+- When Is The Anti-Piracy Screen Check: Press start on title screen and go through it, happens right before you name the character.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv1.
+
 ### Tomba! 2: The Evil Swine Return
 
 - Versions Tested: [USA](http://redump.org/disc/16475/), [USA Demo](http://redump.org/disc/32246/), [Europe](http://redump.org/disc/31192/), [France](http://redump.org/disc/31192/), [Germany](http://redump.org/disc/31192/), [Italy](http://redump.org/disc/41369/), [Spain](http://redump.org/disc/1582/).
@@ -1011,6 +1164,14 @@ This is the complete list of all protected games with bypasses for the additiona
 - When Is The Anti-Piracy Screen Check: Before first now loading screen.
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
+
+### Um Jammer Lammy
+
+- Versions Tested: [Japan](http://redump.org/disc/3582/), [Japan Tentou Houei-you](http://redump.org/disc/97015/), [USA](http://redump.org/disc/1399/), [USA Demo](http://redump.org/disc/10990/), [Europe](http://redump.org/disc/5510/)). **NOTE: I can not find Japan Tentou Houei-you, someone please send me it so I can add support.**
+- Versions With Anti-Piracy Screen: Japan.
+- When Is The Anti-Piracy Screen Check: Before first now loading screen.
+- Versions With Anti-Piracy Bypass Support: Japan.
+- Anti-Piracy Version: APv1.
 
 ### Vandal Harts II
 
@@ -1051,3 +1212,12 @@ This is the complete list of all protected games with bypasses for the additiona
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan, Japan Genteiban Edition, USA, Europe, France, Germany, Spain, Italy.
 - Anti-Piracy Version: APv2.
+
+## NEEDED GAMES
+
+I can not find the below specific versions/releases of these protected games. Tonyhax International aims to support every release, every revision of every game with anti-piracy protection, so if you can provide these in any manner it would help immensly.
+
+*   [Panekit: Infinitive Crafting Toy Case Japan Rev 1](http://redump.org/disc/75024/). This is the 'PS2 compatible' re-release.
+*   [Doko Demo Issho Japan Demo 2](http://redump.org/disc/83081/).
+*   [Silent Hill Japan Rev 2](http://redump.org/disc/18251/).
+*   [Um Jammer Lammy Japan Tentou Houei-you](http://redump.org/disc/97015/). _Probably_ no protection since this is a non-playable rolling 'movie disc' accroding to redump.org.

@@ -1,5 +1,25 @@
 # Changelog
 
+## Version 1.4.2 (10/2/2023)
+
+*   [tonyhax-international-v1.4.2](https://github.com/alex-free/tonyhax/releases/download/v1.4.2i/tonyhax-international-v1.4.2.zip)
+
+Changes:
+
+*   Upgraded all APv2 bypasses to support non-stealth mod-chips! International now supports playing every known protected game which triggers protection on both non-stealth mod-chip consoles and stock consoles (APv2). Stock consoles without non-stealth mod-chips can play all known protected games using International.
+
+*   Protected games that only trigger on non-stealth mod-chip consoles and not on stock consoles (APv1) are now supported, but only a few have bypasses added so far as of v1.4.2.
+
+*   International is now the first soft-mod to support playing i-mode mo Issho: Doko Demo Issho Tsuika Disc and Koneko mo Issho on PAL consoles (there is a special additional protection that causes these games to lockup when detecting a PAL BIOS, but this is now bypassed by International).
+
+*   International now supports playing King's Field Japan (before even the original Tonyhax has added support). Any other early Japanese launch titles that didn't work previously should now also work fine (PSX.EXE, no SYSTEM.CNF titles). The [english translation patch for the game](https://www.romhacking.net/translations/1067/) also works (make sure you get the [save/load screen fix for real hardware](https://www.angelfire.com/art3/weissvulf/kings_field_japanese_to_english_patch_download.html)).
+
+*   Added APv2 bypasses for Jikkyou Powerful Pro Yakyuu 2000: Kaimakuban, Jikkyou Powerful Pro Yakyuu 2000: Ketteiban, Jikkyou Powerful Pro Yakyuu 2001: Ketteiban, Jikkyou Powerful Pro Yakyuu 2001, Jikkyou Powerful Pro Yakyuu 2002: Haru, Jikkyou Powerful Pro Yakyuu: Premium-ban, Resident Evil 3 USA Demo.
+
+*   Added APv1 bypasses for Vandal Hearts II Japan, Dance Dance Revolution Japan, Ape Escape Japan Rev 0, Ape Escape Japan Rev 1, Ape Escape Japan Demo, Bishi Bashi Special 2, Bishi Bashi Special 2 Japan, Jikkyou Kyousouba Ikusei Simulation Game: Breeding Stud '99 Japan, Bust A Move 2: Dance Tengoku Mix, Minna no Golf 2 Japan Rev 0, Minna no Golf 2 Japan Rev 1, Final Fantasy VIII Japan, Doko Demo Issho Japan Rev 0, Doko Demo Issho Japan Rev 1, Doko Demo Issho Calpis Water Version, Doko Demo Issho Japan Demo 1, (**NOTE: I Can not find a Doko Demo Issho Japan Demo 2 CD image (PAPX 90086) http://redump.org/disc/83081/ to add support for that yet, someone please send me that ;)**).
+
+*   Changed my SetMemSize(8) call to be more similar to original Tonyhax (which has now added SetMemSize!).
+
 ## Version 1.4.1 (9/15/2023)
 
 *   [tonyhax-international-v1.4.1](https://github.com/alex-free/tonyhax/releases/download/v1.4.1i/tonyhax-international-v1.4.1.zip)

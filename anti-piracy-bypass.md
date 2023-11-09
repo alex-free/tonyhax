@@ -41,29 +41,46 @@ When triggered, the APv1 and APv2 style copy protections will trigger an 'anti-p
 
 Some games may contain an EDC-based protection measure. For the affected games, this protection is triggered when you burn the EDC protected PSX CD image with standard CD burning software that by default usually corrects invalid EDC data it detects before writing said data to the disc, which when played on a real PSX will cause the game to trip the protection and lock up.
 
-I recommend using the latest CDRDAO v1.2.5 which unlike previous versions supports burning EDC Protected PSX games with CD audio tracks correctly using the `generic-mmc-raw` driver (though you can also use [Clone CD](#cd-burning-software-for-protected-games)). There are pre-built portable releases of a new enough CDRDAO for Linux [available](https://alex-free.github.io/cdrdao). This is the syntax of the command needed to burn EDC protected games correctly with CDRDAO:
+### Burning With CDRTools
 
-`cdrdao write --speed 1 --driver generic-mmc-raw --swap -n --eject yourgame.cue`
+I recommend using the latest CDRTools for burning EDC protected PSX games on Linux. There are pre-built portable releases of a new enough CDRTools for Linux [available](https://alex-free.github.io/cdrtools). Windows versions are available somewhere. The required command syntax for burning EDCRE patched games is this:
+
+`cdrtools -raw16 --speed=x cuefile=yourgame.cue`
+
+Breakdown what each of these arguments to CDRDAO do:
+
+`-raw16` specifies to burn the cd image without regenerating EDC/ECC data internally.
+
+`--speed=x` specifies the burn speed. Replace `x` with a number.
+
+`cuefile=yourgame.cue` specifies that your using a cue file named `yourgame.cue`. Replace `yourgame.cue` with the game's cue file your burning.
+
+
+### Burnign CDRDAO v1.2.5
+
+The latest CDRDAO v1.2.5 also supports burning EDC Protected PSX games with CD audio tracks correctly using the `generic-mmc-raw` driver. There are pre-built portable releases of a new enough CDRDAO for Linux [available](https://alex-free.github.io/cdrdao). The required command syntax for burning EDCRE patched games is this:
+
+`cdrdao write --speed x --driver generic-mmc-raw --swap -n --eject yourgame.cue`
+
+Breakdown what each of these arguments to CDRDAO do:
+
+*   `--speed x` argument sets the writing speed. Replace `x` with a number.
+
+*   `--driver generic-mmc-raw` specifies CDRDAO to use the `generic-mmc-raw` driver, which burns the CD image exactly as it is. The default driver used without specifiying these arguments is the **`generic-mmc` driver, which like the other drivers in CDRDAO will auto-regenerate EDC data as the CD image is burned.** This can change the EDC data read from the burned disc later, which some PSX games use as an additional anti-piracy check which if failed will lock up [the game](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#games-with-edc-protection).
+
+*   `--swap` is necessary if the BIN/CUE CD image contains CD audio. Without it, you will get loud static when the CD audio tracks are played as they are by default byte-swapped by CDRDAO if this argument is not specified.
+
+*   `-n` disables the 10 second waiting period before burning.
+
+*   `--eject` will automatically eject the disc immediately after a successful burn.
 
 ![Burning Dance Dance Revolution 2nd Remix Japan](images/ddr2j-burning.png)
-
-An explanation of the cdrdao arguments is below:
-
-The `--speed 1` argument sets the writing speed to the slowest your CD burner supports.
-
-The `--driver generic-mmc-raw` arguments specifies CDRDAO to use the `generic-mmc-raw` driver, which burns the CD image exactly as it is. The default driver used without specifiying these arguments is the **`generic-mmc` driver, which like the other drivers in CDRDAO will auto-regenerate EDC data as the CD image is burned.** This can change the EDC data read from the burned disc later, which some PSX games use as an additional anti-piracy check which if failed will lock up [the game](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#games-with-edc-protection).
-
-The `--swap` argument is neccesary if the BIN/CUE CD image contains CD audio. Without it, you will get loud static when the CD audio tracks are played as they are by default byte-swapped by CDRDAO if this argument is not specified.
-
-The `-n` argument disables the 10 second waiting period before burning.
-
-The `--eject` argument will automatically eject the disc immediately after a successful burn.
 
 ## LibCrypt
 
 Some PAL PSX games are using a different copy protection scheme known as LibCrypt protection. Similar to EDC protection, LibCrypt protection is triggered when you burn a LibCrypt protected PSX CD image with standard CD burning software, which in most cases changes the SubChannel data when burning such a protected PSX CD image.
 
-LibCrypt protection can be bypassed by burning a backup CD-R of a LibCrypt game using [CloneCD](#clone-cd) in a very [specific](https://github.com/Kippykip/SBITools) way, however non-stealth mod-chip consoles will still trigger the protection for some games. This will only work for stock, unmodified consoles currently.
+LibCrypt protection can be bypassed by ripping the disc image, patching it with the [LibCrypt Patcher](https://alex-free.github.io/libcrypt), and then burning it to a CD-R using any standard burning software.
 
 ## CD Burning Software For Protected Games
 

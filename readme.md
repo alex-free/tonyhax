@@ -26,22 +26,16 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * Uses a completely different [build system](build.md) that is portable to many more Linux distributions. This new build system is more efficient and easier to use as well.
 
+| [Tonyhax International Homepage](https://alex-free.github.io/tonyhax-international) | [Tonyhax International GitHub](https://github.com/alex-free/tonyhax) | [PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/) | [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967) | [GBATemp Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514) |
+
 ## Table Of Contents
 
-[Downloads](#downloads)
-[Usage](#usage)
-[Frequently Asked Questions](#faq)
-[Relevant Software](#relevant-software)
-[Building From Source](build.md)
-[Credits](credits.md)
-
-## Links
-
-[Tonyhax International Homepage](https://alex-free.github.io/tonyhax-international) 
-[Tonyhax International GitHub](https://github.com/alex-free/tonyhax)
-[PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/) 
-[PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967)
-[GBATemp Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514)
+* [Downloads](#downloads)
+* [Usage](#usage)
+* [Frequently Asked Questions](#faq)
+* [Relevant Software](#relevant-software)
+* [Building From Source](build.md)
+* [Credits](credits.md)
 
 ## Downloads
 
@@ -215,6 +209,12 @@ A: This is almost certainly a disc read issue, please see the above answer.
 
 ### Q: Can I use International to play protected games, and will it turn my non-stealth mod-chip into a stealth mod-chip?
 A: Yes, International automatically detects protected games and applies a bypass to enable play. Each game is supported on a game by game basis, and there is a [list](anti-piracy-bypass.md#protected-games-support). If you know of a protected game that isn't on the list, or isn't working in some situation, please open an [anti-piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&projects=&template=antipiracy-issue.md&title=) and tell me all about it.
+
+### Q: Can I Use International To Play LibCrypt protected games?
+A: Yes, but currently you must rip the disc image, patch it with the [LibCrypt Patcher](https://alex-free.github.io/libcrypt-patcher), and burn it to a CD-R Real LibCrypt discs may still trip non-stealth mod-chip detection.
+
+### Q: Can I Use International To Play EDC protected games?
+A: Yes, but currently you must burn the disc image in a [specific way](anti-piracy-bypass.md#edc).
 
 ### Q: Can I play games that span multiple discs (i.e. Fear Effect) / have disc change features?
 A: If you have any USA or PAL console, yes. The Japanese consoles can not currently support this in the same way. However many multi-disc games may allow you to save before you need to disc swap. So then you can reset the console, restart International, boot disc 2, and then load the save from disc 2. Games that don't have such a save file work around include Parasite Eve, Chrono Chross, and Fear Effect. Let me know if you have found other games like this. 

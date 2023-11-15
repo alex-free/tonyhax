@@ -7,7 +7,7 @@ include ../variables-shared.mk
 LOADER_HEADERS := $(wildcard *.h) $(LOADER_AUTOGEN)
 LOADER_OBJECTS := $(patsubst %.c, %.o, $(patsubst %.S, %.o, $(wildcard *.c *.S)))
 
-all: $(LOADER_FILES)
+all: $(LOADER_FILES_NO_MCS)
 
 clean:
 	$(RM) $(LOADER_FILES) *.o *.elf $(LOADER_AUTOGEN)
@@ -29,11 +29,5 @@ secondary.elf: secondary.ld $(LOADER_OBJECTS)
 
 # Results
 
-tonyhax.mcs: tonyhax-tpl.mcs secondary.elf
-	bash generate-tonyhax-mcs.sh secondary.elf tonyhax-tpl.mcs tonyhax.mcs $(TONYHAX_VERSION)
-
-HAX: tonyhax.mcs
-	bash ../util/mcs2raw.sh tonyhax.mcs
-
 tonyhax.exe: secondary.elf
-	bash generate-tonyhax-exe.sh secondary.elf tonyhax.exe
+	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801f6200 -o tonyhax.exe

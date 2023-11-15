@@ -24,17 +24,18 @@ clean:
 orca.inc: orca.img
 	bash ../util/bin2h.sh ORCA_IMAGE orca.img orca.inc
 
-secondary.elf: secondary-ff9.ld $(LOADER_OBJECTS)
-	$(LD) $(LDFLAGS) -T secondary-ff9.ld $(LOADER_OBJECTS) -o $@
+secondary.elf: secondary.ld $(LOADER_OBJECTS)
+	$(LD) $(LDFLAGS) -T secondary.ld $(LOADER_OBJECTS) -o $@
 	bash insert-tonyhax-crc.sh secondary.elf
 
 # Results
 
-tonyhax.mcs: tonyhax-tpl-ff9.mcs secondary.elf
-	bash generate-tonyhax-mcs.sh secondary.elf tonyhax-tpl-ff9.mcs tonyhax-ff9.mcs $(TONYHAX_VERSION)
+tonyhax.mcs: secondary.elf
+	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801F4380 -raw -o secondary.raw
+	bash generate-tonyhax-mcs.sh secondary.raw tonyhax-tpl-ff9-16kb.mcs tonyhax-ff9.mcs $(TONYHAX_VERSION)
 
 HAX: tonyhax.mcs
 	bash ../util/mcs2raw.sh tonyhax-ff9.mcs
 
 tonyhax.exe: secondary.elf
-	bash generate-tonyhax-exe.sh secondary.elf tonyhax.exe
+	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801F4380 -o tonyhax.exe

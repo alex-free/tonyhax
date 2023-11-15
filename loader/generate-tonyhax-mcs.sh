@@ -3,21 +3,29 @@
 set -euo pipefail
 
 if [ $# -ne 4 ]; then
-	echo "Usage: $0 elf-file tpl-file mcs-file version"
+	echo "Usage: $0 raw-binary tpl-file mcs-file version"
 	exit 1
 fi
 
-elf_file="$1"
+raw_binary="$1"
 tpl_file="$2"
 mcs_file="$3"
 version="$4"
 
-# Extract addresses
-ro_start=$(objdump -x "$elf_file" | grep __RO_START__ | cut -d ' ' -f 1)
+# Set addresses
+if [ "$2" = "tonyhax-tpl-ff9-16kb.mcs" ]; then
+	ro_start="801F4380"
+elif [ "$2" = "tonyhax-tpl-16kb.mcs" ]; then
+	ro_start="801F6200"
+else
+	echo "Error: Unknown what to specify ro_start for $2"
+	exit 1
+fi
+echo "$ro_start"
 
 # Create temporary file for the binary
 bin_file=$(mktemp)
-mips-linux-gnu-objcopy -O binary  -j .text -j .rodata -j .data -j .crc "$elf_file" $bin_file
+mv secondary.raw $bin_file
 
 # Round filesize to nearest 128-byte block
 truncate --size=%128 $bin_file

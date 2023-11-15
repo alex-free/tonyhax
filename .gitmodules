@@ -16,3 +16,6 @@
 [submodule "gshax-tool"]
 	path = gshax-tool
 	url = https://github.com/alex-free/gshax-tool
+[submodule "pcsx-redux-support"]
+	path = pcsx-redux-support
+	url = https://github.com/pcsx-redux/support

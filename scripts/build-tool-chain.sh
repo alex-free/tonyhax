@@ -11,3 +11,5 @@ rm -rf src
 mkdir src
 ./ct-ng build
 ../scripts/build-mkpsxiso.sh
+make -C ../pcsx-redux-support clean
+make -C ../pcsx-redux-support tools

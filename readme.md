@@ -10,7 +10,9 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * Supports starting the Tonyhax International loader with [GameShark Codes](gameshark-code.md) and any PSX cheat device using the new GameSharkHAX boot method.
 
-* Supports [flashing](flashed-cheat-cart.md) the Tonyhax International backup/import loader to a GameShark, Action Reply, or similar PSX cheat cartridge. Whenever the flashed cartridge is plugged into the back of a PSX console model with a cartridge port on the back when you power it on the Tonyhax International will boot instead of the shell program/BIOS (Sony screens/CD Player/Memory Card Manager). You can still however access the CD Player/Memory Card Manager by powering on the console with the CD drive open, and then pressing `X` when prompted in the Tonyhax International loader.
+* Supports [flashing](flashed-cheat-cart.md) the Tonyhax International loader to a GameShark, Action Reply, or similar PSX cheat cartridge. Whenever the flashed cartridge is plugged into the back of a PSX console model with a cartridge port on the back when you power it on the Tonyhax International will boot instead of the shell program/BIOS (Sony screens/CD Player/Memory Card Manager). You can still however access the CD Player/Memory Card Manager by powering on the console with the CD drive open, and then pressing `X` when prompted in the Tonyhax International loader.
+
+* Starts the Tonyhax International loader faster using ps1-packer decompression techniques. This also makes it smaller in size.
 
 * Supports **more [save game exploits](save-game-exploit.md)**, enabling the use of even more PSX game discs to start the Tonyhax International loader.
 
@@ -39,23 +41,15 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.4.3 (10/21/2023)
+### Version 1.4.4 (11/15/2023)
 
-*   [tonyhax-international-v1.4.3](https://github.com/alex-free/tonyhax/releases/download/v1.4.3i/tonyhax-international-v1.4.3.zip)
+*   [tonyhax-international-v1.4.4](https://github.com/alex-free/tonyhax/releases/download/v1.4.4i/tonyhax-international-v1.4.4.zip)
 
 Changes:
 
-*   Added APv1 bypasses (allowing play of said game on non-stealth mod-chip consoles when booted with Tonyhax International) for Dancing Blade Katte ni Momotenshi II: Tears of Eden Japan, Global Force: Shin Sentou Kokka Japan Rev 0, Global Force: Shin Sentou Kokka Japan Rev 1, Global Force: Shin Sentou Kokka Japan Demo, I.Q Final Japan Demo 1, I.Q Final Japan Demo 2, Shiritsu Justice Gakuen: Nekketsu Seishun Nikki 2, Konami 80's Arcade Gallery, Lord Of Monsters Japan, Lord Of Monsters Japan Demo, Magical Tetris Challenge featuring Mickey Japan, Metal Gear Solid: Integral Japan, Panekit: Infinitive Crafting Toy Case Japan Rev 0, Pocket MuuMuu Japan,  Planet Laika Japan, PoPoRoGue Japan Rev 0, PoPoRoGue Japan Rev 1, Silent Hill Japan Rev 0, Silent Hill Japan Rev 1, Spyro The Dragon Japan, Spyro The Dragon Shokai Genteiban, Tokimeki Memorial Drama Series Vol. 3: Tabidachi no Uta, and Um Jammer Lammy Japan.
+*   Implemented PS1 Packer decompression technique (massive thanks to nicholas noble for helping to get this to work)! The Tonyhax International now starts much faster and take up significantly less space. The memory card HAX and FF9 loader files now only takes up 2 slots instead of 4!
 
-*   Beatmania featuring Dreams Come True now works on non-stealth mod-chip consoles as well as unmodified ones.
-
-*   Added an APv2 bypass (allows playing on non-stealth mod-chip consoles and unmodified ones) for Hyper Value 2800: Hyper Pachinko.
-
-*   Faster anti-piracy system activation and parsing for protected titles.
-
-*   PoPoRoGue Japan Rev 0 now always works on unmodified SCPH-1000 and early SCPH-3000 consoles. There is a [bug in PoPoRoGue Japan Rev 0 that sometimes even occurs with a real game disc on unmodified hardware](https://geocities.restorativland.org/SiliconValley/Station/8269/) due to the supper buggy anti-piracy checks) thanks to the newly introduced anti-piracy bypass for this game.
-
-[About previous versions](changelog.md).
+[Previous versions](changelog.md).
 
 ## Usage
 

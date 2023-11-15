@@ -52,6 +52,10 @@
 
 *   Generated Aprip codes for APv2 bypasses for i-mode mo Issho: Doko Demo Issho Tsuika Disc, Koko Hore! Pukka, Love Hina: Ai wa Kotoba no Naka ni / Love Hina 2: Kotoba wa Konayuki no You ni, Pocket Jiman.
 
+## Nicholas Noble
+
+*   Wrote PS1 Packer and released it as an easy to use [submodule](https://github.com/pcsx-redux/support). Helped implement it for the memory card boot methods.
+
 ## Misc Acknowledgements
 
 *   [Berion](https://www.psx-place.com/members/berion.1431/) of [PSX-Place](https://psx-place.com) compressed the images of this document properly (this is the first time I've edited photos).

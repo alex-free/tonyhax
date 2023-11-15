@@ -56,7 +56,7 @@ Breakdown what each of these arguments to CDRDAO do:
 `cuefile=yourgame.cue` specifies that your using a cue file named `yourgame.cue`. Replace `yourgame.cue` with the game's cue file your burning.
 
 
-### Burnign CDRDAO v1.2.5
+### Burning With CDRDAO v1.2.5
 
 The latest CDRDAO v1.2.5 also supports burning EDC Protected PSX games with CD audio tracks correctly using the `generic-mmc-raw` driver. There are pre-built portable releases of a new enough CDRDAO for Linux [available](https://alex-free.github.io/cdrdao). The required command syntax for burning EDCRE patched games is this:
 

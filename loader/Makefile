@@ -30,11 +30,12 @@ secondary.elf: secondary.ld $(LOADER_OBJECTS)
 
 # Results
 
-tonyhax.mcs: tonyhax-tpl.mcs secondary.elf
-	bash generate-tonyhax-mcs.sh secondary.elf tonyhax-tpl.mcs tonyhax.mcs $(TONYHAX_VERSION)
+tonyhax.mcs: secondary.elf
+	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801f6200 -raw -o secondary.raw
+	bash generate-tonyhax-mcs.sh secondary.raw tonyhax-tpl-16kb.mcs tonyhax.mcs $(TONYHAX_VERSION)
 
 HAX: tonyhax.mcs
 	bash ../util/mcs2raw.sh tonyhax.mcs
 
 tonyhax.exe: secondary.elf
-	bash generate-tonyhax-exe.sh secondary.elf tonyhax.exe
+	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801f6200 -o tonyhax.exe

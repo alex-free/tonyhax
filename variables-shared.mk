@@ -80,6 +80,9 @@ ENTRY_FILES := $(ENTRY_MCS) $(ENTRY_RAW) entry-bb.bin entry.bin
 
 LOADER_FILES := orca.inc tonyhax.mcs HAX tonyhax.exe
 
+LOADER_FILES_NO_MCS := orca.inc tonyhax.exe
+
+
 # Loader output
 
 LOADER_OUTPUT_FILES := HAX FF9 tonyhax.mcs tonyhax-ff9.mcs tonyhax.exe

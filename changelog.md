@@ -1,5 +1,21 @@
 # Changelog
 
+## Version 1.4.3 (10/21/2023)
+
+*   [tonyhax-international-v1.4.3](https://github.com/alex-free/tonyhax/releases/download/v1.4.3i/tonyhax-international-v1.4.3.zip)
+
+Changes:
+
+*   Added APv1 bypasses (allowing play of said game on non-stealth mod-chip consoles when booted with Tonyhax International) for Dancing Blade Katte ni Momotenshi II: Tears of Eden Japan, Global Force: Shin Sentou Kokka Japan Rev 0, Global Force: Shin Sentou Kokka Japan Rev 1, Global Force: Shin Sentou Kokka Japan Demo, I.Q Final Japan Demo 1, I.Q Final Japan Demo 2, Shiritsu Justice Gakuen: Nekketsu Seishun Nikki 2, Konami 80's Arcade Gallery, Lord Of Monsters Japan, Lord Of Monsters Japan Demo, Magical Tetris Challenge featuring Mickey Japan, Metal Gear Solid: Integral Japan, Panekit: Infinitive Crafting Toy Case Japan Rev 0, Pocket MuuMuu Japan,  Planet Laika Japan, PoPoRoGue Japan Rev 0, PoPoRoGue Japan Rev 1, Silent Hill Japan Rev 0, Silent Hill Japan Rev 1, Spyro The Dragon Japan, Spyro The Dragon Shokai Genteiban, Tokimeki Memorial Drama Series Vol. 3: Tabidachi no Uta, and Um Jammer Lammy Japan.
+
+*   Beatmania featuring Dreams Come True now works on non-stealth mod-chip consoles as well as unmodified ones.
+
+*   Added an APv2 bypass (allows playing on non-stealth mod-chip consoles and unmodified ones) for Hyper Value 2800: Hyper Pachinko.
+
+*   Faster anti-piracy system activation and parsing for protected titles.
+
+*   PoPoRoGue Japan Rev 0 now always works on unmodified SCPH-1000 and early SCPH-3000 consoles. There is a [bug in PoPoRoGue Japan Rev 0 that sometimes even occurs with a real game disc on unmodified hardware](https://geocities.restorativland.org/SiliconValley/Station/8269/) due to the supper buggy anti-piracy checks) thanks to the newly introduced anti-piracy bypass for this game.
+
 ## Version 1.4.2 (10/2/2023)
 
 *   [tonyhax-international-v1.4.2](https://github.com/alex-free/tonyhax/releases/download/v1.4.2i/tonyhax-international-v1.4.2.zip)

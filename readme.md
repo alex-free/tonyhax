@@ -47,7 +47,7 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 Changes:
 
-*   Implemented PS1 Packer decompression technique (massive thanks to nicholas noble for helping to get this to work)! The Tonyhax International now starts much faster and take up significantly less space. The memory card HAX and FF9 loader files now only takes up 2 slots instead of 4!
+*   Implemented PS1 Packer decompression technique (massive thanks to nicholas noble for helping to get this to work)! The Tonyhax International loader now starts much faster and take up significantly less space. The memory card HAX and FF9 loader files now only takes up 2 slots instead of 4!
 
 [Previous versions](changelog.md).
 
@@ -205,7 +205,7 @@ A: This is almost certainly a disc read issue, please see the above answer.
 A: Yes, International automatically detects protected games and applies a bypass to enable play. Each game is supported on a game by game basis, and there is a [list](anti-piracy-bypass.md#protected-games-support). If you know of a protected game that isn't on the list, or isn't working in some situation, please open an [anti-piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&projects=&template=antipiracy-issue.md&title=) and tell me all about it.
 
 ### Q: Can I Use International To Play LibCrypt protected games?
-A: Yes, but currently you must rip the disc image, patch it with the [LibCrypt Patcher](https://alex-free.github.io/libcrypt-patcher), and burn it to a CD-R Real LibCrypt discs may still trip non-stealth mod-chip detection.
+A: Yes, but currently you must rip the disc image, patch it with the [LibCrypt Patcher](https://alex-free.github.io/libcrypt-patcher), and burn it to a CD-R. Real LibCrypt discs may still trip non-stealth mod-chip detection.
 
 ### Q: Can I Use International To Play EDC protected games?
 A: Yes, but currently you must burn the disc image in a [specific way](anti-piracy-bypass.md#edc).

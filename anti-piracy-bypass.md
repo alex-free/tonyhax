@@ -39,7 +39,7 @@ When triggered, the APv1 and APv2 style copy protections will trigger an 'anti-p
 
 ## EDC
 
-Some games may contain an EDC-based protection measure. For the affected games, this protection is triggered when you burn the EDC protected PSX CD image with standard CD burning software that by default usually corrects invalid EDC data it detects before writing said data to the disc, which when played on a real PSX will cause the game to trip the protection and lock up.
+Some games may contain an EDC-based protection measure. For the affected games, this protection is triggered when you burn the EDC protected PSX CD image with standard CD burning software (like IMGBurn) that forces invalid EDC data to be corrected before writing it the disc. If valid EDC is found where an invalid EDC was expected, then when played on a real PSX will cause the game to trip the protection and lock up.
 
 ### Burning With CDRTools
 
@@ -58,7 +58,7 @@ Breakdown what each of these arguments to CDRDAO do:
 
 ### Burning With CDRDAO v1.2.5
 
-The latest CDRDAO v1.2.5 also supports burning EDC Protected PSX games with CD audio tracks correctly using the `generic-mmc-raw` driver. There are pre-built portable releases of a new enough CDRDAO for Linux [available](https://alex-free.github.io/cdrdao). The required command syntax for burning EDCRE patched games is this:
+CDRDAO v1.2.5 and up supports burning EDC Protected PSX games with CD audio tracks correctly using the `generic-mmc-raw` driver. There are pre-built portable releases of a new enough CDRDAO for Linux [available](https://alex-free.github.io/cdrdao). The required command syntax for burning EDCRE patched games is this:
 
 `cdrdao write --speed x --driver generic-mmc-raw --swap -n --eject yourgame.cue`
 
@@ -81,29 +81,6 @@ Breakdown what each of these arguments to CDRDAO do:
 Some PAL PSX games are using a different copy protection scheme known as LibCrypt protection. Similar to EDC protection, LibCrypt protection is triggered when you burn a LibCrypt protected PSX CD image with standard CD burning software, which in most cases changes the SubChannel data when burning such a protected PSX CD image.
 
 LibCrypt protection can be bypassed by ripping the disc image, patching it with the [LibCrypt Patcher](https://alex-free.github.io/libcrypt), and then burning it to a CD-R using any standard burning software.
-
-## CD Burning Software For Protected Games
-
-### [CDRDAO](https://alex-free.github.io/cdrdao)
-
-* Is Open Source?: Yes. Pre-built Linux x86_64 binaries are also [available](https://alex-free.github.io/cdrdao##downloads).
-* Burns Standard PSX Backup CD-Rs?: Yes. For .bin/.cue CD images, the `--swap` argument is required.
-* Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: Yes, After running [EDCRE](https://alex-free.github.io/edcre) use the `--swap` and  `--driver generic-mmc-raw` arguments.
-* Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: CDRDAO can rip an authentic PAL PSX game disc containing LibCrypt protection correctly into a .toc/.bin CD image file. This file can be burned back by using the `generic-mmc-raw` driver. The much more common .bin/.cue/.sub CD image LibCrypt rips do not work directly however.
-
-### [CloneCD](https://www.redfox.bz/en/clonecd.html)
-
-* Is Open Source?: No, it is Windows only FreeWare with a free 'demo' version as well as a full paid version. The 'demo' version can be used however for PSX Backup CD-R burning without limitation.
-* Burns Standard PSX Backup CD-Rs?: Yes, no special options required.
-* Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: Yes, After running [EDCRE](https://alex-free.github.io/edcre) use [RAW](https://hydrogenaud.io/index.php?PHPSESSID=3voij6gqs993vdbd15mlmc2k7h&topic=42415.msg371328##msg371328) mode.
-* Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: [Yes](https://github.com/Kippykip/SBITools), (with the proper BIN/CUE/SUB files).
-
-### [ImgBurn](https://www.imgburn.com/)
-
-* Is Open Source?: No, it is Windows only FreeWare.
-* Burns Standard PSX Backup CD-Rs?: Yes.
-* Burns PSX Backup CD-Rs With Additional EDC Protection Correctly?: No.
-* Burns PSX Backup CD-Rs With LibCrypt Protection Correctly?: No.
 
 ## Protected Games Support
 

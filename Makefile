@@ -1,7 +1,6 @@
 
 # Thanks to whoever made https://devhints.io/makefile!
 
-include variables.mk
 include variables-shared.mk
 
 PACKAGE_FILE = tonyhax-international-$(TONYHAX_VERSION).zip
@@ -54,3 +53,14 @@ clean:
 	$(MAKE) -C gameshark clean
 	$(MAKE) -C gshax clean
 	$(RM) tonyhax-*.zip
+
+deps:
+	scripts/get-deps.sh
+	$(MAKE) -C pcsx-redux-support clean tools
+	cd mkpsxiso; rm -rf ./build; cmake -S . -B ./build -DCMAKE_BUILD_TYPE=Release; cmake --build ./build
+	cd psexe2rom; $(MAKE) clean; $(MAKE)
+
+clean-deps:
+	$(MAKE) -C pcsx-redux-support clean
+	cd mkpsxiso; rm -rf ./build
+	cd psexe2rom; $(MAKE) clean

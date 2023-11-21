@@ -26,7 +26,7 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * Enables speeding up xStation boot time and allows for applying codes to games `Full Boot`ed by xStation. This is accomplished by a [special xStation ROM version](xstation.md).
 
-* Uses a completely different [build system](build.md) that is portable to many more Linux distributions. This new build system is more efficient and easier to use as well.
+* Uses a different [build system](build.md) compatible with the `mipsel-none-elf` toolchain and more operating systems.
 
 | [Tonyhax International Homepage](https://alex-free.github.io/tonyhax-international) | [Tonyhax International GitHub](https://github.com/alex-free/tonyhax) | [PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/) | [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967) | [GBATemp Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514) |
 

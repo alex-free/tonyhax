@@ -1,8 +1,8 @@
 
 # Thanks to whoever made https://devhints.io/makefile!
 
-include ../variables.mk.xstation
 include ../variables-shared.mk
+include ../variables.mk.xstation
 
 LOADER_HEADERS := $(wildcard *.h) $(LOADER_AUTOGEN)
 LOADER_OBJECTS := $(patsubst %.c, %.o, $(patsubst %.S, %.o, $(wildcard *.c *.S)))

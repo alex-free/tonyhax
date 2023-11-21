@@ -1,6 +1,6 @@
 
 #include <stdbool.h>
-#include <stdint.h>
+#include <stdint-gcc.h>
 #include <stddef.h>
 #include "str.h"
 #include "audio.h"

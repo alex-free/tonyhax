@@ -1,6 +1,6 @@
 
 #include "str.h"
-#include <stdint.h>
+#include <stdint-gcc.h>
 
 int isspace(int c) {
 	switch (c) {

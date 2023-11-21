@@ -13,11 +13,11 @@ header_file="${3}"
 
 cat <<EOF >"${header_file}"
 /*
- * Automatically generated from ${binary_file}.
+ * Automatically generated from ${binary_file} by util/bin2h.sh
  * Do not edit
  */
 
-#include <stdint.h>
+#include <stdint-gcc.h>
 #pragma once
 
 static const uint8_t ${constant_name}[] = {

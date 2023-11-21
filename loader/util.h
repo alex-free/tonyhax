@@ -1,6 +1,6 @@
 
 #pragma once
-#include <stdint.h>
+#include <stdint-gcc.h>
 
 /**
  * Executes a delay of roughly the amount of specified deciseconds (1/10th of a second)

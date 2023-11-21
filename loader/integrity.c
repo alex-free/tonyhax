@@ -1,7 +1,7 @@
 
 #include "integrity.h"
 #include "crc.h"
-#include <stdint.h>
+#include <stdint-gcc.h>
 
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __CRC_START__;

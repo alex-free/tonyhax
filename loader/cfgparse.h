@@ -1,6 +1,6 @@
 
 #pragma once
-#include <stdint.h>
+#include <stdint-gcc.h>
 #include <stdbool.h>
 
 bool config_get_hex(const char * config, const char * wanted, uint32_t * value);

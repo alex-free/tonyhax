@@ -1,6 +1,3 @@
-[submodule "crosstool-ng"]
-	path = crosstool-ng
-	url = https://github.com/crosstool-ng/crosstool-ng
 [submodule "mkpsxiso"]
 	path = mkpsxiso
 	url = https://github.com/lameguy64/mkpsxiso

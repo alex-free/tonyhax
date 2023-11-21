@@ -2,7 +2,6 @@
 # Thanks to whoever made https://devhints.io/makefile!
 # NOTE: CAN'T USE -fastload option because it screws up reading from memory cards for GameShark functionallity after exploit on at least BIOS v4.4/v4.5 (verified with a SCPH-101). It may also affect other models so we do not use it.
 
-include ../variables.mk
 include ../variables-shared.mk
 
 .PHONY: clean FreePSXBoot/builder/builder

@@ -1,6 +1,6 @@
 
 #pragma once
-#include <stdint.h>
+#include <stdint-gcc.h>
 
 #define _REG32(x) (*((volatile uint32_t *) x))
 #define _REG16(x) (*((volatile uint16_t *) x))

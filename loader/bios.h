@@ -1,7 +1,7 @@
 
 #pragma once
 #include <stdbool.h>
-#include <stdint.h>
+#include <stdint-gcc.h>
 
 typedef struct exe_header exe_header_t;
 typedef struct handler_info handler_info_t;

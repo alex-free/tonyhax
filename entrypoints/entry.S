@@ -1,47 +1,45 @@
 
-#include <regdef.h>
-
 .text
 .globl __start
 
-# s0 = realstart physical address
-# s1 = file descriptor
-# s2 = load address
-# s3 = real save size (excluding useless trailing zeros)
+# $16 = realstart physical address
+# $17 = file descriptor
+# $18 = load address
+# $19 = real save size (excluding useless trailing zeros)
 
 __start:
 	# Restore stack pointer
-	li t0, 0x801FFF00
-	move sp, t0
+	li $8, 0x801FFF00
+	move $29, $8
 
-	# Call ourselves to get the current program counter in ra
+	# Call ourselves to get the current program counter in $31
 	bal realstart
 
 realstart:
-	# Save real start address in s0
-	move s0, ra
+	# Save real start address in $16
+	move $16, $31
 
 #ifndef BAREBONES
 	# Paint blue
-	li a0, 0xFF0000
+	li $4, 0xFF0000
 	bal paintscr
 #endif
 
 	# Keep only VBlank interrupts enabled
-	li t1, 0x1
-	lui t0, 0x1f80
-	sw t1, 0x1074(t0)
+	li $9, 0x1
+	lui $8, 0x1f80
+	sw $9, 0x1074($8)
 
 	# Call ChangeClearPad(1) so the BIOS card IRQ clears the interrupt flags.
 	# This prevents the PsyQ VBlank ISR from detecting that VBlank fired, and thus prevent its
 	# LIBMCRD from interrupting us.
-	li t1, 0x5B
-	li a0, 1
+	li $9, 0x5B
+	li $4, 1
 	jal 0xB0
 
 	# Call wait_card_status(0) to make sure we can access card on slot 1 safely
-	li t1, 0x5D
-	li a0, 0
+	li $9, 0x5D
+	li $4, 0
 	jal 0xB0
 
 	# Call wait_card_status(1)
@@ -57,99 +55,99 @@ realstart:
 	#
 	# This combination results in dev_card_open failing because it checks a buffer for the "MC"
 	# signature before the actual sector read has finished.
-	li t1, 0x5D
-	li a0, 1
+	li $9, 0x5D
+	li $4, 1
 	jal 0xB0
 
 	# Call FileOpen
-	li t1, 0x32
-	addi a0, s0, (splname - realstart)
-	li a1, 0b00000001
+	li $9, 0x32
+	addi $4, $16, (splname - realstart)
+	li $5, 0b00000001
 	jal 0xB0
 
 	# Save handle
-	move s1, v0
+	move $17, $2
 
 #ifndef BAREBONES
-	# If less than zero, it failed
-	blt v0, zero, fatalerror
+	# If less than $0, it failed
+	blt $2, $0, fatalerror
 #endif
 
 	# The kernel will fail to read if we don't wait a bit (here, ~1/10th of a second)
 	# This is a known issue as specified in LIBOVR46.PDF section 5-11:
 	# "If read() or write() is issued immediately after open(), an error occurs"
-	li t0, 1000000
+	li $8, 1000000
 
 busywait:
-	addi t0, -1
-	bne t0, zero, busywait
+	addi $8, -1
+	bne $8, $0, busywait
 
-	# Load temp buffer address (originally was 0x801FA000, - 0x100 from original start addr of Tonyhax: 0x801FA100) Current start addr of International is 0x801F6200
+	# Load temp buffer address (originally was 0x801F$400, - 0x100 from original start addr of Tonyhax: 0x801F$500) Current start addr of International is 0x801F6200
 	# Final Fantasy IX uses 0x801F4380 as the start addr of Tonyhax, so -0x100 from that is the temp buffer address.
 #ifdef FF9
-	li s2, 0x801F4280
+	li $18, 0x801F4280
 #else
-	li s2, 0x801F6100
+	li $18, 0x801F6100
 #endif
 
 	# Load header using FileRead
-	li t1, 0x34
-	move a0, s1
-	move a1, s2
-	li a2, 0x100
+	li $9, 0x34
+	move $4, $17
+	move $5, $18
+	li $6, 0x100
 	jal 0xB0
 
 	#ifndef BAREBONES
 	# If we did not read the correct amount, lock
-	bne v0, 0x100, fatalerror
+	bne $2, 0x100, fatalerror
 	#endif
 
 	# Load executable load address and size
-	lw s3, 0x44(s2)
-	lw s2, 0x40(s2)
+	lw $19, 0x44($18)
+	lw $18, 0x40($18)
 
 	# Load executable using FileRead
-	li t1, 0x34
-	move a0, s1
-	move a1, s2
-	move a2, s3
+	li $9, 0x34
+	move $4, $17
+	move $5, $18
+	move $6, $19
 	jal 0xB0
 
 #ifndef BAREBONES
 	# If we did not read the correct amount, lock
-	bne v0, s3, fatalerror
+	bne $2, $19, fatalerror
 
 	# Paint green
-	li a0, 0x00FF00
+	li $4, 0x00FF00
 	bal paintscr
 #endif
 
 	# Jump to it!
-	jr s2
+	jr $18
 
 #ifndef BAREBONES
 fatalerror:
 	# Red
-	li a0, 0x0000FF
+	li $4, 0x0000FF
 	bal paintscr
 
 lock:
 	b lock
 
 paintscr:
-	# Add command byte to a0
-	li t0, 0x02000000
-	or t0, a0
+	# Add command byte to $4
+	li $8, 0x02000000
+	or $8, $4
 
 	# Calculate effective address
-	addi a0, s0, (redscreen - realstart)
+	addi $4, $16, (redscreen - realstart)
 
 	# Store color with command on buffer
-	sw t0, 0(a0)
+	sw $8, 0($4)
 
 	# Tail call GPU_cwp to paint the entire screen
-	li a1, 3
-	li t1, 0x4A
+	li $5, 3
+	li $9, 0x4A
 	j 0xA0
 
 redscreen:

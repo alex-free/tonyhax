@@ -6,12 +6,17 @@
 SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Common variables
+TONYHAX_VERSION=v1.4.4
 
-CC=mips-linux-gnu-gcc
-LD=mips-linux-gnu-ld
+CC=mipsel-none-elf-gcc
+CFLAGS=-Wno-error=array-bounds -G0 -Oz -Wall -Wextra -Wno-main -EL -march=r3000 -mabi=32 -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION)
+# Original Tonyhax
+#CFLAGS=-O1 -Wall -Wextra -Wno-main -EL -march=r3000 -mabi=32 -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION) -DSOFTUART_PATCH=$(SOFTUART_PATCH)
+
+LD=mipsel-none-elf-ld
 LDFLAGS=--gc-sections
 
-OBJCOPY=mips-linux-gnu-objcopy
+OBJCOPY=mipsel-none-elf-objcopy
 OBJCOPYFLAGS=-O binary
 
 # Entry point variables

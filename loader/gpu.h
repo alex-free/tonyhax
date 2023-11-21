@@ -1,7 +1,7 @@
 
 #pragma once
 #include <stdbool.h>
-#include <stdint.h>
+#include <stdint-gcc.h>
 
 #define GPU_DISPLAY_H256 0
 #define GPU_DISPLAY_H320 1

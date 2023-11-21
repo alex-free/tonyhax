@@ -1,6 +1,6 @@
 
 #pragma once
-#include <stdint.h>
+#include <stdint-gcc.h>
 #include <stdbool.h>
 
 #define CD_CMD_GETSTAT 0x01

@@ -56,6 +56,10 @@
 
 *   Wrote PS1 Packer and released it as an easy to use [submodule](https://github.com/pcsx-redux/support). Helped implement it for the memory card boot methods.
 
+*   Corrected the CD_REGS value in `loader/cdrom.c` to use the right memory region.
+
+*   Came up with the best `cdrom:\\` text stripper for `CdGetLbn()` in `loader/secondary.c`
+
 ## Misc Acknowledgements
 
 *   [Berion](https://www.psx-place.com/members/berion.1431/) of [PSX-Place](https://psx-place.com) compressed the images of this document properly (this is the first time I've edited photos).

@@ -700,7 +700,7 @@ void try_boot_cd() {
 	debug_write("Reading executable header");	
 	
 	if(bios_is_ps1() == false) {
-		// CdGetLbn() needs any cdrom:\\, cdrom:\, or cdrom: in the bootfile string from SYSTEM.CNF to be stripped out
+		// CdGetLbn() needs any cdrom:\\, cdrom:\, or cdrom: in the bootfile string from SYSTEM.CNF to be stripped out. The function below is by Nicholas Noble
 		char * bootfile_for_CdGetLbn = 0;
 		uint32_t hash = 5381;
 		for (unsigned i = 0; i < 8; i++) {
@@ -756,7 +756,7 @@ void try_boot_cd() {
 
 	/* 
 
-	See https://github.com/grumpycoders/pcsx-redux/blob/a072e38d78c12a4ce1dadf951d9cdfd7ea59220b/src/mips/openbios/main/main.c#L380-L381 for the OpenBIOS equivelent line of bugged code we are working around! Thanks Nicholas Noble
+	See https://github.com/grumpycoders/pcsx-redux/blob/a072e38d78c12a4ce1dadf951d9cdfd7ea59220b/src/mips/openbios/main/main.c#L380-L381 for the OpenBIOS equivelent line of bugged code we are working around, found by Nicholas Noble
 
 	King's Field Japan (SLPS_00017) is a very early PSX.EXE Japan game. While the PSX.EXE is having 0x34/0x38 contain SP values, these are apparently garbage and not being used in reality by a real BIOS boot. These ARE being used by both our exec calls below however so we need to zero out that garbage so it is not used, which finally allows King's Feild (and most likely other PSX.EXE games) to boot correctly.
 

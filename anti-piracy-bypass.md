@@ -47,9 +47,9 @@ I recommend using the latest CDRTools for burning EDC protected PSX games on Lin
 
 `cdrtools -raw16 --speed=x cuefile=yourgame.cue`
 
-Breakdown what each of these arguments to CDRDAO do:
+Breakdown what each of these arguments to CDRTools do:
 
-`-raw16` specifies to burn the cd image without regenerating EDC/ECC data internally.
+`-raw16` specifies to burn the cd image without regenerating EDC/ECC data internally. You can't use the default dao mode anyways because there is some bug in regards to handling the pre-gap between the data and audio tracks when burning with the latest cdrtools currently anyways.
 
 `--speed=x` specifies the burn speed. Replace `x` with a number.
 

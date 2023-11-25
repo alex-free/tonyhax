@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 1.4.4 (11/15/2023)
+
+*   [tonyhax-international-v1.4.4](https://github.com/alex-free/tonyhax/releases/download/v1.4.4i/tonyhax-international-v1.4.4.zip)
+
+Changes:
+
+*   Implemented PS1 Packer decompression technique (massive thanks to nicholas noble for helping to get this to work)! The Tonyhax International loader now starts much faster and take up significantly less space. The memory card HAX and FF9 loader files now only takes up 2 slots instead of 4!
+
 ## Version 1.4.3 (10/21/2023)
 
 *   [tonyhax-international-v1.4.3](https://github.com/alex-free/tonyhax/releases/download/v1.4.3i/tonyhax-international-v1.4.3.zip)

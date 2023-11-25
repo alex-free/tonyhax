@@ -16,14 +16,14 @@
 
 			This is important since Japanese consoles check the game's region.
 		-->
-		<license file="licensej.dat" />
+		<license file="../boot-cd/licensej.dat" />
 
 		<directory_tree>
 			<!-- System configuration file -->
-			<file name="SYSTEM.CNF" type="data" source="system.cnf" />
+			<file name="SYSTEM.CNF" type="data" source="../nxflash/CDFILES/system.cnf" />
 
 			<!-- Main executable -->
-			<file name="NXFLASH.EXE" type="data" source="NXFLASH.EXE" />
+			<file name="NXFLASH.EXE" type="data" source="../nxflash/NXFLASH.EXE" />
 
 			<!-- ROM DAT file -->
 			<file name="ROMFILE.DAT" type="data" source="romfile.dat" />

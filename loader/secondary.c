@@ -581,7 +581,12 @@ void try_boot_cd() {
 			game_region = "unknown";
 	}
 
-	debug_write("Game's region is %s. Using %s video.", game_region, game_is_pal ? "PAL" : "NTSC");
+	// PS2s in PS1 mode can't switch video modes (at least like this from what we know), see https://github.com/socram8888/tonyhax/issues/25
+	if(bios_is_ps1() == true) {
+		debug_write("Game's region is %s. Using %s video.", game_region, game_is_pal ? "PAL" : "NTSC");
+	} else {
+		debug_write("Game's region is %s", game_region);
+	}
 
 	// Defaults if no SYSTEM.CNF file exists
 	uint32_t tcb = BIOS_DEFAULT_TCB;
@@ -591,6 +596,31 @@ void try_boot_cd() {
 
 	char bootfilebuf[32];
 	debug_write("Loading SYSTEM.CNF");
+	// PS2s have a hardware/BIOS bug that results in a seek issue when doing massive seeks from say LBA 4 to 290000+ when dealing with 80 minute media, see https://github.com/socram8888/tonyhax/issues/24#issuecomment-1823585149
+	if(bios_is_ps1() == false) {
+		uint32_t system_cnf_lba = CdGetLbn("SYSTEM.CNF;1");
+		if(system_cnf_lba != 0) {
+			debug_write("SYSTEM.CNF LBA: %d", system_cnf_lba);
+
+    		if (CdReadSector(1, (system_cnf_lba/4), data_buffer) != 1) {
+				debug_write("Failed to read sector at LBA: %d", (system_cnf_lba/4));
+			} else {
+				debug_write("Seeked to LBA: %d", (system_cnf_lba/4));
+			}
+
+    		if (CdReadSector(1, (system_cnf_lba/2), data_buffer) != 1) {
+				debug_write("Failed to read sector at LBA: %d", (system_cnf_lba/2));
+			} else {
+				debug_write("Seeked to LBA: %d", (system_cnf_lba/2));
+			}
+
+    		if (CdReadSector(1, ((system_cnf_lba/2) + (system_cnf_lba/4)), data_buffer) != 1) {
+				debug_write("Failed to read sector at LBA: %d", ((system_cnf_lba/2) + (system_cnf_lba/4)));
+			} else {
+				debug_write("Seeked to LBA: %d", ((system_cnf_lba/2) + (system_cnf_lba/4)));
+			}
+		}
+	}
 
 	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
 	if (cnf_fd > 0) {
@@ -667,7 +697,50 @@ void try_boot_cd() {
 	debug_write("Clearing RAM");
 	bzero(user_start, &__RO_START__ - user_start);
 
-	debug_write("Reading executable header");
+	debug_write("Reading executable header");	
+	
+	if(bios_is_ps1() == false) {
+		// CdGetLbn() needs any cdrom:\\, cdrom:\, or cdrom: in the bootfile string from SYSTEM.CNF to be stripped out
+		char * bootfile_for_CdGetLbn = 0;
+		uint32_t hash = 5381;
+		for (unsigned i = 0; i < 8; i++) {
+		  hash = ((hash << 5) + hash) ^ bootfile[i];
+		  
+		  switch (hash) {
+		    case 0x5b730b88:
+		    case 0xc9d47cd4:
+		    case 0x04641708:
+		      bootfile_for_CdGetLbn = bootfile + i + 1;
+		      break;
+		  }
+		}
+
+		//debug_write("CdGetLbn BOOTFILE NAME: %s", bootfile_for_CdGetLbn);
+		const uint32_t bootfile_lba = CdGetLbn(bootfile_for_CdGetLbn);
+		
+		if(bootfile_lba > 0) {
+			debug_write("BOOTFILE LBA: %d", bootfile_lba);
+
+    		if (CdReadSector(1, (bootfile_lba/4), data_buffer) != 1) {
+				debug_write("Failed to read sector");
+			} else {
+				debug_write("Seeked to LBA: %d", (bootfile_lba/4));
+			}
+
+		    if (CdReadSector(1, (bootfile_lba/2), data_buffer) != 1) {
+				debug_write("Failed to read sector");
+			} else {
+				debug_write("Seeked to LBA: %d", (bootfile_lba/2));
+			}
+
+		    if (CdReadSector(1, ((bootfile_lba/2) + (bootfile_lba/4)), data_buffer) != 1) {
+				debug_write("Failed to read sector");
+			} else {
+				debug_write("Seeked to LBA: %d", ((bootfile_lba/2) + (bootfile_lba/4)));
+			}
+		}
+	}
+	
 	int32_t exe_fd = FileOpen(bootfile, FILE_READ);
 	if (exe_fd <= 0) {
 		debug_write("Open error %d", GetLastError());
@@ -682,6 +755,9 @@ void try_boot_cd() {
 	}
 
 	/* 
+
+	See https://github.com/grumpycoders/pcsx-redux/blob/a072e38d78c12a4ce1dadf951d9cdfd7ea59220b/src/mips/openbios/main/main.c#L380-L381 for the OpenBIOS equivelent line of bugged code we are working around! Thanks Nicholas Noble
+
 	King's Field Japan (SLPS_00017) is a very early PSX.EXE Japan game. While the PSX.EXE is having 0x34/0x38 contain SP values, these are apparently garbage and not being used in reality by a real BIOS boot. These ARE being used by both our exec calls below however so we need to zero out that garbage so it is not used, which finally allows King's Feild (and most likely other PSX.EXE games) to boot correctly.
 
 	From No $ PSX SPX:
@@ -735,11 +811,12 @@ void try_boot_cd() {
 	if (exe_header->load_addr + exe_header->load_size >= &__RO_START__) {
 		debug_write("Executable won't fit. Using buggy BIOS call.");
 
-		if (game_is_pal != gpu_is_pal()) {
-			debug_write("Switching video mode");
-			debug_switch_standard(game_is_pal);
+		if(bios_is_ps1() == true) {
+			if (game_is_pal != gpu_is_pal()) {
+				debug_write("Switching video mode");
+				debug_switch_standard(game_is_pal);
+			}
 		}
-
 		// Restore original error handler
 		bios_restore_disc_error();
 
@@ -765,9 +842,12 @@ void try_boot_cd() {
 
 	FileClose(exe_fd);
 
-	if (game_is_pal != gpu_is_pal()) {
-		debug_write("Switching video mode");
-		debug_switch_standard(game_is_pal);
+
+	if(bios_is_ps1() == true) {
+		if (game_is_pal != gpu_is_pal()) {
+			debug_write("Switching video mode");
+			debug_switch_standard(game_is_pal);
+		}
 	}
 
 	debug_write("Starting");

@@ -15,12 +15,16 @@
 `git clone --recursive https://github.com/alex-free/tonyhax`
 
 
-3) Install the required dependencies:
+3) Add psn00bsdk to $PATH for the current shell (if you had used the psn00bsdk-builder):
+
+`psn00b-env`
+
+4) Install the required dependencies:
 
 `cd tonyhax`
 
 `make deps`
 
-Build Tonyhax International:
+5) Build Tonyhax International:
 
 `make`

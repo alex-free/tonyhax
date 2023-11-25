@@ -331,6 +331,15 @@ void SetConf(uint32_t evcb, uint32_t tcb, uint32_t stacktop);
  */
 int32_t CdReadSector(uint32_t sector_count, uint32_t start_sector, void * buffer);
 
+/**
+ * Gets LBA of file on disc
+ *
+ * @param filename filename without cdrom:\\, i.e. cdrom:\\tonyhax.exe needs to be tonyhax.exe:1
+ *
+ * Table A, call 0x9C.
+ */
+uint32_t CdGetLbn(const char * filename);
+
 /*
  * B-FUNCTIONS
  */

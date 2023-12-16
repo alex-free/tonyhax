@@ -41,27 +41,15 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.4.5 (11/25/2023)
+### Version 1.4.6 (12/16/2023)
 
-*   [tonyhax-international-v1.4.5](https://github.com/alex-free/tonyhax/releases/download/v1.4.5i/tonyhax-international-v1.4.5.zip)
+*   [tonyhax-international-v1.4.6](https://github.com/alex-free/tonyhax/releases/download/v1.4.6i/tonyhax-international-v1.4.6.zip)
 
 Changes:
 
-*   Changed toolchain from `mips-linux-gnu` to `mipsel-none-elf`. Redone [build system](build.md). Upgraded to GCC v12.2.0/Binutils v2.40. Better code size/speed optimizations.
+* Added APv1 bypasses for Panekit: Infinite Crafting Toolbox Japan Rev 1, Silent Hill Japan Rev 2, and Doko Demo Issho Demo 2 Japan.
 
-*   Made CD_REGS address more correct by using the correct memory region (thanks Nicholas Noble!).
-
-*   There is a [bug](https://github.com/socram8888/tonyhax/issues/24) found in the PS1 mode of the early PS2s models supported by Tonyhax International which causes a number of PS1 games burned to a 80 minute CD-R to not boot. The affected games only boot when burned to 74 minute or 71 minute CD-Rs. This limitation applies to mod-chipped consoles as well using the normal boot process fails to start the game. The PS1 doesn't have this issue and was never effected.
-
-Tonyhax International now can work around this PS2 specific limitation and boot any game burned to 80 minute media just as well as the PS1. Some of the confirmed problematic games that now work as of this update are listed below as examples:
-
-- Kurushi / I.Q: Intelligent Qube
-- MediEvil
-- Resident Evil Director’s Cut
-- Resident Evil 2 / BioHazard 2
-- MegaMan X4 / RockMan X4
-
-Any games that previously would not boot on PS2s (but did on PS1s) because of this issue now also work. If you have a chipped PS2, you can use the [Boot CD](boot-cd.md) to then successfully launch a problematic PS1 game burned to an 80 minute CD-R.
+* Fixed APv1 bypass for Doko Demo Issho Demo 1 Japan, Doko Demo Issho Japan, Metal Gear Solid Integral Japan Disc 1, and Metal Gear Solid Integral Japan Disc 2.
 
 [Previous versions](changelog.md).
 
@@ -261,8 +249,6 @@ You can change the video mode first while in PS2 mode however. For now you can r
 A. If you know C/MIPS assembly and can improve any of the code in International, open a [pull request](https://github.com/alex-free/tonyhax/pulls) with your changes. 
 
 If you don't have programming experience something else that you could help out with is bring to my attention any protected games that are not yet supported in an [anti-piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&projects=&template=antipiracy-issue.md&title=). 
-
-I also can not find a [few game revisions](anti-piracy-bypass.md#needed-games) that need anti-piracy support, if you can somehow get those to me that would make it easy to bypass the protection in them.
 
 ## Relevant Software
 

@@ -208,7 +208,7 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
 		ver_check_val = *(uint8_t*) ver_check;
 		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
-		if((ver_check_val == 0x8C)) // Rev 0
+		if(ver_check_val == 0x8C) // Rev 0
 		{
 			/*
 			D0021DF6 1040
@@ -745,7 +745,6 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 	) { 
 		/*
 		these 3 codes work for Japan Rev 0, Japan Rev 1, and Japan Calpis Water Version.
-	
 		D01207E8 2021
 		801207E4 FFF6
 		code 1/3 from https://consolecopyworld.com/psx/psx_game_codes_d.shtml
@@ -757,7 +756,7 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 		801207E6 1000
 		code 2/3 from https://consolecopyworld.com/psx/psx_game_codes_d.shtml
   		*/
-		add_D0_code(0x801207E8, 0x959C);
+		add_D0_code(0x801207E8, 0x2021);
   		add_80_code(0x801207E6, common_routine_return_patch_val);
 		/*
 		D0151AE2 1040
@@ -771,50 +770,26 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 
 	((strcmp("PCPX_961.52", bootfile)) == 0) { // Japan Demo 1
 		/*
-		D0151E10 2021
-		80151E06 FFF6
-		code 1/3 via aprip conversion
+		D0151D92 9222
+		80151D92 A222
+		force ok type B modpar generated code
 		*/
-  		add_D0_code(0x80151E10, 0x959C);
-  		add_80_code(0x80151E06, common_routine_return_patch_val);
-		/*
-		D0151E10 2021
-		80151E08 1000
-		code 2/3 via aprip conversion
-  		*/
-		add_D0_code(0x80151E10, 0x2021);
-  		add_80_code(0xD0151E08, common_routine_return_patch_val);
-		/*
-		00151AE0: 0E
-		00151AE1: 00
-		00151AE2: 40
-		00151AE3: 10
-		00151AE4: 00
-		00151AE5: 00
-
-		end of pattern match, it works though! Manual conversion for this last one was needed. Below bytes don't match from Japan Rev 1 to this demo:
-
-		00151AE6: 00
-		00151AE7: 00
-		00151AE8: D5
-		00151AE9: 46
-		00151AEA: 05
-		00151AEB: 0C
-		00151AEC: 21
-		00151AED: 20
-		00151AEE: 00
-		00151AEF: 00
-
-		D0151D9A 1040
-		80151D9A 1000
-		code 3/3 via aprip conversion
-  		*/
-		add_D0_code(0x80151D9A, common_routine_return_compare_val);
-  		add_80_code(0x80151D9A, common_routine_return_patch_val);
+		add_D0_code(0x80151D92, 0x9222);
+		add_80_code(0x80151D92, 0xA222);
 		install_cheat_engine();
 	} else if
-// TODO: I Can not find Japan Demo 2 image (PAPX 90086) http://redump.org/disc/83081/ to add support yet
 
+	((strcmp("PAPX_900.86", bootfile)) == 0) { // Japan Demo 2
+		/*
+		D0151D8A 9222
+		80151D8A A222
+		force ok type B modpar generated code
+		*/
+		add_D0_code(0x80151D8A, 0x9222);
+		add_80_code(0x80151D8A, 0xA222);
+		install_cheat_engine();
+	} else if
+	
 // Exciting Bass 2
    	((strcmp("SLPM_862.95", bootfile)) == 0) { // Japan
 		/*
@@ -1487,16 +1462,24 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 // Metal Gear Solid: Integral
 	(
    	((strcmp("SLPM_862.47", bootfile)) == 0) // Japan Disc 1
-	|| ((strcmp("SLPM_862.48", bootfile)) == 0) // // Japan Disc 2
+	|| ((strcmp("SLPM_862.48", bootfile)) == 0) // Japan Disc 2
 	) {
 		/*
-		D009E212 1040
-		8009E212 1000
+		D00C3AB6 1040
+		800C3AB6 1000
 		skip mod check
-		code from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_m.shtml
+		code 1/2 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_m.shtml
     	*/
-  		add_D0_code(0x8009E212, common_routine_return_compare_val);
-  		add_80_code(0x8009E212, common_routine_return_patch_val);
+  		add_D0_code(0x800C3AB6, common_routine_return_compare_val);
+  		add_80_code(0x800C3AB6, common_routine_return_patch_val);
+		/*
+		D00C492A 1040
+		800C492A 1000
+		skip mod check
+		code 2/2 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_m.shtml
+    	*/
+  		add_D0_code(0x800C492A, common_routine_return_compare_val);
+  		add_80_code(0x800C492A, common_routine_return_patch_val);
 		install_cheat_engine();
     } else if
 
@@ -1734,32 +1717,62 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
     } else if
 
 // Panekit: Infinitive Crafting Toy Case
-// TODO: Find Japan Rev 1 and confirm the same code for Japan Rev 0 works
-   	((strcmp("SCPS_100.96", bootfile)) == 0) { // Japan Rev 0 / Japan Rev 1?
-		/*
-		skip mod check (3 codes)
-		D00F290C 800B
-		800F290E 1000
-		code 1/3 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_p.shtml
-		*/
-  		add_D0_code(0x800F290C, 0x800B);
-  		add_80_code(0x800F290E, common_routine_return_patch_val);
-		/*
-		D00F290C 800B
-		800F290C 000E
-		code 2/3 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_p.shtml		
-		*/
-  		add_D0_code(0x800F290C, 0x800B);
-  		add_80_code(0x800F290C, 0x000E);
-		/*
-		D0052710 FFF8
-		80052710 0001
-		code 3/3 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_p.shtml
-		*/
-  		add_D0_code(0x80052710, 0xFFF8);
-  		add_80_code(0x80052710, 0x0001);
-		install_cheat_engine();
-    } else if
+   	((strcmp("SCPS_100.96", bootfile)) == 0) { // Japan Rev 0 / Japan Rev 1
+		ver_check = (load_addr + 0x3E52C); // First different byte between rev 0 and rev 1
+		debug_write("Got address for version check: %x", (uint32_t) ver_check);
+		ver_check_val = *(uint8_t*) ver_check;
+		debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
+		if(ver_check_val == 0x40) { // Japan Rev 0
+			/*
+			skip mod check (3 codes)
+			D00F290C 800B
+			800F290E 1000
+			code 1/3 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_p.shtml
+			*/
+  			add_D0_code(0x800F290C, 0x800B);
+  			add_80_code(0x800F290E, common_routine_return_patch_val);
+			/*
+			D00F290C 800B
+			800F290C 000E
+			code 2/3 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_p.shtml		
+			*/
+  			add_D0_code(0x800F290C, 0x800B);
+  			add_80_code(0x800F290C, 0x000E);
+			/*
+			D0052710 FFF8
+			80052710 0001
+			code 3/3 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_p.shtml
+			*/
+  			add_D0_code(0x80052710, 0xFFF8);
+  			add_80_code(0x80052710, 0x0001);
+			install_cheat_engine();
+    	} else { // 0x00 Japan Rev 1
+			debug_write("YES");
+			/*
+			skip mod check (3 codes)
+			D0168AAC 800B
+			80168AAE 1000
+			code 1/3 converted via aprip
+			*/
+  			add_D0_code(0x80168AAC, 0x800B);
+  			add_80_code(0x80168AAE, common_routine_return_patch_val);
+			/*
+			D0168AAC 800B
+			80168AAC 000E
+			code 2/3 converted via aprip		
+			*/
+  			add_D0_code(0x80168AAC, 0x800B);
+  			add_80_code(0x80168AAC, 0x000E);
+			/*
+			D0052710 FFF8
+			80052710 0001
+			code 3/3 needed no conversion for rev 1: ./aprip D0052710 FFF8 paner0 paner1 4 shows this same address with a match
+			*/
+  			add_D0_code(0x80052710, 0xFFF8);
+  			add_80_code(0x80052710, 0x0001);
+			install_cheat_engine();
+		}
+	} else if
 
 // Planet Lakia
    	((strcmp("SLPM_862.64", bootfile)) == 0) { // Japan / English Translation
@@ -1767,7 +1780,7 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
 		ver_check_val = *(uint8_t*) ver_check;
 		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
-		if((ver_check_val == 0x00)) { // Japan, English Translation has 0xC4 here
+		if(ver_check_val == 0x00) { // Japan, English Translation has 0xC4 here
 			/*
 			D001F1C6 1402
 			8001F1C6 1000
@@ -1841,7 +1854,7 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
 		ver_check_val = *(uint8_t*) ver_check;
 		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
-		if((ver_check_val == 0x64)) { // Japan Rev 0
+		if(ver_check_val == 0x64) { // Japan Rev 0
 			/*
 			D008EF4E 1040
 			8008EF4E 1000
@@ -1949,7 +1962,7 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
 		ver_check_val = *(uint8_t*) ver_check;
 		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
-		if((ver_check_val == 0xF4)) // Rev 0
+		if(ver_check_val == 0xF4) // Rev 0
 		{
 			/*
 			D01840E2 1040
@@ -2160,12 +2173,12 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
     } else if
 
 // Saru! Get You! / Ape Escape
-   	((strcmp("SCPS_100.91", bootfile)) == 0) { // Japan Rev 0
+   	((strcmp("SCPS_100.91", bootfile)) == 0) { // Japan Rev 0 / Japan Rev 1
 		ver_check = (load_addr + 0x68); // First different byte between revisions is 0x68
 		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
 		ver_check_val = *(uint8_t*) ver_check;
 		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
-		if(ver_check_val == 0xA0) { // Rev 0
+		if(ver_check_val == 0xA0) { // Japan Rev 0
 		/*
 		D0136A8A 1040
 		80136A8A 1000
@@ -2200,13 +2213,12 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
     } else if
 
 // Silent Hill
-// TODO: Find Japan Rev 2 to confirm it also works
-   	((strcmp("SLPM_861.92", bootfile)) == 0) { // Japan Rev 0/Japan Rev 1
-		// same code works for both Japan Rev 0 and Japan Rev 1
+   	((strcmp("SLPM_861.92", bootfile)) == 0) { // Japan Rev 0/Japan Rev 1/Japan Rev 2
+		// same code works for Japan Rev 0, Japan Rev 1, and Japan Rev 2
 		/*
 		D01E778E 1040
 		801E778E 1000
-		my code via aprip gameshark code conversion
+		code from https://gamehacking.org/game/108601
 		*/
   		add_D0_code(0x801E778E, common_routine_return_compare_val);
   		add_80_code(0x801E778E, common_routine_return_patch_val);

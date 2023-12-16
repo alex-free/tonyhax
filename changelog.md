@@ -1,5 +1,27 @@
 # Changelog
 
+## Version 1.4.5 (11/25/2023)
+
+*   [tonyhax-international-v1.4.5](https://github.com/alex-free/tonyhax/releases/download/v1.4.5i/tonyhax-international-v1.4.5.zip)
+
+Changes:
+
+*   Changed toolchain from `mips-linux-gnu` to `mipsel-none-elf`. Redone [build system](build.md). Upgraded to GCC v12.2.0/Binutils v2.40. Better code size/speed optimizations.
+
+*   Made CD_REGS address more correct by using the correct memory region (thanks Nicholas Noble!).
+
+*   There is a [bug](https://github.com/socram8888/tonyhax/issues/24) found in the PS1 mode of the early PS2s models supported by Tonyhax International which causes a number of PS1 games burned to a 80 minute CD-R to not boot. The affected games only boot when burned to 74 minute or 71 minute CD-Rs. This limitation applies to mod-chipped consoles as well using the normal boot process fails to start the game. The PS1 doesn't have this issue and was never effected.
+
+Tonyhax International now can work around this PS2 specific limitation and boot any game burned to 80 minute media just as well as the PS1. Some of the confirmed problematic games that now work as of this update are listed below as examples:
+
+- Kurushi / I.Q: Intelligent Qube
+- MediEvil
+- Resident Evil Director’s Cut
+- Resident Evil 2 / BioHazard 2
+- MegaMan X4 / RockMan X4
+
+Any games that previously would not boot on PS2s (but did on PS1s) because of this issue now also work. If you have a chipped PS2, you can use the [Boot CD](boot-cd.md) to then successfully launch a problematic PS1 game burned to an 80 minute CD-R.
+
 ## Version 1.4.4 (11/15/2023)
 
 *   [tonyhax-international-v1.4.4](https://github.com/alex-free/tonyhax/releases/download/v1.4.4i/tonyhax-international-v1.4.4.zip)

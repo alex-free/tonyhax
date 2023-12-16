@@ -385,7 +385,7 @@ This is the complete list of all protected games with bypasses for the additiona
 - Versions tested: [Japan Rev 0](http://redump.org/disc/1335/), [Japan Rev 1](http://redump.org/disc/20288/), [Japan Water Calpis Version](http://redump.org/disc/49161/), [Japan Demo 1](http://redump.org/disc/6755/).
 - Versions With Anti-Piracy Screen: [Japan Rev 0](http://redump.org/disc/1335/), [Japan Rev 1](http://redump.org/disc/20288/), [Japan Water Calpis Version](http://redump.org/disc/49161/), [Japan Demo 1](http://redump.org/disc/6755/), [Japan Demo 2](http://redump.org/disc/83081/).
 - When Is The Anti-Piracy Screen Check: Immediately.
-- Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1, Japan Water Calpis Version, Japan Demo 1. **NOTE: I can not find Japan Demo 2, someone please send me it so I can add support.**
+- Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1, Japan Water Calpis Version, Japan Demo 1, Japan Demo 2.
 - Anti-Piracy Version: APv1.
 
 ### Exciting Bass 2
@@ -871,7 +871,7 @@ This is the complete list of all protected games with bypasses for the additiona
 
 ### Panekit: Infinitive Crafting Toy Case
 
-- Versions Tested: [Japan Rev 0](http://redump.org/disc/5364/), [Japan Rev 1](http://redump.org/disc/5364/) - **NOTE: Japan Rev 1 should work but I can not find a copy of it to confirm.**
+- Versions Tested: [Japan Rev 0](http://redump.org/disc/5364/), [Japan Rev 1](http://redump.org/disc/5364/).
 - Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1.
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1.
@@ -1063,7 +1063,7 @@ This is the complete list of all protected games with bypasses for the additiona
 
 ### Silent Hill
 
-- Versions Tested: [Japan Rev 0](http://redump.org/disc/134/), [Japan Rev 1](http://redump.org/disc/82898/),  [Japan Demo](http://redump.org/disc/33473/), [Japan Rev 2](http://redump.org/disc/18251/) **Note: Need to find Japan Rev 2 to confirm it works as well**.
+- Versions Tested: [Japan Rev 0](http://redump.org/disc/134/), [Japan Rev 1](http://redump.org/disc/82898/),  [Japan Demo](http://redump.org/disc/33473/), [Japan Rev 2](http://redump.org/disc/18251/).
 - Versions With Anti-Piracy Screen: Japan Rev 0, Japan Rev 1, Japan Rev 2.
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan Rev 0, Japan Rev 1, Japan Rev 2.
@@ -1161,7 +1161,7 @@ This is the complete list of all protected games with bypasses for the additiona
 
 ### Um Jammer Lammy
 
-- Versions Tested: [Japan](http://redump.org/disc/3582/), [Japan Tentou Houei-you](http://redump.org/disc/97015/), [USA](http://redump.org/disc/1399/), [USA Demo](http://redump.org/disc/10990/), [Europe](http://redump.org/disc/5510/)). **NOTE: I can not find Japan Tentou Houei-you, someone please send me it so I can add support.**
+- Versions Tested: [Japan](http://redump.org/disc/3582/), [Japan Tentou Houei-you](http://redump.org/disc/97015/), [USA](http://redump.org/disc/1399/), [USA Demo](http://redump.org/disc/10990/), [Europe](http://redump.org/disc/5510/)).
 - Versions With Anti-Piracy Screen: Japan.
 - When Is The Anti-Piracy Screen Check: Before first now loading screen.
 - Versions With Anti-Piracy Bypass Support: Japan.
@@ -1206,12 +1206,3 @@ This is the complete list of all protected games with bypasses for the additiona
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan, Japan Genteiban Edition, USA, Europe, France, Germany, Spain, Italy.
 - Anti-Piracy Version: APv2.
-
-## NEEDED GAMES
-
-I can not find the below specific versions/releases of these protected games. Tonyhax International aims to support every release, every revision of every game with anti-piracy protection, so if you can provide these in any manner it would help immensly.
-
-*   [Panekit: Infinitive Crafting Toy Case Japan Rev 1](http://redump.org/disc/75024/). This is the 'PS2 compatible' re-release.
-*   [Doko Demo Issho Japan Demo 2](http://redump.org/disc/83081/).
-*   [Silent Hill Japan Rev 2](http://redump.org/disc/18251/).
-*   [Um Jammer Lammy Japan Tentou Houei-you](http://redump.org/disc/97015/). _Probably_ no protection since this is a non-playable rolling 'movie disc' accroding to redump.org.

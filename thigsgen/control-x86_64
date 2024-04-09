@@ -1,0 +1,6 @@
+Package: thigsgen
+Version: 2.0.3
+Maintainer: alex free
+Architecture: amd64
+Homepage: https://alex-free.github.io/tonyhax-international
+Description: Generates memory card save files containing GameShark codes for Tonyhax International.

@@ -24,6 +24,19 @@ uint16_t gameshark_code_address_mod_val;
 uint32_t read_codes;
 uint32_t gameshark_code_address;
 
+#if defined WIN32
+  #include <conio.h>
+#endif
+
+void do_exit(unsigned char exit_code)
+{
+  #if defined WIN32
+    printf("\nPress any key to continue...\n"); // system("pause") sucks we can do better
+    _getch();
+  #endif
+  exit(exit_code);
+}
+
 bool parse()
 {
   printf("GS Code Address/Prefix: %08X\n", gameshark_code_address);
@@ -85,38 +98,43 @@ bool parse()
 int main(int argc, const char *argv[])
 {
 
-  printf("Tonyhax International GameShark Generator (THIGSGEN) v2.0.2 By Alex Free\n");
+  printf("Tonyhax International GameShark GENerator (THIGSGEN) %s By Alex Free\n", VERSION);
 
-  if (argc != 2)
+  if(argc != 2)
   {
-    printf("Error, THIGSGEN requires 1 argument.\nUsage:\n\nthigsgen <txt file containing GameShark codes>\n");
-    return (1);
+    printf("Error: THIGSGEN requires 1 argument.\nUsage:\n\nthigsgen <txt file containing GameShark codes>\n");
+    do_exit(1);
   }
 
-  if ((txt = fopen(argv[1], "r")) == NULL)
+  if((txt = fopen(argv[1], "r")) == NULL)
   {
-    printf("Error: Cannot read the input txt file: %s\n", argv[1]);
-    return (1);
+    printf("Error: cannot read the input txt file: %s.\n", argv[1]);
+    do_exit(1);
   }
 
   remove("TONYHAXINTGS"); // don't care if it exists yet or not
 
-  if ((out = fopen("TONYHAXINTGS", "wb+")) == NULL)
+  if((out = fopen("TONYHAXINTGS", "wb+")) == NULL)
   {
-    printf("Error: Cannot create the output save file TONYHAXINTGS\n");
+    printf("Error: cannot create the output save file TONYHAXINTGS.\n");
     fclose(txt);
-    return (1);
+    do_exit(1);
   }
 
   fseek(out, 0, SEEK_SET);
   fseek(txt, 0, SEEK_SET);
 
   for (int i = 0; i < 0x2000; i++)
+  {
     fputc(0x00, out);
+  }
 
   fseek(out, 0, SEEK_SET);
+  
   for (int i = 0; i < 0x101; i++)
+  {
     fputc(save[i], out);
+  }
 
   fseek(out, 0x104, SEEK_SET);
 
@@ -129,11 +147,13 @@ int main(int argc, const char *argv[])
     if (read_codes != EOF && read_codes != 0)
     {
       if(!parse())
-        return(1);
+      {
+        do_exit(1);
+      }
     }
     else
     {
-      printf("\nReading of txt file: %s is complete\n\n", argv[1]);
+      printf("\nReading of txt file: %s is complete.\n\n", argv[1]);
       break;
     }
   }
@@ -154,9 +174,10 @@ int main(int argc, const char *argv[])
 
   fseek(out, 0x102, SEEK_SET);
   fwrite(&sum, 1, 1, out);
-	printf("TONYHAXINTGS checksum: 0x%02X\n", sum);
+	printf("TONYHAXINTGS checksum: 0x%02X.\n", sum);
 
   fclose(out);
   fclose(txt);
-  printf("Generated Tonyhax International save file named: TONYHAXINTGS containing %d GameShark code lines\n", number_of_gameshark_code_lines);
+  printf("Generated Tonyhax International save file named: TONYHAXINTGS containing %d GameShark code lines.\n", number_of_gameshark_code_lines);
+  do_exit(0);
 }

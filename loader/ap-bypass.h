@@ -7,3 +7,5 @@ void add_16bit_code(const uint32_t gs1, const uint16_t gs2, const uint8_t gs_cod
 void install_cheat_engine();
 
 extern bool cheat_engine_installed;
+extern bool is_beat_mania_append_3rdmix;
+extern bool is_beat_mania_append_gottamix;

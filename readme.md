@@ -1,10 +1,8 @@
-## [alex-free.github.io](https://alex-free.github.io)
+# Tonyhax International: The Ultimate Backup CD-R/Import Disc Loader Soft-Mod Solution For The Original PlayStation & Early Models Of PlayStation 2
 
-## The Ultimate Backup CD-R/Import Disc Loader Soft-Mod Solution For The Original PlayStation & Early Models Of PlayStation 2
+_Brought to you by [Alex Free](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6018), [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867), [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714), and [SylverReZ (M4x1mumReZ)](https://gbatemp.net/members/sylverrez.610331/). Built on the work of many [others](credits.md)._
 
-Brought to you by [Alex Free](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6018), [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867), [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714), and [SylverReZ (M4x1mumReZ)](https://gbatemp.net/members/sylverrez.610331/). Built on the work of many [others](credits.md).
-
-Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Software backup loader exploit thing for the Sony PlayStation 1" originally created by [Socram8888](https://github.com/socram8888). Tonyhax International is developed by Alex Free and MottZilla with many new features and upgrades compared to the original Tonyhax, some of which are listed below:
+Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Software backup loader exploit thing for the Sony PlayStation 1" originally created by [Socram8888](https://github.com/socram8888).  Developed by Alex Free and MottZilla with many new features and upgrades compared to the original Tonyhax, some of which are listed below:
 
 * Supports all PS1 Consoles (Japanese, American, European, SCPH-1000-SCPH-102) **and** Early PS2 Consoles (Japanese, American, European, SCPH-10000-SCPH-39004).
 
@@ -41,15 +39,29 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.4.6 (12/16/2023)
+### Version 1.4.7 (4/8/2024)
 
-*   [tonyhax-international-v1.4.6](https://github.com/alex-free/tonyhax/releases/download/v1.4.6i/tonyhax-international-v1.4.6.zip)
+*   [tonyhax-international-v1.4.7](https://github.com/alex-free/tonyhax/releases/download/v1.4.7i/tonyhax-international-v1.4.7.zip)
+
+----------------------------------
 
 Changes:
 
-* Added APv1 bypasses for Panekit: Infinite Crafting Toolbox Japan Rev 1, Silent Hill Japan Rev 2, and Doko Demo Issho Demo 2 Japan.
+*   Implemented APv2 and no-swap bypasses for [Beat Mania Append GottaMix](http://redump.org/disc/3550/). Now the anti-piracy detection is disabled, and you can directly boot it from Tonyhax International instead of from an intended [Key Disc](https://remywiki.com/KEY_DISC).
 
-* Fixed APv1 bypass for Doko Demo Issho Demo 1 Japan, Doko Demo Issho Japan, Metal Gear Solid Integral Japan Disc 1, and Metal Gear Solid Integral Japan Disc 2.
+*   Releases now decompress to a folder containing all files, instead of all files loosely without a parent folder.
+
+*   Updated [my FreePSXBoot fork](https://github.com/alex-free/FreePSXBoot) to be equivalent to the latest current commit [1976b3cadf1289d92eafd4a7eaf006b29c333c12](https://github.com/brad-lin/FreePSXBoot/commit/1976b3cadf1289d92eafd4a7eaf006b29c333c12). This removes any remnants of a BIOS v2.0 limitation with the FreePSXBoot builder.
+
+*   Updated MKPSXISO to the latest current commit [08fa69f61365a3314b98076bfe7b2f37ed9db5d3](https://github.com/Lameguy64/mkpsxiso/commit/08fa69f61365a3314b98076bfe7b2f37ed9db5d3).
+
+* Updated the [TonyHax International GameShark GENerator (THIGSGEN)](gameshark-code-support.md) to prompt the user to "Press any key to continue..." before exiting on Windows (for a better Drag n' Drop UX **without using trash coding practices like `system("pause");`**. 
+
+* Significant clean up of code, and implementation of [EzRe](https://github.com/alex-free/ezre) build system allowed `.deb` file creation for Linux i386 and x86_64 platforms. THIGSGEN can now be installed as a system package to Linux systems with proper package manager tracking!
+
+* Updated `loader/insert-tonyhax-crc.sh` to use `mipsel-none-elf-objcopy`, finishing the full transition to the `mipsel-none-elf` platform tool-chain. Was just an oversight from the previous build system transition...
+
+----------------------------------
 
 [Previous versions](changelog.md).
 
@@ -67,7 +79,7 @@ Changes:
 
 The Tonyhax International loader is the program that once started enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted with a [flashed cheat cart](flashed-cheat-cart.md), a [flashed memory card](freepsxboot-exploit.md), a [save game exploit](save-game-exploit.md), a [CD-R](boot-cd.md), or even a [GameShark Code](gameshark-code.md). The Tonyhax International loader provides the ability to properly play backup CD-R and 'imported region discs' on all PS1 consoles, and all supported early PS2 consoles (Japanese, USA, and PAL models SCPH-10000-SCPH-39004).
 
-If you are using **any Japanese console**, at least one real Japanese NTSC-J PS1 game disc is required (any officially licensed Japanese PS1 disc will do). If you are using a **Japanese PS2 console (SCPH-10000-SCPH-39000)** a Swap Magic Tool is also required. Neither of these are needed if you are using an American or European PS1/PS2 console.
+If you are **using any Japanese console, at least one real Japanese NTSC-J PS1 game disc is required (any officially licensed Japanese PS1 disc will do)**. If you are **using a Japanese PS2 console (SCPH-10000-SCPH-39000) a Swap Magic Tool is also required**. Neither of these are needed if you are using any American or European PS1 or PS2 console.
 
 ### Japanese PS1 Console Loader Instructions
 

@@ -55,18 +55,25 @@ The amount of codes that may be enabled all at one time simultaneously is hard c
 
 ### Tonyhax International GameShark Generator (THIGSGEN)
 
-This is a command line program found in the `gameshark` directory of each Tonyhax International release. There are 4 different binaries available:
+This is a command line program found in the `gameshark` directory of each Tonyhax International release. There are 6 different builds available:
 
-*   `windows_x86` - For Windows 95 OSR 2.5 and newer.
-*   `windows_x86_64` - For 64bit Windows.
-*   `linux_x86_static` - For 32bit Linux distros.
-*   `linux_x86_64_static` - For 64bit Linux distros.
+*   `thigsgen-v2.0.3-windows-i686-static.zip` _Portable Release For Windows 95 OSR 2.5 and above, Pentium CPU minimum (32 bit)_
 
-So find the correct binary to use for your computer in one of the folders above. It will be named `thigsgen.exe` (Windows) or `thigsgen` (Linux). 
+*   `thigsgen-v2.0.3-windows-x86_64-static.zip` _Portable Release For x86_64 Windows (64 bit)_
+
+*   `thigsgen-v2.0.3-linux-i386-static.zip` _Portable Release For Linux 3.2.0 and above, 386 CPU minimum (32 bit)_
+
+*   `thigsgen-v2.0.3-linux-i386-static.deb` _Deb package file For Linux 3.2.0 and above, 386 CPU minimum (32 bit)_
+
+*   `thigsgen-v2.0.3-linux-x86_64-static.zip` _Portable Release For x86_64 Linux 3.2.0 and above (64 bit)_
+
+*   `thigsgen-v2.0.3-linux-x86_64-static.zip` _Deb package file for x86_64 Linux 3.2.0 and above (64 bit)_
+
+So find the correct binary to use for your computer in one of the files above. It will be named `thigsgen.exe` (Windows) or `thigsgen` (Linux).
 
 On Windows, and most Linux distros, you can simply drag and drop the **the txt file (containing each code line on it's own line, without any gaps)** on top of the `thigsgen.exe` or `thigsgen` executable file. This will generate the `TONYHAXINTGS` raw save file containing the codes.
 
-_Note:_ If you put a code line in your txt that has a code prefix that isn't supported, the `TONYHAXINTGS` file will not be generated. You can only have code lines with the above supported code prefixes.
+_Note:_ If you put a code line in your txt that has a code prefix that isn't supported, the `TONYHAXINTGS` file will **not** be generated. You can only have code lines with the above supported code prefixes.
 
 ![THIGSGEN Parasite Eve Debug Room Gen](images/thigsgen-parasite-eve-debug-room-gen.png)
 

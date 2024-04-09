@@ -16,7 +16,7 @@ fi
 elf_file="$1"
 
 # Calculate CRC
-crc=$(mips-linux-gnu-objcopy -O binary -j .text -j .rodata -j .data "$elf_file" /dev/stdout | crc32)
+crc=$(mipsel-none-elf-objcopy -O binary -j .text -j .rodata -j .data "$elf_file" /dev/stdout | crc32)
 echo "CRC32: 0x${crc}"
 
 # Create temporary file
@@ -24,7 +24,7 @@ tmpsection=$(mktemp)
 echo -ne "\x${crc:6:2}\x${crc:4:2}\x${crc:2:2}\x${crc:0:2}" >$tmpsection
 
 # Insert it
-mips-linux-gnu-objcopy --update-section .crc=$tmpsection "$elf_file"
+mipsel-none-elf-objcopy --update-section .crc=$tmpsection "$elf_file"
 
 # Cleanup
 rm $tmpsection

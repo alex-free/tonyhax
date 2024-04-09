@@ -160,6 +160,26 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 	const uint16_t common_routine_return_compare_val = 0x1040;
 	const uint16_t common_routine_return_patch_val = 0x1000;
 
+	if(is_beat_mania_append_gottamix) // uses Append No Swap Bypass (By mdmdj) method so bootfile detection at this point in execution is not possible
+	{
+		/*
+		D01C0838 2021
+		801C0834 FFF6
+		code 1/2 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_b.shtml
+		*/
+    	add_D0_code(0x801C0838, 0x2021);
+		add_80_code(0x801C0834, 0xFFF6);
+		/*
+		D01C0838 2021
+		801C0836 1000
+		code 2/2 from consolecopyworld: https://consolecopyworld.com/psx/psx_game_codes_b.shtml
+    	*/
+    	add_D0_code(0x801C0838, 0x2021);
+		add_80_code(0x801C0836, 0x1000);
+    	install_cheat_engine();
+		return;
+	}
+
 	// this is less expensive space-wise then using strncmp
 	if(bootfile_len >= 19) {
 		bootfile = &bootfile[bootfile_len-13]; // strip bootfile to last 13 bytes, XXXX_XXX.XX;1

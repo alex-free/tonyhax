@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 1.4.6 (12/16/2023)
+
+*   [tonyhax-international-v1.4.6](https://github.com/alex-free/tonyhax/releases/download/v1.4.6i/tonyhax-international-v1.4.6.zip)
+
+Changes:
+
+* Added APv1 bypasses for Panekit: Infinite Crafting Toolbox Japan Rev 1, Silent Hill Japan Rev 2, and Doko Demo Issho Demo 2 Japan.
+
+* Fixed APv1 bypass for Doko Demo Issho Demo 1 Japan, Doko Demo Issho Japan, Metal Gear Solid Integral Japan Disc 1, and Metal Gear Solid Integral Japan Disc 2.
+
 ## Version 1.4.5 (11/25/2023)
 
 *   [tonyhax-international-v1.4.5](https://github.com/alex-free/tonyhax/releases/download/v1.4.5i/tonyhax-international-v1.4.5.zip)

@@ -4,22 +4,23 @@
 include variables-shared.mk
 
 PACKAGE_FILE = tonyhax-international-$(TONYHAX_VERSION).zip
-PACKAGE_CONTENTS = $(ENTRY_FILES:%=entrypoints/%) $(ROM_FILES:%=rom/%) $(X_ROM_FILES:%=xstation/%) $(LOADER_OUTPUT_FILES:%=loader/%) $(FREEPSXBOOT_IMAGES:%=freepsxboot/%) $(BOOT_CD_FILES:%=boot-cd/%) $(GSHAX_FILES:%=gshax/%) $(THIGSGEN_FILES:%=gameshark/%) *.md LICENSE images/*
+PACKAGE_CONTENTS = $(ENTRY_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/entrypoints/%) $(ROM_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/rom/%) $(X_ROM_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/xstation/%) $(LOADER_OUTPUT_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/loader/%) $(FREEPSXBOOT_IMAGES:%=tonyhax-international-$(TONYHAX_VERSION)/freepsxboot/%) $(BOOT_CD_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/boot-cd/%) $(GSHAX_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/gshax/%) $(THIGSGEN_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/gameshark/%) tonyhax-international-$(TONYHAX_VERSION)/*.md tonyhax-international-$(TONYHAX_VERSION)/LICENSE tonyhax-international-$(TONYHAX_VERSION)/images/*
 
 .PHONY: clean modules clean
 
 all: modules $(PACKAGE_FILE)
 
+# This is kind of shit but works wayyy better then the mess that is tonyhax og release zip files (which COMPRESSES EVERYTHING from root of current working build directory!)
 $(PACKAGE_FILE): $(PACKAGE_CONTENTS) 
 	$(RM) $(PACKAGE_FILE)
-	zip -9 $(PACKAGE_FILE) $(PACKAGE_CONTENTS)
+	cd ../; cp -r tonyhax tonyhax-international-$(TONYHAX_VERSION); zip -9 tonyhax/$(PACKAGE_FILE) $(PACKAGE_CONTENTS); yes | rm -r tonyhax-international-$(TONYHAX_VERSION)
 
 $(PACKAGE_CONTENTS):
 
 modules:
 	$(MAKE) -C util
 	$(MAKE) -C entrypoints all
-	$(MAKE) -C gameshark all
+	$(MAKE) -C thigsgen all
 	$(MAKE) -C gshax all
 	
 	$(MAKE) -C loader -f Makefile.freepsxboot all
@@ -50,7 +51,7 @@ clean:
 	$(MAKE) -C boot-cd clean
 	$(MAKE) -C rom clean
 	$(MAKE) -C xstation clean
-	$(MAKE) -C gameshark clean
+	$(MAKE) -C thigsgen clean-build
 	$(MAKE) -C gshax clean
 	$(RM) tonyhax-*.zip
 

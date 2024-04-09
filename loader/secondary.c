@@ -33,6 +33,8 @@ uint8_t cdcontrollerver[4];
 const char * p5_localized;
 const char * region_name;
 
+bool is_beat_mania_append_gottamix = 0;
+bool is_beat_mania_append_3rdmix = 0;
 bool calibrate_laser = 0; // Only Japanese VC2 and VC3 consoles need this so it is off by default
 bool bugged_setsession = 0; // VC0 A, VC0 B, and VC1 A CDROM Controller BIOS versions all have a buggy SetSession command that requires a special work around to use
 bool enable_unlock = 1; // Disabled on VC0A and VC0B Japanese CDROM Controller BIOS versions automatically. On VC1A+ the testregion command is run and if the region is Japan it is also disabled.
@@ -696,6 +698,19 @@ void try_boot_cd() {
 
 	debug_write("Clearing RAM");
 	bzero(user_start, &__RO_START__ - user_start);
+
+// Only 2 known no-swap bypass games that work with the Append No Swap Bypass (By mdmdj) method
+	if((strcmp("cdrom:\\SLPM_861.84;1", bootfile)) == 0) { // BeatMania Append 3rdMix
+		bootfile = "cdrom:\\APPEND.EXE;1";
+		is_beat_mania_append_3rdmix = true;
+		//debug_write("Append No Swap Bypass detected");	
+	}
+
+	if((strcmp("cdrom:\\SLPM_862.29;1", bootfile)) == 0) { // BeatMania Append GottaMix
+		bootfile = "cdrom:\\APPEND.EXE;1";
+		is_beat_mania_append_gottamix = true;
+		//debug_write("Append No Swap Bypass detected");	
+	}
 
 	debug_write("Reading executable header");	
 	

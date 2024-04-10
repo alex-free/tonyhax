@@ -41,46 +41,13 @@ When triggered, the APv1 and APv2 style copy protections will trigger an 'anti-p
 
 Some games may contain an EDC-based protection measure. For the affected games, this protection is triggered when you burn the EDC protected PSX CD image with standard CD burning software (like IMGBurn) that forces invalid EDC data to be corrected before writing it the disc. If valid EDC is found where an invalid EDC was expected, then when played on a real PSX will cause the game to trip the protection and lock up.
 
-### Burning With CDRTools
-
-I recommend using the latest CDRTools for burning EDC protected PSX games on Linux. There are pre-built portable releases of a new enough CDRTools for Linux [available](https://alex-free.github.io/cdrtools). Windows versions are available somewhere. The required command syntax for burning EDCRE patched games is this:
-
-`cdrtools -raw16 --speed=x cuefile=yourgame.cue`
-
-Breakdown what each of these arguments to CDRTools do:
-
-`-raw16` specifies to burn the cd image without regenerating EDC/ECC data internally. You can't use the default dao mode anyways because there is some bug in regards to handling the pre-gap between the data and audio tracks when burning with the latest cdrtools currently anyways.
-
-`--speed=x` specifies the burn speed. Replace `x` with a number.
-
-`cuefile=yourgame.cue` specifies that your using a cue file named `yourgame.cue`. Replace `yourgame.cue` with the game's cue file your burning.
-
-
-### Burning With CDRDAO v1.2.5
-
-CDRDAO v1.2.5 and up supports burning EDC Protected PSX games with CD audio tracks correctly using the `generic-mmc-raw` driver. There are pre-built portable releases of a new enough CDRDAO for Linux [available](https://alex-free.github.io/cdrdao). The required command syntax for burning EDCRE patched games is this:
-
-`cdrdao write --speed x --driver generic-mmc-raw --swap -n --eject yourgame.cue`
-
-Breakdown what each of these arguments to CDRDAO do:
-
-*   `--speed x` argument sets the writing speed. Replace `x` with a number.
-
-*   `--driver generic-mmc-raw` specifies CDRDAO to use the `generic-mmc-raw` driver, which burns the CD image exactly as it is. The default driver used without specifiying these arguments is the **`generic-mmc` driver, which like the other drivers in CDRDAO will auto-regenerate EDC data as the CD image is burned.** This can change the EDC data read from the burned disc later, which some PSX games use as an additional anti-piracy check which if failed will lock up [the game](https://alex-free.github.io/tonyhax-international/anti-piracy-bypass.html#games-with-edc-protection).
-
-*   `--swap` is necessary if the BIN/CUE CD image contains CD audio. Without it, you will get loud static when the CD audio tracks are played as they are by default byte-swapped by CDRDAO if this argument is not specified.
-
-*   `-n` disables the 10 second waiting period before burning.
-
-*   `--eject` will automatically eject the disc immediately after a successful burn.
-
-![Burning Dance Dance Revolution 2nd Remix Japan](images/ddr2j-burning.png)
+You can follow my [Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr#burning-software) to learn how to burn a disc which defeats the protection.
 
 ## LibCrypt
 
 Some PAL PSX games are using a different copy protection scheme known as LibCrypt protection. Similar to EDC protection, LibCrypt protection is triggered when you burn a LibCrypt protected PSX CD image with standard CD burning software, which in most cases changes the SubChannel data when burning such a protected PSX CD image.
 
-LibCrypt protection can be bypassed by ripping the disc image, patching it with the [LibCrypt Patcher](https://alex-free.github.io/libcrypt), and then burning it to a CD-R using any standard burning software.
+LibCrypt protection can be bypassed by ripping the disc image, patching it with the [LibCrypt Patcher](https://alex-free.github.io/libcrypt-patcher), and then burning it to a CD-R using any standard burning software.
 
 ## Protected Games Support
 
@@ -117,6 +84,8 @@ This is the complete list of all protected games with bypasses for the additiona
 - When Is The Anti-Piracy Screen Check: Immediately.
 - Versions With Anti-Piracy Bypass Support: Japan.
 - Anti-Piracy Version: APv2.
+
+**Note:** This game has the Append No-Swap Bypass (by mdmdj) enabled, so it works fine directly booted from Tonyhax International. You don't need to boot the game with an intended [Key Disc](https://remywiki.com/KEY_DISC).
 
 ### Beatmania featuring Dreams Come True
 

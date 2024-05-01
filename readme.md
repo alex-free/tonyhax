@@ -6,6 +6,8 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * Supports all PS1 Consoles (Japanese, American, European, SCPH-1000-SCPH-102) **and** Early PS2 Consoles (Japanese, American, European, SCPH-10000-SCPH-39004).
 
+*   Supports formating [FreePSXBoot](freepsxboot-exploit.md) memory cards correctly, removing the exploit if desired and allowing normal game saves to work again.
+
 * Supports starting the Tonyhax International loader with [GameShark Codes](gameshark-code.md) and any PSX cheat device using the new GameSharkHAX boot method.
 
 * Supports [flashing](flashed-cheat-cart.md) the Tonyhax International loader to a GameShark, Action Reply, or similar PSX cheat cartridge. Whenever the flashed cartridge is plugged into the back of a PSX console model with a cartridge port on the back when you power it on the Tonyhax International will boot instead of the shell program/BIOS (Sony screens/CD Player/Memory Card Manager). You can still however access the CD Player/Memory Card Manager by powering on the console with the CD drive open, and then pressing `X` when prompted in the Tonyhax International loader.
@@ -39,27 +41,19 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.4.7 (4/8/2024)
+### Version 1.4.8 (5/1/2024)
 
-*   [tonyhax-international-v1.4.7](https://github.com/alex-free/tonyhax/releases/download/v1.4.7i/tonyhax-international-v1.4.7.zip)
+*   [tonyhax-international-v1.4.8](https://github.com/alex-free/tonyhax/releases/download/v1.4.8i/tonyhax-international-v1.4.8.zip)
 
 ----------------------------------
 
 Changes:
 
-*   Implemented APv2 and no-swap bypasses for [Beat Mania Append GottaMix](http://redump.org/disc/3550/). Now the anti-piracy detection is disabled, and you can directly boot it from Tonyhax International instead of from an intended [Key Disc](https://remywiki.com/KEY_DISC).
+*   Added the ability to format memory cards to the Tonyhax International loader. You can press TRIANGLE on your controller when prompted, and then select slot 1 or slot 2. **You can successfully format FreePSXBoot memory cards using this feature, and it removes the exploit so that you can use the card like normal!**
 
-*   Releases now decompress to a folder containing all files, instead of all files loosely without a parent folder.
+*   Improved controller input parsing.
 
-*   Updated [my FreePSXBoot fork](https://github.com/alex-free/FreePSXBoot) to be equivalent to the latest current commit [1976b3cadf1289d92eafd4a7eaf006b29c333c12](https://github.com/brad-lin/FreePSXBoot/commit/1976b3cadf1289d92eafd4a7eaf006b29c333c12). This removes any remnants of a BIOS v2.0 limitation with the FreePSXBoot builder.
-
-*   Updated MKPSXISO to the latest current commit [08fa69f61365a3314b98076bfe7b2f37ed9db5d3](https://github.com/Lameguy64/mkpsxiso/commit/08fa69f61365a3314b98076bfe7b2f37ed9db5d3).
-
-* Updated the [TonyHax International GameShark GENerator (THIGSGEN)](gameshark-code-support.md) to prompt the user to "Press any key to continue..." before exiting on Windows (for a better Drag n' Drop UX **without using trash coding practices like `system("pause");`**. 
-
-* Significant clean up of code, and implementation of [EzRe](https://github.com/alex-free/ezre) build system allowed `.deb` file creation for Linux i386 and x86_64 platforms. THIGSGEN can now be installed as a system package to Linux systems with proper package manager tracking!
-
-* Updated `loader/insert-tonyhax-crc.sh` to use `mipsel-none-elf-objcopy`, finishing the full transition to the `mipsel-none-elf` platform tool-chain. Was just an oversight from the previous build system transition...
+*   Fixed some warnings in compilation.
 
 ----------------------------------
 

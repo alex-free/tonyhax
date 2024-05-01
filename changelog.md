@@ -1,5 +1,27 @@
 # Changelog
 
+## Version 1.4.7 (4/8/2024)
+
+*   [tonyhax-international-v1.4.7](https://github.com/alex-free/tonyhax/releases/download/v1.4.7i/tonyhax-international-v1.4.7.zip)
+
+----------------------------------
+
+Changes:
+
+*   Implemented APv2 and no-swap bypasses for [Beat Mania Append GottaMix](http://redump.org/disc/3550/). Now the anti-piracy detection is disabled, and you can directly boot it from Tonyhax International instead of from an intended [Key Disc](https://remywiki.com/KEY_DISC).
+
+*   Releases now decompress to a folder containing all files, instead of all files loosely without a parent folder.
+
+*   Updated [my FreePSXBoot fork](https://github.com/alex-free/FreePSXBoot) to be equivalent to the latest current commit [1976b3cadf1289d92eafd4a7eaf006b29c333c12](https://github.com/brad-lin/FreePSXBoot/commit/1976b3cadf1289d92eafd4a7eaf006b29c333c12). This removes any remnants of a BIOS v2.0 limitation with the FreePSXBoot builder.
+
+*   Updated MKPSXISO to the latest current commit [08fa69f61365a3314b98076bfe7b2f37ed9db5d3](https://github.com/Lameguy64/mkpsxiso/commit/08fa69f61365a3314b98076bfe7b2f37ed9db5d3).
+
+* Updated the [TonyHax International GameShark GENerator (THIGSGEN)](gameshark-code-support.md) to prompt the user to "Press any key to continue..." before exiting on Windows (for a better Drag n' Drop UX **without using trash coding practices like `system("pause");`**. 
+
+* Significant clean up of code, and implementation of [EzRe](https://github.com/alex-free/ezre) build system allowed `.deb` file creation for Linux i386 and x86_64 platforms. THIGSGEN can now be installed as a system package to Linux systems with proper package manager tracking!
+
+* Updated `loader/insert-tonyhax-crc.sh` to use `mipsel-none-elf-objcopy`, finishing the full transition to the `mipsel-none-elf` platform tool-chain. Was just an oversight from the previous build system transition...
+
 ## Version 1.4.6 (12/16/2023)
 
 *   [tonyhax-international-v1.4.6](https://github.com/alex-free/tonyhax/releases/download/v1.4.6i/tonyhax-international-v1.4.6.zip)

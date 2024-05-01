@@ -164,6 +164,11 @@ FileClose:
 	li $9, 0x36
 	j 0xB0
 
+.global FormatDevice
+FormatDevice:
+	li $9, 0x41
+	j 0xB0
+
 .global GetLastError
 GetLastError:
 	li $9, 0x54

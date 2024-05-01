@@ -53,6 +53,8 @@ void * address;		// For Calculating BIOS Functions
 uint8_t j;			// Joypad
 uint8_t padbuf[2][0x22];	// Joypad Buffers
 
+void try_boot_cd(); // needs to be defined for format_memcard()
+
 #if !defined TOCPERFECT
 #if defined ROM
 void run_shell() {
@@ -85,6 +87,20 @@ void controller_input_stop() { // this doubles as 'closing' the memory card func
 
 void mc_controller_wait_on_error() {
 	for(volatile int i = 0; i < 0x100000; i++); // Pause to not spam a memory card read error message if O is pressed down
+}
+
+void start_memcard() {
+	debug_write("Reading MC...");
+	// BIOS Function InitCard(pad_enable)
+	int32_t pad_enable = 1; 
+	address = (uint32_t *) GetB0Table()[0x4A];
+	((void (*)(int32_t*)) address)(&pad_enable);
+	// BIOS Function StartCard()
+	address = (void *) (GetB0Table()[0x4B]);
+	((void (*)(void)) address)();
+	// BIOS Function _bu_init()
+	address = (void *) (GetB0Table()[0x55]);
+	((void (*)(void)) address)();
 }
 
 void read_memcard() {
@@ -125,18 +141,7 @@ File Error Numbers for B(54h) and B(55h)
   1Ch not enough free memory card blocks
   FFFFFFFFh invalid or unused file handle passed to B(55h) function
 */
-	debug_write("Reading MC...");
-	int32_t read;
-	// BIOS Function InitCard(pad_enable)
-	int32_t pad_enable = 1; 
-	address = (uint32_t *) GetB0Table()[0x4A];
-	((void (*)(int32_t*)) address)(&pad_enable);
-	// BIOS Function StartCard()
-	address = (void *) (GetB0Table()[0x4B]);
-	((void (*)(void)) address)();
-	// BIOS Function _bu_init()
-	address = (void *) (GetB0Table()[0x55]);
-	((void (*)(void)) address)();
+	start_memcard();
 	int32_t mc_fd = FileOpen("bu00:TONYHAXINTGS", FILE_READ);
 
 	// The kernel will fail to read if we don't wait a bit (here, ~1/10th of a second) (NOTE: this is not exactly 1/10th of a second, what I'm doing here, it is a bit more). This is a known issue as specified in LIBOVR46.PDF section 5-11: "If read() or write() is issued immediately after open(), an error occurs". I noticed that entry.S does this so I do it here as well now
@@ -150,6 +155,8 @@ File Error Numbers for B(54h) and B(55h)
 		#endif
 		debug_write("Please try reinserting MC");
 	}
+
+	int32_t read;
 
 	if (mc_fd > 0) {
 		read = FileRead(mc_fd, user_start, 0x2000); // read the entire file "TONYHAXINTGS" to the start of 'user RAM' (which will be cleared later before booting an executable). So 0x80010000-0x80012000 in RAM contains the contents of "TONYHAXINTGS". 
@@ -186,6 +193,54 @@ File Error Numbers for B(54h) and B(55h)
 			}
 		}
 	}
+}
+
+void format_memcard () {
+	start_memcard();
+	/*
+	 B(41h) - FormatDevice(devicename)
+	Erases all files on the device (ie. for formatting memory cards).
+	Returns 1=okay, or 0=failed.
+	*/
+	mc_controller_wait_on_error();
+	bool did_format = false; // can exit out before formatting (also checks status of being successful)
+	debug_write("Press TRIANGLE to exit without formatting");
+	debug_write("Press CROSS to FORMAT Slot 1");
+	debug_write("Press CIRCLE to FORMAT Slot 2");
+
+	while(1) { 
+		j = padbuf[0][3] ^ 0xFF;
+		if(j == 0x40) { // X button
+			mc_controller_wait_on_error();
+			if(FormatDevice("bu00:") != 1) {
+				debug_write("Format error %d", GetLastError());
+			} else {
+				did_format = true;
+			}
+			break; 
+		} else if(j == 0x20) { // Circle button
+			mc_controller_wait_on_error();
+			if(FormatDevice("bu10:") != 1)
+			{
+				debug_write("Format error %d", GetLastError());
+			} else {
+				mc_controller_wait_on_error();
+				did_format = true;
+			}
+			break;	
+		} else if(j == 0x10) { // Triangle button
+			mc_controller_wait_on_error();
+			break;	
+		}
+
+		debug_write(""); // Vblank wait for controller input
+	}
+
+	if(did_format) {
+		debug_write("Success!");
+	}
+
+	try_boot_cd(); // resets everything
 }
 
 void parse_memcard_save_gameshark_codes() {
@@ -355,20 +410,24 @@ void wait_lid_status(bool open) {
 	do {
 
 		j = padbuf[0][3] ^ 0xFF;
-		debug_write(" "); // Vblank wait for controller input
+		debug_write(""); // Vblank wait for controller input
 
-#if defined ROM // this is more optimized for variable button presses then otherwise if we didn't test both statements in an else if
-		if(j == 0x40) { // X button
-			controller_input_stop();
-			run_shell(); // launch Sony BIOS
-		} else if(j == 0x20) { // Circle button
-			read_memcard();
-		}
-#else // booting the shell is unnecessary for every other boot method besides the ROM so we don't include it
-		if(j == 0x20) { // Circle button
-			read_memcard();
-		}
-#endif // ROM
+		#if defined ROM
+			if(j == 0x40) { // X button
+				controller_input_stop();
+				run_shell(); // launch Sony BIOS
+			} else if(j == 0x20) { // Circle button
+				read_memcard();
+			} else if(j == 0x10) { // Triangle button
+				format_memcard();
+			}
+		#else
+			if(j == 0x20) { // Circle button
+				read_memcard();
+			} else if(j == 0x10) { // Triangle button
+				format_memcard();
+			}
+		#endif
 
 		// Issue Getstat command
 		// We cannot issue the BIOS CD commands yet because we haven't called CdInit
@@ -444,21 +503,32 @@ void re_cd_init() {
 void try_boot_cd() {
 	int32_t read;
 #if defined FREEPSXBOOT
-	debug_write("REMOVE THE FREEPSXBOOT MEMORY CARD FROM YOUR CONSOLE NOW");
+	debug_write("REMOVE THE FREEPSXBOOT MEMORY CARD FROM YOUR CONSOLE...");
+	debug_write("BEFORE BOOTING ANY GAME!");
 #elif defined ROM
-	debug_write("With the CD drive open, press X to boot the Sony BIOS or");
-	debug_write("Press O to enable GS codes");
+	debug_write("");
+	if(enable_unlock)
+	{
+		debug_write("With the CD drive open, press CROSS to boot the Sony BIOS");
+	} else {
+		debug_write("Press CROSS to boot the Sony BIOS"); // japanese consoles don't neccesarily need the drive open at this point to do this behavior, it could be in a lid-sensor block state
+	} 
 #endif
+
+#if !defined ROM
+	debug_write("");
+#endif
+	debug_write("Press CIRCLE to load GameShark codes from Memory Card");
+	debug_write("Press TRIANGLE to FORMAT A MEMORY CARD");
+	debug_write("");
 
 #if !defined XSTATION
 	uint8_t cbuf[4]; // CD Command Buffer
 
 #if !defined TOCPERFECT
 	if(enable_unlock) {
-		#if !defined ROM
-		debug_write("With the CD drive open, press O to enable GS codes");
-		#endif
-		debug_write("Put in a backup or import disc, then close the drive lid");
+		debug_write("Put in a backup/import disc");
+		debug_write("Close the drive to boot it");
 		wait_lid_status(true); // doesn't wait during the ROM method, unsure why but it is what we want as it allows us to auto-boot with the ROM boot method
 		wait_lid_status(false);
 	} else {
@@ -479,12 +549,11 @@ void try_boot_cd() {
 		debug_write("Stopping motor");
 		cd_command(CD_CMD_STOP,0,0); cd_wait_int(); cd_wait_int();
 
-		debug_write("Press O to enable GS codes");
-		controller_input_start();
+		controller_input_start(); // stopped by wait_lid_status() previously. It still makes sense to accept controller input before finally confirming you want to boot the disc
 
-		debug_write("Keep the lid sensor blocked until turning off the console");
+		debug_write("(Keep the lid sensor blocked until turning off the console)");
 		debug_write("Remove the real NTSC-J PSX game disc");
-		debug_write("Put in a backup/import disc, then press X"); // Thanks MottZilla!
+		debug_write("Put in a backup/import disc, then press CROSS to boot it"); // Thanks MottZilla!
             
 		while(1) { 
 			j = padbuf[0][3] ^ 0xFF;
@@ -493,9 +562,12 @@ void try_boot_cd() {
 				break; // X button boots disc
 			} else if(j == 0x20) { // Circle button enables codes
 				read_memcard(); // this allows Japanese console users to enable user supplied GameShark codes without having to unblock the lid sensor, resetting authentication which would just be more unnecessary steps.
+			} else if(j == 0x10) { // Triangle button formats memory card
+				format_memcard();
 			}
-
-			debug_write(" "); // Vblank wait for controller input
+			
+			//debug_write("Button: %x", j);
+			debug_write(""); // Vblank wait for controller input
 		}
 	    controller_input_stop();
 	}

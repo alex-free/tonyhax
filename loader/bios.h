@@ -386,6 +386,15 @@ int32_t FileRead(int32_t fd, void * dst, uint32_t length);
 void FileClose(int32_t fd);
 
 /**
+ * Formats the specified device.
+ *
+ * Table B, call 0x41.
+ *
+ * @param devname memory card device (bu00: or bu10:)
+ */
+uint32_t FormatDevice(char * devicename);
+
+/**
  * Returns the error code for the last failed file operation.
  *
  * @returns the error code for the last failed file operation.

@@ -1739,9 +1739,9 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 // Panekit: Infinitive Crafting Toy Case
    	((strcmp("SCPS_100.96", bootfile)) == 0) { // Japan Rev 0 / Japan Rev 1
 		ver_check = (load_addr + 0x3E52C); // First different byte between rev 0 and rev 1
-		debug_write("Got address for version check: %x", (uint32_t) ver_check);
+		//debug_write("Got address for version check: %x", (uint32_t) ver_check);
 		ver_check_val = *(uint8_t*) ver_check;
-		debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
+		//debug_write("Ver check address has the contents : %x", (uint8_t) ver_check_val);
 		if(ver_check_val == 0x40) { // Japan Rev 0
 			/*
 			skip mod check (3 codes)
@@ -1767,7 +1767,7 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
   			add_80_code(0x80052710, 0x0001);
 			install_cheat_engine();
     	} else { // 0x00 Japan Rev 1
-			debug_write("YES");
+			//debug_write("YES");
 			/*
 			skip mod check (3 codes)
 			D0168AAC 800B

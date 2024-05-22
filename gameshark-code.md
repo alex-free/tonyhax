@@ -1,4 +1,4 @@
-# GameSharkHAX
+# [Tonyhax International](readme.md) -> GameSharkHAX
 
 GameSharkHAX is the newest way to boot the Tonyhax International loader using special [game disc specific](#gamesharkhax-supported-game-discs) GameShark codes. GameSharkHAX enables you to use a [GameShark](#psx-gameshark-version-comparison) (or [other cheat device](#gshax-with-other-gameshark-cds-or-cheat-cartridges)) which **doesn't have a built-in swap trick** to stating the Tonyhax International loader.
 

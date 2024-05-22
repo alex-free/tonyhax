@@ -1,4 +1,4 @@
-# Flashed Cheat Cart
+# [Tonyhax International](readme.md) -> Flashed Cheat Cart
 
 You can overwrite the contents of a GameShark, Action Reply, or other PS1 cheat cartridge with the Tonyhax International loader. This allows you to turn on any PS1 console with such a cheat device installed to the parallel port at the back the console and will have the system instead boot into the Tonyhax International loader rather then the Sony BIOS/Shell (Sony screens/Memory Card/CD Player menu). 
 

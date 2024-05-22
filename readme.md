@@ -41,19 +41,17 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.4.8 (5/1/2024)
+### Version 1.4.9 (5/21/2024)
 
-*   [tonyhax-international-v1.4.8](https://github.com/alex-free/tonyhax/releases/download/v1.4.8i/tonyhax-international-v1.4.8.zip)
+*   [tonyhax-international-v1.4.9](https://github.com/alex-free/tonyhax/releases/download/v1.4.9i/tonyhax-international-v1.4.9.zip)
 
 ----------------------------------
 
 Changes:
 
-*   Added the ability to format memory cards to the Tonyhax International loader. You can press TRIANGLE on your controller when prompted, and then select slot 1 or slot 2. **You can successfully format FreePSXBoot memory cards using this feature, and it removes the exploit so that you can use the card like normal!**
+*   Added APv1 bypasses for Wild Arms - 2nd Ignition (Japan Rev 0, Rev 1, Demo 1, and Demo 2).
 
-*   Improved controller input parsing.
-
-*   Fixed some warnings in compilation.
+*   An insane amount of work has been put into the new [anti-piracy protections list](anti-piracy-bypass.md). Every confirmed protected PSX game known is listed with information of support in Tonyhax International.
 
 ----------------------------------
 

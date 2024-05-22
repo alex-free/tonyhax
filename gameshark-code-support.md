@@ -1,4 +1,4 @@
-# GameShark Code Support
+# [Tonyhax International](readme.md) -> GameShark Code Support
 
 Tonyhax International now has the ability to apply user-supplied GameShark codes to any game before starting it. This uses my save game GameShark storage system as well as MottZilla's 'Cheat Engine', the latter of which has only previously been put to use by the [APv2 bypass system](anti-piracy-bypass.md).
 

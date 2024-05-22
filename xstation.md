@@ -1,4 +1,4 @@
-# XStation Flashed Cheat Cart
+# [Tonyhax International](readme.md) -> XStation Flashed Cheat Cart
 
 You can overwrite the contents of a GameShark, Action Reply, or other PS1 cheat cartridge with _a special version of the Tonyhax International loader_ to significantly speed up the boot time of consoles hard-modded with the xStation device. This feature was [asked for](https://github.com/alex-free/tonyhax/issues/29) by [L10N37](https://github.com/L10N37) after he pointed out that using the Tonyhax International loader via flashed cheat cart is significantly faster then the stock Sony BIOS when it comes to booting the xStation firmware.
 

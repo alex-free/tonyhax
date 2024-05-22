@@ -1,4 +1,20 @@
-# Changelog
+# [Tonyhax International](readme.md) -> Changelog
+
+## Version 1.4.8 (5/1/2024)
+
+*   [tonyhax-international-v1.4.8](https://github.com/alex-free/tonyhax/releases/download/v1.4.8i/tonyhax-international-v1.4.8.zip)
+
+----------------------------------
+
+Changes:
+
+*   Added the ability to format memory cards to the Tonyhax International loader. You can press TRIANGLE on your controller when prompted, and then select slot 1 or slot 2. **You can successfully format FreePSXBoot memory cards using this feature, and it removes the exploit so that you can use the card like normal!**
+
+*   Improved controller input parsing.
+
+*   Fixed some warnings in compilation.
+
+----------------------------------
 
 ## Version 1.4.7 (4/8/2024)
 

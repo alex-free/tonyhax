@@ -2570,13 +2570,66 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 
 // Wild Arms 2
    	(
+	((strcmp("SCPS_100.89", bootfile)) == 0) // Japan Rev 0 Disc 1 / Japan Rev 1 Disc 1
+	|| ((strcmp("SCPS_100.90", bootfile)) == 0) // Japan Rev 0 Disc 2 / Japan Rev 1 Disc 2
+	) {
+   		/*
+   		D002A51A 1040
+		8002A51A 1000
+ 		code from https://consolecopyworld.com/psx/psx_game_codes_w.shtml
+    	*/
+  		add_D0_code(0x8002A51A, common_routine_return_compare_val);
+  		add_80_code(0x8002A51A, common_routine_return_patch_val);
+		install_cheat_engine();
+    } else if
+
+   	((strcmp("PCPX_961.61", bootfile)) == 0) // Japan Demo 1
+	{
+   		/*
+		D002A594 2021
+		8002A590 FFF6
+ 		code 1/2 from https://consolecopyworld.com/psx/psx_game_codes_w.shtml
+    	*/
+  		add_D0_code(0x8002A594, 0x2021);
+  		add_80_code(0x8002A590, 0xFFF6);
+		/*
+		D002A594 2021
+		8002A592 1000
+ 		code 2/2 from https://consolecopyworld.com/psx/psx_game_codes_w.shtml
+    	*/
+  		add_D0_code(0x8002A594, 0x2021);
+  		add_80_code(0x8002A592, 0x1000);
+		install_cheat_engine();
+
+    } else if
+
+   	((strcmp("PCPX_961.71", bootfile)) == 0) // Japan Demo 2
+	{
+   		/*
+		D002A590 2021
+		8002A58C FFF6
+ 		code 1/2 converted via aprip
+    	*/
+  		add_D0_code(0x8002A590, 0x2021);
+  		add_80_code(0x8002A58C, 0xFFF6);
+		/*
+		D002A590 2021
+		8002A58E 1000
+ 		code 2/2 converted via aprip
+    	*/
+  		add_D0_code(0x8002A590, 0x2021);
+  		add_80_code(0x8002A58E, 0x1000);
+		install_cheat_engine();
+
+    } else if
+	(
 	((strcmp("SCUS_944.84", bootfile)) == 0) // USA Disc 1
 	|| ((strcmp("SCUS_944.98", bootfile)) == 0) // USA Disc 2
 	) {
    		/*
    		D00282CE 1062
 		800282CE 1800
- 		my code via aprip to patch out readtoc
+ 		my code via aprip
     	*/
   		add_D0_code(0x800282CE, fake_pal_bios_bypass_compare_val);
   		add_80_code(0x800282CE, fake_pal_bios_bypass_patch_val);

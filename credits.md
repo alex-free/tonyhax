@@ -1,4 +1,4 @@
-# Credits
+# [Tonyhax International](readme.md) -> Credits
 
 ## MottZilla
 

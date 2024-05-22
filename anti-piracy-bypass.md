@@ -42,7 +42,7 @@ _List Notes:_
 | [Arc The Lad III (USA) (Disc 2)](http://redump.org/disc/675/) | None | - | YES |
 | [Asterix: Mega Madness (Europe) (En,Fr,De,Es,It,Nl)](http://redump.org/disc/4873/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Barbie: Aventure Equestre (France)](http://redump.org/disc/29560/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Barbie: Race & Ride (Europe)](http://redump.org/disc/11318/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |)
+| [Barbie: Race & Ride (Europe)](http://redump.org/disc/11318/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Barbie: Race & Ride (Germany)](http://redump.org/disc/25241/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Barbie: Race & Ride (Italy)](http://redump.org/disc/28330/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Barbie: Race & Ride (Spain)](http://redump.org/disc/25983/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |

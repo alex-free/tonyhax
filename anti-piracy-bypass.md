@@ -12,7 +12,7 @@ _List Notes:_
 
 * If one game release was found to have anti-piracy protections ([APv1](#apv1) or [APv2](#apv2)), all revisions, demos, and regional releases (listed on redump) were **tested for active protection code**. This is because many games were released in different regions with different anti-piracy code, or it was disabled entirely for unknown reasons. **This info is not listed on redump correctly due to false positives by some closed source automatic tool they are using to detect different protections. The only way to figure out if the protection is sent is by testing the actual game.**. The APv1 and APv2 distinction is also not listed on redump either.
 
-*   Many games containing [LibCrypt](#libcrypt) protection have 'unknown' listed as when the protection triggers. This is because I haven't investigated each game. The game is confirmed to have LibCrypt protection due to a LibCrypt patch existing for it. This info will be added in the future (**or help me add it, open a [generic issue](https://github.com/alex-free/tonyhax/issues/new)**.
+*   Many games containing [LibCrypt](#libcrypt) protection have 'unknown' listed as when the protection triggers. This is because I haven't investigated each game. The game is confirmed to have LibCrypt protection due to a LibCrypt patch existing for it. This info will be added in the future (**or help me add it, open a [generic issue](https://github.com/alex-free/tonyhax/issues/new))**.
 
 ## List Of Protected PSX Game Discs
 --------------------------------------------
@@ -54,7 +54,7 @@ _List Notes:_
 | [BDFL Manager 2001 (Germany)](http://redump.org/disc/17767/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [BDFL Manager 2002 (Germany)](http://redump.org/disc/3320/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Beat Mania 6thMix + Core Remix (Japan)](http://redump.org/disc/16285/) | [APv2](#apv2) | Boot. | YES | 
-| [Beat Mania Append GottaMix (Japan)](http://redump.org/disc/3550/) | [APv2](#apv2), [Key Disc](#key-disc) | Key Disc Disc Change/Boot. | APv2 - YES. EDC - YES, boot game directly from Tonyhax International, do not use a Key Disc to boot it. |
+| [Beat Mania Append GottaMix (Japan)](http://redump.org/disc/3550/) | [APv2](#apv2), [Key Disc](#key-disc) | Key Disc Disc Change/Boot. | APv2 - YES. Key Disc - YES, boot game directly from Tonyhax International, do not use a Key Disc to boot it. |
 | [Beatmania Best Hits (Japan) (Rev 0)](http://redump.org/disc/36175/) | [APv2](#apv2) | Boot. | YES |
 | [Beatmania Best Hits (Japan) (Rev 1)](http://redump.org/disc/44332/) | [APv2](#apv2) | Boot. | YES | 
 | [Beatmania featuring Dreams Come True (Japan)](http://redump.org/disc/36188/) | [APv2](#apv2) | Boot. |  YES | 
@@ -484,9 +484,6 @@ _List Notes:_
 | [SaGa Frontier 2 (Europe)](http://redump.org/disc/280/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [SaGa Frontier 2 (France)](http://redump.org/disc/28278/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [SaGa Frontier 2 (Germany)](http://redump.org/disc/2605/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [SaGa Frontier II (Europe)](http://redump.org/disc/280/) | None | - | - |
-| [SaGa Frontier II (France)](http://redump.org/disc/28278/) | None | - | - |
-| [SaGa Frontier II (Germany)](http://redump.org/disc/2605/) | None | - | - |
 | [SaGa Frontier II (Japan)](http://redump.org/disc/1605/) | [APv1](#apv1) | Boot. | YES |
 | [SaGa Frontier II (USA)](http://redump.org/disc/1535/) | None | - | - |
 | [Saru! Get You!/Ape Escape (Europe) (Demo)](http://redump.org/disc/995/) | None | - | - |
@@ -676,7 +673,7 @@ _Info:_ Some games are detecting a PAL BIOS and disabling all anti-piracy protec
 
 _Found In:_ Japanese games.
 
-_Bypass support in Tonyhax International Status:_ bypasses this protection in every known game containing it.**
+_Bypass support in Tonyhax International Status:_ bypasses this protection in every known game containing it.
 
 _Effect:_ Locks up.
 
@@ -700,5 +697,5 @@ _Bypass support in Tonyhax International:_ limited. Currently, only one game is 
 
 There are 2 other games with partial bypasses in Tonyhax International, they are Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1 (Japan) and Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1 (Japan). They both are fully bypassed for all USA and PAL consoles. Japanese consoles only work if they have a mod-chip (including non-stealth which would normally trigger the protection). Unmodified Japanese consoles are the only ones not yet supported by the bypass for these specific games in Tonyhax International. 
 
-_Effect:_ Anti-Piracy Screen of Death.
+_Effect:_ Anti-Piracy Screen of Death or locks up.
 

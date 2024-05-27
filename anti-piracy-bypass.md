@@ -542,10 +542,10 @@ _List Notes:_
 | [The Italian Job (Europe)](http://redump.org/disc/617/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [The Italian Job (Italy)](http://redump.org/disc/47605/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Theme Park World (Europe) (En,Fr,De,Es,It,Nl,Sv)](http://redump.org/disc/910/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [This Is Football (Europe) (Fr,Nl)](http://redump.org/disc/19757/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [This Is Football (Europe)](http://redump.org/disc/4004/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [This Is Football (Italy)](http://redump.org/disc/28048/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [This Is Soccer (Australia)](http://redump.org/disc/46676/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [This Is Football (Europe) (Fr,Nl)](http://redump.org/disc/19757/) | [LibCrypt](#libcrypt) | After starting a game with two teams selected the loading bar gets stuck at approximately 80-85%. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [This Is Football (Europe)](http://redump.org/disc/4004/) | [LibCrypt](#libcrypt) | After starting a game with two teams selected the loading bar gets stuck at approximately 80-85%. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [This Is Football (Italy)](http://redump.org/disc/28048/) | [LibCrypt](#libcrypt) | After starting a game with two teams selected the loading bar gets stuck at approximately 80-85%. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [This Is Soccer (Australia)](http://redump.org/disc/46676/) | [LibCrypt](#libcrypt) | After starting a game with two teams selected the loading bar gets stuck at approximately 80-85%. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [TOCA World Touring Cars (Europe) (En,Fr,De)](http://redump.org/disc/615/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [TOCA World Touring Cars (Europe) (Es,It)](http://redump.org/disc/27567/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Tokimeki Memorial 2 Emotional Voice System Append Disc (Disc 1) (Minadzuki - Kotobuki - Sakura) (Japan)](http://redump.org/disc/53927/) | [APv2](#apv2) | Boot. | YES |
@@ -600,7 +600,7 @@ _List Notes:_
 | [Vandal Harts II  (Spain)](http://redump.org/disc/4854/) | None | - | - |
 | [Vandal Harts II: Tenjou no Mon (Japan)](http://redump.org/disc/4854/) | [APv1](#apv1) | Boot. | YES |
 | [Vandal Harts II (USA)](http://redump.org/disc/1550/) | [APv2](#apv2) | Boot. | YES |
-| [V-Rally: Championship Edition 2 (Europe) (En,Fr,De)](http://redump.org/disc/1063/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [V-Rally: Championship Edition 2 (Europe) (En,Fr,De)](http://redump.org/disc/1063/) | [LibCrypt](#libcrypt) | After choosing your car and game mode, the game will permanently get stuck on the loading screen with the ECG patterns and heartbeats played consistently. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Walt Disney World Quest: Magical Racing Tour (Europe) (En,Fr,De,Es,It,Nl,Sv,No,Da)](http://redump.org/disc/1848/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Wild Arms II (Japan) (Demo 1)](http://redump.org/disc/4799/) | [APv1](#apv1) | `MEDIAVISION` logo after Boot. | YES |
 | [Wild Arms II (Japan) (Demo 2)](http://redump.org/disc/74502/) | [APv1](#apv1) | `MEDIAVISION` logo after Boot. | YES |

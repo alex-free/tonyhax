@@ -512,8 +512,8 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 		add_80_code(0x801B6A68, 0x0900);
 		/*
 		EDC code 3/3 from https://consolecopyworld.com/psx/psx_game_codes_d.shtml
-		D01B6A68 0920
-		801B6A68 0900
+		D01B6BF0 0920
+		801B6BF0 0900
 		*/
 	    add_D0_code(0x801B6BF0, 0x0920);
 		add_80_code(0x801B6BF0, 0x0900);

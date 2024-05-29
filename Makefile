@@ -4,13 +4,13 @@
 include variables-shared.mk
 
 PACKAGE_FILE = tonyhax-international-$(TONYHAX_VERSION).zip
-PACKAGE_CONTENTS = $(ENTRY_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/entrypoints/%) $(ROM_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/rom/%) $(X_ROM_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/xstation/%) $(LOADER_OUTPUT_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/loader/%) $(FREEPSXBOOT_IMAGES:%=tonyhax-international-$(TONYHAX_VERSION)/freepsxboot/%) $(BOOT_CD_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/boot-cd/%) $(GSHAX_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/gshax/%) $(THIGSGEN_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/gameshark/%) tonyhax-international-$(TONYHAX_VERSION)/*.md tonyhax-international-$(TONYHAX_VERSION)/LICENSE tonyhax-international-$(TONYHAX_VERSION)/images/*
+PACKAGE_CONTENTS = $(ENTRY_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/entrypoints/%) $(ROM_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/rom/%) $(X_ROM_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/xstation/%) $(LOADER_OUTPUT_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/loader/%) $(FREEPSXBOOT_IMAGES:%=tonyhax-international-$(TONYHAX_VERSION)/freepsxboot/%) $(BOOT_CD_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/boot-cd/%) $(GSHAX_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/gshax/%) $(ENTRY_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/entrypoints/%) $(THIGSGEN_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/gameshark/%) tonyhax-international-$(TONYHAX_VERSION)/*.md tonyhax-international-$(TONYHAX_VERSION)/LICENSE tonyhax-international-$(TONYHAX_VERSION)/images/*
 
 .PHONY: clean modules clean
 
 all: modules $(PACKAGE_FILE)
 
-# This is kind of shit but works wayyy better then the mess that is tonyhax og release zip files (which COMPRESSES EVERYTHING from root of current working build directory!)
+# zip a directory of files, not files themselves
 $(PACKAGE_FILE): $(PACKAGE_CONTENTS) 
 	$(RM) $(PACKAGE_FILE)
 	cd ../; cp -r tonyhax tonyhax-international-$(TONYHAX_VERSION); zip -9 tonyhax/$(PACKAGE_FILE) $(PACKAGE_CONTENTS); yes | rm -r tonyhax-international-$(TONYHAX_VERSION)
@@ -22,7 +22,7 @@ modules:
 	$(MAKE) -C entrypoints all
 	$(MAKE) -C thigsgen all
 	$(MAKE) -C gshax all
-	
+	$(MAKE) -C loader clean	
 	$(MAKE) -C loader -f Makefile.freepsxboot all
 	$(MAKE) -C freepsxboot all
 	$(MAKE) -C loader clean

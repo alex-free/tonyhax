@@ -107,7 +107,7 @@ _List Notes:_
 | [Dance Dance Revolution: Best Hits (Japan)](http://redump.org/disc/30601) | [APv2](#apv2), [EDC](#edc) |  Boot. | APv2 - YES. EDC - NO, [burn disc in special way](#edc). |
 | [Dance Dance Revolution: Disney's Rave (Japan)](http://redump.org/disc/37012/) | [APv2](#apv2), [EDC](#edc) |  Boot. | APv2 - YES. EDC - NO, [burn disc in special way](#edc). |
 | [Dance Dance Revolution Extra Mix (Japan)](http://redump.org/disc/44438/) | [APv2](#apv2), [EDC](#edc) | First `NOW LOADING` blinking text screen after selecting the first option in the  start menu. | APv2 - YES. EDC - NO, [burn disc in special way](#edc). |
-| [Dance Dance Revolution (Japan)](http://redump.org/disc/1562/) | [APv1](#apv1), [EDC](#edc) |  First `NOW LOADING` blinking text screen after selecting the first default option in the main  menu at start. | APv1 - YES.  EDC - NO, [burn disc in special way](#edc). |
+| [Dance Dance Revolution (Japan)](http://redump.org/disc/1562/) | [APv1](#apv1), [EDC](#edc) |  First `NOW LOADING` blinking text screen after selecting the first default option in the main  menu at start. | APv1 - YES.  EDC - YES. |
 | [Dance Dance Revolution Konamix (USA)](http://redump.org/disc/1238/) | [EDC](#edc) | Immediately there is a `NOW LOADING` blinking text screen and the CD drive goes crazy. | NO, [burn disc in special way](#edc). |
 | [Dance Dance Revolution (USA)](http://redump.org/disc/1562/) | [EDC](#edc) |  First `NOW LOADING` blinking text screen after selecting the first default option in the main  menu at start. | NO, [burn disc in special way](#edc). |
 | [Dancing Blade Katte ni Momotenshi II: Tears of Eden (Japan) (Disc 1)](http://redump.org/disc/14229/) | [APv1](#apv1) | First Konami logo screen. | YES |
@@ -647,11 +647,11 @@ _Effect:_ this protection triggers an 'anti-piracy screen of death':
 
 ### EDC
 
-_Info:_ Some games may contain an EDC-based protection measure. For the affected games, this protection is triggered when you burn the EDC protected PSX CD image with standard CD burning software (like IMGBurn) that forces invalid EDC data to be corrected before writing it the disc. If valid EDC is found where an invalid EDC was expected, then when played on a real PSX will cause the game to trip the protection and lock up. Emulators usually ignore EDC/EEC interely, so they do not trigger the protection.
+_Info:_ Some games may contain an EDC-based protection measure. For the affected games, this protection is triggered when you burn the EDC protected PSX CD image with standard CD burning software (like IMGBurn) that forces invalid EDC data to be corrected before writing it the disc. If valid EDC is found where an invalid EDC was expected, then when played on a real PSX will cause the game to trip the protection and lock up. Emulators usually ignore EDC/EEC entirely, so they do not trigger the protection.
 
 _Found In:_ Japanese, USA, and PAL games.
 
-_Bypass support in Tonyhax International Status:_ No. However, you can follow my [Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr#burning-software) for an example on how to burn a disc which defeats the protection with CDRDAO. Using Alchol 120% or Clone CD can also be done as long as you ignore EDC/EEC errors when burning. Basically, burn the games with SafeDisc 1 type settings, as this is basically the same protection/detection scheme.
+_Bypass support in Tonyhax International Status:_ yes. However most games don't have a bypass yet. For such games, you can follow my [Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr#burning-software) for an example on how to burn a disc which defeats the protection with CDRDAO. Using Alchol 120% or Clone CD can also be done as long as you ignore EDC/EEC errors when burning in RAW DAO mode. Basically, burn the games with SafeDisc 1 type settings, as this is basically the same protection/detection scheme.
 
 _Effect:_ Locks up.
 

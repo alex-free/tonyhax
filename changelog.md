@@ -1,5 +1,19 @@
 # [Tonyhax International](readme.md) -> Changelog
 
+## Version 1.4.9 (5/21/2024)
+
+*   [tonyhax-international-v1.4.9](https://github.com/alex-free/tonyhax/releases/download/v1.4.9i/tonyhax-international-v1.4.9.zip)
+
+----------------------------------
+
+Changes:
+
+*   Added APv1 bypasses for Wild Arms - 2nd Ignition (Japan Rev 0, Rev 1, Demo 1, and Demo 2).
+
+*   An insane amount of work has been put into the new [anti-piracy protections list](anti-piracy-bypass.md). Every confirmed protected PSX game known is listed with information of support in Tonyhax International.
+
+----------------------------------
+
 ## Version 1.4.8 (5/1/2024)
 
 *   [tonyhax-international-v1.4.8](https://github.com/alex-free/tonyhax/releases/download/v1.4.8i/tonyhax-international-v1.4.8.zip)

@@ -520,6 +520,18 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
     	install_cheat_engine();
     } else if
 
+   	((strcmp("SLUS_012.80", bootfile)) == 0) { // USA
+		/*
+		D010024E 1062
+		8010024E 1800
+		my code via aprip
+		*/
+	    add_D0_code(0x8010024E, fake_pal_bios_bypass_compare_val);
+		add_80_code(0x8010024E, fake_pal_bios_bypass_patch_val);
+		// todo: EDC bypass
+		install_cheat_engine();
+	} else if
+
 // Dance Dance Revolution: Best Hits
    	((strcmp("SLPM_866.93", bootfile)) == 0) { // Japan
 		/*
@@ -2563,6 +2575,42 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 		*/
   		add_D0_code(0x801DA7D8, 0x2021);
   		add_80_code(0x801DA7D6, common_routine_return_patch_val);
+		install_cheat_engine();
+    } else if
+
+   	((strcmp("SCUS_943.98", bootfile)) == 0) { // USA Demo
+ 		/*	
+		D01DAB44 2021
+		801DAB40 FFF6
+		mod-check skip code via modpar https://consolecopyworld.com/psx/psx_utils_pn_cnv.shtml
+  		*/
+		add_D0_code(0x801DAB44, 0x2021);
+  		add_80_code(0x801DAB40, 0xFFF6);
+ 		/*	
+		D01DAB44 2021
+		801DAB42 1000
+		mod-check skip code via modpar https://consolecopyworld.com/psx/psx_utils_pn_cnv.shtml
+  		*/
+  		add_D0_code(0x801DAB44, 0x2021);
+  		add_80_code(0x801DAB42, 0x1000);
+		install_cheat_engine();
+    } else if
+
+   	((strcmp("SCES_017.53", bootfile)) == 0) { // Europe
+ 		/*	
+		D01D81B8 2021
+		801D81B4 FFF6
+		mod-check skip code via modpar https://consolecopyworld.com/psx/psx_utils_pn_cnv.shtml
+  		*/
+		add_D0_code(0x801D81B8, 0x2021);
+  		add_80_code(0x801D81B4, 0xFFF6);
+ 		/*	
+		D01D81B8 2021
+		801D81B6 1000
+		mod-check skip code via modpar https://consolecopyworld.com/psx/psx_utils_pn_cnv.shtml
+  		*/
+  		add_D0_code(0x801D81B8, 0x2021);
+  		add_80_code(0x801D81B6, 0x1000);
 		install_cheat_engine();
     } else if
 

@@ -41,19 +41,15 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.5.0 (5/28/2024)
+### Version 1.5.1 (6/3/2024)
 
-*   [tonyhax-international-v1.5.0](https://github.com/alex-free/tonyhax/releases/download/v1.5.0i/tonyhax-international-v1.5.0.zip)
+*   [tonyhax-international-v1.5.1](https://github.com/alex-free/tonyhax/releases/download/v1.5.1i/tonyhax-international-v1.5.1.zip)
 
 ----------------------------------
 
 Changes:
 
-*   Fixed booting discs with FreePSXBoot exploited memory cards. The latest FreePSXBoot builder commit has a bug that interferes with Tonyhax International booting games, so I have reverted back to my [last commit](https://github.com/alex-free/FreePSXBoot/commit/9aacebc554b37867936a5d067269113e7ea3b296) in my fork which has no downsides other then it works correctly.
-
-*   Began implementing [EDC](anti-piracy-bypass.md#edc) bypasses for games. Dance Dance Revolution (Japan) now has an EDC bypass and can be burned by any burning software. For games which don't yet have EDC bypasses you still need to burn them in RAW DAO mode to bypass the EDC check in the protected game. Please see the [anti-piracy bypass list](anti-piracy-bypass.md#list-of-protected-psx-game-discs) for compatibility.
-
-*   Included `entry-bb.bin` and `entry.bin` in releases.
+*   Added APv1 bypass for Um Jammer Lammy (Europe) and Um Jammer Lammy (USA Demo). Added APv2 bypass for Dance Dance Revolution (USA).
 
 ----------------------------------
 

@@ -109,7 +109,7 @@ _List Notes:_
 | [Dance Dance Revolution Extra Mix (Japan)](http://redump.org/disc/44438/) | [APv2](#apv2), [EDC](#edc) | First `NOW LOADING` blinking text screen after selecting the first option in the  start menu. | APv2 - YES. EDC - NO, [burn disc in special way](#edc). |
 | [Dance Dance Revolution (Japan)](http://redump.org/disc/1562/) | [APv1](#apv1), [EDC](#edc) |  First `NOW LOADING` blinking text screen after selecting the first default option in the main  menu at start. | APv1 - YES.  EDC - YES. |
 | [Dance Dance Revolution Konamix (USA)](http://redump.org/disc/1238/) | [EDC](#edc) | Immediately there is a `NOW LOADING` blinking text screen and the CD drive goes crazy. | NO, [burn disc in special way](#edc). |
-| [Dance Dance Revolution (USA)](http://redump.org/disc/1562/) | [EDC](#edc) |  First `NOW LOADING` blinking text screen after selecting the first default option in the main  menu at start. | NO, [burn disc in special way](#edc). |
+| [Dance Dance Revolution (USA)](http://redump.org/disc/1562/) | [APv2], [EDC](#edc) | APv2 - `KCET` logo. EDC - after selecting a mode in the main menu there is a `NOW LOADING` blinking text screen that never loads. | APv2 - YES. EDC - NO, [burn disc in special way](#edc). |
 | [Dancing Blade Katte ni Momotenshi II: Tears of Eden (Japan) (Disc 1)](http://redump.org/disc/14229/) | [APv1](#apv1) | First Konami logo screen. | YES |
 | [Dancing Blade Katte ni Momotenshi II: Tears of Eden (Japan) (Disc 2)](http://redump.org/disc/14230/) | [APv1](#apv1) | First Konami logo screen. | YES |
 | [Dancing Blade Katte ni Momotenshi II: Tears of Eden (Japan) (Disc 3)](http://redump.org/disc/14228/) | [APv1](#apv1) | First Konami logo screen. | YES |
@@ -572,10 +572,10 @@ _List Notes:_
 | [UEFA Euro 2000 (Italy)](http://redump.org/disc/28346/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [UEFA Euro 2000 (Spain)](http://redump.org/disc/50591/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [UEFA Striker (Europe) (En,Fr,De,Es,It,Nl)](http://redump.org/disc/7446/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Um Jammer Lammy (Europe)](http://redump.org/disc/5510/) | None | - | - |
+| [Um Jammer Lammy (Europe)](http://redump.org/disc/5510/) | [APv1](#apv1) | After `Sony Computer Entertainment Presents` screen. | YES |
 | [Um Jammer Lammy (Japan)](http://redump.org/disc/3582/) | [APv1](#apv1) | Before first now loading screen. | YES |
 | [Um Jammer Lammy (Japan) (Tentou Houei-you)](http://redump.org/disc/97015/) | None | - | - |
-| [Um Jammer Lammy (USA) (Demo)](http://redump.org/disc/10990/) | None | - | - |
+| [Um Jammer Lammy (USA) (Demo)](http://redump.org/disc/10990/) | [APv1](#apv1) | Before first now loading screen. | YES |
 | [Um Jammer Lammy (USA)](http://redump.org/disc/1399/) | None | - | - |
 | [Urban Chaos (Europe) (En,Es,It)](http://redump.org/disc/618/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Urban Chaos (France)](http://redump.org/disc/50247/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
@@ -621,9 +621,9 @@ _List Notes:_
 
 ### APv1
 
-_Info:_ The very first kind of 'standardized' additional copy protection that appeared in later PSX games. This is only found in some Japanese games. The _APv1 style protection can only prevent a backup CD-R of a game from working on a console that has a 'non-stealth mod-chip' installed_. APv1 style protection can not detect games booted with Tonyhax International on a stock console without a _non-stealth_ mod-chip. 
+_Info:_ The very first kind of 'standardized' additional copy protection that appeared in later PSX games. It is found in all regions. The _APv1 style protection can only prevent a backup CD-R of a game from working on a console that has a 'non-stealth mod-chip' installed_. APv1 style protection can not detect games booted with Tonyhax International on a stock console without a _non-stealth_ mod-chip. 
 
-_Found In:_ Japanese games.
+_Found In:_ Japanese, USA, and PAL games.
 
 _Support In Tonyhax International:_ bypasses this protection in every known game containing it.
 
@@ -633,7 +633,7 @@ Without a bypass, this protection triggers an 'anti-piracy screen of death':
 
 ### APv2
 
-_Info:_ Unlike APv1, APv2 detects both soft-mods and non-stealth mod-chips. It is found in some Japanese games, some USA games, and a few PAL games. It is the only protection besides EDC ever implemented for USA releases. Very early SCPH-3000 Japanese consoles, and all SCPH-1000 Japanese consoles are immune to tripping APv2 as long as they are not containing a 'non-stealth' mod-chip. These consoles will work with every APv2 game without a bypass even being needed. Bypasses are still needed for `non-stealth mod-chip` SCPH-1000 and early SCPH-3000s which is why the bypasses are still enabled for those models.
+_Info:_ Unlike APv1, APv2 detects both soft-mods and non-stealth mod-chips. It is found in all regions. It is the only protection besides EDC ever implemented for USA releases. Very early SCPH-3000 Japanese consoles, and all SCPH-1000 Japanese consoles are immune to tripping APv2 as long as they are not containing a 'non-stealth' mod-chip. These consoles will work with every APv2 game without a bypass even being needed. Bypasses are still needed for `non-stealth mod-chip` SCPH-1000 and early SCPH-3000s which is why the bypasses are still enabled for those models.
 
 _Found In:_ Japanese, USA, and PAL games.
 

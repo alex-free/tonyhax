@@ -195,7 +195,7 @@ File Error Numbers for B(54h) and B(55h)
 	}
 }
 
-void format_memcard () {
+void format_memcard() {
 	start_memcard();
 	/*
 	 B(41h) - FormatDevice(devicename)
@@ -240,6 +240,7 @@ void format_memcard () {
 		debug_write("Success!");
 	}
 
+	controller_input_stop();
 	try_boot_cd(); // resets everything
 }
 

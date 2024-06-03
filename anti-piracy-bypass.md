@@ -573,9 +573,9 @@ _List Notes:_
 | [UEFA Euro 2000 (Spain)](http://redump.org/disc/50591/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [UEFA Striker (Europe) (En,Fr,De,Es,It,Nl)](http://redump.org/disc/7446/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Um Jammer Lammy (Europe)](http://redump.org/disc/5510/) | [APv1](#apv1) | After `Sony Computer Entertainment Presents` screen. | YES |
-| [Um Jammer Lammy (Japan)](http://redump.org/disc/3582/) | [APv1](#apv1) | Before first now loading screen. | YES |
+| [Um Jammer Lammy (Japan)](http://redump.org/disc/3582/) | [APv1](#apv1) |  After `Sony Computer Entertainment Presents` screen. | YES |
 | [Um Jammer Lammy (Japan) (Tentou Houei-you)](http://redump.org/disc/97015/) | None | - | - |
-| [Um Jammer Lammy (USA) (Demo)](http://redump.org/disc/10990/) | [APv1](#apv1) | Before first now loading screen. | YES |
+| [Um Jammer Lammy (USA) (Demo)](http://redump.org/disc/10990/) | [APv1](#apv1) |  After `Sony Computer Entertainment Presents` screen. | YES |
 | [Um Jammer Lammy (USA)](http://redump.org/disc/1399/) | None | - | - |
 | [Urban Chaos (Europe) (En,Es,It)](http://redump.org/disc/618/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Urban Chaos (France)](http://redump.org/disc/50247/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |

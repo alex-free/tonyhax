@@ -2,33 +2,47 @@
 
 _Brought to you by [Alex Free](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6018), [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867), [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714), and [SylverReZ (M4x1mumReZ)](https://gbatemp.net/members/sylverrez.610331/). Built on the work of many [others](credits.md)._
 
-Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Software backup loader exploit thing for the Sony PlayStation 1" originally created by [Socram8888](https://github.com/socram8888).  Developed by Alex Free and MottZilla with many new features and upgrades compared to the original Tonyhax, some of which are listed below:
+Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Software backup loader exploit thing for the Sony PlayStation 1" originally created by [Socram8888](https://github.com/socram8888).  Developed by Alex Free and MottZilla with many new features and upgrades compared to the original Tonyhax.
 
-* Supports all PS1 Consoles (Japanese, American, European, SCPH-1000-SCPH-102) **and** Early PS2 Consoles (Japanese, American, European, SCPH-10000-SCPH-39004).
+## Compatibility
 
-*   Supports formating [FreePSXBoot](freepsxboot-exploit.md) memory cards correctly, removing the exploit if desired and allowing normal game saves to work again.
+Compatible with all PS1 consoles (SCPH-1000 - SCPH-103) **and** Early PS2 Consoles (SCPH-10000 - SCPH-39004). All regions are supported (including japan). Newer PS2s _probably already work_, but this is not documented or tested for _yet_. If you got a newer 'unofficially supported' PS2 model (SCPH-50000 - SCPH-90XXX) and want to test some stuff out, let me know how it goes in a [Github issue](https://github.com/alex-free/tonyhax/issues).
 
-* Supports starting the Tonyhax International loader with [GameShark Codes](gameshark-code.md) and any PSX cheat device using the new GameSharkHAX boot method.
+## Loader Entry Points (Ways To Start The Tonyhax International Loader)
 
-* Supports [flashing](flashed-cheat-cart.md) the Tonyhax International loader to a GameShark, Action Reply, or similar PSX cheat cartridge. Whenever the flashed cartridge is plugged into the back of a PSX console model with a cartridge port on the back when you power it on the Tonyhax International will boot instead of the shell program/BIOS (Sony screens/CD Player/Memory Card Manager). You can still however access the CD Player/Memory Card Manager by powering on the console with the CD drive open, and then pressing `X` when prompted in the Tonyhax International loader.
+* [Flash](flashed-cheat-cart.md) a cheat cartridge (GameShark/Action Replay, etc.) with the loader.
 
-* Starts the Tonyhax International loader faster using ps1-packer decompression techniques. This also makes it smaller in size.
+* [Memory card exploit](freepsxboot-exploit.md).
 
-* Supports **more [save game exploits](save-game-exploit.md)**, enabling the use of even more PSX game discs to start the Tonyhax International loader.
+* Special game disc specific [GameShark Codes](gameshark-code.md) with a PSX cheat CD or cartridge such as GameShark or Action Replay.
 
-* Boots more games via the [FreePSXBoot](freepsxboot-exploit.md) exploit successfully.
+* Gane disc specific [save game exploits](save-game-exploit.md) (many more then the [original Tonyhax](https://github.com/socram8888/tonyhax) are available).
 
-* Supports more [games with additional copy protection routines](anti-piracy-bypass.md), by **using a completely different anti-piracy bypass system.**
+* [Boot CD](boot-cd.md).
 
-* Supports [applying user-supplied GameShark codes](gameshark-code-support.md) to any game it booted by the Tonyhax International loader. Dare I say this is the world's first open source PSX GameShark.
+* [Patch a Backup CD-R directly](https://alex-free.github.io/tocperfect).
 
-* Supports [TOCPerfect Patching](https://alex-free.github.io/tocperfect) a CD image directly to use the Tonyhax International loader as a way to remove some of the limitations of using the CD Player Swap Trick as a boot method, or to make a 'protected non-stealth mod-chip console compatible patched CD-R' that directly boots without needing to go through any other boot method.
+## Additional Features
 
-* Enables speeding up xStation boot time and allows for applying codes to games `Full Boot`ed by xStation. This is accomplished by a [special xStation ROM version](xstation.md).
+* Automatic console detection and loader configuration.
 
-* Uses a different [build system](build.md) compatible with the `mipsel-none-elf` toolchain and more operating systems.
+* Enter the originial Sony BIOS without removing the cheat cart containing the loader (for [ROM entrypoint](flashed-cheat-cart.md)).
 
-| [Tonyhax International Homepage](https://alex-free.github.io/tonyhax-international) | [Tonyhax International GitHub](https://github.com/alex-free/tonyhax) | [PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/) | [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967) | [GBATemp Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514) |
+* Format memory cards directly in the loader program, including any with the [FreePSXBoot](freepsxboot-exploit.md) exploit.
+
+* Small loader size thanks to ps1-packer compression/decompression and space-concious optimizations.
+
+* Boots more games via the [FreePSXBoot](freepsxboot-exploit.md) exploit successfully then any other backup loader.
+
+* The most extensive [anti-piracy bypass system](anti-piracy-bypass.md) of any PS1 soft-mod seemlessly patches protected games on the fly. Non-stealth mod-chips and unmodified consoles essentially become stealth-modded consoles.
+
+* Apply your own [GameShark codes](gameshark-code-support.md) loaded via memory card save files (up to 15 different save files per memory card, meaning you can have up to 30 different sets of GameShark codes available for selection!). Create the memory card save files on your PC, no need to type in super long codes on the console itself with a controller.
+
+* Speeds up your xStation's boot time with a [specialized xStation Tonyhax International ROM](xstation.md).
+
+* Portable [build system](build.md) using bare-bones `mipsel-none-elf` toolchain and no SDK.
+
+| [Homepage](https://alex-free.github.io/tonyhax-international) | [GitHub](https://github.com/alex-free/tonyhax) | [PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/) | [PSX-Place Resource](https://www.psx-place.com/resources/tonyhax-international.1281/) | [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967) | [GBATemp Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514) |
 
 ## Table Of Contents
 
@@ -41,15 +55,37 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.5.1 (6/3/2024)
+### Version 1.5.2 (6/12/2024)
 
-*   [tonyhax-international-v1.5.1](https://github.com/alex-free/tonyhax/releases/download/v1.5.1i/tonyhax-international-v1.5.1.zip)
+*   [tonyhax-international-v1.5.2](https://github.com/alex-free/tonyhax/releases/download/v1.5.2i/tonyhax-international-v1.5.2.zip)
 
 ----------------------------------
 
 Changes:
 
-*   Added APv1 bypass for Um Jammer Lammy (Europe) and Um Jammer Lammy (USA Demo). Added APv2 bypass for Dance Dance Revolution (USA).
+*   Added ability to [load gameshark codes from different save files on memory cards](gameshark-code-support.md) in slot 1 and slot 2. Up to 15 different save files containing GameShark codes can be on a memory card, so you can have up to 30 different sets of GameShark codes available for selection from within the loader now!
+
+*   Updated thigsgen to v2.0.4. The default output save file name is now `TONYHAXINTGS0`. THIGSGEN releases are now distributed in the `gameshark` folder already decompressed for you, the `.deb` files remain as they are.
+
+*   Added ability to update text in-place for `debug_write()`, implemented beautifully in the newly re-written gameshark memory card save file name select function.
+
+*   Added official support for Beat Mania Append 3rdMix Key Disc bypass. You can boot the game with Tonyhax International directly instead of having to use an intended key disc first to do so.
+
+*   Improved memory card formatter function's UX.
+
+*   Modifed RAM layout for larger executable decompressed size. `HAX` and `FF9` loader files are still only taking up 2 memory card slots though thanks to PS1 Packer compression.
+
+*   Added back seperate `secondary-ff9.ld`. When using anything other then the Final Fantasy IX [save game exploit](save-game-exploit.md), you get a bit more user RAM and hence higher chance to load a target PS-EXE with `exec()` (`loadandexec()` still overcomes any such issues with overlap, but it is nice to have the full target exe loaded while the loader itself is running).
+
+*   Loader optimizations for efficiency and size. Rewrote controller input parsing, memory card formatting, and gameshark code save file reading. Cleaned up code to use some local declarations instead of global ones when possible. Added some more comments.
+
+*   Changed video mode switching (NTSC to PAL or PAL to NTSC) to happen as early as possible. The idea with this is we only need one call to change the video mode (instead of doing it 2 different places depending on if we are using exec() or loadandexec() bios functions based on target PS-EXE size). Not only does that save some complexity, it also just makes sense. You'd want to see PAL video in the loader if your playing a PAL game (and you have everything else setup for it to actually display correctly with a NTSC PS1 that can do video mode switching), as early as possible.
+
+*   Releases now include `entry-bb.bin`, `entry-bb.elf`, `entry.bin`, `entry.elf`, `entry-ff9.bin`, and `entry-ff9.elf` (which are used to develop [save game exploits](save-game-exploit.md) and [gshax codes](https://alex-free.github.io/gshax-tool)). Distributing these files in the Tonyhax International releases negates the need to compile them yourself if you don't want to, and could allow more people to submit these to me.
+
+*   Improved [documentation on RAM layout of executable](https://github.com/alex-free/tonyhax/blob/master/docs/ram-setups.md).
+
+*   Other [general documentation improvements](readme.md#faq).
 
 ----------------------------------
 
@@ -57,183 +93,63 @@ Changes:
 
 ## Usage
 
-*   [Japanese PS1 Console Loader Instructions (SCPH-1000-SCPH-100)](#japanese-ps1-console-loader-instructions)
-
-*   [Japanese PS2 Console Loader Instructions (SCPH-10000-SCPH-39000)](#japanese-ps2-console-loader-instructions)
-
-*   [American/European PS1/PS2 Console Loader Instructions (SCPH-1001-SCPH-39004)](#americaneuropean-ps1ps2-console-loader-instructions)
-
-* [GameShark Code Support](gameshark-code-support.md)
-
-* [XStation ROM Version](xstation.md)
-
-The Tonyhax International loader is the program that once started enables the use of backup CD-Rs or import PS1 discs. The Tonyhax International loader can be booted with a [flashed cheat cart](flashed-cheat-cart.md), a [flashed memory card](freepsxboot-exploit.md), a [save game exploit](save-game-exploit.md), a [CD-R](boot-cd.md), or even a [GameShark Code](gameshark-code.md). The Tonyhax International loader provides the ability to properly play backup CD-R and 'imported region discs' on all PS1 consoles, and all supported early PS2 consoles (Japanese, USA, and PAL models SCPH-10000-SCPH-39004).
-
-If you are **using any Japanese console, at least one real Japanese NTSC-J PS1 game disc is required (any officially licensed Japanese PS1 disc will do)**. If you are **using a Japanese PS2 console (SCPH-10000-SCPH-39000) a Swap Magic Tool is also required**. Neither of these are needed if you are using any American or European PS1 or PS2 console.
-
-### Japanese PS1 Console Loader Instructions
-
-Start the Tonyhax International loader with a supported boot method:
-
-*   [TOCPerfect Patching](https://alex-free.github.io/tocperfect)
-*   [GameShark Code](gameshark-code.md)
-*   [ROM/ROM Flasher CD](flashed-cheat-cart.md)
-*   [FreePSXBoot Memory Card Images](freepsxboot-exploit.md)
-*   [Boot CD](boot-cd.md)
-*   [Save Game Exploit](save-game-exploit.md)
-
-If you see the text `Put in a real NTSC-J PSX game disc, then block the lid sensor`:
-
-*   Open the CD drive of your PS1 console.
-*   Put in a real NTSC-J Japanese PS1 game disc in the CD drive, but don't close the CD drive lid.
-*   The lid sensor is highlighted by the red circle and arrow in the pictures below. On the original grey fat PS1 consoles (SCPH-900X and earlier) it is located in the top right corner, it is is shaped like a circle. Ideally you press it down with a bent pen spring as shown. On the slim PSone consoles (SCPH-10X) it is in the lower right corner to the side of the edge of the CD drive. For these consoles it is best to use a piece of tape or paper to slide in and press it down as shown.
-
-![ps1 lid sensor](images/ps1-lid-sensor.jpg)
-
-![ps1 lid sensor blocked front](images/ps1-lid-sensor-blocked-front.jpg)
-
-![ps1 lid sensor blocked side](images/ps1-lid-sensor-blocked-side.jpg)
-
-![psone lid sensor](images/psone-lid-sensor.jpg)
-
-![psone lid sensor blocked](images/psone-lid-sensor-blocked.jpg)
-
-After blocking the lid sensor, your real Japanese PS1 game will spin up and then stop. Once you see the text `Put in a backup/import disc, then press X` remove either the real NTSC-J PSX game disc or Boot CD from your PS1 console's CD drive. 
-
-![scph 1000 rom 1](images/scph-1000-rom-loader-1.png)
-
-![scph 1000 rom 2](images/scph-1000-rom-loader-2.png)
-
-Put in the backup CD-R or import PSX game disc you want to play **without unblocking the lid sensor**. Once you press X, the console will run some commands automatically, followed by the game booting with perfect CD audio playback. Note that you can not unblock the lid sensor while playing the game on **Japanese consoles**, if you do so the game will stop working.
-
-![scph 1000 booting backup](images/scph-1000-loader-rom-booting-duke-nukem-total-meltdown-usa.png)
-
-### Japanese PS2 Console Loader Instructions
-
-Start the Tonyhax International loader with a supported boot method:
-
-*   [Boot CD](boot-cd.md) (I don't know of anyway to boot this on an unmodified Japanese PS2 but it is available).
-*   [Save game exploit](save-game-exploit.md)
-*   [GameShark Code](gameshark-code.md)
-
-Japanese PS2 consoles **must have the DVD drive tray front panel removed to use Tonyhax International**. For the SCPH-10000, you can follow the method below (some newer consoles may slightly differ in the way to remove the DVD drive's front panel).
-
-### Removing The DVD Drive Tray Front Panel
-
-Turn on the Japanese PS2 console. Eject the DVD drive tray, and **while it is open** power off the console by either pulling the plug from the wall or PSU in the back of the console, or by flicking the power switch for the PSU on the back of the console. You can not use the power button because then the DVD drive tray will close before the console turns off. Now, flip the Japanese PS2 console upside down like in the image below:
-
-![ps2 upside down](images/ps2-upside-down.jpg)
-
-Now bring your focus to the bottom of the opened DVD drive tray. At the very top edge (highlighted in the picture above) is a tab. You want to jam a thin flat head screwdriver in between this tab and the DVD drive tray face plate as shown in the image below. Now, push with the flat head screwdriver to separate the DVD drive face plate from the rest of the DVD drive tray. **Be very gentle and only use a direct straight force towards the face plate. Do not go side to side when doing this or you risk breaking off an edge of the DVD drive tray. I am obviously not responsible for any damage you may do by doing this!** Once successful, the face plate will become removable. You are free to slide it back on at a later time, it just needs to be off for you to use the Japanese PS2 to boot backup/import PS1 games with Tonyhax International.
-
-![ps2 drive tab](images/ps2-drive-tab.jpg)
-
-With the DVD drive face plate off, flip over the Japanese PS2 console right side up. You can now see a gap at the bottom of the DVD drive. This is where you place the Swap Magic Tool in when using Tonyhax International on your Japanese PS2 console.
-
-![ps2 drive cover removed](images/ps2-drive-cover-removed.jpg)
-
-You can now use one of the supported boot methods to start the Tonyhax International loader on the Japanese PS2 console. You will most likely be using the [Save Game Exploit](save-game-exploit.md), however you could be using some kind of intermediate boot disc to boot the [Boot CD](boot-cd.md) as well if you find one that supports Japanese PS1 consoles. Once you see the text `Put in a backup/import disc, then press X` appear, you need to use a Swap Magic Slide Tool to release the DVD drive to gain access to it without pressing the eject switch. A [video tutorial](https://www.youtube.com/watch?v=Ffv5m52zlEI) is available that shows how to use the Swap Magic Tool (in general), although the exact steps are also explained below. Once you use the Swap Magic Tool to swap in your import/backup CD-R while booted in the Tonyhax International loader, just press the cross button on your PS2 or PS1 controller to boot and play your game.
-
-![scph-10000 ff9 exploit loader 1](images/scph-10000-ff9-exploit-loader-1.png)
-
-Important note: **do not eject the PS1 import or backup CD-R from the Japanese PS2 console until your done playing the game**. Unlike American and European consoles (which do not have this limitation), if you do so your game will stop working, and you will have to start Tonyhax International all over again to boot your import/backup CD-R and start playing again.
-
-### Using the Swap Magic Tool
-
-Slide in the Swap Magic Tool like shown in the image below by the arrow. You need to feel around with the Swap Magic Tool to get the hook to latch on internally inside the DVD drive.
-
-![ps2 insert slide tool](images/ps2-insert-slide-tool.jpg)
-
-Now that your Swap Magic Tool is latched on internally inside the DVD drive, move it straight to the right side. This movement will feel correct and nice when you are properly using the Swap Magic Tool, reassuring you are using it correctly. Once you get to the end of this movement the DVD drive tray will begin to move forward out of the DVD drive, "releasing" it from it's locked state.
-
-![ps2 slide tool inserted first slide](images/ps2-slide-tool-inserted-first-slide.jpg)
-
-![ps2 slide tool moved to release drive](images/ps2-slide-tool-moved-to-release-drive.jpg)
-
-Use your hand to pull out the DVD drive tray to gain access to the disc in it. Remove the original NTSC-J PSX game disc, and put in your import/backup CD-R.
-
-![ps2 drive released](images/ps2-drive-released.jpg)
-
-With your import/backup CD-R in the Japanese PS2 console, use your hand to push in the DVD drive tray as far as it will go back into the DVD drive.
-
-![ps2 push in released drive](images/ps2-push-in-released-drive.jpg)
-
-Now that the DVD drive tray is pushed all the way back in, the Swap Magic Tool can be used to "lock" the drive. Like before, slide in the Swap Magic Tool to the right most position like shown in the image below. Remember to feel around with the Swap Magic Tool to get the hook to latch on internally inside the DVD drive. Now that your Swap Magic Tool is once again latched on internally inside the DVD drive, move it straight to the left side. This movement will feel correct and nice when you are properly using the Swap Magic Tool, reassuring you are using it correctly. Once you get to the end of this movement (when you can't go any more to the left) the DVD drive tray will fully go back inside the DVD drive to put the DVD drive into the "locked" state. **You must ensure that the DVD drive is fully back in or Tonyhax International will lock up loading the disc**.
-
-![ps2 slide tool moved to lock drive](images/ps2-slide-tool-moved-to-lock-drive.jpg)
-
-![scph-10000 ff9 exploit loader 2](images/scph-10000-ff9-exploit-loader-2.png)
-
-## American/European PS1/PS2 Console Loader Instructions
-
-Start the Tonyhax International loader with a supported boot method.
-
-Available boot methods for American and European PS2 consoles:
-
-*   [Boot CD](boot-cd.md).
-*   [Save game exploit](save-game-exploit.md)
-*   [GameShark Code](gameshark-code.md)
-
-Available boot methods for American and European PS1 consoles:
-
-*   [TOCPerfect Patching](https://alex-free.github.io/tocperfect)
-*   [GameShark Code](gameshark-code.md)
-*   [ROM Flasher CD](flashed-cheat-cart.md)
-*   [FreePSXBoot Memory Card Images](#freepsxboot-memory-card-images)
-*   [Boot CD](boot-cd.md)
-*   [Save Game Exploit](save-game-exploit.md)
-
-Once you see the text `Put in a backup/import disc` appear, eject the DVD drive (PS2) or open the CD drive (PS1).
-
-*   If you are booting the Tonyhax International [Boot CD](boot-cd.md), you'll want to remove the spring or whatever you have blocking down the lid sensor to "open" the CD drive and stop the disc from spinning, allowing you to remove the Boot CD from the console's CD drive (PS1) or DVD drive (PS2).
-*   If you are booting Tonyhax International via a [Save Game Exploit](save-game-exploit.md), after ejecting the DVD drive (PS2) or opening the CD drive (PS1) the real PS1 game disc you used with a save game exploit will stop spinning, allowing you to remove it from the console's CD drive (PS1) or DVD drive (PS2).
-
-All other boot methods don't have a disc usually in the drive already, so there is no disc to remove. With no disc currently in your console, you can now put in the backup CD-R or import PSX game disc you want to play. Close the CD drive (PS1) or DVD drive (PS2). The console will detect that the drive has been closed and will spin up your disc. The console will then send some commands and boot the disc.
-
-![scph 5501 rom](images/scph-5501-rom-loader.png)
-
-![scph 5501 rom booting parasite eve usa disc 2](images/scph-5501-booting-parasite-eve-usa-disc-2.png)
+*   [Japanese PS1 Console Loader Instructions (SCPH-1000-SCPH-100)](japanese-ps1-instructions.md)
+*   [Japanese PS2 Console Loader Instructions (SCPH-10000-SCPH-39000)](japanese-ps2-instructions.md)
+*   [American/European PS1/PS2 Console Loader Instructions (SCPH-1001-SCPH-39004)](american-european-console-instructions.md)
 
 ## F.A.Q.
 
+1) [Does the type of CD-R I am using matter?](#q-does-the-type-of-cd-r-i-am-using-matter)
+
+2) [My console isn't reading discs?](#q-my-console-isnt-reading-discs)
+
+3) [Why is my game not booting, locking up/crashing, audio stuttering, or FMV freezing?](#q-why-is-my-game-not-booting-locking-upcrashing-audio-stuttering-or-fmv-freezing)
+
+4) [Can I use International to play protected games?](#q-can-i-use-international-to-play-protected-games)
+
+5) [Can I play games that span multiple discs (i.e. Fear Effect) / have disc change features?](#q-can-i-play-games-that-span-multiple-discs-ie-fear-effect--have-disc-change-features)
+
+6) [Why not combine Tonyhax and Tonyhax International into one project?](#q-why-not-combine-tonyhax-and-tonyhax-international-into-one-project)
+
+7) [Why Can't Tonyhax/Tonyhax International Change The Video Mode From PAL to NTSC or vice versa on PS2s?](#q-why-cant-tonyhaxtonyhax-international-change-the-video-mode-from-pal-to-ntsc-or-vice-versa-on-ps2s)
+
+8) [Why Are PAL Games Displaying a Black Screen On My Japanese or USA PSOne Slim with Tonyhax/Tonyhax International?](#q-why-are-pal-games-displaying-a-black-screen-on-my-japanese-or-usa-psone-slim)
+
+9) [Why Are Newer PS2s Not Supported?](#q-why-are-newer-ps2s-not-supported)
+
+10) [Why is removing the FreePSXBoot memory card before booting a game required?](#q-why-is-removing-the-freepsxboot-memory-card-before-booting-a-game-equired)
+
+11) [Why does the DuckStation emulator say backdoor failed?](#q-why-does-the-duckstation-emulator-say-backdoor-failed)
+
+12) [How Can I Help?](#q-how-can-i-help)
+
 ### Q: Does the type of CD-R I am using matter?
-A: Yes, and so does the burner you use. I have wrote about my findings and put together [The Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr).
 
-### Q: My game doesn't boot or it locks up?
-A: This is probably a disc read issue. Ensure you are using high quality CD-Rs and a good burner. If that doesn't help, you may need to [refurbish](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/) your console. If all of that doesn't help, maybe there is an issue in International. Please open a [generic issue](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/).
+**A**: Yes, and so does the burner you use. I have wrote about my findings and put together [The Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr).
 
-### Q: My game's FMVs or audio is stuttering or locking up?
-A: This is almost certainly a disc read issue, please see the above answer.
+### Q: My console isn't reading discs?
 
-### Q: Can I use International to play protected games, and will it turn my non-stealth mod-chip into a stealth mod-chip?
-A: Yes, International automatically detects protected games and applies a bypass to enable play. Each game is supported on a game by game basis, and there is a [list](anti-piracy-bypass.md#protected-games-support). If you know of a protected game that isn't on the list, or isn't working in some situation, please open an [anti-piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&projects=&template=antipiracy-issue.md&title=) and tell me all about it.
+**A**: If your already following the [The Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr), your console's optical drive may need a refurbishment. See my [Unofficial PSX CD-ROM Drive Service Manual](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/) for PS1 consoles. I don't have one for PS2 yet.
 
-### Q: Can I Use International To Play LibCrypt protected games?
-A: Yes, but currently you must rip the disc image, patch it with the [LibCrypt Patcher](https://alex-free.github.io/libcrypt-patcher), and burn it to a CD-R. Real LibCrypt discs may still trip non-stealth mod-chip detection.
+### Q: Why is my game not booting, locking up/crashing, audio stuttering, or FMV freezing?
 
-### Q: Can I Use International To Play EDC protected games?
-A: Yes, but currently you must burn the disc image in a [specific way](anti-piracy-bypass.md#edc).
+**A**: This is probably a disc read issue. Ensure you are using high quality CD-Rs, a good burner, and your console's optical drive is in good condition (see above question). If all of that doesn't help, maybe there is an issue in International. In such a case, please open a [generic issue](https://alex-free.github.io/unofficial-ps1-cd-drive-service-manual/).
+
+### Q: Can I use International to play protected games?
+
+**A**: Yes, International automatically detects protected games and applies a bypass to enable play. Each game is supported on a game by game basis, and there is a [list](anti-piracy-bypass.md#protected-games-support). If you know of a protected game that isn't on the list, or isn't working in some situation, please open an [anti-piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&projects=&template=antipiracy-issue.md&title=) and tell me all about it.
 
 ### Q: Can I play games that span multiple discs (i.e. Fear Effect) / have disc change features?
-A: If you have any USA or PAL console, yes. The Japanese consoles can not currently support this in the same way. However many multi-disc games may allow you to save before you need to disc swap. So then you can reset the console, restart International, boot disc 2, and then load the save from disc 2. Games that don't have such a save file work around include Parasite Eve, Chrono Chross, and Fear Effect. Let me know if you have found other games like this. 
 
-If you really must play a multi-disc game on your Japanese console, **you can perform a mid-game hot-swap-trick but I highly don't recommend doing this since you risk damaging the psx and your discs.** A proper software-based seamless workaround is planned for the Japanese consoles.
-
-PS1 Mid-Game Hot-Swap-Trick:
-
-*   When the game asks you to insert disc 2, unblock the lid sensor and remove the CD.
-*   Put **any real authentic Japanese PSX disc** into the PS1 drive.
-*   You will now be performing a _mid-game hot-swap trick_. Have the disc 2 you want to play in one hand, and whatever your using to block the lid sensor in another. Now block the lid sensor, freeing your one hand. Wait until the original real Japanese PSX disc stats spinning fast (~3 seconds) and **immediately** swap the disc with your free hand, and put in the actual disc 2 you want to play. You can now continue playing your game that spans multiple discs normally! This trick would work for games that span even more then 2 discs as well.
-
-PS2 Mid-Game Hot-Swap Trick
-
-This [swap trick method](https://consolecopyworld.com/ps2/ps2swap/lesson1.shtml) probably will suffice but I haven't tried it nor am I interested in it since again the goal is to implement a software-based approach to workaround this issue for all Japanese consoles.
+**A**: If you have any USA or PAL console, yes. If you have a Japanese console without a mod-chip, it gets more complicated. Please see the [japanese ps1 instructions (playing multiple discs)](japanese-ps1-instructions.md) and [japanese ps2 instructions (playing multiple discs)](japanese-ps2-instructions.md#playing-games-with-multiple-discs) sections for full info.
 
 ### Q: Why not combine Tonyhax and Tonyhax International into one project?
-A: Socram8888 does not own a Japanese console, nor is he interested in getting one. While Socram888 and I do work together to fix issues that effect both the original Tonyhax and Tonyhax International, we have different goals in regards to what the project should support so it makes the most sense to keep these 2 projects separate.
+
+**A**: Socram8888 does not own a Japanese console, nor is he interested in getting one. While Socram8888 and I do work together to fix issues that effect both the original Tonyhax and Tonyhax International, we have different goals in regards to what the project should support so it makes the most sense to keep these 2 projects separate.
 
 ### Q: Why Can't Tonyhax/Tonyhax International Change The Video Mode From PAL to NTSC or vice versa on PS2s?
-A: The early PS2 models that Tonyhax International supports do not have the ability to change the video mode from within PS1 mode from what we understand. 
+
+**A**: The early PS2 models that Tonyhax International supports do not have the ability to change the video mode from within PS1 mode from what we understand. 
 
 You can change the video mode first while in PS2 mode however. For now you can resort to the **PS2 homebrew software known as [PSVModeNeg](https://www.psx-place.com/threads/ps1vmodeneg-by-sp193.25050/)**, this software allows you to explicitly change the video mode. An older version of PSVModeNeg is required if you want to use it's effects with Tonyhax International, specifically [v1.0.1](https://alex-free.github.io/tonyhax-international/PS1VModeNeg-1.0.1.zip). This version simply inverses the current video mode of the console, rather then reading the PS1 game disc to figure out what video mode the disc itself expects (which is problematic when using the save game exploit since that disc must match your console's region). Here are the steps below to accomplish this:
 
@@ -247,8 +163,30 @@ You can change the video mode first while in PS2 mode however. For now you can r
 
 *   Playing through your real PSX game disc may look or act weird in the changed video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in the import disc or backup CD-R and the PS1 game will boot at last.
 
+### Q: Why Are PAL Games Displaying a Black Screen On My Japanese or USA PSOne Slim with Tonyhax/Tonyhax International?
+
+**A**: I have verified my SCPH-101 displays a black screen when switching to PAL vidoe mode (no matter if that is switched via Tonyhax original, Tonyhax International, or by the game code itself).
+
+This is a strange oddity, considering the following effects (unmodified hardware):
+1) SCPH-1000-SCPH-9XXX will output PAL, but it will be in black and white if using composite AV.
+2) SCPH-101 (confirmed by myself) and SCPH-100 (unconfirmed) will display a black screen the entire time PAL video mode is active if using composite AV.
+3) SCPH-10000-SCPH-39004 stay in their native video mode always and ignore any request to change the video resolution (from within PS1 mode), using any output cables. There is a PS1VModeNeg workaround though, see the above question.
+
+### Q: Why Are Newer PS2s Not Supported?
+
+**A**: They may be already supported, but this isn't verified or documented in any way (yet). This will hopefully be investigated by myself soon.
+
+### Q: Why is removing the FreePSXBoot memory card before booting a  game equired?
+
+**A**: The original Tonyhax and UniROM use 2 different methods to patch reading of a slot 2 FreePSXBoot memory card after starting the game. This is designed to avoid crashing/freezing issues in-game when the FreePSXBoot memory card is attempted to be parsed by game code. Unfortunatly these patches implemented by UniROM and the original Tonyhax are not 100% compatibile with all games. When enabled they cause some games to not boot up or crash. In the interest of maximum compatibility with all games, I use no patches in Tonyhax International (and simply tell users to remove the FreePSXBoot memory card). Not having these patches is why Tonyhax International can boot more games then any other loader using FreePSXBoot currently.
+
+### Q. Why does the DuckStation emulator say backdoor failed?
+
+**A**: This is some incompatibility bug in all recent DuckStation versions that happens when the unlock drive function is used in the original Tonyhax and Tonyhax International loader. A sufficently old enough DuckStation version works fine (as do all versions of no $ psx emu). Alternatively you can set your cdrom bios version to a japanese one in the advanced settings of DuckStation, and the most recent DuckStation will also work fine (as long as auto-detect region for the emulated console is selected like it is by default, or it is specified as japanese explicitly). This is because the unlock function is not used for japanese consoles.
+
 ### Q. How Can I Help?
-A. If you know C/MIPS assembly and can improve any of the code in International, open a [pull request](https://github.com/alex-free/tonyhax/pulls) with your changes. 
+
+**A**: If you know C/MIPS assembly and can improve any of the code in International, open a [pull request](https://github.com/alex-free/tonyhax/pulls) with your changes. 
 
 If you don't have programming experience something else that you could help out with is bring to my attention any protected games that are not yet supported in an [anti-piracy issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=antipiracy&projects=&template=antipiracy-issue.md&title=). 
 
@@ -260,7 +198,7 @@ If you don't have programming experience something else that you could help out 
 
 *   [EDCRE](https://alex-free.github.io/edcre) - EDC/EEC regenerator to allow patched EDC protected PSX games to be burned by CDRDAO-PLED's generic-mmc-raw driver correctly.
 
-*   [APrip Homepage](https://alex-free.github.io/aprip) - patches some later PSX games with additional anti-piracy copy protection.
+*   [APrip Homepage](https://alex-free.github.io/aprip) - created as a devlopement aid for the [anti-piracy bypass system](anti-piracy-bypass.md).
 
 *   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap) - a similar project that uses the Tonyhax International loader.
 

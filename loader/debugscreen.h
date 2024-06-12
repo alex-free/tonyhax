@@ -11,4 +11,4 @@ void debug_text_at(uint_fast16_t x, uint_fast16_t y, const char * str);
 
 void debug_switch_standard(bool pal);
 
-extern bool controller_input;
+extern bool controller_input, dont_scroll;

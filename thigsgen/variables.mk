@@ -3,7 +3,7 @@
 # Basename of all release files (.zip, .deb)
 RELEASE_BASE_NAME=thigsgen
 # Version number, passed as 'VERSION' string to $(SOURCE_FILES)
-VERSION=v2.0.3
+VERSION=v2.0.4
 # Appeneded to end of release file name
 LINUX_I386_RELEASE_NAME_SUFFIX=linux-i386-static
 LINUX_X86_64_RELEASE_NAME_SUFFIX=linux-x86_64-static

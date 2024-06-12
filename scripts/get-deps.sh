@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+    echo "Sudo privilages may be required to install build dependencies"
 if command -v dnf &> /dev/null; then
     sudo dnf install -y git autoconf automake g++ make libtool texinfo help2man ncurses-devel tinyxml2-devel cmake cdrdao python pip libstdc++-static.i686 glibc-static.i686 libstdc++-static.x86_64 mingw64-gcc mingw32-gcc mingw32-gcc-c++ mingw64-gcc-c++
 elif command -v apt &> /dev/null; then

@@ -132,7 +132,7 @@ const unsigned char cheat_engine_v1_0_4[] = {
 	const uint16_t redirect = 0xC000;
 	memcpy((void*)b0_entry, &redirect, 2); // Write the value 0xC000 to table entry we want to modify
 	//for(volatile int i = 0; i < 0x100000; i++);  // won't be optimized out by -Os, pause
-	cheat_engine_installed = 1;
+	cheat_engine_installed = true;
 }
 
 void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr) 

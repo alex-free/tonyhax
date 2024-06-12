@@ -10,7 +10,7 @@ LOADER_OBJECTS := $(patsubst %.c, %.o, $(patsubst %.S, %.o, $(wildcard *.c *.S))
 all: $(LOADER_FILES)
 
 clean:
-	$(RM) $(LOADER_FILES) *.o *.elf $(LOADER_AUTOGEN)
+	$(RM) $(LOADER_FILES) *.o *.elf *.raw $(LOADER_AUTOGEN)
 
 # Intermediate objects
 
@@ -30,11 +30,11 @@ secondary.elf: secondary.ld $(LOADER_OBJECTS)
 # Results
 
 tonyhax.mcs: secondary.elf
-	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801f6200 -raw -o secondary.raw
+	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801F4280 -raw -o secondary.raw
 	bash generate-tonyhax-mcs.sh secondary.raw tonyhax-tpl-16kb.mcs tonyhax.mcs $(TONYHAX_VERSION)
 
 HAX: tonyhax.mcs
 	bash ../util/mcs2raw.sh tonyhax.mcs
 
 tonyhax.exe: secondary.elf
-	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801f6200 -o tonyhax.exe
+	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801F4280 -o tonyhax.exe

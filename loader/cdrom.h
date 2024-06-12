@@ -5,10 +5,13 @@
 
 #define CD_CMD_GETSTAT 0x01
 #define CD_CMD_INIT 0x0A
-#define CD_CMD_TEST 0x19
 #define CD_CMD_RESET 0x1C
+#define CD_CMD_TEST 0x19
 #define CD_TEST_REGION 0x22
+#define CD_TEST_VERSION 0x20
 #define CD_CMD_SET_SESSION 0x12
+#define CD_SET_SESSION_1 0x01
+#define CD_SET_SESSION_2 0x02
 #define CD_CMD_STOP 0x08
 #define CD_CMD_GETID 0x1A
 #define CD_CMD_SETMODE 0x0E

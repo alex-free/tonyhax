@@ -82,12 +82,13 @@ busywait:
 	addi $8, -1
 	bne $8, $0, busywait
 
-	# Load temp buffer address (originally was 0x801F$400, - 0x100 from original start addr of Tonyhax: 0x801F$500) Current start addr of International is 0x801F6200
-	# Final Fantasy IX uses 0x801F4380 as the start addr of Tonyhax, so -0x100 from that is the temp buffer address.
+# Load temp buffer address (originally was 0x801FA000, - 0x100 from original start addr of Tonyhax: 0x801FA100).
+# This all will be cleared later by Tonyhax International's clearing ram function
+
 #ifdef FF9
-	li $18, 0x801F4280
+	li $18, 0x801ED300
 #else
-	li $18, 0x801F6100
+	li $18, 0x801EF180
 #endif
 
 	# Load header using FileRead

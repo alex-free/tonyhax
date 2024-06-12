@@ -4,7 +4,7 @@
 include variables-shared.mk
 
 PACKAGE_FILE = tonyhax-international-$(TONYHAX_VERSION).zip
-PACKAGE_CONTENTS = $(ENTRY_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/entrypoints/%) $(ROM_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/rom/%) $(X_ROM_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/xstation/%) $(LOADER_OUTPUT_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/loader/%) $(FREEPSXBOOT_IMAGES:%=tonyhax-international-$(TONYHAX_VERSION)/freepsxboot/%) $(BOOT_CD_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/boot-cd/%) $(GSHAX_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/gshax/%) $(ENTRY_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/entrypoints/%) $(THIGSGEN_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/gameshark/%) tonyhax-international-$(TONYHAX_VERSION)/*.md tonyhax-international-$(TONYHAX_VERSION)/LICENSE tonyhax-international-$(TONYHAX_VERSION)/images/*
+PACKAGE_CONTENTS = $(ENTRY_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/entrypoints/%) $(ROM_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/rom/%) $(X_ROM_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/xstation/%) $(LOADER_OUTPUT_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/loader/%) $(FREEPSXBOOT_IMAGES:%=tonyhax-international-$(TONYHAX_VERSION)/freepsxboot/%) $(BOOT_CD_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/boot-cd/%) $(GSHAX_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/gshax/%) $(ENTRY_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/entrypoints/%) $(THIGSGEN_FILES:%=tonyhax-international-$(TONYHAX_VERSION)/gameshark/*%) tonyhax-international-$(TONYHAX_VERSION)/*.md tonyhax-international-$(TONYHAX_VERSION)/LICENSE tonyhax-international-$(TONYHAX_VERSION)/images/*
 
 .PHONY: clean modules clean
 
@@ -21,6 +21,7 @@ modules:
 	$(MAKE) -C util
 	$(MAKE) -C entrypoints all
 	$(MAKE) -C thigsgen all
+	cd gameshark && unzip -q '*.zip'
 	$(MAKE) -C gshax all
 	$(MAKE) -C loader clean	
 	$(MAKE) -C loader -f Makefile.freepsxboot all
@@ -52,6 +53,7 @@ clean:
 	$(MAKE) -C rom clean
 	$(MAKE) -C xstation clean
 	$(MAKE) -C thigsgen clean-build
+	scripts/test-thigsgen.sh --clean
 	$(MAKE) -C gshax clean
 	$(RM) tonyhax-*.zip
 

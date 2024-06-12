@@ -6,7 +6,7 @@
 SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Common variables
-TONYHAX_VERSION=v1.5.1
+TONYHAX_VERSION=v1.5.2
 
 CC=mipsel-none-elf-gcc
 CFLAGS=-Wno-error=array-bounds -G0 -Oz -Wall -Wextra -Wno-main -EL -march=r3000 -mabi=32 -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION)
@@ -79,7 +79,7 @@ ENTRY_RAW := \
 	BESLES-03956TNHXG01 \
 	BESLES-04095XSMOTO
 
-ENTRY_FILES := $(ENTRY_MCS) $(ENTRY_RAW) entry-bb.bin entry.bin
+ENTRY_FILES := $(ENTRY_MCS) $(ENTRY_RAW) entry-bb.bin entry-bb.elf entry.bin entry.elf entry-ff9.bin entry-ff9.elf
 
 # Program loader variables
 
@@ -174,4 +174,4 @@ GSHAX_FILES := wipeout-usa/wipeout-usa-gshax-code.txt wipeout-usa/CODELIST00 par
 
 # THIGSGEN Files
 
-THIGSGEN_FILES := *.zip *.deb
+THIGSGEN_FILES := *.deb thigsgen-v2.0.4-linux-i386-static/* thigsgen-v2.0.4-linux-x86_64-static/* thigsgen-v2.0.4-windows-i686-static/* thigsgen-v2.0.4-windows-x86_64-static/*

@@ -53,6 +53,7 @@ _List Notes:_
 | [Barbie: Super Sports (Spain)](http://redump.org/disc/5579/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [BDFL Manager 2001 (Germany)](http://redump.org/disc/17767/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [BDFL Manager 2002 (Germany)](http://redump.org/disc/3320/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Beat Mania Append 3rdMix (Japan)](http://redump.org/disc/2306/) | [EDC], [Key Disc](#key-disc) | Key Disc Disc Change/Boot. | EDC - NO. Key Disc - YES, boot game directly from Tonyhax International, do not use a Key Disc to boot it. |
 | [Beat Mania 6thMix + Core Remix (Japan)](http://redump.org/disc/16285/) | [APv2](#apv2) | Boot. | YES | 
 | [Beat Mania Append GottaMix (Japan)](http://redump.org/disc/3550/) | [APv2](#apv2), [Key Disc](#key-disc) | Key Disc Disc Change/Boot. | APv2 - YES. Key Disc - YES, boot game directly from Tonyhax International, do not use a Key Disc to boot it. |
 | [Beatmania Best Hits (Japan) (Rev 0)](http://redump.org/disc/36175/) | [APv2](#apv2) | Boot. | YES |

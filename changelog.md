@@ -1,5 +1,17 @@
 # [Tonyhax International](readme.md) -> Changelog
 
+## Version 1.5.1 (6/3/2024)
+
+*   [tonyhax-international-v1.5.1](https://github.com/alex-free/tonyhax/releases/download/v1.5.1i/tonyhax-international-v1.5.1.zip)
+
+----------------------------------
+
+Changes:
+
+*   Added APv1 bypass for Um Jammer Lammy (Europe) and Um Jammer Lammy (USA Demo). Added APv2 bypass for Dance Dance Revolution (USA).
+
+----------------------------------
+
 ## Version 1.5.0 (5/28/2024)
 
 *   [tonyhax-international-v1.5.0](https://github.com/alex-free/tonyhax/releases/download/v1.5.0i/tonyhax-international-v1.5.0.zip)

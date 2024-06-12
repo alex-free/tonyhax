@@ -10,7 +10,7 @@ LOADER_OBJECTS := $(patsubst %.c, %.o, $(patsubst %.S, %.o, $(wildcard *.c *.S))
 all: $(LOADER_FILES)
 
 clean:
-	$(RM) $(LOADER_FILES) FF9 tonyhax-ff9.mcs *.o *.elf $(LOADER_AUTOGEN)
+	$(RM) $(LOADER_FILES) FF9 tonyhax-ff9.mcs *.o *.elf *.raw $(LOADER_AUTOGEN)
 
 # Intermediate objects
 
@@ -23,18 +23,18 @@ clean:
 orca.inc: orca.img
 	bash ../util/bin2h.sh ORCA_IMAGE orca.img orca.inc
 
-secondary.elf: secondary.ld $(LOADER_OBJECTS)
-	$(LD) $(LDFLAGS) -T secondary.ld $(LOADER_OBJECTS) -o $@
+secondary.elf: secondary-ff9.ld $(LOADER_OBJECTS)
+	$(LD) $(LDFLAGS) -T secondary-ff9.ld $(LOADER_OBJECTS) -o $@
 	bash insert-tonyhax-crc.sh secondary.elf
 
 # Results
 
 tonyhax.mcs: secondary.elf
-	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801F4380 -raw -o secondary.raw
+	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801F2400 -raw -o secondary.raw
 	bash generate-tonyhax-mcs.sh secondary.raw tonyhax-tpl-ff9-16kb.mcs tonyhax-ff9.mcs $(TONYHAX_VERSION)
 
 HAX: tonyhax.mcs
 	bash ../util/mcs2raw.sh tonyhax-ff9.mcs
 
 tonyhax.exe: secondary.elf
-	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801F4380 -o tonyhax.exe
+	../pcsx-redux-support/ps1-packer secondary.elf -tload 0x801F2400 -o tonyhax.exe

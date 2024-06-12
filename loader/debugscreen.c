@@ -210,8 +210,33 @@ void debug_write(const char * str, ...) {
 
 	// Flush old textures
 	gpu_flush_cache();
+	bool do_repeat = false;
 
-	if (strcmp(last_printed_line, formatted) != 0) {
+	if((strcmp(last_printed_line, formatted) != 0) && (dont_scroll) && (!do_repeat)) {
+		do_repeat = true; // display text repeated after inital change
+		// Line's text is different, so scroll up
+		gpu_size_t line_size = {
+			.width = SCREEN_WIDTH - LOG_MARGIN,
+			.height = LOG_LINE_HEIGHT,
+		};
+		for (int line = 1; line < LOG_LINES; line++) {
+			gpu_point_t source_line = {
+				.x = LOG_MARGIN,
+				.y = LOG_START_Y + LOG_LINE_HEIGHT * line
+			};
+			gpu_point_t dest_line = {
+				.x = LOG_MARGIN,
+				.y = LOG_START_Y + LOG_LINE_HEIGHT * line
+			};
+			gpu_copy_rectangle(&source_line, &dest_line, &line_size);
+		}
+
+		// Copy to last printed buffer and reset counter
+		strcpy(last_printed_line, formatted);
+		last_printed_count = 1;
+
+		to_print = formatted;
+	} else if ((strcmp(last_printed_line, formatted) != 0) && (!do_repeat)) {
 		// Line's text is different, so scroll up
 		gpu_size_t line_size = {
 			.width = SCREEN_WIDTH - LOG_MARGIN,
@@ -234,6 +259,7 @@ void debug_write(const char * str, ...) {
 		last_printed_count = 1;
 
 		to_print = formatted;
+	
 	} else {
 		last_printed_count++;
 

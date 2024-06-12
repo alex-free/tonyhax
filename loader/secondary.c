@@ -27,24 +27,23 @@
 //to test behavior without any APv2 bypasses enabled (useful for testing D0 AP bypass codes via save game file gameshark functionality rather then internal activate_anti_piracy() function), uncomment:
 //#define AP_BYPASS_DISABLE
 
-uint8_t sscmd;
-uint8_t cdcontrollerver[4];
-
 const char * p5_localized;
 const char * region_name;
 
-bool is_beat_mania_append_gottamix = 0;
-bool is_beat_mania_append_3rdmix = 0;
-bool calibrate_laser = 0; // Only Japanese VC2 and VC3 consoles need this so it is off by default
-bool bugged_setsession = 0; // VC0 A, VC0 B, and VC1 A CDROM Controller BIOS versions all have a buggy SetSession command that requires a special work around to use
-bool enable_unlock = 1; // Disabled on VC0A and VC0B Japanese CDROM Controller BIOS versions automatically. On VC1A+ the testregion command is run and if the region is Japan it is also disabled.
-bool controller_input = 0; // When enabled, debug_write does not display the repeat messages counter. This is so we can draw a blank line and then wait for controller input using vsync in debug_write.
-bool installed_cheat_engine = 0; // The cheat engine is installed when parse_memcard_save_gameshark_codes() completes. Some games may go on to set explicit anti-piracy bypass GameShark codes however, so to prevent the cheat engine from being installed twice (which is wasteful) we set a flag here.
-bool did_read_mc = 0; // We need to set the GameShark codes AFTER the last bios_reintialize(). I want to call bios_reinitilize() after reading the memory card data to prevent anything screwy in booting games, so we can just parse the data later after the final bios_reinitialize since it's still in RAM.
+bool is_beat_mania_append_gottamix = false; // Special handling for no-swap bypass needed for anti-piracy bypass system
+bool calibrate_laser = false; // Only Japanese VC2 and VC3 consoles need this so it is off by default
+bool bugged_setsession = false; // VC0 A, VC0 B, and VC1 A CDROM Controller BIOS versions all have a buggy SetSession command that requires a special work around to use
+bool enable_unlock = true; // Disabled on VC0A and VC0B Japanese CDROM Controller BIOS versions automatically. On VC1A+ the testregion command is run and if the region is Japan it is also disabled.
+bool controller_input = false; // When enabled, debug_write does not display the repeat messages counter. This is so we can draw a blank line and then wait for controller input using vsync in debug_write.
+bool dont_scroll = false; // When enabled, the screen doesn't scroll (for memory card save file selection)
+bool installed_cheat_engine = false; // The cheat engine is installed when parse_memcard_save_gameshark_codes() completes. Some games may go on to set explicit anti-piracy bypass GameShark codes however, so to prevent the cheat engine from being installed twice (which is wasteful) we set a flag here.
+bool did_read_mc = false; // We need to set the GameShark codes AFTER the last bios_reintialize(). I want to call bios_reinitilize() after reading the memory card data to prevent anything screwy in booting games, so we can just parse the data later after the final bios_reinitialize since it's still in RAM.
+
+uint16_t mc_base = 0x102; // start of gs code data in memory card buffer
+
 uint8_t number_of_gameshark_code_lines; // part of my basic format to store codes, this tells us how many we will activate
 uint8_t * user_start = (uint8_t *) 0x80010000;
-uint16_t mc_base = 0x102; // start of gs code data in memory card buffer
-bool no_system_cnf = 0;
+
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
 
@@ -53,7 +52,14 @@ void * address;		// For Calculating BIOS Functions
 uint8_t j;			// Joypad
 uint8_t padbuf[2][0x22];	// Joypad Buffers
 
-void try_boot_cd(); // needs to be defined for format_memcard()
+void try_boot_cd(); // for access in memory card features
+
+// re-usable strings for debug_write(). Due to compiler optimzations for size already being enabled, this isn't as black and white as just put any repeated strings here. It has to make sense (and visably reduce the size of secondary.elf) which it does in the below cases.
+#define memory_card_in_slot "memory card in slot"
+#define press_triangle "Press TRIANGLE to"
+#define press_circle "Press CIRCLE to"
+#define press_cross "Press CROSS to"
+
 
 #if !defined TOCPERFECT
 #if defined ROM
@@ -85,12 +91,17 @@ void controller_input_stop() { // this doubles as 'closing' the memory card func
 	((void (*)(void)) address)();	// BIOS StopPad exec
 }
 
-void mc_controller_wait_on_error() {
-	for(volatile int i = 0; i < 0x100000; i++); // Pause to not spam a memory card read error message if O is pressed down
+void memory_card_and_controller_wait() {
+	for(volatile int i = 0; i < 0x100000; i++); // Pause to not spam a memory card read error message if a button is pressed down, and to ensure successful open/read of memory card which requires a waiting period in between calls
 }
 
-void start_memcard() {
-	debug_write("Reading MC...");
+void save_file_number_select_wait() // 1/2 as responsive for quicker save file selection ui
+{
+	for(volatile int i = 0; i < 0x50000; i++); // Pause
+}
+
+void memory_card_init() {
+	debug_write("Memory card init...");
 	// BIOS Function InitCard(pad_enable)
 	int32_t pad_enable = 1; 
 	address = (uint32_t *) GetB0Table()[0x4A];
@@ -101,9 +112,19 @@ void start_memcard() {
 	// BIOS Function _bu_init()
 	address = (void *) (GetB0Table()[0x55]);
 	((void (*)(void)) address)();
+
+	memory_card_and_controller_wait(); // all current functions calling this do it next so just do it once here
 }
 
-void read_memcard() {
+void read_memory_card_controls() { // we call this more then once
+	debug_write("");
+	debug_write("%s exit without enabling codes", press_triangle);
+	debug_write("%s load codes from %s 1", press_cross, memory_card_in_slot);
+	debug_write("%s load codes from %s 2", press_circle, memory_card_in_slot);
+}
+
+
+void read_memory_card_for_gameshark_codes() {
 /*
 PSX Official Docs
 
@@ -141,107 +162,242 @@ File Error Numbers for B(54h) and B(55h)
   1Ch not enough free memory card blocks
   FFFFFFFFh invalid or unused file handle passed to B(55h) function
 */
-	start_memcard();
-	int32_t mc_fd = FileOpen("bu00:TONYHAXINTGS", FILE_READ);
 
-	// The kernel will fail to read if we don't wait a bit (here, ~1/10th of a second) (NOTE: this is not exactly 1/10th of a second, what I'm doing here, it is a bit more). This is a known issue as specified in LIBOVR46.PDF section 5-11: "If read() or write() is issued immediately after open(), an error occurs". I noticed that entry.S does this so I do it here as well now
-	mc_controller_wait_on_error();
+	int32_t mc_fd; // assign to slot 1 or slot 2 filepath 
+	char slot;
+	char * save_file;
+	bool did_select_card = false; // can exit out before selecting
+	bool card_select_unsuccessful = false; // detect errors in reading save file
 
-	if(mc_fd == -1) {
-		mc_controller_wait_on_error();
-		debug_write("Can not read MC, read error %d", GetLastError());
-		#if defined FREEPSXBOOT
-			debug_write("Ensure the FreePSXBoot memory card has been removed");
-		#endif
-		debug_write("Please try reinserting MC");
-	}
+	memory_card_init();
+	read_memory_card_controls();
 
-	int32_t read;
+	while(!did_select_card) { 
+		j = padbuf[0][3] ^ 0xFF;
+		if(j == 0x40) { // X button
+			memory_card_and_controller_wait();
+			save_file = "bu00:TONYHAXINTGS";
+			did_select_card = true;
+			slot = 1;
+		} else if(j == 0x20) { // Circle button
+			memory_card_and_controller_wait();
+			save_file = "bu10:TONYHAXINTGS";
+			did_select_card = true;
+			slot = 2;
+		} else if(j == 0x10) { // Triangle button
+			memory_card_and_controller_wait();
+			break;	
+		}
 
-	if (mc_fd > 0) {
-		read = FileRead(mc_fd, user_start, 0x2000); // read the entire file "TONYHAXINTGS" to the start of 'user RAM' (which will be cleared later before booting an executable). So 0x80010000-0x80012000 in RAM contains the contents of "TONYHAXINTGS". 
-		// 8192 % 64 = 128
-		FileClose(mc_fd);
-		
-		if (read == -1) {
-			mc_controller_wait_on_error();
-			debug_write("TONYHAXINTGS read error %d", GetLastError());
-		} else {
-			number_of_gameshark_code_lines = user_start[mc_base + 1];
-			debug_write("%d code lines detected", number_of_gameshark_code_lines);
+		if(did_select_card) {
+			debug_write("Select save file name for %s %d", memory_card_in_slot, slot);
+			debug_write("");
+			debug_write("%s increase the save file name's number", press_triangle);
+			debug_write("%s decrease the save file name's number", press_cross);
+			debug_write("%s confirm save file name selection", press_circle);
+			debug_write("");
 
-			uint8_t sum;
-			uint8_t prev = 0;
-			uint8_t next;
-			uint8_t checksum_in_save_file = user_start[mc_base];
+			char save_file_number = 0;
+			char previous_save_file_number = 0;
+    		char selected_save_file_full_path[22]; // +2 for the number and the null terminator
+			bool first_run = true;
+			memory_card_and_controller_wait();
 
-			for (int i = 0x103; i < 0x2000; i++)
+			dont_scroll = true; // beautiful!
+
+			while(1)
 			{
-				//debug_write("%x: @ %x", &user_start[i], user_start[i]);
-				next = user_start[i];
-				sum = prev + next;
-				sum &= 0xFF;
-				prev = sum;
+				j = padbuf[0][3] ^ 0xFF;
+
+				if(j == 0x40) { // Cross button
+					if(save_file_number > 0)
+					{
+						save_file_number--;
+					}
+				} else if(j == 0x10) { // Triangle button
+					if(save_file_number < 14) // max number of save files per memory card is 15 (0-14)
+					{
+						save_file_number++;
+					}
+				} else if(j == 0x20) { // Circle button
+					break;
+				}
+
+				if((save_file_number != previous_save_file_number) || (first_run)) {
+					debug_write("%s%d", save_file, save_file_number);
+					save_file_number_select_wait(); // slow down
+
+					if(first_run) {
+						first_run = false;
+					}
+				}
+
+				previous_save_file_number = save_file_number; // only update display on new selection or first run for starting reference
+			}
+			dont_scroll = false;
+
+    		// where we're going, we don't need sdks
+
+    		for (int i = 0; i < 17; i++) {
+        		selected_save_file_full_path[i] = save_file[i];
+   	 		}
+
+			// get ascii for string append
+			if(save_file_number < 10) // single digit
+			{
+				save_file_number += 0x30; // add 0x30 for 0-9
+				selected_save_file_full_path[17] = save_file_number;
+				selected_save_file_full_path[18] = '\0'; // null terminate
+
+				/* debug
+				for(char i = 0; i < 19; i++)
+					debug_write("%x", selected_save_file_full_path[i]);
+				*/
+			} else {
+				selected_save_file_full_path[17] = 0x31; // 1
+
+				if(save_file_number == 10) { // double digit values
+					selected_save_file_full_path[18] = 0x30; // 0				
+				} else if(save_file_number == 11) {
+					selected_save_file_full_path[18] = 0x31; // 1			
+				} else if(save_file_number == 12) {
+					selected_save_file_full_path[18] = 0x32; // 2			
+				} else if(save_file_number == 13) {
+					selected_save_file_full_path[18] = 0x33; // 3
+				} else if(save_file_number == 14) {
+					selected_save_file_full_path[18] = 0x34; // 4				
+				}
+				
+				selected_save_file_full_path[19] = '\0'; // null terminate
+				/* debug
+				for(char i = 0; i < 20; i++)
+					debug_write("%x", selected_save_file_full_path[i]);
+				*/
 			}
 
-			if(checksum_in_save_file == sum) {
-				debug_write("Checksum: %x Verified", sum);
-				did_read_mc = 1; // set flag to parse codes uploaded to RAM, right before clearing RAM itself and booting the game
-			} else {
-				debug_write("Checksum: %x did not match the expected checksum %x!", sum, checksum_in_save_file);
-				debug_write("No codes enabled, the TONYHAXINTGS file may corrupted");
+			mc_fd = FileOpen(selected_save_file_full_path, FILE_READ);
+
+			if(mc_fd == -1) {
+				memory_card_and_controller_wait();
+				debug_write("Can not open %s, read error %d", selected_save_file_full_path, GetLastError());
+				#if defined FREEPSXBOOT
+					debug_write("Verify that the FreePSXBoot memory card has already been removed");
+				#endif
+				did_select_card = false;
+			} else if (mc_fd > 0) {
+				int32_t read;
+
+				read = FileRead(mc_fd, user_start, 0x2000); // read the entire file "TONYHAXINTGS" to the start of 'user RAM' (which will be cleared later before booting an executable). So 0x80010000-0x80012000 in RAM contains the contents of "TONYHAXINTGS". 
+				// 8192 % 64 = 128
+				FileClose(mc_fd);
+
+				if (read == -1) {
+					memory_card_and_controller_wait();
+					debug_write("Can not read %s, read error %d", selected_save_file_full_path, GetLastError());
+					did_select_card = false;
+				} else {
+					number_of_gameshark_code_lines = user_start[mc_base + 1];
+					debug_write("%d code lines detected", number_of_gameshark_code_lines);
+
+					uint8_t sum;
+					uint8_t prev = 0;
+					uint8_t next;
+					uint8_t checksum_in_save_file = user_start[mc_base];
+
+					for (int i = 0x103; i < 0x2000; i++)
+					{
+						//debug_write("%x: @ %x", &user_start[i], user_start[i]);
+						next = user_start[i];
+						sum = prev + next;
+						sum &= 0xFF;
+						prev = sum;
+					}
+
+					if(checksum_in_save_file == sum) {
+						debug_write("%s checksum: %x verified", selected_save_file_full_path, sum);
+						did_read_mc = 1; // set flag to parse codes uploaded to RAM, right before clearing RAM itself and booting the game
+					} else {
+						debug_write("%s checksum: %x did not match the expected checksum: %x!", selected_save_file_full_path, sum, checksum_in_save_file);
+						debug_write("No codes enabled, %s may be corrupted", selected_save_file_full_path);
+						did_select_card = false;
+					}
+				}
+			}
+
+			if(!did_select_card) { // if this is untrue here we got an error, so display the controls again to user (we are still in gameshark code load loop pulling for input on if we should select the memory card in slot 1 or slot 2 to use)
+				card_select_unsuccessful = true;
 			}
 		}
+
+		if(card_select_unsuccessful) {
+			read_memory_card_controls(); // tell user the updated controls since we are out of the previously ran loop
+			card_select_unsuccessful = false; // only print to screen once
+		} else {
+			debug_write(""); // Vblank wait for controller input
+		}
 	}
+	
+	try_boot_cd(); // simply the easiest way to return
 }
 
 void format_memcard() {
-	start_memcard();
 	/*
 	 B(41h) - FormatDevice(devicename)
 	Erases all files on the device (ie. for formatting memory cards).
 	Returns 1=okay, or 0=failed.
 	*/
-	mc_controller_wait_on_error();
+
 	bool did_format = false; // can exit out before formatting (also checks status of being successful)
-	debug_write("Press TRIANGLE to exit without formatting");
-	debug_write("Press CROSS to FORMAT Slot 1");
-	debug_write("Press CIRCLE to FORMAT Slot 2");
+	char slot = 0;
+
+	memory_card_init();
+
+	debug_write("%s exit without formatting", press_triangle);
+	debug_write("%s FORMAT %s 1", press_cross, memory_card_in_slot);
+	debug_write("%s FORMAT %s 2", press_triangle, memory_card_in_slot);
 
 	while(1) { 
 		j = padbuf[0][3] ^ 0xFF;
-		if(j == 0x40) { // X button
-			mc_controller_wait_on_error();
-			if(FormatDevice("bu00:") != 1) {
-				debug_write("Format error %d", GetLastError());
-			} else {
-				did_format = true;
+		if(j == 0x40) { // Cross button
+			memory_card_and_controller_wait();
+			
+			if(FormatDevice("bu00:") == 1) {
+				did_format = true;			
 			}
-			break; 
+
+			slot = 1;
 		} else if(j == 0x20) { // Circle button
-			mc_controller_wait_on_error();
-			if(FormatDevice("bu10:") != 1)
+			memory_card_and_controller_wait();
+
+			if(FormatDevice("bu10:") == 1)
 			{
-				debug_write("Format error %d", GetLastError());
-			} else {
-				mc_controller_wait_on_error();
 				did_format = true;
 			}
-			break;	
+
+			slot = 2;
 		} else if(j == 0x10) { // Triangle button
-			mc_controller_wait_on_error();
-			break;	
+			memory_card_and_controller_wait();
+			break;	// bail
+		}
+
+		if(did_format) {
+			break;
+		}
+
+		if(slot > 0)
+		{
+			debug_write("Format error %d for %s %d", GetLastError(), memory_card_in_slot, slot);
+			slot = 0;
 		}
 
 		debug_write(""); // Vblank wait for controller input
 	}
 
 	if(did_format) {
-		debug_write("Success!");
+		debug_write("Format successful for %s %d", memory_card_in_slot, slot);
 	}
 
-	controller_input_stop();
-	try_boot_cd(); // resets everything
+	try_boot_cd(); // simply the easiest way to return
 }
 
 void parse_memcard_save_gameshark_codes() {
@@ -340,8 +496,8 @@ void log_bios_version() {
 	 * By adding 11 we get to Version, which we'll compare as a shortcut
 	 */
 	const char * version;
-
-	if (strncmp(BIOS_VERSION + 11, "Version", 7) == 0) {
+	
+	if(strncmp(BIOS_VERSION + 11, "Version", 7) == 0) {
 		version = BIOS_VERSION + 19;
 	} else {
 		version = "1.0 or older";
@@ -418,13 +574,13 @@ void wait_lid_status(bool open) {
 				controller_input_stop();
 				run_shell(); // launch Sony BIOS
 			} else if(j == 0x20) { // Circle button
-				read_memcard();
+				read_memory_card_for_gameshark_codes();
 			} else if(j == 0x10) { // Triangle button
 				format_memcard();
 			}
 		#else
 			if(j == 0x20) { // Circle button
-				read_memcard();
+				read_memory_card_for_gameshark_codes();
 			} else if(j == 0x10) { // Triangle button
 				format_memcard();
 			}
@@ -488,39 +644,41 @@ bool licensed_drive() {
 #endif // TOCPERFECT
 
 void re_cd_init() {
-	debug_write("Reinitializing kernel"); 
+	debug_write("BIOS re-int"); 
 	bios_reinitialize();
 	bios_inject_disc_error();
 	debug_write("Stopping Motor"); // Significantly improves reading data from disc
 	cd_command(CD_CMD_STOP, NULL, 0); cd_wait_int(); cd_wait_int();
 	
-	debug_write("Initializing CD");
+	debug_write("CD init");
 	if (!CdInit()) {
-		debug_write("Init failed");
+		debug_write("CD init failed");
 		return;
 	}
 }
 
 void try_boot_cd() {
+	bool no_system_cnf = false;
 	int32_t read;
-#if defined FREEPSXBOOT
+
+// we don't use freepsxboot patches for maximum game compatibility
+#if defined FREEPSXBOOT 
 	debug_write("REMOVE THE FREEPSXBOOT MEMORY CARD FROM YOUR CONSOLE...");
 	debug_write("BEFORE BOOTING ANY GAME!");
-#elif defined ROM
-	debug_write("");
+#endif
+
+debug_write("");
+#if defined ROM
 	if(enable_unlock)
 	{
-		debug_write("With the CD drive open, press CROSS to boot the Sony BIOS");
+		debug_write("%s with the CD drive open to boot the Sony BIOS", press_cross);
 	} else {
-		debug_write("Press CROSS to boot the Sony BIOS"); // japanese consoles don't neccesarily need the drive open at this point to do this behavior, it could be in a lid-sensor block state
+		debug_write("%s boot the Sony BIOS", press_cross); // japanese consoles don't neccesarily need the drive open at this point to do this behavior, it could be in a lid-sensor block state
 	} 
 #endif
 
-#if !defined ROM
-	debug_write("");
-#endif
-	debug_write("Press CIRCLE to load GameShark codes from Memory Card");
-	debug_write("Press TRIANGLE to FORMAT A MEMORY CARD");
+	debug_write("%s load GameShark codes from a memory card", press_circle);
+	debug_write("%s FORMAT A MEMORY CARD", press_triangle);
 	debug_write("");
 
 #if !defined XSTATION
@@ -528,19 +686,19 @@ void try_boot_cd() {
 
 #if !defined TOCPERFECT
 	if(enable_unlock) {
-		debug_write("Put in a backup/import disc");
-		debug_write("Close the drive to boot it");
+		debug_write("Put in a backup/import disc, then close the drive to boot");
 		wait_lid_status(true); // doesn't wait during the ROM method, unsure why but it is what we want as it allows us to auto-boot with the ROM boot method
 		wait_lid_status(false);
 	} else {
-		if(is_lid_open() || !licensed_drive()) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licensed (if it is not licensed but not open then the drive is closed and the user can open it and license it)
+		if(is_lid_open() || !licensed_drive() ) {	// If lid is open drive is not licensed, and if lid is closed we check if it is licensed (if it is not licensed but not open then the drive is closed and the user can open it and license it)
+			debug_write("To begin boot:");
 			debug_write("Put in a real NTSC-J PSX game disc, then block the lid sensor");
 			wait_lid_status(true);
 			wait_lid_status(false); // Blocking lid sensor = 'closing lid'
 
-            debug_write("Initializing CD");	// Drive will be in licensed state after this is successful
+            debug_write("CD init");	// Drive will be in licensed state after this is successful
 			if (!CdInit()) {
-				debug_write("Init failed");
+				debug_write("CD Init failed");
 				debug_write("Try unblocking then blocking the lid sensor again");
 				return;
 			}
@@ -554,7 +712,7 @@ void try_boot_cd() {
 
 		debug_write("(Keep the lid sensor blocked until turning off the console)");
 		debug_write("Remove the real NTSC-J PSX game disc");
-		debug_write("Put in a backup/import disc, then press CROSS to boot it"); // Thanks MottZilla!
+		debug_write("Put in a backup/import disc, then press CROSS to boot"); // Thanks MottZilla!
             
 		while(1) { 
 			j = padbuf[0][3] ^ 0xFF;
@@ -562,7 +720,7 @@ void try_boot_cd() {
 			if(j == 0x40) {
 				break; // X button boots disc
 			} else if(j == 0x20) { // Circle button enables codes
-				read_memcard(); // this allows Japanese console users to enable user supplied GameShark codes without having to unblock the lid sensor, resetting authentication which would just be more unnecessary steps.
+				read_memory_card_for_gameshark_codes(); // this allows Japanese console users to enable user supplied GameShark codes without having to unblock the lid sensor, resetting authentication which would just be more unnecessary steps.
 			} else if(j == 0x10) { // Triangle button formats memory card
 				format_memcard();
 			}
@@ -577,22 +735,27 @@ void try_boot_cd() {
 	if(!enable_unlock) {
 		if(bugged_setsession) {
 			debug_write("Sending SetSessionSuperUltraCommandSmash v2, please wait"); // DuckStation can get stuck here if you swap the disc and don't wait a few seconds (DuckStation auto starts the motor on disc swap which is actually super annoying since if this executes while it is doing the emulated motor on it will lock up, and it doesn't even need to work like that since real hardware doesn't and game code always starts up a swap disc for i.e. multi-disc games). DuckStation also always emulates a VC1A which triggers this code path with any Japanese BIOS.
-			sscmd = 2; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int(); // There is a 3rd response we are ignoring by sending SetSession 1 next ASAP after SetSession 2.
-			sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
+			
+			int8_t session = CD_SET_SESSION_2;
+			cd_command(CD_CMD_SET_SESSION, (unsigned char *)&session, 1); cd_wait_int(); cd_wait_int(); // There is a 3rd response we are ignoring by sending SetSession 1 next ASAP after SetSession 2.
+			
+			session = 1;
+			cd_command(CD_CMD_SET_SESSION, (unsigned char *)&session, 1); cd_wait_int(); cd_wait_int();
 		} else {
 			debug_write("Sending SetSession 1");
-			sscmd = 1; cd_command(CD_CMD_SET_SESSION,(unsigned char *)&sscmd,1); cd_wait_int(); cd_wait_int();
+			int8_t session = 1;			
+			cd_command(CD_CMD_SET_SESSION, (unsigned char *)&session, 1); cd_wait_int(); cd_wait_int();
 		
 			if(calibrate_laser) { // VC2 and VC3s do auto Bias/Gain calibration when reading a newly inserted real NTSC-J PS1 disc. A swapped in CD-R or just a different disc in general needs this to be updated
         		debug_write("Calibrating laser");
         		cbuf[0] = 0x50; cbuf[1] = 0x38; cbuf[2] = 0x15; cbuf[3] = 0x0A;	// ModeCompensateTrackingAutoGain
-				cd_command(CD_CMD_TEST,&cbuf[0],4); 
+				cd_command(CD_CMD_TEST, &cbuf[0], 4); 
 				cd_wait_int();
 			}		
 		}
 	}
 #else // XSTATION DEFINED
-	debug_write("Open and then close the CD drive lid");
+	debug_write("Open and then close the CD drive lid to continue");
 	wait_lid_status(true); // doesn't wait during the ROM method, unsure why but it is what we want as it allows us to auto-boot with the ROM boot method
 	wait_lid_status(false);
 #endif // XSTATION
@@ -657,10 +820,11 @@ void try_boot_cd() {
 	}
 
 	// PS2s in PS1 mode can't switch video modes (at least like this from what we know), see https://github.com/socram8888/tonyhax/issues/25
-	if(bios_is_ps1() == true) {
-		debug_write("Game's region is %s. Using %s video.", game_region, game_is_pal ? "PAL" : "NTSC");
+	if((bios_is_ps1() == true) && (game_is_pal != gpu_is_pal())) {
+		debug_write("Switching video mode to %s for game region %s", game_is_pal ? "PAL" : "NTSC", game_region);
+		debug_switch_standard(game_is_pal);
 	} else {
-		debug_write("Game's region is %s", game_region);
+		debug_write("Game region is %s", game_region);
 	}
 
 	// Defaults if no SYSTEM.CNF file exists
@@ -672,6 +836,7 @@ void try_boot_cd() {
 	char bootfilebuf[32];
 	debug_write("Loading SYSTEM.CNF");
 	// PS2s have a hardware/BIOS bug that results in a seek issue when doing massive seeks from say LBA 4 to 290000+ when dealing with 80 minute media, see https://github.com/socram8888/tonyhax/issues/24#issuecomment-1823585149
+#if !defined(FREEPSXBOOT) && !defined(XSTATION) && !defined(ROM) && !defined(TOCPERFECT)
 	if(bios_is_ps1() == false) {
 		uint32_t system_cnf_lba = CdGetLbn("SYSTEM.CNF;1");
 		if(system_cnf_lba != 0) {
@@ -696,6 +861,7 @@ void try_boot_cd() {
 			}
 		}
 	}
+#endif
 
 	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
 	if (cnf_fd > 0) {
@@ -727,7 +893,7 @@ void try_boot_cd() {
 			debug_write("Not found");
 		}
 #else
-		if (config_get_string((char *) data_buffer, "BOOT", bootfilebuf)) {
+		if(config_get_string((char *) data_buffer, "BOOT", bootfilebuf)) {
 			bootfile = bootfilebuf;
 		} else {
 			uint32_t errorCode = GetLastError();
@@ -772,21 +938,24 @@ void try_boot_cd() {
 	debug_write("Clearing RAM");
 	bzero(user_start, &__RO_START__ - user_start);
 
+	char * append_bypass_bootfile = "cdrom:\\APPEND.EXE;1";
+
 // Only 2 known no-swap bypass games that work with the Append No Swap Bypass (By mdmdj) method
 	if((strcmp("cdrom:\\SLPM_861.84;1", bootfile)) == 0) { // BeatMania Append 3rdMix
-		bootfile = "cdrom:\\APPEND.EXE;1";
-		is_beat_mania_append_3rdmix = true;
+		bootfile = append_bypass_bootfile;
 		//debug_write("Append No Swap Bypass detected");	
+		// no anti-piracy other then key disc in this one
 	}
 
 	if((strcmp("cdrom:\\SLPM_862.29;1", bootfile)) == 0) { // BeatMania Append GottaMix
-		bootfile = "cdrom:\\APPEND.EXE;1";
-		is_beat_mania_append_gottamix = true;
+		bootfile = append_bypass_bootfile;
+		is_beat_mania_append_gottamix = true; // used for anti-piracy bootfile match replacement
 		//debug_write("Append No Swap Bypass detected");	
 	}
 
 	debug_write("Reading executable header");	
-	
+
+#if !defined(FREEPSXBOOT) && !defined(XSTATION) && !defined(ROM) && !defined(TOCPERFECT)
 	if(bios_is_ps1() == false) {
 		// CdGetLbn() needs any cdrom:\\, cdrom:\, or cdrom: in the bootfile string from SYSTEM.CNF to be stripped out. The function below is by Nicholas Noble
 		char * bootfile_for_CdGetLbn = 0;
@@ -828,6 +997,7 @@ void try_boot_cd() {
 			}
 		}
 	}
+#endif
 	
 	int32_t exe_fd = FileOpen(bootfile, FILE_READ);
 	if (exe_fd <= 0) {
@@ -898,13 +1068,6 @@ void try_boot_cd() {
 	// since that's all we can do.
 	if (exe_header->load_addr + exe_header->load_size >= &__RO_START__) {
 		debug_write("Executable won't fit. Using buggy BIOS call.");
-
-		if(bios_is_ps1() == true) {
-			if (game_is_pal != gpu_is_pal()) {
-				debug_write("Switching video mode");
-				debug_switch_standard(game_is_pal);
-			}
-		}
 		// Restore original error handler
 		bios_restore_disc_error();
 
@@ -930,14 +1093,6 @@ void try_boot_cd() {
 
 	FileClose(exe_fd);
 
-
-	if(bios_is_ps1() == true) {
-		if (game_is_pal != gpu_is_pal()) {
-			debug_write("Switching video mode");
-			debug_switch_standard(game_is_pal);
-		}
-	}
-
 	debug_write("Starting");
 
 	// Restore original error handler
@@ -962,7 +1117,9 @@ void try_boot_cd() {
 }
 
 void main() {
-	
+
+	uint8_t cd_controller_version[4];
+
 	// Undo all possible fuckeries during exploiting
 	bios_reinitialize();
 
@@ -983,18 +1140,19 @@ void main() {
 	debug_write("Resetting Drive");
 	cd_drive_init();
 
-	sscmd = 0x20; cd_command(CD_CMD_TEST,(unsigned char *)&sscmd,1); cd_wait_int(); 
-	cd_read_reply(cdcontrollerver);	// Test Command $19,$20 gets the CDROM BIOS
-	debug_write("CD BIOS: %x", *(uint32_t*) cdcontrollerver);
-   	if(cdcontrollerver[0] == 0x94) {    
-        bugged_setsession = 1;
-        enable_unlock = 0; // VC0 A and VC0 B are both from 1994 and don't support the getregion command to figure out if it is unlockable or not.
+	const int8_t version = CD_TEST_VERSION;
+	cd_command(CD_CMD_TEST, (unsigned char *)&version, 1); cd_wait_int(); 
+	cd_read_reply(cd_controller_version);	// Test Command $19,$20 gets the CDROM BIOS
+	debug_write("CD BIOS: %x", *(uint32_t*) cd_controller_version);
+   	if(cd_controller_version[0] == 0x94) {    
+        bugged_setsession = true;
+        enable_unlock = false; // VC0 A and VC0 B are both from 1994 and don't support the getregion command to figure out if it is unlockable or not.
     } 
-    else if(cdcontrollerver[1] == 0x05 && cdcontrollerver[2] == 0x16 && cdcontrollerver[0] == 0x95 && cdcontrollerver[3] == 0xC1) {     
-        bugged_setsession = 1; // NOTE I don't think this will ever be triggered but just in case. Earliest SCPH-3000s and late SCPH-1000s are VC0B and later SCPH-3000s are VC1B. Only unlockable systems have VC1A it seems.
+    else if(cd_controller_version[1] == 0x05 && cd_controller_version[2] == 0x16 && cd_controller_version[0] == 0x95 && cd_controller_version[3] == 0xC1) {     
+        bugged_setsession = true; // NOTE I don't think this will ever be triggered but just in case. Earliest SCPH-3000s and late SCPH-1000s are VC0B and later SCPH-3000s are VC1B. Only unlockable systems have VC1A it seems.
     }
-    else if((cdcontrollerver[3] == 0xC2) || (cdcontrollerver[3] == 0xC3)) {   
-        calibrate_laser = 1;
+    else if((cd_controller_version[3] == 0xC2) || (cd_controller_version[3] == 0xC3)) {   
+        calibrate_laser = true;
     }
 
 #if !defined XSTATION
@@ -1050,7 +1208,7 @@ void main() {
 	while (1) {
 		try_boot_cd();
 
-		debug_write("Reinitializing kernel");
+		debug_write("BIOS re-int");
 		bios_reinitialize();
 		bios_inject_disc_error();
 	}

@@ -62,7 +62,7 @@ bool parse()
     printf("Error, unsupported code type: %02X, bailing...\n", gameshark_code_type);
     fclose(txt);
     fclose(out);
-    remove("TONYHAXINTGS");
+    remove("TONYHAXINTGS0");
     return false;
   }
 
@@ -112,11 +112,11 @@ int main(int argc, const char *argv[])
     do_exit(1);
   }
 
-  remove("TONYHAXINTGS"); // don't care if it exists yet or not
+  remove("TONYHAXINTGS0"); // don't care if it exists yet or not
 
-  if((out = fopen("TONYHAXINTGS", "wb+")) == NULL)
+  if((out = fopen("TONYHAXINTGS0", "wb+")) == NULL)
   {
-    printf("Error: cannot create the output save file TONYHAXINTGS.\n");
+    printf("Error: cannot create the output save file TONYHAXINTGS0.\n");
     fclose(txt);
     do_exit(1);
   }
@@ -174,10 +174,10 @@ int main(int argc, const char *argv[])
 
   fseek(out, 0x102, SEEK_SET);
   fwrite(&sum, 1, 1, out);
-	printf("TONYHAXINTGS checksum: 0x%02X.\n", sum);
+	printf("TONYHAXINTGS0 checksum: 0x%02X.\n", sum);
 
   fclose(out);
   fclose(txt);
-  printf("Generated Tonyhax International save file named: TONYHAXINTGS containing %d GameShark code lines.\n", number_of_gameshark_code_lines);
+  printf("Generated Tonyhax International save file named: TONYHAXINTGS0 containing %d GameShark code lines.\n", number_of_gameshark_code_lines);
   do_exit(0);
 }

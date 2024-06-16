@@ -12,29 +12,31 @@ Compatible with all PS1 consoles (SCPH-1000 - SCPH-103) **and** Early PS2 Consol
 
 * [Flash](flashed-cheat-cart.md) a cheat cartridge (GameShark/Action Replay, etc.) with the loader.
 
-* [Memory card exploit](freepsxboot-exploit.md).
+* Memory card exploit [(FreePSXBoot)](freepsxboot-exploit.md).
 
-* Special game disc specific [GameShark Codes](gameshark-code.md) with a PSX cheat CD or cartridge such as GameShark or Action Replay.
+* Special game disc specific [GameShark Codes](gameshark-code.md) with a PSX cheat CD or cartridge (GameShark, Action Replay, etc.).
 
-* Gane disc specific [save game exploits](save-game-exploit.md) (many more then the [original Tonyhax](https://github.com/socram8888/tonyhax) are available).
+* Game disc specific [save game exploits](save-game-exploit.md).
 
-* [Boot CD](boot-cd.md).
+* [Boot CD](boot-cd.md) burned to a CD-R.
 
-* [Patch a Backup CD-R directly](https://alex-free.github.io/tocperfect).
+* Patch a Backup CD-R directly [(TOCPerfect)](https://alex-free.github.io/tocperfect).
 
 ## Additional Features
 
 * Automatic console detection and loader configuration.
 
-* Enter the originial Sony BIOS without removing the cheat cart containing the loader (for [ROM entrypoint](flashed-cheat-cart.md)).
+* More [save game exploits](save-game-exploit.md) then the [original Tonyhax](https://github.com/socram8888/tonyhax) available as entry points.
+
+* Enter the original Sony BIOS without removing the cheat cart containing the loader (for [ROM entrypoint](flashed-cheat-cart.md)).
 
 * Format memory cards directly in the loader program, including any with the [FreePSXBoot](freepsxboot-exploit.md) exploit.
 
-* Small loader size thanks to ps1-packer compression/decompression and space-concious optimizations.
+* Small loader size thanks to ps1-packer compression/decompression and space-conscious optimizations.
 
 * Boots more games via the [FreePSXBoot](freepsxboot-exploit.md) exploit successfully then any other backup loader.
 
-* The most extensive [anti-piracy bypass system](anti-piracy-bypass.md) of any PS1 soft-mod seemlessly patches protected games on the fly. Non-stealth mod-chips and unmodified consoles essentially become stealth-modded consoles.
+* The most extensive [anti-piracy bypass system](anti-piracy-bypass.md) of any PS1 soft-mod seamlessly patches protected games on the fly. Non-stealth mod-chips and unmodified consoles essentially become stealth-modded consoles.
 
 * Apply your own [GameShark codes](gameshark-code-support.md) loaded via memory card save files (up to 15 different save files per memory card, meaning you can have up to 30 different sets of GameShark codes available for selection!). Create the memory card save files on your PC, no need to type in super long codes on the console itself with a controller.
 
@@ -117,7 +119,7 @@ Changes:
 
 9) [Why Are Newer PS2s Not Supported?](#q-why-are-newer-ps2s-not-supported)
 
-10) [Why is removing the FreePSXBoot memory card before booting a game required?](#q-why-is-removing-the-freepsxboot-memory-card-before-booting-a-game-equired)
+10) [Why is removing the FreePSXBoot memory card before booting a game required?](#q-why-is-removing-the-freepsxboot-memory-card-before-booting-a-game-required)
 
 11) [Why does the DuckStation emulator say backdoor failed?](#q-why-does-the-duckstation-emulator-say-backdoor-failed)
 
@@ -176,7 +178,7 @@ This is a strange oddity, considering the following effects (unmodified hardware
 
 **A**: They may be already supported, but this isn't verified or documented in any way (yet). This will hopefully be investigated by myself soon.
 
-### Q: Why is removing the FreePSXBoot memory card before booting a  game equired?
+### Q: Why is removing the FreePSXBoot memory card before booting a game required?
 
 **A**: The original Tonyhax and UniROM use 2 different methods to patch reading of a slot 2 FreePSXBoot memory card after starting the game. This is designed to avoid crashing/freezing issues in-game when the FreePSXBoot memory card is attempted to be parsed by game code. Unfortunatly these patches implemented by UniROM and the original Tonyhax are not 100% compatibile with all games. When enabled they cause some games to not boot up or crash. In the interest of maximum compatibility with all games, I use no patches in Tonyhax International (and simply tell users to remove the FreePSXBoot memory card). Not having these patches is why Tonyhax International can boot more games then any other loader using FreePSXBoot currently.
 

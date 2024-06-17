@@ -6,7 +6,7 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Compatibility
 
-Compatible with all PS1 consoles (SCPH-1000 - SCPH-103) **and** Early PS2 Consoles (SCPH-10000 - SCPH-39004). All regions are supported (including japan). Newer PS2s _probably already work_, but this is not documented or tested for _yet_. If you got a newer 'unofficially supported' PS2 model (SCPH-50000 - SCPH-90XXX) and want to test some stuff out, let me know how it goes in a [Github issue](https://github.com/alex-free/tonyhax/issues).
+Compatible with all PS1 consoles (SCPH-1000 - SCPH-103) **and** Early PS2 Consoles (SCPH-10000 - SCPH-39004). All regions are supported (including japan). Newer PS2 console models are not supported ([see why](#q-why-are-newer-ps2s-not-supported)).
 
 ## Loader Entry Points (Ways To Start The Tonyhax International Loader)
 
@@ -176,7 +176,7 @@ This is a strange oddity, considering the following effects (unmodified hardware
 
 ### Q: Why Are Newer PS2s Not Supported?
 
-**A**: They may be already supported, but this isn't verified or documented in any way (yet). This will hopefully be investigated by myself soon.
+**A**: SCPH-50XXX - SCPH-90XXX PS2s are not supported because both `SetSession()` and the unlock commands do not function on these models. The laser re-calibration also seems to be ignored resulting in sub-optimal disc reading performance on the newer models. Technically it can still boot games but with no CD audio support and poor disc reading performance so it is not officially supported whatsoever.
 
 ### Q: Why is removing the FreePSXBoot memory card before booting a game required?
 

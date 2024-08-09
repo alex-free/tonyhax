@@ -3,8 +3,7 @@
 ## Requirements:
 
 * Any real Japanese (NTSC-J region) PS1 CD-ROM game disc.
-* A swap magic tool.
-* Being OK with modifying the DVD-ROM faceplate of the console.
+* Something to block the lid sensor. This could be a pen spring (SCPH-1000-SCPH-9000), or a piece of paper (SCPH-100).
 * Anything else required by the entry point.
 
 ## Supported Entry Points

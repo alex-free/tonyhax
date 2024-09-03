@@ -4,45 +4,35 @@ _Brought to you by [Alex Free](http://www.psxdev.net/forum/memberlist.php?mode=v
 
 Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Software backup loader exploit thing for the Sony PlayStation 1" originally created by [Socram8888](https://github.com/socram8888).  Developed by Alex Free and MottZilla with many new features and upgrades compared to the original Tonyhax.
 
-## Compatibility
-
-Compatible with all PS1 consoles (SCPH-1000 - SCPH-103) **and** Early PS2 Consoles (SCPH-10000 - SCPH-39004). All regions are supported (including japan). Newer PS2 console models are not supported ([see why](#q-why-are-newer-ps2s-not-supported)).
-
-## Loader Entry Points (Ways To Start The Tonyhax International Loader)
-
-* [Flash](flashed-cheat-cart.md) a cheat cartridge (GameShark/Action Replay, etc.) with the loader.
-
-* Memory card exploit [(FreePSXBoot)](freepsxboot-exploit.md).
-
-* Special game disc specific [GameShark Codes](gameshark-code.md) with a PSX cheat CD or cartridge (GameShark, Action Replay, etc.).
-
-* Game disc specific [save game exploits](save-game-exploit.md).
-
-* [Boot CD](boot-cd.md) burned to a CD-R.
-
-* Patch a Backup CD-R directly [(TOCPerfect)](https://alex-free.github.io/tocperfect).
-
 ## Additional Features
+
+* [GameID support](gameid.md) for MemCardPro/SD2PSX. In addition, Tonyhax International is the first to provide GameID support for early Japanese games (PSX.EXE bootfile).
+
+* Supports more [games](additional-game-support.md).
 
 * Automatic console detection and loader configuration.
 
-* More [save game exploits](save-game-exploit.md) then the [original Tonyhax](https://github.com/socram8888/tonyhax) available as entry points.
+* Additional [save game exploits](save-game-exploit.md) available as entry points.
 
-* Enter the original Sony BIOS without removing the cheat cart containing the loader (for [ROM entrypoint](flashed-cheat-cart.md)).
+* [Patch](https://alex-free.github.io/tocperfect) a Backup CD-R of a game to be started with the loader.
 
-* Format memory cards directly in the loader program, including any with the [FreePSXBoot](freepsxboot-exploit.md) exploit.
+* Use [GameShark codes](gameshark-code.md) and a cheat CD or cartridge to start the loader. 
 
-* Small loader size thanks to ps1-packer compression/decompression and space-conscious optimizations.
+* Supports more games via the [FreePSXBoot](freepsxboot-exploit.md) exploit entry point then any other backup loader.
 
-* Boots more games via the [FreePSXBoot](freepsxboot-exploit.md) exploit successfully then any other backup loader.
+* [Flash](flashed-cheat-cart.md) a cheat cartridge to start the loader. Access the original Sony BIOS without removing the cheat cartridge.
 
-* The most extensive [anti-piracy bypass system](anti-piracy-bypass.md) of any PS1 soft-mod seamlessly patches protected games on the fly. Non-stealth mod-chips and unmodified consoles essentially become stealth-modded consoles.
+* Format memory cards directly in the loader, including any with the [FreePSXBoot](freepsxboot-exploit.md) exploit.
+
+* The most extensive [anti-piracy bypass system](anti-piracy-bypass.md) of any PS1 soft-mod seamlessly patches protected games on the fly. Non-stealth mod-chips and unmodified consoles essentially become stealth-modchipped consoles with software!
 
 * Apply your own [GameShark codes](gameshark-code-support.md) loaded via memory card save files (up to 15 different save files per memory card, meaning you can have up to 30 different sets of GameShark codes available for selection!). Create the memory card save files on your PC, no need to type in super long codes on the console itself with a controller.
 
-* Speeds up your xStation's boot time with a [specialized xStation Tonyhax International ROM](xstation.md).
+* Small loader size thanks to ps1-packer compression/decompression and space-conscious optimizations.
 
-* Portable [build system](build.md) using bare-bones `mipsel-none-elf` toolchain and no SDK.
+* Speed up your xStation's boot time with a [specialized xStation Tonyhax International ROM](xstation.md).
+
+* Portable, new [build system](build.md) using bare-bones `mipsel-none-elf` toolchain and no SDK.
 
 | [Homepage](https://alex-free.github.io/tonyhax-international) | [GitHub](https://github.com/alex-free/tonyhax) | [PSX-Place Thread](https://www.psx-place.com/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles.37925/) | [PSX-Place Resource](https://www.psx-place.com/resources/tonyhax-international.1281/) | [PSXDEV Thread](http://www.psxdev.net/forum/viewtopic.php?f=66&t=3967) | [GBATemp Thread](https://gbatemp.net/threads/tonyhax-international-backup-loader-for-all-japanese-usa-and-pal-ps1-consoles-early-ps2-consoles-gameshark-cheat-cart-flasher.615892/##post-9922514) |
 
@@ -57,41 +47,47 @@ Compatible with all PS1 consoles (SCPH-1000 - SCPH-103) **and** Early PS2 Consol
 
 ## Downloads
 
-### Version 1.5.2 (6/12/2024)
+### Version 1.5.3 (9/2/2024)
 
-*   [tonyhax-international-v1.5.2](https://github.com/alex-free/tonyhax/releases/download/v1.5.2i/tonyhax-international-v1.5.2.zip)
+* [tonyhax-international-v1.5.3](https://github.com/alex-free/tonyhax/releases/download/v1.5.3i/tonyhax-international-v1.5.3.zip)
 
 ----------------------------------
 
 Changes:
 
-*   Added ability to [load gameshark codes from different save files on memory cards](gameshark-code-support.md) in slot 1 and slot 2. Up to 15 different save files containing GameShark codes can be on a memory card, so you can have up to 30 different sets of GameShark codes available for selection from within the loader now!
+* [GameID support](gameid.md) for MemCardPro/SD2PSX. Additionally, Tonyhax International is the first to support early Japanese games (with 'PSX.EXE' bootfile) with GameID. Big thanks to the [testers](https://github.com/alex-free/tonyhax/issues/64) [@lzibeti](https://github.com/lzibeti) and [@kimbapslice](https://github.com/kimbapslice)!
 
-*   Updated thigsgen to v2.0.4. The default output save file name is now `TONYHAXINTGS0`. THIGSGEN releases are now distributed in the `gameshark` folder already decompressed for you, the `.deb` files remain as they are.
+* [Modified](https://github.com/alex-free/tonyhax/blob/master/docs/ram-setups.md) RAM layout to handle a larger decompression by PS1 packer
 
-*   Added ability to update text in-place for `debug_write()`, implemented beautifully in the newly re-written gameshark memory card save file name select function.
+* Implemented a fix to work-around a [29 year old bug](https://github.com/socram8888/tonyhax/issues/161) in the game [Kileak, The Blood (Japan)](http://redump.org/disc/14371/) which caused previous versions of Tonyhax International and all versions of the original Tonyhax to not boot it successfully.
 
-*   Added official support for Beat Mania Append 3rdMix Key Disc bypass. You can boot the game with Tonyhax International directly instead of having to use an intended key disc first to do so.
+* Implemented the same functions that the original Tonyhax now uses to handle ignoring the garbage SP values in the PS-X executable header.
 
-*   Improved memory card formatter function's UX.
+* Integrated [psn00bsdk-builder](https://github.com/alex-free/psn00bsdk-builder) into the build system. You can now run `make toolchain` or `make toolchain deps` to build and or install the complete Tonyhax International dev environment on many Linux systems.
 
-*   Modifed RAM layout for larger executable decompressed size. `HAX` and `FF9` loader files are still only taking up 2 memory card slots though thanks to PS1 Packer compression.
+* Loader bug fix: closes memory card/controller input pulling for all consoles (not just Japanese ones) after reading the target boot disc.
 
-*   Added back seperate `secondary-ff9.ld`. When using anything other then the Final Fantasy IX [save game exploit](save-game-exploit.md), you get a bit more user RAM and hence higher chance to load a target PS-EXE with `exec()` (`loadandexec()` still overcomes any such issues with overlap, but it is nice to have the full target exe loaded while the loader itself is running).
+* Removed my '80 Minute CD-R PS2 hardware bug software-fix' from the loader. I have done this because while my '80 Minute CD-R PS2 hardware bug software-fix' ensures correct reading of 80 minute CD-Rs while **inside** Tonyhax International, it can not do anything about what happens in-game after being booted. At least one game ([Street Fighter Alpha 3 (USA)](http://redump.org/disc/508/)) crashes in-game due  to the PS2 hardware bug with 80 minute/700MB CD-Rs, and that can not be fixed by my software-fix. **Please instead use my [PSX80MP](https://github.com/alex-free/psx80mp) to patch games that will be burned on 80 minute/700MB CD-Rs and played on PS2s. This is not required for using 80 minute/700MB CD-Rs on PS1 consoles.**
 
-*   Loader optimizations for efficiency and size. Rewrote controller input parsing, memory card formatting, and gameshark code save file reading. Cleaned up code to use some local declarations instead of global ones when possible. Added some more comments.
-
-*   Changed video mode switching (NTSC to PAL or PAL to NTSC) to happen as early as possible. The idea with this is we only need one call to change the video mode (instead of doing it 2 different places depending on if we are using exec() or loadandexec() bios functions based on target PS-EXE size). Not only does that save some complexity, it also just makes sense. You'd want to see PAL video in the loader if your playing a PAL game (and you have everything else setup for it to actually display correctly with a NTSC PS1 that can do video mode switching), as early as possible.
-
-*   Releases now include `entry-bb.bin`, `entry-bb.elf`, `entry.bin`, `entry.elf`, `entry-ff9.bin`, and `entry-ff9.elf` (which are used to develop [save game exploits](save-game-exploit.md) and [gshax codes](https://alex-free.github.io/gshax-tool)). Distributing these files in the Tonyhax International releases negates the need to compile them yourself if you don't want to, and could allow more people to submit these to me.
-
-*   Improved [documentation on RAM layout of executable](https://github.com/alex-free/tonyhax/blob/master/docs/ram-setups.md).
-
-*   Other [general documentation improvements](readme.md#faq).
+* Documentation clean up and improvements.
 
 ----------------------------------
 
 [Previous versions](changelog.md).
+
+## Loader Entry Points (Ways To Start The Tonyhax International Loader)
+
+* [Flash](flashed-cheat-cart.md) a cheat cartridge (GameShark/Action Replay, etc.) with the loader.
+
+* Memory card exploit [(FreePSXBoot)](freepsxboot-exploit.md).
+
+* Special game disc specific [GameShark Codes](gameshark-code.md) with a PSX cheat CD or cartridge (GameShark, Action Replay, etc.).
+
+* Game disc specific [save game exploits](save-game-exploit.md).
+
+* [Boot CD](boot-cd.md) burned to a CD-R.
+
+* Patch a Backup CD-R directly [(TOCPerfect)](https://alex-free.github.io/tocperfect).
 
 ## Usage
 
@@ -194,9 +190,11 @@ If you don't have programming experience something else that you could help out 
 
 ## Relevant Software
 
-*   [TOCPerfect Patcher](https://alex-free.github.io/tocperfect) - patch the Tonyhax International loader into a disc image directly to expand the capabilities of the CD Player Swap Trick.
+*   [PlayStation Disc Burner](https://github.com/alex-free/playstation-disc-burner) - recommended burning software for Linux.
 
-*   [CDRDAO-PLED](https://alex-free.github.io/cdrdao) - recommended burning software for Linux.
+*   [PSX80MP](https://github.com/alex-free/) - Patch PS1 and PS2 CD games to work on early PS2 models when burned to 80 minute/700MB CD-Rs. 
+
+*   [TOCPerfect Patcher](https://alex-free.github.io/tocperfect) - patch the Tonyhax International loader into a disc image directly to expand the capabilities of the CD Player Swap Trick.
 
 *   [EDCRE](https://alex-free.github.io/edcre) - EDC/EEC regenerator to allow patched EDC protected PSX games to be burned by CDRDAO-PLED's generic-mmc-raw driver correctly.
 

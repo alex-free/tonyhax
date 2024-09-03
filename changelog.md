@@ -1,5 +1,37 @@
 # [Tonyhax International](readme.md) -> Changelog
 
+## Version 1.5.2 (6/12/2024)
+
+*   [tonyhax-international-v1.5.2](https://github.com/alex-free/tonyhax/releases/download/v1.5.2i/tonyhax-international-v1.5.2.zip)
+
+----------------------------------
+
+Changes:
+
+*   Added ability to [load gameshark codes from different save files on memory cards](gameshark-code-support.md) in slot 1 and slot 2. Up to 15 different save files containing GameShark codes can be on a memory card, so you can have up to 30 different sets of GameShark codes available for selection from within the loader now!
+
+*   Updated thigsgen to v2.0.4. The default output save file name is now `TONYHAXINTGS0`. THIGSGEN releases are now distributed in the `gameshark` folder already decompressed for you, the `.deb` files remain as they are.
+
+*   Added ability to update text in-place for `debug_write()`, implemented beautifully in the newly re-written gameshark memory card save file name select function.
+
+*   Added official support for Beat Mania Append 3rdMix Key Disc bypass. You can boot the game with Tonyhax International directly instead of having to use an intended key disc first to do so.
+
+*   Improved memory card formatter function's UX.
+
+*   Modified RAM layout for larger executable decompressed size. `HAX` and `FF9` loader files are still only taking up 2 memory card slots though thanks to PS1 Packer compression.
+
+*   Added back seperate `secondary-ff9.ld`. When using anything other then the Final Fantasy IX [save game exploit](save-game-exploit.md), you get a bit more user RAM and hence higher chance to load a target PS-EXE with `exec()` (`loadandexec()` still overcomes any such issues with overlap, but it is nice to have the full target exe loaded while the loader itself is running).
+
+*   Loader optimizations for efficiency and size. Rewrote controller input parsing, memory card formatting, and gameshark code save file reading. Cleaned up code to use some local declarations instead of global ones when possible. Added some more comments.
+
+*   Changed video mode switching (NTSC to PAL or PAL to NTSC) to happen as early as possible. The idea with this is we only need one call to change the video mode (instead of doing it 2 different places depending on if we are using exec() or loadandexec() bios functions based on target PS-EXE size). Not only does that save some complexity, it also just makes sense. You'd want to see PAL video in the loader if your playing a PAL game (and you have everything else setup for it to actually display correctly with a NTSC PS1 that can do video mode switching), as early as possible.
+
+*   Releases now include `entry-bb.bin`, `entry-bb.elf`, `entry.bin`, `entry.elf`, `entry-ff9.bin`, and `entry-ff9.elf` (which are used to develop [save game exploits](save-game-exploit.md) and [gshax codes](https://alex-free.github.io/gshax-tool)). Distributing these files in the Tonyhax International releases negates the need to compile them yourself if you don't want to, and could allow more people to submit these to me.
+
+*   Improved [documentation on RAM layout of executable](https://github.com/alex-free/tonyhax/blob/master/docs/ram-setups.md).
+
+*   Other [general documentation improvements](readme.md#faq).
+
 ## Version 1.5.1 (6/3/2024)
 
 *   [tonyhax-international-v1.5.1](https://github.com/alex-free/tonyhax/releases/download/v1.5.1i/tonyhax-international-v1.5.1.zip)

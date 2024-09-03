@@ -13,19 +13,42 @@
 #include "ap-bypass.h"
 #include "integrity.h"
 #include "io.h"
+#include "memcardpro.h"
 
-//to test ROM functionality in emulation via boot CD, uncomment the following 2 lines:
+// To test ROM functionality in emulation via boot CD, uncomment the following 2 lines:
 //#undef ROM
 //#define ROM
 
-//to test XSTATION ROM functionality in emulation via boot CD, uncomment the following 4 lines:
+// To test XSTATION ROM functionality in emulation via boot CD, uncomment the following 4 lines:
 //#undef XSTATION
 //#define XSTATION
 //#undef ROM
 //#define ROM
 
-//to test behavior without any APv2 bypasses enabled (useful for testing D0 AP bypass codes via save game file gameshark functionality rather then internal activate_anti_piracy() function), uncomment:
+//To test behavior without any anti-piracy bypasses enabled (useful for testing D0 AP bypass codes via save game file gameshark functionality rather then internal activate_anti_piracy() function), uncomment:
 //#define AP_BYPASS_DISABLE
+
+// To test MCPro code path on an emulator, uncomment the line below. This must be commented out for releases.
+//#define FAKE_MCPRO
+
+/*  
+MCP/SD2PSX support added using danhans42's code in his tonyhax_mcp fork: https://github.com/danhans42/tonyhax_mcp/ as a base.
+
+Implements the protocol which can be found here https://gitlab.com/chriz2600/ps1-game-id-transmission utilising the library/code found here https://github.com/Cybdyn-Systems/MemCardPro-ASM .
+
+--Memcard Pro Library Licence Notice--
+MemCard Pro Library
+Copyright (C) 2021-2024 Cybdyn Systems. All Rights Reserved.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 
 const char * p5_localized;
 const char * region_name;
@@ -37,7 +60,7 @@ bool enable_unlock = true; // Disabled on VC0A and VC0B Japanese CDROM Controlle
 bool controller_input = false; // When enabled, debug_write does not display the repeat messages counter. This is so we can draw a blank line and then wait for controller input using vsync in debug_write.
 bool dont_scroll = false; // When enabled, the screen doesn't scroll (for memory card save file selection)
 bool installed_cheat_engine = false; // The cheat engine is installed when parse_memcard_save_gameshark_codes() completes. Some games may go on to set explicit anti-piracy bypass GameShark codes however, so to prevent the cheat engine from being installed twice (which is wasteful) we set a flag here.
-bool did_read_mc = false; // We need to set the GameShark codes AFTER the last bios_reintialize(). I want to call bios_reinitilize() after reading the memory card data to prevent anything screwy in booting games, so we can just parse the data later after the final bios_reinitialize since it's still in RAM.
+bool did_read_mc = false; // We need to set the GameShark codes AFTER the last bios_reintialize(). I want to call bios_reinitialize() after reading the memory card data to prevent anything screwy in booting games, so we can just parse the data later after the final bios_reinitialize since it's still in RAM.
 
 uint16_t mc_base = 0x102; // start of gs code data in memory card buffer
 
@@ -47,6 +70,14 @@ uint8_t * user_start = (uint8_t *) 0x80010000;
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
 
+uint8_t mcpro_check(uint8_t port){
+	return MemCardPro_Ping(port);
+}
+
+uint8_t mcpro_sendid(char *gameid) {
+    return  MemCardPro_SendGameID(MCPRO_PORT_0, strlen(gameid), gameid);
+}
+
 // for controller input functions
 void * address;		// For Calculating BIOS Functions
 uint8_t j;			// Joypad
@@ -54,7 +85,7 @@ uint8_t padbuf[2][0x22];	// Joypad Buffers
 
 void try_boot_cd(); // for access in memory card features
 
-// re-usable strings for debug_write(). Due to compiler optimzations for size already being enabled, this isn't as black and white as just put any repeated strings here. It has to make sense (and visably reduce the size of secondary.elf) which it does in the below cases.
+// re-usable strings for debug_write(). Due to compiler optimzations for size already being enabled, this isn't as black and white as just put any repeated strings here. It has to make sense (and visibly reduce the size of secondary.elf) which it does in the below cases.
 #define memory_card_in_slot "memory card in slot"
 #define press_triangle "Press TRIANGLE to"
 #define press_circle "Press CIRCLE to"
@@ -354,7 +385,7 @@ void format_memcard() {
 
 	debug_write("%s exit without formatting", press_triangle);
 	debug_write("%s FORMAT %s 1", press_cross, memory_card_in_slot);
-	debug_write("%s FORMAT %s 2", press_triangle, memory_card_in_slot);
+	debug_write("%s FORMAT %s 2", press_circle, memory_card_in_slot);
 
 	while(1) { 
 		j = padbuf[0][3] ^ 0xFF;
@@ -658,7 +689,7 @@ void re_cd_init() {
 }
 
 void try_boot_cd() {
-	bool no_system_cnf = false;
+	bool is_psx_exe = false;
 	int32_t read;
 
 // we don't use freepsxboot patches for maximum game compatibility
@@ -673,7 +704,7 @@ debug_write("");
 	{
 		debug_write("%s with the CD drive open to boot the Sony BIOS", press_cross);
 	} else {
-		debug_write("%s boot the Sony BIOS", press_cross); // japanese consoles don't neccesarily need the drive open at this point to do this behavior, it could be in a lid-sensor block state
+		debug_write("%s boot the Sony BIOS", press_cross); // japanese consoles don't necessarily need the drive open at this point to do this behavior, it could be in a lid-sensor block state
 	} 
 #endif
 
@@ -728,8 +759,10 @@ debug_write("");
 			//debug_write("Button: %x", j);
 			debug_write(""); // Vblank wait for controller input
 		}
-	    controller_input_stop();
 	}
+	
+    controller_input_stop(); // stop MC/controller input at this point
+
 #endif // TOCPERFECT
 
 	if(!enable_unlock) {
@@ -761,11 +794,11 @@ debug_write("");
 #endif // XSTATION
 
 	/*
-	We have to re-initilize the BIOS, stop, and init in that order to prevent the process from possibly freezing at this point on Japanese consoles. 
+	We have to re-initialize the BIOS, stop, and init in that order to prevent the process from possibly freezing at this point on Japanese consoles. 
 	
 	The first reason this is required is because the SetSessionSuperUltraCommandSmash screws up interrupts since we are sending the 2nd SetSession command before the possible 3rd interrupt (which is a second INT5 response sent if session 2 does not actually exist). 
 		
-	The second reason is because of how we are using the BIOS controller functions, to go back to a clean state a bios re-intialization also accomplishes that.
+	The second reason is because of how we are using the BIOS controller functions, to go back to a clean state a bios re-initialization also accomplishes that.
 	*/
 
 	re_cd_init();
@@ -835,33 +868,6 @@ debug_write("");
 
 	char bootfilebuf[32];
 	debug_write("Loading SYSTEM.CNF");
-	// PS2s have a hardware/BIOS bug that results in a seek issue when doing massive seeks from say LBA 4 to 290000+ when dealing with 80 minute media, see https://github.com/socram8888/tonyhax/issues/24#issuecomment-1823585149
-#if !defined(FREEPSXBOOT) && !defined(XSTATION) && !defined(ROM) && !defined(TOCPERFECT)
-	if(bios_is_ps1() == false) {
-		uint32_t system_cnf_lba = CdGetLbn("SYSTEM.CNF;1");
-		if(system_cnf_lba != 0) {
-			debug_write("SYSTEM.CNF LBA: %d", system_cnf_lba);
-
-    		if (CdReadSector(1, (system_cnf_lba/4), data_buffer) != 1) {
-				debug_write("Failed to read sector at LBA: %d", (system_cnf_lba/4));
-			} else {
-				debug_write("Seeked to LBA: %d", (system_cnf_lba/4));
-			}
-
-    		if (CdReadSector(1, (system_cnf_lba/2), data_buffer) != 1) {
-				debug_write("Failed to read sector at LBA: %d", (system_cnf_lba/2));
-			} else {
-				debug_write("Seeked to LBA: %d", (system_cnf_lba/2));
-			}
-
-    		if (CdReadSector(1, ((system_cnf_lba/2) + (system_cnf_lba/4)), data_buffer) != 1) {
-				debug_write("Failed to read sector at LBA: %d", ((system_cnf_lba/2) + (system_cnf_lba/4)));
-			} else {
-				debug_write("Seeked to LBA: %d", ((system_cnf_lba/2) + (system_cnf_lba/4)));
-			}
-		}
-	}
-#endif
 
 	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
 	if (cnf_fd > 0) {
@@ -892,6 +898,7 @@ debug_write("");
 
 			debug_write("Not found");
 		}
+    } // Always has SYSTEM.CNF
 #else
 		if(config_get_string((char *) data_buffer, "BOOT", bootfilebuf)) {
 			bootfile = bootfilebuf;
@@ -904,18 +911,430 @@ debug_write("");
 
 			debug_write("Not found");
 		}
-#endif
 	} else {
-		no_system_cnf = true;
+        debug_write("No SYSTEM.CNF");
+		is_psx_exe = true;
 	}
+#endif
 
 	// Use string format to reduce ROM usage
 	debug_write(" * %s = %x", "TCB", tcb);
 	debug_write(" * %s = %x", "EVENT", event);
 	debug_write(" * %s = %x", "STACK", stacktop);
 	debug_write(" * %s = %s", "BOOT", bootfile);
+    
+    // PSX.EXE games almost never have a SYSTEM.CNF (that's the point of naming it 'PSX.EXE'). However, there are exceptions:
+    if(
+    (strcmp(bootfile, "cdrom:\\psx.exe") == 0) || 
+    // Cool Boarder's 3 (USA) (Beta) - http://redump.org/disc/75375/. Game does have save functionality, but we currently don't support betas.
+    
+    (strcmp(bootfile, "cdrom:\\PSX.EXE;1") == 0) || 
+    // Dead Or Alive (USA) (Beta) (1-09-1998) - http://redump.org/disc/73759/. Game does not have save functionality yet implemented. We don't currently support betas either.
+    // Gokuu Densetsu: Magic Beast Warriors (Japan) - http://redump.org/disc/24258/.
+    
+    (strcmp(bootfile, "cdrom:\\psx.exe;1") == 0) || 
+    // The Great Battle IV (Japan) - https://psxdatacenter.com/games/J/T/SLPS-00719.html.
+    
+    (strcmp(bootfile, "cdrom:PSX.EXE;1") == 0)
+    // Tokimeki Memorial: Forever with You (Japan) (Shokai Genteiban) - http://redump.org/disc/6788/.
+    // Tokimeki Memorial: Forever with You (Japan) (Rev 1) - http://redump.org/disc/6789/.
+    // Tokimeki Memorial: Forever with You (Japan) (Rev 2) - http://redump.org/disc/33338/.
+    // Tokimeki Memorial: Forever with You (Japan) (Rev 4) - http://redump.org/disc/6764/.
+    ) {
+        is_psx_exe = true;
+    }
 
-	re_cd_init(); // Reset one last time to avoid potential lockups (here be dragons)
+#if defined FAKE_MCPRO
+    debug_write("DEBUG: forcing MCPro code path");
+#else
+    int memcardpro_status = mcpro_check(MCPRO_PORT_0);
+    memory_card_and_controller_wait(); // docs say to wait
+	if(memcardpro_status == 0) {
+		mcpro_sendid("");
+        memory_card_and_controller_wait(); // docs say to wait
+		debug_write("MCPRO/SD2PSX detected in slot 1"); // This is enough of a wait between the next one if needed.
+#endif
+
+        if(is_psx_exe) {
+            /*
+            Special handling for PSX.EXE games with memcardpro. We have 2 lists: 
+            * http://redump.org/discs/quicksearch/PSX.EXE/comments/only
+            * http://redump.org/discs/quicksearch/PSXEXE/comments/only
+
+            
+            There are some false positives in the above 2 lists due to how redump search works/how they were listed. There are also some discs not listed that do have PSX.EXE. In addition ONLY officially licensed discs with PSX.EXE are supported. Beta and unlicensed discs are ignored (due to lacking a serial designation and to save exe space).
+
+            ======================================================================
+            Implementation Notes:
+
+            WE DO NOT WANT TO DEPEND ON THE ABILITY TO LOAD THE ENTIRE PSX.EXE INTO RAM. As Tonyhax International gets larger we can't guarantee every PSX.EXE executable will fit into the RAM lower then Tonyhax International before we call do_execute(), sometimes we may need to load_and_exec() which means we can't depend on having the PSX.EXE in memory to check anything.
+
+            Failed attempts to ID PSX.EXE games:
+
+            1) CRC32 sector 16. This is great, but if you rebuild/modify the game with i.e. mkpsxiso you get a different checksum we can't possibly know, and fail the match.
+            
+            2) CRC32 sector 16 up to 0x48. The includes the Volume Identifier. This would probably even work with  mkpsxiso rebuilt disc images, BUT some ridiculous games such as http://redump.org/disc/21858/ have no identifiable information even here. Even the Volume Identifier at 0x28 is SPACES FOR THAT GAME! WHY?!
+
+            ======================================================================
+            SUCCESSFUL IMPLEMENTATION FOUND: 
+            
+            Check the date of creation ;) at 0x32D (Volume Creation Timestamp). MKPSXISO keeps that the same on rebuild.
+            
+            From NO$PSX SPX: https://problemkaputt.de/psx-spx.htm#cdromisovolumedescriptors
+
+            ======================================================================
+            Primary Volume Descriptor (sector 16 on PSX disks)
+
+            000h 1    Volume Descriptor Type        (01h=Primary Volume Descriptor)
+            001h 5    Standard Identifier           ("CD001")
+            006h 1    Volume Descriptor Version     (01h=Standard)
+            007h 1    Reserved                      (00h)
+            008h 32   System Identifier             (a-characters) ("PLAYSTATION")
+            028h 32   Volume Identifier             (d-characters) (max 8 chars for PSX?)
+            048h 8    Reserved                      (00h)
+            050h 8    Volume Space Size             (2x32bit, number of logical blocks)
+            058h 32   Reserved                      (00h)
+            078h 4    Volume Set Size               (2x16bit) (usually 0001h)
+            07Ch 4    Volume Sequence Number        (2x16bit) (usually 0001h)
+            080h 4    Logical Block Size in Bytes   (2x16bit) (usually 0800h) (1 sector)
+            084h 8    Path Table Size in Bytes      (2x32bit) (max 800h for PSX)
+            08Ch 4    Path Table 1 Block Number     (32bit little-endian)
+            090h 4    Path Table 2 Block Number     (32bit little-endian) (or 0=None)
+            094h 4    Path Table 3 Block Number     (32bit big-endian)
+            098h 4    Path Table 4 Block Number     (32bit big-endian) (or 0=None)
+            09Ch 34   Root Directory Record         (see next chapter)
+            0BEh 128  Volume Set Identifier         (d-characters) (usually empty)
+            13Eh 128  Publisher Identifier          (a-characters) (company name)
+            1BEh 128  Data Preparer Identifier      (a-characters) (empty or other)
+            23Eh 128  Application Identifier        (a-characters) ("PLAYSTATION")
+            2BEh 37   Copyright Filename            ("FILENAME.EXT;VER") (empty or text)
+            2E3h 37   Abstract Filename             ("FILENAME.EXT;VER") (empty)
+            308h 37   Bibliographic Filename        ("FILENAME.EXT;VER") (empty)
+            32Dh 17   Volume Creation Timestamp     ("YYYYMMDDHHMMSSFF",timezone)
+            33Eh 17   Volume Modification Timestamp ("0000000000000000",00h)
+            34Fh 17   Volume Expiration Timestamp   ("0000000000000000",00h)
+            360h 17   Volume Effective Timestamp    ("0000000000000000",00h)
+            371h 1    File Structure Version        (01h=Standard)
+            372h 1    Reserved for future           (00h-filled)
+            373h 141  Application Use Area          (00h-filled for PSX and VCD)
+            400h 8    CD-XA Identifying Signature   ("CD-XA001" for PSX and VCD)
+            408h 2    CD-XA Flags (unknown purpose) (00h-filled for PSX and VCD)
+            40Ah 8    CD-XA Startup Directory       (00h-filled for PSX and VCD)
+            412h 8    CD-XA Reserved                (00h-filled for PSX and VCD)
+            41Ah 345  Application Use Area          (00h-filled for PSX and VCD)
+            573h 653  Reserved for future           (00h-filled)
+            ======================================================================
+            */
+
+            bool no_save_function = false; // by default we assume games do need a unique MCPro GameID sent. If they don't have save functionality though we tell the user why we don't send anything. We save a bit of exe space by not sending the serial too if we don't need to.
+
+            re_cd_init(); // Reset before next read
+
+            if (CdReadSector(1, 16, data_buffer) != 1) { // No chance of overseek for PS2s because it is a very early sector at the inner part of the disc.
+		        debug_write("Failed to read sector 16");
+		        return;
+	        }
+
+            unsigned char volume_creation_timestamp[17]; // 16 bytes for Volume Creation Timestamp + termination From No $ PSX
+            /*
+            =============================================================================================
+            Volume Descriptor Timestamps
+            The various timestamps occupy 17 bytes each, in form of
+
+            "YYYYMMDDHHMMSSFF",timezone
+            "0000000000000000",00h         ;empty timestamp
+
+            The first 16 bytes are ASCII Date and Time digits (Year, Month, Day, Hour, Minute, Second, and 1/100 Seconds. The last byte is Offset from Greenwich Mean Time in number of 15-minute steps from -48 (West) to +52 (East); or actually: to +56 when recursing Kiribati's new timezone.
+            Note: PSX games manufactured in year 2000 were accidently marked to be created in year 0000.
+            =============================================================================================
+            */
+
+            char * gameid = 0; // If not known stays 0, and reported to user.
+
+            for(int i = 0; i < 16; i++) {
+                volume_creation_timestamp[i] = data_buffer[0x32D + i];
+                volume_creation_timestamp[16] = '\0';
+            }
+
+            debug_write("PSX.EXE ID: %s", (char *)volume_creation_timestamp); 
+
+            if(strcmp( (char *)volume_creation_timestamp, "1995040719355400") == 0) { // 3x3 Eyes: Kyuusei Koushu (Disc 1) (Japan) - http://redump.org/disc/7881/ / 3x3 Eyes: Kyuusei Koushu (Disc 2) (Japan) http://redump.org/disc/7880/
+                gameid = "cdrom:SLPS_000.71;1"; // Using disc 1 CD case serial: http://redump.org/disc/7881/. All CDs assigned to same memory card.
+                //debug_write("3x3 Eyes: Kyuusei Koushu (Disc 1) (Japan) / (Disc 2)"); // 1 MC block - https://psxdatacenter.com/games/J/0-9/SLPS-00071.html
+            } else if
+            
+            ( 
+            (strcmp( (char *)volume_creation_timestamp, "1994110218594700") == 0) || // A Ressha de Ikou 4: Evolution (Japan) (Rev 0) - http://redump.org/disc/21858/
+            (strcmp( (char *)volume_creation_timestamp, "1995030218052000") == 0) // A Ressha de Ikou 4: Evolution (Japan) (Rev 1) - http://redump.org/disc/21858/
+            ) { // we don't care about any revision differences!
+                gameid = "cdrom:SLPS_000.04;1"; // Serial from CD case.
+                //debug_write("A Ressha de Ikou 4: Evolution (Japan) (Rev 0) / (Rev 1)"); // 15 MC blocks - https://psxdatacenter.com/games/J/A/SLPS-00004.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995051700000000") == 0) { // Ace Combat (Japan) - http://redump.org/disc/1691/
+                gameid = "cdrom:SLPS_000.61;1"; // Serial from CD case.
+                //debug_write("Ace Combat (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/A/SLPS-00061.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995121620000000") == 0) { // Alnam no Kiba: Juuzoku Juuni Shinto Densetsu (Japan) - http://redump.org/disc/11199/
+                gameid = "cdrom:SLPS_001.73;1"; // Serial from CD case.
+                //debug_write("Alnam no Kiba: Juuzoku Juuni Shinto Densetsu (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/A/SLPS-00173.html
+            } else if
+
+            ( 
+            (strcmp( (char *)volume_creation_timestamp, "1995080809000000") == 0) || // Boxer's Road (Japan) (Rev 0) - http://redump.org/disc/2765/
+            (strcmp( (char *)volume_creation_timestamp, "1995100209000000") == 0) // // Boxer's Road (Japan) (Rev 1) - http://redump.org/disc/6537/
+            ) { // we don't care about any revision differences!
+                gameid = "cdrom:SLPS_910.07;1"; // Serial from CD case.
+                //debug_write("Boxer's Road (Japan) (Rev 0) / (Rev 1)"); // 7 MC blocks - https://psxdatacenter.com/games/J/B/SLPS-91007.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1998110515540400") == 0) { // Contender (USA) (Demo) - http://redump.org/disc/43176/
+                //gameid = "cdrom:SCUS_943.80;1"; // Serial from CD case.
+                //debug_write("Contender (USA) (Demo)");
+                no_save_function = true; // Demos can't save.
+            } else if
+
+            ( 
+            (strcmp( (char *)volume_creation_timestamp, "1995060504013600") == 0) || // Cyberwar (Japan) (Disc 1) - http://redump.org/disc/30637/
+            (strcmp( (char *)volume_creation_timestamp, "1995060319142200") == 0) || // Cyberwar (Japan) (Disc 2) - http://redump.org/disc/30638/
+            (strcmp( (char *)volume_creation_timestamp, "1995060402110800") == 0) // Cyberwar (Japan) (Disc 3) - http://redump.org/disc/30639/
+            ) {
+                gameid = "cdrom:SLPS_000.55;1"; // Using Disc 1 CD case serial: http://redump.org/disc/30637/. All CDs assigned to same memory card.
+                //debug_write("Cyberwar (Japan) (Disc 1) / (Disc 2) / (Disc 3)"); // 1 MC block - https://psxdatacenter.com/games/J/C/SLPS-00055.html
+            } else if
+
+           ( 
+            (strcmp( (char *)volume_creation_timestamp, "1995102101350000") == 0) || // D no Shokutaku: Complete Graphics (Japan) (Disc 1) - http://redump.org/disc/763/
+            (strcmp( (char *)volume_creation_timestamp, "1995102102521200") == 0) || // D no Shokutaku: Complete Graphics (Japan) (Disc 2) - http://redump.org/disc/764/
+            (strcmp( (char *)volume_creation_timestamp, "1995102105003200") == 0) // D no Shokutaku: Complete Graphics (Japan) (Disc 3) - http://redump.org/disc/765/
+            ) {
+                gameid = "cdrom:SLPS_001.33;1"; // Using disc 1 CD case serial: http://redump.org/disc/763/. All CDs assigned to same memory card.
+                //debug_write("D no Shokutaku: Complete Graphics (Japan)"); // 13 MC blocks - https://psxdatacenter.com/games/J/D/SLPS-00133.html
+            } else if            
+
+            (strcmp( (char *)volume_creation_timestamp, "1995051015300000") == 0) { // Douga de Puzzle da! Puppukupuu (Japan) - http://redump.org/disc/11935/
+                gameid = "cdrom:SLPS_000.77;1"; // Serial from CD case.
+                //debug_write("Douga de Puzzle da! Puppukupuu"); // 13 MC blocks - https://psxdatacenter.com/games/J/D/SLPS-00077.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995061806364400") == 0) { // Dragon Ball Z: Ultimate Battle 22 (Japan) - http://redump.org/disc/10992/
+                gameid = "cdrom:SLPS_000.73;1"; // Serial from CD case.
+                //debug_write("Dragon Ball Z: Ultimate Battle 22 (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/D/SLPS-00073.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995040509595900") == 0) { // Entertainment Jansou: That's Pon! (Japan) - http://redump.org/disc/34808/
+                gameid = "cdrom:SLPS_000.51;1"; // Serial from CD case.
+                //debug_write("Entertainment Jansou: That's Pon! (Japan)"); // 2 MC blocks - https://psxdatacenter.com/games/J/T/SLPS-00051.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995052918000000") == 0) { // Falcata: Astran Pardma no Monshou (Japan) - http://redump.org/disc/1682/
+                gameid = "cdrom:SLPS_000.10;1"; // Serial from CD case.
+                //debug_write("Falcata: Astran Pardma no Monshou (Japan)"); // 4 MC blocks - https://psxdatacenter.com/games/J/F/SLPS-00010.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1994110702000000") == 0) { // Gokujou Parodius Da! Deluxe Pack (Japan) - http://redump.org/disc/5337/
+                gameid = "cdrom:SLPS_000.02;1"; // Serial from CD case.
+                //debug_write("Gokujou Parodius Da! Deluxe Pack (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00002.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995041400000000") == 0) { // Gokuu Densetsu: Magic Beast Warriors (Japan) - http://redump.org/disc/24258/
+                gameid = "cdrom:SLPS_000.48;1"; // Serial from CD case.
+                //debug_write("Gokuu Densetsu: Magic Beast Warriors (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00048.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1997011500000000") == 0) { // The Great Battle VI (Japan) - http://redump.org/disc/37406/
+                //gameid = "cdrom:SLPS_007.19;1"; // Serial from CD case.
+                //debug_write("The Great Battle VI (Japan)");
+                no_save_function = true; // https://psxdatacenter.com/games/J/T/SLPS-00719.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995070613170000") == 0) { // Ground Stroke: Advanced Tennis Game (Japan) - http://redump.org/disc/33778/
+                gameid = "cdrom:SLPS_000.88;1"; // Serial from CD case.
+                //debug_write("Ground Stroke: Advanced Tennis Game (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00088.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1994111721302100") == 0) { // Houma Hunter Lime: Special Collection Vol. 1 (Japan) - http://redump.org/disc/18606/
+                gameid = "cdrom:SLPS_000.20;1"; // Serial from CD case.
+                //debug_write("Houma Hunter Lime: Special Collection Vol. 1 (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/H/SLPS-00020.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995072522004900") == 0) { // Houma Hunter Lime: Special Collection Vol. 2 (Japan) - http://redump.org/disc/18607/
+                gameid = "cdrom:SLPS_000.85;1"; // Serial from CD case.
+                //debug_write("Houma Hunter Lime: Special Collection Vol. 2 (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/I/SLPS-00029.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995022623000000") == 0) { // Idol Janshi Suchie-Pai Limited (Japan) - http://redump.org/disc/33789/
+                gameid = "cdrom:SLPS_000.29;1"; // Serial from CD case.
+                //debug_write("Idol Janshi Suchie-Pai Limited (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/I/SLPS-00029.html
+            } else if
+
+            ( 
+            (strcmp( (char *)volume_creation_timestamp, "1995061911303400") == 0) || // J.League Jikkyou Winning Eleven (Japan) (Rev 0) - http://redump.org/disc/6740/
+            (strcmp( (char *)volume_creation_timestamp, "1995072800300000") == 0) // // J.League Jikkyou Winning Eleven (Japan) (Rev 1) - http://redump.org/disc/2848/
+            ) { // we don't care about any revision differences!
+                gameid = "cdrom:SLPS_000.68;1"; // Serial from CD case.
+                //debug_write("J.League Jikkyou Winning Eleven (Japan) (Rev 0) / (Rev 1)"); // 1 MC block - https://psxdatacenter.com/games/J/J/SLPS-00068.html
+            } else if
+
+            ( 
+            (strcmp( (char *)volume_creation_timestamp, "1994112617300000") == 0) || // Jikkyou Powerful Pro Yakyuu '95 (Japan) (Rev 0) -http://redump.org/disc/9552/
+            (strcmp( (char *)volume_creation_timestamp, "1994121517300000") == 0) // // Jikkyou Powerful Pro Yakyuu '95 (Japan) (Rev 1) - http://redump.org/disc/14367/
+            ) { // we don't care about any revision differences!
+                gameid = "cdrom:SLPS_000.67;1"; // Serial from CD case.
+                //debug_write("Jikkyou Powerful Pro Yakyuu '95 (Japan) (Rev 0) / (Rev 1)"); //  3 MC blocks - https://psxdatacenter.com/games/J/J/SLPS-00067.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995113010450000") == 0) { // Keiba Saishou no Housoku '96 Vol. 1 (Japan) - http://redump.org/disc/22945/
+                gameid = "cdrom:SLPS_001.46;1"; // Serial from CD case.
+                //debug_write("Keiba Saishou no Housoku '96 Vol. 1"); // 15 MC blocks - https://psxdatacenter.com/games/J/K/SLPS-00146.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1994100617242100") == 0) { // Kikuni Masahiko Jirushi: Warau Fukei-san Pachi-Slot Hunter (Japan) - http://redump.org/disc/33816/
+                gameid = "cdrom:SLPS_000.21;1"; // Serial from CD case.
+               //debug_write("Kikuni Masahiko Jirushi: Warau Fukei-san Pachi-Slot Hunter"); // Too long to fit '(Japan)'. // 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00021.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1994121500000000") == 0) { // Kileak, The Blood (Japan) - http://redump.org/disc/14371/
+                gameid = "cdrom:SLPS_000.27;1"; // Serial from CD case.
+                //debug_write("Kileak, The Blood (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00027.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1994111013000000") == 0) { // King's Field (Japan) - http://redump.org/disc/7072/
+                gameid = "cdrom:SLPS_000.17;1"; // Serial from CD case.
+                //debug_write("King's Field (Japan)"); // 5 MC blocks - https://psxdatacenter.com/games/J/K/SLPS-00017.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995051816000000") == 0) { // Kururin Pa! (Japan) - http://redump.org/disc/33413/
+                gameid = "cdrom:SLPS_000.66;1"; // Serial from CD case.
+                //debug_write("Kururin Pa! (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00066.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995033100003000") == 0) { // Missland (Japan) - http://redump.org/disc/10869/
+                gameid = "cdrom:SLPS_000.47;1"; // Serial from CD case.
+                //debug_write("Missland (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/M/SLPS-00047.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995042506300000") == 0) { // Mobile Suit Gundam (Japan) - http://redump.org/disc/3080/
+                gameid = "cdrom:SLPS_000.35;1"; // Serial from CD case.
+                //debug_write("Mobile Suit Gundam (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/M/SLPS-00035.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1994092920284600") == 0) { // Myst (Japan) (Rev 0) - http://redump.org/disc/4786/ / Myst (Japan) (Rev 1)  - http://redump.org/disc/33887/ /  Myst (Japan) (Rev 2)  - http://redump.org/disc/1488/
+                gameid = "cdrom:SLPS_000.24;1"; // CD case serial.
+                //debug_write("Myst (Japan) (Rev 0) / (Rev 1) / (Rev 2)"); // 1 MC block - https://psxdatacenter.com/games/J/M/SLPS-00024.html
+            } else if  
+
+            (strcmp( (char *)volume_creation_timestamp, "1995050413421800") == 0) { // Night Striker (Japan) - http://redump.org/disc/10931/
+                gameid = "cdrom:SLPS_000.50;1"; // CD case serial.
+                //debug_write("Night Striker (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/N/SLPS-00050.html
+            } else if  
+
+            (strcmp( (char *)volume_creation_timestamp, "1995071011035200") == 0) { // Oh-chan no Oekaki Logic (Japan) - http://redump.org/disc/7882/
+                gameid = "cdrom:SLPS_000.93;1"; // CD case serial.
+                //debug_write("Oh-chan no Oekaki Logic (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/O/SLPS-00093.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995082517551900") == 0) { // The Oni Taiji!!: Mezase! Nidaime Momotarou (Japan) - http://redump.org/disc/33948/
+                gameid = "cdrom:SLPS_000.89;1"; // CD case serial.
+                // debug_write("The Oni Taiji!!: Mezase! Nidaime Momotarou (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00089.html
+            } else if  
+
+            (strcmp( (char *)volume_creation_timestamp, "1995011411551700") == 0) { // Pachio-kun: Pachinko Land Daibouken (Japan) - http://redump.org/disc/36504/
+                gameid = "cdrom:SLPS_000.37;1"; // CD case serial.
+                //debug_write("Pachio-kun: Pachinko Land Daibouken (Japan)"); // 2 MC block - https://psxdatacenter.com/games/J/P/SLPS-00037.html
+            } else if  
+
+            (strcmp( (char *)volume_creation_timestamp, "1995041921063500") == 0) { // Rayman (Japan) - http://redump.org/disc/33719/
+                gameid = "cdrom:SLPS_000.26;1"; // CD case serial.
+                //debug_write("Rayman (Japan)"); // 3 MC blocks - https://psxdatacenter.com/games/J/R/SLPS-00026.html
+            } else if  
+
+            (strcmp( (char *)volume_creation_timestamp, "1994111009000000") == 0) { // Ridge Racer (Japan) - http://redump.org/disc/2679/
+                gameid = "cdrom:SLPS_000.01;1"; // Serial from CD case.
+                //debug_write("Ridge Racer (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/R/SLPS-00001.htmls
+            } else if
+
+           ( 
+            (strcmp( (char *)volume_creation_timestamp, "1995083112000000") == 0) || // Tokimeki Memorial: Forever with You (Japan) (Rev 1) - http://redump.org/disc/6789/ / Tokimeki Memorial: Forever with You (Japan) (Shokai Genteiban) (Rev 1) - http://redump.org/disc/6788/
+            (strcmp( (char *)volume_creation_timestamp, "1995111700000000") == 0) // Tokimeki Memorial: Forever with You (Japan) (Rev 2) - http://redump.org/disc/33338/
+             // Tokimeki Memorial: Forever with You (Japan) (PlayStation The Best) - http://redump.org/disc/8876/ has it's own different serial and proper bootfile name, so already works with mcpro!
+            ) { // We don't care about revision differences!
+                gameid = "cdrom:SLPS_000.64;1"; // Using CD case serial.
+                //debug_write("Tokimeki Memorial: Forever with You (Japan) (Rev 1) / (Rev 2)"); // 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00064.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1996033100000000") == 0) { // Tokimeki Memorial: Forever with You (Japan) (Rev 4) - http://redump.org/disc/6764/.
+                gameid = "cdrom:SLPS_000.65;1"; // Using CD case serial. Why it is different from the above? No clue. Not a typo though.
+                //debug_write("Tokimeki Memorial: Forever with You (Japan) (Rev 4)"); // 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00065.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995090516062841") == 0) { // Sotsugyou II: Neo Generation (Japan) - http://redump.org/disc/7885/.
+                gameid = "cdrom:SLPS_001.13;1"; // Using CD case serial.
+                //debug_write("Sotsugyou II: Neo Generation (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00040.html
+            } else if
+
+           ( 
+            (strcmp( (char *)volume_creation_timestamp, "1995031205000000") == 0) || // Tekken (Japan) (Rev 0) - http://redump.org/disc/671/
+            (strcmp( (char *)volume_creation_timestamp, "1995061612000000") == 0) // Tekken (Japan) (Rev 1) - http://redump.org/disc/1807/
+            ) { // We don't care about revision differences!
+                gameid = "cdrom:SLPS_000.40;1"; // Using CD case serial.
+                //debug_write("Tekken (Japan) (Rev 0) / (Rev 1)"); // 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00040.html
+            } else if
+
+           ( 
+            (strcmp( (char *)volume_creation_timestamp, "1994113012000000") == 0) || // Toushinden (Japan) (Rev 0) - http://redump.org/disc/1560/
+            (strcmp( (char *)volume_creation_timestamp, "1995012512000000") == 0) // Toushinden (Japan) (Rev 1) - http://redump.org/disc/23826/
+            ) { // We don't care about revision differences!
+                gameid = "cdrom:SLPS_000.25;1"; // Using CD case serial.
+                //debug_write("Toushinden (Japan) (Rev 0) / (Rev 1)"); //1 MC block - https://psxdatacenter.com/games/J/B/SLPS-00025.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1994111522183200") == 0) { // Twin Goddesses (Japan) - http://redump.org/disc/7885/.
+                gameid = "cdrom:SLPS_000.18;1"; // Using CD case serial.
+                //debug_write("Twin Goddesses (Japan)");// 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00018.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995021615022900") == 0) { // Uchuu Seibutsu Flopon-kun P! (Japan) - http://redump.org/disc/18814/.
+                gameid = "cdrom:SLPS_000.32;1"; // Using CD case serial.
+                //debug_write("Uchuu Seibutsu Flopon-kun P! (Japan)");// 1 MC block - https://psxdatacenter.com/games/J/U/SLPS-00032.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995080316000000") == 0) { // V-Tennis (Japan) - http://redump.org/disc/22684/.
+                gameid = "cdrom:SLPS_001.03;1"; // Using CD case serial.
+                debug_write("V-Tennis (Japan)");// 1 MC block - https://psxdatacenter.com/games/J/V/SLPS-00103.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995070523450000") == 0) { // Zero Divide (Japan) - http://redump.org/disc/99925/.
+                gameid = "cdrom:SLPS_001.03;1"; // Using CD case serial.
+                debug_write("Zero Divide (Japan)");// 1 MC block - https://psxdatacenter.com/games/J/Z/SLPS-00083.html
+            } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995070500000000") == 0) { // Zero Divide (Japan) (Demo) - http://redump.org/disc/99925/.
+                //gameid = "cdrom:SLPM_800.08;1"; // Using CD case serial.
+                no_save_function = true; // Demos don't have save features.
+                //debug_write("Zero Divide (Japan) (Demo)");
+            }
+
+            if(gameid != 0) {
+                mcpro_sendid(gameid);
+            } else {
+                if(no_save_function) {
+                    debug_write("Detected game that does not use memory cards"); // Still send bootfile to MCPro next because we want to switch off of a potential FreeMCBoot exploited memory card.
+                } else {
+                    debug_write("Unknown PSX.EXE ID, unique GameID unavailable.");
+                }
+                mcpro_sendid(bootfile); // as a last resort, we send PSX.EXE to mcpro
+            }
+        } else {
+            mcpro_sendid(bootfile); // wow, that was a lot simpler then PSX.EXE!
+        }
+
+#if !defined FAKE_MCPRO
+    }
+#endif
+
+    re_cd_init(); // Reset one last time to avoid potential lockups (here be dragons)
 
 	/*
 	 * SetConf is run by BIOS with interrupts disabled.
@@ -953,51 +1372,7 @@ debug_write("");
 		//debug_write("Append No Swap Bypass detected");	
 	}
 
-	debug_write("Reading executable header");	
-
-#if !defined(FREEPSXBOOT) && !defined(XSTATION) && !defined(ROM) && !defined(TOCPERFECT)
-	if(bios_is_ps1() == false) {
-		// CdGetLbn() needs any cdrom:\\, cdrom:\, or cdrom: in the bootfile string from SYSTEM.CNF to be stripped out. The function below is by Nicholas Noble
-		char * bootfile_for_CdGetLbn = 0;
-		uint32_t hash = 5381;
-		for (unsigned i = 0; i < 8; i++) {
-		  hash = ((hash << 5) + hash) ^ bootfile[i];
-		  
-		  switch (hash) {
-		    case 0x5b730b88:
-		    case 0xc9d47cd4:
-		    case 0x04641708:
-		      bootfile_for_CdGetLbn = bootfile + i + 1;
-		      break;
-		  }
-		}
-
-		//debug_write("CdGetLbn BOOTFILE NAME: %s", bootfile_for_CdGetLbn);
-		const uint32_t bootfile_lba = CdGetLbn(bootfile_for_CdGetLbn);
-		
-		if(bootfile_lba > 0) {
-			debug_write("BOOTFILE LBA: %d", bootfile_lba);
-
-    		if (CdReadSector(1, (bootfile_lba/4), data_buffer) != 1) {
-				debug_write("Failed to read sector");
-			} else {
-				debug_write("Seeked to LBA: %d", (bootfile_lba/4));
-			}
-
-		    if (CdReadSector(1, (bootfile_lba/2), data_buffer) != 1) {
-				debug_write("Failed to read sector");
-			} else {
-				debug_write("Seeked to LBA: %d", (bootfile_lba/2));
-			}
-
-		    if (CdReadSector(1, ((bootfile_lba/2) + (bootfile_lba/4)), data_buffer) != 1) {
-				debug_write("Failed to read sector");
-			} else {
-				debug_write("Seeked to LBA: %d", ((bootfile_lba/2) + (bootfile_lba/4)));
-			}
-		}
-	}
-#endif
+	debug_write("Reading executable header");
 	
 	int32_t exe_fd = FileOpen(bootfile, FILE_READ);
 	if (exe_fd <= 0) {
@@ -1005,30 +1380,40 @@ debug_write("");
 		return;
 	}
 
+    file_control_block_t * exe_fcb = *BIOS_FCBS + exe_fd;
 	read = FileRead(exe_fd, data_buffer, 2048);
 
 	if (read != 2048) {
-		debug_write("Read error %d", GetLastError());
+        debug_write("Missing header. Read %d, error %d.", read, exe_fcb->last_error);
 		return;
 	}
 
-	/* 
+    exe_header_t * exe_header = (exe_header_t *) data_buffer;
+	if (strncmp(exe_header->signature, "PS-X EXE", 8)) {
+		debug_write("Header has invalid signature");
+		return;
+	}
+    
+    /*
+	 * Patch executable header like stock does. Fixes issue #153 with King's Field (J) (SLPS-00017).
+	 * https://github.com/grumpycoders/pcsx-redux/blob/a072e38d78c12a4ce1dadf951d9cdfd7ea59220b/src/mips/openbios/main/main.c#L380-L381
+	 */
+	exe_header->offsets.initial_sp_base = stacktop;
+	exe_header->offsets.initial_sp_offset = 0;
 
-	See https://github.com/grumpycoders/pcsx-redux/blob/a072e38d78c12a4ce1dadf951d9cdfd7ea59220b/src/mips/openbios/main/main.c#L380-L381 for the OpenBIOS equivelent line of bugged code we are working around, found by Nicholas Noble
-
-	King's Field Japan (SLPS_00017) is a very early PSX.EXE Japan game. While the PSX.EXE is having 0x34/0x38 contain SP values, these are apparently garbage and not being used in reality by a real BIOS boot. These ARE being used by both our exec calls below however so we need to zero out that garbage so it is not used, which finally allows King's Feild (and most likely other PSX.EXE games) to boot correctly.
-
-	From No $ PSX SPX:
-
-  	030h      Initial SP/R29 & FP/R30 Base (usually 801FFFF0h) (or 0=None)
-  	034h      Initial SP/R29 & FP/R30 Offs (usually 0, added to above Base)
-	
-	Note: In bootfiles, SP is usually 801FFFF0h (ie. not 801FFF00h as in system.cnf). When SP is 0, the unmodified caller's stack is used. In most cases (except when manually calling DoExecute), the stack values in the exeheader seem to be ignored though (eg. replaced by the SYSTEM.CNF value)
-	*/
-	if(no_system_cnf) {
-		for(int i = 0; i < 8; i++) {
-    		data_buffer[0x30 + i] = 0;
-		}
+    /*
+	 * Patch executable load size, capping it to the file size.
+	 *
+	 * According to https://github.com/socram8888/tonyhax/issues/161,
+	 * Kileak, The Blood (J) (SLPS-00027) specifies in its header a an invalid load size, larger
+	 * than the actual executable.
+	 *
+	 * While the BIOS does not validate this, we do to ensure the file could be read in its
+	 * entirety and detect possible CD read errors.
+	 */
+	uint32_t actual_exe_size = exe_fcb->size - 2048;
+	if (actual_exe_size < exe_header->offsets.load_size) {
+		exe_header->offsets.load_size = actual_exe_size;
 	}
 
 	/*
@@ -1062,34 +1447,74 @@ debug_write("");
 	for (volatile int i = 0; i < 0x100000; i++);  // won't be optimized out by -Os, pause
 	*/
 
-	exe_header_t * exe_header = (exe_header_t *) (data_buffer + 0x10);
-
 	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function
 	// since that's all we can do.
-	if (exe_header->load_addr + exe_header->load_size >= &__RO_START__) {
-		debug_write("Executable won't fit. Using buggy BIOS call.");
+    if (exe_header->offsets.load_addr + exe_header->offsets.load_size >= &__RO_START__) {
+    	debug_write("Executable won't fit. Using buggy BIOS call.");
 		// Restore original error handler
 		bios_restore_disc_error();
 
 #if !defined XSTATION
 #if !defined AP_BYPASS_DISABLE
-		activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+		activate_anti_anti_piracy(bootfile, (int32_t) exe_header->offsets.load_addr);
 #endif
 #endif
 
-		if((did_read_mc) && (!cheat_engine_installed))
+		if((did_read_mc) && (!cheat_engine_installed)) {
 			install_cheat_engine();
+        }
 
-		LoadAndExecute(bootfile, exe_header->initial_sp_base, exe_header->initial_sp_offset);
-		return;
+		LoadAndExecute(
+			bootfile,
+			exe_header->offsets.initial_sp_base,
+			exe_header->offsets.initial_sp_offset
+		);
+        return;
 	}
 
-	debug_write("Loading executable (%d bytes @ %x)", exe_header->load_size, exe_header->load_addr);
+    debug_write(
+		"Loading executable (%d bytes @ %x)",
+		exe_header->offsets.load_size,
+		exe_header->offsets.load_addr
+	);
+    
+    /*
+    https://github.com/socram8888/tonyhax/issues/161
 
-	if (FileRead(exe_fd, exe_header->load_addr, exe_header->load_size) != (int32_t) exe_header->load_size) {
-		debug_write("Read error %d", GetLastError());
-		return;
-	}
+    Kileak, The Blood (Japan) - http://redump.org/disc/14371/ specifies the wrong executable filesize (offset 0x1C in PSX.EXE). The filesize given (643072) includes the PSX.EXE header sector, when it is mandated to NOT include it in the total filesize.
+        
+    From No $ PSX SPX:
+    ===============================
+    000h-007h ASCII ID "PS-X EXE"
+    008h-00Fh Zerofilled
+    010h Initial PC (usually 80010000h, or higher)
+    014h Initial GP/R28 (usually 0)
+    018h Destination Address in RAM (usually 80010000h, or higher)
+    01Ch Filesize (must be N*800h) (excluding 800h-byte header) THIS RIGHT HERE
+    020h Data section Start Address (usually 0)
+    024h Data Section Size in bytes (usually 0)
+    028h BSS section Start Address (usually 0) (when below Size=None)
+    02Ch BSS section Size in bytes (usually 0) (0=None)
+    030h Initial SP/R29 & FP/R30 Base (usually 801FFFF0h) (or 0=None)
+    034h Initial SP/R29 & FP/R30 Offs (usually 0, added to above Base)
+    038h-04Bh Reserved for A(43h) Function (should be zerofilled in exefile)
+    04Ch-xxxh ASCII marker
+    "Sony Computer Entertainment Inc. for Japan area"
+    "Sony Computer Entertainment Inc. for Europe area"
+    "Sony Computer Entertainment Inc. for North America area"
+    (or often zerofilled in some homebrew files)
+    (the BIOS doesn't verify this string, and boots fine without it)
+    xxxh-7FFh Zerofilled
+    800h... Code/Data (loaded to entry[018h] and up)
+    ===============================
+    */
+
+    read = FileRead(exe_fd, exe_header->offsets.load_addr, exe_header->offsets.load_size);
+
+	if (read != (int32_t) exe_header->offsets.load_size) {
+		debug_write("Failed to load body. Read %d, error %d.", read, exe_fcb->last_error);
+        return;
+    }
 
 	FileClose(exe_fd);
 
@@ -1100,12 +1525,13 @@ debug_write("");
 
 #if !defined XSTATION
 #if !defined AP_BYPASS_DISABLE
-	activate_anti_anti_piracy(bootfile, (int32_t) exe_header->load_addr);
+	activate_anti_anti_piracy(bootfile, (int32_t) exe_header->offsets.load_addr);
 #endif
 #endif
 
-	if((did_read_mc) && (!cheat_engine_installed))
+	if((did_read_mc) && (!cheat_engine_installed)) {
 		install_cheat_engine();
+    }
 
 	// Games from WarmBoot start with interrupts disabled
 	EnterCriticalSection();
@@ -1113,7 +1539,7 @@ debug_write("");
 	// FlushCache needs to be called with interrupts disabled
 	FlushCache();
 
-	DoExecute(exe_header, 0, 0);
+    DoExecute(&exe_header->offsets, 0, 0);
 }
 
 void main() {

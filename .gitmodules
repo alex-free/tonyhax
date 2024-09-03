@@ -16,3 +16,6 @@
 [submodule "pcsx-redux-support"]
 	path = pcsx-redux-support
 	url = https://github.com/pcsx-redux/support
+[submodule "psn00bsdk-builder"]
+	path = psn00bsdk-builder
+	url = https://github.com/alex-free/psn00bsdk-builder

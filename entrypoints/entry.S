@@ -86,9 +86,9 @@ busywait:
 # This all will be cleared later by Tonyhax International's clearing ram function
 
 #ifdef FF9
-	li $18, 0x801ED300
+	li $18, 0x801EC300
 #else
-	li $18, 0x801EF180
+	li $18, 0x801EE180
 #endif
 
 	# Load header using FileRead

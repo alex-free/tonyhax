@@ -17,7 +17,7 @@ _List Notes:_
 ## List Of Protected PSX Game Discs
 --------------------------------------------
 
-| Game Disc  | [Protection Type](#protection-types) | Protection Trigged At | Tonyhax International Bypass Support |
+| Game Disc  | [Protection Type](#protection-types) | Protection Triggered At | Tonyhax International Bypass Support |
 | --------------- | ------------- | ------------- | ------------- |
 | [Actua Ice Hockey 2 (Europe)](http://redump.org/disc/5120/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Alundra 2 (Europe)](http://redump.org/disc/1089/) | None | - | - |

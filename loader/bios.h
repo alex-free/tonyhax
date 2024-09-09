@@ -9,14 +9,14 @@ typedef struct handler_info handler_info_t;
 typedef struct file_control_block file_control_block_t;
 
 struct exe_offsets {
-	uint32_t initial_pc;        // 0x00
-	uint32_t initial_gp;        // 0x04
-	uint8_t * load_addr;        // 0x08
+	void * initial_pc;          // 0x00
+	void * initial_gp;          // 0x04
+	void * load_addr;           // 0x08
 	uint32_t load_size;         // 0x0C
 	uint32_t _reserved0[2];     // 0x10
-	uint32_t memfill_start;     // 0x18
+	void * memfill_start; 		// 0x18
 	uint32_t memfill_size;      // 0x1C
-	uint32_t initial_sp_base;   // 0x20
+	void * initial_sp_base;		// 0x20
 	uint32_t initial_sp_offset; // 0x24
 };
 
@@ -49,7 +49,7 @@ struct file_control_block {
 
 #define BIOS_DEFAULT_EVCB 0x10
 #define BIOS_DEFAULT_TCB 0x4
-#define BIOS_DEFAULT_STACKTOP 0x801FFF00
+#define BIOS_DEFAULT_STACKTOP ((void *) 0x801FFF00)
 
 /*
  * EXTRAS.
@@ -323,7 +323,7 @@ void GPU_cwp(uint32_t * src, uint32_t num);
  *
  * Table A, call 0x51.
  */
-bool LoadAndExecute(const char * filename, uint32_t stack_base, uint32_t stack_offset);
+bool LoadAndExecute(const char * filename, void * stack_base, uint32_t stack_offset);
 
 /**
  * Initializes the CD drive and filesystem.
@@ -343,7 +343,7 @@ bool CdInit(void);
  *
  * Table A, call 0x9C.
  */
-void SetConf(uint32_t evcb, uint32_t tcb, uint32_t stacktop);
+void SetConf(uint32_t evcb, uint32_t tcb, void * stacktop);
 
 /**
  * Reads the requested amount of sectors from the CD.
@@ -356,6 +356,15 @@ void SetConf(uint32_t evcb, uint32_t tcb, uint32_t stacktop);
  * Table A, call 0xA5.
  */
 int32_t CdReadSector(uint32_t sector_count, uint32_t start_sector, void * buffer);
+
+/**
+ * Gets LBA of file on disc
+ *
+ * @param filename filename without cdrom:\\, i.e. cdrom:\\tonyhax.exe needs to be tonyhax.exe:1
+ *
+ * Table A, call 0x9C.
+ */
+uint32_t CdGetLbn(const char * filename);
 
 /*
  * B-FUNCTIONS

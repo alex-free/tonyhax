@@ -130,6 +130,11 @@ CdReadSector:
 	li $9, 0xA5
 	j 0xA0
 
+.global CdGetLbn
+CdGetLbn:
+	li $9, 0xA4
+	j 0xA0
+
 .global SetMemSize
 SetMemSize:
 	li $9, 0x9F

@@ -90,7 +90,7 @@ Load Address in secondary.ld: 0x801ED400 (Final Fantasy IX save game exploit) or
 This fits in a memory card with one 'linked slot' shown in memcardrex.
 
 
-## Layout 6: Tonyhax International v1.5.3-??
+## Layout 6: Tonyhax International v1.5.3
 
 Notes: 
 
@@ -133,6 +133,70 @@ Files:
 `loader/secondary.ld`
 
 0x801F2400 (start for ff9) - 0x6000 (to not overlap PS1 Packer) = 0x801EC400
+
+Files:
+
+`loader/secondary-ff9.ld`
+
+============================================================
+
+0x801EE280 - 0x100 (temp buffer address for entry.S) = 0x801EE180 
+
+Files:
+
+`entrypoints/entry.S`
+
+0x801EC400 - 0x100 (ff9 temp buffer address for entry.S) = 0x801EC300
+
+Files:
+
+`entrypoints/entry.S`
+
+============================================================
+
+## Layout 6: Tonyhax International v1.5.4-??
+
+Notes: 
+
+* Uses PS1 Packer to decompress a larger exe.
+* Same as Layout 6, but increased ps1 packer spacing from 0x5000 to 0x6000.
+
+============================================================
+
+0x3F00 (Original size of tonyhax) / 2 = 0x1F80 (half size of original tonyhax layout max size)
+0x7E00 (last layout max size) + 0x1F80 (half size of original tonyhax) = 0x9D80 (2.5 times original size)
+
+Files:
+
+`loader/Makefile`
+
+============================================================
+
+0x801FE000 (max) - 0x9D80 (current layout size) = 0x801F4280 
+
+Files:
+
+`loader/Makefile`
+
+`generate-tonyhax-mcs.sh`
+
+0x801FC180 (max for ff9) - 0x9D80 (current layout size) = 0x801F2400
+
+Files:
+
+`loader/Makefile.ff9`
+
+`generate-tonyhax-mcs.sh`
+
+============================================================
+
+0x801F4280 (start) - 0x8000 (to not overlap PS1 Packer) = 0x801EC280
+
+Files:
+
+`loader/secondary.ld`
+
+0x801F2400 (start for ff9) - 0x8000 (to not overlap PS1 Packer) = 0x801EA400
 
 Files:
 

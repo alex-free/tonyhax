@@ -104,7 +104,9 @@ Notes:
 
 Files:
 
-`loader/Makefile`
+`loader/secondary.ld`
+
+`loader/secondary-ff9.ld`
 
 ============================================================
 
@@ -158,45 +160,49 @@ Files:
 
 Notes: 
 
+* Increases size from 2.5x to 3x compared to OG tonyhax.
+* Increases PS1 Packer overlap space to 0x8000.
 * Uses PS1 Packer to decompress a larger exe.
-* Same as Layout 6, but increased ps1 packer spacing from 0x5000 to 0x6000.
+* HAX and FF9 loader files for save game exploit/gshax still only take up 2 MC slots.
+
 
 ============================================================
 
-0x3F00 (Original size of tonyhax) / 2 = 0x1F80 (half size of original tonyhax layout max size)
-0x7E00 (last layout max size) + 0x1F80 (half size of original tonyhax) = 0x9D80 (2.5 times original size)
-
-Files:
-
-`loader/Makefile`
-
-============================================================
-
-0x801FE000 (max) - 0x9D80 (current layout size) = 0x801F4280 
-
-Files:
-
-`loader/Makefile`
-
-`generate-tonyhax-mcs.sh`
-
-0x801FC180 (max for ff9) - 0x9D80 (current layout size) = 0x801F2400
-
-Files:
-
-`loader/Makefile.ff9`
-
-`generate-tonyhax-mcs.sh`
-
-============================================================
-
-0x801F4280 (start) - 0x8000 (to not overlap PS1 Packer) = 0x801EC280
+0x3F00 (Original size of tonyhax) * 3 = 0xBD00
 
 Files:
 
 `loader/secondary.ld`
 
-0x801F2400 (start for ff9) - 0x8000 (to not overlap PS1 Packer) = 0x801EA400
+`loader/secondary-ff9.ld`
+
+============================================================
+
+0x801FE000 (max) - 0xBD00 (current layout size) = 0x801F2300 (tonyhax start)
+
+Files:
+
+`loader/Makefile`
+
+`loader/generate-tonyhax-mcs.sh`
+
+0x801FC180 (max for ff9) - 0xBD00 (current layout size) = 0x801F0480 (tonyhax ff9 start)
+
+Files:
+
+`loader/Makefile.ff9`
+
+`loader/generate-tonyhax-mcs.sh`
+
+============================================================
+
+0x801F2300 (start) - 0x8000 (to not overlap PS1 Packer) = 0x801EA300 (PS1 Packer start)
+
+Files:
+
+`loader/secondary.ld`
+
+0x801F0480 (start for ff9) - 0x8000 (to not overlap PS1 Packer) = 0x801E8480 (PS1 Packer start for ff9)
 
 Files:
 
@@ -204,13 +210,13 @@ Files:
 
 ============================================================
 
-0x801EE280 - 0x100 (temp buffer address for entry.S) = 0x801EE180 
+0x801F2300 (start) - 0x100 (temp buffer size) = 0x801F2200  (temp buffer address for entry.S)
 
 Files:
 
 `entrypoints/entry.S`
 
-0x801EC400 - 0x100 (ff9 temp buffer address for entry.S) = 0x801EC300
+0x801F0480 (fff9 start) - 0x100  (temp buffer size) = 0x801F0380 (ff9 temp buffer address for entry.S)
 
 Files:
 

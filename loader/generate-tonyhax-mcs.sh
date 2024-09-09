@@ -14,9 +14,9 @@ version="$4"
 
 # Set addresses
 if [ "$2" = "tonyhax-tpl-ff9-16kb.mcs" ]; then
-	ro_start="801F2400"
+	ro_start="801F0480"
 elif [ "$2" = "tonyhax-tpl-16kb.mcs" ]; then
-	ro_start="801F4280"
+	ro_start="801F2300"
 else
 	echo "Error: Unknown what to specify ro_start for $2"
 	exit 1

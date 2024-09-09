@@ -1,8 +1,8 @@
 MEMORY {
-	ram(wrx)	:ORIGIN = 0x801EC280, LENGTH = 0x9D80
+	ram(wrx)	:ORIGIN = 0x801EA300, LENGTH = 0xBD00
 }
 SECTIONS {
-	. = 0x801EC280;
+	. = 0x801EA300;
 	PROVIDE(__RO_START__ = .);
 	.text :
 	{

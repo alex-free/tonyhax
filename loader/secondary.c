@@ -1018,6 +1018,7 @@ debug_write("");
 	// Tokimeki Memorial: Forever with You (Japan) (Rev 1) - http://redump.org/disc/6789/.
 	// Tokimeki Memorial: Forever with You (Japan) (Rev 2) - http://redump.org/disc/33338/.
 	// Tokimeki Memorial: Forever with You (Japan) (Rev 4) - http://redump.org/disc/6764/.
+	// Gussun Oyoyo (Japan) - http://redump.org/disc/11336/
 	// All other PSX.EXE games without a system.cnf also match here ;)
 	) {
 		is_psx_exe = true;

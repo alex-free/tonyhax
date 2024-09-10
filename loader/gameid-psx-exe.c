@@ -84,167 +84,167 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
             // Ordered by serial number.
 
             if(strcmp( (char *)volume_creation_timestamp, "1994111009000000") == 0) { // Ridge Racer (Japan) - http://redump.org/disc/2679/
-                return "cdrom:SLPS_000.01;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/R/SLPS-00001.html
+                return "000.01"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/R/SLPS-00001.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994110702000000") == 0) { // Gokujou Parodius Da! Deluxe Pack (Japan) - http://redump.org/disc/5337/
-                return "cdrom:SLPS_000.02;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00002.html
+                return "000.02"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00002.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994102615231700") == 0) { // Tama: Adventurous Ball in Giddy Labyrinth (Japan) - http://redump.org/disc/6980/
-                return "cdrom:SLPS_000.03;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00003.html
+                return "000.03"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00003.html
             } else if
 
             ( 
             (strcmp( (char *)volume_creation_timestamp, "1994110218594700") == 0) || // A Ressha de Ikou 4: Evolution (Japan) (Rev 0) - http://redump.org/disc/21858/
             (strcmp( (char *)volume_creation_timestamp, "1995030218052000") == 0) // A Ressha de Ikou 4: Evolution (Japan) (Rev 1) - http://redump.org/disc/21858/
             ) {
-                return "cdrom:SLPS_000.04;1"; // Serial from CD case. Uses 15 MC blocks - https://psxdatacenter.com/games/J/A/SLPS-00004.html
+                return "000.04"; // Serial from CD case. Uses 15 MC blocks - https://psxdatacenter.com/games/J/A/SLPS-00004.html
             } else if
 
             ( 
             (strcmp( (char *)volume_creation_timestamp, "1994110722360400") == 0) || // Mahjong Station Mazin (Japan) (Rev 0) - http://redump.org/disc/63533/
             (strcmp( (char *)volume_creation_timestamp, "1994120610494900") == 0) // Mahjong Station Mazin (Japan) (Rev 1) - http://redump.org/disc/10881/
             ) {
-                return "cdrom:SLPS_000.05;1"; // Serial from CD case. Uses 1 MC blocks - https://psxdatacenter.com/games/J/M/SLPS-00005.html
+                return "000.05"; // Serial from CD case. Uses 1 MC blocks - https://psxdatacenter.com/games/J/M/SLPS-00005.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994110407000000") == 0) { // Nekketsu Oyako (Japan) - http://redump.org/disc/10088/
-                return "cdrom:SLPS_000.06;1"; // Serial from CD case. Uses 1 MC block -https://psxdatacenter.com/games/J/N/SLPS-00006.html
+                return "000.06"; // Serial from CD case. Uses 1 MC block -https://psxdatacenter.com/games/J/N/SLPS-00006.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994111419300000") == 0) { // Geom Cube (Japan) - http://redump.org/disc/14660/
-                return "cdrom:SLPS_000.07;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00007.html
+                return "000.07"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00007.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994121808190700") == 0) { // Metal Jacket (Japan) - http://redump.org/disc/5927/
-                return "cdrom:SLPS_000.08;1"; // Serial from CD case. Uses 2 MC blocks - https://psxdatacenter.com/games/J/M/SLPS-00008.html
+                return "000.08"; // Serial from CD case. Uses 2 MC blocks - https://psxdatacenter.com/games/J/M/SLPS-00008.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994121917000000") == 0) { // Cosmic Race (Japan) - http://redump.org/disc/16058/
-                return "cdrom:SLPS_000.09;1"; // Serial from CD case. Uses 7 MC blocks - https://psxdatacenter.com/games/J/C/SLPS-00009.html
+                return "000.09"; // Serial from CD case. Uses 7 MC blocks - https://psxdatacenter.com/games/J/C/SLPS-00009.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995052918000000") == 0) { // Falcata: Astran Pardma no Monshou (Japan) - http://redump.org/disc/1682/
-                return "cdrom:SLPS_000.10;1"; // Serial from CD case. Uses 4 MC blocks - https://psxdatacenter.com/games/J/F/SLPS-00010.html
+                return "000.10"; // Serial from CD case. Uses 4 MC blocks - https://psxdatacenter.com/games/J/F/SLPS-00010.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994110220020600") == 0) { // A Ressha de Ikou 4: Evolution (Japan) (Hatsubai Kinen Gentei Set) - http://redump.org/disc/70160/
-                return "cdrom:SLPS_000.11;1"; // Serial from CD case. Uses 15 MC blocks - https://psxdatacenter.com/games/J/A/SLPS-00011.html
+                return "000.11"; // Serial from CD case. Uses 15 MC blocks - https://psxdatacenter.com/games/J/A/SLPS-00011.html
             } else if
 
             // SLPS_00012 (https://psxdatacenter.com/games/J/S/SLPS-00012.html) bootfile is START.EXE with a SYSTEM.CNF. This is the discs Space Griffon VF-9(Japan) (Rev 0) - http://redump.org/disc/5914/ and Space Griffon VF-9(Japan) (Rev 1) - http://redump.org/disc/45998/.
 
             (strcmp( (char *)volume_creation_timestamp, "1994121518000000") == 0) { // Raiden Project (Japan) - http://redump.org/disc/3774/
-                return "cdrom:SLPS_000.13;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/R/SLPS-00013.html
+                return "000.13"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/R/SLPS-00013.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994103000000000") == 0) { // Mahjong Gokuu Tenjiku (Japan) - http://redump.org/disc/17392/
-                return "cdrom:SLPS_000.14;1"; // Serial from CD case. Uses 4 MC blocks - https://psxdatacenter.com/games/J/M/SLPS-00014.html
+                return "000.14"; // Serial from CD case. Uses 4 MC blocks - https://psxdatacenter.com/games/J/M/SLPS-00014.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994101813262400") == 0) { // TwinBee Taisen Puzzle-dama (Japan) - http://redump.org/disc/22905/
-                return "cdrom:SLPS_000.15;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00015.html
+                return "000.15"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00015.html
             } else if
 
             ( 
             (strcmp( (char *)volume_creation_timestamp, "1994112617300000") == 0) || // Jikkyou Powerful Pro Yakyuu '95 (Japan) (Rev 0) - http://redump.org/disc/9552/
             (strcmp( (char *)volume_creation_timestamp, "1994121517300000") == 0) // // Jikkyou Powerful Pro Yakyuu '95 (Japan) (Rev 1) - http://redump.org/disc/27931/
             ) {
-                return "cdrom:SLPS_000.16;1"; // Serial from CD case. 3 MC blocks - https://psxdatacenter.com/games/J/J/SLPS-00016.html
+                return "000.16"; // Serial from CD case. 3 MC blocks - https://psxdatacenter.com/games/J/J/SLPS-00016.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994111013000000") == 0) { // King's Field (Japan) - http://redump.org/disc/7072/
-                return "cdrom:SLPS_000.17;1"; // Serial from CD case. Uses 5 MC blocks - https://psxdatacenter.com/games/J/K/SLPS-00017.html
+                return "000.17"; // Serial from CD case. Uses 5 MC blocks - https://psxdatacenter.com/games/J/K/SLPS-00017.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994111522183200") == 0) { // Twin Goddesses (Japan) - http://redump.org/disc/7885/.
-                return "cdrom:SLPS_000.18;1"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00018.html
+                return "000.18"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00018.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994112918000000") == 0) { // Kakinoki Shougi (Japan) - http://redump.org/disc/22869/
-                return "cdrom:SLPS_000.19;1"; // Serial from CD case. Uses 4 MC blocks - https://psxdatacenter.com/games/J/K/SLPS-00019.html
+                return "000.19"; // Serial from CD case. Uses 4 MC blocks - https://psxdatacenter.com/games/J/K/SLPS-00019.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994111721302100") == 0) { // Houma Hunter Lime: Special Collection Vol. 1 (Japan) - http://redump.org/disc/18606/
-                return "cdrom:SLPS_000.20;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/H/SLPS-00020.html
+                return "000.20"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/H/SLPS-00020.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994100617242100") == 0) { // Kikuni Masahiko Jirushi: Warau Fukei-san Pachi-Slot Hunter (Japan) - http://redump.org/disc/33816/
-                return "cdrom:SLPS_000.21;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00021.html
+                return "000.21"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00021.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995030215000000") == 0) { //Starblade Alpha (Japan) - http://redump.org/disc/4664/
-                return "cdrom:SLPS_000.22;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/S/SLPS-00022.html
+                return "000.22"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/S/SLPS-00022.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994122718351900") == 0) { //CyberSled (Japan) - http://redump.org/disc/7879/
-                return "cdrom:SLPS_000.23;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/C/SLPS-00023.html
+                return "000.23"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/C/SLPS-00023.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994092920284600") == 0) { // Myst (Japan) (Rev 0) - http://redump.org/disc/4786/ / Myst (Japan) (Rev 1)  - http://redump.org/disc/33887/ /  Myst (Japan) (Rev 2)  - http://redump.org/disc/1488/
-                return "cdrom:SLPS_000.24;1"; // CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/M/SLPS-00024.html
+                return "000.24"; // CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/M/SLPS-00024.html
             } else if  
 
            ( 
             (strcmp( (char *)volume_creation_timestamp, "1994113012000000") == 0) || // Toushinden (Japan) (Rev 0) - http://redump.org/disc/1560/
             (strcmp( (char *)volume_creation_timestamp, "1995012512000000") == 0) // Toushinden (Japan) (Rev 1) - http://redump.org/disc/23826/
             ) { // We don't care about revision differences!
-                return "cdrom:SLPS_000.25;1"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/B/SLPS-00025.html
+                return "000.25"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/B/SLPS-00025.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995041921063500") == 0) { // Rayman (Japan) - http://redump.org/disc/33719/
-                return "cdrom:SLPS_000.26;1"; // CD case serial. Uses 3 MC blocks - https://psxdatacenter.com/games/J/R/SLPS-00026.html
+                return "000.26"; // CD case serial. Uses 3 MC blocks - https://psxdatacenter.com/games/J/R/SLPS-00026.html
             } else if  
 
             (strcmp( (char *)volume_creation_timestamp, "1994121500000000") == 0) { // Kileak, The Blood (Japan) - http://redump.org/disc/14371/
-                return "cdrom:SLPS_000.27;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00027.html
+                return "000.27"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00027.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1994121017582300") == 0) { // Jigsaw World (Japan) - http://redump.org/disc/14455/
-                return "cdrom:SLPS_000.28;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/J/SLPS-00028.html
+                return "000.28"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/J/SLPS-00028.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995022623000000") == 0) { // Idol Janshi Suchie-Pai Limited (Japan) - http://redump.org/disc/33789/
-                return "cdrom:SLPS_000.29;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/I/SLPS-00029.html
+                return "000.29"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/I/SLPS-00029.html
             } else if
 
            ( 
             (strcmp( (char *)volume_creation_timestamp, "1995050116000000") == 0) || // Game no Tatsujin (Japan) (Rev 0) -http://redump.org/disc/36035/
             (strcmp( (char *)volume_creation_timestamp, "1995060613000000") == 0) // Game no Tatsujin (Japan) (Rev 1) - http://redump.org/disc/37866/
             ) {
-                return "cdrom:SLPS_000.30;1"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00030.html
+                return "000.30"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00030.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995021802000000") == 0) { // Kyuutenkai (Japan) - http://redump.org/disc/37548/
-                return "cdrom:SLPS_000.31;1"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00031.html
+                return "000.31"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00031.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995021615022900") == 0) { // Uchuu Seibutsu Flopon-kun P! (Japan) - http://redump.org/disc/18814/.
-                return "cdrom:SLPS_000.32;1"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/U/SLPS-00032.html
+                return "000.32"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/U/SLPS-00032.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995080809000000") == 0) { // Boxer's Road (Japan) (Rev 0) - http://redump.org/disc/2765/
-                return "cdrom:SLPS_000.33;1"; // Serial from CD case. Uses 7 MC blocks - https://psxdatacenter.com/games/J/B/SLPS-00033.html
+                return "000.33"; // Serial from CD case. Uses 7 MC blocks - https://psxdatacenter.com/games/J/B/SLPS-00033.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995071821394900") == 0) { // Zeitgeist (Japan) - http://redump.org/disc/16333/
-                return "cdrom:SLPS_000.34;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/Z/SLPS-00034.html
+                return "000.34"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/Z/SLPS-00034.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995042506300000") == 0) { // Mobile Suit Gundam (Japan) - http://redump.org/disc/3080/
-                return "cdrom:SLPS_000.35;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/M/SLPS-00035.html
+                return "000.35"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/M/SLPS-00035.html
             } else if
 
             // SLPS_000.36 has a proper bootfile: http://redump.org/disc/6599/
 
             (strcmp( (char *)volume_creation_timestamp, "1995011411551700") == 0) { // Pachio-kun: Pachinko Land Daibouken (Japan) - http://redump.org/disc/36504/
-                return "cdrom:SLPS_000.37;1"; // CD case serial.
+                return "000.37"; // CD case serial.
                 //debug_write("Pachio-kun: Pachinko Land Daibouken (Japan)"); // 2 MC block - https://psxdatacenter.com/games/J/P/SLPS-00037.html
             } else if  
 
             (strcmp( (char *)volume_creation_timestamp, "1995041311392800") == 0) { // Nichibutsu Mahjong: Joshikou Meijinsen (Japan) - http://redump.org/disc/35101/
-                return "cdrom:SLPS_000.38;1"; // CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/N/SLPS-00038.html
+                return "000.38"; // CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/N/SLPS-00038.html
             } else if
 
             // Metamor Panic: Doki Doki Youma Busters!! (Japan) - http://redump.org/disc/34086/ uses proper bootfile name SLPS_00039
@@ -253,22 +253,22 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
             (strcmp( (char *)volume_creation_timestamp, "1995031205000000") == 0) || // Tekken (Japan) (Rev 0) - http://redump.org/disc/671/
             (strcmp( (char *)volume_creation_timestamp, "1995061612000000") == 0) // Tekken (Japan) (Rev 1) - http://redump.org/disc/1807/
             ) { // We don't care about revision differences!
-                return "cdrom:SLPS_000.40;1"; // Using CD case serial.
+                return "000.40"; // Using CD case serial.
                 //debug_write("Tekken (Japan) (Rev 0) / (Rev 1)"); // 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00040.html
             } else if
 
            (strcmp( (char *)volume_creation_timestamp, "1995040509000000") == 0) { // Gussun Oyoyo (Japan) - http://redump.org/disc/11336/
-                return "cdrom:SLPS_000.41;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00041.html
+                return "000.41"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00041.html
             } else if
 
             // SLPS_00042 DOESN't EXIST??!! - https://github.com/julianxhokaxhiu/iPoPS/blob/master/PSXListOFGames.txt
 
            (strcmp( (char *)volume_creation_timestamp, "1995052612000000") == 0) { // Mahjong Ganryuu-jima (Japan) - http://redump.org/disc/33772/
-                return "cdrom:SLPS_000.43;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/M/SLPS-00043.html
+                return "000.43"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/M/SLPS-00043.html
             } else if
 
            (strcmp( (char *)volume_creation_timestamp, "1995042500000000") == 0) { // Hebereke Station Popoitto (Japan) - http://redump.org/disc/36164/
-                return "cdrom:SLPS_000.44;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/H/SLPS-00044.html
+                return "000.44"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/H/SLPS-00044.html
             } else if
 
             // SLPS_00045 DOESN't EXIST??!! - https://github.com/julianxhokaxhiu/iPoPS/blob/master/PSXListOFGames.txt
@@ -276,29 +276,29 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
            // SLPS_00046 Universal Virtua Pachi-Slot: Hisshou Kouryakuhou (Japan) - http://redump.org/disc/36344/ uses bootfile 'PACH.EXE'
 
             (strcmp( (char *)volume_creation_timestamp, "1995033100003000") == 0) { // Missland (Japan) - http://redump.org/disc/10869/
-                return "cdrom:SLPS_000.47;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/M/SLPS-00047.html
+                return "000.47"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/M/SLPS-00047.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995041400000000") == 0) { // Gokuu Densetsu: Magic Beast Warriors (Japan) - http://redump.org/disc/24258/
-                return "cdrom:SLPS_000.48;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00048.html
+                return "000.48"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00048.html
             } else if
 
             // SLPS_00049 DOESN't EXIST??!! - https://github.com/julianxhokaxhiu/iPoPS/blob/master/PSXListOFGames.txt
 
             (strcmp( (char *)volume_creation_timestamp, "1995050413421800") == 0) { // Night Striker (Japan) - http://redump.org/disc/10931/
-                return "cdrom:SLPS_000.50;1"; // CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/N/SLPS-00050.html
+                return "000.50"; // CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/N/SLPS-00050.html
             } else if  
 
             (strcmp( (char *)volume_creation_timestamp, "1995040509595900") == 0) { // Entertainment Jansou: That's Pon! (Japan) - http://redump.org/disc/34808/
-                return "cdrom:SLPS_000.51;1"; // Serial from CD case. Uses 2 MC blocks - https://psxdatacenter.com/games/J/T/SLPS-00051.html
+                return "000.51"; // Serial from CD case. Uses 2 MC blocks - https://psxdatacenter.com/games/J/T/SLPS-00051.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995030103150000") == 0) { //Kanazawa Shougi '95 (Japan) - http://redump.org/disc/34246/
-                return "cdrom:SLPS_000.52;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00052.html
+                return "000.52"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00052.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995100409235300") == 0) { //Thoroughbred Breeder II Plus (Japan) - http://redump.org/disc/33282/
-                return "cdrom:SLPS_000.53;1"; // Serial from CD case. Uses 5 MC block - https://psxdatacenter.com/games/J/T/SLPS-00053.html
+                return "000.53"; // Serial from CD case. Uses 5 MC block - https://psxdatacenter.com/games/J/T/SLPS-00053.html
             } else if
 
             // SLPS_00054 Yaoi Jun'ichi Gokuhi Project: UFO o Oe!! (Japan) - http://redump.org/disc/28631/ has proper bootfile 'SLPS_000.54'
@@ -308,27 +308,27 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
             (strcmp( (char *)volume_creation_timestamp, "1995060319142200") == 0) || // Cyberwar (Japan) (Disc 2) - http://redump.org/disc/30638/
             (strcmp( (char *)volume_creation_timestamp, "1995060402110800") == 0) // Cyberwar (Japan) (Disc 3) - http://redump.org/disc/30639/
             ) {
-                return "cdrom:SLPS_000.55;1"; // Using Disc 1 CD case serial: http://redump.org/disc/30637/. All CDs assigned to same memory card. SLPS_00056 is Disc 2, and SLPS_00057 is Disc 3. Uses 1 MC block - https://psxdatacenter.com/games/J/C/SLPS-00055.html.
+                return "000.55"; // Using Disc 1 CD case serial: http://redump.org/disc/30637/. All CDs assigned to same memory card. SLPS_00056 is Disc 2, and SLPS_00057 is Disc 3. Uses 1 MC block - https://psxdatacenter.com/games/J/C/SLPS-00055.html.
             } else if
 
             // SLPS_0058 Ide Yousuke no Mahjong Kazoku (Japan) (Rev 0) - http://redump.org/disc/34169/ and Ide Yousuke no Mahjong Kazoku (Japan) (Rev 1) - http://redump.org/disc/33562/ have proper bootfile 'SLPS_00058'.
 
             (strcmp( (char *)volume_creation_timestamp, "1995081612000000") == 0) { // Taikyoku Shougi: Kiwame (Japan) - http://redump.org/disc/35288/
-                return "cdrom:SLPS_000.59;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00059.html
+                return "000.59"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00059.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995051201000000") == 0) { // Aquanaut no Kyuujitsu (Japan) - http://redump.org/disc/16984/
-                return "cdrom:SLPS_000.60;1"; // Serial from CD case. Uses 4 MC block - https://psxdatacenter.com/games/J/A/SLPS-00060.html
+                return "000.60"; // Serial from CD case. Uses 4 MC block - https://psxdatacenter.com/games/J/A/SLPS-00060.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995051700000000") == 0) { // Ace Combat (Japan) - http://redump.org/disc/1691/
-                return "cdrom:SLPS_000.61;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/A/SLPS-00061.html
+                return "000.61"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/A/SLPS-00061.html
             } else if
 
             // SLPS_00062 Hyper Formation Soccer (Japan) - http://redump.org/disc/2602/ has a proper bootfile 'SLPS_00062'.
 
             (strcmp( (char *)volume_creation_timestamp, "1995051002471900") == 0) { // Keiba Saishou no Housoku '95 (Japan) - http://redump.org/disc/22944/
-                return "cdrom:SLPS_000.63;1"; // Serial from CD case. Uses 15 MC blocks - https://psxdatacenter.com/games/J/K/SLPS-00063.html
+                return "000.63"; // Serial from CD case. Uses 15 MC blocks - https://psxdatacenter.com/games/J/K/SLPS-00063.html
             } else if
 
            ( 
@@ -336,47 +336,46 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
             (strcmp( (char *)volume_creation_timestamp, "1995111700000000") == 0) // Tokimeki Memorial: Forever with You (Japan) (Rev 2) - http://redump.org/disc/33338/
              // Tokimeki Memorial: Forever with You (Japan) (PlayStation The Best) - http://redump.org/disc/8876/ has it's own different serial and proper bootfile name, so already works with mcpro!
             ) {
-                return "cdrom:SLPS_000.64;1"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00064.html
+                return "000.64"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00064.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1996033100000000") == 0) { // Tokimeki Memorial: Forever with You (Japan) (Rev 4) - http://redump.org/disc/6764/.
-                return "cdrom:SLPS_000.65;1"; // Using CD case serial. Why it is different from the above? No clue. Not a typo though. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00065.html
+                return "000.65"; // Using CD case serial. Why it is different from the above? No clue. Not a typo though. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00065.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995051816000000") == 0) { // Kururin Pa! (Japan) - http://redump.org/disc/33413/
-                return "cdrom:SLPS_000.66;1"; // Serial from CD case.
+                return "000.66"; // Serial from CD case.
                 //debug_write("Kururin Pa! (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00066.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995061418000000") == 0) { // Jikkyou Powerful Pro Yakyuu '95: Kaimakuban (Japan) - Jikkyou Powerful Pro Yakyuu '95: Kaimakuban
-                return "cdrom:SLPS_000.67;1"; // Serial from CD case. Uses 3 MC blocks - https://psxdatacenter.com/games/J/J/SLPS-00067.html
+                return "000.67"; // Serial from CD case. Uses 3 MC blocks - https://psxdatacenter.com/games/J/J/SLPS-00067.html
             } else if
 
             ( 
             (strcmp( (char *)volume_creation_timestamp, "1995061911303400") == 0) || // J.League Jikkyou Winning Eleven (Japan) (Rev 0) - http://redump.org/disc/6740/
             (strcmp( (char *)volume_creation_timestamp, "1995072800300000") == 0) // // J.League Jikkyou Winning Eleven (Japan) (Rev 1) - http://redump.org/disc/2848/
-            ) { // we don't care about any revision differences!
-                return "cdrom:SLPS_000.68;1"; // Serial from CD case.
-                //debug_write("J.League Jikkyou Winning Eleven (Japan) (Rev 0) / (Rev 1)"); // 1 MC block - https://psxdatacenter.com/games/J/J/SLPS-00068.html
+            ) {
+                return "000.68"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/J/SLPS-00068.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995061806364400") == 0) { // King's Field II (Japan) - http://redump.org/disc/5892/
-                return "cdrom:SLPS_000.69;1"; // Serial from CD case. Uses 2-15 MC blocks - https://psxdatacenter.com/games/J/K/SLPS-00069.html
+                return "000.69"; // Serial from CD case. Uses 2-15 MC blocks - https://psxdatacenter.com/games/J/K/SLPS-00069.html
             } else if
             
             // King's Field II (Japan) (PlayStation the Best) (Rev 0) - http://redump.org/disc/7073/ and King's Field II (Japan) (PlayStation the Best) (Rev 1) - http://redump.org/disc/13338/ have a proper bootfile 'SLPS_910.03'.
 
             (strcmp( (char *)volume_creation_timestamp, "1995062922000000") == 0) { //Street Fighter: Real Battle on Film (Japan) - http://redump.org/disc/26158/
-                return "cdrom:SLPS_000.70;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/S/SLPS-00070.html
+                return "000.70"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/S/SLPS-00070.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995040719355400") == 0) { // 3x3 Eyes: Kyuusei Koushu (Disc 1) (Japan) - http://redump.org/disc/7881/ / 3x3 Eyes: Kyuusei Koushu (Disc 2) (Japan) http://redump.org/disc/7880/
-                return "cdrom:SLPS_000.71;1"; // Using disc 1 CD case serial: http://redump.org/disc/7881/. Disc 2 serial is SLPS_00072. All CDs assigned to same memory card.
+                return "000.71"; // Using disc 1 CD case serial: http://redump.org/disc/7881/. Disc 2 serial is SLPS_00072. All CDs assigned to same memory card.
                 //debug_write("3x3 Eyes: Kyuusei Koushu (Disc 1) (Japan) / (Disc 2)"); // 1 MC block - https://psxdatacenter.com/games/J/0-9/SLPS-00071.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995061806364400") == 0) { // Dragon Ball Z: Ultimate Battle 22 (Japan) - http://redump.org/disc/10992/
-                return "cdrom:SLPS_000.73;1"; // Serial from CD case.
+                return "000.73"; // Serial from CD case.
                 //debug_write("Dragon Ball Z: Ultimate Battle 22 (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/D/SLPS-00073.html
             } else if
 
@@ -387,11 +386,11 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
             // SLPS_00076 DOESN't EXIST??!! - https://github.com/julianxhokaxhiu/iPoPS/blob/master/PSXListOFGames.txt
 
             (strcmp( (char *)volume_creation_timestamp, "1995051015300000") == 0) { // Douga de Puzzle da! Puppukupuu (Japan) - http://redump.org/disc/11935/
-                return "cdrom:SLPS_000.77;1"; // Serial from CD case. Uses 13 MC blocks - https://psxdatacenter.com/games/J/D/SLPS-00077.html
+                return "000.77"; // Serial from CD case. Uses 13 MC blocks - https://psxdatacenter.com/games/J/D/SLPS-00077.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995070302000000") == 0) { // Gakkou no Kowai Uwasa: Hanako-san ga Kita!! (Japan) - http://redump.org/disc/11935/
-                return "cdrom:SLPS_000.78;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00078.html
+                return "000.78"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00078.html
             } else if
 
             // SLPS_00079E J.League Soccer: Prime Goal EX (Japan) (Lawson Station) - http://redump.org/disc/67854/ and  SLPS_00079 J.League Soccer: Prime Goal EX (Japan) - http://redump.org/disc/67854/ have a proper bootfile 'SLPS_000.79"
@@ -403,13 +402,13 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
             // SLPS_00082 Shichuu Suimei Pitagraph (Japan) - http://redump.org/disc/33850/ has a proper bootfile 'SLPS_000.82"
 
             (strcmp( (char *)volume_creation_timestamp, "1995070523450000") == 0) { // Zero Divide (Japan) - http://redump.org/disc/99925/.
-                return "cdrom:SLPS_000.83;1"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/Z/SLPS-00083.html
+                return "000.83"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/Z/SLPS-00083.html
             } else if
 
             // SLPS_00084 Shin Nihon Pro Wrestling: Toukon Retsuden (Japan) - http://redump.org/disc/12635/ has a proper bootfile 'SLPS_000.84"
 
             (strcmp( (char *)volume_creation_timestamp, "1995072522004900") == 0) { // Houma Hunter Lime: Special Collection Vol. 2 (Japan) - http://redump.org/disc/18607/
-                return "cdrom:SLPS_000.85;1"; // Serial from CD case.
+                return "000.85"; // Serial from CD case.
                 //debug_write("Houma Hunter Lime: Special Collection Vol. 2 (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/I/SLPS-00029.html
             } else if
 
@@ -418,46 +417,79 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
             // SLPS_00087 The Perfect Golf (Japan) - http://redump.org/disc/11332/ has a proper bootfile 'SLPS_000.87"
 
             (strcmp( (char *)volume_creation_timestamp, "1995070613170000") == 0) { // Ground Stroke: Advanced Tennis Game (Japan) - http://redump.org/disc/33778/
-                return "cdrom:SLPS_000.88;1"; // Serial from CD case.
+                return "000.88"; // Serial from CD case.
                 //debug_write("Ground Stroke: Advanced Tennis Game (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00088.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995082517551900") == 0) { // The Oni Taiji!!: Mezase! Nidaime Momotarou (Japan) - http://redump.org/disc/33948/
-                return "cdrom:SLPS_000.89;1"; // CD case serial.
+                return "000.89"; // CD case serial.
                 // debug_write("The Oni Taiji!!: Mezase! Nidaime Momotarou (Japan)"); // 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00089.html
             } else if  
 
             (strcmp( (char *)volume_creation_timestamp, "1995082517551900") == 0) { // Eisei Meijin (Japan) (Rev 1) - http://redump.org/disc/37494/
-                return "cdrom:SLPS_000.90;1"; // CD case serial. Uses 3 MC blocks - https://psxdatacenter.com/games/J/E/SLPS-00090.html
+                return "000.90"; // CD case serial. Uses 3 MC blocks - https://psxdatacenter.com/games/J/E/SLPS-00090.html
             } else if  
 
             // Eisei Meijin (Japan) (Rev 0) has never been dumped or may not exist??
 
             (strcmp( (char *)volume_creation_timestamp, "1995053117000000") == 0) { // Exector (Japan) - http://redump.org/disc/2814/
-                return "cdrom:SLPS_000.91;1"; // CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/E/SLPS-00091.html
+                return "000.91"; // CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/E/SLPS-00091.html
             } else if 
 
             (strcmp( (char *)volume_creation_timestamp, "1995081100000000") == 0) { // King of Bowling (Japan) - http://redump.org/disc/34727/
-                return "cdrom:SLPS_000.92;1"; // CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00092.html
+                return "000.92"; // CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/K/SLPS-00092.html
             } else if  
 
             (strcmp( (char *)volume_creation_timestamp, "1995071011035200") == 0) { // Oh-chan no Oekaki Logic (Japan) - http://redump.org/disc/7882/
-                return "cdrom:SLPS_000.93;1"; // CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/O/SLPS-00093.html
+                return "000.93"; // CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/O/SLPS-00093.html
             } else if
 
+            ( 
+            (strcmp( (char *)volume_creation_timestamp, "1995090510000000") == 0) || // Thunder Storm & Road Blaster (Disc 1) (Thunder Storm) (Japan) - http://redump.org/disc/6740/
+            (strcmp( (char *)volume_creation_timestamp, "1995083123000000") == 0) // Thunder Storm & Road Blaster (Disc 2) (Road Blaster) (Japan) - http://redump.org/disc/8551/
+            ) {
+                return "000.94"; // Serial from Disc 1 CD case. Disc 2 serial is SLPS_00095. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00094.html
+            } else if
 
+            // SLPS_00096 Game no Tetsujin: The Shanghai (Japan) - http://redump.org/disc/36470/ has a proper bootfile 'SLPS_000.96"
 
+            // SLPS_00097 Gensou Suikoden (Japan) - http://redump.org/disc/7461/ has a proper bootfile 'SLPS_000.97"
+
+            // SLPS_00098 Ray Tracers (Japan) - http://redump.org/disc/34232/ has a proper bootfile 'SLPS_000.98"
+
+            (strcmp( (char *)volume_creation_timestamp, "1995100601300000") == 0) { // Moero!! Pro Yakyuu '95: Double Header (Japan) - http://redump.org/disc/34818/.
+                return "000.99"; // Using CD case serial. Uses 6 MC blocks - https://psxdatacenter.com/games/J/M/SLPS-00099.html
+            } else if
+
+            // SLPS_00100 Detana Twinbee Yahoo! Deluxe Pack (Japan) - http://redump.org/disc/5336/ has a proper bootfile 'SLPS_001.00'.
+
+            (strcmp( (char *)volume_creation_timestamp, "1995081001450000") == 0) { // Universal-ki Kanzen Kaiseki: Pachi-Slot Simulator (Japan) - http://redump.org/disc/36304/.
+                return "001.01"; // Using CD case serial. Uses 2 MC block - https://psxdatacenter.com/games/J/U/SLPS-00101.html
+            } else if
+
+            // SLPS_00102 Twilight Syndrome: Tansaku-hen (Japan) - http://redump.org/disc/6840/ has a proper bootfile 'SLPS_001.02'.
 
             (strcmp( (char *)volume_creation_timestamp, "1995080316000000") == 0) { // V-Tennis (Japan) - http://redump.org/disc/22684/.
-                return "cdrom:SLPS_001.03;1"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/V/SLPS-00103.html
+                return "001.03"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/V/SLPS-00103.html
             } else if
+
+            (strcmp( (char *)volume_creation_timestamp, "1995081020000000") == 0) { // Gouketsuji Ichizoku 2: Chotto dake Saikyou Densetsu (Japan) - http://redump.org/disc/12680/.
+                return "001.04"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/G/SLPS-00104.html
+            } else if
+
+            // SLPS_00105 Total Eclipse Turbo (Japan) - http://redump.org/disc/27059/ has a proper bootfile 'SLPS_00105'.
+
+            // SLPS_00106 Nobunaga no Yabou: Haouden (Japan) - http://redump.org/disc/8443/ has a proper bootfile 'SLPS_00106'
+
+
+
 
 
 
 
 
             (strcmp( (char *)volume_creation_timestamp, "1995090516062841") == 0) { // Sotsugyou II: Neo Generation (Japan) - http://redump.org/disc/7885/.
-                return "cdrom:SLPS_001.13;1"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00040.html
+                return "001.13"; // Using CD case serial. Uses 1 MC block - https://psxdatacenter.com/games/J/T/SLPS-00040.html
             } else if
 
 
@@ -472,13 +504,13 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
             (strcmp( (char *)volume_creation_timestamp, "1995102102521200") == 0) || // D no Shokutaku: Complete Graphics (Japan) (Disc 2) - http://redump.org/disc/764/
             (strcmp( (char *)volume_creation_timestamp, "1995102105003200") == 0) // D no Shokutaku: Complete Graphics (Japan) (Disc 3) - http://redump.org/disc/765/
             ) {
-                return "cdrom:SLPS_001.33;1"; // Using disc 1 CD case serial: http://redump.org/disc/763/. All CDs assigned to same memory card. Use 13 MC blocks - https://psxdatacenter.com/games/J/D/SLPS-00133.html
+                return "001.33"; // Using disc 1 CD case serial: http://redump.org/disc/763/. All CDs assigned to same memory card. Use 13 MC blocks - https://psxdatacenter.com/games/J/D/SLPS-00133.html
             } else if     
 
 
 
             (strcmp( (char *)volume_creation_timestamp, "1995113010450000") == 0) { // Keiba Saishou no Housoku '96 Vol. 1 (Japan) - http://redump.org/disc/22945/
-                return "cdrom:SLPS_001.46;1"; // Serial from CD case.
+                return "001.46"; // Serial from CD case.
                 //debug_write("Keiba Saishou no Housoku '96 Vol. 1"); // 15 MC blocks - https://psxdatacenter.com/games/J/K/SLPS-00146.html
             } else if
 
@@ -487,16 +519,16 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
 
 
             (strcmp( (char *)volume_creation_timestamp, "1995121620000000") == 0) { // Alnam no Kiba: Juuzoku Juuni Shinto Densetsu (Japan) - http://redump.org/disc/11199/
-                return "cdrom:SLPS_001.73;1"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/A/SLPS-00173.html
+                return "001.73"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/A/SLPS-00173.html
             } else if
 
             (strcmp( (char *)volume_creation_timestamp, "1995100209000000") == 0) { // Boxer's Road (Japan) (Rev 1) - http://redump.org/disc/6537/
-                return "cdrom:SLPS_910.07;1"; // Serial from CD case. Uses 7 MC blocks - https://psxdatacenter.com/games/J/B/SLPS-91007.html
+                return "910.07"; // Serial from CD case. Uses 7 MC blocks - https://psxdatacenter.com/games/J/B/SLPS-91007.html
             } else {
 
             /*
             (strcmp( (char *)volume_creation_timestamp, "1998110515540400") == 0) { // Contender (USA) (Demo) - http://redump.org/disc/43176/
-                //return "cdrom:SCUS_943.80;1"; // Serial from CD case.
+                //return "cdrom:SCUS_943.80"; // Serial from CD case.
                 //debug_write("Contender (USA) (Demo)");
                 //no_save_function = true; // Demos can't save.
             } else if
@@ -505,7 +537,7 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
 
             /*
             (strcmp( (char *)volume_creation_timestamp, "1997011500000000") == 0) { // The Great Battle VI (Japan) - http://redump.org/disc/37406/
-                //return "cdrom:SLPS_007.19;1"; // Serial from CD case.
+                //return "007.19"; // Serial from CD case.
                 //debug_write("The Great Battle VI (Japan)");
                 //no_save_function = true; // https://psxdatacenter.com/games/J/T/SLPS-00719.html
             } else if
@@ -513,7 +545,7 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
 
             /*    
             (strcmp( (char *)volume_creation_timestamp, "1995070500000000") == 0) { // Zero Divide (Japan) (Demo) - http://redump.org/disc/99925/.
-                //return "cdrom:SLPM_800.08;1"; // Using CD case serial.
+                //return "cdrom:SLPM_800.08"; // Using CD case serial.
                 // Demos don't have save features.
                 //debug_write("Zero Divide (Japan) (Demo)");
             */

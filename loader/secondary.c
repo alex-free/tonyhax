@@ -717,7 +717,7 @@ bool licensed_drive() {
 #endif // TOCPERFECT
 
 void re_cd_init() {
-	debug_write("BIOS re-int"); 
+	debug_write("BIOS re-init"); 
 	bios_reinitialize();
 	bios_inject_disc_error();
 	debug_write("Stopping Motor"); // Significantly improves reading data from disc
@@ -1052,17 +1052,24 @@ debug_write("");
             volume_creation_timestamp[16] = '\0';
             debug_write("PSX.EXE ID: %s", (char *)volume_creation_timestamp); 
 
-			const char * psx_exe_gameid = get_psx_exe_gameid(volume_creation_timestamp);
+			const char * base = "cdrom:SLPS_";
+			const char * serial = get_psx_exe_gameid(volume_creation_timestamp);
+			char * end = ";1\0";
+			char * temp;
+			char * psx_exe_gameid;
 
-            if(strcmp(psx_exe_gameid, "0") != 0) {
+    		mini_sprintf(temp, "%s%s", base, serial); // Append serial (i.e. "000.01") to base "cdrom:SLPS_"
+    		mini_sprintf(psx_exe_gameid, "%s%s", temp, end); // Append ";1<termination>"
+
+            if(strcmp(serial, "0") != 0) {
 				debug_write("Sending %s as GameID", psx_exe_gameid);
                 mcpro_sendid(psx_exe_gameid);
             } else {
-                //debug_write("Unknown PSX.EXE ID, unique GameID unavailable.");
-                mcpro_sendid(bootfile); // as a last resort, we send PSX.EXE to mcpro
+                debug_write("Unknown PSX.EXE ID, unique GameID unavailable.");
+                mcpro_sendid(bootfile); // As a last resort, we send PSX.EXE to mcpro
             }
         } else {
-            mcpro_sendid(bootfile); // wow, that was a lot simpler then PSX.EXE!
+            mcpro_sendid(bootfile); // Wow, that was a lot simpler then PSX.EXE!
         }
 
 #if !defined FAKE_MCPRO

@@ -74,14 +74,6 @@ uint8_t * user_start = (uint8_t *) 0x80010000;
 // Loading address of tonyhax, provided by the secondary.ld linker script
 extern uint8_t __RO_START__, __BSS_START__, __BSS_END__;
 
-uint8_t mcpro_check(uint8_t port){
-	return MemCardPro_Ping(port);
-}
-
-uint8_t mcpro_sendid(const char *gameid) {
-    return  MemCardPro_SendGameID(MCPRO_PORT_0, strlen(gameid), gameid);
-}
-
 // for controller input functions
 void * address;		// For Calculating BIOS Functions
 uint8_t j;			// Joypad
@@ -128,6 +120,19 @@ void controller_input_stop() { // this doubles as 'closing' the memory card func
 
 void memory_card_and_controller_wait() {
 	for(volatile int i = 0; i < 0x100000; i++); // Pause to not spam a memory card read error message if a button is pressed down, and to ensure successful open/read of memory card which requires a waiting period in between calls
+}
+
+uint8_t mcpro_check(uint8_t port){
+	uint8_t mcpro_check_ret = MemCardPro_Ping(port);
+	memory_card_and_controller_wait(); // docs say to wait
+	return mcpro_check_ret;
+}
+
+uint8_t mcpro_sendid(const char *gameid) {
+    memory_card_and_controller_wait(); // docs say to wait
+    uint8_t mcpro_sendid_ret =  MemCardPro_SendGameID(MCPRO_PORT_0, strlen(gameid), gameid);
+    memory_card_and_controller_wait(); // docs say to wait
+	return mcpro_sendid_ret;
 }
 
 void save_file_number_select_wait() // 1/2 as responsive for quicker save file selection ui
@@ -731,21 +736,24 @@ void re_cd_init() {
 }
 
 void ps2_hardware_bug_software_fix(const uint32_t target_lba, uint8_t * data_buffer) {
-			const uint32_t seek_step[5] = { 
-				(target_lba/6),
-				( (target_lba/6) * 2),
-				( (target_lba/6) * 3),
-				( (target_lba/6) * 4),
-				( (target_lba/6) * 5),
-			};
+	if(target_lba > 1000) // Don't need it except for extremly large seeks, 1000 is a pretty small condition here tbh.
+	{
+		const uint32_t seek_step[5] = { 
+			(target_lba/6),
+			( (target_lba/6) * 2),
+			( (target_lba/6) * 3),
+			( (target_lba/6) * 4),
+			( (target_lba/6) * 5),
+		};
 
-			for(int i = 0; i < 5; i++) {
-				if (CdReadSector(1, seek_step[i], data_buffer) != 1) {
-					debug_write("Failed to read sector at LBA: %d", seek_step[i]);
-				} else {
-					debug_write("Seeked to LBA: %d", seek_step[i]);
-				}					
-			}
+		for(int i = 0; i < 5; i++) {
+			if (CdReadSector(1, seek_step[i], data_buffer) != 1) {
+				debug_write("Failed to read sector at LBA: %d", seek_step[i]);
+			} else {
+				debug_write("Seeked to LBA: %d", seek_step[i]);
+			}					
+		}
+	}
 }
 
 void try_boot_cd() {
@@ -819,10 +827,10 @@ debug_write("");
 			//debug_write("Button: %x", j);
 			debug_write(""); // Vblank wait for controller input
 		}
+	
+	    controller_input_stop(); // stop MC/controller input at this point
 	}
 	
-    controller_input_stop(); // stop MC/controller input at this point
-
 #endif // TOCPERFECT
 
 	if(!enable_unlock) {
@@ -936,11 +944,11 @@ debug_write("");
 	if(bios_is_ps1() == false) {
 #endif
 
-		uint32_t system_cnf_lba = CdGetLbn("SYSTEM.CNF;1");
-		if(system_cnf_lba != 0) {
-			debug_write("SYSTEM.CNF LBA: %d", system_cnf_lba);
-			ps2_hardware_bug_software_fix(system_cnf_lba, data_buffer);
-		}
+	uint32_t system_cnf_lba = CdGetLbn("SYSTEM.CNF;1");
+	if(system_cnf_lba != 0) {
+		debug_write("SYSTEM.CNF LBA: %d", system_cnf_lba);
+		ps2_hardware_bug_software_fix(system_cnf_lba, data_buffer);
+	}
 
 #if !defined(FAKE_PS2)
 	}
@@ -1027,12 +1035,9 @@ debug_write("");
 #if defined FAKE_MCPRO
     debug_write("DEBUG: forcing MCPro code path");
 #else
-    int memcardpro_status = mcpro_check(MCPRO_PORT_0);
-    memory_card_and_controller_wait(); // docs say to wait
-	if(memcardpro_status == 0) {
+	if(mcpro_check(MCPRO_PORT_0) == 0) {
 		mcpro_sendid("");
-        memory_card_and_controller_wait(); // docs say to wait
-		debug_write("MCPRO/SD2PSX detected in slot 1"); // This is enough of a wait between the next one if needed.
+		debug_write("MCPRO/SD2PSX detected in slot 1");
 #endif
 
         if(is_psx_exe) {
@@ -1053,13 +1058,60 @@ debug_write("");
             debug_write("PSX.EXE ID: %s", (char *)volume_creation_timestamp); 
 
 			const char * base = "cdrom:SLPS_";
-			const char * serial = get_psx_exe_gameid(volume_creation_timestamp);
-			char * end = ";1\0";
-			char * temp;
-			char * psx_exe_gameid;
+			const char * base_scps = "cdrom:SCPS_";
 
-    		mini_sprintf(temp, "%s%s", base, serial); // Append serial (i.e. "000.01") to base "cdrom:SLPS_"
-    		mini_sprintf(psx_exe_gameid, "%s%s", temp, end); // Append ";1<termination>"
+			const char * serial = get_psx_exe_gameid(volume_creation_timestamp);
+			char * end = ";1";
+
+			char temp[11];
+			// c // 0
+			// d // 1
+			// r // 2
+			// o // 3
+			// m // 4
+			// : // 5
+			// S // 6
+			// L or C // 7 (if is_scps bool is returned as true)
+			// P // 8
+			// S // 9
+			// _ // 10
+
+			char psx_exe_gameid[20];
+			// c // 0
+			// d // 1
+			// r // 2
+			// o // 3
+			// m // 4
+			// : // 5
+			// S // 6
+			// L or C // 7
+			// P // 8
+			// S // 9
+			// _ // 10
+			// #?? // 11
+			// #?? // 12
+			// #?? // 13
+			// . // 14
+			// #?? // 15
+			// #?? // 16
+			// ; // 17
+			// 1 // 18
+			// termination '\0' // 19
+			
+			if(is_scps) {
+    			mini_sprintf(temp, "%s%s", base_scps, serial); // Append serial (i.e. "000.01") to base "cdrom:SLPS_"
+			} else {
+    			mini_sprintf(temp, "%s%s", base, serial); // Append serial (i.e. "000.01") to base "cdrom:SLPS_"
+			}
+
+			mini_sprintf(psx_exe_gameid, "%s%s", temp, end); // Append ";1"
+
+			/*
+			Tests Arc The Lad Japan Rev 0/Rev 1
+            if(strcmp(psx_exe_gameid, "cdrom:SCPS_100.08;1") != 0) {
+				debug_write("Mismatch");
+			}
+			*/
 
             if(strcmp(serial, "0") != 0) {
 				debug_write("Sending %s as GameID", psx_exe_gameid);

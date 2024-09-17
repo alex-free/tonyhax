@@ -6,9 +6,11 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Additional Features
 
-* [GameID support](gameid.md) for MemCardPro/SD2PSX. In addition, Tonyhax International is the first to provide GameID support for early Japanese games (PSX.EXE bootfile).
+* [GameID support](gameid.md) for MemCardPro/MemCardPro 2/SD2PSX. In addition, Tonyhax International is the first to provide GameID support for early Japanese games (PSX.EXE bootfile).
 
-* Supports more [games](additional-game-support.md).
+* Ensures 80 Minute CD-Rs on early PS2 models are booted correctly with a first of it's kind [software fix](ps2-80-minute-cd-rs.md).
+
+* Supports more [games](additional-game-support.md). Bleeding edge of Tonyhax upstream.
 
 * Automatic console detection and loader configuration.
 
@@ -47,29 +49,23 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.5.3 (9/2/2024)
+### Version 1.5.4 (9/16/2024)
 
-* [tonyhax-international-v1.5.3](https://github.com/alex-free/tonyhax/releases/download/v1.5.3i/tonyhax-international-v1.5.3.zip)
+* [tonyhax-international-v1.5.4](https://github.com/alex-free/tonyhax/releases/download/v1.5.4i/tonyhax-international-v1.5.4.zip)
 
 ----------------------------------
 
 Changes:
 
-* [GameID support](gameid.md) for MemCardPro/SD2PSX. Additionally, Tonyhax International is the first to support early Japanese games (with 'PSX.EXE' bootfile) with GameID. Big thanks to the [testers](https://github.com/alex-free/tonyhax/issues/64) [@lzibeti](https://github.com/lzibeti) and [@kimbapslice](https://github.com/kimbapslice)!
+* Improved [GameID support](gameid.md). More (nearly all) `PSX.EXE` games are now supported for GameID by my new [library](https://github.com/alex-free/tonyhax/blob/master/loader/gameid-psx-exe.c) (please use it Unirom people!). MemCardPro 2 now works, fixed all timing issues related to talking with GameID. Big thanks to everyone who reports [issues](https://github.com/alex-free/tonyhax/issues) and helped with testing.
 
-* [Modified](https://github.com/alex-free/tonyhax/blob/master/docs/ram-setups.md) RAM layout to handle a larger decompression by PS1 packer
+* Due to user request, I have re-introduced a new and improved PS2 hardware bug software fix for 80 minute CD-Rs with additional [info](ps2-80-minute-cd-rs.md).
 
-* Implemented a fix to work-around a [29 year old bug](https://github.com/socram8888/tonyhax/issues/161) in the game [Kileak, The Blood (Japan)](http://redump.org/disc/14371/) which caused previous versions of Tonyhax International and all versions of the original Tonyhax to not boot it successfully.
+* [Modified](https://github.com/alex-free/tonyhax/blob/master/docs/ram-setups.md) RAM layout to handle a larger EXE decompressed by Nicholas Noble's brilliant [PS1 packer](https://github.com/pcsx-redux/support?tab=readme-ov-file).
 
-* Implemented the same functions that the original Tonyhax now uses to handle ignoring the garbage SP values in the PS-X executable header.
+* Jikkyou Powerful Pro Yakyuu '95 (Japan) (Rev 0) now works again, as it did in v1.5.2 and below.
 
-* Integrated [psn00bsdk-builder](https://github.com/alex-free/psn00bsdk-builder) into the build system. You can now run `make toolchain` or `make toolchain deps` to build and or install the complete Tonyhax International dev environment on many Linux systems.
-
-* Loader bug fix: closes memory card/controller input pulling for all consoles (not just Japanese ones) after reading the target boot disc.
-
-* Removed my '80 Minute CD-R PS2 hardware bug software-fix' from the loader. I have done this because while my '80 Minute CD-R PS2 hardware bug software-fix' ensures correct reading of 80 minute CD-Rs while **inside** Tonyhax International, it can not do anything about what happens in-game after being booted. At least one game ([Street Fighter Alpha 3 (USA)](http://redump.org/disc/508/)) crashes in-game due  to the PS2 hardware bug with 80 minute/700MB CD-Rs, and that can not be fixed by my software-fix. **Please instead use my [PSX80MP](https://github.com/alex-free/psx80mp) to patch games that will be burned on 80 minute/700MB CD-Rs and played on PS2s. This is not required for using 80 minute/700MB CD-Rs on PS1 consoles.**
-
-* Documentation clean up and improvements.
+* Added better debug variables/settings for use by myself during testing.
 
 ----------------------------------
 

@@ -1,5 +1,23 @@
 # [Tonyhax International](readme.md) -> Changelog
 
+## Version 1.5.4 (9/16/2024)
+
+* [tonyhax-international-v1.5.4](https://github.com/alex-free/tonyhax/releases/download/v1.5.4i/tonyhax-international-v1.5.4.zip)
+
+----------------------------------
+
+Changes:
+
+* Improved [GameID support](gameid.md). More (nearly all) `PSX.EXE` games are now supported for GameID by my new [library](https://github.com/alex-free/tonyhax/blob/master/loader/gameid-psx-exe.c) (please use it Unirom people!). MemCardPro 2 now works, fixed all timing issues related to talking with GameID. Big thanks to everyone who reports [issues](https://github.com/alex-free/tonyhax/issues) and helped with testing.
+
+* Due to user request, I have re-introduced a new and improved PS2 hardware bug software fix for 80 minute CD-Rs with additional [info](ps2-80-minute-cd-rs.md).
+
+* [Modified](https://github.com/alex-free/tonyhax/blob/master/docs/ram-setups.md) RAM layout to handle a larger EXE decompressed by Nicholas Noble's brilliant [PS1 packer](https://github.com/pcsx-redux/support?tab=readme-ov-file).
+
+* Jikkyou Powerful Pro Yakyuu '95 (Japan) (Rev 0) now works again, as it did in v1.5.2 and below.
+
+* Added better debug variables/settings for use by myself during testing.
+
 ## Version 1.5.3 (9/2/2024)
 
 * [tonyhax-international-v1.5.3](https://github.com/alex-free/tonyhax/releases/download/v1.5.3i/tonyhax-international-v1.5.3.zip)

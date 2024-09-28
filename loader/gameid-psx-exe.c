@@ -6,30 +6,45 @@ bool is_scps = false;
 const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17])
  {
     /*
-    Special handling for PSX.EXE games with memcardpro. We have 2 lists: 
+    Special handling for PSX.EXE games with memcardpro. Currently this library support games that meet the below crtera:
+    * An officially licensed discs with a PSX.EXE bootfile (or some variant of it, i.e. psx.exe). Betas, Alphas, or unreleased games usually don't have a common sense product code/serial to send to the memcardpro and are currently not implemented.
+    * The game Has features that actively utilize a memory card. If there is no saving functionality in the game, then why waste executable space for it?
+    
+    Japanese PSX games from launch day (12/3/1994) to 7/12/1995 (the date of the below memo found in the Sony BBS archive: http://psx.arthus.net/sdk/Psy-Q/DOCS/BBS/scea_bbs.pdf)  did not consistently follow the bootfile name format:
+    ======================================================================
+    7/12/95 10:43 AM
+    URGENT!! CD mastering information
+    Thomas Boyd
+    News
+    Late Late Breaking News from Japan: ---------------------------------------------------- Do not name your
+    executable PSX.EXE Name your executable after the following convention:
+    Use your product code (AAAA-XXXXX) and turn it into a file name by inserting a period after
+    the eighth character.
+    Example: AAAA-XXXXX = SLUS-12345
+    Product code: SLUS-12345 Executable name on CD: SLUS-123.45;1
+    To run the main file, build SYSTEM.CNF and put it in your root directory. SYSTEM.CNF should
+    look like this:
+    BOOT=cdrom:\AAAA-XXX.XX;1 (in the example this TCB=4 would
+    be SLUS-123.45;1) EVENT=10 STACK=801fff00
+
+    ======================================================================
+
+    Some Japanese PSX games were released not following the bootfile name format even after the memo. It appears to myself that by October 1995, it got a lot more consistant with following the bootfile name format.
+
+    All PSX games have an serial product code, even the ones that don't make the product code the bootfile name. This is what needs to be sent as the game id to the memcardpro for games that don't follow the bootfile name format.
+
+    In order to find such games, I used the redump,org search functionality to search for the "PSX.EXE" and "PSXEXE" comments on the redump pages of all PlayStation games. This doesn't get you all such games as leaving a comment on a redump upload mentioning the PSX.EXE boot file are left inconstantly by different up-loaders. There were also some false positives with these searches:
+
     * http://redump.org/discs/quicksearch/PSX.EXE/comments/only
     * http://redump.org/discs/quicksearch/PSXEXE/comments/only
 
     
-    There are some false positives in the above 2 lists due to how redump search works/how they were listed. There are also some discs not listed that do have PSX.EXE. In addition ONLY officially licensed discs with PSX.EXE are supported. Beta and unlicensed discs are ignored (due to lacking a serial designation and to save exe space).
+    In order to find the remaining games, I decided to search through all disc images from SLPS_00001 to SLPS_00152. While the product serial codes are not perfectly sequential in regards to release date, by time you get to SLPS_00152 your in at least late 1995 for most release dates of games. At that point most games are following the correct bootfile format.
 
     ======================================================================
     Implementation Notes:
-
-    WE DO NOT WANT TO DEPEND ON THE ABILITY TO LOAD THE ENTIRE PSX.EXE INTO RAM. As Tonyhax International gets larger we can't guarantee every PSX.EXE executable will fit into the RAM lower then Tonyhax International before we call do_execute(), sometimes we may need to load_and_exec() which means we can't depend on having the PSX.EXE in memory to check anything.
-
-    Failed attempts to ID PSX.EXE games:
-
-    1) CRC32 sector 16. This is great, but if you rebuild/modify the game with i.e. mkpsxiso you get a different checksum we can't possibly know, and fail the match.
     
-    2) CRC32 sector 16 up to 0x48. The includes the Volume Identifier. This would probably even work with  mkpsxiso rebuilt disc images, BUT some ridiculous games such as http://redump.org/disc/21858/ have no identifiable information even here. Even the Volume Identifier at 0x28 is SPACES FOR THAT GAME! WHY?!
-
-    ======================================================================
-    SUCCESSFUL IMPLEMENTATION FOUND: 
-    
-    Check the date of creation ;) at 0x32D (Volume Creation Timestamp). MKPSXISO keeps that the same on rebuild.
-    
-    From NO$PSX SPX: https://problemkaputt.de/psx-spx.htm#cdromisovolumedescriptors
+    1) Read Sector 16. From NO$PSX SPX (https://problemkaputt.de/psx-spx.htm#cdromisovolumedescriptors), sector 16 contains:
 
     ======================================================================
     Primary Volume Descriptor (sector 16 on PSX disks)
@@ -72,7 +87,7 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
     412h 8    CD-XA Reserved                (00h-filled for PSX and VCD)
     41Ah 345  Application Use Area          (00h-filled for PSX and VCD)
     573h 653  Reserved for future           (00h-filled)
-    =============================================================================================
+    ======================================================================
     Volume Descriptor Timestamps
     The various timestamps occupy 17 bytes each, in form of
 
@@ -80,8 +95,16 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
     "0000000000000000",00h         ;empty timestamp
 
     The first 16 bytes are ASCII Date and Time digits (Year, Month, Day, Hour, Minute, Second, and 1/100 Seconds. The last byte is Offset from Greenwich Mean Time in number of 15-minute steps from -48 (West) to +52 (East); or actually: to +56 when recursing Kiribati's new timezone.
-    Note: PSX games manufactured in year 2000 were accidently marked to be created in year 0000.
-    =============================================================================================
+    Note: PSX games manufactured in year 2000 were accidentally marked to be created in year 0000.
+    ======================================================================
+
+    2) We use the Volume Creation Timestamp at offset 0x32D to identify what game we have. So far there have been no conflicts between games, this value is unique enough.
+
+    3) We send back the serial as SLPS by default. In order to signify it is SCPS we set a boolean to true.
+
+    ======================================================================
+
+    4) You need to rebuild the full serial number (this is because we only send back unique parts of the string that will be sent as the final GameID to save executable space). See 'secondary.c' for the implementation of this.
     */
 
     // Ordered by serial number.
@@ -561,26 +584,49 @@ const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17
         return "001.37"; // Serial from CD case. Uses 1 MC blocks- https://psxdatacenter.com/games/J/S/SLPS-00137.html.
     } else if
 
+    // SLPS_00138 Galaxy Fight: Universal Warriors (Japan) - http://redump.org/disc/21626/ has a proper bootfile 'SLPS_001.38'.
 
+    // SLPS_00139 Shougi Joryuu Meijin'isen (Japan) - http://redump.org/disc/46378/ has a proper bootfile 'SLPS_001.39'.
 
+    // SLPS_00140 The Snowman (Japan) - http://redump.org/disc/36568/has a proper bootfile 'SLPS_001.40'.
 
+    // SLPS_00141 Alone in the Dark 2 (Japan) - http://redump.org/disc/13174/ has a proper bootfile 'SLPS_001.41'.
 
+    (strcmp( (char *)volume_creation_timestamp, "1995101801325900") == 0) { //  Senryaku Shougi (Japan) - http://redump.org/disc/61170/.
+        return "001.42"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/S/SLPS-00142.html.
+    } else if
 
+    // SLPS_00143 Reverthion (Japan) - http://redump.org/disc/7887/ has a proper bootfile 'SLPS_001.43'.
 
+    // SLPS_00144 J. B. Harold: Blue Chicago Blues (Disc 1) (Japan) - http://redump.org/disc/18647/ has a proper bootfile 'SLPS_001.44'.
+
+    // SLPS_00145 J. B. Harold: Blue Chicago Blues (Disc 2) (Japan) - http://redump.org/disc/18646/ has a proper bootfile 'SLPS_001.45'.
 
     (strcmp( (char *)volume_creation_timestamp, "1995113010450000") == 0) { // Keiba Saishou no Housoku '96 Vol. 1 (Japan) - http://redump.org/disc/22945/.
         return "001.46"; // Serial from CD case. Uses 15 MC blocks - https://psxdatacenter.com/games/J/K/SLPS-00146.html.
     } else if
 
+    // SLPS_00147 Floating Runner: 7-tsu no Suishou no Monogatari (Japan) - http://redump.org/disc/8582/ has a proper bootfile 'SLPS_001.47'.
 
+    // SLPS_00148 The Firemen 2: Pete & Danny (Japan) - http://redump.org/disc/18950/ has a proper bootfile 'SLPS_001.48'.
 
+    // SLPS_00149 Puppet Zoo Pilomy (Japan) - http://redump.org/disc/37618/ has a proper bootfile 'SLPS_001.49'.
 
+    // SLPS_00150 Ridge Racer Revolution (Japan) (Rev 0) - http://redump.org/disc/2733/ and Ridge Racer Revolution (Japan) (Rev 1) - http://redump.org/disc/6209 have a proper bootfile 'SLPS_001.50'.
+
+    // SLPS_00151 Carnage Heart (Japan) - http://redump.org/disc/1599/ has a proper bootfile 'SLPS_001.51'.
+
+    (strcmp( (char *)volume_creation_timestamp, "1995092205430500") == 0) { // Yaku: Yuujou Dangi (Japan) - http://redump.org/disc/4668/
+        return "001.52"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/Y/SLPS-00152.html.
+    } else if
+
+    // TODO, check until at least SLPS_00173 for any more stragglers.
 
     (strcmp( (char *)volume_creation_timestamp, "1995121620000000") == 0) { // Alnam no Kiba: Juuzoku Juuni Shinto Densetsu (Japan) - http://redump.org/disc/11199/
         return "001.73"; // Serial from CD case. Uses 1 MC block - https://psxdatacenter.com/games/J/A/SLPS-00173.html.
     } else if
 
-    // SLPS_00719 The Great Battle VI (Japan) - http://redump.org/disc/37406/ does not use memory cards https://psxdatacenter.com/games/J/T/SLPS-00719.html.
+    // SLPS_00719 The Great Battle VI (Japan) - http://redump.org/disc/37406/ has PSX.EXE. But it does not use memory cards (no save functionallity) https://psxdatacenter.com/games/J/T/SLPS-00719.html.
 
     // Begin SCPS.
 

@@ -6,6 +6,8 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Additional Features
 
+* Supports all PS1 console models (SCPH-1000 to SCPH-103), and early PS2 console models from SCPH-10000 to SCPH-39004. All console regions (including Japan) are supported.
+
 * [GameID support](gameid.md) for MemCardPro/MemCardPro 2/SD2PSX. In addition, Tonyhax International is the first to provide GameID support for early Japanese games (PSX.EXE bootfile).
 
 * Ensures 80 Minute CD-Rs on early PS2 models are booted correctly with a first of it's kind [software fix](ps2-80-minute-cd-rs.md).
@@ -49,23 +51,17 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.5.4 (9/16/2024)
+### Version 1.5.5 (9/27/2024)
 
-* [tonyhax-international-v1.5.4](https://github.com/alex-free/tonyhax/releases/download/v1.5.4i/tonyhax-international-v1.5.4.zip)
+* [tonyhax-international-v1.5.5](https://github.com/alex-free/tonyhax/releases/download/v1.5.5i/tonyhax-international-v1.5.5.zip)
 
 ----------------------------------
 
 Changes:
 
-* Improved [GameID support](gameid.md). More (nearly all) `PSX.EXE` games are now supported for GameID by my new [library](https://github.com/alex-free/tonyhax/blob/master/loader/gameid-psx-exe.c) (please use it Unirom people!). MemCardPro 2 now works, fixed all timing issues related to talking with GameID. Big thanks to everyone who reports [issues](https://github.com/alex-free/tonyhax/issues) and helped with testing.
+* Fixed [GameID support](gameid.md) for Eisei Meijin (Japan) (Rev 1) (thanks to the bug report by [@sh06un](https://github.com/sh06un)). Added support for a few more PSX.EXE titles as well, and updated my [library](https://github.com/alex-free/tonyhax/blob/master/loader/gameid-psx-exe.c) with more documentation.
 
-* Due to user request, I have re-introduced a new and improved PS2 hardware bug software fix for 80 minute CD-Rs with additional [info](ps2-80-minute-cd-rs.md).
-
-* [Modified](https://github.com/alex-free/tonyhax/blob/master/docs/ram-setups.md) RAM layout to handle a larger EXE decompressed by Nicholas Noble's brilliant [PS1 packer](https://github.com/pcsx-redux/support?tab=readme-ov-file).
-
-* Jikkyou Powerful Pro Yakyuu '95 (Japan) (Rev 0) now works again, as it did in v1.5.2 and below.
-
-* Added better debug variables/settings for use by myself during testing.
+* GameID detection happens quicker now then before.
 
 ----------------------------------
 

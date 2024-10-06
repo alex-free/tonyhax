@@ -9,7 +9,7 @@
 //
 
 extern int MemCardPro_Ping(int port01);
-extern int MemCardPro_SendGameID(int port01, int maxLen255, const char *gameID);
+extern int MemCardPro_SendGameID(int port01, int maxLen255, char *gameID);
 
 extern int MemCardPro_NextCH(int port01);
 extern int MemCardPro_PrevCH(int port01);

@@ -3,9 +3,8 @@
 #include "bios.h"
 #include <stddef.h>
 
-//volatile uint8_t * const CD_REGS = (volatile uint8_t *) 0x1F801800;
-// Changed to correct memory region (thanks Nicholas Noble), see https://psx-spx.consoledev.net/memorymap/#write-queue
-volatile uint8_t * const CD_REGS = (volatile uint8_t *) 0xbf801800;
+// Changed from 0x1F801800 to correct memory region (thanks Nicholas Noble), see https://psx-spx.consoledev.net/memorymap/#write-queue
+volatile uint8_t * const CD_REGS = (volatile uint8_t *) 0xBF801800;
 
 inline void cd_set_page(uint8_t page) {
 	CD_REGS[0] = page;

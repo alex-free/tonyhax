@@ -42,7 +42,7 @@ void bios_reinitialize() {
 	I_STAT = 0;
 	I_MASK = 0;
 
-	// Setup devices
+	// Setup devices.
 	InstallDevices(tty_enabled);
 
 	/*

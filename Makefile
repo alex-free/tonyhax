@@ -52,13 +52,13 @@ clean:
 	$(MAKE) -C boot-cd clean
 	$(MAKE) -C rom clean
 	$(MAKE) -C xstation clean
-	scripts/test-thigsgen.sh --clean
+	scripts/test-thigsgen --clean
 	$(MAKE) -C thigsgen clean-build
 	$(MAKE) -C gshax clean
 	$(RM) tonyhax-*.zip
 
 deps:
-	scripts/get-deps.sh
+	scripts/get-deps
 	$(MAKE) -C pcsx-redux-support clean tools
 	cd mkpsxiso; rm -rf ./build; cmake -S . -B ./build -DCMAKE_BUILD_TYPE=Release; cmake --build ./build
 	cd psexe2rom; $(MAKE) clean; $(MAKE)

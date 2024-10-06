@@ -1,6 +1,6 @@
-diff --git a/tmp/og-tonyhax.R0u/loader/Makefile b/loader/Makefile
+diff --git a/tmp/og-tonyhax.rGK/loader/Makefile b/loader/Makefile
 index f121ebf..0f5e6ff 100644
---- a/tmp/og-tonyhax.R0u/loader/Makefile
+--- a/tmp/og-tonyhax.rGK/loader/Makefile
 +++ b/loader/Makefile
 @@ -1,7 +1,7 @@
  
@@ -3039,9 +3039,9 @@ index 0000000..d9379b6
 +
 +extern bool cheat_engine_installed;
 +extern bool is_beat_mania_append_gottamix;
-diff --git a/tmp/og-tonyhax.R0u/loader/bios-asm.S b/loader/bios-asm.S
+diff --git a/tmp/og-tonyhax.rGK/loader/bios-asm.S b/loader/bios-asm.S
 index f181105..d81b6bb 100644
---- a/tmp/og-tonyhax.R0u/loader/bios-asm.S
+--- a/tmp/og-tonyhax.rGK/loader/bios-asm.S
 +++ b/loader/bios-asm.S
 @@ -1,6 +1,4 @@
  
@@ -3299,9 +3299,9 @@ index f181105..d81b6bb 100644
 -	li t1, 0x1C
 +	li $9, 0x1C
  	j 0xC0
-diff --git a/tmp/og-tonyhax.R0u/loader/bios.c b/loader/bios.c
-index 92edfab..13af146 100644
---- a/tmp/og-tonyhax.R0u/loader/bios.c
+diff --git a/tmp/og-tonyhax.rGK/loader/bios.c b/loader/bios.c
+index 92edfab..be740e7 100644
+--- a/tmp/og-tonyhax.rGK/loader/bios.c
 +++ b/loader/bios.c
 @@ -5,23 +5,13 @@
  #include "debugscreen.h"
@@ -3331,13 +3331,11 @@ index 92edfab..13af146 100644
  	// Disable interrupts
  	EnterCriticalSection();
  
-@@ -52,8 +42,8 @@ void bios_reinitialize() {
- 	I_STAT = 0;
+@@ -53,7 +43,7 @@ void bios_reinitialize() {
  	I_MASK = 0;
  
--	// Setup devices.
+ 	// Setup devices.
 -	InstallDevices(console_has_tty());
-+	// Setup devices
 +	InstallDevices(tty_enabled);
  
  	/*
@@ -3358,9 +3356,9 @@ index 92edfab..13af146 100644
  	// Re-enable interrupts
  	ExitCriticalSection();
  
-diff --git a/tmp/og-tonyhax.R0u/loader/bios.h b/loader/bios.h
-index 2a2db60..35d4294 100644
---- a/tmp/og-tonyhax.R0u/loader/bios.h
+diff --git a/tmp/og-tonyhax.rGK/loader/bios.h b/loader/bios.h
+index 2a2db60..91b0171 100644
+--- a/tmp/og-tonyhax.rGK/loader/bios.h
 +++ b/loader/bios.h
 @@ -1,7 +1,7 @@
  
@@ -3371,16 +3369,7 @@ index 2a2db60..35d4294 100644
  
  typedef struct exe_header exe_header_t;
  typedef struct exe_offsets exe_offsets_t;
-@@ -14,14 +14,14 @@ struct exe_offsets {
- 	void * load_addr;           // 0x08
- 	uint32_t load_size;         // 0x0C
- 	uint32_t _reserved0[2];     // 0x10
--	void * memfill_start;       // 0x18
-+	void * memfill_start; 		// 0x18
- 	uint32_t memfill_size;      // 0x1C
--	void * initial_sp_base;     // 0x20
-+	void * initial_sp_base;		// 0x20
- 	uint32_t initial_sp_offset; // 0x24
+@@ -21,7 +21,7 @@ struct exe_offsets {
  };
  
  struct exe_header {
@@ -3403,23 +3392,7 @@ index 2a2db60..35d4294 100644
  /**
   * Starts a previously loaded executable.
   *
-@@ -352,15 +345,6 @@ bool CdInit(void);
-  */
- void SetConf(uint32_t evcb, uint32_t tcb, void * stacktop);
- 
--/**
-- * Configured the RAM size.
-- *
-- * @param size memory size in megabytes, either 2 or 8.
-- *
-- * Table A, call 0x9F.
-- */
--void SetMemSize(uint32_t size);
--
- /**
-  * Reads the requested amount of sectors from the CD.
-  *
-@@ -373,6 +357,15 @@ void SetMemSize(uint32_t size);
+@@ -373,6 +366,15 @@ void SetMemSize(uint32_t size);
   */
  int32_t CdReadSector(uint32_t sector_count, uint32_t start_sector, void * buffer);
  
@@ -3435,7 +3408,7 @@ index 2a2db60..35d4294 100644
  /*
   * B-FUNCTIONS
   */
-@@ -418,6 +411,15 @@ int32_t FileRead(int32_t fd, void * dst, uint32_t length);
+@@ -418,6 +420,15 @@ int32_t FileRead(int32_t fd, void * dst, uint32_t length);
   */
  void FileClose(int32_t fd);
  
@@ -3451,33 +3424,21 @@ index 2a2db60..35d4294 100644
  /**
   * Returns the error code for the last failed file operation.
   *
-@@ -474,3 +476,10 @@ void InstallDevices(uint32_t enable_tty);
-  * Table C, call 0x1C.
-  */
- void AdjustA0Table(void);
-+
-+/**
-+ * Called to set the RAM to 8MBs, which enables the mirroring of RAM 4 times in the real 2MBs of RAM (which is exactly what the BIOS ends up doing)
-+ *
-+ * Table A, call 0x9F.
-+ */
-+void SetMemSize(uint32_t mem_size);
-diff --git a/tmp/og-tonyhax.R0u/loader/cdrom.c b/loader/cdrom.c
-index dddc533..33bc152 100644
---- a/tmp/og-tonyhax.R0u/loader/cdrom.c
+diff --git a/tmp/og-tonyhax.rGK/loader/cdrom.c b/loader/cdrom.c
+index dddc533..4f754db 100644
+--- a/tmp/og-tonyhax.rGK/loader/cdrom.c
 +++ b/loader/cdrom.c
-@@ -3,7 +3,9 @@
+@@ -3,7 +3,8 @@
  #include "bios.h"
  #include <stddef.h>
  
 -volatile uint8_t * const CD_REGS = (volatile uint8_t *) 0x1F801800;
-+//volatile uint8_t * const CD_REGS = (volatile uint8_t *) 0x1F801800;
-+// Changed to correct memory region (thanks Nicholas Noble), see https://psx-spx.consoledev.net/memorymap/#write-queue
-+volatile uint8_t * const CD_REGS = (volatile uint8_t *) 0xbf801800;
++// Changed from 0x1F801800 to correct memory region (thanks Nicholas Noble), see https://psx-spx.consoledev.net/memorymap/#write-queue
++volatile uint8_t * const CD_REGS = (volatile uint8_t *) 0xBF801800;
  
  inline void cd_set_page(uint8_t page) {
  	CD_REGS[0] = page;
-@@ -43,6 +45,40 @@ void cd_command(uint_fast8_t cmd, const uint8_t * params, uint_fast8_t params_le
+@@ -43,6 +44,40 @@ void cd_command(uint_fast8_t cmd, const uint8_t * params, uint_fast8_t params_le
  	CD_REGS[1] = cmd;
  }
  
@@ -3518,7 +3479,7 @@ index dddc533..33bc152 100644
  uint_fast8_t cd_wait_int(void) {
  
  	// Wait for command to finish, if any
-@@ -64,6 +100,28 @@ uint_fast8_t cd_wait_int(void) {
+@@ -64,6 +99,28 @@ uint_fast8_t cd_wait_int(void) {
  	return interrupt;
  }
  
@@ -3547,7 +3508,7 @@ index dddc533..33bc152 100644
  uint_fast8_t cd_read_reply(uint8_t * reply_buffer) {
  
  	// Switch to page 1
-@@ -81,6 +139,9 @@ uint_fast8_t cd_read_reply(uint8_t * reply_buffer) {
+@@ -81,6 +138,9 @@ uint_fast8_t cd_read_reply(uint8_t * reply_buffer) {
  	return len;
  }
  
@@ -3557,7 +3518,7 @@ index dddc533..33bc152 100644
  bool cd_drive_init() {
  	cd_command(CD_CMD_INIT, NULL, 0);
  
-@@ -96,18 +157,22 @@ bool cd_drive_init() {
+@@ -96,18 +156,22 @@ bool cd_drive_init() {
  
  	return true;
  }
@@ -3589,11 +3550,11 @@ index dddc533..33bc152 100644
 -	return true;
 +	for (volatile int i = 0; i < 0x400000; i++); // unmodifiable compiler code when using -Os optimizations
  }
-diff --git a/tmp/og-tonyhax.R0u/loader/cdrom.h b/loader/cdrom.h
-index 438e7cd..76734d7 100644
---- a/tmp/og-tonyhax.R0u/loader/cdrom.h
+diff --git a/tmp/og-tonyhax.rGK/loader/cdrom.h b/loader/cdrom.h
+index 438e7cd..653b02c 100644
+--- a/tmp/og-tonyhax.rGK/loader/cdrom.h
 +++ b/loader/cdrom.h
-@@ -1,13 +1,22 @@
+@@ -1,6 +1,6 @@
  
  #pragma once
 -#include <stdint.h>
@@ -3601,10 +3562,9 @@ index 438e7cd..76734d7 100644
  #include <stdbool.h>
  
  #define CD_CMD_GETSTAT 0x01
- #define CD_CMD_INIT 0x0A
--#define CD_CMD_TEST 0x19
+@@ -8,6 +8,15 @@
+ #define CD_CMD_TEST 0x19
  #define CD_CMD_RESET 0x1C
-+#define CD_CMD_TEST 0x19
  #define CD_TEST_REGION 0x22
 +#define CD_TEST_VERSION 0x20
 +#define CD_CMD_SET_SESSION 0x12
@@ -3635,9 +3595,9 @@ index 438e7cd..76734d7 100644
 -bool cd_drive_reset(void);
 +// Resets the drive.
 +void cd_drive_reset();
-diff --git a/tmp/og-tonyhax.R0u/loader/cfgparse.h b/loader/cfgparse.h
+diff --git a/tmp/og-tonyhax.rGK/loader/cfgparse.h b/loader/cfgparse.h
 index 00e9464..7935129 100644
---- a/tmp/og-tonyhax.R0u/loader/cfgparse.h
+--- a/tmp/og-tonyhax.rGK/loader/cfgparse.h
 +++ b/loader/cfgparse.h
 @@ -1,6 +1,6 @@
  
@@ -3647,9 +3607,9 @@ index 00e9464..7935129 100644
  #include <stdbool.h>
  
  bool config_get_hex(const char * config, const char * wanted, uint32_t * value);
-diff --git a/tmp/og-tonyhax.R0u/loader/crc.h b/loader/crc.h
+diff --git a/tmp/og-tonyhax.rGK/loader/crc.h b/loader/crc.h
 index cf3305b..4e1e512 100644
---- a/tmp/og-tonyhax.R0u/loader/crc.h
+--- a/tmp/og-tonyhax.rGK/loader/crc.h
 +++ b/loader/crc.h
 @@ -1,6 +1,6 @@
  
@@ -3659,9 +3619,9 @@ index cf3305b..4e1e512 100644
 +#include <stdint-gcc.h>
  
  uint32_t crc32(const void * data, uint32_t len);
-diff --git a/tmp/og-tonyhax.R0u/loader/debugscreen.c b/loader/debugscreen.c
-index cb8c32e..2baa2cb 100644
---- a/tmp/og-tonyhax.R0u/loader/debugscreen.c
+diff --git a/tmp/og-tonyhax.rGK/loader/debugscreen.c b/loader/debugscreen.c
+index cb8c32e..0accfe8 100644
+--- a/tmp/og-tonyhax.rGK/loader/debugscreen.c
 +++ b/loader/debugscreen.c
 @@ -113,7 +113,7 @@ void debug_init() {
  	gpu_flush_cache();
@@ -3718,7 +3678,7 @@ index cb8c32e..2baa2cb 100644
 -		// Same line, so print with a repeat counter
 -		mini_sprintf(formatted_repeated, "%s (x%d)", last_printed_line, last_printed_count);
 -
-+		// Same line, so print with a repeat counter unless we are waiting for controller input on a Japanese console
++		// Same line, so print with a repeat counter unless we are waiting for controller input.
 +		if(!controller_input) {
 +			mini_sprintf(formatted_repeated, "%s (x%d)", last_printed_line, last_printed_count);
 +		} else {
@@ -3727,9 +3687,9 @@ index cb8c32e..2baa2cb 100644
  		to_print = formatted_repeated;
  	}
  
-diff --git a/tmp/og-tonyhax.R0u/loader/debugscreen.h b/loader/debugscreen.h
+diff --git a/tmp/og-tonyhax.rGK/loader/debugscreen.h b/loader/debugscreen.h
 index 6ae71a5..1647381 100644
---- a/tmp/og-tonyhax.R0u/loader/debugscreen.h
+--- a/tmp/og-tonyhax.rGK/loader/debugscreen.h
 +++ b/loader/debugscreen.h
 @@ -1,6 +1,6 @@
  
@@ -4412,10 +4372,10 @@ index 0000000..5bffaf6
 +
 +const char * get_psx_exe_gameid(const unsigned char volume_creation_timestamp[17]);
 +extern bool is_scps;
-diff --git a/tmp/og-tonyhax.R0u/loader/generate-tonyhax-exe.sh b/tmp/og-tonyhax.R0u/loader/generate-tonyhax-exe.sh
+diff --git a/tmp/og-tonyhax.rGK/loader/generate-tonyhax-exe.sh b/tmp/og-tonyhax.rGK/loader/generate-tonyhax-exe.sh
 deleted file mode 100644
 index 6bd43aa..0000000
---- a/tmp/og-tonyhax.R0u/loader/generate-tonyhax-exe.sh
+--- a/tmp/og-tonyhax.rGK/loader/generate-tonyhax-exe.sh
 +++ /dev/null
 @@ -1,49 +0,0 @@
 -#!/bin/bash
@@ -4467,9 +4427,9 @@ index 6bd43aa..0000000
 -
 -# Cleanup
 -rm $bin_file
-diff --git a/tmp/og-tonyhax.R0u/loader/generate-tonyhax-mcs.sh b/loader/generate-tonyhax-mcs.sh
+diff --git a/tmp/og-tonyhax.rGK/loader/generate-tonyhax-mcs.sh b/loader/generate-tonyhax-mcs.sh
 index 33116fa..2fb1ee5 100644
---- a/tmp/og-tonyhax.R0u/loader/generate-tonyhax-mcs.sh
+--- a/tmp/og-tonyhax.rGK/loader/generate-tonyhax-mcs.sh
 +++ b/loader/generate-tonyhax-mcs.sh
 @@ -3,21 +3,29 @@
  set -euo pipefail
@@ -4520,9 +4480,9 @@ index 33116fa..2fb1ee5 100644
  
  # Cleanup
  rm $bin_file
-diff --git a/tmp/og-tonyhax.R0u/loader/gpu.h b/loader/gpu.h
+diff --git a/tmp/og-tonyhax.rGK/loader/gpu.h b/loader/gpu.h
 index c7ac757..de5fa81 100644
---- a/tmp/og-tonyhax.R0u/loader/gpu.h
+--- a/tmp/og-tonyhax.rGK/loader/gpu.h
 +++ b/loader/gpu.h
 @@ -1,7 +1,7 @@
  
@@ -4533,9 +4493,9 @@ index c7ac757..de5fa81 100644
  
  #define GPU_DISPLAY_H256 0
  #define GPU_DISPLAY_H320 1
-diff --git a/tmp/og-tonyhax.R0u/loader/insert-tonyhax-crc.sh b/loader/insert-tonyhax-crc.sh
+diff --git a/tmp/og-tonyhax.rGK/loader/insert-tonyhax-crc.sh b/loader/insert-tonyhax-crc.sh
 index ce49e5f..14d3582 100644
---- a/tmp/og-tonyhax.R0u/loader/insert-tonyhax-crc.sh
+--- a/tmp/og-tonyhax.rGK/loader/insert-tonyhax-crc.sh
 +++ b/loader/insert-tonyhax-crc.sh
 @@ -16,7 +16,7 @@ fi
  elf_file="$1"
@@ -4555,9 +4515,9 @@ index ce49e5f..14d3582 100644
  
  # Cleanup
  rm $tmpsection
-diff --git a/tmp/og-tonyhax.R0u/loader/integrity.c b/loader/integrity.c
+diff --git a/tmp/og-tonyhax.rGK/loader/integrity.c b/loader/integrity.c
 index e7c4e3d..f3134f2 100644
---- a/tmp/og-tonyhax.R0u/loader/integrity.c
+--- a/tmp/og-tonyhax.rGK/loader/integrity.c
 +++ b/loader/integrity.c
 @@ -1,7 +1,7 @@
  
@@ -4568,9 +4528,9 @@ index e7c4e3d..f3134f2 100644
  
  // Loading address of tonyhax, provided by the secondary.ld linker script
  extern uint8_t __RO_START__, __CRC_START__;
-diff --git a/tmp/og-tonyhax.R0u/loader/io.h b/loader/io.h
+diff --git a/tmp/og-tonyhax.rGK/loader/io.h b/loader/io.h
 index b7012b5..1164b7b 100644
---- a/tmp/og-tonyhax.R0u/loader/io.h
+--- a/tmp/og-tonyhax.rGK/loader/io.h
 +++ b/loader/io.h
 @@ -1,6 +1,6 @@
  
@@ -5167,7 +5127,7 @@ index 0000000..898295d
 +.include "memcardpro_regs.asm"
 diff --git a/loader/memcardpro.h b/loader/memcardpro.h
 new file mode 100644
-index 0000000..7298dcc
+index 0000000..a66f607
 --- /dev/null
 +++ b/loader/memcardpro.h
 @@ -0,0 +1,40 @@
@@ -5182,7 +5142,7 @@ index 0000000..7298dcc
 +//
 +
 +extern int MemCardPro_Ping(int port01);
-+extern int MemCardPro_SendGameID(int port01, int maxLen255, const char *gameID);
++extern int MemCardPro_SendGameID(int port01, int maxLen255, char *gameID);
 +
 +extern int MemCardPro_NextCH(int port01);
 +extern int MemCardPro_PrevCH(int port01);
@@ -5211,6 +5171,7 @@ index 0000000..7298dcc
 +#define MCPRO_PORT_1 1
 +
 +#endif /* MCPRO_H */
+\ No newline at end of file
 diff --git a/loader/memcardpro_regs.asm b/loader/memcardpro_regs.asm
 new file mode 100644
 index 0000000..7a3dfa7
@@ -5334,10 +5295,10 @@ index 0000000..7a3dfa7
 +.equ T2_CNT, 			0x1120
 +.equ T2_MODE, 			0x1124
 +.equ T2_TGT, 			0x1128
-diff --git a/tmp/og-tonyhax.R0u/loader/patch-ap.S b/tmp/og-tonyhax.R0u/loader/patch-ap.S
+diff --git a/tmp/og-tonyhax.rGK/loader/patch-ap.S b/tmp/og-tonyhax.rGK/loader/patch-ap.S
 deleted file mode 100644
 index 85511eb..0000000
---- a/tmp/og-tonyhax.R0u/loader/patch-ap.S
+--- a/tmp/og-tonyhax.rGK/loader/patch-ap.S
 +++ /dev/null
 @@ -1,196 +0,0 @@
 -
@@ -5536,10 +5497,10 @@ index 85511eb..0000000
 -
 -.globl patch_ap_end
 -patch_ap_end:
-diff --git a/tmp/og-tonyhax.R0u/loader/patch-fpb.S b/tmp/og-tonyhax.R0u/loader/patch-fpb.S
+diff --git a/tmp/og-tonyhax.rGK/loader/patch-fpb.S b/tmp/og-tonyhax.rGK/loader/patch-fpb.S
 deleted file mode 100644
 index e26fb72..0000000
---- a/tmp/og-tonyhax.R0u/loader/patch-fpb.S
+--- a/tmp/og-tonyhax.rGK/loader/patch-fpb.S
 +++ /dev/null
 @@ -1,35 +0,0 @@
 -
@@ -5577,10 +5538,10 @@ index e26fb72..0000000
 -
 -.globl patch_fpb_end
 -patch_fpb_end:
-diff --git a/tmp/og-tonyhax.R0u/loader/patch-uart.S b/tmp/og-tonyhax.R0u/loader/patch-uart.S
+diff --git a/tmp/og-tonyhax.rGK/loader/patch-uart.S b/tmp/og-tonyhax.rGK/loader/patch-uart.S
 deleted file mode 100644
 index da95257..0000000
---- a/tmp/og-tonyhax.R0u/loader/patch-uart.S
+--- a/tmp/og-tonyhax.rGK/loader/patch-uart.S
 +++ /dev/null
 @@ -1,121 +0,0 @@
 -
@@ -5704,10 +5665,10 @@ index da95257..0000000
 -
 -.global patch_uartputc_end
 -patch_uartputc_end:
-diff --git a/tmp/og-tonyhax.R0u/loader/patch-vandal-hearths-2.S b/tmp/og-tonyhax.R0u/loader/patch-vandal-hearths-2.S
+diff --git a/tmp/og-tonyhax.rGK/loader/patch-vandal-hearths-2.S b/tmp/og-tonyhax.rGK/loader/patch-vandal-hearths-2.S
 deleted file mode 100644
 index 67f389a..0000000
---- a/tmp/og-tonyhax.R0u/loader/patch-vandal-hearths-2.S
+--- a/tmp/og-tonyhax.rGK/loader/patch-vandal-hearths-2.S
 +++ /dev/null
 @@ -1,35 +0,0 @@
 -
@@ -5745,10 +5706,10 @@ index 67f389a..0000000
 -
 -.globl patch_vandal_end
 -patch_vandal_end:
-diff --git a/tmp/og-tonyhax.R0u/loader/patcher.c b/tmp/og-tonyhax.R0u/loader/patcher.c
+diff --git a/tmp/og-tonyhax.rGK/loader/patcher.c b/tmp/og-tonyhax.rGK/loader/patcher.c
 deleted file mode 100644
 index 27c1c49..0000000
---- a/tmp/og-tonyhax.R0u/loader/patcher.c
+--- a/tmp/og-tonyhax.rGK/loader/patcher.c
 +++ /dev/null
 @@ -1,147 +0,0 @@
 -
@@ -5898,10 +5859,10 @@ index 27c1c49..0000000
 -	// Overwrite BIOS' std_out_putchar function
 -	memcpy(BIOS_A0_TABLE[0x3C], &patch_uartputc_start, &patch_uartputc_end - &patch_uartputc_start);
 -}
-diff --git a/tmp/og-tonyhax.R0u/loader/patcher.h b/tmp/og-tonyhax.R0u/loader/patcher.h
+diff --git a/tmp/og-tonyhax.rGK/loader/patcher.h b/tmp/og-tonyhax.rGK/loader/patcher.h
 deleted file mode 100644
 index 5b24f53..0000000
---- a/tmp/og-tonyhax.R0u/loader/patcher.h
+--- a/tmp/og-tonyhax.rGK/loader/patcher.h
 +++ /dev/null
 @@ -1,12 +0,0 @@
 -
@@ -5958,9 +5919,9 @@ index 0000000..178d83d
 +	}
 +}
 +ENTRY (start)
-diff --git a/tmp/og-tonyhax.R0u/loader/secondary.c b/loader/secondary.c
-index 340a79a..0997947 100644
---- a/tmp/og-tonyhax.R0u/loader/secondary.c
+diff --git a/tmp/og-tonyhax.rGK/loader/secondary.c b/loader/secondary.c
+index 340a79a..5787713 100644
+--- a/tmp/og-tonyhax.rGK/loader/secondary.c
 +++ b/loader/secondary.c
 @@ -1,6 +1,6 @@
  
@@ -5970,7 +5931,7 @@ index 340a79a..0997947 100644
  #include <stddef.h>
  #include "str.h"
  #include "audio.h"
-@@ -10,442 +10,1472 @@
+@@ -10,13 +10,527 @@
  #include "crc.h"
  #include "debugscreen.h"
  #include "gpu.h"
@@ -6030,6 +5991,7 @@ index 340a79a..0997947 100644
 +bool dont_scroll = false; // When enabled, the screen doesn't scroll (for memory card save file selection)
 +bool installed_cheat_engine = false; // The cheat engine is installed when parse_memcard_save_gameshark_codes() completes. Some games may go on to set explicit anti-piracy bypass GameShark codes however, so to prevent the cheat engine from being installed twice (which is wasteful) we set a flag here.
 +bool did_read_mc = false; // We need to set the GameShark codes AFTER the last bios_reintialize(). I want to call bios_reinitialize() after reading the memory card data to prevent anything screwy in booting games, so we can just parse the data later after the final bios_reinitialize since it's still in RAM.
++bool gameid_device = false; // We don't need to remove a mcpro with gameid, so we don't display the remove the freepsxboot card now message when it's detected. This also tells the code to handle gameid when true.
 +
 +uint16_t mc_base = 0x102; // start of gs code data in memory card buffer
 +
@@ -6093,7 +6055,7 @@ index 340a79a..0997947 100644
 +    return mcpro_check_ret;
 +}
 +
-+uint8_t mcpro_sendid(const char *gameid) {
++uint8_t mcpro_sendid(char *gameid) {
 +    memory_card_and_controller_wait(); // docs say to wait
 +    uint8_t mcpro_sendid_ret =  MemCardPro_SendGameID(MCPRO_PORT_0, strlen(gameid), gameid);
 +    memory_card_and_controller_wait(); // docs say to wait
@@ -6496,85 +6458,9 @@ index 340a79a..0997947 100644
 +#endif // TOCPERFECT
 +
  void log_bios_version() {
--	/*
--	 * "System ROM Version 4.5 05/25/00 A"
--	 * By adding 11 we get to Version, which we'll compare as a shortcut
--	 */
--	const char * version;
--
--	if (strncmp(BIOS_VERSION + 11, "Version", 7) == 0) {
--		version = BIOS_VERSION + 19;
--	} else {
--		version = "1.0 or older";
--	}
--
--	debug_write("Console: %s", bios_is_ps1() ? "PS1": "PS2");
--	debug_write("BIOS: v%s", version);
-+    /*
-+     * "System ROM Version 4.5 05/25/00 A"
-+     * By adding 11 we get to Version, which we'll compare as a shortcut
-+     */
-+    const char * version;
-+    
-+    if(strncmp(BIOS_VERSION + 11, "Version", 7) == 0) {
-+        version = BIOS_VERSION + 19;
-+    } else {
-+        version = "1.0 or older";
-+    }
-+
-+    debug_write("Console: %s", bios_is_ps1() ? "PS1": "PS2");
-+    debug_write("System BIOS: %s", version);
- }
- 
- bool backdoor_cmd(uint_fast8_t cmd, const char * string) {
--	uint8_t cd_reply[16];
-+    uint8_t cd_reply[16];
- 
--	// Send command
--	cd_command(cmd, (const uint8_t *) string, strlen(string));
-+    // Send command
-+    cd_command(cmd, (const uint8_t *) string, strlen(string));
- 
--	// Check if INT5, else fail
--	if (cd_wait_int() != 5) {
--		return false;
--	}
-+    // Check if INT5, else fail
-+    if (cd_wait_int() != 5) {
-+        return false;
-+    }
- 
--	// Check length
--	uint_fast8_t reply_len = cd_read_reply(cd_reply);
--	if (reply_len != 2) {
--		return false;
--	}
-+    // Check length
-+    uint_fast8_t reply_len = cd_read_reply(cd_reply);
-+    if (reply_len != 2) {
-+        return false;
-+    }
- 
--	// Check there is an error flagged
--	if (!(cd_reply[0] & 0x01)) {
--		return false;
--	}
-+    // Check there is an error flagged
-+    if (!(cd_reply[0] & 0x01)) {
-+        return false;
-+    }
- 
--	// Check error code
--	if (cd_reply[1] != 0x40) {
--		return false;
--	}
-+    // Check error code
-+    if (cd_reply[1] != 0x40) {
-+        return false;
-+    }
- 
--	return true;
-+    return true;
+ 	/*
+ 	 * "System ROM Version 4.5 05/25/00 A"
+@@ -65,44 +579,7 @@ bool backdoor_cmd(uint_fast8_t cmd, const char * string) {
  }
  
  bool unlock_drive() {
@@ -6616,51 +6502,33 @@ index 340a79a..0997947 100644
 -	}
 -
 -	debug_write("Drive region: %s", region_name);
--
--	// Note the kernel's implementation of strlen returns 0 for nulls.
--	if (
--			!backdoor_cmd(0x50, NULL) ||
--			!backdoor_cmd(0x51, "Licensed by") ||
--			!backdoor_cmd(0x52, "Sony") ||
--			!backdoor_cmd(0x53, "Computer") ||
--			!backdoor_cmd(0x54, "Entertainment") ||
--			!backdoor_cmd(0x55, p5_localized) ||
--			!backdoor_cmd(0x56, NULL)
--	) {
--		debug_write("Backdoor failed");
--		return false;
--	}
--
--	return true;
 +    debug_write("Drive region: %s", region_name);
-+
-+    // Note the kernel's implementation of strlen returns 0 for nulls.
-+    if (
-+            !backdoor_cmd(0x50, NULL) ||
-+            !backdoor_cmd(0x51, "Licensed by") ||
-+            !backdoor_cmd(0x52, "Sony") ||
-+            !backdoor_cmd(0x53, "Computer") ||
-+            !backdoor_cmd(0x54, "Entertainment") ||
-+            !backdoor_cmd(0x55, p5_localized) ||
-+            !backdoor_cmd(0x56, NULL)
-+    ) {
-+        debug_write("Backdoor failed");
-+        return false;
-+    }
-+
-+    return true;
+ 
+ 	// Note the kernel's implementation of strlen returns 0 for nulls.
+ 	if (
+@@ -121,331 +598,881 @@ bool unlock_drive() {
+ 	return true;
  }
  
 +#if !defined TOCPERFECT
  void wait_lid_status(bool open) {
--	uint8_t cd_reply[16];
-+    uint8_t cd_reply[16];
+ 	uint8_t cd_reply[16];
 +    
 +    controller_input_start();
-+
-+    uint8_t expected = open ? 0x10 : 0x00;
-+    do {
-+
+ 
+ 	uint8_t expected = open ? 0x10 : 0x00;
+ 	do {
+-		// Issue Getstat command
+-		// We cannot issue the BIOS CD commands yet because we haven't called CdInit
+-		cd_command(CD_CMD_GETSTAT, NULL, 0);
+ 
+-		// Always returns 3, no need to check
+-		cd_wait_int();
+-
+-		// Always returns one, no need to check either
+-		cd_read_reply(cd_reply);
+-
+-	} while ((cd_reply[0] & 0x10) != expected);
 +        j = padbuf[0][3] ^ 0xFF;
 +        debug_write(""); // Vblank wait for controller input
 +
@@ -6694,77 +6562,9 @@ index 340a79a..0997947 100644
 +    } while ((cd_reply[0] & 0x10) != expected);
 +
 +    controller_input_stop();
-+}
- 
--	uint8_t expected = open ? 0x10 : 0x00;
--	do {
--		// Issue Getstat command
--		// We cannot issue the BIOS CD commands yet because we haven't called CdInit
--		cd_command(CD_CMD_GETSTAT, NULL, 0);
-+bool exe_file_okay(const exe_header_t * exe_header) {
-+    /*
-+     * Cannot assume this will be present. The first revision of
-+     * Jikkyou Powerful Pro Yakyuu '95 (J) (SLPS-00016) does not have this present in the PSX.EXE.
-+     *
-+     * Just warn about it.
-+     */
-+    if (strncmp(exe_header->signature, "PS-X EXE", 8)) {
-+        debug_write("Warning: header has invalid signature");
-+    }
-+
-+    // Check that the address is within RAM
-+    uint32_t masked_load = (uint32_t) exe_header->offsets.load_addr & 0xFF800000;
-+    if (
-+        masked_load != 0x00000000 &&
-+        masked_load != 0x80000000 &&
-+        masked_load != 0xA0000000
-+    ) {
-+        debug_write("Error: header has an invalid load address");
-+        return false;
-+    }
-+
-+    // Check that the PC is within RAM *and* aligned to a word
-+    uint32_t masked_pc = (uint32_t) exe_header->offsets.initial_pc & 0xFF800003;
-+    if (
-+        masked_pc != 0x00000000 &&
-+        masked_pc != 0x80000000 &&
-+        masked_pc != 0xA0000000
-+    ) {
-+        debug_write("Error: header has an invalid start address");
-+        return false;
-+    }
-+
-+    // Maybe we could check if the load+size overlaps with the kernel-reserved area? Dunno.
-+
-+    return true;
-+}
-+
-+bool is_lid_open() {
-+    uint8_t cd_reply[16];
-+
-+    // Issue Getstat command
-+    // We cannot issue the BIOS CD commands yet because we haven't called CdInit
-+    cd_command(CD_CMD_GETSTAT, NULL, 0);
- 
--		// Always returns 3, no need to check
--		cd_wait_int();
-+    // Always returns 3, no need to check
-+    cd_wait_int();
- 
--		// Always returns one, no need to check either
--		cd_read_reply(cd_reply);
-+    // Always returns one, no need to check either
-+    cd_read_reply(cd_reply);
- 
--	} while ((cd_reply[0] & 0x10) != expected);
-+    if(cd_reply[0]==0x10) {
-+        return true;
-+    } else {
-+        return false;
-+    }   
  }
  
--bool exe_file_okay(const exe_header_t * exe_header) {
+ bool exe_file_okay(const exe_header_t * exe_header) {
 -	/*
 -	 * Cannot assume this will be present. The first revision of
 -	 * Jikkyou Powerful Pro Yakyuu '95 (J) (SLPS-00016) does not have this present in the PSX.EXE.
@@ -6800,6 +6600,143 @@ index 340a79a..0997947 100644
 -	// Maybe we could check if the load+size overlaps with the kernel-reserved area? Dunno.
 -
 -	return true;
++    /*
++     * Cannot assume this will be present. The first revision of
++     * Jikkyou Powerful Pro Yakyuu '95 (J) (SLPS-00016) does not have this present in the PSX.EXE.
++     *
++     * Just warn about it.
++     */
++    if (strncmp(exe_header->signature, "PS-X EXE", 8)) {
++        debug_write("Warning: header has invalid signature");
++    }
++
++    // Check that the address is within RAM
++    uint32_t masked_load = (uint32_t) exe_header->offsets.load_addr & 0xFF800000;
++    if (
++        masked_load != 0x00000000 &&
++        masked_load != 0x80000000 &&
++        masked_load != 0xA0000000
++    ) {
++        debug_write("Error: header has an invalid load address");
++        return false;
++    }
++
++    // Check that the PC is within RAM *and* aligned to a word
++    uint32_t masked_pc = (uint32_t) exe_header->offsets.initial_pc & 0xFF800003;
++    if (
++        masked_pc != 0x00000000 &&
++        masked_pc != 0x80000000 &&
++        masked_pc != 0xA0000000
++    ) {
++        debug_write("Error: header has an invalid start address");
++        return false;
++    }
++
++    // Maybe we could check if the load+size overlaps with the kernel-reserved area? Dunno.
++
++    return true;
+ }
+ 
+-void try_boot_cd() {
+-	int32_t read;
+-
+-	debug_write("Swap CD now");
+-	wait_lid_status(true);
+-	wait_lid_status(false);
++bool is_lid_open() {
++    uint8_t cd_reply[16];
+ 
+-	debug_write("Initializing CD");
+-	if (!CdInit()) {
+-		debug_write("Init failed");
+-		return;
+-	}
++    // Issue Getstat command
++    // We cannot issue the BIOS CD commands yet because we haven't called CdInit
++    cd_command(CD_CMD_GETSTAT, NULL, 0);
+ 
+-	/*
+-	 * Use the space the BIOS has allocated for reading CD sectors.
+-	 *
+-	 * The English translation of Mizzurna Falls (J) (SLPS-01783) depends on the header being
+-	 * present here (see issue #95 in GitHub).
+-	 *
+-	 * This address varies between PS1 and PS2.
+-	 */
+-	uint8_t * data_buffer = (uint8_t *) (bios_is_ps1() ? 0xA000B070 : 0xA000A8D0);
++    // Always returns 3, no need to check
++    cd_wait_int();
+ 
+-	debug_write("Checking game region");
+-	if (CdReadSector(1, 4, data_buffer) != 1) {
+-		debug_write("Failed to read sector");
+-		return;
+-	}
++    // Always returns one, no need to check either
++    cd_read_reply(cd_reply);
+ 
+-	const char * game_region;
+-	bool game_is_pal = false;
+-	/*
+-	 * EU: "          Licensed  by          Sony Computer Entertainment Euro pe   "
+-	 * US: "          Licensed  by          Sony Computer Entertainment Amer  ica "
+-	 * JP: "          Licensed  by          Sony Computer Entertainment Inc.",0x0A
+-	 *                                                                  |- character we use, at 0x3C
+-	 */
+-	switch (data_buffer[0x3C]) {
+-		case 'E':
+-			game_region = "European";
+-			game_is_pal = true;
+-			break;
+-
+-		case 'A':
+-			game_region = "American";
+-			break;
+-
+-		case 'I':
+-			game_region = "Japanese";
+-			break;
+-
+-		default:
+-			game_region = "unknown";
+-	}
++    if(cd_reply[0]==0x10) {
++        return true;
++    } else {
++        return false;
++    }   
++}
+ 
+-	debug_write("Game's region is %s. Using %s video.", game_region, game_is_pal ? "PAL" : "NTSC");
+-
+-	// Defaults if no SYSTEM.CNF file exists
+-	uint32_t tcb = BIOS_DEFAULT_TCB;
+-	uint32_t event = BIOS_DEFAULT_EVCB;
+-	void * stacktop = BIOS_DEFAULT_STACKTOP;
+-	const char * bootfile = "cdrom:PSX.EXE;1";
+-
+-	char bootfilebuf[32];
+-	debug_write("Loading SYSTEM.CNF");
+-
+-	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
+-	if (cnf_fd >= 0) {
+-		read = FileRead(cnf_fd, data_buffer, 2048);
+-		if (read < 0) {
+-			debug_write("Failed to read. Error %d.", read, BIOS_FCBS[cnf_fd]->last_error);
+-			FileClose(cnf_fd);
+-			return;
+-		}
+-		FileClose(cnf_fd);
+-
+-		// Null terminate
+-		data_buffer[read] = '\0';
+-
+-		config_get_hex((char *) data_buffer, "TCB", &tcb);
+-		config_get_hex((char *) data_buffer, "EVENT", &event);
+-		config_get_hex((char *) data_buffer, "STACK", (uint32_t *) &stacktop);
+-		if (config_get_string((char *) data_buffer, "BOOT", bootfilebuf)) {
+-			bootfile = bootfilebuf;
+-		}
 +bool licensed_drive() {
 +    uint8_t getid_response[9];
 +    unsigned char gid;
@@ -6834,110 +6771,64 @@ index 340a79a..0997947 100644
 +        debug_write("CD init failed");
 +        return;
 +    }
- }
++}
  
--void try_boot_cd() {
--	int32_t read;
--
--	debug_write("Swap CD now");
--	wait_lid_status(true);
--	wait_lid_status(false);
--
--	debug_write("Initializing CD");
--	if (!CdInit()) {
--		debug_write("Init failed");
--		return;
--	}
--
--	/*
--	 * Use the space the BIOS has allocated for reading CD sectors.
--	 *
--	 * The English translation of Mizzurna Falls (J) (SLPS-01783) depends on the header being
--	 * present here (see issue #95 in GitHub).
--	 *
--	 * This address varies between PS1 and PS2.
--	 */
--	uint8_t * data_buffer = (uint8_t *) (bios_is_ps1() ? 0xA000B070 : 0xA000A8D0);
--
--	debug_write("Checking game region");
--	if (CdReadSector(1, 4, data_buffer) != 1) {
--		debug_write("Failed to read sector");
--		return;
--	}
--
--	const char * game_region;
--	bool game_is_pal = false;
--	/*
--	 * EU: "          Licensed  by          Sony Computer Entertainment Euro pe   "
--	 * US: "          Licensed  by          Sony Computer Entertainment Amer  ica "
--	 * JP: "          Licensed  by          Sony Computer Entertainment Inc.",0x0A
--	 *                                                                  |- character we use, at 0x3C
--	 */
--	switch (data_buffer[0x3C]) {
--		case 'E':
--			game_region = "European";
--			game_is_pal = true;
--			break;
--
--		case 'A':
--			game_region = "American";
--			break;
--
--		case 'I':
--			game_region = "Japanese";
--			break;
--
--		default:
--			game_region = "unknown";
--	}
--
--	debug_write("Game's region is %s. Using %s video.", game_region, game_is_pal ? "PAL" : "NTSC");
--
--	// Defaults if no SYSTEM.CNF file exists
--	uint32_t tcb = BIOS_DEFAULT_TCB;
--	uint32_t event = BIOS_DEFAULT_EVCB;
--	void * stacktop = BIOS_DEFAULT_STACKTOP;
--	const char * bootfile = "cdrom:PSX.EXE;1";
--
--	char bootfilebuf[32];
--	debug_write("Loading SYSTEM.CNF");
--
--	int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
--	if (cnf_fd >= 0) {
--		read = FileRead(cnf_fd, data_buffer, 2048);
--		if (read < 0) {
--			debug_write("Failed to read. Error %d.", read, BIOS_FCBS[cnf_fd]->last_error);
--			FileClose(cnf_fd);
--			return;
--		}
--		FileClose(cnf_fd);
--
--		// Null terminate
--		data_buffer[read] = '\0';
--
--		config_get_hex((char *) data_buffer, "TCB", &tcb);
--		config_get_hex((char *) data_buffer, "EVENT", &event);
--		config_get_hex((char *) data_buffer, "STACK", (uint32_t *) &stacktop);
--		if (config_get_string((char *) data_buffer, "BOOT", bootfilebuf)) {
--			bootfile = bootfilebuf;
--		}
--
 -	} else {
 -		uint32_t errorCode = GetLastError();
 -		if (errorCode != FILEERR_NOT_FOUND) {
 -			debug_write("Open error %d", errorCode);
 -			return;
 -		}
--
++void ps2_hardware_bug_software_fix(const uint32_t target_lba, uint8_t * data_buffer) {
++    if(target_lba > 1000) // Don't need it except for extremly large seeks, 1000 is a pretty small condition here tbh.
++    {
++        const uint32_t seek_step[5] = { 
++            (target_lba/6),
++            ( (target_lba/6) * 2),
++            ( (target_lba/6) * 3),
++            ( (target_lba/6) * 4),
++            ( (target_lba/6) * 5),
++        };
++
++        for(int i = 0; i < 5; i++) {
++            if (CdReadSector(1, seek_step[i], data_buffer) != 1) {
++                debug_write("Failed to read sector at LBA: %d", seek_step[i]);
++            } else {
++                debug_write("Seeked to LBA: %d", seek_step[i]);
++            }					
++        }
++    }
++}
+ 
 -		debug_write("Not found");
 -	}
--
++void try_boot_cd() {
++    bool is_psx_exe = false;
++    int32_t read;
++
++// we don't use freepsxboot patches for maximum game compatibility
++#if defined FREEPSXBOOT 
++    if(!gameid_device) { // GameID switches off of 0.MCR (freepsxboot memory card) automatically!
++        debug_write("REMOVE THE FREEPSXBOOT MEMORY CARD FROM YOUR CONSOLE...");
++        debug_write("BEFORE BOOTING ANY GAME!");
++    }
++#endif
+ 
 -	// Use string format to reduce ROM usage
 -	debug_write(" * %s = %x", "TCB", tcb);
 -	debug_write(" * %s = %x", "EVENT", event);
 -	debug_write(" * %s = %x", "STACK", stacktop);
 -	debug_write(" * %s = %s", "BOOT", bootfile);
--
++    debug_write("");
++#if defined ROM
++    if(enable_unlock)
++    {
++        debug_write("%s with the CD drive open to boot the Sony BIOS", press_cross);
++    } else {
++        debug_write("%s boot the Sony BIOS", press_cross); // japanese consoles don't necessarily need the drive open at this point to do this behavior, it could be in a lid-sensor block state
++    } 
++#endif
+ 
 -	/*
 -	 * SetConf is run by BIOS with interrupts disabled.
 -	 *
@@ -6962,171 +6853,6 @@ index 340a79a..0997947 100644
 -		return;
 -	}
 -	file_control_block_t * exe_fcb = *BIOS_FCBS + exe_fd;
--
--	read = FileRead(exe_fd, data_buffer, 2048);
--	if (read < 0) {
--		debug_write("Failed to read. Error %d.", exe_fcb->last_error);
--		FileClose(exe_fd);
--		return;
--	}
--
--	/*
--	 * Patch executable header like stock does. Fixes issue #153 with King's Field (J) (SLPS-00017).
--	 * https://github.com/grumpycoders/pcsx-redux/blob/a072e38d78c12a4ce1dadf951d9cdfd7ea59220b/src/mips/openbios/main/main.c#L380-L381
--	 */
--	exe_header_t * exe_header = (exe_header_t *) data_buffer;
--	exe_header->offsets.initial_sp_base = stacktop;
--	exe_header->offsets.initial_sp_offset = 0;
--
--	/*
--	 * Patch executable load size, capping it to the file size.
--	 *
--	 * According to https://github.com/socram8888/tonyhax/issues/161,
--	 * Kileak, The Blood (J) (SLPS-00027) specifies in its header a an invalid load size, larger
--	 * than the actual executable.
--	 *
--	 * While the BIOS does not validate this, we do to ensure the file could be read in its
--	 * entirety and detect possible CD read errors.
--	 */
--	uint32_t actual_exe_size = exe_fcb->size - 2048;
--	if (actual_exe_size < exe_header->offsets.load_size) {
--		exe_header->offsets.load_size = actual_exe_size;
--	}
--
--	if (!exe_file_okay(exe_header)) {
--		FileClose(exe_fd);
--		return;
--	}
--
--	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function
--	// since that's all we can do.
--	if ((uint8_t *) exe_header->offsets.load_addr + exe_header->offsets.load_size >= &__RO_START__) {
--		debug_write("Executable won't fit. Using buggy BIOS call.");
--
--		if (game_is_pal != gpu_is_pal()) {
--			debug_write("Switching video mode");
--			debug_switch_standard(game_is_pal);
--		}
--
--		// Restore original error handler
--		bios_restore_disc_error();
--
--		LoadAndExecute(
--			bootfile,
--			exe_header->offsets.initial_sp_base,
--			exe_header->offsets.initial_sp_offset
--		);
--		return;
--	}
--
--	debug_write(
--		"Loading executable (%d bytes @ %x)",
--		exe_header->offsets.load_size,
--		exe_header->offsets.load_addr
--	);
--
--	read = FileRead(exe_fd, exe_header->offsets.load_addr, exe_header->offsets.load_size);
--	if (read < 0) {
--		debug_write("Failed to read. Error %d.", exe_fcb->last_error);
--		return;
--	}
--
--	FileClose(exe_fd);
--
--	patcher_apply(bootfile);
--
--	if (game_is_pal != gpu_is_pal()) {
--		debug_write("Switching video mode");
--		debug_switch_standard(game_is_pal);
--	}
--
--	debug_write("Starting");
--
--	// Restore original error handler
--	bios_restore_disc_error();
--
--	// Games from WarmBoot start with interrupts disabled
--	EnterCriticalSection();
--
--	// FlushCache needs to be called with interrupts disabled
--	FlushCache();
--
--	DoExecute(&exe_header->offsets, 0, 0);
-+void ps2_hardware_bug_software_fix(const uint32_t target_lba, uint8_t * data_buffer) {
-+    if(target_lba > 1000) // Don't need it except for extremly large seeks, 1000 is a pretty small condition here tbh.
-+    {
-+        const uint32_t seek_step[5] = { 
-+            (target_lba/6),
-+            ( (target_lba/6) * 2),
-+            ( (target_lba/6) * 3),
-+            ( (target_lba/6) * 4),
-+            ( (target_lba/6) * 5),
-+        };
-+
-+        for(int i = 0; i < 5; i++) {
-+            if (CdReadSector(1, seek_step[i], data_buffer) != 1) {
-+                debug_write("Failed to read sector at LBA: %d", seek_step[i]);
-+            } else {
-+                debug_write("Seeked to LBA: %d", seek_step[i]);
-+            }					
-+        }
-+    }
- }
- 
--void main() {
--	// Undo all possible fuckeries during exploiting
--	bios_reinitialize();
--
--	// Mute the audio
--	audio_halt();
--
--	// Initialize debug screen
--	debug_init();
--
--	debug_write("Integrity check %sed", integrity_ok ? "pass" : "fail");
--	if (!integrity_ok) {
--		return;
--	}
--
--	bios_inject_disc_error();
--	log_bios_version();
--
--	debug_write("Resetting drive");
--	if (!cd_drive_init()) {
--		debug_write("Reset failed");
--		return;
--	}
--
--	debug_write("Unlocking drive");
--	if (!unlock_drive()) {
--		return;
--	}
--
--	while (1) {
--#if SOFTUART_PATCH
--		patcher_apply_softuart();
--		std_out_puts("SoftUART ready\n");
-+void try_boot_cd() {
-+    bool is_psx_exe = false;
-+    int32_t read;
-+
-+// we don't use freepsxboot patches for maximum game compatibility
-+#if defined FREEPSXBOOT 
-+    debug_write("REMOVE THE FREEPSXBOOT MEMORY CARD FROM YOUR CONSOLE...");
-+    debug_write("BEFORE BOOTING ANY GAME!");
- #endif
- 
--		try_boot_cd();
-+debug_write("");
-+#if defined ROM
-+    if(enable_unlock)
-+    {
-+        debug_write("%s with the CD drive open to boot the Sony BIOS", press_cross);
-+    } else {
-+        debug_write("%s boot the Sony BIOS", press_cross); // japanese consoles don't necessarily need the drive open at this point to do this behavior, it could be in a lid-sensor block state
-+    } 
-+#endif
-+
 +    debug_write("%s load GameShark codes from a memory card", press_circle);
 +    debug_write("%s FORMAT A MEMORY CARD", press_triangle);
 +    debug_write("");
@@ -7244,7 +6970,13 @@ index 340a79a..0997947 100644
 +        return;
 +    }
 +#endif
-+
+ 
+-	read = FileRead(exe_fd, data_buffer, 2048);
+-	if (read < 0) {
+-		debug_write("Failed to read. Error %d.", exe_fcb->last_error);
+-		FileClose(exe_fd);
+-		return;
+-	}
 +    const char * game_region;
 +    bool game_is_pal = false;
 +    /*
@@ -7294,19 +7026,70 @@ index 340a79a..0997947 100644
 +#if !defined(FAKE_PS2)
 +    if(bios_is_ps1() == false) {
 +#endif
-+
+ 
+-	/*
+-	 * Patch executable header like stock does. Fixes issue #153 with King's Field (J) (SLPS-00017).
+-	 * https://github.com/grumpycoders/pcsx-redux/blob/a072e38d78c12a4ce1dadf951d9cdfd7ea59220b/src/mips/openbios/main/main.c#L380-L381
+-	 */
+-	exe_header_t * exe_header = (exe_header_t *) data_buffer;
+-	exe_header->offsets.initial_sp_base = stacktop;
+-	exe_header->offsets.initial_sp_offset = 0;
 +    uint32_t system_cnf_lba = CdGetLbn("SYSTEM.CNF;1");
 +    if(system_cnf_lba != 0) {
 +        debug_write("SYSTEM.CNF LBA: %d", system_cnf_lba);
 +        ps2_hardware_bug_software_fix(system_cnf_lba, data_buffer);
 +    }
-+
+ 
+-	/*
+-	 * Patch executable load size, capping it to the file size.
+-	 *
+-	 * According to https://github.com/socram8888/tonyhax/issues/161,
+-	 * Kileak, The Blood (J) (SLPS-00027) specifies in its header a an invalid load size, larger
+-	 * than the actual executable.
+-	 *
+-	 * While the BIOS does not validate this, we do to ensure the file could be read in its
+-	 * entirety and detect possible CD read errors.
+-	 */
+-	uint32_t actual_exe_size = exe_fcb->size - 2048;
+-	if (actual_exe_size < exe_header->offsets.load_size) {
+-		exe_header->offsets.load_size = actual_exe_size;
+-	}
+-
+-	if (!exe_file_okay(exe_header)) {
+-		FileClose(exe_fd);
+-		return;
+-	}
 +#if !defined(FAKE_PS2)
 +    }
 +#endif
-+
+ 
+-	// If the file overlaps tonyhax, we will use the unstable LoadAndExecute function
+-	// since that's all we can do.
+-	if ((uint8_t *) exe_header->offsets.load_addr + exe_header->offsets.load_size >= &__RO_START__) {
+-		debug_write("Executable won't fit. Using buggy BIOS call.");
+-
+-		if (game_is_pal != gpu_is_pal()) {
+-			debug_write("Switching video mode");
+-			debug_switch_standard(game_is_pal);
+-		}
+-
+-		// Restore original error handler
+-		bios_restore_disc_error();
+-
+-		LoadAndExecute(
+-			bootfile,
+-			exe_header->offsets.initial_sp_base,
+-			exe_header->offsets.initial_sp_offset
+-		);
+-		return;
+-	}
 +#endif
-+
+ 
+-	debug_write(
+-		"Loading executable (%d bytes @ %x)",
+-		exe_header->offsets.load_size,
+-		exe_header->offsets.load_addr
+-	);
 +    int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
 +    if (cnf_fd >= 0) {
 +        read = FileRead(cnf_fd, data_buffer, 2048);
@@ -7354,7 +7137,12 @@ index 340a79a..0997947 100644
 +        debug_write("No SYSTEM.CNF");
 +    }
 +#endif
-+
+ 
+-	read = FileRead(exe_fd, exe_header->offsets.load_addr, exe_header->offsets.load_size);
+-	if (read < 0) {
+-		debug_write("Failed to read. Error %d.", exe_fcb->last_error);
+-		return;
+-	}
 +    // Use string format to reduce ROM usage
 +    debug_write(" * %s = %x", "TCB", tcb);
 +    debug_write(" * %s = %x", "EVENT", event);
@@ -7386,12 +7174,39 @@ index 340a79a..0997947 100644
 +#if defined FAKE_MCPRO
 +    debug_write("DEBUG: forcing MCPro code path");
 +#else
-+    if(mcpro_check(MCPRO_PORT_0) == 0) {
-+        debug_write("MCPRO/SD2PSX detected in slot 1");
++    if(gameid_device) {
 +#endif
++        int8_t bootfile_len = strlen(bootfile);
++        const char * base = "cdrom:"; // Device exe is loaded from.
++        const char * slps = "SLPS_"; // Sony Licensed Product Serial.
++        const char * scps = "SCPS_"; // Sony Computer Product Serial.
++        const char * end = ";1";
++        char * send_as_gameid_tmp = bootfile;
++
++        char send_as_gameid[20];
++        // c // 0
++        // d // 1
++        // r // 2
++        // o // 3
++        // m // 4
++        // : // 5
++        // S // 6
++        // L or C // 7
++        // P // 8
++        // S // 9
++        // _ // 10
++        // #?? // 11
++        // #?? // 12
++        // #?? // 13
++        // . // 14
++        // #?? // 15
++        // #?? // 16
++        // ; // 17
++        // 1 // 18
++        // termination '\0' // 19
 +
 +        if(is_psx_exe) {
-+            re_cd_init(); // Reset before next read
++            re_cd_init(); // Reset before next read.
 +
 +            if (CdReadSector(1, 16, data_buffer) != 1) { // No chance of overseek for PS2s because it is a very early sector at the inner part of the disc.
 +                debug_write("Failed to read sector 16");
@@ -7406,55 +7221,14 @@ index 340a79a..0997947 100644
 +
 +            volume_creation_timestamp[16] = '\0';
 +            debug_write("PSX.EXE ID: %s", (char *)volume_creation_timestamp); 
++            const char * serial = get_psx_exe_gameid(volume_creation_timestamp); // See gameid-psx-exe.c.
 +
-+            const char * base = "cdrom:SLPS_";
-+            const char * base_scps = "cdrom:SCPS_";
-+
-+            const char * serial = get_psx_exe_gameid(volume_creation_timestamp);
-+            char * end = ";1";
-+
-+            char temp[11];
-+            // c // 0
-+            // d // 1
-+            // r // 2
-+            // o // 3
-+            // m // 4
-+            // : // 5
-+            // S // 6
-+            // L or C // 7 (if is_scps bool is returned as true)
-+            // P // 8
-+            // S // 9
-+            // _ // 10
-+
-+            char psx_exe_gameid[20];
-+            // c // 0
-+            // d // 1
-+            // r // 2
-+            // o // 3
-+            // m // 4
-+            // : // 5
-+            // S // 6
-+            // L or C // 7
-+            // P // 8
-+            // S // 9
-+            // _ // 10
-+            // #?? // 11
-+            // #?? // 12
-+            // #?? // 13
-+            // . // 14
-+            // #?? // 15
-+            // #?? // 16
-+            // ; // 17
-+            // 1 // 18
-+            // termination '\0' // 19
-+            
-+            if(is_scps) {
-+                mini_sprintf(temp, "%s%s", base_scps, serial); // Append serial (i.e. "000.01") to base "cdrom:SLPS_"
++            // Build full bootfile.
++            if(is_scps) { // Returned by gameid-psx-exe.c. Since there are so few SCPS PSX.EXE games in comparison to the massive amount of SLPS, we default to SLPS unless we are told not to.
++                mini_sprintf(send_as_gameid, "%s%s%s", base, scps, serial, end);
 +            } else {
-+                mini_sprintf(temp, "%s%s", base, serial); // Append serial (i.e. "000.01") to base "cdrom:SLPS_"
++                mini_sprintf(send_as_gameid, "%s%s%s", base, slps, serial, end);
 +            }
-+
-+            mini_sprintf(psx_exe_gameid, "%s%s", temp, end); // Append ";1"
 +
 +            /*
 +            Tests Arc The Lad Japan Rev 0/Rev 1
@@ -7463,21 +7237,25 @@ index 340a79a..0997947 100644
 +            }
 +            */
 +
-+            if(strcmp(serial, "0") != 0) {
-+                debug_write("Sending %s as GameID", psx_exe_gameid);
-+                mcpro_sendid(psx_exe_gameid);
-+            } else {
-+                debug_write("Unknown PSX.EXE ID, unique GameID unavailable.");
-+                mcpro_sendid(bootfile); // As a last resort, we send PSX.EXE to mcpro
++            if(strcmp(serial, "0") == 0) { // The library sends back a literal string containing '0' for no match.
++                debug_write("Unknown PSX.EXE ID, unique GameID unavailable."); // As a last resort, we send PSX.EXE for gameid.
 +            }
 +        } else {
-+            mcpro_sendid(bootfile); // Wow, that was a lot simpler then PSX.EXE!
++            if(bootfile_len > 20) { // We got crazy shit like 'TEKKEN3\SLUS_004.02;1' to deal with, that looks ugly in the pico memcard index.txt file that we need to clean up. I think it is too large so the pico memcard does stuff like TEKKEN3\SLUS_004.02<invalid character><invalid character>, when it should be 'TEKKEN3\SLUS_004.02;1'. Anyways, the idea is to make it shorter without the parent dir to avoid this.
++                // Strip everything except the executable name (last 13 bytes). I.e. 'SLPS_123.45;1<termination>'.
++                send_as_gameid_tmp = &send_as_gameid_tmp[bootfile_len-13];
++                //debug_write("Stripped: %s", send_as_gameid_tmp);
++                mini_sprintf(send_as_gameid, "%s%s", base, send_as_gameid_tmp); // Build it back, 'cdrom:XXXX_XXX.XX;1<termination>'.
++            }
 +        }
 +
++        debug_write("Sending %s as gameid", send_as_gameid);
++        mcpro_sendid(send_as_gameid); // Sends the bootfile string as-is if the bootfile string itself is not greater then 20, or if there isn't a PSX.EXE GameID match. Otherwise, this got modified from the bootile string.
 +#if !defined FAKE_MCPRO
 +    }
 +#endif
-+
+ 
+-	FileClose(exe_fd);
 +    re_cd_init(); // Reset one last time to avoid potential lockups (here be dragons)
 +
 +    /*
@@ -7497,33 +7275,50 @@ index 340a79a..0997947 100644
 +    if(did_read_mc) // before clearing RAM (which contains our mem card buffer if applicable) but after last bios_reinitalize/setconf()
 +        parse_memcard_save_gameshark_codes();
 +#endif
-+
+ 
+-	patcher_apply(bootfile);
 +    debug_write("Clearing RAM");
 +    bzero(user_start, &__RO_START__ - user_start);
-+
+ 
+-	if (game_is_pal != gpu_is_pal()) {
+-		debug_write("Switching video mode");
+-		debug_switch_standard(game_is_pal);
+-	}
 +    char * append_bypass_bootfile = "cdrom:\\APPEND.EXE;1";
-+
+ 
+-	debug_write("Starting");
 +// Only 2 known no-swap bypass games that work with the Append No Swap Bypass (By mdmdj) method
 +    if((strcmp("cdrom:\\SLPM_861.84;1", bootfile)) == 0) { // BeatMania Append 3rdMix
 +        bootfile = append_bypass_bootfile;
 +        //debug_write("Append No Swap Bypass detected");	
 +        // no anti-piracy other then key disc in this one
 +    }
-+
+ 
+-	// Restore original error handler
+-	bios_restore_disc_error();
 +    if((strcmp("cdrom:\\SLPM_862.29;1", bootfile)) == 0) { // BeatMania Append GottaMix
 +        bootfile = append_bypass_bootfile;
 +        is_beat_mania_append_gottamix = true; // used for anti-piracy bootfile match replacement
 +        //debug_write("Append No Swap Bypass detected");	
 +    }
-+
+ 
+-	// Games from WarmBoot start with interrupts disabled
+-	EnterCriticalSection();
 +    debug_write("Reading executable header");
-+
+ 
+-	// FlushCache needs to be called with interrupts disabled
+-	FlushCache();
 +#if !defined(FREEPSXBOOT) && !defined(XSTATION) && !defined(ROM) && !defined(TOCPERFECT)
-+
+ 
+-	DoExecute(&exe_header->offsets, 0, 0);
+-}
 +#if !defined(FAKE_PS2)
 +    if(bios_is_ps1() == false) {
 +#endif
-+
+ 
+-void main() {
+-	// Undo all possible fuckeries during exploiting
+-	bios_reinitialize();
 +        // CdGetLbn() needs any cdrom:\\, cdrom:\, or cdrom: in the bootfile string from SYSTEM.CNF to be stripped out. The function below is by Nicholas Noble
 +        char * bootfile_for_CdGetLbn = 0;
 +        uint32_t hash = 5381;
@@ -7550,9 +7345,13 @@ index 340a79a..0997947 100644
 +#if !defined(FAKE_PS2)
 +    }
 +#endif
-+
+ 
+-	// Mute the audio
+-	audio_halt();
 +#endif
-+
+ 
+-	// Initialize debug screen
+-	debug_init();
 +    int32_t exe_fd = FileOpen(bootfile, FILE_READ);
 +    if (exe_fd < 0) {
 +        debug_write("Open error %d", GetLastError());
@@ -7639,7 +7438,11 @@ index 340a79a..0997947 100644
 +        activate_anti_anti_piracy(bootfile, (int32_t) exe_header->offsets.load_addr);
 +#endif
 +#endif
-+
+ 
+-	debug_write("Integrity check %sed", integrity_ok ? "pass" : "fail");
+-	if (!integrity_ok) {
+-		return;
+-	}
 +        if((did_read_mc) && (!cheat_engine_installed)) {
 +            install_cheat_engine();
 +        }
@@ -7707,20 +7510,37 @@ index 340a79a..0997947 100644
 +    activate_anti_anti_piracy(bootfile, (int32_t) exe_header->offsets.load_addr);
 +#endif
 +#endif
-+
+ 
+-	bios_inject_disc_error();
+-	log_bios_version();
 +    if((did_read_mc) && (!cheat_engine_installed)) {
 +        install_cheat_engine();
 +    }
-+
+ 
+-	debug_write("Resetting drive");
+-	if (!cd_drive_init()) {
+-		debug_write("Reset failed");
+-		return;
+-	}
 +    // Games from WarmBoot start with interrupts disabled
 +    EnterCriticalSection();
-+
+ 
+-	debug_write("Unlocking drive");
+-	if (!unlock_drive()) {
+-		return;
+-	}
 +    // FlushCache needs to be called with interrupts disabled
 +    FlushCache();
-+
+ 
+-	while (1) {
+-#if SOFTUART_PATCH
+-		patcher_apply_softuart();
+-		std_out_puts("SoftUART ready\n");
+-#endif
 +    DoExecute(&exe_header->offsets, 0, 0);
 +}
-+
+ 
+-		try_boot_cd();
 +void main() {
  
 -		debug_write("Reinitializing kernel");
@@ -7814,6 +7634,11 @@ index 340a79a..0997947 100644
 +    }
 +#endif // XSTATION
 +
++    if(mcpro_check(MCPRO_PORT_0) == 0) {
++        debug_write("GameID device detected in slot 1");
++        gameid_device = true;
++    }
++    
 +    while (1) {
 +        try_boot_cd();
 +
@@ -7840,9 +7665,9 @@ index 340a79a..0997947 100644
 -	while(1);
 +    while(1);
  }
-diff --git a/tmp/og-tonyhax.R0u/loader/secondary.ld b/loader/secondary.ld
+diff --git a/tmp/og-tonyhax.rGK/loader/secondary.ld b/loader/secondary.ld
 index 7dc880a..2a912c2 100644
---- a/tmp/og-tonyhax.R0u/loader/secondary.ld
+--- a/tmp/og-tonyhax.rGK/loader/secondary.ld
 +++ b/loader/secondary.ld
 @@ -1,8 +1,8 @@
  MEMORY {
@@ -7855,9 +7680,9 @@ index 7dc880a..2a912c2 100644
  	PROVIDE(__RO_START__ = .);
  	.text :
  	{
-diff --git a/tmp/og-tonyhax.R0u/loader/str.c b/loader/str.c
+diff --git a/tmp/og-tonyhax.rGK/loader/str.c b/loader/str.c
 index 0f9c895..4ae2e05 100644
---- a/tmp/og-tonyhax.R0u/loader/str.c
+--- a/tmp/og-tonyhax.rGK/loader/str.c
 +++ b/loader/str.c
 @@ -1,6 +1,6 @@
  
@@ -7891,13 +7716,13 @@ diff --git a/loader/tonyhax-tpl-ff9-32kb.mcs b/loader/tonyhax-tpl-ff9-32kb.mcs
 new file mode 100644
 index 0000000..4001e74
 Binary files /dev/null and b/loader/tonyhax-tpl-ff9-32kb.mcs differ
-diff --git a/tmp/og-tonyhax.R0u/loader/tonyhax-tpl.mcs b/loader/tonyhax-tpl-original.mcs
+diff --git a/tmp/og-tonyhax.rGK/loader/tonyhax-tpl.mcs b/loader/tonyhax-tpl-original.mcs
 similarity index 100%
-rename from /tmp/og-tonyhax.R0u/loader/tonyhax-tpl.mcs
+rename from /tmp/og-tonyhax.rGK/loader/tonyhax-tpl.mcs
 rename to loader/tonyhax-tpl-original.mcs
-diff --git a/tmp/og-tonyhax.R0u/loader/util.h b/loader/util.h
+diff --git a/tmp/og-tonyhax.rGK/loader/util.h b/loader/util.h
 index 6102557..db06d8a 100644
---- a/tmp/og-tonyhax.R0u/loader/util.h
+--- a/tmp/og-tonyhax.rGK/loader/util.h
 +++ b/loader/util.h
 @@ -1,6 +1,6 @@
  

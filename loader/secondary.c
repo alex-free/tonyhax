@@ -65,6 +65,7 @@ bool controller_input = false; // When enabled, debug_write does not display the
 bool dont_scroll = false; // When enabled, the screen doesn't scroll (for memory card save file selection)
 bool installed_cheat_engine = false; // The cheat engine is installed when parse_memcard_save_gameshark_codes() completes. Some games may go on to set explicit anti-piracy bypass GameShark codes however, so to prevent the cheat engine from being installed twice (which is wasteful) we set a flag here.
 bool did_read_mc = false; // We need to set the GameShark codes AFTER the last bios_reintialize(). I want to call bios_reinitialize() after reading the memory card data to prevent anything screwy in booting games, so we can just parse the data later after the final bios_reinitialize since it's still in RAM.
+bool gameid_device = false; // We don't need to remove a mcpro with gameid, so we don't display the remove the freepsxboot card now message when it's detected. This also tells the code to handle gameid when true.
 
 uint16_t mc_base = 0x102; // start of gs code data in memory card buffer
 
@@ -128,7 +129,7 @@ uint8_t mcpro_check(uint8_t port){
     return mcpro_check_ret;
 }
 
-uint8_t mcpro_sendid(const char *gameid) {
+uint8_t mcpro_sendid(char *gameid) {
     memory_card_and_controller_wait(); // docs say to wait
     uint8_t mcpro_sendid_ret =  MemCardPro_SendGameID(MCPRO_PORT_0, strlen(gameid), gameid);
     memory_card_and_controller_wait(); // docs say to wait
@@ -531,80 +532,80 @@ void parse_memcard_save_gameshark_codes() {
 #endif // TOCPERFECT
 
 void log_bios_version() {
-    /*
-     * "System ROM Version 4.5 05/25/00 A"
-     * By adding 11 we get to Version, which we'll compare as a shortcut
-     */
-    const char * version;
-    
-    if(strncmp(BIOS_VERSION + 11, "Version", 7) == 0) {
-        version = BIOS_VERSION + 19;
-    } else {
-        version = "1.0 or older";
-    }
+	/*
+	 * "System ROM Version 4.5 05/25/00 A"
+	 * By adding 11 we get to Version, which we'll compare as a shortcut
+	 */
+	const char * version;
 
-    debug_write("Console: %s", bios_is_ps1() ? "PS1": "PS2");
-    debug_write("System BIOS: %s", version);
+	if (strncmp(BIOS_VERSION + 11, "Version", 7) == 0) {
+		version = BIOS_VERSION + 19;
+	} else {
+		version = "1.0 or older";
+	}
+
+	debug_write("Console: %s", bios_is_ps1() ? "PS1": "PS2");
+	debug_write("BIOS: v%s", version);
 }
 
 bool backdoor_cmd(uint_fast8_t cmd, const char * string) {
-    uint8_t cd_reply[16];
+	uint8_t cd_reply[16];
 
-    // Send command
-    cd_command(cmd, (const uint8_t *) string, strlen(string));
+	// Send command
+	cd_command(cmd, (const uint8_t *) string, strlen(string));
 
-    // Check if INT5, else fail
-    if (cd_wait_int() != 5) {
-        return false;
-    }
+	// Check if INT5, else fail
+	if (cd_wait_int() != 5) {
+		return false;
+	}
 
-    // Check length
-    uint_fast8_t reply_len = cd_read_reply(cd_reply);
-    if (reply_len != 2) {
-        return false;
-    }
+	// Check length
+	uint_fast8_t reply_len = cd_read_reply(cd_reply);
+	if (reply_len != 2) {
+		return false;
+	}
 
-    // Check there is an error flagged
-    if (!(cd_reply[0] & 0x01)) {
-        return false;
-    }
+	// Check there is an error flagged
+	if (!(cd_reply[0] & 0x01)) {
+		return false;
+	}
 
-    // Check error code
-    if (cd_reply[1] != 0x40) {
-        return false;
-    }
+	// Check error code
+	if (cd_reply[1] != 0x40) {
+		return false;
+	}
 
-    return true;
+	return true;
 }
 
 bool unlock_drive() {
     debug_write("Drive region: %s", region_name);
 
-    // Note the kernel's implementation of strlen returns 0 for nulls.
-    if (
-            !backdoor_cmd(0x50, NULL) ||
-            !backdoor_cmd(0x51, "Licensed by") ||
-            !backdoor_cmd(0x52, "Sony") ||
-            !backdoor_cmd(0x53, "Computer") ||
-            !backdoor_cmd(0x54, "Entertainment") ||
-            !backdoor_cmd(0x55, p5_localized) ||
-            !backdoor_cmd(0x56, NULL)
-    ) {
-        debug_write("Backdoor failed");
-        return false;
-    }
+	// Note the kernel's implementation of strlen returns 0 for nulls.
+	if (
+			!backdoor_cmd(0x50, NULL) ||
+			!backdoor_cmd(0x51, "Licensed by") ||
+			!backdoor_cmd(0x52, "Sony") ||
+			!backdoor_cmd(0x53, "Computer") ||
+			!backdoor_cmd(0x54, "Entertainment") ||
+			!backdoor_cmd(0x55, p5_localized) ||
+			!backdoor_cmd(0x56, NULL)
+	) {
+		debug_write("Backdoor failed");
+		return false;
+	}
 
-    return true;
+	return true;
 }
 
 #if !defined TOCPERFECT
 void wait_lid_status(bool open) {
-    uint8_t cd_reply[16];
+	uint8_t cd_reply[16];
     
     controller_input_start();
 
-    uint8_t expected = open ? 0x10 : 0x00;
-    do {
+	uint8_t expected = open ? 0x10 : 0x00;
+	do {
 
         j = padbuf[0][3] ^ 0xFF;
         debug_write(""); // Vblank wait for controller input
@@ -762,11 +763,13 @@ void try_boot_cd() {
 
 // we don't use freepsxboot patches for maximum game compatibility
 #if defined FREEPSXBOOT 
-    debug_write("REMOVE THE FREEPSXBOOT MEMORY CARD FROM YOUR CONSOLE...");
-    debug_write("BEFORE BOOTING ANY GAME!");
+    if(!gameid_device) { // GameID switches off of 0.MCR (freepsxboot memory card) automatically!
+        debug_write("REMOVE THE FREEPSXBOOT MEMORY CARD FROM YOUR CONSOLE...");
+        debug_write("BEFORE BOOTING ANY GAME!");
+    }
 #endif
 
-debug_write("");
+    debug_write("");
 #if defined ROM
     if(enable_unlock)
     {
@@ -1035,12 +1038,39 @@ debug_write("");
 #if defined FAKE_MCPRO
     debug_write("DEBUG: forcing MCPro code path");
 #else
-    if(mcpro_check(MCPRO_PORT_0) == 0) {
-        debug_write("MCPRO/SD2PSX detected in slot 1");
+    if(gameid_device) {
 #endif
+        int8_t bootfile_len = strlen(bootfile);
+        const char * base = "cdrom:"; // Device exe is loaded from.
+        const char * slps = "SLPS_"; // Sony Licensed Product Serial.
+        const char * scps = "SCPS_"; // Sony Computer Product Serial.
+        const char * end = ";1";
+        char * send_as_gameid_tmp = bootfile;
+
+        char send_as_gameid[20];
+        // c // 0
+        // d // 1
+        // r // 2
+        // o // 3
+        // m // 4
+        // : // 5
+        // S // 6
+        // L or C // 7
+        // P // 8
+        // S // 9
+        // _ // 10
+        // #?? // 11
+        // #?? // 12
+        // #?? // 13
+        // . // 14
+        // #?? // 15
+        // #?? // 16
+        // ; // 17
+        // 1 // 18
+        // termination '\0' // 19
 
         if(is_psx_exe) {
-            re_cd_init(); // Reset before next read
+            re_cd_init(); // Reset before next read.
 
             if (CdReadSector(1, 16, data_buffer) != 1) { // No chance of overseek for PS2s because it is a very early sector at the inner part of the disc.
                 debug_write("Failed to read sector 16");
@@ -1055,55 +1085,14 @@ debug_write("");
 
             volume_creation_timestamp[16] = '\0';
             debug_write("PSX.EXE ID: %s", (char *)volume_creation_timestamp); 
+            const char * serial = get_psx_exe_gameid(volume_creation_timestamp); // See gameid-psx-exe.c.
 
-            const char * base = "cdrom:SLPS_";
-            const char * base_scps = "cdrom:SCPS_";
-
-            const char * serial = get_psx_exe_gameid(volume_creation_timestamp);
-            char * end = ";1";
-
-            char temp[11];
-            // c // 0
-            // d // 1
-            // r // 2
-            // o // 3
-            // m // 4
-            // : // 5
-            // S // 6
-            // L or C // 7 (if is_scps bool is returned as true)
-            // P // 8
-            // S // 9
-            // _ // 10
-
-            char psx_exe_gameid[20];
-            // c // 0
-            // d // 1
-            // r // 2
-            // o // 3
-            // m // 4
-            // : // 5
-            // S // 6
-            // L or C // 7
-            // P // 8
-            // S // 9
-            // _ // 10
-            // #?? // 11
-            // #?? // 12
-            // #?? // 13
-            // . // 14
-            // #?? // 15
-            // #?? // 16
-            // ; // 17
-            // 1 // 18
-            // termination '\0' // 19
-            
-            if(is_scps) {
-                mini_sprintf(temp, "%s%s", base_scps, serial); // Append serial (i.e. "000.01") to base "cdrom:SLPS_"
+            // Build full bootfile.
+            if(is_scps) { // Returned by gameid-psx-exe.c. Since there are so few SCPS PSX.EXE games in comparison to the massive amount of SLPS, we default to SLPS unless we are told not to.
+                mini_sprintf(send_as_gameid, "%s%s%s%s", base, scps, serial, end);
             } else {
-                mini_sprintf(temp, "%s%s", base, serial); // Append serial (i.e. "000.01") to base "cdrom:SLPS_"
+                mini_sprintf(send_as_gameid, "%s%s%s%s", base, slps, serial, end);
             }
-
-            mini_sprintf(psx_exe_gameid, "%s%s", temp, end); // Append ";1"
 
             /*
             Tests Arc The Lad Japan Rev 0/Rev 1
@@ -1112,17 +1101,20 @@ debug_write("");
             }
             */
 
-            if(strcmp(serial, "0") != 0) {
-                debug_write("Sending %s as GameID", psx_exe_gameid);
-                mcpro_sendid(psx_exe_gameid);
-            } else {
-                debug_write("Unknown PSX.EXE ID, unique GameID unavailable.");
-                mcpro_sendid(bootfile); // As a last resort, we send PSX.EXE to mcpro
+            if(strcmp(serial, "0") == 0) { // The library sends back a literal string containing '0' for no match.
+                debug_write("Unknown PSX.EXE ID, unique GameID unavailable."); // As a last resort, we send PSX.EXE for gameid.
             }
         } else {
-            mcpro_sendid(bootfile); // Wow, that was a lot simpler then PSX.EXE!
+            if(bootfile_len > 20) { // We got crazy shit like 'TEKKEN3\SLUS_004.02;1' to deal with, that looks ugly in the pico memcard index.txt file that we need to clean up. I think it is too large so the pico memcard does stuff like TEKKEN3\SLUS_004.02<invalid character><invalid character>, when it should be 'TEKKEN3\SLUS_004.02;1'. Anyways, the idea is to make it shorter without the parent dir to avoid this.
+                // Strip everything except the executable name (last 13 bytes). I.e. 'SLPS_123.45;1<termination>'.
+                send_as_gameid_tmp = &send_as_gameid_tmp[bootfile_len-13];
+                //debug_write("Stripped: %s", send_as_gameid_tmp);
+                mini_sprintf(send_as_gameid, "%s%s", base, send_as_gameid_tmp); // Build it back, 'cdrom:XXXX_XXX.XX;1<termination>'.
+            }
         }
 
+        debug_write("Sending %s as gameid", send_as_gameid);
+        mcpro_sendid(send_as_gameid); // Sends the bootfile string as-is if the bootfile string itself is not greater then 20, or if there isn't a PSX.EXE GameID match. Otherwise, this got modified from the bootile string.
 #if !defined FAKE_MCPRO
     }
 #endif
@@ -1459,6 +1451,11 @@ void main() {
     }
 #endif // XSTATION
 
+    if(mcpro_check(MCPRO_PORT_0) == 0) {
+        debug_write("GameID device detected in slot 1");
+        gameid_device = true;
+    }
+    
     while (1) {
         try_boot_cd();
 

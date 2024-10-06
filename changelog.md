@@ -1,5 +1,17 @@
 # [Tonyhax International](readme.md) -> Changelog
 
+## Version 1.5.5 (9/27/2024)
+
+* [tonyhax-international-v1.5.5](https://github.com/alex-free/tonyhax/releases/download/v1.5.5i/tonyhax-international-v1.5.5.zip)
+
+----------------------------------
+
+Changes:
+
+* Fixed [GameID support](gameid.md) for Eisei Meijin (Japan) (Rev 1) (thanks to the bug report by [@sh06un](https://github.com/sh06un)). Added support for a few more PSX.EXE titles as well, and updated my [library](https://github.com/alex-free/tonyhax/blob/master/loader/gameid-psx-exe.c) with more documentation.
+
+* GameID detection happens quicker now then before.
+
 ## Version 1.5.4 (9/16/2024)
 
 * [tonyhax-international-v1.5.4](https://github.com/alex-free/tonyhax/releases/download/v1.5.4i/tonyhax-international-v1.5.4.zip)

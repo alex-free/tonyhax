@@ -14,9 +14,9 @@ struct exe_offsets {
 	void * load_addr;           // 0x08
 	uint32_t load_size;         // 0x0C
 	uint32_t _reserved0[2];     // 0x10
-	void * memfill_start; 		// 0x18
+	void * memfill_start;       // 0x18
 	uint32_t memfill_size;      // 0x1C
-	void * initial_sp_base;		// 0x20
+	void * initial_sp_base;     // 0x20
 	uint32_t initial_sp_offset; // 0x24
 };
 
@@ -346,6 +346,15 @@ bool CdInit(void);
 void SetConf(uint32_t evcb, uint32_t tcb, void * stacktop);
 
 /**
+ * Configured the RAM size.
+ *
+ * @param size memory size in megabytes, either 2 or 8.
+ *
+ * Table A, call 0x9F.
+ */
+void SetMemSize(uint32_t size);
+
+/**
  * Reads the requested amount of sectors from the CD.
  *
  * @param sector_count sector count
@@ -476,10 +485,3 @@ void InstallDevices(uint32_t enable_tty);
  * Table C, call 0x1C.
  */
 void AdjustA0Table(void);
-
-/**
- * Called to set the RAM to 8MBs, which enables the mirroring of RAM 4 times in the real 2MBs of RAM (which is exactly what the BIOS ends up doing)
- *
- * Table A, call 0x9F.
- */
-void SetMemSize(uint32_t mem_size);

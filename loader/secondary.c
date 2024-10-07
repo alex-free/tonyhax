@@ -1041,6 +1041,7 @@ void try_boot_cd() {
     if(gameid_device) {
 #endif
         int8_t bootfile_len = strlen(bootfile);
+        //debug_write("Bootfile len: %d", bootfile_len);
         const char * base = "cdrom:"; // Device exe is loaded from.
         const char * slps = "SLPS_"; // Sony Licensed Product Serial.
         const char * scps = "SCPS_"; // Sony Computer Product Serial.
@@ -1105,11 +1106,13 @@ void try_boot_cd() {
                 debug_write("Unknown PSX.EXE ID, unique GameID unavailable."); // As a last resort, we send PSX.EXE for gameid.
             }
         } else {
-            if(bootfile_len > 20) { // We got crazy shit like 'TEKKEN3\SLUS_004.02;1' to deal with, that looks ugly in the pico memcard index.txt file that we need to clean up. I think it is too large so the pico memcard does stuff like TEKKEN3\SLUS_004.02<invalid character><invalid character>, when it should be 'TEKKEN3\SLUS_004.02;1'. Anyways, the idea is to make it shorter without the parent dir to avoid this.
+            if(bootfile_len > 19) { // Don't count termination. We got crazy shit like 'TEKKEN3\SLUS_004.02;1' to deal with, that looks ugly in the pico memcard index.txt file that we need to clean up. I think it is too large so the pico memcard does stuff like TEKKEN3\SLUS_004.02<invalid character><invalid character>, when it should be 'TEKKEN3\SLUS_004.02;1'. Anyways, the idea is to make it shorter without the parent dir to avoid this.
                 // Strip everything except the executable name (last 13 bytes). I.e. 'SLPS_123.45;1<termination>'.
                 send_as_gameid_tmp = &send_as_gameid_tmp[bootfile_len-13];
                 //debug_write("Stripped: %s", send_as_gameid_tmp);
                 mini_sprintf(send_as_gameid, "%s%s", base, send_as_gameid_tmp); // Build it back, 'cdrom:XXXX_XXX.XX;1<termination>'.
+            } else { // is 19 (20 including termination) or less so is safe. If it is less, then terminator will get copied anyways cutting it short.
+                strcpy(send_as_gameid, send_as_gameid_tmp); // Note that send_as_gameid_tmp was previously assigned to the bootfile string.
             }
         }
 

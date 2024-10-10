@@ -82,7 +82,7 @@ uint8_t padbuf[2][0x22];	// Joypad Buffers
 
 void try_boot_cd(); // for access in memory card features
 
-// re-usable strings for debug_write(). Due to compiler optimzations for size already being enabled, this isn't as black and white as just put any repeated strings here. It has to make sense (and visibly reduce the size of secondary.elf) which it does in the below cases.
+// re-usable strings for debug_write(). Due to compiler optimizations for size already being enabled, this isn't as black and white as just put any repeated strings here. It has to make sense (and visibly reduce the size of secondary.elf) which it does in the below cases.
 #define memory_card_in_slot "memory card in slot"
 #define press_triangle "Press TRIANGLE to"
 #define press_circle "Press CIRCLE to"
@@ -124,6 +124,8 @@ void memory_card_and_controller_wait() {
 }
 
 uint8_t mcpro_check(uint8_t port){
+    controller_input_start(); // For at least the ROM entrypoint, the BIOS is calling StartPad() (which also initializes memory cards and controllers) at some point before mottzilla's PS-EXE cartridge loader is taking over control and giving it to Tonyhax International. We need to call our own StartPad()and then stoppad() to close it correctly BEFORE we pull for a game id device. See https://github.com/alex-free/tonyhax/issues/69 .
+    controller_input_stop();
     uint8_t mcpro_check_ret = MemCardPro_Ping(port);
     memory_card_and_controller_wait(); // docs say to wait
     return mcpro_check_ret;

@@ -1,5 +1,15 @@
 # [Tonyhax International](readme.md) -> Changelog
 
+## Version 1.5.7 (10/7/2024)
+
+* [tonyhax-international-v1.5.7](https://github.com/alex-free/tonyhax/releases/download/v1.5.7i/tonyhax-international-v1.5.7.zip)
+
+----------------------------------
+
+Changes:
+
+* Bug fix: v1.5.6 introduced a regression that caused some games to send an empty GameID string. This has been addressed with better boot file parsing for GameID.
+
 ## Version 1.5.6 (10/6/2024)
 
 * [tonyhax-international-v1.5.6](https://github.com/alex-free/tonyhax/releases/download/v1.5.6i/tonyhax-international-v1.5.6.zip)

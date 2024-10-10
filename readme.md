@@ -51,15 +51,15 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.5.7 (10/7/2024)
+### Version 1.5.8 (10/10/2024)
 
-* [tonyhax-international-v1.5.7](https://github.com/alex-free/tonyhax/releases/download/v1.5.7i/tonyhax-international-v1.5.7.zip)
+* [tonyhax-international-v1.5.8](https://github.com/alex-free/tonyhax/releases/download/v1.5.8i/tonyhax-international-v1.5.8.zip)
 
 ----------------------------------
 
 Changes:
 
-* Bug fix: v1.5.6 introduced a regression that caused some games to send an empty GameID string. This has been addressed with better boot file parsing for GameID.
+* The loader now resets memory card/controller polling to a clean state during initial start up. This fixes a bug that caused the [ROM entrypoint](flashed-cheat-cart.md) to not detect GameID devices, since the BIOS is initializing the memory cards and controllers so close to the loader taking over execution from the BIOS. Thank you [@kimbapslice](https://github.com/kimbapslice) for bringing this [bug](https://github.com/alex-free/tonyhax/issues/69) to my attention and testing the fixes.
 
 ----------------------------------
 

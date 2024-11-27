@@ -51,15 +51,15 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.5.8 (10/10/2024)
+### Version 1.5.9 (11/26/2024)
 
-* [tonyhax-international-v1.5.8](https://github.com/alex-free/tonyhax/releases/download/v1.5.8i/tonyhax-international-v1.5.8.zip)
+* [tonyhax-international-v1.5.9](https://github.com/alex-free/tonyhax/releases/download/v1.5.9i/tonyhax-international-v1.5.9.zip)
 
 ----------------------------------
 
 Changes:
 
-* The loader now resets memory card/controller polling to a clean state during initial start up. This fixes a bug that caused the [ROM entrypoint](flashed-cheat-cart.md) to not detect GameID devices, since the BIOS is initializing the memory cards and controllers so close to the loader taking over execution from the BIOS. Thank you [@kimbapslice](https://github.com/kimbapslice) for bringing this [bug](https://github.com/alex-free/tonyhax/issues/69) to my attention and testing the fixes.
+* Added an APv2 anti-piracy bypass for [GeGeGe no Kitarou: Gyakushuu! Youma Daikessen (Japan)](http://redump.org/disc/4930/). This is one of the [rarest PS1 games](https://github.com/alex-free/tonyhax/issues/72).
 
 ----------------------------------
 
@@ -69,7 +69,7 @@ Changes:
 
 * [Flash](flashed-cheat-cart.md) a cheat cartridge (GameShark/Action Replay, etc.).
 
-* Use the [FreePSXBoot](freepsxboot-exploit.md)) Memory card exploit.
+* Use the [FreePSXBoot](freepsxboot-exploit.md) Memory card exploit.
 
 * Use Special game disc specific [GameShark Codes](gameshark-code.md) with a PSX cheat CD or cartridge (GameShark, Action Replay, etc.).
 

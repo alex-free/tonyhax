@@ -869,8 +869,8 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
 
 // Final Fantasy VIII
     (
-       ((strcmp("SLPS_018.80", bootfile)) == 0) // Japan Disc 1
-       || ((strcmp("SLPS_018.81", bootfile)) == 0) // Japan Disc 2
+    ((strcmp("SLPS_018.80", bootfile)) == 0) // Japan Disc 1
+    || ((strcmp("SLPS_018.81", bootfile)) == 0) // Japan Disc 2
     || ((strcmp("SLPS_018.82", bootfile)) == 0) // Japan Disc 3
     || ((strcmp("SLPS_018.83", bootfile)) == 0) // Japan Disc 3
     ) {
@@ -884,16 +884,29 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
         install_cheat_engine();
     } else if
 
+// GeGeGe no Kitarou
+    ((strcmp("SLPM_872.86", bootfile)) == 0) { // Japan
+        /*
+        D00C68EA 1062
+        800C68EA 1800
+        my code via aprip
+        */
+        add_D0_code(0x800C68EA, fake_pal_bios_bypass_compare_val);
+        add_80_code(0x800C68EA, fake_pal_bios_bypass_patch_val);
+        install_cheat_engine();
+    } else if
+
+
 // Gekitotsu Toma L'Arc - L'Arc en Ciel vs Tomarunner
-       ((strcmp("SCPS_101.34", bootfile)) == 0) { // Japan
+    ((strcmp("SCPS_101.34", bootfile)) == 0) { // Japan
         /*
         D016385E 1062
         8016385E 1800
         my code via aprip
-          */
+        */
         add_D0_code(0x8016385E, fake_pal_bios_bypass_compare_val);
         add_80_code(0x8016385E, fake_pal_bios_bypass_patch_val);
-          install_cheat_engine();
+        install_cheat_engine();
     } else if
 
 // Glint Glitters

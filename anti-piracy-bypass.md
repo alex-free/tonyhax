@@ -10,16 +10,16 @@ _List Notes:_
 
 *   Tonyhax International Bypass Support marked as YES means the protection does not trigger when booting the game with Tonyhax International. If it is marked as NO there are simply extra steps you need to take to play this game with Tonyhax International. 
 
-* If one game release was found to have anti-piracy protections ([APv1](#apv1) or [APv2](#apv2)), all revisions, demos, and regional releases (listed on redump) were **tested for active protection code**. This is because many games were released in different regions with different anti-piracy code, or it was disabled entirely for unknown reasons. **This info is not listed on redump correctly due to false positives by some closed source automatic tool they are using to detect different protections. The only way to figure out if the protection is sent is by testing the actual game.**. The APv1 and APv2 distinction is also not listed on redump either.
+* If one game release was found to have anti-piracy protections ([APv1](#apv1) or [APv2](#apv2)), all revisions, demos, and regional releases (listed on redump) were **tested for active protection code**. This is because many games were released in different regions with different anti-piracy code, or it was disabled entirely for Unknown. reasons. **This info is not listed on redump correctly due to false positives by some closed source automatic tool they are using to detect different protections. The only way to figure out if the protection is sent is by testing the actual game.**. The APv1 and APv2 distinction is also not listed on redump either.
 
-*   Many games containing [LibCrypt](#libcrypt) protection have 'unknown' listed as when the protection triggers. This is because I haven't investigated each game. The game is confirmed to have LibCrypt protection due to a LibCrypt patch existing for it. This info will be added in the future (**or help me add it, open a [generic issue](https://github.com/alex-free/tonyhax/issues/new))**.
+*   Many games containing [LibCrypt](#libcrypt) protection have 'Unknown.' listed as when the protection triggers. This is because I haven't investigated each game. The game is confirmed to have LibCrypt protection due to a LibCrypt patch existing for it. This info will be added in the future (**or help me add it, open a [generic issue](https://github.com/alex-free/tonyhax/issues/new))**.
 
 ## List Of Protected PSX Game Discs
 --------------------------------------------
 
 | Game Disc  | [Protection Type](#protection-types) | Protection Triggered At | Tonyhax International Bypass Support |
 | --------------- | ------------- | ------------- | ------------- |
-| [Actua Ice Hockey 2 (Europe)](http://redump.org/disc/5120/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Actua Ice Hockey 2 (Europe)](http://redump.org/disc/5120/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Alundra 2 (Europe)](http://redump.org/disc/1089/) | None | - | - |
 | [Alundra 2 (France)](http://redump.org/disc/13396/) | None | - | - |
 | [Alundra 2 (Germany)](http://redump.org/disc/11603/) | None | - | - |
@@ -28,31 +28,31 @@ _List Notes:_
 | [Alundra 2 (USA)](http://redump.org/disc/2996/) | None | - | - |
 | [Animetic Story Game 1: Card Captor Sakura (Japan) (Disc 1)](http://redump.org/disc/12000/) | [APv2](#apv2) | Boot. | YES |
 | [Animetic Story Game 1: Card Captor Sakura (Japan) (Disc 2)](http://redump.org/disc/11999/) | [APv2](#apv2) | Boot. | YES |
-| [Anstoss: Premier Manager (Germany)](http://redump.org/disc/3334/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Ape Escape (Europe)](http://redump.org/disc/6147/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Ape Escape (France)](http://redump.org/disc/995/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Ape Escape (Germany)](http://redump.org/disc/26604/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Ape Escape (Italy)](http://redump.org/disc/27680/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Ape Escape: La Invasion de los Monos (Spain)](http://redump.org/disc/1128/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Anstoss: Premier Manager (Germany)](http://redump.org/disc/3334/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Ape Escape (Europe)](http://redump.org/disc/6147/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Ape Escape (France)](http://redump.org/disc/995/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Ape Escape (Germany)](http://redump.org/disc/26604/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Ape Escape (Italy)](http://redump.org/disc/27680/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Ape Escape: La Invasion de los Monos (Spain)](http://redump.org/disc/1128/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Arc The Lad III (Japan) (Rev 0) (Disc 1)](http://redump.org/disc/5897/) | [APv2](#apv2) | Boot. | YES |
 | [Arc The Lad III (Japan) (Rev 0) (Disc 2)](http://redump.org/disc/5898/) | [APv2](#apv2) | Boot. | YES |
 | [Arc The Lad III (Japan) (Rev 1) (Disc 1)](http://redump.org/disc/34793/) | [APv2](#apv2) | Boot. | YES |
 | [Arc The Lad III (Japan) (Rev 1) (Disc 2)](http://redump.org/disc/34794/) | [APv2](#apv2) | Boot. | YES |
 | [Arc The Lad III (USA) (Disc 1)](http://redump.org/disc/674/) | None | - | YES |
 | [Arc The Lad III (USA) (Disc 2)](http://redump.org/disc/675/) | None | - | YES |
-| [Asterix: Mega Madness (Europe) (En,Fr,De,Es,It,Nl)](http://redump.org/disc/4873/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Barbie: Aventure Equestre (France)](http://redump.org/disc/29560/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Barbie: Race & Ride (Europe)](http://redump.org/disc/11318/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Barbie: Race & Ride (Germany)](http://redump.org/disc/25241/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Barbie: Race & Ride (Italy)](http://redump.org/disc/28330/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Barbie: Race & Ride (Spain)](http://redump.org/disc/25983/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Barbie: Sports Extreme (France)](http://redump.org/disc/28149/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Barbie: Super Sport (Germany)](http://redump.org/disc/26734/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Barbie: Super Sports (Europe)](http://redump.org/disc/29290/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Barbie: Super Sports (Italy)](http://redump.org/disc/35294/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Barbie: Super Sports (Spain)](http://redump.org/disc/5579/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [BDFL Manager 2001 (Germany)](http://redump.org/disc/17767/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [BDFL Manager 2002 (Germany)](http://redump.org/disc/3320/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Asterix: Mega Madness (Europe) (En,Fr,De,Es,It,Nl)](http://redump.org/disc/4873/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Barbie: Aventure Equestre (France)](http://redump.org/disc/29560/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Barbie: Race & Ride (Europe)](http://redump.org/disc/11318/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Barbie: Race & Ride (Germany)](http://redump.org/disc/25241/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Barbie: Race & Ride (Italy)](http://redump.org/disc/28330/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Barbie: Race & Ride (Spain)](http://redump.org/disc/25983/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Barbie: Sports Extreme (France)](http://redump.org/disc/28149/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Barbie: Super Sport (Germany)](http://redump.org/disc/26734/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Barbie: Super Sports (Europe)](http://redump.org/disc/29290/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Barbie: Super Sports (Italy)](http://redump.org/disc/35294/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Barbie: Super Sports (Spain)](http://redump.org/disc/5579/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [BDFL Manager 2001 (Germany)](http://redump.org/disc/17767/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [BDFL Manager 2002 (Germany)](http://redump.org/disc/3320/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Beat Mania Append 3rdMix (Japan)](http://redump.org/disc/2306/) | [EDC], [Key Disc](#key-disc) | Key Disc Disc Change/Boot. | EDC - NO. Key Disc - YES, boot game directly from Tonyhax International, do not use a Key Disc to boot it. |
 | [Beat Mania 6thMix + Core Remix (Japan)](http://redump.org/disc/16285/) | [APv2](#apv2) | Boot. | YES | 
 | [Beat Mania Append GottaMix (Japan)](http://redump.org/disc/3550/) | [APv2](#apv2), [Key Disc](#key-disc) | Key Disc Disc Change/Boot. | APv2 - YES. Key Disc - YES, boot game directly from Tonyhax International, do not use a Key Disc to boot it. |
@@ -68,7 +68,7 @@ _List Notes:_
 | [Breath of Fire IV (USA)](http://redump.org/disc/1222/) | None | - | - |
 | [Bust A Move 2: Dance Tengoku Mix (Japan Demo)](http://redump.org/disc/6753/) | [APv1](#apv1) | Boot. | YES |
 | [Bust A Move 2: Dance Tengoku Mix (Japan)](http://redump.org/disc/3723/) | [APv1](#apv1) | Boot. | YES |
-| [Canal+ Premier Manager (Europe) (Fr,Es,It)](http://redump.org/disc/27297/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Canal+ Premier Manager (Europe) (Fr,Es,It)](http://redump.org/disc/27297/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Capcom vs. SNK: Millennium Fight 2000 Pro (Europe)](http://redump.org/disc/3904/) | None | - | - |
 | [Capcom vs. SNK: Millennium Fight 2000 Pro (Japan Demo)](http://redump.org/disc/62464/) | None | - | - |
 | [Capcom vs. SNK: Millennium Fight 2000 Pro (Japan)](http://redump.org/disc/37359/) | [APv2](#apv2) | Boot. | YES |
@@ -91,14 +91,14 @@ _List Notes:_
 | [Cool Boarders 2001 (USA)](http://redump.org/disc/513/) | [APv2](#apv2) | First loading screen. | YES |
 | [Crash Bandicoot Racing (Japan Demo)](http://redump.org/disc/53590/) | [APv2](#apv2) | When the Naughty Dog box is first visible. | YES |
 | [Crash Bandicoot Racing (Japan)](http://redump.org/disc/3694/) | [APv2](#apv2) | When the Naughty Dog box is first visible. | YES |
-| [Crash Bash (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/5483/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Crash Bash (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/5483/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Crash Bash (Europe)](http://redump.org/disc/5483/) | None | - | - |
 | [Crash Bash (Japan Demo)](http://redump.org/disc/53589/) | None | - |  - |
 | [Crash Bash (Japan)](http://redump.org/disc/3819/) | [APv2](#apv2) | At the 'Sony Computer Entertainment Presents' screen. |  YES |
 | [Crash Bash (USA Demo)](http://redump.org/disc/49446/) | None | - | - |
 | [Crash Bash (USA)](http://redump.org/disc/512/) | [APv2](#apv2) | At the 'Sony Computer Entertainment Presents' screen. |  YES |
-| [CTR: Crash Team Racing (Europe) (En,Fr,De,Es,It,Nl) (EDC)](http://redump.org/disc/897/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [CTR: Crash Team Racing (Europe) (En,Fr,De,Es,It,Nl) (No EDC)](http://redump.org/disc/798/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [CTR: Crash Team Racing (Europe) (En,Fr,De,Es,It,Nl) (EDC)](http://redump.org/disc/897/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [CTR: Crash Team Racing (Europe) (En,Fr,De,Es,It,Nl) (No EDC)](http://redump.org/disc/798/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Dance Dance Revolution 2nd Remix: Append Club Version Vol. 1 (Japan)](http://redump.org/disc/23382/) | [APv2](#apv2), [Key Disc](#key-disc) | On Disc Change. | APv2 - YES. Key Disc - **ONLY USA/PAL consoles, or a Japanese console with a mod-chip are supported**.
 | [Dance Dance Revolution 2nd Remix: Append Club Version Vol. 2 (Japan)](http://redump.org/disc/33339/) | [APv2](#apv2), [Key Disc](#key-disc) | On Disc Change. | APv2 - YES. Key Disc - **ONLY USA/PAL consoles, or a Japanese console with a mod-chip are supported**.
 | [Dance Dance Revolution 2nd Remix (Japan)](http://redump.org/disc/9477/) | [APv2](#apv2), [EDC](#edc) |  Immediately at first screen with text. | APv2 - YES. EDC - NO, [burn disc in special way](#edc). |
@@ -126,53 +126,53 @@ _List Notes:_
 | [Dino Crisis 2 (USA Demo)](http://redump.org/disc/49242/) | None | - | - |
 | [Dino Crisis 2 (USA)](http://redump.org/disc/460/) | None | - | - |
 | [Dino Crisis (Europe)](http://redump.org/disc/710/) | [LibCrypt](#libcrypt) | On the disclaimer screen after the game boots. | YES |
-| [Dino Crisis (Europe)](http://redump.org/disc/710/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Dino Crisis (Europe)](http://redump.org/disc/710/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Dino Crisis (France)](http://redump.org/disc/24278/) | [LibCrypt](#libcrypt) | On the disclaimer screen after the game boots. | YES |
-| [Dino Crisis (France)](http://redump.org/disc/24278/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Dino Crisis (France)](http://redump.org/disc/24278/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Dino Crisis (Germany)](http://redump.org/disc/7586/) | [LibCrypt](#libcrypt) | On the disclaimer screen after the game boots. | YES |
-| [Dino Crisis (Germany)](http://redump.org/disc/7586/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Dino Crisis (Germany)](http://redump.org/disc/7586/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Dino Crisis (Italy)](http://redump.org/disc/28171/) | [LibCrypt](#libcrypt) | On the disclaimer screen after the game boots. | YES |
-| [Dino Crisis (Italy)](http://redump.org/disc/28171/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Dino Crisis (Italy)](http://redump.org/disc/28171/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Dino Crisis (Japan)](http://redump.org/disc/15853/) | [APv2](#apv2) | On the disclaimer screen after the game boots. | YES |
 | [Dino Crisis (Spain)](http://redump.org/disc/27940/) | [LibCrypt](#libcrypt) | On the disclaimer screen after the game boots. | YES |
-| [Dino Crisis (Spain)](http://redump.org/disc/27940/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Dino Crisis (Spain)](http://redump.org/disc/27940/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Dino Crisis (USA Demo)](http://redump.org/disc/2942/) | None | - | - |
 | [Dino Crisis (USA) (Rev 0)](http://redump.org/disc/459/) | [APv2](#apv2) | On the disclaimer screen after the game boots. |YES |
 | [Dino Crisis (USA) (Rev 1)](http://redump.org/disc/473/) | [APv2](#apv2) | On the disclaimer screen after the game boots. |YES |
-| [Disney Fais Ton Histoire! Mulan (France)](http://redump.org/disc/27819/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disney Libro Animato Creativo: Mulan (Italy)](http://redump.org/disc/28327/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disney Libro Animato Creativo: Mulan (Italy)](http://redump.org/disc/28327/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disneyn Tarzan (Finland)](http://redump.org/disc/48938/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). | 
-| [Disney's 102 Dalmatians: Puppies to the Rescue (Europe) (Fr,De,Es,It,Nl)](http://redump.org/disc/19140/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disney's 102 Dalmatians: Puppies to the Rescue (Europe)](http://redump.org/disc/58589/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disney's 102 Dalmatians: Puppies to the Rescue (Scandinavia)](http://redump.org/disc/53874/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disney's Aventura Interactiva: Mulan (Spain)](http://redump.org/disc/17311/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disneys Interaktive Abenteuer: Mulan (Germany)](http://redump.org/disc/19124/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disney's Mulan: Story Studio (Europe)](http://redump.org/disc/6887/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disneys Tarzan (Denmark)](http://redump.org/disc/51711/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disney's Tarzan (Europe)](http://redump.org/disc/29818/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disneys Tarzan (Germany)](http://redump.org/disc/19124/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disneys Tarzan (Italy)](http://redump.org/disc/27824/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disneys Tarzan (Netherlands)](http://redump.org/disc/27067/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disney's Tarzan (Sweden)](http://redump.org/disc/6885/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disney Fais Ton Histoire! Mulan (France)](http://redump.org/disc/27819/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disney Libro Animato Creativo: Mulan (Italy)](http://redump.org/disc/28327/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disney Libro Animato Creativo: Mulan (Italy)](http://redump.org/disc/28327/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disneyn Tarzan (Finland)](http://redump.org/disc/48938/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). | 
+| [Disney's 102 Dalmatians: Puppies to the Rescue (Europe) (Fr,De,Es,It,Nl)](http://redump.org/disc/19140/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disney's 102 Dalmatians: Puppies to the Rescue (Europe)](http://redump.org/disc/58589/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disney's 102 Dalmatians: Puppies to the Rescue (Scandinavia)](http://redump.org/disc/53874/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disney's Aventura Interactiva: Mulan (Spain)](http://redump.org/disc/17311/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disneys Interaktive Abenteuer: Mulan (Germany)](http://redump.org/disc/19124/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disney's Mulan: Story Studio (Europe)](http://redump.org/disc/6887/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disneys Tarzan (Denmark)](http://redump.org/disc/51711/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disney's Tarzan (Europe)](http://redump.org/disc/29818/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disneys Tarzan (Germany)](http://redump.org/disc/19124/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disneys Tarzan (Italy)](http://redump.org/disc/27824/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disneys Tarzan (Netherlands)](http://redump.org/disc/27067/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disney's Tarzan (Sweden)](http://redump.org/disc/6885/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Disney's The Emperor's New Grove (Europe)](http://redump.org/disc/7565/) | [APv2](#apv2) | Start a new game, after the first FMV on the first loading screen is when the check completes. | YES |
 | [Disney's The Emperor's New Grove (USA)](http://redump.org/disc/14583/) | [APv2](#apv2) | Start a new game, after the first FMV on the first loading screen is when the check completes. | YES |
-| [Disney's Verhalenstudio: Mulan (Netherlands)](http://redump.org/disc/27076/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disney Tarzan (France)](http://redump.org/disc/29462/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Disney Tarzan (Spain)](http://redump.org/disc/27287/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disney's Verhalenstudio: Mulan (Netherlands)](http://redump.org/disc/27076/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disney Tarzan (France)](http://redump.org/disc/29462/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Disney Tarzan (Spain)](http://redump.org/disc/27287/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Doko Demo Issho (Japan) (Demo 1)](http://redump.org/disc/6755/) | [APv1](#apv1) | Boot. | YES |
 | [Doko Demo Issho (Japan) (Demo 2)](http://redump.org/disc/83081/) | [APv1](#apv1) | Boot. | YES |
 | [Doko Demo Issho (Japan) (Rev 0)](http://redump.org/disc/1335/) | [APv1](#apv1) | Boot. | YES |
 | [Doko Demo Issho (Japan) (Rev 1)](http://redump.org/disc/20288/) | [APv1](#apv1) | Boot. | YES |
 | [Doko Demo Issho (Japan) (Water Calpis Version)](http://redump.org/disc/49161/) | [APv1](#apv1) | Boot. | YES |
-| [Eagle One: Harrier Attack (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/880/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [EA Sports Superbike 2000 (Europe) (En,Fr,De,Es,It,Sv)](http://redump.org/disc/26580/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Esto es Futbol (Spain)](http://redump.org/disc/25328/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Eagle One: Harrier Attack (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/880/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [EA Sports Superbike 2000 (Europe) (En,Fr,De,Es,It,Sv)](http://redump.org/disc/26580/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Esto es Futbol (Spain)](http://redump.org/disc/25328/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Exciting Bass 2 (Japan)](http://redump.org/disc/63487/) | [APv2](#apv2) | Boot. | YES |
 | [Exciting Bass 3 (Japan)](http://redump.org/disc/59734/) | [APv2](#apv2) | Boot. | YES |
-| [F1 2000 (Europe) (En,Es,Sv,Da,Fi)](http://redump.org/disc/6867/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [F1 2000 (Europe) (En,Fr,De,Nl)](http://redump.org/disc/4311/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [F1 2000 (Italy)](http://redump.org/disc/29597/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [F1 2000 (Europe) (En,Es,Sv,Da,Fi)](http://redump.org/disc/6867/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [F1 2000 (Europe) (En,Fr,De,Nl)](http://redump.org/disc/4311/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [F1 2000 (Italy)](http://redump.org/disc/29597/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Final Fantasy IX (Europe) (Disc 1)](http://redump.org/disc/2371/) | [LibCrypt](#libcrypt) | Boot. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Final Fantasy IX (Europe) (Disc 2)](http://redump.org/disc/2370/) | [LibCrypt](#libcrypt) | Boot. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Final Fantasy IX (Europe) (Disc 3)](http://redump.org/disc/2370/) | [LibCrypt](#libcrypt) | Boot. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
@@ -228,25 +228,26 @@ _List Notes:_
 | [Final Fantasy VIII (USA) (Disc 2)](http://redump.org/disc/70/) | None | - | - |
 | [Final Fantasy VIII (USA) (Disc 3)](http://redump.org/disc/71) | None | - | - |
 | [Final Fantasy VIII (USA) (Disc 4)](http://redump.org/disc/72/) | None | - | - |
-| [Football Manager Campionato 2001 (Italy)](http://redump.org/disc/29597/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Football Manager Campionato 2002 (Italy)](http://redump.org/disc/48369/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Football Manager Campionato 2001 (Italy)](http://redump.org/disc/29597/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Football Manager Campionato 2002 (Italy)](http://redump.org/disc/48369/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Formula One 99 (Europe) (En,Es,Fi)](http://redump.org/disc/31126/) | [LibCrypt](#libcrypt) | Loading a level crashes game. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Formula One 99 (Europe) (En,Fr,De,It) (Beta 9/9/1999)](http://redump.org/disc/64499/) | [LibCrypt](#libcrypt) | Loading a level crashes game. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Formula One 99 (Europe) (En,Fr,De,It)](http://redump.org/disc/969/) | [LibCrypt](#libcrypt) | Loading a level crashes game. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | Formula One 99 (Europe) (En,Fr,De,It) (prototype 8/12/1999) - find it on hiddenpalace, no redump page exists! | [LibCrypt](#libcrypt) | Loading a level crashes game. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Frontschweine (Germany)](http://redump.org/disc/19539/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Fussball Live (Germany)](http://redump.org/disc/4385/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Fussball Manager 2001 (Germany)](http://redump.org/disc/7516/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Galerians (Europe) (Disc 1)](http://redump.org/disc/7420/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Galerians (Europe) (Disc 2)](http://redump.org/disc/7421/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Galerians (Europe) (Disc 3)](http://redump.org/disc/7422/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Galerians (France) (Disc 1)](http://redump.org/disc/13382/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Galerians (France) (Disc 2)](http://redump.org/disc/13383/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Galerians (France) (Disc 3)](http://redump.org/disc/13384/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Galerians (Germany) (Disc 1)](http://redump.org/disc/7695/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Galerians (Germany) (Disc 2)](http://redump.org/disc/7696/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Galerians (Germany) (Disc 3)](http://redump.org/disc/7697/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Gekido: Urban Fighters (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/833/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Frontschweine (Germany)](http://redump.org/disc/19539/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Fussball Live (Germany)](http://redump.org/disc/4385/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Fussball Manager 2001 (Germany)](http://redump.org/disc/7516/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Galerians (Europe) (Disc 1)](http://redump.org/disc/7420/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Galerians (Europe) (Disc 2)](http://redump.org/disc/7421/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Galerians (Europe) (Disc 3)](http://redump.org/disc/7422/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Galerians (France) (Disc 1)](http://redump.org/disc/13382/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Galerians (France) (Disc 2)](http://redump.org/disc/13383/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Galerians (France) (Disc 3)](http://redump.org/disc/13384/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Galerians (Germany) (Disc 1)](http://redump.org/disc/7695/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Galerians (Germany) (Disc 2)](http://redump.org/disc/7696/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Galerians (Germany) (Disc 3)](http://redump.org/disc/7697/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [GeGeGe no Kitarou: Gyakushuu! Youma Daikessen (Japan)](http://redump.org/disc/4930/) | [APv2](#apv2) | Boot. | YES. |
+| [Gekido: Urban Fighters (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/833/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Gekitotsu Toma L'Arc - L'Arc en Ciel vs Tomarunner (Japan)](http://redump.org/disc/20715/) | [APv2](#apv2) | Boot. | YES |
 | [Glint Glitters (Japan)](http://redump.org/disc/15969/) | [APv2](#apv2) | Boot. | YES |
 | [Global Force: Shin Sentou Kokka (Japan) (Demo)](http://redump.org/disc/4819/) | [APv1](#apv1) | Boot. | YES |
@@ -260,8 +261,8 @@ _List Notes:_
 | [Guitar Freaks (Japan)](http://redump.org/disc/2277/) | [APv2](#apv2) | At the loading screen with the spinning guitars. | YES |
 | [Gungauge (Japan)](http://redump.org/disc/6328/) | [APv2](#apv2) | At the loading screen with the spinning guitars. | YES |
 | [Harlem Beat: You're The One (Japan)](http://redump.org/disc/36294/) | [APv2](#apv2) | First loading screen. | YES |
-| [Hogs of War (Europe)](http://redump.org/disc/703/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Hogs of War: Nati per Soffritto](http://redump.org/disc/48020/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Hogs of War (Europe)](http://redump.org/disc/703/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Hogs of War: Nati per Soffritto](http://redump.org/disc/48020/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Hyper Value 2800: Hanafuda (Japan)](http://redump.org/disc/15791/) | [APv2](#apv2) | Boot. | YES |
 | [Hyper Value 2800: Hyper Pachinko (Japan)](http://redump.org/disc/15792/) | [APv2](#apv2) | Boot. | YES |
 | [Hyper Value 2800: Mahjong (Japan)](http://redump.org/disc/15793/) | [APv2](#apv2) | Boot. | YES |
@@ -269,8 +270,8 @@ _List Notes:_
 | [I.Q Final (Japan) (Demo 1)](http://redump.org/disc/6649/) | [APv1](#apv1) | Boot. | YES |
 | [I.Q Final (Japan) (Demo 2)](http://redump.org/disc/32988/) | [APv1](#apv1) | Boot. | YES |
 | [I.Q Final (Japan)](http://redump.org/disc/1504/) | None | - | - |
-| [Jackie Chan Stuntmaster (Europe)](http://redump.org/disc/3985/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Jackie Chan Stuntmaster (Europe) (Recalled)](http://redump.org/disc/64315/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Jackie Chan Stuntmaster (Europe)](http://redump.org/disc/3985/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Jackie Chan Stuntmaster (Europe) (Recalled)](http://redump.org/disc/64315/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Jikkyou Kyousouba Ikusei Simulation Game: Breeding Stud '99 (Japan)](http://redump.org/disc/8762/) | [APv1](#apv1) | Boot. | YES |
 | [Jikkyou Powerful Pro Yakyuu 2000: Kaimakuban (Japan)](http://redump.org/disc/9553/) | [APv2](#apv2) | Boot. | YES |
 | [Jikkyou Powerful Pro Yakyuu 2000: Ketteiban (Japan)](http://redump.org/disc/11092/) | [APv2](#apv2) | Boot. | YES |
@@ -286,11 +287,11 @@ _List Notes:_
 | [Koko Hore! Pukka (Japan)](http://redump.org/disc/4812/) | [APv2](#apv2) | Boot. | YES |
 | [Konami 80's Arcade Gallery (Japan)](http://redump.org/disc/16955/) | [APv1](#apv1) | Boot. | YES |
 | [Koneko mo Issho (Japan)](http://redump.org/disc/6329/) | [APv2](#apv2), [PAL BIOS Detection](#pal-bios-detection) | Boot. | APv2 - YES. PAL Bios Detection - YES. |
-| [Legacy of Kain: Soul Reaver (Europe)](http://redump.org/disc/1177/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Legacy of Kain: Soul Reaver (Europe)](http://redump.org/disc/1177/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Legacy of Kain: Soul Reaver (France)](http://redump.org/disc/24279)
-| [Legacy of Kain: Soul Reaver (Germany)](http://redump.org/disc/393/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Legacy of Kain: Soul Reaver (Italy)](http://redump.org/disc/28167/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Legacy of Kain: Soul Reaver (Spain)](http://redump.org/disc/27944/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Legacy of Kain: Soul Reaver (Germany)](http://redump.org/disc/393/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Legacy of Kain: Soul Reaver (Italy)](http://redump.org/disc/28167/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Legacy of Kain: Soul Reaver (Spain)](http://redump.org/disc/27944/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Legend Of Dragoon (Europe) (Disc 1)](http://redump.org/disc/2379/) | [APv2](#apv2) | First loading screen. | YES |
 | [Legend Of Dragoon (Europe) (Disc 2)](http://redump.org/disc/2380/) | [APv2](#apv2) | First loading screen. | YES |
 | [Legend Of Dragoon (Europe) (Disc 3)](http://redump.org/disc/2381/) | [APv2](#apv2) | First loading screen. | YES |
@@ -317,62 +318,62 @@ _List Notes:_
 | [Legend Of Dragoon (USA) (Disc 4)](http://redump.org/disc/156/) | [APv2](#apv2) | First loading screen. | YES |
 | [Legend Of Mana (Japan)](http://redump.org/disc/1940/) | [APv2](#apv2) | Boot. | YES |
 | [Legend Of Mana (USA)](http://redump.org/disc/96/) | [APv2](#apv2) | Boot. | YES |
-| [Le Mans 24 Hours (Europe) (En,Fr,De,Es,It,Pt)](http://redump.org/disc/1659/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Le Monde des Bleus: Le Jeu Officiel de l'Équipe de France (France)](http://redump.org/disc/8346/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Les Cochons de Guerre (France) (Rev 0)](http://redump.org/disc/33070/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Les Cochons de Guerre (France) (Rev 1)](http://redump.org/disc/99695/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [LMA Manager 2001 (Europe) (Beta 02/26/2001)](http://redump.org/disc/92303/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [LMA Manager 2001 (Europe)](http://redump.org/disc/6847/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [LMA Manager 2002 (Europe)](http://redump.org/disc/26750/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Le Mans 24 Hours (Europe) (En,Fr,De,Es,It,Pt)](http://redump.org/disc/1659/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Le Monde des Bleus: Le Jeu Officiel de l'Équipe de France (France)](http://redump.org/disc/8346/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Les Cochons de Guerre (France) (Rev 0)](http://redump.org/disc/33070/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Les Cochons de Guerre (France) (Rev 1)](http://redump.org/disc/99695/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [LMA Manager 2001 (Europe) (Beta 02/26/2001)](http://redump.org/disc/92303/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [LMA Manager 2001 (Europe)](http://redump.org/disc/6847/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [LMA Manager 2002 (Europe)](http://redump.org/disc/26750/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Lord Of Monsters (Japan) (Demo)](http://redump.org/disc/68358/) | [APv1](#apv1) | Boot. | YES |
 | [Lord Of Monsters (Japan)](http://redump.org/disc/58023/) | [APv1](#apv1) | Boot. | YES |
 | [Love Hina 2: Kotoba wa Konayuki no You ni (Japan)](http://redump.org/disc/7370/) | [APv2](#apv2) | Boot. | YES |
 | [Love Hina: Ai wa Kotoba no Naka ni (Japan)](http://redump.org/disc/7369/) | [APv2](#apv2) | Boot. | YES |
-| [Lucky Luke: Western Fever (Europe) (En,Fr,De,Es,It,Nl)](http://redump.org/disc/19142/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Lucky Luke: Western Fever (Europe) (En,Fr,De,Es,It,Nl)](http://redump.org/disc/19142/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Magical Tetris Challenge featuring Mickey (Japan)](http://redump.org/disc/19170/) | [APv1](#apv1) | Boot. | YES |
-| [Manager de Liga 2001 (Spain)](http://redump.org/disc/48045/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Manager de Liga 2002 (Spain)](http://redump.org/disc/48045/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Manager de Liga (Spain) (Beta)](http://redump.org/disc/3413/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Marranos en Guerra (Spain)](http://redump.org/disc/48791/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Manager de Liga 2001 (Spain)](http://redump.org/disc/48045/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Manager de Liga 2002 (Spain)](http://redump.org/disc/48045/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Manager de Liga (Spain) (Beta)](http://redump.org/disc/3413/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Marranos en Guerra (Spain)](http://redump.org/disc/48791/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Marvel vs. Capcom: Clash of Super Heroes (Europe)](http://redump.org/disc/3910/) | None | - | - |
 | [Marvel vs. Capcom: Clash of Super Heroes (Japan) (Demo)](http://redump.org/disc/60646/) | [APv2](#apv2) | Boot. | YES |
 | [Marvel vs. Capcom: Clash of Super Heroes (Japan)](http://redump.org/disc/36384/) | [APv2](#apv2) | Boot. | YES |
 | [Marvel vs. Capcom: Clash of Super Heroes (USA)](http://redump.org/disc/1235/) | None | - | - |
-| [MediEvil 2 (Europe) (En,Fr,De)](http://redump.org/disc/593/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [MediEvil 2 (Europe) (Es,It,Pt)](http://redump.org/disc/1547/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [MediEvil 2 (Russia)](http://redump.org/disc/2625/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [MediEvil (Europe)](http://redump.org/disc/592/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [MediEvil (France)](http://redump.org/disc/13389/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [MediEvil (Germany)](http://redump.org/disc/25542/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [MediEvil 2 (Europe) (En,Fr,De)](http://redump.org/disc/593/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [MediEvil 2 (Europe) (Es,It,Pt)](http://redump.org/disc/1547/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [MediEvil 2 (Russia)](http://redump.org/disc/2625/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [MediEvil (Europe)](http://redump.org/disc/592/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [MediEvil (France)](http://redump.org/disc/13389/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [MediEvil (Germany)](http://redump.org/disc/25542/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [MediEvil II (Europe) (Demo)](http://redump.org/disc/45822/) | None | - | - |
 | [MediEvil II (Europe) (Rev 0)](http://redump.org/disc/593/) | None | - | - |
 | [MediEvil II (Europe) (Rev 1)](http://redump.org/disc/1547/) | None | - | - |
 | [MediEvil II (USA)](http://redump.org/disc/2503/) | [APv2](#apv2) | At the Whitechapel level loading screen (quite far in the game). | YES |
-| [MediEvil (Italy)](http://redump.org/disc/29475/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [MediEvil (Spain)](http://redump.org/disc/1584/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Men in Black: The Series: Crashdown (Europe)](http://redump.org/disc/30764/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Men in Black: The Series: Crashdown (France)](http://redump.org/disc/28185/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Men in Black: The Series: Crashdown (Germany)](http://redump.org/disc/17711/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Men in Black: The Series: Crashdown (Italy)](http://redump.org/disc/28025/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Men in Black: The Series: Crashdown (Spain)](http://redump.org/disc/27937/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [MediEvil (Italy)](http://redump.org/disc/29475/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [MediEvil (Spain)](http://redump.org/disc/1584/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Men in Black: The Series: Crashdown (Europe)](http://redump.org/disc/30764/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Men in Black: The Series: Crashdown (France)](http://redump.org/disc/28185/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Men in Black: The Series: Crashdown (Germany)](http://redump.org/disc/17711/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Men in Black: The Series: Crashdown (Italy)](http://redump.org/disc/28025/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Men in Black: The Series: Crashdown (Spain)](http://redump.org/disc/27937/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Metal Gear Solid: Integral (Japan) (Disc 1)](http://redump.org/disc/423/) | [APv1](#apv1) | Boot. | YES |
 | [Metal Gear Solid: Integral (Japan) (Disc 2)](http://redump.org/disc/424/) | [APv1](#apv1) | Boot. | YES |
 | [Metal Gear Solid: Integral (Japan) (Disc 3)](http://redump.org/disc/426/) | [APv1](#apv1) | Boot. | YES |
-| [Michelin Rally Masters: Race of Champions (Europe) (En,De,Sv)](http://redump.org/disc/25913/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Michelin Rally Masters: Race of Champions (Europe) (Fr,Es,It)](http://redump.org/disc/28160/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Mike Tyson Boxing (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/5823/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Michelin Rally Masters: Race of Champions (Europe) (En,De,Sv)](http://redump.org/disc/25913/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Michelin Rally Masters: Race of Champions (Europe) (Fr,Es,It)](http://redump.org/disc/28160/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Mike Tyson Boxing (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/5823/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Minna no Golf 2 / Everybody's Golf 2 (Europe)](http://redump.org/disc/19905/) | None | Boot. | YES |
 | [Minna no Golf 2 / Everybody's Golf 2 (Japan) (Rev 0)](http://redump.org/disc/2290/) | [APv2](#apv2) | Boot. | YES |
 | [Minna no Golf 2 / Everybody's Golf 2 (Japan) (Rev 1)](http://redump.org/disc/2291/) | [APv2](#apv2) | Boot. | YES |
-| [Mission: Impossible (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/1176/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Mission: Impossible (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/1176/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [MLB 2002 (USA) (Demo)](http://redump.org/disc/43238/) | [APv2](#apv2) | First loading screen. | YES |
 | [MLB 2002 (USA)](http://redump.org/disc/826/) | [APv2](#apv2) | First loading screen. | YES |
 | [MLB 2003 (USA) (Demo)](http://redump.org/disc/50864/) | [APv2](#apv2) | First loading screen. | YES |
 | [MLB 2003 (USA)](http://redump.org/disc/16660/) | [APv2](#apv2) | First loading screen. | YES |
 | [MLB 2004 (USA)](http://redump.org/disc/15325/) | [APv2](#apv2) | First loading screen. | YES |
 | [MLB 2005 (USA)](http://redump.org/disc/7212/) | [APv2](#apv2) | First loading screen. | YES |
-| [MoHo (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/15091/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Monde des Bleus, Le: Le jeu officiel de l'equipe de France (France)](http://redump.org/disc/8346/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [MoHo (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/15091/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Monde des Bleus, Le: Le jeu officiel de l'equipe de France (France)](http://redump.org/disc/8346/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [My Garden (Japan)](http://redump.org/disc/8300/) | [APv2](#apv2) | Boot. | YES |
 | [NBA Shootout 2001 (USA) (Demo)](http://redump.org/disc/42465/) | [APv2](#apv2) | At the end of the first loading screen. | YES |
 | [NBA Shootout 2001 (USA)](http://redump.org/disc/16764/) | [APv2](#apv2) | At the end of the first loading screen. | YES |
@@ -383,40 +384,40 @@ _List Notes:_
 | [NCAA Final Four 2001 (USA)](http://redump.org/disc/16765/) | [APv2](#apv2) | First loading screen. | YES |
 | [NCAA Game Breaker 2001 (USA) (Demo)](http://redump.org/disc/43879/) | [APv2](#apv2) | Second loading screen. | YES |
 | [NCAA Game Breaker 2001 (USA)](http://redump.org/disc/14374/) | [APv2](#apv2) | Second loading screen. | YES |
-| [Need for Speed: Porsche 2000 (Europe) (En,De,Sv)](http://redump.org/disc/622/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Need for Speed: Porsche 2000 (Europe) (Fr,Es,It)](http://redump.org/disc/3933/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Need for Speed: Porsche 2000 (Europe) (En,De,Sv)](http://redump.org/disc/622/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Need for Speed: Porsche 2000 (Europe) (Fr,Es,It)](http://redump.org/disc/3933/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [NFL GameDay 2001 (USA) (Demo)](http://redump.org/disc/50868/) | [APv2](#apv2) | First loading screen. |  YES |
 | [NFL GameDay 2001 (USA)](http://redump.org/disc/21065/) | [APv2](#apv2) | First loading screen. | YES |
 | [NFL GameDay 2002 (USA)](http://redump.org/disc/2725/) | [APv2](#apv2) | First loading screen. | YES |
 | [NFL GameDay 2003 (USA)](http://redump.org/disc/13364/) | [APv2](#apv2) | Third loading screen. | YES |
 | [NFL GameDay 2004 (USA)](http://redump.org/disc/14523/) | [APv2](#apv2) | Third loading screen. | YES |
 | [NFL GameDay 2005 (USA)](http://redump.org/disc/15995/) | [APv2](#apv2) | Third loading screen. | YES |
-| [N-Gen Racing (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/1010/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [N-Gen Racing (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/1010/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [NHL FaceOff 2001 (USA) (Demo)](http://redump.org/disc/43880/) | [APv2](#apv2) | When the main menu starts. | YES |
 | [NHL FaceOff 2001 (USA)](http://redump.org/disc/12934/) | [APv2](#apv2) | When the main menu starts. | YES |
 | [Oha-Studio Dance Dance Revolution (Japan)](http://redump.org/disc/33938/) | [APv2](#apv2) | Boot. | YES |
 | [Ore no Ryouri / My Cooking (Japan)](http://redump.org/disc/39643/) | [APv2](#apv2) | Boot. | YES |
 | [Ore no Shikabane o Koete Yuke (Japan) (Demo)](http://redump.org/disc/82897/) | None | - | - |
 | [Ore no Shikabane o Koete Yuke (Japan)](http://redump.org/disc/3983/) | [APv2](#apv2) | Start a new game and proceed through the beginning intro text, it is quite a bit to go through to see it trigger. Once you finish making your character it will trigger, google translate is your friend here. | YES |
-| [OverBlood 2 (Europe) (Disc 1) (v1.0)](http://redump.org/disc/26606/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [OverBlood 2 (Europe) (Disc 2) (v1.0)](http://redump.org/disc/26607/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [OverBlood 2 (Italy) (Disc 1)](http://redump.org/disc/35017/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [OverBlood 2 (Italy) (Disc 2)](http://redump.org/disc/35018/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [OverBlood 2 (Europe) (Disc 1) (v1.0)](http://redump.org/disc/26606/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [OverBlood 2 (Europe) (Disc 2) (v1.0)](http://redump.org/disc/26607/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [OverBlood 2 (Italy) (Disc 1)](http://redump.org/disc/35017/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [OverBlood 2 (Italy) (Disc 2)](http://redump.org/disc/35018/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Panekit: Infinitive Crafting Toy Case (Japan) (Rev 0)](http://redump.org/disc/5364/) | [APv1](#apv1) | Boot. | YES |
 | [Panekit: Infinitive Crafting Toy Case (Japan) (Rev 1)](http://redump.org/disc/75024/) | [APv1](#apv1) | Boot. | YES |
-| [Parasite Eve II (Europe) (Disc 1)](http://redump.org/disc/118/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Parasite Eve II (Europe) (Disc 2)](http://redump.org/disc/119/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Parasite Eve II (France) (Disc 1)](http://redump.org/disc/13381/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Parasite Eve II (France) (Disc 2)](http://redump.org/disc/13380/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Parasite Eve II (Germany) (Disc 1)](http://redump.org/disc/4307/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Parasite Eve II (Germany) (Disc 2)](http://redump.org/disc/4308/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Parasite Eve II (Italy) (Disc 1)](http://redump.org/disc/29442/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Parasite Eve II (Italy) (Disc 2)](http://redump.org/disc/29443/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Parasite Eve II (Spain) (Disc 1)](http://redump.org/disc/1122/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Parasite Eve II (Spain) (Disc 2)](http://redump.org/disc/1123/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [PGA European Tour Golf (Europe) (En,De)](http://redump.org/disc/772/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [PGA European Tour Golf (Fr, It, Es) (Alt) (Europe)](http://redump.org/disc/56471/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [PGA European Tour Golf (Fr, It, Es) (Europe)](http://redump.org/disc/46131/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Parasite Eve II (Europe) (Disc 1)](http://redump.org/disc/118/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Parasite Eve II (Europe) (Disc 2)](http://redump.org/disc/119/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Parasite Eve II (France) (Disc 1)](http://redump.org/disc/13381/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Parasite Eve II (France) (Disc 2)](http://redump.org/disc/13380/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Parasite Eve II (Germany) (Disc 1)](http://redump.org/disc/4307/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Parasite Eve II (Germany) (Disc 2)](http://redump.org/disc/4308/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Parasite Eve II (Italy) (Disc 1)](http://redump.org/disc/29442/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Parasite Eve II (Italy) (Disc 2)](http://redump.org/disc/29443/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Parasite Eve II (Spain) (Disc 1)](http://redump.org/disc/1122/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Parasite Eve II (Spain) (Disc 2)](http://redump.org/disc/1123/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [PGA European Tour Golf (Europe) (En,De)](http://redump.org/disc/772/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [PGA European Tour Golf (Fr, It, Es) (Alt) (Europe)](http://redump.org/disc/56471/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [PGA European Tour Golf (Fr, It, Es) (Europe)](http://redump.org/disc/46131/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Planet Laika (Japan)](http://redump.org/disc/75024/) | [APv1](#apv1) | Boot. | YES. **TONYHAX INTERNATIONAL GAMESHARK CODE FEATURES CAN NOT BE USED WITH THE ENGLISH TRANSLATION PATCHED GAME DISC**. The translation uses the same memory for that feature. GameShark codes with the original Japanese release has no issues. |
 | [Pocket Jiman (Japan)](http://redump.org/disc/3189/) | [APv2](#apv2) | Boot. | YES |
 | [Pocket MuuMuu (Japan)](http://redump.org/disc/16166/) | [APv1](#apv1) | Boot. | YES |
@@ -432,16 +433,16 @@ _List Notes:_
 | [PoPoRoGue (Japan) (Demo)](http://redump.org/disc/35068/) | None | - | - |
 | [PoPoRoGue (Japan) (Rev 0)](http://redump.org/disc/1552/) | [APv1](#apv1) | Boot. | YES |
 | [PoPoRoGue (Japan) (Rev 1)](http://redump.org/disc/8313/) | [APv1](#apv1) | Boot. | YES |
-| [Premier Manager 2000 (Europe)](http://redump.org/disc/3619/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Prince Naseem Boxing (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/3309/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Radikal Bikers (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/25908/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [RC Revenge (Europe) (En,Fr,De,Es)](http://redump.org/disc/5127/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Resident Evil 3: Nemesis (Europe)](http://redump.org/disc/496/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Resident Evil 3: Nemesis (France)](http://redump.org/disc/9753/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Resident Evil 3: Nemesis (Germany)](http://redump.org/disc/5526/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Resident Evil 3: Nemesis (Ireland)](http://redump.org/disc/28197/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Resident Evil 3: Nemesis (Italy)](http://redump.org/disc/16397/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Resident Evil 3: Nemesis (Spain)](http://redump.org/disc/1387/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Premier Manager 2000 (Europe)](http://redump.org/disc/3619/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Prince Naseem Boxing (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/3309/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Radikal Bikers (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/25908/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [RC Revenge (Europe) (En,Fr,De,Es)](http://redump.org/disc/5127/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Resident Evil 3: Nemesis (Europe)](http://redump.org/disc/496/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Resident Evil 3: Nemesis (France)](http://redump.org/disc/9753/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Resident Evil 3: Nemesis (Germany)](http://redump.org/disc/5526/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Resident Evil 3: Nemesis (Ireland)](http://redump.org/disc/28197/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Resident Evil 3: Nemesis (Italy)](http://redump.org/disc/16397/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Resident Evil 3: Nemesis (Spain)](http://redump.org/disc/1387/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Resident Evil 3: The Last Escape (Europe) (Demo)](http://redump.org/disc/9463/) | None | - | - |
 | [Resident Evil 3: The Last Escape (Europe)](http://redump.org/disc/496/) | None | - | - |
 | [Resident Evil 3: The Last Escape (France)](http://redump.org/disc/9753/) | None | - | - |
@@ -467,12 +468,12 @@ _List Notes:_
 | [Rockman (Japan)](http://redump.org/disc/6091/) | [APv2](#apv2) | Boot. | YES |
 | [Rockman X5 (Japan)](http://redump.org/disc/4779/) | [APv2](#apv2) | Boot. | YES |
 | [Rockman X6 (Japan)](http://redump.org/disc/4778/) | [APv2](#apv2) | Boot. | YES |
-| [Roger Lemerre: La Sélection des Champions 2002 (France)](http://redump.org/disc/49266/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Roger Lemerre: La Sélection des Champions 2002 (France)](http://redump.org/disc/49266/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Ronaldo V-Football (Europe) (De,Es,It,Pt)](http://redump.org/disc/7755)
-| [Ronaldo V-Football (Europe) (En,Fr,Nl,Sv)](http://redump.org/disc/17746/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [SaGa Frontier 2 (Europe)](http://redump.org/disc/280/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [SaGa Frontier 2 (France)](http://redump.org/disc/28278/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [SaGa Frontier 2 (Germany)](http://redump.org/disc/2605/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Ronaldo V-Football (Europe) (En,Fr,Nl,Sv)](http://redump.org/disc/17746/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [SaGa Frontier 2 (Europe)](http://redump.org/disc/280/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [SaGa Frontier 2 (France)](http://redump.org/disc/28278/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [SaGa Frontier 2 (Germany)](http://redump.org/disc/2605/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [SaGa Frontier II (Japan)](http://redump.org/disc/1605/) | [APv1](#apv1) | Boot. | YES |
 | [SaGa Frontier II (USA)](http://redump.org/disc/1535/) | None | - | - |
 | [Saru! Get You!/Ape Escape (Europe) (Demo)](http://redump.org/disc/995/) | None | - | - |
@@ -492,15 +493,15 @@ _List Notes:_
 | [Silent Hill (Japan) (Rev 0)](http://redump.org/disc/134/) | [APv1](#apv1) | Boot. | YES |
 | [Silent Hill (Japan) (Rev 1)](http://redump.org/disc/82898/) | [APv1](#apv1) | Boot. | YES |
 | [Silent Hill (Japan) (Rev 2)](http://redump.org/disc/18251/) | [APv1](#apv1) | Boot. | YES |
-| [SnoCross Championship Racing (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/3705/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Space Debris (Europe)](http://redump.org/disc/29918/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Space Debris (France)](http://redump.org/disc/29512/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Space Debris (Germany) (Beta 11/11/1999)](http://redump.org/disc/85814/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Space Debris (Germany)](http://redump.org/disc/20213/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Space Debris (Italy)](http://redump.org/disc/29592/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Space Debris (Spain)](http://redump.org/disc/48046/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Speed Freaks (Europe)](http://redump.org/disc/1250/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Spyro 2: Gateway to Glimmer (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/1250/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [SnoCross Championship Racing (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/3705/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Space Debris (Europe)](http://redump.org/disc/29918/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Space Debris (France)](http://redump.org/disc/29512/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Space Debris (Germany) (Beta 11/11/1999)](http://redump.org/disc/85814/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Space Debris (Germany)](http://redump.org/disc/20213/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Space Debris (Italy)](http://redump.org/disc/29592/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Space Debris (Spain)](http://redump.org/disc/48046/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Speed Freaks (Europe)](http://redump.org/disc/1250/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Spyro 2: Gateway to Glimmer (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/1250/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Spyro The Dragon (Japan) (Demo)](http://redump.org/disc/68768/) | [APv1](#apv1) | Immediately after the universal logo. | YES |
 | [Spyro The Dragon (Japan)](http://redump.org/disc/42739/) | [APv1](#apv1) |Immediately after the universal logo. | YES |
 | [Spyro The Dragon (Japan) (Shokai Genteiban)](http://redump.org/disc/11432/) | [APv1](#apv1) | Immediately after the universal logo. | YES |
@@ -515,28 +516,28 @@ _List Notes:_
 | [Street Fighter EX2 Plus (USA)](http://redump.org/disc/1233/) | None | - | - |
 | [Strider 2 (Europe)](http://redump.org/disc/3917/) | None | - | - |
 | [Strider 2 (USA)](http://redump.org/disc/1231/) | [APv2](#apv2) | Boot. | YES |
-| [Sydney 2000 (Australia)](http://redump.org/disc/62664/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Sydney 2000 (Europe)](http://redump.org/disc/7460/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Sydney 2000 (France)](http://redump.org/disc/15759/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Sydney 2000 (Germany)](http://redump.org/disc/15759/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Sydney 2000 (Spain)](http://redump.org/disc/27884/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [TechnoMage: De Terugkeer der Eeuwigheid (Netherlands)](http://redump.org/disc/27310/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [TechnoMage: Die Rueckkehr der Ewigkeit (Germany)](http://redump.org/disc/25284/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Technomage: El Retorno de la Eternidad (Spain)](http://redump.org/disc/49569/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [TechnoMage: En Quete de L'Eternite (France)](http://redump.org/disc/27310/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [TechnoMage: Return of Eternity (Europe)](http://redump.org/disc/12627/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [TechnoMage: Ritorno all'Eternità (Italy)](http://redump.org/disc/46130/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [The F.A. Premier League Football Manager 2001 (Europe)](http://redump.org/disc/6867/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [The Italian Job (Europe) (Fr,De,Es)](http://redump.org/disc/5819/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [The Italian Job (Europe)](http://redump.org/disc/617/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [The Italian Job (Italy)](http://redump.org/disc/47605/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Theme Park World (Europe) (En,Fr,De,Es,It,Nl,Sv)](http://redump.org/disc/910/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Sydney 2000 (Australia)](http://redump.org/disc/62664/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Sydney 2000 (Europe)](http://redump.org/disc/7460/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Sydney 2000 (France)](http://redump.org/disc/15759/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Sydney 2000 (Germany)](http://redump.org/disc/15759/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Sydney 2000 (Spain)](http://redump.org/disc/27884/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [TechnoMage: De Terugkeer der Eeuwigheid (Netherlands)](http://redump.org/disc/27310/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [TechnoMage: Die Rueckkehr der Ewigkeit (Germany)](http://redump.org/disc/25284/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Technomage: El Retorno de la Eternidad (Spain)](http://redump.org/disc/49569/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [TechnoMage: En Quete de L'Eternite (France)](http://redump.org/disc/27310/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [TechnoMage: Return of Eternity (Europe)](http://redump.org/disc/12627/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [TechnoMage: Ritorno all'Eternità (Italy)](http://redump.org/disc/46130/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [The F.A. Premier League Football Manager 2001 (Europe)](http://redump.org/disc/6867/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [The Italian Job (Europe) (Fr,De,Es)](http://redump.org/disc/5819/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [The Italian Job (Europe)](http://redump.org/disc/617/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [The Italian Job (Italy)](http://redump.org/disc/47605/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Theme Park World (Europe) (En,Fr,De,Es,It,Nl,Sv)](http://redump.org/disc/910/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [This Is Football (Europe) (Fr,Nl)](http://redump.org/disc/19757/) | [LibCrypt](#libcrypt) | After starting a game with two teams selected the loading bar gets stuck at approximately 80-85%. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [This Is Football (Europe)](http://redump.org/disc/4004/) | [LibCrypt](#libcrypt) | After starting a game with two teams selected the loading bar gets stuck at approximately 80-85%. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [This Is Football (Italy)](http://redump.org/disc/28048/) | [LibCrypt](#libcrypt) | After starting a game with two teams selected the loading bar gets stuck at approximately 80-85%. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [This Is Soccer (Australia)](http://redump.org/disc/46676/) | [LibCrypt](#libcrypt) | After starting a game with two teams selected the loading bar gets stuck at approximately 80-85%. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [TOCA World Touring Cars (Europe) (En,Fr,De)](http://redump.org/disc/615/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [TOCA World Touring Cars (Europe) (Es,It)](http://redump.org/disc/27567/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [TOCA World Touring Cars (Europe) (En,Fr,De)](http://redump.org/disc/615/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [TOCA World Touring Cars (Europe) (Es,It)](http://redump.org/disc/27567/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Tokimeki Memorial 2 Emotional Voice System Append Disc (Disc 1) (Minadzuki - Kotobuki - Sakura) (Japan)](http://redump.org/disc/53927/) | [APv2](#apv2) | Boot. | YES |
 | [Tokimeki Memorial 2 Emotional Voice System Append Disc (Disc 2) (Akai - Ichimonji - Yae) (Japan)](http://redump.org/disc/53945/) | [APv2](#apv2) | Boot. | YES |
 | [Tokimeki Memorial 2 Emotional Voice System Append Disc (Disc 3) (Shirayuki - Ijuin - Nozaki) (Japan)](http://redump.org/disc/53946/) | [APv2](#apv2) | Boot. | YES |
@@ -567,30 +568,30 @@ _List Notes:_
 | [Tombi! 2 (Germany)](http://redump.org/disc/25235/) | None | - | - |
 | [Tombi! 2 (Italy)](http://redump.org/disc/41369/) | None | - | - |
 | [Tron ni Kobun (Japan) ](http://redump.org/disc/10765/) | [APv2](#apv2) | Before first now loading screen. | YES |
-| [UEFA Euro 2000 (Europe)](http://redump.org/disc/1793/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [UEFA Euro 2000 (France)](http://redump.org/disc/28153/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [UEFA Euro 2000 (Germany)](http://redump.org/disc/5528/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [UEFA Euro 2000 (Italy)](http://redump.org/disc/28346/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [UEFA Euro 2000 (Spain)](http://redump.org/disc/50591/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [UEFA Striker (Europe) (En,Fr,De,Es,It,Nl)](http://redump.org/disc/7446/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [UEFA Euro 2000 (Europe)](http://redump.org/disc/1793/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [UEFA Euro 2000 (France)](http://redump.org/disc/28153/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [UEFA Euro 2000 (Germany)](http://redump.org/disc/5528/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [UEFA Euro 2000 (Italy)](http://redump.org/disc/28346/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [UEFA Euro 2000 (Spain)](http://redump.org/disc/50591/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [UEFA Striker (Europe) (En,Fr,De,Es,It,Nl)](http://redump.org/disc/7446/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Um Jammer Lammy (Europe)](http://redump.org/disc/5510/) | [APv1](#apv1) | After `Sony Computer Entertainment Presents` screen. | YES |
 | [Um Jammer Lammy (Japan)](http://redump.org/disc/3582/) | [APv1](#apv1) |  After `Sony Computer Entertainment Presents` screen. | YES |
 | [Um Jammer Lammy (Japan) (Tentou Houei-you)](http://redump.org/disc/97015/) | None | - | - |
 | [Um Jammer Lammy (USA) (Demo)](http://redump.org/disc/10990/) | [APv1](#apv1) |  After `Sony Computer Entertainment Presents` screen. | YES |
 | [Um Jammer Lammy (USA)](http://redump.org/disc/1399/) | None | - | - |
-| [Urban Chaos (Europe) (En,Es,It)](http://redump.org/disc/618/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Urban Chaos (France)](http://redump.org/disc/50247/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Urban Chaos (Germany)](http://redump.org/disc/17768/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Vagrant Story (Europe)](http://redump.org/disc/9978/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Vagrant Story (France)](http://redump.org/disc/12636/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Vagrant Story (Germany)](http://redump.org/disc/548/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Urban Chaos (Europe) (En,Es,It)](http://redump.org/disc/618/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Urban Chaos (France)](http://redump.org/disc/50247/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Urban Chaos (Germany)](http://redump.org/disc/17768/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Vagrant Story (Europe)](http://redump.org/disc/9978/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Vagrant Story (France)](http://redump.org/disc/12636/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Vagrant Story (Germany)](http://redump.org/disc/548/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Vandal Harts II  (Europe)](http://redump.org/disc/4854/) | None | - | - |
 | [Vandal Harts II  (Italy)](http://redump.org/disc/4854/) | None | - | - |
 | [Vandal Harts II  (Spain)](http://redump.org/disc/4854/) | None | - | - |
 | [Vandal Harts II: Tenjou no Mon (Japan)](http://redump.org/disc/4854/) | [APv1](#apv1) | Boot. | YES |
 | [Vandal Harts II (USA)](http://redump.org/disc/1550/) | [APv2](#apv2) | Boot. | YES |
 | [V-Rally: Championship Edition 2 (Europe) (En,Fr,De)](http://redump.org/disc/1063/) | [LibCrypt](#libcrypt) | After choosing your car and game mode, the game will permanently get stuck on the loading screen with the ECG patterns and heartbeats played consistently. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Walt Disney World Quest: Magical Racing Tour (Europe) (En,Fr,De,Es,It,Nl,Sv,No,Da)](http://redump.org/disc/1848/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Walt Disney World Quest: Magical Racing Tour (Europe) (En,Fr,De,Es,It,Nl,Sv,No,Da)](http://redump.org/disc/1848/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [Wild Arms II (Japan) (Demo 1)](http://redump.org/disc/4799/) | [APv1](#apv1) | `MEDIAVISION` logo after Boot. | YES |
 | [Wild Arms II (Japan) (Demo 2)](http://redump.org/disc/74502/) | [APv1](#apv1) | `MEDIAVISION` logo after Boot. | YES |
 | [Wild Arms II (Japan) (Rev 0) (Disc 1)](http://redump.org/disc/3924/) | [APv1](#apv1) | `MEDIAVISION` logo after Boot. | YES |
@@ -598,7 +599,7 @@ _List Notes:_
 | [Wild Arms II (USA) (Demo)](http://redump.org/disc/42466/) | [APv2](#apv2) | `MEDIAVISION` logo after Boot. | YES |
 | [Wild Arms II (USA) (Disc 1)](http://redump.org/disc/171/) | [APv2](#apv2) | `MEDIAVISION` logo after Boot. | YES |
 | [Wild Arms II (USA) (Disc 2)](http://redump.org/disc/172/) | [APv2](#apv2) | `MEDIAVISION` logo after Boot. | YES |
-| [Wip3out (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/355/) | [LibCrypt](#libcrypt) | Unknown | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Wip3out (Europe) (En,Fr,De,Es,It)](http://redump.org/disc/355/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
 | [World Soccer Jikkyou Winning Eleven 4 (Japan) (Rev 0)](http://redump.org/disc/4934/) | [APv2](#apv2) | As soon as the Japan Olympic Committee screen appears. | YES |
 | [World Soccer Jikkyou Winning Eleven 4 (Japan) (Rev 1)](http://redump.org/disc/6889/) | [APv2](#apv2) | As soon as the Japan Olympic Committee screen appears. | YES |
 | [XI[SAI] Jumbo (Japan)](http://redump.org/disc/8372/) | [APv2](#apv2) | Boot. | YES |

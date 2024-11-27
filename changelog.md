@@ -1,5 +1,72 @@
 # [Tonyhax International](readme.md) -> Changelog
 
+## Table Of Contents
+* [Version 1.5.8 (10/10/2024)](#version-158-10102024)
+* [Version 1.5.7 (10/7/2024)](#version-157-1072024)
+* [Version 1.5.6 (10/6/2024)](#version-156-1062024)
+* [Version 1.5.5 (9/27/2024)](#version-155-9272024)
+* [Version 1.5.4 (9/16/2024)](#version-154-9162024)
+* [Version 1.5.3 (9/2/2024)](#version-153-922024)
+* [Version 1.5.2 (6/12/2024)](#version-152-6122024)
+* [Version 1.5.1 (6/3/2024)](#version-151-632024)
+* [Version 1.5.0 (5/28/2024)](#version-150-5282024)
+* [Version 1.4.9 (5/21/2024)](#version-149-5212024)
+* [Version 1.4.8 (5/1/2024)](#version-148-512024)
+* [Version 1.4.7 (4/8/2024)](#version-147-482024)
+* [Version 1.4.6 (12/16/2023)](#version-146-12162023)
+* [Version 1.4.5 (11/25/2023)](#version-145-11252023)
+* [Version 1.4.4 (11/15/2023)](#version-144-11152023)
+* [Version 1.4.3 (10/21/2023)](#version-143-10212023)
+* [Version 1.4.2 (10/2/2023)](#version-142-1022023)
+* [Version 1.4.1 (9/15/2023)](#version-141-9152023)
+* [Version 1.4.0 (9/7/2023)](#version-140-972023)
+* [Version 1.3.9 (9/2/2023)](#version-139-922023)
+* [Version 1.3.8 (9/2/2023)](#version-138-922023)
+* [Version 1.3.7 (8/1/2023)](#version-137-812023)
+* [Version 1.3.6 (7/26/2023)](#version-136-7262023)
+* [Version 1.3.5 (6/16/2023)](#version-135-6162023)
+* [Version 1.3.4 (6/14/2023)](#version-134-6142023)
+* [Version 1.3.3 (6/5/2023)](#version-133-652023)
+* [Version 1.3.2 (6/3/2023)](#version-132-632023)
+* [Version 1.3.1 (5/28/2023)](#version-131-5282023)
+* [Version 1.3.0 (5/27/2023)](#version-130-5272023)
+* [Version 1.2.9 (5/24/2023)](#version-129-5242023)
+* [Version 1.2.8 (5/19/2023)](#version-128-5192023)
+* [Version 1.2.7 (5/17/2023)](#version-127-5172023)
+* [Version 1.2.6 (5/7/2023)](#version-126-572023)
+* [Version 1.2.5 (5/4/2023)](#version-125-542023)
+* [Version 1.2.4 (4/30/2023)](#version-124-4302023)
+* [Version 1.2.3 (4/28/2023)](#version-123-4282023)
+* [Version 1.2.2 (4/26/2023)](#version-122-4262023)
+* [Version 1.2.1 (3/28/2023)](#version-121-3282023)
+* [Version 1.2.0 (3/17/2023)](#version-120-3172023)
+* [Version 1.1.9 (3/9/2023)](#version-119-392023)
+* [Version 1.1.8 (1/11/2023)](#version-118-1112023)
+* [Version 1.1.7 (1/3/2023)](#version-117-132023)
+* [Version 1.1.6 (12/10/2022)](#version-116-12102022)
+* [Version 1.1.5 (12/3/2022)](#version-115-1232022)
+* [Version 1.1.4 (12/2/2022)](#version-114-1222022)
+* [Version 1.1.3 (11/30/2022)](#version-113-11302022)
+* [Version 1.1.2 (11/9/2022)](#version-112-1192022)
+* [Version 1.1.1 (10/29/2022)](#version-111-10292022)
+* [Version 1.1.0 (9/25/2022)](#version-110-9252022)
+* [Version 1.0.8 (8/26/2022)](#version-108-8262022)
+* [Version 1.0.7 (8/7/2022)](#version-107-872022)
+* [Version 1.0.6 (8/3/2022)](#version-106-832022)
+* [Version 1.0.5 (7/27/2022)](#version-105-7272022)
+* [Version 1.0.4 (7/23/2022)](#version-104-7232022)
+
+## Version 1.5.8 (10/10/2024)
+
+* [tonyhax-international-v1.5.8](https://github.com/alex-free/tonyhax/releases/download/v1.5.8i/tonyhax-international-v1.5.8.zip)
+
+----------------------------------
+
+Changes:
+
+* The loader now resets memory card/controller polling to a clean state during initial start up. This fixes a bug that caused the [ROM entrypoint](flashed-cheat-cart.md) to not detect GameID devices, since the BIOS is initializing the memory cards and controllers so close to the loader taking over execution from the BIOS. Thank you [@kimbapslice](https://github.com/kimbapslice) for bringing this [bug](https://github.com/alex-free/tonyhax/issues/69) to my attention and testing the fixes.
+
+
 ## Version 1.5.7 (10/7/2024)
 
 * [tonyhax-international-v1.5.7](https://github.com/alex-free/tonyhax/releases/download/v1.5.7i/tonyhax-international-v1.5.7.zip)

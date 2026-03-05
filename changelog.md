@@ -1,6 +1,8 @@
 # [Tonyhax International](readme.md) -> Changelog
 
 ## Table Of Contents
+
+* [Version 1.5.9 (11/26/2024)](#version-159-11262024)
 * [Version 1.5.8 (10/10/2024)](#version-158-10102024)
 * [Version 1.5.7 (10/7/2024)](#version-157-1072024)
 * [Version 1.5.6 (10/6/2024)](#version-156-1062024)
@@ -55,6 +57,16 @@
 * [Version 1.0.6 (8/3/2022)](#version-106-832022)
 * [Version 1.0.5 (7/27/2022)](#version-105-7272022)
 * [Version 1.0.4 (7/23/2022)](#version-104-7232022)
+
+## Version 1.5.9 (11/26/2024)
+
+* [tonyhax-international-v1.5.9](https://github.com/alex-free/tonyhax/releases/download/v1.5.9i/tonyhax-international-v1.5.9.zip)
+
+----------------------------------
+
+Changes:
+
+* Added an APv2 anti-piracy bypass for [GeGeGe no Kitarou: Gyakushuu! Youma Daikessen (Japan)](http://redump.org/disc/4930/). This is one of the [rarest PS1 games](https://github.com/alex-free/tonyhax/issues/72).
 
 ## Version 1.5.8 (10/10/2024)
 

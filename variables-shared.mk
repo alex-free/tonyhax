@@ -6,7 +6,7 @@
 SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Common variables
-TONYHAX_VERSION=v1.5.9
+TONYHAX_VERSION=v1.6.0
 
 CC=mipsel-none-elf-gcc
 CFLAGS=-Wno-error=array-bounds -G0 -Oz -Wall -Wextra -Wno-main -EL -march=r3000 -mabi=32 -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION)
@@ -171,7 +171,3 @@ X_ROM_FILES := tonyhax-international-x-$(TONYHAX_VERSION).rom tonyhax-x-rom-flas
 # GSHAX Files
 
 GSHAX_FILES := wipeout-usa/wipeout-usa-gshax-code.txt wipeout-usa/CODELIST00 parasite-eve-usa/parasite-eve-usa-gshax-code.txt parasite-eve-usa/CODELIST00 ridge-racer-usa/ridge-racer-usa-gshax-code.txt ridge-racer-usa/CODELIST00
-
-# THIGSGEN Files
-
-THIGSGEN_FILES := *.deb thigsgen-v2.0.4-linux-i386-static/* thigsgen-v2.0.4-linux-x86_64-static/* thigsgen-v2.0.4-windows-i686-static/* thigsgen-v2.0.4-windows-x86_64-static/*

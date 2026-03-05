@@ -20,6 +20,7 @@ _List Notes:_
 | Game Disc  | [Protection Type](#protection-types) | Protection Triggered At | Tonyhax International Bypass Support |
 | --------------- | ------------- | ------------- | ------------- |
 | [Actua Ice Hockey 2 (Europe)](http://redump.org/disc/5120/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
+| [Addie no Okurimono: To Moze from Addie](http://redump.org/disc/8373/) | [APv2](#apv2), [EDC](#edc), [PAL BIOS Protection](#pal-bios-protection) | Boot. | APv2 - YES. PAL BIOS Detection - YES. |
 | [Alundra 2 (Europe)](http://redump.org/disc/1089/) | None | - | - |
 | [Alundra 2 (France)](http://redump.org/disc/13396/) | None | - | - |
 | [Alundra 2 (Germany)](http://redump.org/disc/11603/) | None | - | - |
@@ -120,7 +121,7 @@ _List Notes:_
 | [Dino Crisis 2 (France)](http://redump.org/disc/29514/) | None | - | - |
 | [Dino Crisis 2 (Germany)](http://redump.org/disc/10641/) | None | - | - |
 | [Dino Crisis 2 (Italy)](http://redump.org/disc/45993/) | None | - | - |
-| [Dino Crisis 2 (Japan Demo)](http://redump.org/disc/4407/) | [APv2](#apv2) | On the disclaimer screen after the game boots. | YES |
+| [Dino Crisis 2 (Japan Demo)](http://redump.org/disc/4407/) | [APv2](#apv2) | On the disclaimer screen after the game boots. | YES. Note: This demo contains an earlier beta build of the [**entire game**](https://youtu.be/Mjh0S8df0fo?si=oTA49oUVvEQwCiKd&t=343). Saving and loading even work, with the idea that one could buy the full retail game on release and continue your progress. The only limitation is a 45 minute timer. This timer is disabled by the anti-piracy bypass system in addition to the standard APv2 protection. |
 | [Dino Crisis 2 (Japan)](http://redump.org/disc/1600/) | [APv2](#apv2) | On the disclaimer screen after the game boots. | YES |
 | [Dino Crisis 2 (Spain)](http://redump.org/disc/27941/) | None | - | - |
 | [Dino Crisis 2 (USA Demo)](http://redump.org/disc/49242/) | None | - | - |
@@ -655,7 +656,7 @@ _Info:_ Some games may contain an EDC-based protection measure. For the affected
 
 _Found In:_ Japanese, USA, and PAL games.
 
-_Bypass support in Tonyhax International Status:_ yes. However most games don't have a bypass yet. For such games, you can follow my [Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr#burning-software) for an example on how to burn a disc which defeats the protection with CDRDAO. Using Alchol 120% or Clone CD can also be done as long as you ignore EDC/EEC errors when burning in RAW DAO mode. Basically, burn the games with SafeDisc 1 type settings, as this is basically the same protection/detection scheme.
+_Bypass support in Tonyhax International Status:_ yes. However most games don't have a bypass yet. For such games, you can follow my [Ultimate Guide To PSX CD-Rs](https://alex-free.github.io/psx-cdr#burning-software) for an example on how to burn a disc which defeats the protection with CDRDAO. Using Alchol 120% or Clone CD can also be done as long as you ignore EDC/EEC errors when burning in RAW DAO mode. Basically, burn the games with SafeDisc 1 type settings, as this is basically the same protection/detection scheme. For Linux, use my [PlayStation Disc Burner](https://github.com/alex-free/playstation-disc-burner) in [raw mode](https://github.com/alex-free/playstation-disc-burner?tab=readme-ov-file#raw-writing).
 
 _Effect:_ Locks up.
 

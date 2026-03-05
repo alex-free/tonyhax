@@ -1,5 +1,7 @@
 # [Tonyhax International](readme.md) -> Building From Source
 
+_Note:_ Currently requires a Linux distro with either the `dnf` or `apt` package manager.
+
 1) Clone Tonyhax International **recursively** from GitHub:
 
 `git clone --recursive https://github.com/alex-free/tonyhax`

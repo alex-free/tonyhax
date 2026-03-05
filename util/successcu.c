@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 /*
 MottZilla's notes on how the checksums are calculated
@@ -39,8 +40,6 @@ checksum offset (xor): 12033+128=12161
 FILE *game_save;
 
 int prev, next, xord, sum, current_fpos, xord_checksum, checked_area_start, checked_area_length;
-
-typedef enum { FALSE, TRUE } bool;
 
 bool is_thps2, is_chvtr;
 

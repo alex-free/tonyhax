@@ -88,8 +88,6 @@ void try_boot_cd(); // for access in memory card features
 #define press_circle "Press CIRCLE to"
 #define press_cross "Press CROSS to"
 
-
-#if !defined TOCPERFECT
 #if defined ROM
 void run_shell() {
     // runs Sony BIOS. Can access CD Player/Memory Card Manager. Can not boot any discs, even ones that normally work without the flash cart inserted in the console. This has been adapted code from the SCPH-1001 decomp: https://github.com/ogamespec/psxdev/blob/97fbb2d03e5aff4449097afd2b59690002cb2341/reverse/Main.c#L395
@@ -138,6 +136,8 @@ uint8_t mcpro_sendid(char *gameid) {
     return mcpro_sendid_ret;
 }
 
+
+#if !defined TOCPERFECT
 void save_file_number_select_wait() // 1/2 as responsive for quicker save file selection ui
 {
     for(volatile int i = 0; i < 0x50000; i++); // Pause
@@ -600,6 +600,44 @@ bool unlock_drive() {
 	return true;
 }
 
+bool exe_file_okay(const exe_header_t * exe_header) {
+    /*
+     * Cannot assume this will be present. The first revision of
+     * Jikkyou Powerful Pro Yakyuu '95 (J) (SLPS-00016) does not have this present in the PSX.EXE.
+     *
+     * Just warn about it.
+     */
+    if (strncmp(exe_header->signature, "PS-X EXE", 8)) {
+        debug_write("Warning: header has invalid signature");
+    }
+
+    // Check that the address is within RAM
+    uint32_t masked_load = (uint32_t) exe_header->offsets.load_addr & 0xFF800000;
+    if (
+        masked_load != 0x00000000 &&
+        masked_load != 0x80000000 &&
+        masked_load != 0xA0000000
+    ) {
+        debug_write("Error: header has an invalid load address");
+        return false;
+    }
+
+    // Check that the PC is within RAM *and* aligned to a word
+    uint32_t masked_pc = (uint32_t) exe_header->offsets.initial_pc & 0xFF800003;
+    if (
+        masked_pc != 0x00000000 &&
+        masked_pc != 0x80000000 &&
+        masked_pc != 0xA0000000
+    ) {
+        debug_write("Error: header has an invalid start address");
+        return false;
+    }
+
+    // Maybe we could check if the load+size overlaps with the kernel-reserved area? Dunno.
+
+    return true;
+}
+
 #if !defined TOCPERFECT
 void wait_lid_status(bool open) {
 	uint8_t cd_reply[16];
@@ -642,44 +680,6 @@ void wait_lid_status(bool open) {
     } while ((cd_reply[0] & 0x10) != expected);
 
     controller_input_stop();
-}
-
-bool exe_file_okay(const exe_header_t * exe_header) {
-    /*
-     * Cannot assume this will be present. The first revision of
-     * Jikkyou Powerful Pro Yakyuu '95 (J) (SLPS-00016) does not have this present in the PSX.EXE.
-     *
-     * Just warn about it.
-     */
-    if (strncmp(exe_header->signature, "PS-X EXE", 8)) {
-        debug_write("Warning: header has invalid signature");
-    }
-
-    // Check that the address is within RAM
-    uint32_t masked_load = (uint32_t) exe_header->offsets.load_addr & 0xFF800000;
-    if (
-        masked_load != 0x00000000 &&
-        masked_load != 0x80000000 &&
-        masked_load != 0xA0000000
-    ) {
-        debug_write("Error: header has an invalid load address");
-        return false;
-    }
-
-    // Check that the PC is within RAM *and* aligned to a word
-    uint32_t masked_pc = (uint32_t) exe_header->offsets.initial_pc & 0xFF800003;
-    if (
-        masked_pc != 0x00000000 &&
-        masked_pc != 0x80000000 &&
-        masked_pc != 0xA0000000
-    ) {
-        debug_write("Error: header has an invalid start address");
-        return false;
-    }
-
-    // Maybe we could check if the load+size overlaps with the kernel-reserved area? Dunno.
-
-    return true;
 }
 
 bool is_lid_open() {
@@ -1357,7 +1357,7 @@ void try_boot_cd() {
     if((did_read_mc) && (!cheat_engine_installed)) {
         install_cheat_engine();
     }
-
+    
     // Games from WarmBoot start with interrupts disabled
     EnterCriticalSection();
 

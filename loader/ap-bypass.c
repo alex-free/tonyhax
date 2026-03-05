@@ -2,7 +2,6 @@
 #include "bios.h"
 #include "str.h"
 #include "ap-bypass.h"
-//#include "debugscreen.h"
 
 bool cheat_engine_installed;
 
@@ -186,17 +185,65 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
         //debug_write("Bootfile stripped 1: %s", bootfile);
         bootfile[11] = 0; // replace ; with termination. So XXXX_XXX.XX;1 becomes XXXX_XXX.XX for less expensive (space-wise) strcmps
         //debug_write("Bootfile stripped 2: %s", bootfile);
-        //for(volatile int i = 0; i < 0x100000; i++);  // won't be optimized out by -Os, pause	
+        for(volatile int i = 0; i < 0x400000; i++);  // won't be optimized out by -Os, pause	
     } else {
         return; 
         // Speed optimization. All anti-piracy games currently have an pre-stripped bootfile name that is at least 19 bytes long. So if the bootfile happens to have something like 'cdrom://MAIN.EXE;1' (which is 18 in length) , we already know not to bother even checking for an anti-piracy bootfile match to apply codes for (which takes time in itself to do as well).
     }
 
+// Addie no Okurimono: To Moze from Addie
+    if(
+        ((strcmp("SCPS_101.26", bootfile)) == 0) // Japan
+    )
+    {
+        /*
+        D0069E28 0062
+        80069E28 0014
+        Force test commands ok part 1 by Alex Free.
+        */
+        //add_D0_code(0x80069E28, 0x0062);
+        //add_80_code(0x80069E28, 0x0014);
+        /*
+        D0069E2A 1202
+        80069E2A 1800
+        Force test commands ok part 2 by Alex Free.
+        */
+        //add_D0_code(0x80069E2A, 0x1202);
+        //add_80_code(0x80069E2A, 0x1800);
+        *(volatile unsigned int *)0x80069E2A = 0x00141800;
+        /*
+        D00A1F14 001E
+        800A1F14 0000
+        Fake VC0 by Alex Free.
+        */
+        //add_D0_code(0x800A1F14, 0x001E);
+        //add_80_code(0x800A1F14, 0x0000);
+        *(volatile unsigned int *)0x800A1F14 = 0x0000;
+        /*
+        D00696A0 000A
+        800696A0 0000
+        Make PAL BIOS not lock part 1 by Alex Free.
+        */
+        //add_D0_code(0x800696A0, 0x000A);
+        //add_80_code(0x800696A0, 0x0000);
+        /*
+        D00696A2 1062
+        800696A2 0000
+        Make PAL BIOS not lock part 2 by Alex Free.
+        */
+        //add_D0_code(0x800696A2, 0x1062);
+        //add_80_code(0x800696A2, 0x0000);
+        *(volatile unsigned int *)0x800696A0 = 0x00000000;
+        // PAL BIOS bypass codes can not be applied fast enough by cheat engine DuckStation did apply them fast enough to work though, real GameShark probably can't... Can do better with writes to ram anyways.
+        //install_cheat_engine();
+    } else if
+
 // Animetic Story Game 1: Card Captor Sakura
-       if(
+    (
     ((strcmp("SLPS_018.30", bootfile)) == 0) // Japan Disc 1
     || ((strcmp("SLPS_018.31", bootfile)) == 0) // Japan Disc 2
-    ) { // 2 disc game
+    )
+    { // 2 disc game
         /*
         D001516A 1040
         8001516A 1000
@@ -758,13 +805,21 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
     } else if
 
        ((strcmp("SLPM_805.73", bootfile)) == 0) { // Japan Demo
-          /*
+        /*
         D00C9DA6 1062
         800C9DA6 1800
         my code via aprip
         */
         add_D0_code(0x800C9DA6, fake_pal_bios_bypass_compare_val);
         add_80_code(0x800C9DA6, fake_pal_bios_bypass_patch_val);
+        /*
+        8002EBA2 2400
+        8002EBCA 1000
+        Disable Trial Timer by Unicorngoulash - https://gamehacking.org/game/138029 .
+        This demo includes a full beta build of the game, the only limit was the 45 minute timer: https://youtu.be/Mjh0S8df0fo?si=oTA49oUVvEQwCiKd&t=343 . Capcom never released a demo with the full build limited by a timer ever again.
+        */
+        add_80_code(0x8002EBA2, 0x2400);
+        add_80_code(0x8002EBCA, 0x1000);
         install_cheat_engine();
     } else if
 
@@ -1099,7 +1154,7 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
     D01518D6 1062
     801518D6 0000
     Fake a Non-PAL BIOS
-    aprip conversion from MottZilla and I's koneko mo isso bypass 
+    aprip conversion from MottZilla and I's koneko mo isso bypass. Rewrites this is you just try to do a RAM write so HAS to be GameShark code.
     */
     add_D0_code(0x801518D4, 0x000A);
     add_80_code(0x801518D4, 0x0000);
@@ -1122,6 +1177,30 @@ void activate_anti_anti_piracy(char * bootfile, const int32_t load_addr)
         */
           add_D0_code(0x800824CA, common_routine_return_compare_val);
           add_80_code(0x800824CA, common_routine_return_patch_val);
+        install_cheat_engine();
+    } else if
+
+// J.League Jikkyou Winning Eleven 2000
+       ((strcmp("SLPM_865.38", bootfile)) == 0) { // Japan
+        /*
+        Force Test commands ok part 1 by Alex Free
+        D0113B18 0062
+        80113B18 0014
+        */
+        add_D0_code(0x80113B18, 0x0062);
+        add_80_code(0x80113B18, 0x0014);
+        /* Force Test commands ok part 2 by Alex Free
+        D0113B1A 1202
+        80113B1A 1800
+        */
+        add_D0_code(0x80113B1A, 0x1202);
+        add_80_code(0x80113B1A, 0x1800);
+        /* Fake VC0 by Alex Free
+        D0115908 001E
+        80115908 0000
+        */
+        add_D0_code(0x80115908, 0x001E);
+        add_80_code(0x80115908, 0x0000);
         install_cheat_engine();
     } else if
 

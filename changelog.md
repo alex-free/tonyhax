@@ -1,6 +1,9 @@
 # [Tonyhax International](readme.md) -> Changelog
 
 ## Table Of Contents
+
+* [Version 1.6.0 (3/4/2026)](#version-160-342026)
+* [Version 1.5.9 (11/26/2024)](#version-159-11262024)
 * [Version 1.5.8 (10/10/2024)](#version-158-10102024)
 * [Version 1.5.7 (10/7/2024)](#version-157-1072024)
 * [Version 1.5.6 (10/6/2024)](#version-156-1062024)
@@ -55,6 +58,44 @@
 * [Version 1.0.6 (8/3/2022)](#version-106-832022)
 * [Version 1.0.5 (7/27/2022)](#version-105-7272022)
 * [Version 1.0.4 (7/23/2022)](#version-104-7232022)
+
+## Version 1.6.0 (3/4/2026)
+
+* [tonyhax-international-v1.6.0](https://github.com/alex-free/tonyhax/releases/download/v1.6.0i/tonyhax-international-v1.6.0.zip)
+
+----------------------------------
+
+Changes:
+
+* Improved the [game-id.md](https://github.com/alex-free/tonyhax/blob/master/gameid.md) documentation. I now have made mu own [custom firmware](https://github.com/alex-free/PicoMemcard) which works better then any other for FreePSXBoot exploit using a BitFunxMemCard Pro.
+
+* [Addie no Okurimono: To Moze from Addie](http://redump.org/disc/8373/) APv2 protection bypass and PAL BIOS protection bypass! AFAIK no one has ever been able to play this on a PAL console before now. This is an EDC protected game as well though so make sure you are using either [PlayStation Disc Burner](https://github.com/alex-free/playstation-disc-burner) in [raw mode](https://github.com/alex-free/playstation-disc-burner?tab=readme-ov-file#raw-writing) or Alcohol 120% in protected mode (SafeDisc v1 equievelent) to burn it. This game is the first to introduce MottZilla's idea of the 'PS-EXE' write system, where for some anti-piracy bypasses we don't need to use GameShark codes at all but rather can patch the loaded EXE in RAM.
+
+* [J.League Jikkyou Winning Eleven 2000](http://redump.org/disc/1979/) APv2 bypass implemented!
+
+* The Tonyhax International GameShark Generator (THIGSGEN) has grown up and become it's own separate project (found [here](https://github.com/alex-free/tonyhax-international-gameshark-generator)) that is no longer bundled with the Tonyhax International releases. This is simply because I am now supporting Mac OS, and I can't cross compile for the Mac OS targets I want from Linux all in one go in the way I want it to work with the Tonyhax International build system currently. Please download it at [https://github.com/alex-free/tonyhax-international-gameshark-generator](https://github.com/alex-free/tonyhax-international-gameshark-generator). Perhaps other PSX soft-mods want to use the same format and can now link to a separate GameShark code save file generator program as well? I think this is for the best. 
+
+* Added additional anti-piracy related [info](https://github.com/alex-free/tonyhax/issues/74) to the [documentation](anti-piracy-bypass.md) thanks to [@Sukotto-1999](https://github.com/Sukotto-1999)! If anyone has more info they can add to expand the knowledge there, please open a [Github issue](https://github.com/alex-free/tonyhax/issues/new?assignees=&labels=bug&projects=&template=generic-issue.md&title=).
+
+* Updated submodules for [mkpsxiso](https://github.com/Lameguy64/mkpsxiso), [psexe2rom](https://github.com/alex-free/psexe2rom), [gshax-tool](https://github.com/alex-free/gshax-tool), and [psn00bsdk-builder](https://github.com/alex-free/psn00bsdk-builder).
+
+* Updated [F.A.Q.](#faq) question [Why does the DuckStation emulator say backdoor failed when using the boot cd?](#q-why-does-the-duckstation-emulator-say-backdoor-failed-when-using-the-boot-cd) with a new link. I really hope Stenzneck fixes this bug in DuckStation eventually. Using an old DuckStation version forever is not ideal.
+
+* Updated additonal-games.md, as socram8888 has added many of the previously Tonyhax International only fixes to the main Tonyhax.
+
+* Fixed missing `zlib-static` dependency not being installed by `make deps` on Linux distributions with the `dnf` package manager such as Fedora.
+
+* Improved `make deps` rule by making it GNUMake native. No more executing bash scripts to install dependencies.
+
+## Version 1.5.9 (11/26/2024)
+
+* [tonyhax-international-v1.5.9](https://github.com/alex-free/tonyhax/releases/download/v1.5.9i/tonyhax-international-v1.5.9.zip)
+
+----------------------------------
+
+Changes:
+
+* Added an APv2 anti-piracy bypass for [GeGeGe no Kitarou: Gyakushuu! Youma Daikessen (Japan)](http://redump.org/disc/4930/). This is one of the [rarest PS1 games](https://github.com/alex-free/tonyhax/issues/72).
 
 ## Version 1.5.8 (10/10/2024)
 

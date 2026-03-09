@@ -1,4 +1,4 @@
-# Tonyhax International: The Ultimate Backup CD-R/Import Disc Loader Soft-Mod Solution For The Original PlayStation & Early Models Of PlayStation 2
+# Tonyhax International: The Ultimate Backup CD-R/Import Disc Loader Soft-Mod Solution For All Models Of The Original PlayStation & Early Models Of The PlayStation 2
 
 _Brought to you by [Alex Free](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6018), [MottZilla](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=867), [Patchouli (karehaani)](http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714), and [SylverReZ (M4x1mumReZ)](https://gbatemp.net/members/sylverrez.610331/). Built on the work of many [others](credits.md)._
 
@@ -12,7 +12,7 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * Ensures 80 Minute CD-Rs on early PS2 models are booted correctly with a first of it's kind [software fix](ps2-80-minute-cd-rs.md).
 
-* Supports more [games](additional-game-support.md). Bleeding edge of Tonyhax upstream.
+* Supports more [games](additional-game-support.md).
 
 * Automatic console detection and loader configuration.
 
@@ -30,7 +30,7 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 * The most extensive [anti-piracy bypass system](anti-piracy-bypass.md) of any PS1 soft-mod seamlessly patches protected games on the fly. Non-stealth mod-chips and unmodified consoles essentially become stealth-modchipped consoles with software!
 
-* Apply your own [GameShark codes](gameshark-code-support.md) loaded via memory card save files (up to 15 different save files per memory card, meaning you can have up to 30 different sets of GameShark codes available for selection!). Create the memory card save files on your PC, no need to type in super long codes on the console itself with a controller.
+* Apply your own [GameShark codes](https://github.com/alex-free/tonyhax-international-gameshark-generator) loaded via memory card save files (up to 15 different save files per memory card, meaning you can have up to 30 different sets of GameShark codes available for selection!). Create said memory card save files on your Windows/Mac/Linux computer, no need to type in super long codes on the console itself with a controller.
 
 * Small loader size thanks to ps1-packer compression/decompression and space-conscious optimizations.
 
@@ -43,7 +43,8 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 ## Table Of Contents
 
 * [Downloads](#downloads)
-* [Usage](#usage)
+* [How To Start The Loader](#how-to-start-the-loader)
+* [How To Use The Loader](#how-to-use-the-loader)
 * [Frequently Asked Questions](#faq)
 * [Relevant Software](#relevant-software)
 * [Building From Source](build.md)
@@ -51,21 +52,21 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.5.9 (11/26/2024)
+### Version 1.6.1 (3/8/2026)
 
-* [tonyhax-international-v1.5.9](https://github.com/alex-free/tonyhax/releases/download/v1.5.9i/tonyhax-international-v1.5.9.zip)
+* [tonyhax-international-v1.6.1](https://github.com/alex-free/tonyhax/releases/download/v1.6.1i/tonyhax-international-v1.6.1.zip)
 
 ----------------------------------
 
 Changes:
 
-* Added an APv2 anti-piracy bypass for [GeGeGe no Kitarou: Gyakushuu! Youma Daikessen (Japan)](http://redump.org/disc/4930/). This is one of the [rarest PS1 games](https://github.com/alex-free/tonyhax/issues/72).
+* Removed previous mis-information about Dino Crisis (Japan Demo) being able to be unlocked to the full game. This doesn't seem real so removing it.
 
 ----------------------------------
 
 [Previous versions](changelog.md).
 
-## How To
+## How To Start The Loader
 
 * [Flash](flashed-cheat-cart.md) a cheat cartridge (GameShark/Action Replay, etc.).
 
@@ -79,7 +80,7 @@ Changes:
 
 * Patch a game with [(TOCPerfect)](https://alex-free.github.io/tocperfect).
 
-## Usage
+## How To Use The Loader
 
 * [Japanese PS1 Console Loader Instructions (SCPH-1000-SCPH-100)](japanese-ps1-instructions.md)
 * [Japanese PS2 Console Loader Instructions (SCPH-10000-SCPH-39000)](japanese-ps2-instructions.md)
@@ -97,13 +98,13 @@ Changes:
 
 5) [Why not combine Tonyhax and Tonyhax International into one project?](#q-why-not-combine-tonyhax-and-tonyhax-international-into-one-project)
 
-6) [Why Can't Tonyhax/Tonyhax International Change The Video Mode From PAL to NTSC or vice versa on PS2s?](#q-why-cant-tonyhaxtonyhax-international-change-the-video-mode-from-pal-to-ntsc-or-vice-versa-on-ps2s)
+6) [Why can't Tonyhax/Tonyhax International change the video mode from PAL to NTSC or vice versa on PS2s?](#q-why-cant-tonyhaxtonyhax-international-change-the-video-mode-from-pal-to-ntsc-or-vice-versa-on-ps2s)
 
-7) [Why Are PAL Games Displaying a Black Screen On My Japanese or USA PSOne Slim with Tonyhax/Tonyhax International?](#q-why-are-pal-games-displaying-a-black-screen-on-my-japanese-or-usa-psone-slim)
+7) [Why are PAL games displaying a black screen on my Japanese or USA PSOne slim with Tonyhax/Tonyhax International?](#q-why-are-pal-games-displaying-a-black-screen-on-my-japanese-or-usa-psone-slim)
 
-8) [Why Are Newer PS2s Not Supported?](#q-why-are-newer-ps2s-not-supported)
+8) [Why Are newer PS2s not supported?](#q-why-are-newer-ps2s-not-supported)
 
-9) [Why does the DuckStation emulator say backdoor failed?](#q-why-does-the-duckstation-emulator-say-backdoor-failed)
+9) [Why does the DuckStation emulator say backdoor failed when using the boot cd?](#q-why-does-the-duckstation-emulator-say-backdoor-failed-when-using-the-boot-cd)
 
 10) [How Can I Help?](#q-how-can-i-help)
 
@@ -129,9 +130,9 @@ If you have good CD-Rs, a good burner, optimal burn speed, and a working refurbi
 
 ### Q: Why not combine Tonyhax and Tonyhax International into one project?
 
-**A**: Socram8888 does not own a Japanese console, nor is he interested in getting one. While Socram8888 and I do work together to fix issues that effect both the original Tonyhax and Tonyhax International, we have different goals in regards to what the project should support.
+**A**: Socram8888 does not own a Japanese console, nor is he interested in getting one. While Socram8888 and I do work together to fix issues that effect both the original Tonyhax and Tonyhax International, we have different goals in regards to what the project should support. Also the changes are incredibly immense at this point in time to do a merge.
 
-### Q: Why Can't Tonyhax/Tonyhax International Change The Video Mode From PAL to NTSC or vice versa on PS2s?
+### Q: Why can't Tonyhax/Tonyhax International change the video mode from PAL to NTSC or vice versa on PS2s?
 
 **A**: The early PS2 models that Tonyhax International supports do not have the ability to change the video mode from within PS1 mode from what we understand. 
 
@@ -147,27 +148,29 @@ You can change the video mode first while in PS2 mode however. For now you can r
 
 * Playing through your real PSX game disc may look or act weird in the changed video mode, ignore this. Just get to the exploit method and start Tonyhax International. Put in the import disc or backup CD-R and the PS1 game will boot at last.
 
-### Q: Why Are PAL Games Displaying a Black Screen On My Japanese or USA PSOne Slim with Tonyhax/Tonyhax International?
+### Q: Why are PAL games displaying a black screen on my Japanese or USA PSOne slim with Tonyhax/Tonyhax International?
 
-**A**: I have verified my SCPH-101 displays a black screen when switching to PAL vidoe mode (no matter if that is switched via Tonyhax original, Tonyhax International, or by the game code itself).
-
-This is a strange oddity, considering the following effects (unmodified hardware):
+**A**: I have verified my SCPH-101 displays a black screen when switching to PAL vidoe mode (no matter if that is switched via Tonyhax original, Tonyhax International, or by the game code itself). This seems to be a hardware limitation of the slim models, considering the following effects happen on unmodified hardware :
 
 * SCPH-1000-SCPH-9XXX will output PAL, but it will be in black and white if using composite AV.
 
-* SCPH-101 (confirmed by myself) and SCPH-100 (unconfirmed) will display a black screen the entire time PAL video mode is active if using composite AV.
+* SCPH-10000-SCPH-39004 stay in their native video mode always and ignore any request to change the video resolution (from within PS1 mode), using any output cables. There is a software based [workaround](#q-why-cant-tonyhaxtonyhax-international-change-the-video-mode-from-pal-to-ntsc-or-vice-versa-on-ps2s) though for the PS2s only.
 
-* SCPH-10000-SCPH-39004 stay in their native video mode always and ignore any request to change the video resolution (from within PS1 mode), using any output cables. There is a PS1VModeNeg workaround though, see the above question.
+### Q: Why are newer PS2s not supported?
 
-### Q: Why Are Newer PS2s Not Supported?
+**A**: SCPH-50XXX - SCPH-90XXX PS2s are not supported because both `SetSession()` and the unlock commands do not function on these models. The laser re-calibration also seems to be ignored resulting in sub-optimal disc reading performance on the newer models. Technically it can still boot games but with no CD audio support and poor disc reading performance so **newer models are not officially supported whatsoever.** If this is ever solved support can be added.
 
-**A**: SCPH-50XXX - SCPH-90XXX PS2s are not supported because both `SetSession()` and the unlock commands do not function on these models. The laser re-calibration also seems to be ignored resulting in sub-optimal disc reading performance on the newer models. Technically it can still boot games but with no CD audio support and poor disc reading performance so it is not officially supported whatsoever.
+### Q. Why does the DuckStation emulator say backdoor failed when using the boot cd?
 
-### Q. Why does the DuckStation emulator say backdoor failed?
+**A**: This is some incompatibility bug in all recent DuckStation versions that happens when the unlock drive function is used by the original Tonyhax and Tonyhax International loader. This bug occurs when you use the European Boot CD with the default settings. It also occurs if you force the USA or PAL console region setting in DuckStation and attempt to boot the Japanese Boot CD.
 
-**A**: This is some incompatibility bug in all recent DuckStation versions that happens when the unlock drive function is used in the original Tonyhax and Tonyhax International loader. A sufficiently old enough DuckStation ([v0.1-6292](https://github.com/stenzek/duckstation/releases/tag/v0.1-6292)) works fine (as do all versions of no $ psx emu). Alternatively you can set your cdrom bios version to a japanese one in the advanced settings of DuckStation, and the most recent DuckStation will also work fine (as long as auto-detect region for the emulated console is selected like it is by default, or it is specified as japanese explicitly). This is because the unlock function is not used for japanese consoles.
+A sufficiently old enough DuckStation ([v0.1-6292](https://github.com/duckstation/old-releases/releases/tag/v0.1-6292) to be percise) works fine (as do all versions of no $ psx emu) with none of these issues. 
 
-### Q. How Can I Help?
+If you must use the most recent DuckStation with the European Boot CD in one of the above manners, you can set your console region to Japan. This kind of negates the point though because you won't be using the unlock functions.
+
+I have no idea if Stenzneck will ever fix this.
+
+### Q. How can I help?
 
 **A**: There are many ways!
 
@@ -181,24 +184,24 @@ This is a strange oddity, considering the following effects (unmodified hardware
 
 ## Relevant Software
 
-*   [PlayStation Disc Burner](https://github.com/alex-free/playstation-disc-burner) - recommended burning software for Linux.
+* [PlayStation Disc Burner](https://github.com/alex-free/playstation-disc-burner) - recommended burning software for Linux.
 
-*   [PSX80MP](https://github.com/alex-free/) - Patch PS1 and PS2 CD games to work on early PS2 models when burned to 80 minute/700MB CD-Rs. 
+* [PSX80MP](https://github.com/alex-free/) - Patch PS1 and PS2 CD games to work on early PS2 models when burned to 80 minute/700MB CD-Rs. 
 
-*   [TOCPerfect Patcher](https://alex-free.github.io/tocperfect) - patch the Tonyhax International loader into a disc image directly to expand the capabilities of the CD Player Swap Trick.
+* [TOCPerfect Patcher](https://alex-free.github.io/tocperfect) - patch the Tonyhax International loader into a disc image directly to expand the capabilities of the CD Player Swap Trick.
 
-*   [EDCRE](https://alex-free.github.io/edcre) - EDC/EEC regenerator to allow patched EDC protected PSX games to be burned by CDRDAO-PLED's generic-mmc-raw driver correctly.
+* [EDCRE](https://alex-free.github.io/edcre) - EDC/EEC regenerator to allow patched EDC protected PSX games to be burned by CDRDAO-PLED's generic-mmc-raw driver correctly.
 
-*   [APrip Homepage](https://alex-free.github.io/aprip) - created as a development aid for the [anti-piracy bypass system](anti-piracy-bypass.md).
+* [APrip Homepage](https://alex-free.github.io/aprip) - created as a development aid for the [anti-piracy bypass system](anti-piracy-bypass.md).
 
-*   [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap) - a similar project that uses the Tonyhax International loader.
+* [PS1 DemoSwap Patcher Homepage](https://alex-free.github.io/ps1demoswap) - a similar project that uses the Tonyhax International loader.
 
-*   [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom) - what generates the Tonyhax International ROM file.
+* [PSEXE2ROM Homepage](https://alex-free.github.io/psexe2rom) - what generates the Tonyhax International ROM file.
 
-*   [NXFLASH](https://github.com/danhans42/nxflash) - the software which flashes cheat carts with the Tonyhax International ROM.
+* [NXFLASH](https://github.com/danhans42/nxflash) - the software which flashes cheat carts with the Tonyhax International ROM.
 
-*   [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) - an exploit used in a Tonyhax International boot method.
+* [FreePSXBoot](https://github.com/brad-lin/FreePSXBoot) - an exploit used in a Tonyhax International boot method.
 
-*   [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax) - what Tonyhax International is based on (_International is not an official version and at this point deviates quite greatly_).
+* [Tonyhax (the original) Github](https://github.com/socram8888/tonyhax) - what Tonyhax International is based on (_International is not an official version and at this point deviates quite greatly_).
 
-*   [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)
+* [Tonyhax (the original) Homepage](https://orca.pet/tonyhax)

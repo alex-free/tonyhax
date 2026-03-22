@@ -6,7 +6,7 @@
 SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Common variables
-TONYHAX_VERSION=v1.6.1
+TONYHAX_VERSION=v1.6.2
 
 CC=mipsel-none-elf-gcc
 CFLAGS=-Wno-error=array-bounds -G0 -Oz -Wall -Wextra -Wno-main -EL -march=r3000 -mabi=32 -mfp32 -mno-abicalls -fno-pic -fdata-sections -ffunction-sections -fno-builtin -nostdlib -DTONYHAX_VERSION=$(TONYHAX_VERSION)
@@ -77,7 +77,8 @@ ENTRY_RAW := \
     BESLES-03954TNHXG01 \
     BESLES-03955TNHXG01 \
     BESLES-03956TNHXG01 \
-    BESLES-04095XSMOTO
+    BESLES-04095XSMOTO \
+	BASLUS-01000
 
 ENTRY_FILES := $(ENTRY_MCS) $(ENTRY_RAW) entry-bb.bin entry-bb.elf entry.bin entry.elf entry-ff9.bin entry-ff9.elf
 

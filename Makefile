@@ -19,6 +19,7 @@ $(PACKAGE_CONTENTS):
 
 modules:
 	$(MAKE) -C util
+	$(MAKE) -C entrypoints clean
 	$(MAKE) -C entrypoints all
 	$(MAKE) -C gshax all
 	$(MAKE) -C loader clean	

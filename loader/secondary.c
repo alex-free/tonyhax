@@ -32,9 +32,6 @@
 // To test MCPro code path on an emulator, uncomment the line below. This must be commented out for releases.
 //#define FAKE_MCPRO
 
-// To test PS2 code path on an emulator, uncomment the line below. This must be commented out for releases.
-//#define FAKE_PS2
-
 /*  
 MCP/SD2PSX support added using danhans42's code in his tonyhax_mcp fork: https://github.com/danhans42/tonyhax_mcp/ as a base.
 
@@ -738,9 +735,11 @@ void re_cd_init() {
     }
 }
 
-void ps2_hardware_bug_software_fix(const uint32_t target_lba, uint8_t * data_buffer) {
+// PS2s more so then PS1 have a hardware/BIOS bug that results in a seek issue when doing massive seeks from say LBA 4 to 290000+ when dealing with 80 minute media, see https://github.com/socram8888/tonyhax/issues/24#issuecomment-1823585149
+void cdr_80_min_assist(const uint32_t target_lba, uint8_t * data_buffer) {
     if(target_lba > 1000) // Don't need it except for extremly large seeks, 1000 is a pretty small condition here tbh.
     {
+        debug_write("80 Min CD seek assist activated");
         const uint32_t seek_step[5] = { 
             (target_lba/6),
             ( (target_lba/6) * 2),
@@ -942,23 +941,12 @@ void try_boot_cd() {
     char bootfilebuf[32];
     debug_write("Loading SYSTEM.CNF");
 
-// PS2s have a hardware/BIOS bug that results in a seek issue when doing massive seeks from say LBA 4 to 290000+ when dealing with 80 minute media, see https://github.com/socram8888/tonyhax/issues/24#issuecomment-1823585149
-#if !defined(FREEPSXBOOT) && !defined(XSTATION) && !defined(ROM) && !defined(TOCPERFECT)
-
-#if !defined(FAKE_PS2)
-    if(bios_is_ps1() == false) {
-#endif
-
+#if !defined(XSTATION)
     uint32_t system_cnf_lba = CdGetLbn("SYSTEM.CNF;1");
     if(system_cnf_lba != 0) {
         debug_write("SYSTEM.CNF LBA: %d", system_cnf_lba);
-        ps2_hardware_bug_software_fix(system_cnf_lba, data_buffer);
+        cdr_80_min_assist(system_cnf_lba, data_buffer);
     }
-
-#if !defined(FAKE_PS2)
-    }
-#endif
-
 #endif
 
     int32_t cnf_fd = FileOpen("cdrom:SYSTEM.CNF;1", FILE_READ);
@@ -1164,38 +1152,29 @@ void try_boot_cd() {
 
     debug_write("Reading executable header");
 
-#if !defined(FREEPSXBOOT) && !defined(XSTATION) && !defined(ROM) && !defined(TOCPERFECT)
+#if !defined(XSTATION)
+    // CdGetLbn() needs any cdrom:\\, cdrom:\, or cdrom: in the bootfile string from SYSTEM.CNF to be stripped out. The function below is by Nicholas Noble
+    char * bootfile_for_CdGetLbn = 0;
+    uint32_t hash = 5381;
+    for (unsigned i = 0; i < 8; i++) {
+        hash = ((hash << 5) + hash) ^ bootfile[i];
 
-#if !defined(FAKE_PS2)
-    if(bios_is_ps1() == false) {
-#endif
-
-        // CdGetLbn() needs any cdrom:\\, cdrom:\, or cdrom: in the bootfile string from SYSTEM.CNF to be stripped out. The function below is by Nicholas Noble
-        char * bootfile_for_CdGetLbn = 0;
-        uint32_t hash = 5381;
-        for (unsigned i = 0; i < 8; i++) {
-          hash = ((hash << 5) + hash) ^ bootfile[i];
-
-          switch (hash) {
-            case 0x5b730b88:
-            case 0xc9d47cd4:
-            case 0x04641708:
-              bootfile_for_CdGetLbn = bootfile + i + 1;
-              break;
-          }
+        switch (hash) {
+        case 0x5b730b88:
+        case 0xc9d47cd4:
+        case 0x04641708:
+            bootfile_for_CdGetLbn = bootfile + i + 1;
+            break;
         }
-
-        //debug_write("CdGetLbn BOOTFILE NAME: %s", bootfile_for_CdGetLbn);
-        const uint32_t bootfile_lba = CdGetLbn(bootfile_for_CdGetLbn);
-
-        if(bootfile_lba > 0) {
-            debug_write("BOOTFILE LBA: %d", bootfile_lba);
-            ps2_hardware_bug_software_fix(bootfile_lba, data_buffer);
-        }
-
-#if !defined(FAKE_PS2)
     }
-#endif
+
+    //debug_write("CdGetLbn BOOTFILE NAME: %s", bootfile_for_CdGetLbn);
+    const uint32_t bootfile_lba = CdGetLbn(bootfile_for_CdGetLbn);
+
+    if(bootfile_lba > 0) {
+        debug_write("BOOTFILE LBA: %d", bootfile_lba);
+        cdr_80_min_assist(bootfile_lba, data_buffer);
+    }
 
 #endif
 
@@ -1384,6 +1363,7 @@ void main() {
     if (!integrity_ok) {
         return;
     }
+    debug_write("github.com/alex-free/tonyhax");
 
     bios_inject_disc_error();
     log_bios_version();

@@ -52,15 +52,19 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.6.1 (3/8/2026)
+### Version 1.6.2 (3/21/2026)
 
-* [tonyhax-international-v1.6.1](https://github.com/alex-free/tonyhax/releases/download/v1.6.1i/tonyhax-international-v1.6.1.zip)
+* [tonyhax-international-v1.6.2](https://github.com/alex-free/tonyhax/releases/download/v1.6.2i/tonyhax-international-v1.6.2.zip)
 
 ----------------------------------
 
 Changes:
 
-* Removed previous mis-information about Dino Crisis (Japan Demo) being able to be unlocked to the full game. This doesn't seem real so removing it.
+* Reverted [ps1packer](https://github.com/pcsx-redux/support) to commit [f264aa053095f949e4b16ae40a64dd6cff9ac04b](https://github.com/pcsx-redux/support/tree/f264aa053095f949e4b16ae40a64dd6cff9ac04b), fixing [save game exploits](save-game-exploit.md) and [gshax](gameshark-code.md) entrypoints that were not working in v1.6.0 and v1.6.1.
+
+* Added [save game exploit](save-game-exploit.md) for [No Fear Downhill Mountain Bike Racing](http://redump.org/disc/3000/) thanks to [@ChampionLeake](https://github.com/ChampionLeake).
+
+* Enabled 80 Minute Assist for all consoles, to help boot 80 Minute CD-Rs better.
 
 ----------------------------------
 

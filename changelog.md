@@ -2,6 +2,7 @@
 
 ## Table Of Contents
 
+* [Version 1.6.1 (3/4/2026)](#version-161-382026)
 * [Version 1.6.0 (3/4/2026)](#version-160-342026)
 * [Version 1.5.9 (11/26/2024)](#version-159-11262024)
 * [Version 1.5.8 (10/10/2024)](#version-158-10102024)
@@ -59,11 +60,21 @@
 * [Version 1.0.5 (7/27/2022)](#version-105-7272022)
 * [Version 1.0.4 (7/23/2022)](#version-104-7232022)
 
+### Version 1.6.1 (3/8/2026)
+
+* [tonyhax-international-v1.6.1](https://github.com/alex-free/tonyhax/releases/download/v1.6.1i/tonyhax-international-v1.6.1.zip)
+
+----------------------------------
+
+Changes:
+
+* Removed previous mis-information about Dino Crisis (Japan Demo) being able to be unlocked to the full game. This doesn't seem real so removing it.
+
+----------------------------------
+
 ## Version 1.6.0 (3/4/2026)
 
 * [tonyhax-international-v1.6.0](https://github.com/alex-free/tonyhax/releases/download/v1.6.0i/tonyhax-international-v1.6.0.zip)
-
-----------------------------------
 
 Changes:
 

@@ -175,6 +175,11 @@ FF9-B-US/ff9-b-us.mcs: FF9-B-US/ff9-b-us-tpl.mcs entry-ff9.bin
 	cp FF9-B-US/ff9-b-us-tpl.mcs FF9-B-US/ff9-b-us.mcs
 	dd conv=notrunc if=entry-ff9.bin of=FF9-B-US/ff9-b-us.mcs bs=1 seek=132
 
+# No Fear Downhill Mountain Bike Racing NTSC-US target
+mountainbikeracing-us.mcs: mountainbikeracing-us-tpl.mcs entry.bin
+	cp mountainbikeracing-us-tpl.mcs mountainbikeracing-us.mcs
+	dd conv=notrunc if=entry.bin of=mountainbikeracing-us.mcs bs=1 seek=1136
+
 # The Legend Of Heroes I&II NTSC-J target (Patchouli (karehaani) - http://www.psxdev.net/forum/memberlist.php?mode=viewprofile&u=6714)
 the-legend-of-heroes-1-and-2-jp.mcs: the-legend-of-heroes-1-and-2-jp-tpl.mcs entry.bin
 	cp the-legend-of-heroes-1-and-2-jp-tpl.mcs the-legend-of-heroes-1-and-2-jp.mcs

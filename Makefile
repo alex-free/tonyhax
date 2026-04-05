@@ -73,7 +73,7 @@ deps:
 	cd psexe2rom; $(MAKE) clean; $(MAKE)
 
 toolchain:
-	psn00bsdk-builder/build.sh
+	psn00bsdk-builder/build
 
 clean-deps:
 	$(MAKE) -C pcsx-redux-support clean

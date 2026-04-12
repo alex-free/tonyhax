@@ -52,19 +52,17 @@ Tonyhax International is a fork of the [Tonyhax](https://orca.pet/tonyhax/) "Sof
 
 ## Downloads
 
-### Version 1.6.2 (3/21/2026)
+### Version 1.6.3 (4/12/2026)
 
-* [tonyhax-international-v1.6.2](https://github.com/alex-free/tonyhax/releases/download/v1.6.2i/tonyhax-international-v1.6.2.zip)
+* [tonyhax-international-v1.6.3](https://github.com/alex-free/tonyhax/releases/download/v1.6.3i/tonyhax-international-v1.6.3.zip)
 
 ----------------------------------
 
 Changes:
 
-* Reverted [ps1packer](https://github.com/pcsx-redux/support) to commit [f264aa053095f949e4b16ae40a64dd6cff9ac04b](https://github.com/pcsx-redux/support/tree/f264aa053095f949e4b16ae40a64dd6cff9ac04b), fixing [save game exploits](save-game-exploit.md) and [gshax](gameshark-code.md) entrypoints that were not working in v1.6.0 and v1.6.1.
+* Added massive PSX.EXE Game ID support update thanks to [@Ronniesahlberg](https://github.com/sahlberg). All known PSX.EXE games should be working with GameID now.
 
-* Added [save game exploit](save-game-exploit.md) for [No Fear Downhill Mountain Bike Racing](http://redump.org/disc/3000/) thanks to [@ChampionLeake](https://github.com/ChampionLeake).
-
-* Enabled 80 Minute Assist for all consoles, to help boot 80 Minute CD-Rs better.
+* Improved [build documentation](https://github.com/alex-free/tonyhax/blob/master/build.md) with some additional information I think anyone who wants to take a look at the code would like. Also added a necessary dependency (glibc static to both fedora and debian `make deps`).
 
 ----------------------------------
 

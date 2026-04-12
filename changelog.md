@@ -2,6 +2,7 @@
 
 ## Table Of Contents
 
+* [Version 1.6.2 (3/21/2026)](#version-162-3212026)
 * [Version 1.6.1 (3/4/2026)](#version-161-382026)
 * [Version 1.6.0 (3/4/2026)](#version-160-342026)
 * [Version 1.5.9 (11/26/2024)](#version-159-11262024)
@@ -60,7 +61,23 @@
 * [Version 1.0.5 (7/27/2022)](#version-105-7272022)
 * [Version 1.0.4 (7/23/2022)](#version-104-7232022)
 
-### Version 1.6.1 (3/8/2026)
+## Version 1.6.2 (3/21/2026)
+
+* [tonyhax-international-v1.6.2](https://github.com/alex-free/tonyhax/releases/download/v1.6.2i/tonyhax-international-v1.6.2.zip)
+
+----------------------------------
+
+Changes:
+
+* Reverted [ps1packer](https://github.com/pcsx-redux/support) to commit [f264aa053095f949e4b16ae40a64dd6cff9ac04b](https://github.com/pcsx-redux/support/tree/f264aa053095f949e4b16ae40a64dd6cff9ac04b), fixing [save game exploits](save-game-exploit.md) and [gshax](gameshark-code.md) entrypoints that were not working in v1.6.0 and v1.6.1.
+
+* Added [save game exploit](save-game-exploit.md) for [No Fear Downhill Mountain Bike Racing](http://redump.org/disc/3000/) thanks to [@ChampionLeake](https://github.com/ChampionLeake).
+
+* Enabled 80 Minute Assist for all consoles, to help boot 80 Minute CD-Rs better.
+
+----------------------------------
+
+## Version 1.6.1 (3/8/2026)
 
 * [tonyhax-international-v1.6.1](https://github.com/alex-free/tonyhax/releases/download/v1.6.1i/tonyhax-international-v1.6.1.zip)
 

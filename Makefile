@@ -60,10 +60,10 @@ deps:
 		echo "Linux detected."; \
 		if command -v dnf > /dev/null; then \
 			echo "Using dnf"; \
-			sudo dnf -y install git autoconf automake g++ make libtool zlib-static magic_enum-devel texinfo help2man ncurses-devel tinyxml2-devel cmake cdrdao python libstdc++-static python3-numpy; \
+			sudo dnf -y install git autoconf automake g++ make libtool zlib-static magic_enum-devel texinfo help2man ncurses-devel tinyxml2-devel cmake cdrdao python libstdc++-static python3-numpy glibc-static; \
 		elif command -v apt > /dev/null; then \
 			echo "Using apt"; \
-			sudo apt install --yes build-essential libtinyxml2-dev git cmake cdrdao python3 python3-pip pipx autoconf texinfo help2man gawk libtool-bin libtool libmagicenum-dev ncurses-dev python3-numpy zip dpkg-dev; \
+			sudo apt install --yes build-essential libtinyxml2-dev git cmake cdrdao python3 python3-pip pipx autoconf texinfo help2man gawk libtool-bin libtool libmagicenum-dev ncurses-dev python3-numpy zip dpkg-dev libc6-dev; \
 		else \
 			echo "A Linux distro with DNF or the APT package manager was not found. The make deps rule requires one of these package managers to automatically install all of the required build dependencies."; \
 		fi; \

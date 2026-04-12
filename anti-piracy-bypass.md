@@ -20,7 +20,7 @@ _List Notes:_
 | Game Disc  | [Protection Type](#protection-types) | Protection Triggered At | Tonyhax International Bypass Support |
 | --------------- | ------------- | ------------- | ------------- |
 | [Actua Ice Hockey 2 (Europe)](http://redump.org/disc/5120/) | [LibCrypt](#libcrypt) | Unknown. | NO, patch disc with [LibCrypt patcher](https://alex-free.github.io/libcrypt-patcher). |
-| [Addie no Okurimono: To Moze from Addie](http://redump.org/disc/8373/) | [APv2](#apv2), [EDC](#edc), [PAL BIOS Protection](#pal-bios-protection) | Boot. | APv2 - YES. PAL BIOS Detection - YES. |
+| [Addie no Okurimono: To Moze from Addie](http://redump.org/disc/8373/) | [APv2](#apv2), [EDC](#edc), [PAL BIOS Protection](#pal-bios-protection) | Boot. | APv2 - YES. PAL BIOS Detection - YES. EDC - NO, [burn disc in special way](#edc).|
 | [Alundra 2 (Europe)](http://redump.org/disc/1089/) | None | - | - |
 | [Alundra 2 (France)](http://redump.org/disc/13396/) | None | - | - |
 | [Alundra 2 (Germany)](http://redump.org/disc/11603/) | None | - | - |
